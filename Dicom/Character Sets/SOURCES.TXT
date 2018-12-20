@@ -1,0 +1,101 @@
+ISO/IEC 646:
+ISO IEC 646.htm
+https://en.wikipedia.org/wiki/ISO/IEC_646
+
+------
+
+ISO/IEC 8859-1:
+ISO IEC 8859-1.htm
+https://en.wikipedia.org/wiki/ISO/IEC_8859-1
+
+------
+
+ISO/IEC 8859-2:
+ISO IEC 8859-2.htm
+https://en.wikipedia.org/wiki/ISO/IEC_8859-2
+
+------
+
+ISO/IEC 8859-3:
+ISO IEC 8859-3.htm
+https://en.wikipedia.org/wiki/ISO/IEC_8859-3
+
+------
+
+ISO/IEC 8859-4:
+ISO IEC 8859-4.htm
+https://en.wikipedia.org/wiki/ISO/IEC_8859-4
+
+------
+
+ISO/IEC 8859-5:
+ISO IEC 8859-5.htm
+https://en.wikipedia.org/wiki/ISO/IEC_8859-5
+
+------
+
+ISO/IEC 8859-6:
+ISO IEC 8859-6.htm
+https://en.wikipedia.org/wiki/ISO/IEC_8859-6
+
+------
+
+ISO/IEC 8859-7:
+ISO IEC 8859-7.htm
+https://en.wikipedia.org/wiki/ISO/IEC_8859-7
+
+------
+
+ISO/IEC 8859-8:
+ISO IEC 8859-8.htm
+https://en.wikipedia.org/wiki/ISO/IEC_8859-8
+
+------
+
+ISO/IEC 8859-9:
+ISO IEC 8859-9.htm
+https://en.wikipedia.org/wiki/ISO/IEC_8859-9
+
+------
+
+JIS X 0201:
+JIS X 0201.htm
+http://en.wikipedia.org/wiki/JIS_X_0201
+
+------
+
+JIS X 0208:
+JIS0208.TXT
+ftp://ftp.unicode.org/Public/MAPPINGS/OBSOLETE/EASTASIA/JIS/JIS0208.TXT
+CP932.TXT
+ftp://ftp.unicode.org/Public/MAPPINGS/VENDORS/MICSFT/WINDOWS/CP932.TXT
+
+------
+
+JIS X 0212:
+JIS0212.TXT
+ftp://ftp.unicode.org/Public/MAPPINGS/OBSOLETE/EASTASIA/JIS/JIS0212.TXT
+
+------
+
+KS X 1001:
+KSX1001.TXT
+ftp://ftp.unicode.org/Public/MAPPINGS/OBSOLETE/EASTASIA/KSC/KSX1001.TXT
+
+------
+
+GB18030:
+gb-18030-2000.xml
+http://source.icu-project.org/repos/icu/data/trunk/charset/data/xml/gb-18030-2000.xml
+
+------
+
+GB2312:
+glibc-EUC_CN-2.1.2.xml
+http://source.icu-project.org/repos/icu/data/trunk/charset/data/xml/glibc-EUC_CN-2.1.2.xml
+
+------
+
+TIS 620-2533:
+Thai Industrial Standard 620-2533.htm
+https://en.wikipedia.org/wiki/Thai_Industrial_Standard_620-2533

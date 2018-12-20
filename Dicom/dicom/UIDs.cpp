@@ -1,0 +1,377 @@
+#include "dicom_pch.h"
+#include "dicom/UIDs.h"
+
+namespace dicom {
+namespace uids {
+    // 
+    const char*const VLImageStorageTrialRetired("1.2.840.10008.5.1.4.1.1.77.1");
+    const char*const VLMultiframeImageStorageTrialRetired("1.2.840.10008.5.1.4.1.1.77.2");
+
+    // Application Context Name
+    const char*const DICOMApplicationContextName("1.2.840.10008.3.1.1.1");
+
+    // Application Hosting Model
+    const char*const AbstractMultiDimensionalImageModel("1.2.840.10008.7.1.2");
+    const char*const NativeDICOMModel("1.2.840.10008.7.1.1");
+
+    // Coding Scheme
+    const char*const DICOMControlledTerminology("1.2.840.10008.2.16.4");
+
+    // DICOM UIDs as a Coding Scheme
+    const char*const DICOMUIDRegistry("1.2.840.10008.2.6.1");
+
+    // LDAP OID
+    const char*const DicomAETitle("1.2.840.10008.15.0.3.7");
+    const char*const DicomApplicationCluster("1.2.840.10008.15.0.3.9");
+    const char*const DicomAssociationAcceptor("1.2.840.10008.15.0.3.11");
+    const char*const DicomAssociationInitiator("1.2.840.10008.15.0.3.10");
+    const char*const DicomAuthorizedNodeCertificateReference("1.2.840.10008.15.0.3.21");
+    const char*const DicomConfigurationRoot("1.2.840.10008.15.0.4.1");
+    const char*const DicomDescription("1.2.840.10008.15.0.3.2");
+    const char*const DicomDevice("1.2.840.10008.15.0.4.4");
+    const char*const DicomDeviceName("1.2.840.10008.15.0.3.1");
+    const char*const DicomDeviceSerialNumber("1.2.840.10008.15.0.3.25");
+    const char*const DicomDevicesRoot("1.2.840.10008.15.0.4.2");
+    const char*const DicomHostname("1.2.840.10008.15.0.3.12");
+    const char*const DicomInstalled("1.2.840.10008.15.0.3.23");
+    const char*const DicomInstitutionAddress("1.2.840.10008.15.0.3.27");
+    const char*const DicomInstitutionDepartmentName("1.2.840.10008.15.0.3.28");
+    const char*const DicomInstitutionName("1.2.840.10008.15.0.3.26");
+    const char*const DicomIssuerOfPatientID("1.2.840.10008.15.0.3.29");
+    const char*const DicomManufacturer("1.2.840.10008.15.0.3.3");
+    const char*const DicomManufacturerModelName("1.2.840.10008.15.0.3.4");
+    const char*const DicomNetworkAE("1.2.840.10008.15.0.4.5");
+    const char*const DicomNetworkConnection("1.2.840.10008.15.0.4.6");
+    const char*const DicomNetworkConnectionReference("1.2.840.10008.15.0.3.8");
+    const char*const DicomPort("1.2.840.10008.15.0.3.13");
+    const char*const DicomPreferredCalledAETitle("1.2.840.10008.15.0.3.19");
+    const char*const DicomPreferredCallingAETitle("1.2.840.10008.15.0.3.30");
+    const char*const DicomPrimaryDeviceType("1.2.840.10008.15.0.3.17");
+    const char*const DicomRelatedDeviceReference("1.2.840.10008.15.0.3.18");
+    const char*const DicomSoftwareVersion("1.2.840.10008.15.0.3.5");
+    const char*const DicomSOPClass("1.2.840.10008.15.0.3.14");
+    const char*const DicomStationName("1.2.840.10008.15.0.3.24");
+    const char*const DicomSupportedCharacterSet("1.2.840.10008.15.0.3.31");
+    const char*const DicomThisNodeCertificateReference("1.2.840.10008.15.0.3.22");
+    const char*const DicomTLSCyphersuite("1.2.840.10008.15.0.3.20");
+    const char*const DicomTransferCapability("1.2.840.10008.15.0.4.8");
+    const char*const DicomTransferRole("1.2.840.10008.15.0.3.15");
+    const char*const DicomTransferSyntax("1.2.840.10008.15.0.3.16");
+    const char*const DicomUniqueAETitle("1.2.840.10008.15.0.4.7");
+    const char*const DicomUniqueAETitlesRegistryRoot("1.2.840.10008.15.0.4.3");
+    const char*const DicomVendorData("1.2.840.10008.15.0.3.6");
+
+    // Meta SOP Class
+    const char*const BasicColorPrintManagementMetaSOPClass("1.2.840.10008.5.1.1.18");
+    const char*const BasicGrayscalePrintManagementMetaSOPClass("1.2.840.10008.5.1.1.9");
+    const char*const DetachedPatientManagementMetaSOPClassRetired("1.2.840.10008.3.1.2.1.4");
+    const char*const DetachedResultsManagementMetaSOPClassRetired("1.2.840.10008.3.1.2.5.4");
+    const char*const DetachedStudyManagementMetaSOPClassRetired("1.2.840.10008.3.1.2.5.5");
+    const char*const GeneralPurposeWorklistManagementMetaSOPClass("1.2.840.10008.5.1.4.32");
+    const char*const PullStoredPrintManagementMetaSOPClassRetired("1.2.840.10008.5.1.1.32");
+    const char*const ReferencedColorPrintManagementMetaSOPClassRetired("1.2.840.10008.5.1.1.18.1");
+    const char*const ReferencedGrayscalePrintManagementMetaSOPClassRetired("1.2.840.10008.5.1.1.9.1");
+
+    // Query/Retrieve
+    const char*const ColorPaletteInformationModelFIND("1.2.840.10008.5.1.4.39.2");
+    const char*const ColorPaletteInformationModelGET("1.2.840.10008.5.1.4.39.4");
+    const char*const ColorPaletteInformationModelMOVE("1.2.840.10008.5.1.4.39.3");
+
+    // Service Class
+    const char*const StorageServiceClass("1.2.840.10008.4.2");
+    const char*const UnifiedWorklistAndProcedureStepServiceClass("1.2.840.10008.5.1.4.34.6");
+    const char*const UnifiedWorklistAndProcedureStepServiceClassTrialRetired("1.2.840.10008.5.1.4.34.4");
+
+    // SOP Class
+    const char*const TwelveLeadECGWaveformStorage("1.2.840.10008.5.1.4.1.1.9.1.1");
+    const char*const AmbulatoryECGWaveformStorage("1.2.840.10008.5.1.4.1.1.9.1.3");
+    const char*const ArterialPulseWaveformStorage("1.2.840.10008.5.1.4.1.1.9.5.1");
+    const char*const AudioSRStorageTrialRetired("1.2.840.10008.5.1.4.1.1.88.2");
+    const char*const AutorefractionMeasurementsStorage("1.2.840.10008.5.1.4.1.1.78.2");
+    const char*const BasicAnnotationBoxSOPClass("1.2.840.10008.5.1.1.15");
+    const char*const BasicColorImageBoxSOPClass("1.2.840.10008.5.1.1.4.1");
+    const char*const BasicFilmBoxSOPClass("1.2.840.10008.5.1.1.2");
+    const char*const BasicFilmSessionSOPClass("1.2.840.10008.5.1.1.1");
+    const char*const BasicGrayscaleImageBoxSOPClass("1.2.840.10008.5.1.1.4");
+    const char*const BasicPrintImageOverlayBoxSOPClassRetired("1.2.840.10008.5.1.1.24.1");
+    const char*const BasicStructuredDisplayStorage("1.2.840.10008.5.1.4.1.1.131");
+    const char*const BasicStudyContentNotificationSOPClassRetired("1.2.840.10008.1.9");
+    const char*const BasicTextSRStorage("1.2.840.10008.5.1.4.1.1.88.11");
+    const char*const BasicVoiceAudioWaveformStorage("1.2.840.10008.5.1.4.1.1.9.4.1");
+    const char*const BlendingSoftcopyPresentationStateStorageSOPClass("1.2.840.10008.5.1.4.1.1.11.4");
+    const char*const BreastImagingRelevantPatientInformationQuery("1.2.840.10008.5.1.4.37.2");
+    const char*const BreastTomosynthesisImageStorage("1.2.840.10008.5.1.4.1.1.13.1.3");
+    const char*const CardiacElectrophysiologyWaveformStorage("1.2.840.10008.5.1.4.1.1.9.3.1");
+    const char*const CardiacRelevantPatientInformationQuery("1.2.840.10008.5.1.4.37.3");
+    const char*const ChestCADSRStorage("1.2.840.10008.5.1.4.1.1.88.65");
+    const char*const ColonCADSRStorage("1.2.840.10008.5.1.4.1.1.88.69");
+    const char*const ColorSoftcopyPresentationStateStorageSOPClass("1.2.840.10008.5.1.4.1.1.11.2");
+    const char*const CompositeInstanceRetrieveWithoutBulkDataGET("1.2.840.10008.5.1.4.1.2.5.3");
+    const char*const CompositeInstanceRootRetrieveGET("1.2.840.10008.5.1.4.1.2.4.3");
+    const char*const CompositeInstanceRootRetrieveMOVE("1.2.840.10008.5.1.4.1.2.4.2");
+    const char*const ComprehensiveSRStorage("1.2.840.10008.5.1.4.1.1.88.33");
+    const char*const ComprehensiveSRStorageTrialRetired("1.2.840.10008.5.1.4.1.1.88.4");
+    const char*const ComputedRadiographyImageStorage("1.2.840.10008.5.1.4.1.1.1");
+    const char*const CTImageStorage("1.2.840.10008.5.1.4.1.1.2");
+    const char*const DeformableSpatialRegistrationStorage("1.2.840.10008.5.1.4.1.1.66.3");
+    const char*const DetachedInterpretationManagementSOPClassRetired("1.2.840.10008.3.1.2.6.1");
+    const char*const DetachedPatientManagementSOPClassRetired("1.2.840.10008.3.1.2.1.1");
+    const char*const DetachedResultsManagementSOPClassRetired("1.2.840.10008.3.1.2.5.1");
+    const char*const DetachedStudyManagementSOPClassRetired("1.2.840.10008.3.1.2.3.1");
+    const char*const DetachedVisitManagementSOPClassRetired("1.2.840.10008.3.1.2.2.1");
+    const char*const DetailSRStorageTrialRetired("1.2.840.10008.5.1.4.1.1.88.3");
+    const char*const DICOSCTImageStorage("1.2.840.10008.5.1.4.1.1.501.1");
+    const char*const DICOSDigitalXRayImageStorageForPresentation("1.2.840.10008.5.1.4.1.1.501.2.1");
+    const char*const DICOSDigitalXRayImageStorageForProcessing("1.2.840.10008.5.1.4.1.1.501.2.2");
+    const char*const DICOSThreatDetectionReportStorage("1.2.840.10008.5.1.4.1.1.501.3");
+    const char*const DigitalIntraoralXRayImageStorageForPresentation("1.2.840.10008.5.1.4.1.1.1.3");
+    const char*const DigitalIntraoralXRayImageStorageForProcessing("1.2.840.10008.5.1.4.1.1.1.3.1");
+    const char*const DigitalMammographyXRayImageStorageForPresentation("1.2.840.10008.5.1.4.1.1.1.2");
+    const char*const DigitalMammographyXRayImageStorageForProcessing("1.2.840.10008.5.1.4.1.1.1.2.1");
+    const char*const DigitalXRayImageStorageForPresentation("1.2.840.10008.5.1.4.1.1.1.1");
+    const char*const DigitalXRayImageStorageForProcessing("1.2.840.10008.5.1.4.1.1.1.1.1");
+    const char*const EddyCurrentImageStorage("1.2.840.10008.5.1.4.1.1.601.1");
+    const char*const EddyCurrentMultiframeImageStorage("1.2.840.10008.5.1.4.1.1.601.2");
+    const char*const EncapsulatedCDAStorage("1.2.840.10008.5.1.4.1.1.104.2");
+    const char*const EncapsulatedPDFStorage("1.2.840.10008.5.1.4.1.1.104.1");
+    const char*const EnhancedCTImageStorage("1.2.840.10008.5.1.4.1.1.2.1");
+    const char*const EnhancedMRColorImageStorage("1.2.840.10008.5.1.4.1.1.4.3");
+    const char*const EnhancedMRImageStorage("1.2.840.10008.5.1.4.1.1.4.1");
+    const char*const EnhancedPETImageStorage("1.2.840.10008.5.1.4.1.1.130");
+    const char*const EnhancedSRStorage("1.2.840.10008.5.1.4.1.1.88.22");
+    const char*const EnhancedUSVolumeStorage("1.2.840.10008.5.1.4.1.1.6.2");
+    const char*const EnhancedXAImageStorage("1.2.840.10008.5.1.4.1.1.12.1.1");
+    const char*const EnhancedXRFImageStorage("1.2.840.10008.5.1.4.1.1.12.2.1");
+    const char*const GeneralAudioWaveformStorage("1.2.840.10008.5.1.4.1.1.9.4.2");
+    const char*const GeneralECGWaveformStorage("1.2.840.10008.5.1.4.1.1.9.1.2");
+    const char*const GeneralPurposePerformedProcedureStepSOPClass("1.2.840.10008.5.1.4.32.3");
+    const char*const GeneralPurposeScheduledProcedureStepSOPClass("1.2.840.10008.5.1.4.32.2");
+    const char*const GeneralPurposeWorklistInformationModelFIND("1.2.840.10008.5.1.4.32.1");
+    const char*const GeneralRelevantPatientInformationQuery("1.2.840.10008.5.1.4.37.1");
+    const char*const GenericImplantTemplateInformationModelFIND("1.2.840.10008.5.1.4.43.2");
+    const char*const GenericImplantTemplateInformationModelGET("1.2.840.10008.5.1.4.43.4");
+    const char*const GenericImplantTemplateInformationModelMOVE("1.2.840.10008.5.1.4.43.3");
+    const char*const GenericImplantTemplateStorage("1.2.840.10008.5.1.4.43.1");
+    const char*const GrayscaleSoftcopyPresentationStateStorageSOPClass("1.2.840.10008.5.1.4.1.1.11.1");
+    const char*const HangingProtocolInformationModelFIND("1.2.840.10008.5.1.4.38.2");
+    const char*const HangingProtocolInformationModelGET("1.2.840.10008.5.1.4.38.4");
+    const char*const HangingProtocolInformationModelMOVE("1.2.840.10008.5.1.4.38.3");
+    const char*const HangingProtocolStorage("1.2.840.10008.5.1.4.38.1");
+    const char*const HardcopyColorImageStorageSOPClassRetired("1.2.840.10008.5.1.1.30");
+    const char*const HardcopyGrayscaleImageStorageSOPClassRetired("1.2.840.10008.5.1.1.29");
+    const char*const HemodynamicWaveformStorage("1.2.840.10008.5.1.4.1.1.9.2.1");
+    const char*const ImageOverlayBoxSOPClassRetired("1.2.840.10008.5.1.1.24");
+    const char*const ImplantAssemblyTemplateInformationModelFIND("1.2.840.10008.5.1.4.44.2");
+    const char*const ImplantAssemblyTemplateInformationModelGET("1.2.840.10008.5.1.4.44.4");
+    const char*const ImplantAssemblyTemplateInformationModelMOVE("1.2.840.10008.5.1.4.44.3");
+    const char*const ImplantAssemblyTemplateStorage("1.2.840.10008.5.1.4.44.1");
+    const char*const ImplantTemplateGroupInformationModelFIND("1.2.840.10008.5.1.4.45.2");
+    const char*const ImplantTemplateGroupInformationModelGET("1.2.840.10008.5.1.4.45.4");
+    const char*const ImplantTemplateGroupInformationModelMOVE("1.2.840.10008.5.1.4.45.3");
+    const char*const ImplantTemplateGroupStorage("1.2.840.10008.5.1.4.45.1");
+    const char*const ImplantationPlanSRStorage("1.2.840.10008.5.1.4.1.1.88.70");
+    const char*const InstanceAvailabilityNotificationSOPClass("1.2.840.10008.5.1.4.33");
+    const char*const IntraocularLensCalculationsStorage("1.2.840.10008.5.1.4.1.1.78.8");
+    const char*const IntravascularOpticalCoherenceTomographyImageStorageForPresentation("1.2.840.10008.5.1.4.1.1.14.1");
+    const char*const IntravascularOpticalCoherenceTomographyImageStorageForProcessing("1.2.840.10008.5.1.4.1.1.14.2");
+    const char*const KeratometryMeasurementsStorage("1.2.840.10008.5.1.4.1.1.78.3");
+    const char*const KeyObjectSelectionDocumentStorage("1.2.840.10008.5.1.4.1.1.88.59");
+    const char*const LensometryMeasurementsStorage("1.2.840.10008.5.1.4.1.1.78.1");
+    const char*const MacularGridThicknessAndVolumeReportStorage("1.2.840.10008.5.1.4.1.1.79.1");
+    const char*const MammographyCADSRStorage("1.2.840.10008.5.1.4.1.1.88.50");
+    const char*const MediaCreationManagementSOPClassUID("1.2.840.10008.5.1.1.33");
+    const char*const MediaStorageDirectoryStorage("1.2.840.10008.1.3.10");
+    const char*const ModalityPerformedProcedureStepNotificationSOPClass("1.2.840.10008.3.1.2.3.5");
+    const char*const ModalityPerformedProcedureStepRetrieveSOPClass("1.2.840.10008.3.1.2.3.4");
+    const char*const ModalityPerformedProcedureStepSOPClass("1.2.840.10008.3.1.2.3.3");
+    const char*const ModalityWorklistInformationModelFIND("1.2.840.10008.5.1.4.31");
+    const char*const MRImageStorage("1.2.840.10008.5.1.4.1.1.4");
+    const char*const MRSpectroscopyStorage("1.2.840.10008.5.1.4.1.1.4.2");
+    const char*const MultiframeGrayscaleByteSecondaryCaptureImageStorage("1.2.840.10008.5.1.4.1.1.7.2");
+    const char*const MultiframeGrayscaleWordSecondaryCaptureImageStorage("1.2.840.10008.5.1.4.1.1.7.3");
+    const char*const MultiframeSingleBitSecondaryCaptureImageStorage("1.2.840.10008.5.1.4.1.1.7.1");
+    const char*const MultiframeTrueColorSecondaryCaptureImageStorage("1.2.840.10008.5.1.4.1.1.7.4");
+    const char*const NuclearMedicineImageStorage("1.2.840.10008.5.1.4.1.1.20");
+    const char*const NuclearMedicineImageStorageRetired("1.2.840.10008.5.1.4.1.1.5");
+    const char*const OphthalmicAxialMeasurementsStorage("1.2.840.10008.5.1.4.1.1.78.7");
+    const char*const OphthalmicPhotography16BitImageStorage("1.2.840.10008.5.1.4.1.1.77.1.5.2");
+    const char*const OphthalmicPhotography8BitImageStorage("1.2.840.10008.5.1.4.1.1.77.1.5.1");
+    const char*const OphthalmicTomographyImageStorage("1.2.840.10008.5.1.4.1.1.77.1.5.4");
+    const char*const OphthalmicVisualFieldStaticPerimetryMeasurementsStorage("1.2.840.10008.5.1.4.1.1.80.1");
+    const char*const PatientRootQueryRetrieveInformationModelFIND("1.2.840.10008.5.1.4.1.2.1.1");
+    const char*const PatientRootQueryRetrieveInformationModelGET("1.2.840.10008.5.1.4.1.2.1.3");
+    const char*const PatientRootQueryRetrieveInformationModelMOVE("1.2.840.10008.5.1.4.1.2.1.2");
+    const char*const PatientStudyOnlyQueryRetrieveInformationModelFINDRetired("1.2.840.10008.5.1.4.1.2.3.1");
+    const char*const PatientStudyOnlyQueryRetrieveInformationModelGETRetired("1.2.840.10008.5.1.4.1.2.3.3");
+    const char*const PatientStudyOnlyQueryRetrieveInformationModelMOVERetired("1.2.840.10008.5.1.4.1.2.3.2");
+    const char*const PositronEmissionTomographyImageStorage("1.2.840.10008.5.1.4.1.1.128");
+    const char*const PresentationLUTSOPClass("1.2.840.10008.5.1.1.23");
+    const char*const PrintJobSOPClass("1.2.840.10008.5.1.1.14");
+    const char*const PrintQueueManagementSOPClassRetired("1.2.840.10008.5.1.1.26");
+    const char*const PrinterConfigurationRetrievalSOPClass("1.2.840.10008.5.1.1.16.376");
+    const char*const PrinterSOPClass("1.2.840.10008.5.1.1.16");
+    const char*const ProceduralEventLoggingSOPClass("1.2.840.10008.1.40");
+    const char*const ProcedureLogStorage("1.2.840.10008.5.1.4.1.1.88.40");
+    const char*const ProductCharacteristicsQuerySOPClass("1.2.840.10008.5.1.4.41");
+    const char*const PseudoColorSoftcopyPresentationStateStorageSOPClass("1.2.840.10008.5.1.4.1.1.11.3");
+    const char*const PullPrintRequestSOPClassRetired("1.2.840.10008.5.1.1.31");
+    const char*const RawDataStorage("1.2.840.10008.5.1.4.1.1.66");
+    const char*const RealWorldValueMappingStorage("1.2.840.10008.5.1.4.1.1.67");
+    const char*const ReferencedImageBoxSOPClassRetired("1.2.840.10008.5.1.1.4.2");
+    const char*const RespiratoryWaveformStorage("1.2.840.10008.5.1.4.1.1.9.6.1");
+    const char*const RTBeamsDeliveryInstructionStorage("1.2.840.10008.5.1.4.34.7");
+    const char*const RTBeamsDeliveryInstructionStorageTrialRetired("1.2.840.10008.5.1.4.34.1");
+    const char*const RTBeamsTreatmentRecordStorage("1.2.840.10008.5.1.4.1.1.481.4");
+    const char*const RTBrachyTreatmentRecordStorage("1.2.840.10008.5.1.4.1.1.481.6");
+    const char*const RTConventionalMachineVerification("1.2.840.10008.5.1.4.34.8");
+    const char*const RTConventionalMachineVerificationTrialRetired("1.2.840.10008.5.1.4.34.2");
+    const char*const RTDoseStorage("1.2.840.10008.5.1.4.1.1.481.2");
+    const char*const RTImageStorage("1.2.840.10008.5.1.4.1.1.481.1");
+    const char*const RTIonBeamsTreatmentRecordStorage("1.2.840.10008.5.1.4.1.1.481.9");
+    const char*const RTIonMachineVerification("1.2.840.10008.5.1.4.34.9");
+    const char*const RTIonMachineVerificationTrialRetired("1.2.840.10008.5.1.4.34.3");
+    const char*const RTIonPlanStorage("1.2.840.10008.5.1.4.1.1.481.8");
+    const char*const RTPlanStorage("1.2.840.10008.5.1.4.1.1.481.5");
+    const char*const RTStructureSetStorage("1.2.840.10008.5.1.4.1.1.481.3");
+    const char*const RTTreatmentSummaryRecordStorage("1.2.840.10008.5.1.4.1.1.481.7");
+    const char*const SecondaryCaptureImageStorage("1.2.840.10008.5.1.4.1.1.7");
+    const char*const SegmentationStorage("1.2.840.10008.5.1.4.1.1.66.4");
+    const char*const SpatialFiducialsStorage("1.2.840.10008.5.1.4.1.1.66.2");
+    const char*const SpatialRegistrationStorage("1.2.840.10008.5.1.4.1.1.66.1");
+    const char*const SpectaclePrescriptionReportStorage("1.2.840.10008.5.1.4.1.1.78.6");
+    const char*const StandaloneCurveStorageRetired("1.2.840.10008.5.1.4.1.1.9");
+    const char*const StandaloneModalityLUTStorageRetired("1.2.840.10008.5.1.4.1.1.10");
+    const char*const StandaloneOverlayStorageRetired("1.2.840.10008.5.1.4.1.1.8");
+    const char*const StandalonePETCurveStorageRetired("1.2.840.10008.5.1.4.1.1.129");
+    const char*const StandaloneVOILUTStorageRetired("1.2.840.10008.5.1.4.1.1.11");
+    const char*const StereometricRelationshipStorage("1.2.840.10008.5.1.4.1.1.77.1.5.3");
+    const char*const StorageCommitmentPullModelSOPClassRetired("1.2.840.10008.1.20.2");
+    const char*const StorageCommitmentPushModelSOPClass("1.2.840.10008.1.20.1");
+    const char*const StoredPrintStorageSOPClassRetired("1.2.840.10008.5.1.1.27");
+    const char*const StudyComponentManagementSOPClassRetired("1.2.840.10008.3.1.2.3.2");
+    const char*const StudyRootQueryRetrieveInformationModelFIND("1.2.840.10008.5.1.4.1.2.2.1");
+    const char*const StudyRootQueryRetrieveInformationModelGET("1.2.840.10008.5.1.4.1.2.2.3");
+    const char*const StudyRootQueryRetrieveInformationModelMOVE("1.2.840.10008.5.1.4.1.2.2.2");
+    const char*const SubjectiveRefractionMeasurementsStorage("1.2.840.10008.5.1.4.1.1.78.4");
+    const char*const SubstanceAdministrationLoggingSOPClass("1.2.840.10008.1.42");
+    const char*const SubstanceApprovalQuerySOPClass("1.2.840.10008.5.1.4.42");
+    const char*const SurfaceSegmentationStorage("1.2.840.10008.5.1.4.1.1.66.5");
+    const char*const TextSRStorageTrialRetired("1.2.840.10008.5.1.4.1.1.88.1");
+    const char*const UltrasoundImageStorage("1.2.840.10008.5.1.4.1.1.6.1");
+    const char*const UltrasoundImageStorageRetired("1.2.840.10008.5.1.4.1.1.6");
+    const char*const UltrasoundMultiframeImageStorage("1.2.840.10008.5.1.4.1.1.3.1");
+    const char*const UltrasoundMultiframeImageStorageRetired("1.2.840.10008.5.1.4.1.1.3");
+    const char*const UnifiedProcedureStepEventSOPClass("1.2.840.10008.5.1.4.34.6.4");
+    const char*const UnifiedProcedureStepEventSOPClassTrialRetired("1.2.840.10008.5.1.4.34.4.4");
+    const char*const UnifiedProcedureStepPullSOPClass("1.2.840.10008.5.1.4.34.6.3");
+    const char*const UnifiedProcedureStepPullSOPClassTrialRetired("1.2.840.10008.5.1.4.34.4.3");
+    const char*const UnifiedProcedureStepPushSOPClass("1.2.840.10008.5.1.4.34.6.1");
+    const char*const UnifiedProcedureStepPushSOPClassTrialRetired("1.2.840.10008.5.1.4.34.4.1");
+    const char*const UnifiedProcedureStepWatchSOPClass("1.2.840.10008.5.1.4.34.6.2");
+    const char*const UnifiedProcedureStepWatchSOPClassTrialRetired("1.2.840.10008.5.1.4.34.4.2");
+    const char*const VerificationSOPClass("1.2.840.10008.1.1");
+    const char*const VideoEndoscopicImageStorage("1.2.840.10008.5.1.4.1.1.77.1.1.1");
+    const char*const VideoMicroscopicImageStorage("1.2.840.10008.5.1.4.1.1.77.1.2.1");
+    const char*const VideoPhotographicImageStorage("1.2.840.10008.5.1.4.1.1.77.1.4.1");
+    const char*const VisualAcuityMeasurementsStorage("1.2.840.10008.5.1.4.1.1.78.5");
+    const char*const VLEndoscopicImageStorage("1.2.840.10008.5.1.4.1.1.77.1.1");
+    const char*const VLMicroscopicImageStorage("1.2.840.10008.5.1.4.1.1.77.1.2");
+    const char*const VLPhotographicImageStorage("1.2.840.10008.5.1.4.1.1.77.1.4");
+    const char*const VLSlideCoordinatesMicroscopicImageStorage("1.2.840.10008.5.1.4.1.1.77.1.3");
+    const char*const VLWholeSlideMicroscopyImageStorage("1.2.840.10008.5.1.4.1.1.77.1.6");
+    const char*const VOILUTBoxSOPClass("1.2.840.10008.5.1.1.22");
+    const char*const WaveformStorageTrialRetired("1.2.840.10008.5.1.4.1.1.9.1");
+    const char*const XAXRFGrayscaleSoftcopyPresentationStateStorage("1.2.840.10008.5.1.4.1.1.11.5");
+    const char*const XRay3DAngiographicImageStorage("1.2.840.10008.5.1.4.1.1.13.1.1");
+    const char*const XRay3DCraniofacialImageStorage("1.2.840.10008.5.1.4.1.1.13.1.2");
+    const char*const XRayAngiographicBiPlaneImageStorageRetired("1.2.840.10008.5.1.4.1.1.12.3");
+    const char*const XRayAngiographicImageStorage("1.2.840.10008.5.1.4.1.1.12.1");
+    const char*const XRayRadiationDoseSRStorage("1.2.840.10008.5.1.4.1.1.88.67");
+    const char*const XRayRadiofluoroscopicImageStorage("1.2.840.10008.5.1.4.1.1.12.2");
+
+    // Synchronization Frame of Reference
+    const char*const UniversalCoordinatedTime("1.2.840.10008.15.1.1");
+
+    // Transfer
+    const char*const ColorPaletteStorage("1.2.840.10008.5.1.4.39.1");
+
+    // Transfer Syntax
+    const char*const DeflatedExplicitVRLittleEndian("1.2.840.10008.1.2.1.99");
+    const char*const ExplicitVRBigEndian("1.2.840.10008.1.2.2");
+    const char*const ExplicitVRLittleEndian("1.2.840.10008.1.2.1");
+    const char*const ImplicitVRLittleEndian("1.2.840.10008.1.2");
+    const char*const JPEG2000ImageCompression("1.2.840.10008.1.2.4.91");
+    const char*const JPEG2000ImageCompressionLosslessOnly("1.2.840.10008.1.2.4.90");
+    const char*const JPEG2000Part2MulticomponentImageCompression("1.2.840.10008.1.2.4.93");
+    const char*const JPEG2000Part2MulticomponentImageCompressionLosslessOnly("1.2.840.10008.1.2.4.92");
+    const char*const JPEGBaselineProcess1("1.2.840.10008.1.2.4.50");
+    const char*const JPEGExtendedProcess24("1.2.840.10008.1.2.4.51");
+    const char*const JPEGExtendedProcess35Retired("1.2.840.10008.1.2.4.52");
+    const char*const JPEGExtendedHierarchicalProcess1618Retired("1.2.840.10008.1.2.4.59");
+    const char*const JPEGExtendedHierarchicalProcess1719Retired("1.2.840.10008.1.2.4.60");
+    const char*const JPEGFullProgressionHierarchicalProcess2426Retired("1.2.840.10008.1.2.4.63");
+    const char*const JPEGFullProgressionHierarchicalProcess2527Retired("1.2.840.10008.1.2.4.64");
+    const char*const JPEGFullProgressionNonHierarchicalProcess1012Retired("1.2.840.10008.1.2.4.55");
+    const char*const JPEGFullProgressionNonHierarchicalProcess1113Retired("1.2.840.10008.1.2.4.56");
+    const char*const JPEGLosslessHierarchicalProcess28Retired("1.2.840.10008.1.2.4.65");
+    const char*const JPEGLosslessHierarchicalProcess29Retired("1.2.840.10008.1.2.4.66");
+    const char*const JPEGLosslessNonHierarchicalProcess14("1.2.840.10008.1.2.4.57");
+    const char*const JPEGLosslessNonHierarchicalProcess15Retired("1.2.840.10008.1.2.4.58");
+    const char*const JPEGLosslessNonHierarchicalFirstOrderPredictionProcess14SelectionValue1("1.2.840.10008.1.2.4.70");
+    const char*const JPEGSpectralSelectionHierarchicalProcess2022Retired("1.2.840.10008.1.2.4.61");
+    const char*const JPEGSpectralSelectionHierarchicalProcess2123Retired("1.2.840.10008.1.2.4.62");
+    const char*const JPEGSpectralSelectionNonHierarchicalProcess68Retired("1.2.840.10008.1.2.4.53");
+    const char*const JPEGSpectralSelectionNonHierarchicalProcess79Retired("1.2.840.10008.1.2.4.54");
+    const char*const JPEGLSLosslessImageCompression("1.2.840.10008.1.2.4.80");
+    const char*const JPEGLSLossyNearLosslessImageCompression("1.2.840.10008.1.2.4.81");
+    const char*const JPIPReferenced("1.2.840.10008.1.2.4.94");
+    const char*const JPIPReferencedDeflate("1.2.840.10008.1.2.4.95");
+    const char*const MPEG2MainProfileHighLevel("1.2.840.10008.1.2.4.101");
+    const char*const MPEG2MainProfileMainLevel("1.2.840.10008.1.2.4.100");
+    const char*const MPEG4AVCH264BDcompatibleHighProfileLevel41("1.2.840.10008.1.2.4.103");
+    const char*const MPEG4AVCH264HighProfileLevel41("1.2.840.10008.1.2.4.102");
+    const char*const RFC2557MIMEEncapsulation("1.2.840.10008.1.2.6.1");
+    const char*const RLELossless("1.2.840.10008.1.2.5");
+    const char*const XMLEncoding("1.2.840.10008.1.2.6.2");
+
+    // Well-known frame of reference
+    const char*const ICBM452T1FrameOfReference("1.2.840.10008.1.4.2.1");
+    const char*const ICBMSingleSubjectMRIFrameOfReference("1.2.840.10008.1.4.2.2");
+    const char*const SPM2AVG152PDFrameOfReference("1.2.840.10008.1.4.1.17");
+    const char*const SPM2AVG152T1FrameOfReference("1.2.840.10008.1.4.1.15");
+    const char*const SPM2AVG152T2FrameOfReference("1.2.840.10008.1.4.1.16");
+    const char*const SPM2AVG305T1FrameOfReference("1.2.840.10008.1.4.1.14");
+    const char*const SPM2BRAINMASKFrameOfReference("1.2.840.10008.1.4.1.13");
+    const char*const SPM2CSFFrameOfReference("1.2.840.10008.1.4.1.12");
+    const char*const SPM2EPIFrameOfReference("1.2.840.10008.1.4.1.5");
+    const char*const SPM2FILT1FrameOfReference("1.2.840.10008.1.4.1.6");
+    const char*const SPM2GRAYFrameOfReference("1.2.840.10008.1.4.1.10");
+    const char*const SPM2PDFrameOfReference("1.2.840.10008.1.4.1.4");
+    const char*const SPM2PETFrameOfReference("1.2.840.10008.1.4.1.7");
+    const char*const SPM2SINGLESUBJT1FrameOfReference("1.2.840.10008.1.4.1.18");
+    const char*const SPM2SPECTFrameOfReference("1.2.840.10008.1.4.1.9");
+    const char*const SPM2T1FrameOfReference("1.2.840.10008.1.4.1.2");
+    const char*const SPM2T2FrameOfReference("1.2.840.10008.1.4.1.3");
+    const char*const SPM2TRANSMFrameOfReference("1.2.840.10008.1.4.1.8");
+    const char*const SPM2WHITEFrameOfReference("1.2.840.10008.1.4.1.11");
+    const char*const TalairachBrainAtlasFrameOfReference("1.2.840.10008.1.4.1.1");
+
+    // Well-known Print Queue SOP Instance
+    const char*const PrintQueueSOPInstanceRetired("1.2.840.10008.5.1.1.25");
+
+    // Well-known Printer SOP Instance
+    const char*const PrinterConfigurationRetrievalSOPInstance("1.2.840.10008.5.1.1.17.376");
+    const char*const PrinterSOPInstance("1.2.840.10008.5.1.1.17");
+
+    // Well-known SOP Instance
+    const char*const HotIronColorPaletteSOPInstance("1.2.840.10008.1.5.1");
+    const char*const HotMetalBlueColorPaletteSOPInstance("1.2.840.10008.1.5.3");
+    const char*const PET20StepColorPaletteSOPInstance("1.2.840.10008.1.5.4");
+    const char*const PETColorPaletteSOPInstance("1.2.840.10008.1.5.2");
+    const char*const ProceduralEventLoggingSOPInstance("1.2.840.10008.1.40.1");
+    const char*const StorageCommitmentPullModelSOPInstanceRetired("1.2.840.10008.1.20.2.1");
+    const char*const StorageCommitmentPushModelSOPInstance("1.2.840.10008.1.20.1.1");
+    const char*const SubstanceAdministrationLoggingSOPInstance("1.2.840.10008.1.42.1");
+    const char*const UnifiedWorklistAndProcedureStepSOPInstance("1.2.840.10008.5.1.4.34.5");
+} // namespace uids
+}

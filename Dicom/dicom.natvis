@@ -1,0 +1,438 @@
+<?xml version="1.0" encoding="utf-8"?>
+<AutoVisualizer xmlns="http://schemas.microsoft.com/vstudio/debugger/natvis/2010">
+  <!-- multiplicity_range -->
+  <Type Name="dicom::multiplicity_range">
+    <DisplayString>({(int)Minimum,d}, {(int)Maximum,d})</DisplayString>
+    <Expand>
+      <Item Name="Minimum">(int)Minimum,d</Item>
+      <Item Name="Maximum">(int)Maximum,d</Item>
+    </Expand>
+  </Type>
+
+  <!-- tag -->
+  <Type Name="dicom::tag">
+    <DisplayString Condition="ContextBasedType == false">({Number,X}, {Multiplicity}, {Type,X})</DisplayString>
+    <DisplayString Condition="ContextBasedType == true">({Number,X}, {Multiplicity}, {Type,X} [Context Sensitive])</DisplayString>
+    <Expand>
+      <Item Name="Number">Number,X</Item>
+      <Item Name="Multiplicity">Multiplicity</Item>
+      <Item Name="Type">Type,X</Item>
+      <Item Name="ContextBasedType">ContextBasedType</Item>
+    </Expand>
+  </Type>
+  
+  <!-- range_tag -->
+  <Type Name="dicom::range_tag">
+    <DisplayString Condition="ContextBasedType == false">({RangeMin,X}-{RangeMax,X}, {RangeStep,X}, {Multiplicity}, {Type,X})</DisplayString>
+    <DisplayString Condition="ContextBasedType == true">({RangeMin,X}-{RangeMax,X}, {RangeStep,X}, {Multiplicity}, {Type,X} [Context Sensitive])</DisplayString>
+    <Expand>
+      <Item Name="RangeMin">RangeMin,X</Item>
+      <Item Name="RangeMax">RangeMax,X</Item>
+      <Item Name="RangeStep">RangeStep,X</Item>
+      <Item Name="Multiplicity">Multiplicity</Item>
+      <Item Name="Type">Type,X</Item>
+      <Item Name="ContextBasedType">ContextBasedType</Item>
+    </Expand>
+  </Type>
+  
+  <!-- private_tag_creator -->
+  <Type Name="dicom::private_tag_creator">
+    <DisplayString>({Name,na}, {Group,X})</DisplayString>
+    <Expand>
+      <Item Name="Name">Name,na</Item>
+      <Item Name="Group">Group,X</Item>
+    </Expand>
+  </Type>
+  
+  <!-- private_tag -->
+  <Type Name="dicom::private_tag">
+    <DisplayString Condition="ContextBasedType == false">({Creator->Name,na}, {Creator->Group,X}, {Element,X}, {Multiplicity}, {Type,X})</DisplayString>
+    <DisplayString Condition="ContextBasedType == true">({Creator->Name,na}, {Creator->Group,X}, {Element,X}, {Multiplicity}, {Type,X} [Context Sensitive])</DisplayString>
+    <Expand>
+      <Item Name="Creator">Creator,na</Item>
+      <Item Name="Element">Element,X</Item>
+      <Item Name="Multiplicity">Multiplicity</Item>
+      <Item Name="Type">Type</Item>
+      <Item Name="ContextBasedType">ContextBasedType</Item>
+    </Expand>
+  </Type>
+  
+  <!-- buffer<T> -->
+  <Type Name="dicom::data::buffer&lt;*&gt;">
+    <DisplayString>buffer {{ size = {m_length} }}</DisplayString>
+    <Expand>
+      <Item Name="Length">m_length</Item>
+      <Item Name="Buffer">m_buffer</Item>
+      <Item Name="Owns Buffer">m_owns_buffer</Item>
+    </Expand>
+  </Type>
+  
+  <!-- encoded_string -->
+  <Type Name="dicom::data::encoded_string">
+    <DisplayString Condition="m_validity == ValidityType::Invalid">? (Invalid)</DisplayString>
+    <DisplayString Condition="m_validity == ValidityType::Deinitialized">? (Deinitialized)</DisplayString>
+    <DisplayString Condition="m_validity == ValidityType::Uninitialized">? (Uninitialized)</DisplayString>
+    <DisplayString Condition="m_value.m_length == 0">empty</DisplayString>
+    <DisplayString Condition="m_validity == ValidityType::Valid">{m_parsed}</DisplayString>
+    <Expand>
+      <Item Name="Encoding">m_encoding</Item>
+      <Item Name="Validity">m_validity</Item>
+      <Item Name="Parsed Value">m_parsed</Item>
+      <Item Name="Value">m_value</Item>
+    </Expand>
+  </Type>
+  
+  <!-- date -->
+  <Type Name="dicom::data::date">
+    <DisplayString Condition="m_is_valid == true">({m_year,d}-{(int)m_month,d}-{(int)m_day,d})</DisplayString>
+    <DisplayString Condition="m_is_valid == false">?</DisplayString>
+    <Expand>
+      <Item Name="Year">m_year,d</Item>
+      <Item Name="Month">m_month,d</Item>
+      <Item Name="Day">m_day,d</Item>
+      <Item Name="IsValid">m_is_valid</Item>
+    </Expand>
+  </Type>
+
+  <!-- time -->
+  <Type Name="dicom::data::time">
+    <DisplayString Condition="m_is_valid == true">({(int)m_hour,d}:{(int)m_minute,d}:{(int)m_second,d})</DisplayString>
+    <DisplayString Condition="m_is_valid == false">?</DisplayString>
+    <Expand>
+      <Item Name="Hour">m_hour,d</Item>
+      <Item Name="Minute">m_minute,d</Item>
+      <Item Name="Second">m_second,d</Item>
+      <Item Name="Millisecond">m_millisecond,d</Item>
+      <Item Name="IsValid">m_is_valid</Item>
+    </Expand>
+  </Type>
+  
+  <!-- time_offset -->
+  <Type Name="dicom::data::time_offset">
+    <DisplayString Condition="m_is_valid == false">?</DisplayString>
+    <DisplayString Condition="m_is_negative == true">-{(int)m_hour}:{(int)m_minute}</DisplayString>
+    <DisplayString Condition="m_is_negative == false">{(int)m_hour}:{(int)m_minute}</DisplayString>
+    <Expand>
+      <Item Name="Hour">m_hour,d</Item>
+      <Item Name="Minute">m_minute,d</Item>
+      <Item Name="IsNegative">m_is_negative</Item>
+      <Item Name="IsValid">m_is_valid</Item>
+    </Expand>
+  </Type>
+  
+  <!-- date_time -->
+  <Type Name="dicom::data::date_time">
+    <DisplayString Condition="m_is_valid == false">?</DisplayString>
+    <DisplayString>({m_date}, {m_time})</DisplayString>
+    <Expand>
+      <Item Name="Date">m_date</Item>
+      <Item Name="Time">m_time</Item>
+      <Item Name="IsValid">m_is_valid</Item>
+    </Expand>    
+  </Type>
+  
+  <!-- uri_section -->
+  <Type Name="dicom::data::uri_section">
+    <DisplayString>{m_value}</DisplayString>
+    <Expand>
+      <ExpandedItem>m_value</ExpandedItem>
+    </Expand>
+  </Type>
+  
+  <!-- uri -->
+  <Type Name="dicom::data::uri">
+    <DisplayString>{m_value}</DisplayString>
+    <Expand>
+      <Item Name="Value">m_value</Item>
+      <Item Name="Validity">m_validity</Item>
+      <Item Name="Scheme" Condition="m_validity == 1">m_scheme</Item>
+      <Item Name="Authentication" Condition="m_validity == 1">m_authentication</Item>
+      <Item Name="Host" Condition="m_validity == 1">m_host</Item>
+      <Item Name="Port" Condition="m_validity == 1">m_port</Item>
+      <Item Name="Path" Condition="m_validity == 1">m_path</Item>
+      <Item Name="Query" Condition="m_validity == 1">m_query</Item>
+      <Item Name="Fragment" Condition="m_validity == 1">m_fragment</Item>
+    </Expand>
+  </Type>
+  
+  <!-- AttributeSet -->
+  <Type Name="dicom::data::AttributeSet">
+    <DisplayString>AttributeSet {{ size = {m_attributes._Mysize} }}</DisplayString>
+    <Expand>
+      <Item Name="Attributes">m_attributes</Item>
+      <Item Name="Private Creators">m_creator_group_masks</Item>
+    </Expand>
+  </Type>
+  
+  <!-- AttributeSetRef -->
+  <Type Name="dicom::data::AttributeSetRef">
+    <DisplayString>{*_Ptr}</DisplayString>
+    <Expand>
+      <ExpandedItem>*_Ptr</ExpandedItem>
+    </Expand>
+  </Type>
+  
+  <!-- VRs -->
+  <Type Name="dicom::data::AE">
+    <DisplayString>AE {{ {m_value} }}</DisplayString>
+    <Expand>
+      <Item Name="VRType">m_type</Item>
+      <Item Name="Validity">m_validity</Item>
+      <Item Name="Value">m_value</Item>
+    </Expand>
+  </Type>
+  <Type Name="dicom::data::AS">
+    <DisplayString>AS {{ {m_value} }}</DisplayString>
+    <Expand>
+      <Item Name="VRType">m_type</Item>
+      <Item Name="Validity">m_validity</Item>
+      <Item Name="Value">m_value</Item>
+    </Expand>
+  </Type>
+  <Type Name="dicom::data::AT">
+    <DisplayString>AT {{ {m_values} }}</DisplayString>
+    <Expand>
+      <Item Name="VRType">m_type</Item>
+      <Item Name="Validity">m_validity</Item>
+      <Item Name="Values">m_values</Item>
+    </Expand>
+  </Type>
+  <Type Name="dicom::data::CS">
+    <DisplayString>CS {{ {m_value} }}</DisplayString>
+    <Expand>
+      <Item Name="VRType">m_type</Item>
+      <Item Name="Validity">m_validity</Item>
+      <Item Name="Value">m_value</Item>
+    </Expand>
+  </Type>
+  <Type Name="dicom::data::DA">
+    <DisplayString Condition="m_validity == ValidityType::Invalid">DA {{ {m_value} }}</DisplayString>
+    <DisplayString Condition="m_validity == ValidityType::Deinitialized">DA {{ {m_value} }}</DisplayString>
+    <DisplayString Condition="m_validity == ValidityType::Uninitialized">DA {{ {m_value} }}</DisplayString>
+    <DisplayString>DA {{ {m_parsed} }}</DisplayString>
+    <Expand>
+      <Item Name="VRType">m_type</Item>
+      <Item Name="Validity">m_validity</Item>
+      <Item Name="Value">m_value</Item>
+      <Item Name="Parsed Value">m_parsed</Item>
+    </Expand>
+  </Type>
+  <Type Name="dicom::data::DS">
+    <DisplayString>DS {{ {m_value} }}</DisplayString>
+    <Expand>
+      <Item Name="VRType">m_type</Item>
+      <Item Name="Validity">m_validity</Item>
+      <Item Name="Value">m_value</Item>
+    </Expand>
+  </Type>
+  <Type Name="dicom::data::DT">
+    <DisplayString Condition="m_validity == ValidityType::Invalid">DT {{ {m_value} }}</DisplayString>
+    <DisplayString Condition="m_validity == ValidityType::Deinitialized">DT {{ {m_value} }}</DisplayString>
+    <DisplayString Condition="m_validity == ValidityType::Uninitialized">DT {{ {m_value} }}</DisplayString>
+    <DisplayString>DT {{ ({m_parsed_date_time}, {m_parsed_offset}) }}</DisplayString>
+    <Expand>
+      <Item Name="VRType">m_type</Item>
+      <Item Name="Validity">m_validity</Item>
+      <Item Name="Value">m_value</Item>
+      <Item Name="Parsed Date Time">m_parsed_date_time</Item>
+      <Item Name="Parsed Offset">m_parsed_offset</Item>
+    </Expand>
+  </Type>
+  <Type Name="dicom::data::FD">
+    <DisplayString>FD {{ {m_value} }}</DisplayString>
+    <Expand>
+      <Item Name="VRType">m_type</Item>
+      <Item Name="Validity">m_validity</Item>
+      <Item Name="Value">m_value</Item>
+    </Expand>
+  </Type>
+  <Type Name="dicom::data::FL">
+    <DisplayString>FL {{ {m_value} }}</DisplayString>
+    <Expand>
+      <Item Name="VRType">m_type</Item>
+      <Item Name="Validity">m_validity</Item>
+      <Item Name="Value">m_value</Item>
+    </Expand>
+  </Type>
+  <Type Name="dicom::data::IS">
+    <DisplayString>IS {{ {m_value} }}</DisplayString>
+    <Expand>
+      <Item Name="VRType">m_type</Item>
+      <Item Name="Validity">m_validity</Item>
+      <Item Name="Value">m_value</Item>
+    </Expand>
+  </Type>
+  <Type Name="dicom::data::LO">
+    <DisplayString>LO {{ {m_value} }}</DisplayString>
+    <Expand>
+      <Item Name="VRType">m_type</Item>
+      <Item Name="Validity">m_validity</Item>
+      <Item Name="Value">m_value</Item>
+    </Expand>
+  </Type>
+  <Type Name="dicom::data::LT">
+    <DisplayString>LT {{ {m_value} }}</DisplayString>
+    <Expand>
+      <Item Name="VRType">m_type</Item>
+      <Item Name="Validity">m_validity</Item>
+      <Item Name="Value">m_value</Item>
+    </Expand>
+  </Type>
+  <Type Name="dicom::data::OB">
+    <DisplayString>OB {{ {m_value} }}</DisplayString>
+    <Expand>
+      <Item Name="VRType">m_type</Item>
+      <Item Name="Validity">m_validity</Item>
+      <Item Name="Value">m_value</Item>
+    </Expand>
+  </Type>
+  <Type Name="dicom::data::OF">
+    <DisplayString>OF {{ {m_value} }}</DisplayString>
+    <Expand>
+      <Item Name="VRType">m_type</Item>
+      <Item Name="Validity">m_validity</Item>
+      <Item Name="Value">m_value</Item>
+    </Expand>
+  </Type>
+  <Type Name="dicom::data::OW">
+    <DisplayString>OW {{ {m_value} }}</DisplayString>
+    <Expand>
+      <Item Name="VRType">m_type</Item>
+      <Item Name="Validity">m_validity</Item>
+      <Item Name="Value">m_value</Item>
+    </Expand>
+  </Type>
+  <Type Name="dicom::data::PN">
+    <DisplayString>PN {{ {m_value} }}</DisplayString>
+    <Expand>
+      <Item Name="VRType">m_type</Item>
+      <Item Name="Validity">m_validity</Item>
+      <Item Name="Value">m_value</Item>
+    </Expand>
+  </Type>
+  <Type Name="dicom::data::SH">
+    <DisplayString>SH {{ {m_value} }}</DisplayString>
+    <Expand>
+      <Item Name="VRType">m_type</Item>
+      <Item Name="Validity">m_validity</Item>
+      <Item Name="Value">m_value</Item>
+    </Expand>
+  </Type>
+  <Type Name="dicom::data::SL">
+    <DisplayString>SL {{ {m_value} }}</DisplayString>
+    <Expand>
+      <Item Name="VRType">m_type</Item>
+      <Item Name="Validity">m_validity</Item>
+      <Item Name="Value">m_value</Item>
+    </Expand>
+  </Type>
+  <Type Name="dicom::data::SQ">
+    <DisplayString>SQ {{ {m_items} }}</DisplayString>
+    <Expand>
+      <ExpandedItem>m_items</ExpandedItem>
+    </Expand>
+  </Type>
+  <Type Name="dicom::data::SS">
+    <DisplayString>SS {{ {m_value} }}</DisplayString>
+    <Expand>
+      <Item Name="VRType">m_type</Item>
+      <Item Name="Validity">m_validity</Item>
+      <Item Name="Value">m_value</Item>
+    </Expand>
+  </Type>
+  <Type Name="dicom::data::ST">
+    <DisplayString>ST {{ {m_value} }}</DisplayString>
+    <Expand>
+      <Item Name="VRType">m_type</Item>
+      <Item Name="Validity">m_validity</Item>
+      <Item Name="Value">m_value</Item>
+    </Expand>
+  </Type>
+  <Type Name="dicom::data::TM">
+    <DisplayString Condition="m_validity == ValidityType::Invalid">TM {{ {m_value} }}</DisplayString>
+    <DisplayString Condition="m_validity == ValidityType::Deinitialized">TM {{ {m_value} }}</DisplayString>
+    <DisplayString Condition="m_validity == ValidityType::Uninitialized">TM {{ {m_value} }}</DisplayString>
+    <DisplayString>TM {{ {m_parsed} }}</DisplayString>
+    <Expand>
+      <Item Name="VRType">m_type</Item>
+      <Item Name="Validity">m_validity</Item>
+      <Item Name="Value">m_value</Item>
+      <Item Name="Parsed Value">m_parsed</Item>
+    </Expand>
+  </Type>
+  <Type Name="dicom::data::UI">
+    <DisplayString>UI {{ {m_value} }}</DisplayString>
+    <Expand>
+      <Item Name="VRType">m_type</Item>
+      <Item Name="Validity">m_validity</Item>
+      <Item Name="Value">m_value</Item>
+    </Expand>
+  </Type>
+  <Type Name="dicom::data::UL">
+    <DisplayString>UL {{ {m_value} }}</DisplayString>
+    <Expand>
+      <Item Name="VRType">m_type</Item>
+      <Item Name="Validity">m_validity</Item>
+      <Item Name="Value">m_value</Item>
+    </Expand>
+  </Type>
+  <Type Name="dicom::data::UN">
+    <DisplayString>UN {{ {m_value} }}</DisplayString>
+    <Expand>
+      <Item Name="VRType">m_type</Item>
+      <Item Name="Validity">m_validity</Item>
+      <Item Name="Value">m_value</Item>
+    </Expand>
+  </Type>
+  <Type Name="dicom::data::US">
+    <DisplayString>US {{ {m_value} }}</DisplayString>
+    <Expand>
+      <Item Name="VRType">m_type</Item>
+      <Item Name="Validity">m_validity</Item>
+      <Item Name="Value">m_value</Item>
+    </Expand>
+  </Type>
+  <Type Name="dicom::data::UT">
+    <DisplayString>UT {{ {m_value} }}</DisplayString>
+    <Expand>
+      <Item Name="VRType">m_type</Item>
+      <Item Name="Validity">m_validity</Item>
+      <Item Name="Value">m_value</Item>
+    </Expand>
+  </Type>
+  <Type Name="dicom::data::ComponentGroup">
+    <DisplayString>ComponentGroup {{ {m_value} }}</DisplayString>
+    <Expand>
+      <Item Name="Validity">m_validity</Item>
+      <Item Name="Value">m_value</Item>
+    </Expand>
+  </Type>
+  <Type Name="dicom::data::PatientNameGroup">
+    <DisplayString>PatientNameGroup {{ {m_value} }}</DisplayString>
+    <Expand>
+      <Item Name="Validity">m_validity</Item>
+      <Item Name="Value">m_value</Item>
+    </Expand>
+  </Type>
+  
+  <!-- Deferred VR -->
+  <Type Name="dicom::io::Deferred">
+    <DisplayString Condition="m_loaded_vr._Myptr == 0">Deferred {{ Not Loaded }}</DisplayString>
+    <DisplayString>Deferred {{ {m_loaded_vr} }}</DisplayString>
+    <Expand>
+      <Item Name="Load Callback">m_load_vr_callback</Item>
+      <Item Name="VR">m_loaded_vr</Item>
+    </Expand>
+  </Type>
+  
+  <!-- frame_index -->
+  <Type Name="dicom::multiframe::frame_index">
+    <DisplayString>frame_index {{ {m_sop_instance_uid}, {m_frame_number} }}</DisplayString>
+    <Expand>
+      <Item Name="StudyInstanceUID">m_study_instance_uid,na</Item>
+      <Item Name="SeriesInstanceUID">m_series_instance_uid,na</Item>
+      <Item Name="SOPInstanceUID">m_sop_instance_uid,na</Item>
+      <Item Name="Frame Number">m_frame_number</Item>
+    </Expand>
+  </Type>
+</AutoVisualizer>
