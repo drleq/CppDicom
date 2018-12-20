@@ -1,5 +1,5 @@
 #include "dicomtest_pch.h"
-#include "boost/test/unit_test.hpp"
+#include "CppUnitTestFramework.hpp"
 
 #include "dicom/data/string_converter/ks_x_1001_converter.h"
 #include "dicom_test/data/string_converter/CommonFixture.h"
@@ -9,9 +9,9 @@ namespace {
     using namespace dicom_test::data::string_converter;
     using namespace dicom_test::data::string_converter::detail;
 
-    class TestFixture : public CommonFixture {
+    class ks_x_1001_converter_test : public CommonFixture {
     public:
-        TestFixture() {
+        ks_x_1001_converter_test() {
             ByteRangeGroupPtr range_0x21(new ByteRangeGroup);
             range_0x21->Add(0xA1, 0xFE);
 
@@ -73,7 +73,7 @@ namespace {
             root_range->Add(0xB0, 0xC8, range_0x30_48);
             root_range->Add(0xCA, 0xFD, range_0x4A_7D);
 
-            m_mapping = LoadMapping(L"dicom_test/data/string_converter/KSX1001.txt", root_range, MoveToG1Plane);
+            m_mapping = LoadMapping("dicom_test/data/string_converter/KSX1001.TXT", root_range, MoveToG1Plane);
         }
 
     protected:
@@ -97,34 +97,26 @@ namespace {
 
 namespace dicom_test::data::string_converter {
 
-    BOOST_FIXTURE_TEST_SUITE(ks_x_1001_converter_test, TestFixture)
-
-    //------------------------------------------------------------------------------------------------------------
-
-    BOOST_AUTO_TEST_CASE(ValidToUTF16) {
-        BOOST_REQUIRE(m_mapping->CheckValidByteSequences(ks_x_1001_to_utf16));
+    TEST_CASE(ks_x_1001_converter_test, ValidToUTF8) {
+        REQUIRE(m_mapping->CheckValidByteSequences(ks_x_1001_to_utf8));
     }
 
     //------------------------------------------------------------------------------------------------------------
 
-    BOOST_AUTO_TEST_CASE(InvalidToUTF16) {
-        BOOST_REQUIRE(m_mapping->CheckInvalidByteSequences(ks_x_1001_to_utf16));
+    TEST_CASE(ks_x_1001_converter_test, InvalidToUTF8) {
+        REQUIRE(m_mapping->CheckInvalidByteSequences(ks_x_1001_to_utf8));
     }
 
     //------------------------------------------------------------------------------------------------------------
 
-    BOOST_AUTO_TEST_CASE(ValidFromUTF16) {
-        BOOST_REQUIRE(m_mapping->CheckValidUnicodeValues(utf16_to_ks_x_1001));
+    TEST_CASE(ks_x_1001_converter_test, ValidFromUTF8) {
+        REQUIRE(m_mapping->CheckValidUnicodeValues(utf8_to_ks_x_1001));
     }
 
     //------------------------------------------------------------------------------------------------------------
 
-    BOOST_AUTO_TEST_CASE(InvalidFromUTF16) {
-        BOOST_REQUIRE(m_mapping->CheckInvalidUnicodeValues(utf16_to_ks_x_1001));
+    TEST_CASE(ks_x_1001_converter_test, InvalidFromUTF8) {
+        REQUIRE(m_mapping->CheckInvalidUnicodeValues(utf8_to_ks_x_1001));
     }
-
-    //------------------------------------------------------------------------------------------------------------
-
-    BOOST_AUTO_TEST_SUITE_END()
 
 }

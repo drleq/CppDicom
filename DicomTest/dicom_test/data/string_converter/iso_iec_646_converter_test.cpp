@@ -11,7 +11,7 @@ namespace {
     class iso_iec_646_converter_test : public CommonFixture {
     public:
         iso_iec_646_converter_test() {
-            m_mapping = LoadMapping(L"dicom_test/data/string_converter/glibc-ISO646_US-2.1.2.xml");
+            m_mapping = LoadMapping("dicom_test/data/string_converter/glibc-ISO646_US-2.1.2.xml");
         }
 
     protected:

@@ -133,7 +133,11 @@ namespace dicom_test::data::string_converter::detail {
         const ByteRangeGroupPtr& root_valid_range,
         std::function<bool (std::string&)> filter00
     ) {
-        ifstream in(text_file.string());
+        if (!std::filesystem::exists(text_file)) {
+            throw std::logic_error("Cannot find text file: " + text_file.string());
+        }
+
+        std::ifstream in(text_file);
 
         char line[1024];
         string byte_sequence;
@@ -299,7 +303,6 @@ namespace dicom_test::data::string_converter::detail {
                 SetUTF8(utf32, tmp);
 
                 if (converter(tmp, dest)) {
-                    std::cout << "F1: 0x" << utf32 << std::endl;
                     return false;
                 }
             }
@@ -312,7 +315,6 @@ namespace dicom_test::data::string_converter::detail {
                 SetUTF8(utf32, tmp);
 
                 if (converter(tmp, dest)) {
-                    std::cout << "F2: 0x" << utf32 << std::endl;
                     return false;
                 }
             }

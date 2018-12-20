@@ -11,7 +11,7 @@ namespace {
     class gb18030_converter_test : public CommonFixture {
     public:
         gb18030_converter_test() {
-            m_mapping = LoadMapping(L"dicom_test/data/string_converter/gb-18030-2000.xml");
+            m_mapping = LoadMapping("dicom_test/data/string_converter/gb-18030-2000.xml");
         }
 
     protected:

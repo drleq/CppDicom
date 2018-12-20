@@ -129,7 +129,6 @@ namespace dicom_test::data {
 
         AE ae3("");
         REQUIRE(ae3.Empty());
-        REQUIRE(false);
 
         AE ae4("    ");
         REQUIRE(ae4.Empty());

@@ -11,7 +11,7 @@ namespace {
     class gb2312_converter_test : public CommonFixture {
     public:
         gb2312_converter_test() {
-            m_mapping = LoadMapping(L"dicom_test/data/string_converter/glibc-EUC_CN-2.1.2.xml");
+            m_mapping = LoadMapping("dicom_test/data/string_converter/glibc-EUC_CN-2.1.2.xml");
         }
 
     protected:

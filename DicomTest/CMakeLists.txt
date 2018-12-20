@@ -22,6 +22,11 @@ add_executable(DicomTest
     dicom_test/data/string_converter/iso_iec_8859_7_converter_test.cpp
     dicom_test/data/string_converter/iso_iec_8859_8_converter_test.cpp
     dicom_test/data/string_converter/iso_iec_8859_9_converter_test.cpp
+    dicom_test/data/string_converter/jis_x_0201_converter_test.cpp
+    dicom_test/data/string_converter/jis_x_0208_converter_test.cpp
+    dicom_test/data/string_converter/jis_x_0212_converter_test.cpp
+    dicom_test/data/string_converter/ks_x_1001_converter_test.cpp
+    dicom_test/data/string_converter/tis_620_2533_converter_test.cpp
     dicom_test/data/AETest.cpp
     dicom_test/data/ASTest.cpp
     dicom_test/data/ATTest.cpp

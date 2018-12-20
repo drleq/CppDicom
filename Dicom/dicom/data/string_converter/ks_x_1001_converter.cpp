@@ -1291,6 +1291,10 @@ namespace dicom::data::string_converter {
                 uint16_t* dest_ptr = reinterpret_cast<uint16_t*>(next_it);
                 next_it += sizeof(uint16_t);
 
+                if (c >= 0x10000) {
+                    return false;
+                }
+
                 // 0x30 -> 0x48
                 auto it = detail::find_codepoint00(s_0x30_48, c);
                 if (it != nullptr) {

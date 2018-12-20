@@ -11,7 +11,7 @@ namespace {
     class iso_iec_8859_7_converter_test : public CommonFixture {
     public:
         iso_iec_8859_7_converter_test() {
-            m_mapping = LoadMapping(L"dicom_test/data/string_converter/iso-8859_7-2003.xml");
+            m_mapping = LoadMapping("dicom_test/data/string_converter/iso-8859_7-2003.xml");
         }
 
     protected:
