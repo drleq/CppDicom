@@ -21,25 +21,25 @@ namespace {
 
 namespace dicom_test::data::string_converter {
 
-    TEST_CASE(gb18030_converter_test, ValidToUTF8) {
+    TEST_CASE(gb18030_converter_test, ValidToUTF8, "string_converter") {
         REQUIRE(m_mapping->CheckValidByteSequences(gb_18030_to_utf8));
     }
 
     //------------------------------------------------------------------------------------------------------------
 
-    TEST_CASE(gb18030_converter_test, InvalidToUTF8) {
+    TEST_CASE(gb18030_converter_test, InvalidToUTF8, "string_converter") {
         REQUIRE(m_mapping->CheckInvalidByteSequences(gb_18030_to_utf8));
     }
 
     //------------------------------------------------------------------------------------------------------------
 
-    TEST_CASE(gb18030_converter_test, ValidFromUTF8) {
+    TEST_CASE(gb18030_converter_test, ValidFromUTF8, "string_converter") {
         REQUIRE(m_mapping->CheckValidUnicodeValues(utf8_to_gb_18030));
     }
 
     //------------------------------------------------------------------------------------------------------------
 
-    TEST_CASE(gb18030_converter_test, InvalidFromUTF8) {
+    TEST_CASE(gb18030_converter_test, InvalidFromUTF8, "string_converter") {
         REQUIRE(m_mapping->CheckInvalidUnicodeValues(utf8_to_gb_18030));
     }
 

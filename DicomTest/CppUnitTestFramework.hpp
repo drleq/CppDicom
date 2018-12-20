@@ -1,5 +1,6 @@
 #pragma once
 
+#include <array>
 #include <functional>
 #include <iomanip>
 #include <iostream>
@@ -39,8 +40,50 @@ namespace CppUnitTestFramework {
     //--------------------------------------------------------------------------------------------------------
     //--------------------------------------------------------------------------------------------------------
 
+    struct RunOptions {
+        bool Verbose = false;
+        std::vector<std::string> Keywords;
+
+        bool ParseCommandLine(int argc, const char* argv[]) {
+            for (int index = 1; index < argc; ++index) {
+                auto arg = argv[index];
+
+                if (arg[0] != '-') {
+                    Keywords.push_back(arg);
+                    continue;
+                }
+
+                std::string option_name{ &arg[1] };
+                if (option_name == "h" || option_name == "-help" || option_name == "?") {
+                    std::cout << "Usage:" << std::endl;
+                    std::cout << "    -h, --help, -?:  Displays this message" << std::endl;
+                    std::cout << "    -v, --verbose:   Show verbose output" << std::endl;
+                    return false;
+                }
+
+                if (option_name == "v" || option_name == "-verbose") {
+                    Verbose = true;
+                    continue;
+                }
+
+                // Unknown option
+                std::cout << "Unknown option: " << option_name << std::endl;
+                return false;
+            }
+
+            return true;
+        }
+    };
+
+    //--------------------------------------------------------------------------------------------------------
+    //--------------------------------------------------------------------------------------------------------
+    //--------------------------------------------------------------------------------------------------------
+
     struct ILogger {
         virtual ~ILogger() = default;
+
+        virtual void BeginRun(size_t test_count) = 0;
+        virtual void EndRun(size_t pass_count, size_t fail_count, size_t skip_count) = 0;
 
         virtual void SkipTest(const std::string_view& name) = 0;
         virtual void EnterTest(const std::string_view& name) = 0;
@@ -64,29 +107,61 @@ namespace CppUnitTestFramework {
     struct ConsoleLogger :
         ILogger
     {
-        static ILoggerPtr Create() {
-            return std::make_unique<ConsoleLogger>();
+        static ILoggerPtr Create(const RunOptions* options) {
+            return std::unique_ptr<ConsoleLogger>{ new ConsoleLogger(options) };
         }
 
         virtual ~ConsoleLogger() = default;
 
+        void BeginRun(size_t test_count) override {
+            std::cout << "Running " << test_count << " test cases..." << std::endl;
+        }
+        void EndRun(size_t pass_count, size_t fail_count, size_t skip_count) override {
+            std::cout << "Complete." << std::endl;
+            std::cout << "    Passed:  " << pass_count << std::endl;
+            std::cout << "    Failed:  " << fail_count << std::endl;
+            std::cout << "    Skipped: " << skip_count << std::endl;
+        }
+
         void SkipTest(const std::string_view& name) override {
-            std::cout << "Skip: " << name.data() << std::endl;
+            m_test_log.clear();
+            m_test_log << "Skip: " << name.data() << std::endl;
+            
+            if (m_run_options->Verbose) {
+                FlushLog();
+            }
         }
         void EnterTest(const std::string_view& name) override {
-            std::cout << "Test: " << name.data() << std::endl;
+            m_test_log = std::stringstream();
+            m_test_log << "Test: " << name.data() << std::endl;
             m_indent_level++;
+
+            if (m_run_options->Verbose) {
+                FlushLog();
+            }
         }
         void ExitTest() override {
             m_indent_level = 0;
+
+            if (m_test_failed || m_run_options->Verbose) {
+                FlushLog();
+            }
         }
 
         void SkipSection(const std::string_view& name) override {
-            Indent(std::cout) << "[Skipped] " << name.data() << std::endl;
+            Indent() << "[Skipped] " << name.data() << std::endl;
+
+            if (m_run_options->Verbose) {
+                FlushLog();
+            }
         }
         void PushSection(const std::string_view& name) override {
-            Indent(std::cout) << name.data() << std::endl;
+            Indent() << name.data() << std::endl;
             m_indent_level++;
+
+            if (m_run_options->Verbose) {
+                FlushLog();
+            }
         }
         void PopSection() override {
             if (m_indent_level > 0) {
@@ -100,7 +175,7 @@ namespace CppUnitTestFramework {
             const std::string_view& message
         ) override {
             m_test_failed = true;
-            auto& log = Indent(std::cout);
+            auto& log = Indent();
 
             log << "@" << location.LineNumber << " ";
 
@@ -110,30 +185,43 @@ namespace CppUnitTestFramework {
             }
 
             log << ": " << message.data() << std::endl;
+            
+            if (m_run_options->Verbose) {
+                FlushLog();
+            }
         }
         void UnhandledException(const std::string_view& message) override {
             m_test_failed = true;
-            Indent(std::cout) << "Fail: " << message.data() << std::endl;
+            Indent() << "Fail: " << message.data() << std::endl;
+
+            if (m_run_options->Verbose) {
+                FlushLog();
+            }
         }
 
     private:
+        ConsoleLogger(const RunOptions* run_options)
+          : m_run_options(run_options)
+        {}
+
+        std::ostream& Indent() {
+            for (size_t i = 0; i != m_indent_level; ++i) {
+                m_test_log << "    ";
+            }
+            return m_test_log;
+        }
+
+        void FlushLog() {
+            std::cout << m_test_log.str().c_str();
+            m_test_log = std::stringstream();
+        }
+
+    private:
+        const RunOptions*const m_run_options;
+
         bool m_test_failed = false;
         size_t m_indent_level = 0;
-
-        std::ostream& Indent(std::ostream& out) {
-            for (size_t i = 0; i != m_indent_level; ++i) {
-                out << "    ";
-            }
-            return out;
-        }
-    };
-
-    //--------------------------------------------------------------------------------------------------------
-    //--------------------------------------------------------------------------------------------------------
-    //--------------------------------------------------------------------------------------------------------
-
-    struct TestRunContext {
-        ILoggerPtr Logger;
+        std::stringstream m_test_log;
     };
 
     //--------------------------------------------------------------------------------------------------------
@@ -145,6 +233,7 @@ namespace CppUnitTestFramework {
         using TestCallback = std::function<void (const ILoggerPtr& logger)>;
         struct TestDetails {
             std::string_view Name;
+            std::vector<std::string_view> Tags;
             TestCallback Callback;
         };
 
@@ -159,30 +248,41 @@ namespace CppUnitTestFramework {
     public:
         template <typename TTestCase>
         static void Add() {
-            TestDetails details {
-                TTestCase::Name,
-                [](const auto&... args) {
-                    TTestCase test_case(args...);
-                    test_case.Run();
-                }
+            TestDetails details;
+            details.Name = TTestCase::Name;
+            details.Tags.assign(std::begin(TTestCase::Tags), std::end(TTestCase::Tags));
+            details.Callback = [](const auto&... args) {
+                TTestCase test_case(args...);
+                test_case.Run();
             };
 
             GetTestVector().push_back(std::move(details));
         }
 
-        static void Run(const ILoggerPtr& logger) {
-            for (auto& test_case : GetTestVector()) {
-                // if (filter00 && !filter00(test_case.Name)) {
-                //     logger->SkipTest(test_case.Name);
-                //     continue;
-                // }
+        static void Run(const RunOptions* options, const ILoggerPtr& logger) {
+            const auto& all_test_cases = GetTestVector();
+
+            logger->BeginRun(all_test_cases.size());
+
+            size_t pass_count = 0;
+            size_t fail_count = 0;
+            size_t skip_count = 0;
+
+            for (auto& test_case : all_test_cases) {
+                if (!ShouldRunTest(options, test_case.Name, test_case.Tags)) {
+                    logger->SkipTest(test_case.Name);
+                    skip_count++;
+                    continue;
+                }
 
                 logger->EnterTest(test_case.Name);
 
+                bool test_failed = true;
                 try {
                     test_case.Callback(logger);
+                    test_failed = false;
                 } catch (const AssertException& e) {
-                    // REQUIRE* statement failed.  We should stop here.
+                    // REQUIRE* statement failed.  No need to do anything else.
                 } catch (const std::exception& e) {
                     logger->UnhandledException(e.what());
                 } catch (...) {
@@ -190,13 +290,46 @@ namespace CppUnitTestFramework {
                 }
 
                 logger->ExitTest();
+
+                if (test_failed) {
+                    fail_count++;
+                } else {
+                    pass_count++;
+                }
             }
+
+            logger->EndRun(pass_count, fail_count, skip_count);
         }
 
     private:
         static std::vector<TestDetails>& GetTestVector() {
             static std::vector<TestDetails> s_test_vector;
             return s_test_vector;
+        }
+
+        static bool ShouldRunTest(
+            const RunOptions* options,
+            const std::string_view& test_name,
+            const std::vector<std::string_view> test_tags
+        ) {
+            if (options->Keywords.empty()) {
+                // No keywords.  All tests match.
+                return true;
+            }
+
+            for (auto& keyword : options->Keywords) {
+                if (test_name.find(keyword) != std::string_view::npos) {
+                    return true;
+                }
+
+                for (auto& tag : test_tags) {
+                    if (tag == keyword) {
+                        return true;
+                    }
+                }
+            }
+
+            return false;
         }
     };
 
@@ -370,6 +503,14 @@ namespace CppUnitTestFramework {
             }
         }
 
+        // In leiu of std::make_array()
+        template <typename... TArgs>
+        static constexpr auto make_tags_array(TArgs&&... tags) {
+            return std::array<std::string_view, sizeof...(TArgs)> {
+                std::forward<TArgs>(tags)...
+            };
+        }
+
     private:
         ILoggerPtr m_logger;
     };
@@ -386,10 +527,11 @@ namespace CppUnitTestFramework {
 
 //------------------------------------------------------------------------------------------------------------
 
-#define TEST_CASE(TestFixture, TestName) namespace {                                                \
+#define TEST_CASE(TestFixture, TestName, ...) namespace {                                           \
     struct TestCase_##TestName : TestFixture, CppUnitTestFramework::CommonFixture {                 \
         using CppUnitTestFramework::CommonFixture::CommonFixture;                                   \
         static constexpr std::string_view Name = #TestFixture "::" #TestName;                       \
+        static constexpr auto Tags = make_tags_array(__VA_ARGS__);                                  \
         void Run();                                                                                 \
     };                                                                                              \
     CppUnitTestFramework::TestRegistry::AutoReg<TestCase_##TestName> _CPPUTF_NEXT_REGISTRAR_NAME;   \
@@ -432,11 +574,15 @@ void TestCase_##TestName::Run()
 //------------------------------------------------------------------------------------------------------------
 
 #ifdef GENERATE_UNIT_TEST_MAIN
-int main(int /*argc*/, const char* /*argv*/[]) {
-    std::cout << "Running tests..." << std::endl;
+int main(int argc, const char* argv[]) {
+    CppUnitTestFramework::RunOptions options;
+    if (!options.ParseCommandLine(argc, argv)) {
+        return -1;
+    }
 
     CppUnitTestFramework::TestRegistry::Run(
-        CppUnitTestFramework::ConsoleLogger::Create()
+        &options,
+        CppUnitTestFramework::ConsoleLogger::Create(&options)
     );
 
     return 0;
