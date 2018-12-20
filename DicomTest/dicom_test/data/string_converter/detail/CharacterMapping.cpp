@@ -299,6 +299,7 @@ namespace dicom_test::data::string_converter::detail {
                 SetUTF8(utf32, tmp);
 
                 if (converter(tmp, dest)) {
+                    std::cout << "F1: 0x" << utf32 << std::endl;
                     return false;
                 }
             }
@@ -311,6 +312,7 @@ namespace dicom_test::data::string_converter::detail {
                 SetUTF8(utf32, tmp);
 
                 if (converter(tmp, dest)) {
+                    std::cout << "F2: 0x" << utf32 << std::endl;
                     return false;
                 }
             }

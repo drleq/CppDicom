@@ -68,6 +68,10 @@ namespace dicom::data::string_converter {
                     return true;
                 }
 
+                if (c >= 0x10000) {
+                    return false;
+                }
+
                 // ISO/IEC 8859-2. Non-trivial conversion; use a LUT
                 auto it = detail::find_codepoint00(s_lut, c);
                 if (it == nullptr) { return false; }

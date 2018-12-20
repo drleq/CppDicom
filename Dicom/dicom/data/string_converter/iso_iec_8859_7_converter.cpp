@@ -66,6 +66,10 @@ namespace dicom::data::string_converter {
                     return true;
                 }
 
+                if (c >= 0x10000) {
+                    return false;
+                }
+
                 // Non-trivial. Check the LUT.
                 auto it = detail::find_codepoint00(s_lut, c);
                 if (it == nullptr) { return false; }

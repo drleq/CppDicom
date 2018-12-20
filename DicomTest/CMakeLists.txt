@@ -13,7 +13,15 @@ add_executable(DicomTest
     dicom_test/data/string_converter/CommonFixture.cpp
     dicom_test/data/string_converter/gb2312_converter_test.cpp
     dicom_test/data/string_converter/gb18030_converter_test.cpp
-    dicom_test/data/string_converter/iso_iec_646_converter_test.cpp
+    dicom_test/data/string_converter/iso_iec_8859_1_converter_test.cpp
+    dicom_test/data/string_converter/iso_iec_8859_2_converter_test.cpp
+    dicom_test/data/string_converter/iso_iec_8859_3_converter_test.cpp
+    dicom_test/data/string_converter/iso_iec_8859_4_converter_test.cpp
+    dicom_test/data/string_converter/iso_iec_8859_5_converter_test.cpp
+    dicom_test/data/string_converter/iso_iec_8859_6_converter_test.cpp
+    dicom_test/data/string_converter/iso_iec_8859_7_converter_test.cpp
+    dicom_test/data/string_converter/iso_iec_8859_8_converter_test.cpp
+    dicom_test/data/string_converter/iso_iec_8859_9_converter_test.cpp
     dicom_test/data/AETest.cpp
     dicom_test/data/ASTest.cpp
     dicom_test/data/ATTest.cpp

@@ -1,5 +1,5 @@
 #include "dicomtest_pch.h"
-#include "boost/test/unit_test.hpp"
+#include "CppUnitTestFramework.hpp"
 
 #include "dicom/data/string_converter/iso_iec_8859_2_converter.h"
 
@@ -11,9 +11,9 @@ using namespace dicom::data::string_converter;
 namespace {
     using namespace dicom_test::data::string_converter;
 
-    class TestFixture : public CommonFixture {
+    class iso_iec_8859_2_converter_test : public CommonFixture {
     public:
-        TestFixture() {
+        iso_iec_8859_2_converter_test() {
             m_mapping = LoadMapping(L"dicom_test/data/string_converter/iso-8859_2-1999.xml");
         }
 
@@ -24,34 +24,26 @@ namespace {
 
 namespace dicom_test::data::string_converter {
 
-    BOOST_FIXTURE_TEST_SUITE(iso_iec_8859_2_converter_test, TestFixture)
-
-    //------------------------------------------------------------------------------------------------------------
-
-    BOOST_AUTO_TEST_CASE(ValidToUTF16) {
-        BOOST_REQUIRE(m_mapping->CheckValidByteSequences(iso_iec_8859_2_to_utf16));
+    TEST_CASE(iso_iec_8859_2_converter_test, ValidToUTF8) {
+        REQUIRE(m_mapping->CheckValidByteSequences(iso_iec_8859_2_to_utf8));
     }
 
     //------------------------------------------------------------------------------------------------------------
 
-    BOOST_AUTO_TEST_CASE(InvalidToUTF16) {
-        BOOST_REQUIRE(m_mapping->CheckInvalidByteSequences(iso_iec_8859_2_to_utf16));
+    TEST_CASE(iso_iec_8859_2_converter_test, InvalidToUTF8) {
+        REQUIRE(m_mapping->CheckInvalidByteSequences(iso_iec_8859_2_to_utf8));
     }
 
     //------------------------------------------------------------------------------------------------------------
 
-    BOOST_AUTO_TEST_CASE(ValidFromUTF16) {
-        BOOST_REQUIRE(m_mapping->CheckValidUnicodeValues(utf16_to_iso_iec_8859_2));
+    TEST_CASE(iso_iec_8859_2_converter_test, ValidFromUTF8) {
+        REQUIRE(m_mapping->CheckValidUnicodeValues(utf8_to_iso_iec_8859_2));
     }
 
     //------------------------------------------------------------------------------------------------------------
 
-    BOOST_AUTO_TEST_CASE(InvalidFromUTF16) {
-        BOOST_REQUIRE(m_mapping->CheckInvalidUnicodeValues(utf16_to_iso_iec_8859_2));
+    TEST_CASE(iso_iec_8859_2_converter_test, InvalidFromUTF8) {
+        REQUIRE(m_mapping->CheckInvalidUnicodeValues(utf8_to_iso_iec_8859_2));
     }
-
-    //------------------------------------------------------------------------------------------------------------
-
-    BOOST_AUTO_TEST_SUITE_END()
 
 }
