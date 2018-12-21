@@ -130,7 +130,7 @@ namespace dicom_test::data::string_converter::detail {
 
     CharacterMapping::CharacterMapping(
         const std::filesystem::path& text_file,
-        const ByteRangeGroupPtr& root_valid_range,
+        const CodePoints& root_valid_range,
         std::function<bool (std::string&)> filter00
     ) {
         if (!std::filesystem::exists(text_file)) {
@@ -162,7 +162,15 @@ namespace dicom_test::data::string_converter::detail {
             m_valid_unicode_values.emplace(make_pair(unicode, byte_sequence));
         }
 
-        m_root_valid_range = root_valid_range;
+        m_root_valid_range = std::make_shared<detail::ByteRangeGroup>();
+        for (auto& range : root_valid_range) {
+            auto sub_converted = std::make_shared<detail::ByteRangeGroup>();
+            for (auto& sub_range : range.SubRanges) {
+                sub_converted->Add(sub_range.Start, sub_range.End);
+            }
+
+            m_root_valid_range->Add(range.Start, range.End, sub_converted);
+        }
     }
 
     //--------------------------------------------------------------------------------------------------------

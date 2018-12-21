@@ -12,72 +12,62 @@ namespace {
     class jis_x_0208_converter_test : public CommonFixture {
     public:
         jis_x_0208_converter_test() {
-            ByteRangeGroupPtr range_0x21(new ByteRangeGroup);
-            range_0x21->Add(0x21, 0x7E);
+            CodePoints valid_ranges = {
+                CodePointRange {
+                    0x21, 0x21,
+                    { {0x21, 0x7E} }
+                },
+                CodePointRange {
+                    0x22, 0x22,
+                    { {0x21, 0x2E}, {0x3A, 0x41}, {0x4A, 0x50}, {0x5C, 0x6A}, {0x72, 0x79}, {0x7E, 0x7E} }
+                },
+                CodePointRange {
+                    0x23, 0x23,
+                    { {0x30, 0x39}, {0x41, 0x5A}, {0x61, 0x7A} }
+                },
+                CodePointRange {
+                    0x24, 0x24,
+                    { {0x21, 0x73} }
+                },
+                CodePointRange {
+                    0x25, 0x25,
+                    { {0x21, 0x76} }
+                },
+                CodePointRange {
+                    0x26, 0x26,
+                    { {0x21, 0x38}, {0x41, 0x58} }
+                },
+                CodePointRange {
+                    0x27, 0x27,
+                    { {0x21, 0x41}, {0x51, 0x71} }
+                },
+                CodePointRange {
+                    0x28, 0x28,
+                    { {0x21, 0x40} }
+                },
+                CodePointRange {
+                    0x2D, 0x2D,
+                    { {0x21, 0x3E}, {0x40, 0x56}, {0x5F, 0x7C} }
+                },
+                CodePointRange {
+                    0x30, 0x4E,
+                    { {0x21, 0x7E} }
+                },
+                CodePointRange {
+                    0x4F, 0x4F,
+                    { {0x21, 0x53} }
+                },
+                CodePointRange {
+                    0x50, 0x73,
+                    { {0x21, 0x7E} }
+                },
+                CodePointRange {
+                    0x74, 0x74,
+                    { {0x21, 0x26} }
+                },
+            };
 
-            ByteRangeGroupPtr range_0x22(new ByteRangeGroup);
-            range_0x22->Add(0x21, 0x2E);
-            range_0x22->Add(0x3A, 0x41);
-            range_0x22->Add(0x4A, 0x50);
-            range_0x22->Add(0x5C, 0x6A);
-            range_0x22->Add(0x72, 0x79);
-            range_0x22->Add(0x7E, 0x7E);
-
-            ByteRangeGroupPtr range_0x23(new ByteRangeGroup);
-            range_0x23->Add(0x30, 0x39);
-            range_0x23->Add(0x41, 0x5A);
-            range_0x23->Add(0x61, 0x7A);
-
-            ByteRangeGroupPtr range_0x24(new ByteRangeGroup);
-            range_0x24->Add(0x21, 0x73);
-
-            ByteRangeGroupPtr range_0x25(new ByteRangeGroup);
-            range_0x25->Add(0x21, 0x76);
-
-            ByteRangeGroupPtr range_0x26(new ByteRangeGroup);
-            range_0x26->Add(0x21, 0x38);
-            range_0x26->Add(0x41, 0x58);
-
-            ByteRangeGroupPtr range_0x27(new ByteRangeGroup);
-            range_0x27->Add(0x21, 0x41);
-            range_0x27->Add(0x51, 0x71);
-
-            ByteRangeGroupPtr range_0x28(new ByteRangeGroup);
-            range_0x28->Add(0x21, 0x40);
-
-            ByteRangeGroupPtr range_0x2D(new ByteRangeGroup);
-            range_0x2D->Add(0x21, 0x3E);
-            range_0x2D->Add(0x40, 0x56);
-            range_0x2D->Add(0x5F, 0x7C);
-
-            ByteRangeGroupPtr range_0x30_4E(new ByteRangeGroup);
-            range_0x30_4E->Add(0x21, 0x7E);
-
-            ByteRangeGroupPtr range_0x4F(new ByteRangeGroup);
-            range_0x4F->Add(0x21, 0x53);
-
-            ByteRangeGroupPtr range_0x50_73(new ByteRangeGroup);
-            range_0x50_73->Add(0x21, 0x7E);
-
-            ByteRangeGroupPtr range_0x74(new ByteRangeGroup);
-            range_0x74->Add(0x21, 0x26);
-
-            ByteRangeGroupPtr root_range(new ByteRangeGroup);
-            root_range->Add(0x21, 0x21, range_0x21);
-            root_range->Add(0x22, 0x22, range_0x22);
-            root_range->Add(0x23, 0x23, range_0x23);
-            root_range->Add(0x24, 0x24, range_0x24);
-            root_range->Add(0x25, 0x25, range_0x25);
-            root_range->Add(0x26, 0x26, range_0x26);
-            root_range->Add(0x27, 0x27, range_0x27);
-            root_range->Add(0x28, 0x28, range_0x28);
-            root_range->Add(0x2D, 0x2D, range_0x2D);
-            root_range->Add(0x30, 0x4E, range_0x30_4E);
-            root_range->Add(0x4F, 0x4F, range_0x4F);
-            root_range->Add(0x50, 0x73, range_0x50_73);
-            root_range->Add(0x74, 0x74, range_0x74);
-
-            m_mapping = LoadMapping("dicom_test/data/string_converter/CP932.TXT", root_range, ShiftJISToJISX0208);
+            m_mapping = LoadMapping("dicom_test/data/string_converter/CP932.TXT", valid_ranges, ShiftJISToJISX0208);
         }
 
     protected:

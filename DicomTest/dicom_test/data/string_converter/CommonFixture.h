@@ -4,6 +4,10 @@
 
 namespace dicom_test::data::string_converter {
 
+    using detail::CodePointRange;
+    using detail::CodePointRangeList;
+    using detail::CodePoints;
+
     class CommonFixture
     {
     public:
@@ -23,7 +27,7 @@ namespace dicom_test::data::string_converter {
 
         detail::CharacterMappingPtr LoadMapping(
             const std::filesystem::path& character_mapping,
-            detail::ByteRangeGroupPtr root_valid_range,
+            const detail::CodePoints& root_valid_range,
             std::function<bool (std::string&)> filter00 = nullptr
         ) {
             if (s_mapping_file != character_mapping.string()) {

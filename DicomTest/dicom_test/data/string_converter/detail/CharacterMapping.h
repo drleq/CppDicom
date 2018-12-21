@@ -13,7 +13,7 @@ namespace dicom_test::data::string_converter::detail {
         CharacterMapping(const std::filesystem::path& xml_file);
         CharacterMapping(
             const std::filesystem::path& txt_file,
-            const ByteRangeGroupPtr& valid_ranges,
+            const CodePoints& valid_ranges,
             std::function<bool (std::string&)> filter00 = nullptr
         );
 

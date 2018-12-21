@@ -132,6 +132,7 @@ namespace CppUnitTestFramework {
             }
         }
         void EnterTest(const std::string_view& name) override {
+            m_test_failed = false;
             m_test_log = std::stringstream();
             m_test_log << "Test: " << name.data() << std::endl;
             m_indent_level++;

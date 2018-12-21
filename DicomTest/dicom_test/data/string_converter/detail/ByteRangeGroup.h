@@ -4,11 +4,25 @@
 
 namespace dicom_test::data::string_converter::detail {
 
-    class ByteRangeGroup;
-    using ByteRangeGroupPtr = std::shared_ptr<ByteRangeGroup>;
-
     using StringConverterToUTF8 = std::function<bool (const std::string_view&, std::string&)>;
     using StringConverterFromUTF8 = std::function<bool (const std::string_view&, std::string&)>;
+
+    //--------------------------------------------------------------------------------------------------------
+
+    struct CodePointRange;
+    using CodePointRangeList = std::vector<CodePointRange>;
+    struct CodePointRange {
+        uint8_t Start;
+        uint8_t End;
+        CodePointRangeList SubRanges;
+    };
+
+    using CodePoints = CodePointRangeList;
+
+    //--------------------------------------------------------------------------------------------------------
+
+    class ByteRangeGroup;
+    using ByteRangeGroupPtr = std::shared_ptr<ByteRangeGroup>;
 
     // A single range of values for a single byte in a byte sequence
     class ByteRangeInfo
