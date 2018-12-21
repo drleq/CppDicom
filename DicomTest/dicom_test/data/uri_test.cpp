@@ -28,27 +28,27 @@ namespace dicom_test::data {
 
         // uri(const string_view&, bool)
         uri u1{ std::string_view(TestUri) };
-        CHECK(u1.Validity() == ValidityType::Valid);
-        CHECK(u1.Value() == TestUri);
-        CHECK(*u1.Scheme() == "http");
-        CHECK(*u1.Authentication() == "bobby:tables");
-        CHECK(*u1.Host() == "example.com");
-        CHECK(*u1.Port() == "1234");
-        CHECK(*u1.Path() == "/my/path");
-        CHECK(*u1.Query() == "id=1&seq=2");
-        CHECK(*u1.Fragment() == "PageMarker");
+        CHECK_EQUAL(u1.Validity(), ValidityType::Valid);
+        CHECK_EQUAL(u1.Value(), TestUri);
+        CHECK_EQUAL(*u1.Scheme(), "http");
+        CHECK_EQUAL(*u1.Authentication(), "bobby:tables");
+        CHECK_EQUAL(*u1.Host(), "example.com");
+        CHECK_EQUAL(*u1.Port(), "1234");
+        CHECK_EQUAL(*u1.Path(), "/my/path");
+        CHECK_EQUAL(*u1.Query(), "id=1&seq=2");
+        CHECK_EQUAL(*u1.Fragment(), "PageMarker");
 
         // uri(string&&, bool)
         uri u2{ std::string(TestUri) };
-        CHECK(u2.Validity() == ValidityType::Valid);
-        CHECK(u2.Value() == TestUri);
-        CHECK(*u2.Scheme() == "http");
-        CHECK(*u2.Authentication() == "bobby:tables");
-        CHECK(*u2.Host() == "example.com");
-        CHECK(*u2.Port() == "1234");
-        CHECK(*u2.Path() == "/my/path");
-        CHECK(*u2.Query() == "id=1&seq=2");
-        CHECK(*u2.Fragment() == "PageMarker");
+        CHECK_EQUAL(u2.Validity(), ValidityType::Valid);
+        CHECK_EQUAL(u2.Value(), TestUri);
+        CHECK_EQUAL(*u2.Scheme(), "http");
+        CHECK_EQUAL(*u2.Authentication(), "bobby:tables");
+        CHECK_EQUAL(*u2.Host(), "example.com");
+        CHECK_EQUAL(*u2.Port(), "1234");
+        CHECK_EQUAL(*u2.Path(), "/my/path");
+        CHECK_EQUAL(*u2.Query(), "id=1&seq=2");
+        CHECK_EQUAL(*u2.Fragment(), "PageMarker");
 
         //uri(
         //    const std::string_view& scheme,
@@ -68,15 +68,48 @@ namespace dicom_test::data {
             "id=1&seq=2",
             "PageMarker"
         );
-        CHECK(u3.Validity() == ValidityType::Valid);
-        CHECK(u3.Value() == TestUri);
-        CHECK(*u3.Scheme() == "http");
-        CHECK(*u3.Authentication() == "bobby:tables");
-        CHECK(*u3.Host() == "example.com");
-        CHECK(*u3.Port() == "1234");
-        CHECK(*u3.Path() == "/my/path");
-        CHECK(*u3.Query() == "id=1&seq=2");
-        CHECK(*u3.Fragment() == "PageMarker");
+        CHECK_EQUAL(u3.Validity(), ValidityType::Valid);
+        CHECK_EQUAL(u3.Value(), TestUri);
+        CHECK_EQUAL(*u3.Scheme(), "http");
+        CHECK_EQUAL(*u3.Authentication(), "bobby:tables");
+        CHECK_EQUAL(*u3.Host(), "example.com");
+        CHECK_EQUAL(*u3.Port(), "1234");
+        CHECK_EQUAL(*u3.Path(), "/my/path");
+        CHECK_EQUAL(*u3.Query(), "id=1&seq=2");
+        CHECK_EQUAL(*u3.Fragment(), "PageMarker");
+
+        // uri(const uri&)
+        uri u4(u3);
+        CHECK_EQUAL(u4.Validity(), u3.Validity());
+        CHECK_EQUAL(u4.Value(), u3.Value());
+        CHECK_EQUAL(*u4.Scheme(), *u3.Scheme());
+        CHECK_EQUAL(*u4.Authentication(), *u3.Authentication());
+        CHECK_EQUAL(*u4.Host(), *u3.Host());
+        CHECK_EQUAL(*u4.Port(), *u3.Port());
+        CHECK_EQUAL(*u4.Path(), *u3.Path());
+        CHECK_EQUAL(*u4.Query(), *u3.Query());
+        CHECK_EQUAL(*u4.Fragment(), *u3.Fragment());
+
+        // uri(uri&&)
+        uri u5(std::move(u4));
+        CHECK_EQUAL(u5.Validity(), u3.Validity());
+        CHECK_EQUAL(u5.Value(), u3.Value());
+        CHECK_EQUAL(*u5.Scheme(), *u3.Scheme());
+        CHECK_EQUAL(*u5.Authentication(), *u3.Authentication());
+        CHECK_EQUAL(*u5.Host(), *u3.Host());
+        CHECK_EQUAL(*u5.Port(), *u3.Port());
+        CHECK_EQUAL(*u5.Path(), *u3.Path());
+        CHECK_EQUAL(*u5.Query(), *u3.Query());
+        CHECK_EQUAL(*u5.Fragment(), *u3.Fragment());
+        CHECK_EQUAL(u4.Validity(), ValidityType::Deinitialized);
+        CHECK(u4.Value().empty());
+        CHECK(!u4.Scheme());
+        CHECK(!u4.Authentication());
+        CHECK(!u4.Host());
+        CHECK(!u4.Port());
+        CHECK(!u4.Path());
+        CHECK(!u4.Query());
+        CHECK(!u4.Fragment());
     }
 
 }

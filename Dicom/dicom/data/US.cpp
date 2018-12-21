@@ -19,6 +19,40 @@ namespace dicom::data {
       : VR(VRType::US),
         m_value(std::forward<buffer<uint16_t>>(binary_value))
     {}
+    
+    //--------------------------------------------------------------------------------------------------------
+
+    US::US(uint16_t value)
+      : VR(VRType::US),
+        m_value(1)
+    {
+        *m_value = value;
+    }
+
+    //--------------------------------------------------------------------------------------------------------
+
+    US::US(const std::vector<uint16_t>& values)
+      : VR(VRType::US),
+        m_value(values.size())
+    {
+        if (!values.empty()) {
+            memcpy(m_value, &values[0], m_value.ByteLength());
+        }
+    }
+
+    //--------------------------------------------------------------------------------------------------------
+
+    US::US(std::initializer_list<uint16_t> values)
+      : VR(VRType::US),
+        m_value(values.size())
+    {
+        if (values.size() != 0) {
+            uint16_t* ptr = m_value;
+            for (auto it = values.begin(); it != values.end(); ++it, ++ptr) {
+                *ptr = *it;
+            }
+        }
+    }
 
     //--------------------------------------------------------------------------------------------------------
 

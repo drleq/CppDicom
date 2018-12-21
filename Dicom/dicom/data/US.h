@@ -16,6 +16,9 @@ namespace dicom::data {
         US();
         US(const buffer<uint16_t>& binary_value);
         US(buffer<uint16_t>&& binary_value);
+        US(uint16_t value);
+        US(const std::vector<uint16_t>& values);
+        US(std::initializer_list<uint16_t> values);
         US(const US& other);
         US(US&& other);
         virtual ~US();

@@ -24,8 +24,8 @@ namespace CppUnitTestFramework {
     struct AssertException :
         std::exception
     {
-        AssertException(const std::string_view& message)
-          : m_message(message)
+        AssertException(std::string message)
+          : m_message(std::move(message))
         {}
 
         const char* what() const noexcept override {
@@ -33,7 +33,7 @@ namespace CppUnitTestFramework {
         }
 
     private:
-        std::string_view m_message;
+        std::string m_message;
     };
 
     //--------------------------------------------------------------------------------------------------------
@@ -376,7 +376,7 @@ namespace CppUnitTestFramework {
                 return std::nullopt;
             }
 
-            auto msg = Ext::ToString(left) + " == " + Ext::ToString(right);
+            auto msg = "[" + Ext::ToString(left) + "] == [" + Ext::ToString(right) + "]";
             return AssertException(msg.c_str());
         }
 
@@ -388,7 +388,7 @@ namespace CppUnitTestFramework {
                 return std::nullopt;
             }
 
-            auto msg = Ext::ToString(left) + " == " + Ext::ToString(right);
+            auto msg = "[" + Ext::ToString(left) + "] == [" + Ext::ToString(right) + "]";
             return AssertException(msg.c_str());
         }
 
@@ -482,6 +482,12 @@ namespace CppUnitTestFramework {
           : m_logger(std::move(logger))
         {}
 
+        ~CommonFixture() noexcept(false) {
+            if (m_check_has_failed) {
+                throw AssertException("One or more CHECKs have failed");
+            }
+        }
+
     protected:
         SectionLock EnterSection(std::string text) {
             return SectionLock(text, m_logger);
@@ -501,6 +507,8 @@ namespace CppUnitTestFramework {
 
             if (behavior == AssertType::Throw) {
                 throw *exception00;
+            } else {
+                m_check_has_failed = true;
             }
         }
 
@@ -513,6 +521,7 @@ namespace CppUnitTestFramework {
         }
 
     private:
+        bool m_check_has_failed = false;
         ILoggerPtr m_logger;
     };
 }

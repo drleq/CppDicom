@@ -462,7 +462,9 @@ namespace dicom::data {
 
     //--------------------------------------------------------------------------------------------------------
 
-    uri::uri(const uri& other) = default;
+    uri::uri(const uri& other) {
+        *this = other;
+    }
 
     //--------------------------------------------------------------------------------------------------------
 
@@ -476,15 +478,23 @@ namespace dicom::data {
 
     //--------------------------------------------------------------------------------------------------------
 
-    uri& uri::operator = (const uri& other) = default;
+    uri& uri::operator = (const uri& other) {
+        Initialize(std::string(other.m_value));
+        return *this;
+    }
 
     //--------------------------------------------------------------------------------------------------------
 
     uri& uri::operator = (uri&& other) {
-        m_value = move(other.m_value);
-        m_validity = other.m_validity;
-
+        Initialize(move(other.m_value));
         other.m_validity = ValidityType::Deinitialized;
+        other.m_scheme = uri_section();
+        other.m_authentication = uri_section();
+        other.m_host = uri_section();
+        other.m_port = uri_section();
+        other.m_path = uri_section();
+        other.m_query = uri_section();
+        other.m_fragment = uri_section();
         return *this;
     }
 
