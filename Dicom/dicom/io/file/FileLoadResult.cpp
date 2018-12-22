@@ -88,7 +88,7 @@ namespace dicom::io::file {
 
         // Re-open the stream.
         auto stream = m_file_stream_factory();
-        if (!stream) { return false; }
+        if (!stream) { return nullptr; }
 
         // Verify the file is large enough
         auto& range = m_pixel_data_ranges[frame_index];
@@ -111,7 +111,7 @@ namespace dicom::io::file {
             return detail::read_pixel_data_encapsulated(&context, should_reverse_endian, range);
 
         default:
-            return buffer<int8_t>();
+            return nullptr;
         }
     }
 

@@ -36,28 +36,39 @@ namespace dicom_test::data {
         CHECK(b2.Get() != nullptr);
         CHECK(static_cast<char*>(b2) != nullptr);
 
-        // buffer(buffer&&)
-        buffer<char> b3(std::move(b1));
+        // buffer(std::initializer_list<>)
+        buffer<char> b3({ 10, 20, 30 });
         CHECK(!b3.Empty());
-        CHECK_EQUAL(b3.Length(), 10u);
-        CHECK_EQUAL(b3.ByteLength(), 10u);
+        CHECK_EQUAL(b3.Length(), 3u);
+        CHECK_EQUAL(b3.ByteLength(), 3u);
         CHECK(b3.Get() != nullptr);
         CHECK(static_cast<char*>(b3) != nullptr);
+        CHECK(b3[0] == 10);
+        CHECK(b3[1] == 20);
+        CHECK(b3[2] == 30);
 
-        // buffer(buffer<U>&&)
-        buffer<short> b4(std::move(b3));
+        // buffer(buffer&&)
+        buffer<char> b4(std::move(b1));
         CHECK(!b4.Empty());
-        CHECK_EQUAL(b4.Length(), 5u);
+        CHECK_EQUAL(b4.Length(), 10u);
         CHECK_EQUAL(b4.ByteLength(), 10u);
         CHECK(b4.Get() != nullptr);
-        CHECK(static_cast<short*>(b4) != nullptr);
+        CHECK(static_cast<char*>(b4) != nullptr);
 
-        buffer<char> b5(std::move(b4));
+        // buffer(buffer<U>&&)
+        buffer<short> b5(std::move(b4));
         CHECK(!b5.Empty());
-        CHECK_EQUAL(b5.Length(), 10u);
+        CHECK_EQUAL(b5.Length(), 5u);
         CHECK_EQUAL(b5.ByteLength(), 10u);
         CHECK(b5.Get() != nullptr);
-        CHECK(static_cast<char*>(b5) != nullptr);
+        CHECK(static_cast<short*>(b5) != nullptr);
+
+        buffer<char> b6(std::move(b5));
+        CHECK(!b6.Empty());
+        CHECK_EQUAL(b6.Length(), 10u);
+        CHECK_EQUAL(b6.ByteLength(), 10u);
+        CHECK(b6.Get() != nullptr);
+        CHECK(static_cast<char*>(b6) != nullptr);
     }
 
     //------------------------------------------------------------------------------------------------------------

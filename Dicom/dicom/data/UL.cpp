@@ -10,7 +10,7 @@ namespace dicom::data {
     //--------------------------------------------------------------------------------------------------------
 
     UL::UL(const buffer<uint32_t>& binary_value)
-      : UL(buffer<uint32_t>(binary_value.Copy()))
+      : UL(binary_value.Copy())
     {}
 
     //--------------------------------------------------------------------------------------------------------
@@ -27,6 +27,28 @@ namespace dicom::data {
         m_value(1)
     {
         m_value[0] = value;
+    }
+
+    //--------------------------------------------------------------------------------------------------------
+
+    UL::UL(const std::vector<uint32_t>& values)
+      : VR(VRType::UL),
+        m_value(values.size())
+    {
+        if (!values.empty()) {
+            memcpy(m_value, &values[0], m_value.ByteLength());
+        }
+    }
+
+    //--------------------------------------------------------------------------------------------------------
+
+    UL::UL(std::initializer_list<uint32_t> values)
+      : VR(VRType::UL),
+        m_value(values.size())
+    {
+        if (values.size() > 0) {
+            memcpy(m_value, values.begin(), m_value.ByteLength());
+        }
     }
 
     //--------------------------------------------------------------------------------------------------------

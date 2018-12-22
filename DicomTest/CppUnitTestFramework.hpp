@@ -425,6 +425,11 @@ namespace CppUnitTestFramework {
                 callback();
             } catch (const TException&) {
                 return std::nullopt;
+            } catch (const std::exception& e) {
+                std::ostringstream ss;
+                ss << "Expected exception [" << typeid(TException).name() << "] but caught ["
+                    << typeid(e).name() << ": " << e.what() << "]";
+                return AssertException(ss.str().c_str());
             } catch (...) {
                 std::ostringstream ss;
                 ss << "Expected exception [" << typeid(TException).name() << "] but caught another";

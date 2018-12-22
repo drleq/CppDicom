@@ -43,6 +43,9 @@ add_executable(DicomTest
     dicom_test/data/LTTest.cpp
     dicom_test/data/SHTest.cpp
     dicom_test/data/STTest.cpp
+    dicom_test/data/UITest.cpp
+    dicom_test/data/ULTest.cpp
+    dicom_test/data/UNTest.cpp
     dicom_test/data/uri_test.cpp
     dicom_test/data/URTest.cpp
     dicom_test/data/USTest.cpp

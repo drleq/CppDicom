@@ -150,7 +150,7 @@ namespace dicom_test::data {
         FD fd1;
         REQUIRE(fd1.Empty());
 
-        FD fd2(buffer<double>(0));
+        FD fd2(nullptr);
         REQUIRE(fd2.Empty());
 
         FD fd3(1.0);

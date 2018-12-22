@@ -17,6 +17,8 @@ namespace dicom::data {
         UL(const buffer<uint32_t>& binary_value);
         UL(buffer<uint32_t>&& binary_value);
         UL(uint32_t value);
+        UL(const std::vector<uint32_t>& values);
+        UL(std::initializer_list<uint32_t> values);
         UL(const UL& other);
         UL(UL&& other);
         virtual ~UL();

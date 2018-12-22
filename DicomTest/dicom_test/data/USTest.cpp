@@ -150,7 +150,7 @@ namespace dicom_test::data {
         US us1;
         REQUIRE(us1.Empty());
 
-        US us2(buffer<uint16_t>(0));
+        US us2(nullptr);
         REQUIRE(us2.Empty());
 
         US us3(1);

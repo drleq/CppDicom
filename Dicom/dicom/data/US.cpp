@@ -47,10 +47,7 @@ namespace dicom::data {
         m_value(values.size())
     {
         if (values.size() != 0) {
-            uint16_t* ptr = m_value;
-            for (auto it = values.begin(); it != values.end(); ++it, ++ptr) {
-                *ptr = *it;
-            }
+            memcpy(m_value, values.begin(), m_value.ByteLength());
         }
     }
 

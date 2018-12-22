@@ -19,7 +19,15 @@ namespace dicom::data {
 
         //----------------------------------------------------------------------------------------------------
 
-        buffer(size_t length)
+        buffer(std::nullptr_t)
+          : m_owns_buffer(false),
+            m_length(0),
+            m_buffer(nullptr)
+        {}
+
+        //----------------------------------------------------------------------------------------------------
+
+        explicit buffer(size_t length)
 	      : m_length(length)
 		{
             if (length != 0) {
@@ -50,6 +58,16 @@ namespace dicom::data {
             m_length(length),
             m_buffer(buf)
         {}
+
+        //----------------------------------------------------------------------------------------------------
+
+        buffer(std::initializer_list<T> values)
+          : buffer(values.size())
+        {
+            if (values.size() > 0) {
+                memcpy(m_buffer, values.begin(), ByteLength());
+            }
+        }
 
         //----------------------------------------------------------------------------------------------------
 
