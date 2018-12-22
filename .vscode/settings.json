@@ -41,5 +41,7 @@
         "typeinfo": "cpp",
         "utility": "cpp",
         "cstddef": "cpp"
-    }
+    },
+    "telemetry.enableTelemetry": false,
+    "cmake.configureOnOpen": true
 }
