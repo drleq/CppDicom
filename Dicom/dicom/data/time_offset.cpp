@@ -36,9 +36,10 @@ namespace dicom::data {
         }
 
         int32_t result = compare_values(m_hour, other.m_hour);
-        if (result != 0) { return result; }
+        if (result != 0) { return m_is_negative ? -result : result; }
 
-        return compare_values(m_minute, other.m_minute);
+        result = compare_values(m_minute, other.m_minute);
+        return m_is_negative ? -result : result;
     }
 
 }

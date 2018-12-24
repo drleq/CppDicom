@@ -43,6 +43,10 @@ add_executable(DicomTest
     dicom_test/data/LTTest.cpp
     dicom_test/data/SHTest.cpp
     dicom_test/data/STTest.cpp
+    dicom_test/data/time_offset_test.cpp
+    dicom_test/data/time_test.cpp
+    dicom_test/data/TMTest.cpp
+    dicom_test/data/UCTest.cpp
     dicom_test/data/UITest.cpp
     dicom_test/data/ULTest.cpp
     dicom_test/data/UNTest.cpp
@@ -51,7 +55,8 @@ add_executable(DicomTest
     dicom_test/data/USTest.cpp
     dicom_test/data/UTTest.cpp
     dicom_test/DicomTest.cpp
-    dicomtest_pch.cpp)
+    dicomtest_pch.cpp
+    ToString.cpp)
 
 target_include_directories(DicomTest
     PUBLIC .)

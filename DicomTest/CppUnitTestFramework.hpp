@@ -395,24 +395,34 @@ namespace CppUnitTestFramework {
         //----------------------------------------------------------------------------------------------------
 
         template <typename T>
-        std::optional<AssertException> IsNull(const T& value) {
-            return AreEqual(value, nullptr);
+        std::optional<AssertException> IsNull(const T& value, const char* expression) {
+            if (value == nullptr) {
+                return std::nullopt;
+            }
+
+            std::ostringstream ss;
+            ss << "IsNull(" << expression << ")";
+            return AssertException(ss.str());
         }
 
         //----------------------------------------------------------------------------------------------------
 
-        inline std::optional<AssertException> IsTrue(bool value) {
+        inline std::optional<AssertException> IsTrue(bool value, const char* expression) {
             if (!value) {
-                return AssertException("false == true");
+                std::ostringstream ss;
+                ss << "IsTrue(" << expression << ")";
+                return AssertException(ss.str());
             }
             return std::nullopt;
         }
 
         //----------------------------------------------------------------------------------------------------
 
-        inline std::optional<AssertException> IsFalse(bool value) {
+        inline std::optional<AssertException> IsFalse(bool value, const char* expression) {
             if (value) {
-                return AssertException("true == false");
+                std::ostringstream ss;
+                ss << "IsFalse(" << expression << ")";
+                return AssertException(ss.str());
             }
             return std::nullopt;
         }
@@ -566,19 +576,19 @@ void TestCase_##TestName::Run()
 
 #define _CPPUTF_ASSERT_LOCATION CppUnitTestFramework::AssertLocation{ __FILE__, __LINE__ }
 
-#define REQUIRE(Expression)        CppUnitTestFramework::CommonFixture::HandleAssert(CppUnitTestFramework::AssertType::Throw, _CPPUTF_ASSERT_LOCATION, CppUnitTestFramework::Assert::IsTrue((Expression)))
-#define REQUIRE_TRUE(Expression)   CppUnitTestFramework::CommonFixture::HandleAssert(CppUnitTestFramework::AssertType::Throw, _CPPUTF_ASSERT_LOCATION, CppUnitTestFramework::Assert::IsTrue((Expression)))
-#define REQUIRE_FALSE(Expression)  CppUnitTestFramework::CommonFixture::HandleAssert(CppUnitTestFramework::AssertType::Throw, _CPPUTF_ASSERT_LOCATION, CppUnitTestFramework::Assert::IsFalse((Expression)))
+#define REQUIRE(Expression)        CppUnitTestFramework::CommonFixture::HandleAssert(CppUnitTestFramework::AssertType::Throw, _CPPUTF_ASSERT_LOCATION, CppUnitTestFramework::Assert::IsTrue((Expression), #Expression))
+#define REQUIRE_TRUE(Expression)   CppUnitTestFramework::CommonFixture::HandleAssert(CppUnitTestFramework::AssertType::Throw, _CPPUTF_ASSERT_LOCATION, CppUnitTestFramework::Assert::IsTrue((Expression), #Expression))
+#define REQUIRE_FALSE(Expression)  CppUnitTestFramework::CommonFixture::HandleAssert(CppUnitTestFramework::AssertType::Throw, _CPPUTF_ASSERT_LOCATION, CppUnitTestFramework::Assert::IsFalse((Expression), #Expression))
 #define REQUIRE_EQUAL(Left, Right) CppUnitTestFramework::CommonFixture::HandleAssert(CppUnitTestFramework::AssertType::Throw, _CPPUTF_ASSERT_LOCATION, CppUnitTestFramework::Assert::AreEqual((Left), (Right)))
-#define REQUIRE_NULL(Expression)   CppUnitTestFramework::CommonFixture::HandleAssert(CppUnitTestFramework::AssertType::Throw, _CPPUTF_ASSERT_LOCATION, CppUnitTestFramework::Assert::IsNull((Expression)))
+#define REQUIRE_NULL(Expression)   CppUnitTestFramework::CommonFixture::HandleAssert(CppUnitTestFramework::AssertType::Throw, _CPPUTF_ASSERT_LOCATION, CppUnitTestFramework::Assert::IsNull((Expression), #Expression))
 #define REQUIRE_THROW(ExceptionType, Expression) \
     CppUnitTestFramework::CommonFixture::HandleAssert(CppUnitTestFramework::AssertType::Throw, _CPPUTF_ASSERT_LOCATION, CppUnitTestFramework::Assert::Throws<ExceptionType>([&] { Expression; }))
 
-#define CHECK(Expression)        CppUnitTestFramework::CommonFixture::HandleAssert(CppUnitTestFramework::AssertType::Continue, _CPPUTF_ASSERT_LOCATION, CppUnitTestFramework::Assert::IsTrue((Expression)))
-#define CHECK_TRUE(Expression)   CppUnitTestFramework::CommonFixture::HandleAssert(CppUnitTestFramework::AssertType::Continue, _CPPUTF_ASSERT_LOCATION, CppUnitTestFramework::Assert::IsTrue((Expression)))
-#define CHECK_FALSE(Expression)  CppUnitTestFramework::CommonFixture::HandleAssert(CppUnitTestFramework::AssertType::Continue, _CPPUTF_ASSERT_LOCATION, CppUnitTestFramework::Assert::IsFalse((Expression)))
+#define CHECK(Expression)        CppUnitTestFramework::CommonFixture::HandleAssert(CppUnitTestFramework::AssertType::Continue, _CPPUTF_ASSERT_LOCATION, CppUnitTestFramework::Assert::IsTrue((Expression), #Expression))
+#define CHECK_TRUE(Expression)   CppUnitTestFramework::CommonFixture::HandleAssert(CppUnitTestFramework::AssertType::Continue, _CPPUTF_ASSERT_LOCATION, CppUnitTestFramework::Assert::IsTrue((Expression), #Expression))
+#define CHECK_FALSE(Expression)  CppUnitTestFramework::CommonFixture::HandleAssert(CppUnitTestFramework::AssertType::Continue, _CPPUTF_ASSERT_LOCATION, CppUnitTestFramework::Assert::IsFalse((Expression), #Expression))
 #define CHECK_EQUAL(Left, Right) CppUnitTestFramework::CommonFixture::HandleAssert(CppUnitTestFramework::AssertType::Continue, _CPPUTF_ASSERT_LOCATION, CppUnitTestFramework::Assert::AreEqual((Left), (Right)))
-#define CHECK_NULL(Expression)   CppUnitTestFramework::CommonFixture::HandleAssert(CppUnitTestFramework::AssertType::Continue, _CPPUTF_ASSERT_LOCATION, CppUnitTestFramework::Assert::IsNull((Expression)))
+#define CHECK_NULL(Expression)   CppUnitTestFramework::CommonFixture::HandleAssert(CppUnitTestFramework::AssertType::Continue, _CPPUTF_ASSERT_LOCATION, CppUnitTestFramework::Assert::IsNull((Expression), #Expression))
 #define CHECK_THROW(ExceptionType, Expression) \
     CppUnitTestFramework::CommonFixture::HandleAssert(CppUnitTestFramework::AssertType::Continue, _CPPUTF_ASSERT_LOCATION, CppUnitTestFramework::Assert::Throws<ExceptionType>([&] { Expression; }))
 

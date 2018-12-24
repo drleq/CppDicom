@@ -49,6 +49,10 @@ namespace dicom::data {
     //---------------------------------------------------------------------------------------------
 
     int32_t time::Compare(const time& other) const {
+        if (m_is_valid != other.m_is_valid) {
+            return m_is_valid ? 1 : -1;
+        }
+
         TimePrecision other_precision = other.m_precision;
         int result;
 
