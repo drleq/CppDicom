@@ -231,7 +231,7 @@ namespace CppUnitTestFramework {
 
     struct TestRegistry {
     private:
-        using TestCallback = std::function<void (const ILoggerPtr& logger)>;
+        using TestCallback = std::function<bool (const ILoggerPtr& logger)>;
         struct TestDetails {
             std::string_view Name;
             std::vector<std::string_view> Tags;
@@ -252,9 +252,10 @@ namespace CppUnitTestFramework {
             TestDetails details;
             details.Name = TTestCase::Name;
             details.Tags.assign(std::begin(TTestCase::Tags), std::end(TTestCase::Tags));
-            details.Callback = [](const auto&... args) {
+            details.Callback = [](const auto&... args) -> bool {
                 TTestCase test_case(args...);
                 test_case.Run();
+                return test_case.HaveChecksFailed();
             };
 
             GetTestVector().push_back(std::move(details));
@@ -280,8 +281,7 @@ namespace CppUnitTestFramework {
 
                 bool test_failed = true;
                 try {
-                    test_case.Callback(logger);
-                    test_failed = false;
+                    test_failed = test_case.Callback(logger);
                 } catch (const AssertException& e) {
                     // REQUIRE* statement failed.  No need to do anything else.
                 } catch (const std::exception& e) {
@@ -497,10 +497,8 @@ namespace CppUnitTestFramework {
           : m_logger(std::move(logger))
         {}
 
-        ~CommonFixture() noexcept(false) {
-            if (m_check_has_failed) {
-                throw AssertException("One or more CHECKs have failed");
-            }
+        bool HaveChecksFailed() const {
+            return m_check_has_failed;
         }
 
     protected:

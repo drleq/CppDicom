@@ -5,6 +5,7 @@
 #include <iomanip>
 
 #include "dicom/data/detail/atoi.h"
+#include "dicom/data/detail/combine_strings.h"
 #include "dicom/data/detail/DefaultCharacterRepertoire.h"
 #include "dicom/data/detail/locate_separators.h"
 
@@ -26,9 +27,9 @@ namespace {
 
         dest << std::setfill('0');
 
-        dest << std::setw(2) << duration.Hour();
-        if (parts >= 1) { dest << std::setw(2) << duration.Minute(); }
-        if (parts >= 2) { dest << std::setw(2) << duration.Second(); }
+        dest << std::setw(2) << static_cast<uint16_t>(duration.Hour());
+        if (parts >= 1) { dest << std::setw(2) << static_cast<uint16_t>(duration.Minute()); }
+        if (parts >= 2) { dest << std::setw(2) << static_cast<uint16_t>(duration.Second()); }
         if (parts == 3) {
             dest << '.' << std::setw(0) << duration.Millisecond();
         }
@@ -36,9 +37,9 @@ namespace {
 
     //--------------------------------------------------------------------------------------------------------
 
-    [[nodiscard]] bool is_valid_acr_nema_300_value(const std::string& value) {
+    [[nodiscard]] bool is_valid_acr_nema_300_value(const std::string_view& value) {
 		auto len = value.size();
-		auto s = value.c_str();
+		auto s = value.data();
 
 		// Check hh
 		bool valid = std::all_of(s, s+1, isdigit);
@@ -67,9 +68,9 @@ namespace {
 
 	//--------------------------------------------------------------------------------------------------------
 
-    [[nodiscard]] bool is_valid_dicom_value(const std::string& value) {
+    [[nodiscard]] bool is_valid_dicom_value(const std::string_view& value) {
 		auto len = value.size();
-		auto s = value.c_str();
+		auto s = value.data();
 
 		// Check hhmmss
 		bool valid = std::all_of(s, s + std::min<size_t>(6, len), isdigit);
@@ -115,14 +116,68 @@ namespace dicom::data {
 
     //--------------------------------------------------------------------------------------------------------
 
+    TM::TM(const std::vector<std::string>& values)
+      : VR(VRType::TM)
+    {
+        detail::combine_strings(values, &m_value);
+    }
+
+    //--------------------------------------------------------------------------------------------------------
+
+    TM::TM(std::initializer_list<std::string_view> values)
+      : VR(VRType::TM)
+    {
+        detail::combine_strings(values, &m_value);
+    }
+
+    //--------------------------------------------------------------------------------------------------------
+
     TM::TM(const time& duration)
       : VR(VRType::TM)
     {
-        if (duration.IsValid()) {
-            std::ostringstream ss;
+        std::ostringstream ss;
+        output_duration_to_string(duration, ss);
+        m_value = ss.str();
+    }
+
+    //--------------------------------------------------------------------------------------------------------
+
+    TM::TM(const std::vector<time>& values)
+      : VR(VRType::TM)
+    {
+        bool needs_multiplicity = false;
+        std::ostringstream ss;
+        for (auto& duration : values) {
+            if (needs_multiplicity) {
+                ss << detail::MultiplicityChar;
+            } else {
+                needs_multiplicity = true;
+            }
+
             output_duration_to_string(duration, ss);
-            m_value = ss.str();
         }
+
+        m_value = ss.str();
+    }
+
+    //--------------------------------------------------------------------------------------------------------
+
+    TM::TM(std::initializer_list<time> values)
+      : VR(VRType::TM)
+    {
+        bool needs_multiplicity = false;
+        std::ostringstream ss;
+        for (auto& duration : values) {
+            if (needs_multiplicity) {
+                ss << detail::MultiplicityChar;
+            } else {
+                needs_multiplicity = true;
+            }
+
+            output_duration_to_string(duration, ss);
+        }
+
+        m_value = ss.str();
     }
 
     //--------------------------------------------------------------------------------------------------------
@@ -187,6 +242,10 @@ namespace dicom::data {
 			hh:mm:ss.ffffff
 		*/
 
+        if (m_value.empty()) {
+            return ValidityType::Valid;
+        }
+
         // Get the offsets for multiplicity markers
         std::vector<size_t> parsed_offsets;
         detail::locate_separators(parsed_offsets, m_value, detail::MultiplicityChar);
@@ -195,20 +254,20 @@ namespace dicom::data {
 		/*** Essential checks ***/
         using subvalue_iterator = detail::substring_iterator<detail::trim_none>;
         auto values_it = subvalue_iterator(&m_value, &parsed_offsets, 0);
-        auto values_end = subvalue_iterator(&m_value, &parsed_offsets, parsed_offsets.size());
+        auto values_end = subvalue_iterator(&m_value, &parsed_offsets, parsed_offsets.size() + 1);
 
         std::vector<time> parsed_times;
         parsed_times.reserve(parsed_offsets.size() + 1);
 
 		// Perform a basic check on the length of the value
         for (; values_it != values_end; ++values_it) {
-            auto len = m_value.size();
+            auto value = *values_it;
+            auto len = value.size();
             bool is_valid_length = len == 2 || (len >= 4 && len <= 15);
             if (!is_valid_length) { return ValidityType::Invalid; }
             
             // Guess if the value is ACR-NEMA
-            bool is_acr_nema = m_value.find(':') != std::string::npos;
-            auto v = m_value.c_str();
+            bool is_acr_nema = value.find(':') != std::string::npos;
             TimePrecision p = TimePrecision::Hours;
             uint8_t h = 0;
             uint8_t m = 0;
@@ -217,37 +276,43 @@ namespace dicom::data {
 
             // Extract the hours, minutes, seconds and fractional seconds.
             if (is_acr_nema) {
-                if (!is_valid_acr_nema_300_value(m_value)) { return ValidityType::Invalid; }
+                if (!is_valid_acr_nema_300_value(value)) { return ValidityType::Invalid; }
 
                 if (len >= 2) {
                     p = TimePrecision::Hours;
-                    h = detail::unchecked_atoi<uint8_t>(v+0);
+                    h = detail::unchecked_atoi<uint8_t>(value.substr(0, 2));
                 }
                 if (len >= 5) {
                     p = TimePrecision::Minutes;
-                    m = detail::unchecked_atoi<uint8_t>(v+3);
+                    m = detail::unchecked_atoi<uint8_t>(value.substr(3, 2));
                 }
                 if (len >= 8) {
                     p = TimePrecision::Seconds;
-                    s = detail::unchecked_atoi<uint8_t>(v+6);
+                    s = detail::unchecked_atoi<uint8_t>(value.substr(6, 2));
                 }
                 if (len >= 10) {
                     p = TimePrecision::Milliseconds;
-                    f = detail::unchecked_atoi<uint32_t>(v+9);
+                    f = detail::unchecked_atoi<uint32_t>(value.substr(9));
                     f *= FractionalScale[len - 9];
                 }
             } else {
-                if (!is_valid_dicom_value(m_value)) { return ValidityType::Invalid; }
+                if (!is_valid_dicom_value(value)) { return ValidityType::Invalid; }
 
-                p = static_cast<TimePrecision>(std::min<size_t>(6, len) / 2);
-                
-                uint32_t hms = detail::unchecked_atoi<uint32_t>(v+0);
-                s = uint8_t(hms % 100);
-                m = uint8_t((hms / 100) % 100);
-                h = uint8_t( hms / 10000);
+                if (len >= 2) {
+                    p = TimePrecision::Hours;
+                    h = detail::unchecked_atoi<uint8_t>(value.substr(0, 2));
+                }
+                if (len >= 4) {
+                    p = TimePrecision::Minutes;
+                    m = detail::unchecked_atoi<uint8_t>(value.substr(2, 2));
+                }
+                if (len >= 6) {
+                    p = TimePrecision::Seconds;
+                    s = detail::unchecked_atoi<uint8_t>(value.substr(4, 2));
+                }
                 if (len >= 8) {
                     p = TimePrecision::Milliseconds;
-                    f = detail::unchecked_atoi<uint32_t>(v+7);
+                    f = detail::unchecked_atoi<uint32_t>(value.substr(7));
                     f *= FractionalScale[len - 7];
                 }
             }
@@ -262,7 +327,14 @@ namespace dicom::data {
 
         
 		/*** Strict checks ***/
-		if (!is_valid_dicom_value(m_value)) { return ValidityType::Acceptable; }
+        bool is_valid_dicom = std::any_of(
+            subvalue_iterator(&m_value, &parsed_offsets, 0),
+            values_end,
+            is_valid_dicom_value
+        );
+        if (!is_valid_dicom) {
+            return ValidityType::Acceptable;
+        }
 
 		return ValidityType::Valid;
     }
@@ -286,7 +358,7 @@ namespace dicom::data {
         auto cmp_len = std::min(m_parsed_times.size(), typed->m_parsed_times.size());
         auto it = ParsedBegin();
         auto typed_it = typed->ParsedBegin();
-        for (size_t i = 0; i <= cmp_len; ++i, ++it, ++typed_it) {
+        for (size_t i = 0; i < cmp_len; ++i, ++it, ++typed_it) {
             auto result = (*it).Compare(*typed_it);
             if (result != 0) { return result; }
         }

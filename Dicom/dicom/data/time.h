@@ -34,6 +34,10 @@ namespace dicom::data {
 
         //-----------------------------------------------------------------------------------------
 
+        [[nodiscard]] std::string AsString() const;
+
+        //-----------------------------------------------------------------------------------------
+
         [[nodiscard]] int32_t Compare(const time& other) const;
 
         [[nodiscard]] bool operator == (const time& other) const { return Compare(other) == 0; }

@@ -18,7 +18,7 @@ namespace dicom::data::detail {
         if (neg || *s == '+') { s++; }
 
         TInt i = 0;
-        while (isdigit(*s)) {
+        while (isdigit(*s) && (s < str.end())) {
             i = (i * 10) + (*s++ - '0');
         }
 
@@ -54,7 +54,7 @@ namespace dicom::data::detail {
 
         if constexpr (std::is_signed_v<TInt>) {
             if (neg) {
-                while (isdigit(*s)) {
+                while (isdigit(*s) && (s < str.end())) {
                     if (i < (MinNegativeValue / 10)) {
                         // Overflow.
                         errno = EINVAL;
@@ -74,7 +74,7 @@ namespace dicom::data::detail {
         } 
 
         if (!neg) {
-            while (isdigit(*s)) {
+            while (isdigit(*s) && (s < str.end())) {
                 if (i > (MaxPositiveValue / 10)) {
                     // Overflow.
                     errno = EINVAL;

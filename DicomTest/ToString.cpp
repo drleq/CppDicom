@@ -23,18 +23,28 @@ namespace CppUnitTestFramework::Ext {
 
     //--------------------------------------------------------------------------------------------------------
 
-    std::string ToString(const uri& value) {
-        return value.Value();
-    }
-
-    //--------------------------------------------------------------------------------------------------------
-
     std::string ToString(const encoded_string& value) {
         if (value.Validity() == ValidityType::Valid) {
             return value.Parsed();
         } else {
             return "*" + ToString(value.Validity()) + "*";
         }
+    }
+
+    //--------------------------------------------------------------------------------------------------------
+
+    std::string ToString(const dicom::data::time& value) {
+        if (!value.IsValid()) {
+            return "*Invalid*";
+        } else {
+            return value.AsString();
+        }
+    }
+
+    //--------------------------------------------------------------------------------------------------------
+
+    std::string ToString(const uri& value) {
+        return value.Value();
     }
 
 }

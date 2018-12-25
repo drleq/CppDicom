@@ -43,5 +43,6 @@
         "cstddef": "cpp"
     },
     "telemetry.enableTelemetry": false,
-    "cmake.configureOnOpen": true
+    "cmake.configureOnOpen": true,
+    "C_Cpp.configurationWarnings": "Disabled"
 }
