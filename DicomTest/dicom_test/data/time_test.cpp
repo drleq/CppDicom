@@ -2,6 +2,7 @@
 
 #include "CppUnitTestFramework.hpp"
 #include "dicom/data/time.h"
+#include "dicom/data/value_invalid.h"
 
 using namespace dicom;
 using namespace dicom::data;
@@ -167,6 +168,23 @@ namespace dicom_test::data {
         CHECK_FALSE(s == ms);
         CHECK_FALSE(s > ms);
         CHECK_FALSE(s >= ms);
+    }
+
+    TEST_CASE(time_test, AsString) {
+        dicom_time tm0;
+        CHECK_THROW(value_invalid_error, UNUSED_RETURN(tm0.AsString()));
+
+        dicom_time tm1(TimePrecision::Hours, 10);
+        CHECK_EQUAL(tm1.AsString(), "10");
+
+        dicom_time tm2(TimePrecision::Minutes, 10, 15);
+        CHECK_EQUAL(tm2.AsString(), "1015");
+
+        dicom_time tm3(TimePrecision::Seconds, 10, 15, 20);
+        CHECK_EQUAL(tm3.AsString(), "101520");
+
+        dicom_time tm4(TimePrecision::Milliseconds, 10, 15, 20, 123456);
+        CHECK_EQUAL(tm4.AsString(), "101520.123456");
     }
 
 }

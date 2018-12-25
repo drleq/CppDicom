@@ -41,7 +41,14 @@ add_executable(DicomTest
     dicom_test/data/ISTest.cpp
     dicom_test/data/LOTest.cpp
     dicom_test/data/LTTest.cpp
+    dicom_test/data/OBTest.cpp
+    dicom_test/data/ODTest.cpp
+    dicom_test/data/OFTest.cpp
+    dicom_test/data/OLTest.cpp
+    dicom_test/data/OWTest.cpp
+    dicom_test/data/SLTest.cpp
     dicom_test/data/SHTest.cpp
+    dicom_test/data/SSTest.cpp
     dicom_test/data/STTest.cpp
     dicom_test/data/time_offset_test.cpp
     dicom_test/data/time_test.cpp
