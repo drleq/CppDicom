@@ -31,6 +31,7 @@ add_executable(DicomTest
     dicom_test/data/ASTest.cpp
     dicom_test/data/ATTest.cpp
     dicom_test/data/buffer_test.cpp
+    dicom_test/data/ComponentGroupTest.cpp
     dicom_test/data/CSTest.cpp
     dicom_test/data/DATest.cpp
     dicom_test/data/DSTest.cpp
@@ -46,6 +47,8 @@ add_executable(DicomTest
     dicom_test/data/OFTest.cpp
     dicom_test/data/OLTest.cpp
     dicom_test/data/OWTest.cpp
+    dicom_test/data/PatientNameGroupTest.cpp
+    dicom_test/data/PNTest.cpp
     dicom_test/data/SLTest.cpp
     dicom_test/data/SHTest.cpp
     dicom_test/data/SSTest.cpp

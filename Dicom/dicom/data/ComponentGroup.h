@@ -2,6 +2,7 @@
 
 #include "dicom/data/encoded_string.h"
 #include "dicom/data/ValidityType.h"
+#include "dicom/data/value_invalid.h"
 #include "dicom/data/detail/string_iterator.h"
 
 namespace dicom::data {
@@ -73,6 +74,11 @@ namespace dicom::data {
         [[nodiscard]] bool operator == (const ComponentGroup& other) const;
         [[nodiscard]] bool operator != (const ComponentGroup& other) const;
 
+        [[nodiscard]] bool operator <  (const ComponentGroup& other) const { return Compare(other) <  0; }
+        [[nodiscard]] bool operator <= (const ComponentGroup& other) const { return Compare(other) <= 0; }
+        [[nodiscard]] bool operator >  (const ComponentGroup& other) const { return Compare(other) >  0; }
+        [[nodiscard]] bool operator >= (const ComponentGroup& other) const { return Compare(other) >= 0; }
+
     private:
         ValidityType m_validity;
         encoded_string m_value;
@@ -82,7 +88,7 @@ namespace dicom::data {
 
         void AssertValid() const {
             if (m_validity != ValidityType::Acceptable && m_validity != ValidityType::Valid) {
-                throw std::runtime_error("Parsed value is not valid");
+                throw value_invalid_error();
             }
         }
         void AssertNotEmpty() const {

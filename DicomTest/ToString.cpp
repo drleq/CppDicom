@@ -23,12 +23,24 @@ namespace CppUnitTestFramework::Ext {
 
     //--------------------------------------------------------------------------------------------------------
 
+    std::string ToString(const dicom::data::ComponentGroup& value) {
+        return ToString(value.Value());
+    }
+
+    //--------------------------------------------------------------------------------------------------------
+
     std::string ToString(const encoded_string& value) {
         if (value.Validity() == ValidityType::Valid) {
             return value.Parsed();
         } else {
             return "*" + ToString(value.Validity()) + "*";
         }
+    }
+
+    //--------------------------------------------------------------------------------------------------------
+
+    std::string ToString(const dicom::data::PatientNameGroup& value) {
+        return ToString(value.Value());
     }
 
     //--------------------------------------------------------------------------------------------------------
