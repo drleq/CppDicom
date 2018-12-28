@@ -41,6 +41,7 @@ namespace CppUnitTestFramework {
     //--------------------------------------------------------------------------------------------------------
 
     struct RunOptions {
+        bool DiscoveryMode = false;
         bool Verbose = false;
         std::vector<std::string> Keywords;
 
@@ -55,9 +56,10 @@ namespace CppUnitTestFramework {
 
                 std::string option_name{ &arg[1] };
                 if (option_name == "h" || option_name == "-help" || option_name == "?") {
-                    std::cout << "Usage:" << std::endl;
-                    std::cout << "    -h, --help, -?:  Displays this message" << std::endl;
-                    std::cout << "    -v, --verbose:   Show verbose output" << std::endl;
+                    std::cout << "Usage: <program> [<options>] [keyword1] [keyword2] ..." << std::endl;
+                    std::cout << "    -h, --help, -?:        Displays this message" << std::endl;
+                    std::cout << "    -v, --verbose:         Show verbose output" << std::endl;
+                    std::cout << "        --discover_tests:  Output test details" << std::endl;
                     return false;
                 }
 
@@ -66,8 +68,13 @@ namespace CppUnitTestFramework {
                     continue;
                 }
 
+                if (option_name == "-discover_tests") {
+                    DiscoveryMode = true;
+                    continue;
+                }
+
                 // Unknown option
-                std::cout << "Unknown option: " << option_name << std::endl;
+                std::cerr << "Unknown option: " << option_name << std::endl;
                 return false;
             }
 
@@ -234,6 +241,8 @@ namespace CppUnitTestFramework {
         using TestCallback = std::function<bool (const ILoggerPtr& logger)>;
         struct TestDetails {
             std::string_view Name;
+            std::string_view SourceFile;
+            size_t SourceLine;
             std::vector<std::string_view> Tags;
             TestCallback Callback;
         };
@@ -251,6 +260,8 @@ namespace CppUnitTestFramework {
         static void Add() {
             TestDetails details;
             details.Name = TTestCase::Name;
+            details.SourceFile = TTestCase::SourceFile;
+            details.SourceLine = TTestCase::SourceLine;
             details.Tags.assign(std::begin(TTestCase::Tags), std::end(TTestCase::Tags));
             details.Callback = [](const auto&... args) -> bool {
                 TTestCase test_case(args...);
@@ -261,8 +272,15 @@ namespace CppUnitTestFramework {
             GetTestVector().push_back(std::move(details));
         }
 
-        static void Run(const RunOptions* options, const ILoggerPtr& logger) {
+        static bool Run(const RunOptions* options, const ILoggerPtr& logger) {
             const auto& all_test_cases = GetTestVector();
+
+            if (options->DiscoveryMode) {
+                for (auto& test_case : all_test_cases) {
+                    std::cout << test_case.Name << "," << test_case.SourceFile << "," << test_case.SourceLine << std::endl;
+                }
+                return true;
+            }
 
             logger->BeginRun(all_test_cases.size());
 
@@ -300,6 +318,8 @@ namespace CppUnitTestFramework {
             }
 
             logger->EndRun(pass_count, fail_count, skip_count);
+
+            return (fail_count == 0);
         }
 
     private:
@@ -342,23 +362,28 @@ namespace CppUnitTestFramework {
         template <typename T>
         std::string ToString([[maybe_unused]] const T& value) {
             if constexpr (std::is_null_pointer_v<T>) {
+                // std::nullptr_t
                 return "nullptr";
 
             } else if constexpr (std::is_constructible_v<std::string, const T&>) {
+                // std::string(const T&)
                 return std::string(value);
 
             } else if constexpr (std::is_pointer_v<T>) {
+                // <pointer> -> Hex address
                 std::ostringstream ss;
                 ss << "0x" << std::hex << std::setfill('0') << std::setw(sizeof(size_t) * 2)
                     << reinterpret_cast<std::uintptr_t>(value);
                 return ss.str();
 
             } else if constexpr (std::is_enum_v<T>) {
+                // Enum -> [<name>] <number>
                 std::ostringstream ss;
                 ss << "[" << typeid(T).name() << "] " << static_cast<std::underlying_type_t<T>>(value);
                 return ss.str();
 
             } else {
+                // std::to_string(const T&)
                 return std::to_string(value);
             }
         }
@@ -383,7 +408,7 @@ namespace CppUnitTestFramework {
         //----------------------------------------------------------------------------------------------------
 
         inline std::optional<AssertException> AreEqual(const char* left, const char* right) {
-            bool equal = (strcmp(left, right) == 0);
+            bool equal = (std::strcmp(left, right) == 0);
             if (equal) {
                 return std::nullopt;
             }
@@ -553,6 +578,8 @@ namespace CppUnitTestFramework {
 #define TEST_CASE(TestFixture, TestName, ...) namespace {                                           \
     struct TestCase_##TestName : TestFixture, CppUnitTestFramework::CommonFixture {                 \
         using CppUnitTestFramework::CommonFixture::CommonFixture;                                   \
+        static constexpr std::string_view SourceFile = __FILE__;                                    \
+        static constexpr size_t SourceLine = (__LINE__ - 1);                                        \
         static constexpr std::string_view Name = #TestFixture "::" #TestName;                       \
         static constexpr auto Tags = make_tags_array(__VA_ARGS__);                                  \
         void Run();                                                                                 \
@@ -600,14 +627,14 @@ void TestCase_##TestName::Run()
 int main(int argc, const char* argv[]) {
     CppUnitTestFramework::RunOptions options;
     if (!options.ParseCommandLine(argc, argv)) {
-        return -1;
+        return 2;
     }
 
-    CppUnitTestFramework::TestRegistry::Run(
+    bool success = CppUnitTestFramework::TestRegistry::Run(
         &options,
         CppUnitTestFramework::ConsoleLogger::Create(&options)
     );
 
-    return 0;
+    return success ? 0 : 1;
 }
 #endif

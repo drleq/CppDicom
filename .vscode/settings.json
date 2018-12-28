@@ -40,9 +40,13 @@
         "tuple": "cpp",
         "typeinfo": "cpp",
         "utility": "cpp",
-        "cstddef": "cpp"
+        "cstddef": "cpp",
+        "strstream": "cpp",
+        "numeric": "cpp"
     },
     "telemetry.enableTelemetry": false,
     "cmake.configureOnOpen": true,
-    "C_Cpp.configurationWarnings": "Disabled"
+    "C_Cpp.configurationWarnings": "Disabled",
+    "cppUnitTestFramework.executable": "./build/DicomTest/DicomTest",
+    "cppUnitTestFramework.workingDirectory": "./DicomTest"
 }
