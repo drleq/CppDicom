@@ -6,13 +6,13 @@
 
 namespace dicom::data {
 
-    class string_invalid_error : public std::runtime_error
+    class DICOM_EXPORT string_invalid_error : public std::runtime_error
     {
     public:
         string_invalid_error();
     };
 
-    class encoded_string
+    class DICOM_EXPORT encoded_string
     {
     public:
         // Raw constructor

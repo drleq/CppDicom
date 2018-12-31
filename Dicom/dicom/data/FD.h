@@ -5,7 +5,7 @@
 
 namespace dicom::data {
 
-    class FD : public VR
+    class DICOM_EXPORT FD : public VR
     {
     public:
         using value_type = double;

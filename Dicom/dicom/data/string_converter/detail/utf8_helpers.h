@@ -3,14 +3,14 @@
 namespace dicom::data::string_converter::detail {
 
     // Get UTF-8 character count (not code-point count). Assumes [str] has a valid encoding.
-    [[nodiscard]] size_t utf8_strlen(const std::string_view& str);
+    DICOM_EXPORT [[nodiscard]] size_t utf8_strlen(const std::string_view& str);
 
     //--------------------------------------------------------------------------------------------------------
 
-    [[nodiscard]] bool decode_utf8_char(const uint8_t*& next_it, const uint8_t* end_it, char32_t& decoded);
-    [[nodiscard]] bool encode_utf8_char(char32_t decoded, uint8_t*& next_it, const uint8_t* end_it);
-    void make_space(std::string& buffer, ptrdiff_t minimum_increase);
-    void shrink_utf8(std::string& buffer, ptrdiff_t length);
+    DICOM_EXPORT [[nodiscard]] bool decode_utf8_char(const uint8_t*& next_it, const uint8_t* end_it, char32_t& decoded);
+    DICOM_EXPORT [[nodiscard]] bool encode_utf8_char(char32_t decoded, uint8_t*& next_it, const uint8_t* end_it);
+    DICOM_EXPORT void make_space(std::string& buffer, ptrdiff_t minimum_increase);
+    DICOM_EXPORT void shrink_utf8(std::string& buffer, ptrdiff_t length);
 
     //--------------------------------------------------------------------------------------------------------
 

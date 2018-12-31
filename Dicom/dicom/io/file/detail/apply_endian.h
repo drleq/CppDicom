@@ -1,5 +1,7 @@
 #pragma once
 
+#include "dicom/detail/intrinsic.h"
+
 namespace dicom::io::file::detail {
 
     // Base template parameterized on the byte width of the value to convert.
@@ -27,7 +29,7 @@ namespace dicom::io::file::detail {
         static void Apply(void* binary, size_t length) {
             auto data = (uint16_t*)binary;
             auto data_end = data + length;
-            while (data != data_end) { *data = __builtin_bswap16(*data); ++data; }
+            while (data != data_end) { *data = dicom::detail::byte_swap16(*data); ++data; }
         }
     };
 
@@ -40,7 +42,7 @@ namespace dicom::io::file::detail {
         static void Apply(void* binary, size_t length) {
             auto data = (uint32_t*)binary;
             auto data_end = data + length;
-            while (data != data_end) { *data = __builtin_bswap32(*data); ++data; }
+            while (data != data_end) { *data = dicom::detail::byte_swap32(*data); ++data; }
         }
     };
 
@@ -53,7 +55,7 @@ namespace dicom::io::file::detail {
         static void Apply(void* binary, size_t length) {
             auto data = (uint64_t*)binary;
             auto data_end = data + length;
-            while (data != data_end) { *data = __builtin_bswap64(*data); ++data; }
+            while (data != data_end) { *data = dicom::detail::byte_swap64(*data); ++data; }
         }
     };
 

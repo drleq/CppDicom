@@ -16,7 +16,7 @@ namespace dicom::data {
         Milliseconds = 6
     };
 
-    class date_time
+    class DICOM_EXPORT date_time
     {
     public:
         date_time();

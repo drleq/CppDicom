@@ -5,7 +5,7 @@
 
 namespace dicom::data {
 
-	class UN : public VR
+	class DICOM_EXPORT UN : public VR
 	{
 	public:
         using value_type = int8_t;

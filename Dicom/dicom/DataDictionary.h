@@ -5,7 +5,7 @@
 
 namespace dicom {
 
-    class DataDictionary
+    class DICOM_EXPORT DataDictionary
     {
     public:
         DataDictionary();

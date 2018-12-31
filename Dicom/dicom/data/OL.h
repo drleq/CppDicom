@@ -5,7 +5,7 @@
 
 namespace dicom::data {
 
-	class OL : public VR
+	class DICOM_EXPORT OL : public VR
 	{
 	public:
         using value_type = int32_t;

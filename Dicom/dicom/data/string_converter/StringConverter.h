@@ -5,22 +5,22 @@
 
 namespace dicom::data::string_converter {
     
-    [[nodiscard]] StringEncodingType convert_to_string_encoding(
+    DICOM_EXPORT [[nodiscard]] StringEncodingType convert_to_string_encoding(
         const std::vector<std::string_view>& character_sets
     );
 
-    [[nodiscard]] bool convert_from_string_encoding(
+    DICOM_EXPORT [[nodiscard]] bool convert_from_string_encoding(
         StringEncodingType encoding,
         std::vector<std::string_view>& character_sets
     );
 
-    [[nodiscard]] bool convert_to_utf8(
+    DICOM_EXPORT [[nodiscard]] bool convert_to_utf8(
         StringEncodingType string_encoding,
         const std::string_view& encoded_source,
         std::string& utf8_dest
     );
 
-    [[nodiscard]] bool convert_from_utf8(
+    DICOM_EXPORT [[nodiscard]] bool convert_from_utf8(
         StringEncodingType string_encoding,
         const std::string& utf8_source,
         data::buffer<char>& encoded_dest

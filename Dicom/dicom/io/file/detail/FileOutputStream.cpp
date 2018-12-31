@@ -4,8 +4,9 @@
 namespace dicom::io::file::detail {
 
     FileOutputStream::FileOutputStream(const std::string_view& filename) {
-        m_file = std::fopen(filename.data(), "wb");
-        if (m_file == nullptr) { return; }
+        if (fopen_s(&m_file, filename.data(), "wb") != 0) {
+            return;
+        }
     }
 
     //--------------------------------------------------------------------------------------------------------

@@ -1,6 +1,8 @@
 #include "dicom_pch.h"
 #include "dicom/io/file/detail/InputContext.h"
 
+#include "dicom/detail/intrinsic.h"
+
 namespace dicom::io::file::detail {
 
     InputContext::InputContext(
@@ -42,7 +44,7 @@ namespace dicom::io::file::detail {
     std::streamsize InputContext::ReadExplicitTagLength(data::VRType vr_type, std::streamoff end_position) {
         uint16_t default_length = m_stream->ReadValue<uint16_t>();
         if (m_endian == EndianType::Big) {
-            default_length = __builtin_bswap16(default_length);
+            default_length = dicom::detail::byte_swap16(default_length);
         }
 
         switch (vr_type) {
@@ -59,7 +61,7 @@ namespace dicom::io::file::detail {
             // Read the large tag 32bit length
             auto length = m_stream->ReadValue<uint32_t>();
             if (m_endian == EndianType::Big) {
-                length = __builtin_bswap32(length);
+                length = dicom::detail::byte_swap32(length);
             }
 
             // Correct the special case length of 0xFFFFFFFF, meaning all remaining data

@@ -5,7 +5,7 @@ namespace dicom::data { class UI; }
 
 namespace dicom::multiframe {
 
-    class frame_index
+    class DICOM_EXPORT frame_index
     {
     public:
         frame_index(const data::AttributeSet* attribute_set);

@@ -37,7 +37,7 @@ namespace dicom::data::string_converter {
         return detail::encoded_to_utf8(
             encoded_source,
             utf8_dest,
-            [](const uint8_t*& next_it, const uint8_t* end_it, char32_t& decoded) {
+            [](const uint8_t*& next_it, const uint8_t* /*end_it*/, char32_t& decoded) {
                 if (*next_it < 0xA0) {
                     // ASCII. Direct mapping to BMP
                     decoded = *next_it;
@@ -73,7 +73,7 @@ namespace dicom::data::string_converter {
                 }
 
                 // ISO/IEC 8859-4. Non-trivial conversion; use a LUT
-                auto it = detail::find_codepoint00(s_lut, c);
+                auto it = detail::find_codepoint00(s_lut, static_cast<uint16_t>(c));
                 if (it == nullptr) { return false; }
 
                 *next_it++ = static_cast<uint8_t>(0xA0 + std::distance(std::begin(s_lut), it));

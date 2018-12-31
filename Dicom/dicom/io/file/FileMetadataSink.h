@@ -5,7 +5,7 @@
 
 namespace dicom::io::file {
 
-    class FileMetadataSink : public IMetadataSink
+    class DICOM_EXPORT FileMetadataSink : public IMetadataSink
     {
     public:
         FileMetadataSink();

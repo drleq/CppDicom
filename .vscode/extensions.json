@@ -7,7 +7,8 @@
 		"ms-vscode.cpptools",
 		"eamodio.gitlens",
 		"vector-of-bool.cmake-tools",
-		"twxs.cmake"
+		"twxs.cmake",
+		"drleq.vscode-cpputf-test-adapter"
 	],
 	// List of extensions recommended by VS Code that should not be recommended for users of this workspace.
 	"unwantedRecommendations": [

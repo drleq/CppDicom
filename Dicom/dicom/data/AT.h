@@ -5,7 +5,7 @@
 
 namespace dicom::data {
 
-    class AT : public VR
+    class DICOM_EXPORT AT : public VR
     {
     public:
         using container_type = std::vector<tag_number>;

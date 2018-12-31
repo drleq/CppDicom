@@ -6,7 +6,7 @@ namespace dicom::io::file::detail { class InputContext; }
 
 namespace dicom::io::file::detail {
 
-    [[nodiscard]] std::unique_ptr<data::VR> read_vr(
+    DICOM_EXPORT [[nodiscard]] std::unique_ptr<data::VR> read_vr(
         InputContext& context,
         std::streamsize length,
         data::VRType vr_type

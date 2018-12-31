@@ -4,7 +4,7 @@
 
 namespace dicom::io::codec {
 
-    class CodecImage : public ICodecImage
+    class DICOM_EXPORT CodecImage : public ICodecImage
     {
     public:
         CodecImage();

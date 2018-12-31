@@ -4,7 +4,7 @@
 
 namespace dicom::io::file::detail {
 
-    class FileInputStream : public InputStream
+    class DICOM_EXPORT FileInputStream : public InputStream
     {
     public:
         FileInputStream(const std::string_view& filename);

@@ -7,7 +7,7 @@ namespace dicom::io::file::detail { class InputContext; }
 
 namespace dicom::io::file::detail {
 
-    void read_vr_type_and_length(
+    DICOM_EXPORT void read_vr_type_and_length(
         InputContext& context,
         const data::AttributeSet* attribute_set,
         tag_number tag,

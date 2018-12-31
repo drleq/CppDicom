@@ -1,6 +1,8 @@
 #include "dicom_pch.h"
 #include "dicom/data/string_converter/detail/utf8_helpers.h"
 
+#include "dicom/detail/intrinsic.h"
+
 namespace {
     // Number of trailing bytes, indexed by the first byte
     constexpr uint8_t s_trailing_bytes[256] = {
@@ -147,8 +149,8 @@ namespace dicom::data::string_converter::detail {
         uint8_t bytes_to_write = 1;
 
         // Search for the highest bit
-        if (decoded != 0) {
-            int high_bit = 31 - __builtin_clz(decoded);
+        int high_bit = dicom::detail::bit_scan_reverse32(decoded);
+        if (high_bit >= 0) {
             bytes_to_write = s_bytes_to_write[high_bit];
         }
 

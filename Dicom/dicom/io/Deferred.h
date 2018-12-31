@@ -8,7 +8,7 @@ namespace dicom::io {
 
     using LoadDeferredVRCallback = std::function<std::unique_ptr<data::VR> ()>;
 
-    class Deferred :
+    class DICOM_EXPORT Deferred :
         public data::VR
     {
     public:

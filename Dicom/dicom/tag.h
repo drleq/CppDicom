@@ -5,13 +5,13 @@
 
 namespace dicom {
 
-    struct multiplicity_range
+    struct DICOM_EXPORT multiplicity_range
     {
         const int8_t Minimum;
         const int8_t Maximum;
     };
 
-    struct tag
+    struct DICOM_EXPORT tag
     {
         const tag_number Number;
         const multiplicity_range Multiplicity;
@@ -23,7 +23,7 @@ namespace dicom {
         [[nodiscard]] constexpr operator tag_number() const { return Number; }
     };
 
-    struct range_tag
+    struct DICOM_EXPORT range_tag
     {
         const tag_number RangeMin;
         const tag_number RangeMax;

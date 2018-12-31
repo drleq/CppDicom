@@ -6,7 +6,7 @@
 
 namespace dicom::data {
 
-    class PatientNameGroup
+    class DICOM_EXPORT PatientNameGroup
     {
     public:
         struct string_to_component_group {

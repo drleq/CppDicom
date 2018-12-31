@@ -1025,6 +1025,10 @@ namespace dicom::data::string_converter {
             encoded_source,
             utf8_dest,
             [](const uint8_t*& next_it, const uint8_t* end_it, char32_t& decoded) {
+                if (std::distance(next_it, end_it) < 2) {
+                    return false;
+                }
+
                 // JIS X 0208 is a 16-bit encoding
                 uint16_t c = *reinterpret_cast<const uint16_t*>(next_it);
 
@@ -1137,15 +1141,17 @@ namespace dicom::data::string_converter {
                     return false;
                 }
 
+                uint16_t c16 = static_cast<uint16_t>(c);
+
                 // 0x21 (0x21-0x7E)
-                auto it = detail::find_codepoint00(s_0x21, c);
+                auto it = detail::find_codepoint00(s_0x21, c16);
                 if (it != nullptr) {
                     *dest_ptr = make_row_column(0x21, 0x21 + distance(begin(s_0x21), it));
                     return true;
                 }
 
                 // 0x30 -> 0x4E (0x21-0x7E)
-                it = detail::find_codepoint00(s_0x30_4E, c);
+                it = detail::find_codepoint00(s_0x30_4E, c16);
                 if (it != nullptr) {
                     auto dist = distance(begin(s_0x30_4E), it);
                     auto block = dist / 94;
@@ -1157,7 +1163,7 @@ namespace dicom::data::string_converter {
                 }
 
                 // 0x50 -> 0x73 (0x21-0x7E)
-                it = detail::find_codepoint00(s_0x50_73, c);
+                it = detail::find_codepoint00(s_0x50_73, c16);
                 if (it != nullptr) {
                     auto dist = distance(begin(s_0x50_73), it);
                     auto block = dist / 94;
@@ -1169,7 +1175,7 @@ namespace dicom::data::string_converter {
                 }
 
                 // 0x22 (0x21-0x2E, 0x3A-0x41, 0x4A-0x50, 0x5C-0x6A, 0x72-0x79, 0x7E)
-                it = detail::find_codepoint00(s_0x22, c);
+                it = detail::find_codepoint00(s_0x22, c16);
                 if (it != nullptr) {
                     auto dist = distance(begin(s_0x22), it);
                     auto column = dist;
@@ -1184,7 +1190,7 @@ namespace dicom::data::string_converter {
                 }
 
                 // 0x23 (0x30-0x39, 0x41-0x5A, 0x61-0x7A)
-                it = detail::find_codepoint00(s_0x23, c);
+                it = detail::find_codepoint00(s_0x23, c16);
                 if (it != nullptr) {
                     auto dist = distance(begin(s_0x23), it);
                     auto column = dist;
@@ -1196,7 +1202,7 @@ namespace dicom::data::string_converter {
                 }
 
                 // 0x24 (0x21-0x73)
-                it = detail::find_codepoint00(s_0x24, c);
+                it = detail::find_codepoint00(s_0x24, c16);
                 if (it != nullptr) {
                     auto dist = distance(begin(s_0x24), it);
                     *dest_ptr = make_row_column(0x24, 0x21 + dist);
@@ -1204,7 +1210,7 @@ namespace dicom::data::string_converter {
                 }
 
                 // 0x25 (0x21-0x76)
-                it = detail::find_codepoint00(s_0x25, c);
+                it = detail::find_codepoint00(s_0x25, c16);
                 if (it != nullptr) {
                     auto dist = distance(begin(s_0x25), it);
                     *dest_ptr = make_row_column(0x25, 0x21 + dist);
@@ -1212,7 +1218,7 @@ namespace dicom::data::string_converter {
                 }
 
                 // 0x26 (0x21-0x38, 0x41-0x58)
-                it = detail::find_codepoint00(s_0x26, c);
+                it = detail::find_codepoint00(s_0x26, c16);
                 if (it != nullptr) {
                     auto dist = distance(begin(s_0x26), it);
                     auto column = dist;
@@ -1223,7 +1229,7 @@ namespace dicom::data::string_converter {
                 }
 
                 // 0x27 (0x21-0x41, 0x51-0x71)
-                it = detail::find_codepoint00(s_0x27, c);
+                it = detail::find_codepoint00(s_0x27, c16);
                 if (it != nullptr) {
                     auto dist = distance(begin(s_0x27), it);
                     auto column = dist;
@@ -1234,7 +1240,7 @@ namespace dicom::data::string_converter {
                 }
 
                 // 0x28 (0x21-0x40)
-                it = detail::find_codepoint00(s_0x28, c);
+                it = detail::find_codepoint00(s_0x28, c16);
                 if (it != nullptr) {
                     auto dist = distance(begin(s_0x28), it);
                     *dest_ptr = make_row_column(0x28, 0x21 + dist);
@@ -1242,7 +1248,7 @@ namespace dicom::data::string_converter {
                 }
 
                 // 0x2D (0x21-0x3E, 0x40-0x56, 0x5F-0x7C)
-                it = detail::find_codepoint00(s_0x2D, c);
+                it = detail::find_codepoint00(s_0x2D, c16);
                 if (it != nullptr) {
                     auto dist = distance(begin(s_0x2D), it);
                     auto column = dist;
@@ -1254,7 +1260,7 @@ namespace dicom::data::string_converter {
                 }
 
                 // 0x4F (0x21-0x53)
-                it = detail::find_codepoint00(s_0x4F, c);
+                it = detail::find_codepoint00(s_0x4F, c16);
                 if (it != nullptr) {
                     auto dist = distance(begin(s_0x4F), it);
                     *dest_ptr = make_row_column(0x4F, 0x21 + dist);
@@ -1262,7 +1268,7 @@ namespace dicom::data::string_converter {
                 }
 
                 // 0x74 (0x21-0x26)
-                it = detail::find_codepoint00(s_0x74, c);
+                it = detail::find_codepoint00(s_0x74, c16);
                 if (it != nullptr) {
                     auto dist = distance(begin(s_0x74), it);
                     *dest_ptr = make_row_column(0x74, 0x21 + dist);

@@ -4,12 +4,11 @@
 #include "dicom/data/encoded_string.h"
 #include "dicom/data/StringEncodingType.h"
 #include "dicom/data/VRType.h"
+#include "dicom/detail/intrinsic.h"
 #include "dicom/io/file/detail/apply_endian.h"
 #include "dicom/io/file/detail/OutputStream.h"
 #include "dicom/io/TransferSyntax.h"
 #include "dicom/tag_number.h"
-
-#include <x86intrin.h>
 
 namespace dicom::io::file::detail {
 
@@ -48,10 +47,10 @@ namespace dicom::io::file::detail {
             tag_number val;
             if (m_endian == EndianType::Little) {
                 // [b,a,d,c] -> [d,c,b,a]
-                val = __rord(tag, 16);
+                val = dicom::detail::rotate_left32(tag, 16);
             } else {
                 // [b,a,d,c] -> [c,d,a,b]
-                val = __builtin_bswap32(tag);
+                val = dicom::detail::byte_swap32(tag);
             }
             m_stream->WriteValue(val);
         }
@@ -64,11 +63,9 @@ namespace dicom::io::file::detail {
                 return;
             }
 
-            uint32_t val;
-            if (m_endian == EndianType::Little) {
-                val = uint32_t(length);
-            } else {
-                val = __builtin_bswap32(uint32_t(length));
+            uint32_t val = static_cast<uint32_t>(length);
+            if (m_endian == EndianType::Big) {
+                val = dicom::detail::byte_swap32(val);
             }
             m_stream->WriteValue(val);
         }

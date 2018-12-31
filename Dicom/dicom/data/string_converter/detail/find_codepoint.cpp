@@ -1,7 +1,7 @@
 #include "dicom_pch.h"
 #include "dicom/data/string_converter/detail/find_codepoint.h"
 
-#include <emmintrin.h>
+#include "dicom/detail/intrinsic.h"
 
 namespace dicom::data::string_converter::detail {
 
@@ -14,12 +14,13 @@ namespace dicom::data::string_converter::detail {
         while (loop_count-- != 0) {
             auto mask = _mm_cmpeq_epi16(*ptr_128, cp_128);
             int result = _mm_movemask_epi8(mask);
-            if (result == 0) {
+
+            int32_t index = dicom::detail::bit_scan_forward32(result); 
+            if (index < 0) {
                 ++ptr_128;
                 continue;
             }
-
-            int index = (__builtin_ffs(result) - 1) / 2;
+            index /= 2;
 
             return reinterpret_cast<const uint16_t*>(ptr_128) + index;
         }

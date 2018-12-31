@@ -5,7 +5,7 @@
 
 namespace dicom::data {
 
-    class DA : public VR
+    class DICOM_EXPORT DA : public VR
     {
     public:
         using container_type = std::vector<date>;

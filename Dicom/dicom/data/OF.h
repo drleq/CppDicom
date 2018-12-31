@@ -5,7 +5,7 @@
 
 namespace dicom::data {
 
-	class OF : public VR
+	class DICOM_EXPORT OF : public VR
 	{
 	public:
         using value_type = float;

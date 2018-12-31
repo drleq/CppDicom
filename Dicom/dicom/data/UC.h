@@ -6,7 +6,7 @@
 
 namespace dicom::data {
 
-	class UC : public VR
+	class DICOM_EXPORT UC : public VR
 	{
 	public:
         using iterator = detail::substring_iterator<detail::trim_right>;
