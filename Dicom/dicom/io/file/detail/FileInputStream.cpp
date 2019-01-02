@@ -6,7 +6,18 @@ namespace dicom::io::file::detail {
     FileInputStream::FileInputStream(const std::string_view& filename)
       : m_filename(filename)
     {
-        if (fopen_s(&m_file, filename.data(), "rb") != 0) { return; }
+#ifdef __GNUG__
+        m_file = fopen(filename.data(), "rb");
+        if (m_file == nullptr) {
+            return;
+        }
+#endif
+#ifdef _MSC_VER
+        if (fopen_s(&m_file, filename.data(), "rb") != 0) {
+            return;
+        }
+#endif
+
         fseek(m_file, 0, SEEK_END);
         Initialize(ftell(m_file));
         fseek(m_file, 0, SEEK_SET);

@@ -24,7 +24,7 @@ namespace dicom::detail {
 
     inline int32_t bit_scan_reverse32(uint32_t value) {
         if (value != 0) {
-            return 31 - __builtin_clz(decoded);
+            return 31 - __builtin_clz(value);
         } else {
             return -1;
         }
@@ -32,7 +32,7 @@ namespace dicom::detail {
 
     inline int32_t bit_scan_reverse64(uint64_t value) {
         if (value != 0) {
-            return 63 - __builtin_clzll(decoded);
+            return 63 - __builtin_clzll(value);
         } else {
             return -1;
         }
@@ -49,7 +49,7 @@ namespace dicom::detail {
     }
 
     inline uint32_t rotate_left32(uint32_t value, uint8_t distance) {
-        return __rold(value, distance)
+        return __rold(value, distance);
     }
 }
 #endif
