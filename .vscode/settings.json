@@ -47,6 +47,6 @@
     "telemetry.enableTelemetry": false,
     "cmake.configureOnOpen": true,
     "C_Cpp.configurationWarnings": "Disabled",
-    "cppUnitTestFramework.executable": "./build/DicomTest/DicomTest",
+    "cppUnitTestFramework.executable": "./build/output/DicomTest",
     "cppUnitTestFramework.workingDirectory": "./DicomTest"
 }
