@@ -6,7 +6,7 @@
 
 namespace dicom::io::codec {
 
-    class ICodecFactory
+    class DICOM_EXPORT ICodecFactory
     {
     public:
         virtual ~ICodecFactory() = default;

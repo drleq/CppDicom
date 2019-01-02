@@ -5,7 +5,7 @@
 
 namespace dicom::data {
 
-    class SQ : public VR
+    class DICOM_EXPORT SQ : public VR
     {
     public:
 		using item_type = std::unique_ptr<AttributeSet>;

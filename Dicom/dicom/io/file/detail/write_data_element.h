@@ -7,7 +7,7 @@ namespace dicom::io::file::detail { class OutputContext; }
 
 namespace dicom::io::file::detail {
 
-    void write_data_element(
+    DICOM_EXPORT void write_data_element(
         OutputContext* context,
         tag_number tag,
         const data::VR* attribute

@@ -5,7 +5,7 @@
 
 namespace dicom::io::file {
 
-    class FileMetadataSource : public IMetadataSource
+    class DICOM_EXPORT FileMetadataSource : public IMetadataSource
     {
     public:
         FileMetadataSource(

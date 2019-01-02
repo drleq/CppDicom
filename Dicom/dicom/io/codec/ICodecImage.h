@@ -5,7 +5,7 @@
 
 namespace dicom::io::codec {
 
-    class ICodecImage
+    class DICOM_EXPORT ICodecImage
     {
     public:
         virtual ~ICodecImage() = default;

@@ -359,7 +359,7 @@ namespace dicom::data {
         auto it = ParsedBegin();
         auto typed_it = typed->ParsedBegin();
         for (size_t i = 0; i < cmp_len; ++i, ++it, ++typed_it) {
-            auto result = (*it).Compare(*typed_it);
+            result = (*it).Compare(*typed_it);
             if (result != 0) { return result; }
         }
 

@@ -10,7 +10,7 @@ namespace dicom::data::string_converter {
         return detail::encoded_to_utf8(
             encoded_source,
             utf8_dest,
-            [](const uint8_t*& next_it, const uint8_t* end_it, char32_t& decoded) {
+            [](const uint8_t*& next_it, const uint8_t* /*end_it*/, char32_t& decoded) {
                 decoded = *next_it;
                 next_it++;
                 return true;

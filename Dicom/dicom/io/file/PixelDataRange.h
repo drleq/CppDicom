@@ -4,7 +4,7 @@
 
 namespace dicom::io::file {
 
-    class PixelDataRange
+    class DICOM_EXPORT PixelDataRange
     {
     public:
         constexpr PixelDataRange(size_t start_offset, size_t length, PixelDataEncodingType encoding_type)

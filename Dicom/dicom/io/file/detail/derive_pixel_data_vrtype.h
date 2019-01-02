@@ -6,7 +6,7 @@ namespace dicom::io { struct TransferSyntax; }
 
 namespace dicom::io::file::detail {
 
-    [[nodiscard]] bool derive_pixel_data_vrtype(
+    DICOM_EXPORT [[nodiscard]] bool derive_pixel_data_vrtype(
         const dicom::data::AttributeSet* metadata,
         const dicom::io::TransferSyntax* transfer_syntax,
         dicom::data::VRType* type

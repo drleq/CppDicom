@@ -5,7 +5,7 @@
 
 namespace dicom::data {
 
-	class OW : public VR
+	class DICOM_EXPORT OW : public VR
 	{
 	public:
         using value_type = int16_t;

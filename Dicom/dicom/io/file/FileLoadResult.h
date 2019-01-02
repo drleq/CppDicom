@@ -7,7 +7,7 @@
 
 namespace dicom::io::file {
 
-    class FileLoadResult : public ILoadResult
+    class DICOM_EXPORT FileLoadResult : public ILoadResult
     {
     public:
         FileLoadResult(

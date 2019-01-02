@@ -4,6 +4,6 @@
 
 namespace dicom::io::file::detail {
 
-    void write_header(const OutputStreamPtr& stream);
+    DICOM_EXPORT void write_header(const OutputStreamPtr& stream);
 
 }

@@ -3,6 +3,7 @@
 
 #include "dicom/data/VRType.h"
 #include "dicom/data/string_converter/StringConverter.h"
+#include "dicom/detail/intrinsic.h"
 
 namespace dicom::io::file::detail {
 
@@ -43,7 +44,7 @@ namespace dicom::io::file::detail {
             // Write the large tag length
             uint32_t len = static_cast<uint32_t>(length);
             if (m_endian == EndianType::Big) {
-                len = __builtin_bswap32(len);
+                len = dicom::detail::byte_swap32(len);
             }
             m_stream->WriteValue(len);
             break;
@@ -59,7 +60,7 @@ namespace dicom::io::file::detail {
             // Write the default length.
             uint16_t len = static_cast<uint16_t>(length);
             if (m_endian == EndianType::Big) {
-                len = __builtin_bswap16(len);
+                len = dicom::detail::byte_swap16(len);
             }
             m_stream->WriteValue(len);
             break;

@@ -4,6 +4,6 @@
 
 namespace dicom::io::file::detail {
 
-    [[nodiscard]] bool verify_header(const InputStreamPtr& stream);
+    DICOM_EXPORT [[nodiscard]] bool verify_header(const InputStreamPtr& stream);
 
 }

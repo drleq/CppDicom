@@ -144,7 +144,7 @@ namespace dicom_test::data {
         SS ss2(nullptr);
         CHECK(ss2.Empty());
 
-        SS ss3(1.0);
+        SS ss3(1);
         CHECK(!ss3.Empty());
 
         SS ss4(buffer<int16_t>(1));

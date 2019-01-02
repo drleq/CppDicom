@@ -32,7 +32,8 @@ namespace dicom::data::detail {
             // In JIS X 0201 the multiplicity character is translated to Yen. Search for that instead.
             // We don't do this for CodeExtension_JISX0201 as that ought to be escaped back to something
             // more sensible before hand.
-            split_char = 0xA5;
+            constexpr uint8_t Yen = 0xA5;
+            split_char = static_cast<char>(Yen);
         }
 
         auto s_ptr = parsed.begin();

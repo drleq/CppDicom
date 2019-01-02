@@ -11,7 +11,7 @@ namespace dicom::io {
     // bool (size_t frame_index, WritePixelDataFunction write_func)
     using WritePixelDataCallback = std::function<bool(size_t, WritePixelDataFunction)>;
 
-    class IMetadataSink
+    class DICOM_EXPORT IMetadataSink
     {
     public:
         virtual ~IMetadataSink() = default;

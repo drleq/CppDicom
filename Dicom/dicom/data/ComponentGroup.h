@@ -7,7 +7,7 @@
 
 namespace dicom::data {
 
-    class ComponentGroup
+    class DICOM_EXPORT ComponentGroup
     {
     public:
         using iterator = detail::substring_iterator<detail::trim_right>;

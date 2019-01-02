@@ -2,7 +2,7 @@
 
 namespace dicom::io::file::detail {
 
-    class OutputStream
+    class DICOM_EXPORT OutputStream
     {
     public:
         OutputStream(const OutputStream&) = delete;

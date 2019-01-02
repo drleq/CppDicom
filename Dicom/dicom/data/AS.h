@@ -4,7 +4,7 @@
 
 namespace dicom::data {
 
-    class AS : public VR
+    class DICOM_EXPORT AS : public VR
     {
     public:
         enum UnitType

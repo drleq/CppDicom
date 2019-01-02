@@ -6,7 +6,7 @@
 
 namespace dicom::io {
 
-    class ILoadResult
+    class DICOM_EXPORT ILoadResult
     {
     public:
         virtual ~ILoadResult() = default;

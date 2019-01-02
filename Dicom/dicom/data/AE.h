@@ -4,7 +4,7 @@
 
 namespace dicom::data {
 
-    class AE : public VR
+    class DICOM_EXPORT AE : public VR
     {
     public:
         AE();

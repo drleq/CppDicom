@@ -2,7 +2,7 @@
 
 namespace dicom::data {
 
-    class time_offset
+    class DICOM_EXPORT time_offset
     {
     public:
         time_offset();

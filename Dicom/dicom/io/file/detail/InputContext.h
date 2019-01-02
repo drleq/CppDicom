@@ -3,12 +3,11 @@
 #include "dicom/DataDictionary.h"
 #include "dicom/data/AttributeSet.h"
 #include "dicom/data/encoded_string.h"
+#include "dicom/detail/intrinsic.h"
 #include "dicom/io/file/AttributeFilter.h"
 #include "dicom/io/file/detail/apply_endian.h"
 #include "dicom/io/file/detail/InputStream.h"
 #include "dicom/io/TransferSyntax.h"
-
-#include <x86intrin.h>
 
 namespace dicom::io::file::detail {
 
@@ -107,10 +106,10 @@ namespace dicom::io::file::detail {
             auto tag = m_stream->ReadValue<tag_number>();
             if (m_endian == EndianType::Little) {
                 // [d,c,b,a] -> [b,a,d,c]
-                return __rold(tag, 16);
+                return dicom::detail::rotate_left32(tag, 16);
             } else {
                 // [c,d,a,b] -> [b,a,d,c]
-                return __builtin_bswap32(tag);
+                return dicom::detail::byte_swap32(tag);
             }
         }
 
@@ -121,7 +120,7 @@ namespace dicom::io::file::detail {
             if (m_endian == EndianType::Little) {
                 return length;
             } else {
-                return __builtin_bswap32(length);
+                return dicom::detail::byte_swap32(length);
             }
         }
         [[nodiscard]] std::streamsize ReadExplicitTagLength(data::VRType vr_type, std::streamoff end_position);
@@ -136,7 +135,7 @@ namespace dicom::io::file::detail {
         template <typename TVR>
         [[nodiscard]] std::unique_ptr<TVR> ReadString(std::streamsize length) {
             // Simply read the string and return it.
-            std::string s((size_t)length, '\0');
+            std::string s(static_cast<size_t>(length), '\0');
             if (!TryReadString(length, s)) { return nullptr; }
             return std::make_unique<TVR>(std::move(s));
         }

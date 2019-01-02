@@ -46,7 +46,7 @@ namespace dicom::data {
 
     //---------------------------------------------------------------------------------------------
 
-    [[nodiscard]] bool extract_string_encodings(
+    DICOM_EXPORT [[nodiscard]] bool extract_string_encodings(
         const AttributeSet& as,
         std::set<StringEncodingType>& string_encodings
     );

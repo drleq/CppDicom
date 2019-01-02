@@ -7,7 +7,7 @@ namespace dicom::data { class AttributeSet; }
 
 namespace dicom::io::file::detail {
 
-    [[nodiscard]] bool derive_pixel_data_ranges(
+    DICOM_EXPORT [[nodiscard]] bool derive_pixel_data_ranges(
         InputContext& context,
         const data::AttributeSet* metadata,
         std::vector<PixelDataRange>* ranges

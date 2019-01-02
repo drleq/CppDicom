@@ -9,7 +9,7 @@ namespace dicom::data {
         Days = 2
     };
 
-    class date
+    class DICOM_EXPORT date
     {
     public:
         date();
