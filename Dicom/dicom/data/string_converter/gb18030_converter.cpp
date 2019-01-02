@@ -4220,7 +4220,7 @@ namespace {
         }
 
         uint32_t v = (b4 << 24) | (b3 << 16) | (b2 << 8) | b1;
-        *(uint32_t*)dest_it = v;
+        *reinterpret_cast<uint32_t*>(dest_it) = v;
     }
 
     //--------------------------------------------------------------------------------------------------------
@@ -4483,6 +4483,7 @@ namespace dicom::data::string_converter {
                     next_it += 4;
                     return true;
                 }
+                uint16_t c16 = static_cast<uint16_t>(c);
                 
                 // BMP character. First attempt to write a four byte code based on linearly mapped ranges.
                 if (utf32_easy_bmp_to_fourbyte(c, next_it)) {
@@ -4491,7 +4492,7 @@ namespace dicom::data::string_converter {
                 }
 
                 // The easy cases have not matched. Attempt to find [cp1] in one of the LUTs.
-                auto it = detail::find_codepoint00(s_twobyte, c);
+                auto it = detail::find_codepoint00(s_twobyte, c16);
                 if (it != nullptr) {
                     // Matches a two byte code. Convert the index to the code and write it out.
                     auto index = distance(begin(s_twobyte), it);
@@ -4504,135 +4505,135 @@ namespace dicom::data::string_converter {
                 }
 
                 // 0x8130
-                it = detail::find_codepoint00(s_fourbyte_0x8130, c);
+                it = detail::find_codepoint00(s_fourbyte_0x8130, c16);
                 if (it != nullptr) {
                     auto index = distance(begin(s_fourbyte_0x8130), it);
-                    write_fourbyte(next_it, 0x30813081, (uint32_t)index);
+                    write_fourbyte(next_it, 0x30813081, static_cast<uint32_t>(index));
                     next_it += 4;
                     return true;
                 }
 
                 // 0x8136
-                it = detail::find_codepoint00(s_fourbyte_0x8136, c);
+                it = detail::find_codepoint00(s_fourbyte_0x8136, c16);
                 if (it != nullptr) {
                     auto index = distance(begin(s_fourbyte_0x8136), it);
-                    write_fourbyte(next_it, 0x32A53681, (uint32_t)index);
+                    write_fourbyte(next_it, 0x32A53681, static_cast<uint32_t>(index));
                     next_it += 4;
                     return true;
                 }
 
                 // 0x8137
-                it = detail::find_codepoint00(s_fourbyte_0x8137, c);
+                it = detail::find_codepoint00(s_fourbyte_0x8137, c16);
                 if (it != nullptr) {
                     auto index = distance(begin(s_fourbyte_0x8137), it);
-                    write_fourbyte(next_it, 0x30813781, (uint32_t)index);
+                    write_fourbyte(next_it, 0x30813781, static_cast<uint32_t>(index));
                     next_it += 4;
                     return true;
                 }
 
                 // 0x8138
-                it = detail::find_codepoint00(s_fourbyte_0x8138, c);
+                it = detail::find_codepoint00(s_fourbyte_0x8138, c16);
                 if (it != nullptr) {
                     auto index = distance(begin(s_fourbyte_0x8138), it);
-                    write_fourbyte(next_it, 0x39FD3881, (uint32_t)index);
+                    write_fourbyte(next_it, 0x39FD3881, static_cast<uint32_t>(index));
                     next_it += 4;
                     return true;
                 }
 
                 // 0x8139
-                it = detail::find_codepoint00(s_fourbyte_0x8139, c);
+                it = detail::find_codepoint00(s_fourbyte_0x8139, c16);
                 if (it != nullptr) {
                     auto index = distance(begin(s_fourbyte_0x8139), it);
-                    write_fourbyte(next_it, 0x30813981, (uint32_t)index);
+                    write_fourbyte(next_it, 0x30813981, static_cast<uint32_t>(index));
                     next_it += 4;
                     return true;
                 }
 
                 // 0x8230
-                it = detail::find_codepoint00(s_fourbyte_0x8230, c);
+                it = detail::find_codepoint00(s_fourbyte_0x8230, c16);
                 if (it != nullptr) {
                     // 0x3082 (0x0000-0x0174, 0x0472-0x04EB)
                     auto index = distance(begin(s_fourbyte_0x8230), it);
                     if (index > 0x0174) { index = (index + 0x0472) - 0x0175; }
-                    write_fourbyte(next_it, 0x30813082, (uint32_t)index);
+                    write_fourbyte(next_it, 0x30813082, static_cast<uint32_t>(index));
                     next_it += 4;
                     return true;
                 }
 
                 // 0x8231
-                it = detail::find_codepoint00(s_fourbyte_0x8231, c);
+                it = detail::find_codepoint00(s_fourbyte_0x8231, c16);
                 if (it != nullptr) {
                     auto index = distance(begin(s_fourbyte_0x8231), it);
-                    write_fourbyte(next_it, 0x30813182, (uint32_t)index);
+                    write_fourbyte(next_it, 0x30813182, static_cast<uint32_t>(index));
                     next_it += 4;
                     return true;
                 }
 
                 // 0x8232
-                it = detail::find_codepoint00(s_fourbyte_0x8232, c);
+                it = detail::find_codepoint00(s_fourbyte_0x8232, c16);
                 if (it != nullptr) {
                     // 0x3282 (0x01CF-0x02D6, 0x04AE-0x04EB)
                     auto index = distance(begin(s_fourbyte_0x8232), it);
                     if (index > 0x0107) { index = (index + 0x02DF) - 0x0108; }
-                    write_fourbyte(next_it, 0x33AF3282, (uint32_t)index);
+                    write_fourbyte(next_it, 0x33AF3282, static_cast<uint32_t>(index));
                     next_it += 4;
                     return true;
                 }
 
                 // 0x8233
-                it = detail::find_codepoint00(s_fourbyte_0x8233, c);
+                it = detail::find_codepoint00(s_fourbyte_0x8233, c16);
                 if (it != nullptr) {
                     // 0x3382 (0x0000-0x015C, 0x02D2-0x040D)
                     auto index = distance(begin(s_fourbyte_0x8233), it);
                     if (index > 0x015C) { index = (index + 0x02D2) - 0x015D; }
-                    write_fourbyte(next_it, 0x30813382, (uint32_t)index);
+                    write_fourbyte(next_it, 0x30813382, static_cast<uint32_t>(index));
                     next_it += 4;
                     return true;
                 }
 
                 // 0x8234
-                it = detail::find_codepoint00(s_fourbyte_0x8234, c);
+                it = detail::find_codepoint00(s_fourbyte_0x8234, c16);
                 if (it != nullptr) {
                     // 0x3482 (0x00DB-0x0140, 0x0400-0x04EB)
                     auto index = distance(begin(s_fourbyte_0x8234), it);
                     if (index > 0x0065) { index = (index + 0x0325) - 0x0066; }
-                    write_fourbyte(next_it, 0x39963482, (uint32_t)index);
+                    write_fourbyte(next_it, 0x39963482, static_cast<uint32_t>(index));
                     next_it += 4;
                     return true;
                 }
 
                 // 0x8235
-                it = detail::find_codepoint00(s_fourbyte_0x8235, c);
+                it = detail::find_codepoint00(s_fourbyte_0x8235, c16);
                 if (it != nullptr) {
                     auto index = distance(begin(s_fourbyte_0x8235), it);
-                    write_fourbyte(next_it, 0x30813582, (uint32_t)index);
+                    write_fourbyte(next_it, 0x30813582, static_cast<uint32_t>(index));
                     next_it += 4;
                     return true;
                 }
 
                 // 0x8336
-                it = detail::find_codepoint00(s_fourbyte_0x8336, c);
+                it = detail::find_codepoint00(s_fourbyte_0x8336, c16);
                 if (it != nullptr) {
                     auto index = distance(begin(s_fourbyte_0x8336), it);
-                    write_fourbyte(next_it, 0x39C73683, (uint32_t)index);
+                    write_fourbyte(next_it, 0x39C73683, static_cast<uint32_t>(index));
                     next_it += 4;
                     return true;
                 }
 
                 // 0x8430
-                it = detail::find_codepoint00(s_fourbyte_0x8430, c);
+                it = detail::find_codepoint00(s_fourbyte_0x8430, c16);
                 if (it != nullptr) {
                     auto index = distance(begin(s_fourbyte_0x8430), it);
-                    write_fourbyte(next_it, 0x35853084, (uint32_t)index);
+                    write_fourbyte(next_it, 0x35853084, static_cast<uint32_t>(index));
                     next_it += 4;
                     return true;
                 }
 
                 // 0x8431
-                it = detail::find_codepoint00(s_fourbyte_0x8431, c);
+                it = detail::find_codepoint00(s_fourbyte_0x8431, c16);
                 if (it != nullptr) {
                     auto index = distance(begin(s_fourbyte_0x8431), it);
-                    write_fourbyte(next_it, 0x38853184, (uint32_t)index);
+                    write_fourbyte(next_it, 0x38853184, static_cast<uint32_t>(index));
                     next_it += 4;
                     return true;
                 }
@@ -4662,7 +4663,9 @@ namespace dicom::data::string_converter {
                 }
 
                 if (c <= 0xFFFF) {
-                    auto it = detail::find_codepoint00(s_twobyte, c);
+                    uint16_t c16 = static_cast<uint16_t>(c);
+
+                    auto it = detail::find_codepoint00(s_twobyte, c16);
                     if (it != nullptr) {
                         // Matches a two byte code. Convert the index to the code and write it out.
                         auto index = distance(begin(s_twobyte), it);
@@ -4700,7 +4703,7 @@ namespace dicom::data::string_converter {
                 }
 
                 if (c <= 0xFFFF) {
-                    auto it = detail::find_codepoint00(s_twobyte, c);
+                    auto it = detail::find_codepoint00(s_twobyte, static_cast<uint16_t>(c));
                     if (it != nullptr) {
                         // Matches a two byte code. Convert the index to the code and write it out.
                         auto index = distance(begin(s_twobyte), it);

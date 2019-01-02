@@ -11,7 +11,7 @@ namespace dicom::multiframe {
 
     using FrameList = std::vector<data::AttributeSetConstPtr>;
 
-    class FrameCache
+    class DICOM_EXPORT FrameCache
     {
     public:
         FrameCache();

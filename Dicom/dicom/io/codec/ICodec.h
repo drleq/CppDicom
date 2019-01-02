@@ -6,7 +6,7 @@ namespace dicom::io::codec {
 
     using WriteDataCallback = std::function<bool (const void*, size_t)>;
 
-    class ICodec
+    class DICOM_EXPORT ICodec
     {
     public:
         virtual ~ICodec() = default;

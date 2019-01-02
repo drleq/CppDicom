@@ -5,7 +5,7 @@
 
 namespace dicom::data {
 
-    class SL : public VR
+    class DICOM_EXPORT SL : public VR
     {
     public:
         using value_type = int32_t;

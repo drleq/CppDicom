@@ -41,7 +41,7 @@ namespace dicom::io {
         m_loaded_vr = m_load_vr_callback();
 
         // Return the VR
-        return (bool)m_loaded_vr;
+        return static_cast<bool>(m_loaded_vr);
     }
 
     //--------------------------------------------------------------------------------------------------------

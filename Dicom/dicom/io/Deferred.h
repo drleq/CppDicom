@@ -8,7 +8,7 @@ namespace dicom::io {
 
     using LoadDeferredVRCallback = std::function<std::unique_ptr<data::VR> ()>;
 
-    class Deferred :
+    class DICOM_EXPORT Deferred :
         public data::VR
     {
     public:
@@ -28,7 +28,7 @@ namespace dicom::io {
 
         //----------------------------------------------------------------------------------------------------
 
-        [[nodiscard]] bool IsLoaded() const { return (bool)m_loaded_vr; }
+        [[nodiscard]] bool IsLoaded() const { return static_cast<bool>(m_loaded_vr); }
         bool Load();
         void Unload();
 

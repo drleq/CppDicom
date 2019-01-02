@@ -5,7 +5,7 @@ namespace dicom::data { class UI; }
 
 namespace dicom::multiframe {
 
-    class frame_index
+    class DICOM_EXPORT frame_index
     {
     public:
         frame_index(const data::AttributeSet* attribute_set);
@@ -16,7 +16,7 @@ namespace dicom::multiframe {
         [[nodiscard]] const data::UI* StudyInstanceUID() const { return m_study_instance_uid; }
         [[nodiscard]] const data::UI* SeriesInstanceUID() const { return m_series_instance_uid; }
         [[nodiscard]] const data::UI* SOPInstanceUID() const { return m_sop_instance_uid; }
-        [[nodiscard]] const uint32_t FrameNumber() const { return m_frame_number; }
+        [[nodiscard]] uint32_t FrameNumber() const { return m_frame_number; }
 
         //----------------------------------------------------------------------------------------------------
 

@@ -5,13 +5,13 @@ namespace dicom::io::file::detail { class InputContext; }
 
 namespace dicom::io::file::detail {
 
-    struct FragmentInfo
+    struct DICOM_EXPORT FragmentInfo
     {
         dicom::tag_number m_tag;
         uint32_t m_byte_length;
     };
 
-    [[nodiscard]] std::vector<FragmentInfo> discover_pixel_data_fragments(
+    DICOM_EXPORT [[nodiscard]] std::vector<FragmentInfo> discover_pixel_data_fragments(
         InputContext* context,
         size_t raw_length,
         size_t* real_length

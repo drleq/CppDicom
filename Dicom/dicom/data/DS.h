@@ -6,7 +6,7 @@
 
 namespace dicom::data {
 
-    class DS : public VR
+    class DICOM_EXPORT DS : public VR
     {
     public:
         using iterator = detail::string_iterator<double, detail::string_to_double, detail::trim_left>;

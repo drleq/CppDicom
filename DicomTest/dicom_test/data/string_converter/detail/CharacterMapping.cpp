@@ -48,7 +48,8 @@ namespace {
         std::string seq;
         auto str_ptr = str;
         while (true) {
-            seq.push_back((char)strtol(str_ptr, nullptr, 16));
+            char value = static_cast<char>(strtol(str_ptr, nullptr, 16));
+            seq.push_back(value);
             if (str_ptr[2] == '\0') { break; }
             str_ptr += 3; // 2 hex chars + 1 space
         }
@@ -94,8 +95,8 @@ namespace dicom_test::data::string_converter::detail {
                     next_ptr = valid_ranges[next_index];
                 }
                 valid_ranges[index]->Add(
-                    (uint8_t)strtol(start, nullptr, 16),
-                    (uint8_t)strtol(end, nullptr, 16),
+                    static_cast<uint8_t>(strtol(start, nullptr, 16)),
+                    static_cast<uint8_t>(strtol(end, nullptr, 16)),
                     next_ptr
                 );
             }
@@ -152,7 +153,10 @@ namespace dicom_test::data::string_converter::detail {
 
             auto line_ptr = &line[2];
             auto byte_sequence_int = strtol(line_ptr, &line_ptr, 16);
-            byte_sequence.assign((char*)&byte_sequence_int, (((line_ptr - line) - 2) + 1) / 2);
+            byte_sequence.assign(
+                reinterpret_cast<char*>(&byte_sequence_int),
+                (std::distance(line, line_ptr) - 1) / 2
+            );
             std::reverse(byte_sequence.begin(), byte_sequence.end());
 
             auto unicode = strtol(line_ptr, &line_ptr, 16);

@@ -10,7 +10,7 @@ namespace dicom::data {
         Milliseconds = 3
     };
 
-    class time
+    class DICOM_EXPORT time
     {
     public:
         time();

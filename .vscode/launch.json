@@ -5,10 +5,32 @@
     "version": "0.2.0",
     "configurations": [
         {
+            "name": "(Windows) DicomTest",
+            "type": "cppvsdbg",
+            "request": "launch",
+            "program": "${workspaceFolder}/build/output/DicomTest.exe",
+            "args": [],
+            "stopAtEntry": false,
+            "cwd": "${workspaceFolder}/DicomTest",
+            "environment": [],
+            "externalConsole": false
+        },
+        {
+            "name": "(Windows) DicomFileTest",
+            "type": "cppvsdbg",
+            "request": "launch",
+            "program": "${workspaceFolder}/build/output/DicomFileTest.exe",
+            "args": [ "${input:dicomPath}" ],
+            "stopAtEntry": false,
+            "cwd": "${workspaceFolder}/build/output",
+            "environment": [],
+            "externalConsole": false
+        },
+        {
             "name": "(gdb) DicomTest",
             "type": "cppdbg",
             "request": "launch",
-            "program": "${workspaceFolder}/build/DicomTest/DicomTest",
+            "program": "${workspaceFolder}/build/output/DicomTest",
             "args": [],
             "stopAtEntry": false,
             "cwd": "${workspaceFolder}/DicomTest",
@@ -22,6 +44,33 @@
                     "ignoreFailures": true
                 }
             ]
+        },
+        {
+            "name": "(gdb) DicomFileTest",
+            "type": "cppdbg",
+            "request": "launch",
+            "program": "${workspaceFolder}/build/output/DicomFileTest",
+            "args": [ "${input:dicomPath}" ],
+            "stopAtEntry": false,
+            "cwd": "${workspaceFolder}/build/output",
+            "environment": [],
+            "externalConsole": false,
+            "MIMode": "gdb",
+            "setupCommands": [
+                {
+                    "description": "Enable pretty-printing for gdb",
+                    "text": "-enable-pretty-printing",
+                    "ignoreFailures": true
+                }
+            ]
+        }
+    ],
+    "inputs" :[
+        {
+            "id": "dicomPath",
+            "description": "The path of the DICOM file to load",
+            "default": "",
+            "type": "promptString"
         }
     ]
 }

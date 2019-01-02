@@ -4,7 +4,7 @@
 
 namespace dicom::data {
 
-    class uri_section
+    class DICOM_EXPORT uri_section
     {
     public:
         uri_section();
@@ -22,7 +22,7 @@ namespace dicom::data {
 
     //--------------------------------------------------------------------------------------------------------
 
-    class uri
+    class DICOM_EXPORT uri
     {
     public:
         using optional_section = std::optional<std::string>;

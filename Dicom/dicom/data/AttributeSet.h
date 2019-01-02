@@ -7,7 +7,7 @@ namespace dicom { struct private_tag; }
 
 namespace dicom::data {
 
-    class AttributeSet
+    class DICOM_EXPORT AttributeSet
     {
     public:
         using attribute_map = std::map<tag_number, VR*>;

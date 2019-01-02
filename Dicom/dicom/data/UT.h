@@ -5,7 +5,7 @@
 
 namespace dicom::data {
 
-	class UT : public VR
+	class DICOM_EXPORT UT : public VR
 	{
 	public:
         UT();

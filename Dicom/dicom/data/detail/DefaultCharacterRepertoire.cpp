@@ -2,7 +2,7 @@
 #include "dicom/data/detail/DefaultCharacterRepertoire.h"
 
 namespace {
-    [[nodiscard]] bool is_control_character(char c) {
+    [[nodiscard]] bool is_control_character(uint8_t c) {
         // There are five control characters:
         //   TAB (0x09)
         //   LF  (0x0A)
@@ -16,7 +16,7 @@ namespace {
 namespace dicom::data::detail {
 
     bool validate_default_character_repertoire(const std::string_view& value) {
-        for (char c : value) {
+        for (uint8_t c : value) {
             // All characters from 0x20 to 0x7F are valid
             if (c > 0x7F) { return false; }
             if (c < 0x20) {
@@ -31,7 +31,7 @@ namespace dicom::data::detail {
     //--------------------------------------------------------------------------------------------------------
 
     bool validate_excludes_control_characters(const std::string_view& value) {
-        for (char c : value) {
+        for (uint8_t c : value) {
             if (is_control_character(c)) { return false; }
         }
 

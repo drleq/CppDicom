@@ -7,7 +7,7 @@
 
 namespace dicom::data {
 
-	class PN : public VR
+	class DICOM_EXPORT PN : public VR
 	{
 	public:
         struct string_to_patient_group_name {

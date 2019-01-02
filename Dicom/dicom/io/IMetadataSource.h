@@ -5,7 +5,7 @@
 
 namespace dicom::io {
 
-    class IMetadataSource
+    class DICOM_EXPORT IMetadataSource
     {
     public:
         virtual ~IMetadataSource() = default;

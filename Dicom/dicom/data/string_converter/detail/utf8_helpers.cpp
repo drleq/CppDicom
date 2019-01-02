@@ -1,6 +1,8 @@
 #include "dicom_pch.h"
 #include "dicom/data/string_converter/detail/utf8_helpers.h"
 
+#include "dicom/detail/intrinsic.h"
+
 namespace {
     // Number of trailing bytes, indexed by the first byte
     constexpr uint8_t s_trailing_bytes[256] = {
@@ -131,10 +133,10 @@ namespace dicom::data::string_converter::detail {
         if (trail_count != 0) {
             c32 <<= 6;
             while (next_it != cp_end) {
-                c32 |= (*next_it++) & 0x3F;
+                c32 |= (*next_it++) & 0x3Fu;
                 c32 <<= 6;
             }
-            c32 |= (*next_it++) & 0x3F;
+            c32 |= (*next_it++) & 0x3Fu;
         }
 
         decoded = c32;
@@ -147,8 +149,8 @@ namespace dicom::data::string_converter::detail {
         uint8_t bytes_to_write = 1;
 
         // Search for the highest bit
-        if (decoded != 0) {
-            int high_bit = 31 - __builtin_clz(decoded);
+        int high_bit = dicom::detail::bit_scan_reverse32(decoded);
+        if (high_bit >= 0) {
             bytes_to_write = s_bytes_to_write[high_bit];
         }
 
@@ -161,11 +163,11 @@ namespace dicom::data::string_converter::detail {
 
         // Output the UTF-8 code points
         switch (bytes_to_write) {
-        case 6: *(--out_ptr) = 0x80 | static_cast<uint8_t>(decoded & 0x3F); decoded >>= 6;
-        case 5: *(--out_ptr) = 0x80 | static_cast<uint8_t>(decoded & 0x3F); decoded >>= 6;
-        case 4: *(--out_ptr) = 0x80 | static_cast<uint8_t>(decoded & 0x3F); decoded >>= 6;
-        case 3: *(--out_ptr) = 0x80 | static_cast<uint8_t>(decoded & 0x3F); decoded >>= 6;
-        case 2: *(--out_ptr) = 0x80 | static_cast<uint8_t>(decoded & 0x3F); decoded >>= 6;
+        case 6: *(--out_ptr) = 0x80 | static_cast<uint8_t>(decoded & 0x3F); decoded >>= 6; [[fallthrough]];
+        case 5: *(--out_ptr) = 0x80 | static_cast<uint8_t>(decoded & 0x3F); decoded >>= 6; [[fallthrough]];
+        case 4: *(--out_ptr) = 0x80 | static_cast<uint8_t>(decoded & 0x3F); decoded >>= 6; [[fallthrough]];
+        case 3: *(--out_ptr) = 0x80 | static_cast<uint8_t>(decoded & 0x3F); decoded >>= 6; [[fallthrough]];
+        case 2: *(--out_ptr) = 0x80 | static_cast<uint8_t>(decoded & 0x3F); decoded >>= 6; [[fallthrough]];
         case 1: *(--out_ptr) = static_cast<uint8_t>(decoded | s_first_byte_masks[bytes_to_write]); break;
 
         default:

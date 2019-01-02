@@ -7,7 +7,7 @@
 
 namespace dicom::io {
 
-	struct TransferSyntax
+	struct DICOM_EXPORT TransferSyntax
 	{
         std::string_view Name;
         std::string_view Uid;
@@ -17,8 +17,8 @@ namespace dicom::io {
         PixelDataCompressionType PixelDataCompression;
 	};
 
-    [[nodiscard]] const TransferSyntax* get_transfer_syntax(const std::string_view& uid);
-    [[nodiscard]] bool can_directly_convert_transfer_syntax(
+    DICOM_EXPORT [[nodiscard]] const TransferSyntax* get_transfer_syntax(const std::string_view& uid);
+    DICOM_EXPORT [[nodiscard]] bool can_directly_convert_transfer_syntax(
         const TransferSyntax* syntax_1,
         const TransferSyntax* syntax_2
     );

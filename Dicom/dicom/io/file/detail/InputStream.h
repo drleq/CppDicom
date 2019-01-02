@@ -9,7 +9,7 @@ namespace dicom::io::file::detail {
 
     using ReOpenStreamFunction = std::function<InputStreamPtr ()>;
 
-    class InputStream
+    class DICOM_EXPORT InputStream
     {
     public:
         InputStream(const InputStream&) = delete;

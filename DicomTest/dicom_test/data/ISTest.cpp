@@ -160,8 +160,8 @@ namespace dicom_test::data {
         REQUIRE(is_just_ok2.Value() == "-2147483648");
         REQUIRE(is_just_ok2.Validity() == ValidityType::Valid);
         REQUIRE(is_just_ok2.Parsed().size() == 1);
-        REQUIRE(is_just_ok2.Parsed()[0] == -2147483648);
-        REQUIRE(is_just_ok2.First() == -2147483648);
+        REQUIRE(is_just_ok2.Parsed()[0] == std::numeric_limits<int32_t>::min());
+        REQUIRE(is_just_ok2.First() == std::numeric_limits<int32_t>::min());
 
         // Smallest negative number that underflows
         IS is_just_overflow2("-2147483649");

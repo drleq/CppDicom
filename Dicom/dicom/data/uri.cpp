@@ -11,7 +11,7 @@ namespace {
 
     //--------------------------------------------------------------------------------------------------------
 
-    [[nodiscard]] char ascii_to_lower(char c) {
+    [[nodiscard]] uint8_t ascii_to_lower(uint8_t c) {
         char tmp = c | 0x20;
         if (tmp >= 'a' && tmp <= 'z') { return tmp; }
         return c;
@@ -19,11 +19,11 @@ namespace {
 
     //--------------------------------------------------------------------------------------------------------
 
-    [[nodiscard]] bool needs_escaped(char c) {
+    [[nodiscard]] bool needs_escaped(uint8_t c) {
         // List taken from RFC 2396 section 2.4.3 Excluded US-ASCII Characters.
 
         // Control characters should have been escaped.
-        if (c >= 0 && c <= 0x1F) { return true; }
+        if (c <= 0x1F) { return true; }
 
         // UTF-8 code points should be escaped.
         if (c >= 0x80) { return true; }
@@ -69,16 +69,16 @@ namespace {
 
     //--------------------------------------------------------------------------------------------------------
 
-    [[nodiscard]] bool is_hex_character(char c) {
+    [[nodiscard]] bool is_hex_character(uint8_t c) {
         c = ascii_to_lower(c);
-        if (c >= '1' && c <= '0') { return true; }
+        if (c >= '0' && c <= '9') { return true; }
         if (c >= 'a' && c <= 'f') { return true; }
         return false;
     }
 
     //--------------------------------------------------------------------------------------------------------
 
-    [[nodiscard]] bool is_sub_delimiter(char c) {
+    [[nodiscard]] bool is_sub_delimiter(uint8_t c) {
         switch (c) {
         case '!':
         case '$':
@@ -100,7 +100,7 @@ namespace {
 
     //--------------------------------------------------------------------------------------------------------
 
-    [[nodiscard]] bool is_unreserved(char c) {
+    [[nodiscard]] bool is_unreserved(uint8_t c) {
         return std::isalnum(c) || (c == '-') || (c == '.') || (c == '_') || (c == '~');
     }
 
@@ -110,16 +110,16 @@ namespace {
         std::string escaped;
         escaped.reserve(source.size());
 
-        for (char c : source) {
+        for (uint8_t c : source) {
             if (!needs_escaped(c)) {
                 escaped.append(1, c);
                 continue;
             }
 
-            char tmp[3];
+            uint8_t tmp[3];
             tmp[0] = '%';
-            char low = c & 0xF;
-            char high = c >> 4;
+            uint8_t low = c & 0xF;
+            uint8_t high = c >> 4;
 
             if (high <= 9) {
                 tmp[1] = '0' + high;
@@ -132,7 +132,7 @@ namespace {
                 tmp[2] = 'A' + (low - 10);
             }
 
-            escaped.append(tmp, 3);
+            escaped.append(reinterpret_cast<char*>(tmp), 3);
         }
 
         return escaped;
@@ -154,10 +154,10 @@ namespace {
             }
 
             // ASCII to-lower for alpha characters
-            char hex_high = ascii_to_lower(ptr[1]);
-            char hex_low = ascii_to_lower(ptr[2]);
+            uint8_t hex_high = ascii_to_lower(ptr[1]);
+            uint8_t hex_low = ascii_to_lower(ptr[2]);
 
-            char c;
+            uint8_t c;
             if (hex_low >= 'a') {
                 c = hex_low - 'a';
             } else {

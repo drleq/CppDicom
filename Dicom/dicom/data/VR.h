@@ -7,7 +7,7 @@
 
 namespace dicom::data {
 
-    class VR
+    class DICOM_EXPORT VR
     {
     public:
         virtual ~VR() = default;

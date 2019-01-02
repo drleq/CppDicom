@@ -23,7 +23,7 @@ namespace dicom {
 
     //--------------------------------------------------------------------------------------------------------
     
-    struct private_tag_creator
+    struct DICOM_EXPORT private_tag_creator
     {
         const std::string_view Name;
         const tag_group Group;
@@ -31,7 +31,7 @@ namespace dicom {
 
     //--------------------------------------------------------------------------------------------------------
 
-    struct private_tag
+    struct DICOM_EXPORT private_tag
     {
         const private_tag_creator*const Creator;
         const uint8_t Element;
