@@ -156,7 +156,6 @@ namespace dicom_test::data::string_converter::detail {
             byte_sequence.assign(
                 reinterpret_cast<char*>(&byte_sequence_int),
                 (std::distance(line, line_ptr) - 1) / 2
-                //(((line_ptr - line) - 2) + 1) / 2
             );
             std::reverse(byte_sequence.begin(), byte_sequence.end());
 
