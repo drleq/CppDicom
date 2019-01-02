@@ -17,6 +17,7 @@ else()
 endif()
 set(CMAKE_CXX_STANDARD 17)
 set(CMAKE_CXX_STANDARD_REQUIRED on)
+set(CMAKE_CXX_EXTENSIONS OFF)
 
 add_library(Dicom SHARED
     dicom_pch.cpp
