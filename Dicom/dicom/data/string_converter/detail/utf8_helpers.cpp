@@ -133,10 +133,10 @@ namespace dicom::data::string_converter::detail {
         if (trail_count != 0) {
             c32 <<= 6;
             while (next_it != cp_end) {
-                c32 |= (*next_it++) & 0x3F;
+                c32 |= (*next_it++) & 0x3Fu;
                 c32 <<= 6;
             }
-            c32 |= (*next_it++) & 0x3F;
+            c32 |= (*next_it++) & 0x3Fu;
         }
 
         decoded = c32;
@@ -163,11 +163,11 @@ namespace dicom::data::string_converter::detail {
 
         // Output the UTF-8 code points
         switch (bytes_to_write) {
-        case 6: *(--out_ptr) = 0x80 | static_cast<uint8_t>(decoded & 0x3F); decoded >>= 6;
-        case 5: *(--out_ptr) = 0x80 | static_cast<uint8_t>(decoded & 0x3F); decoded >>= 6;
-        case 4: *(--out_ptr) = 0x80 | static_cast<uint8_t>(decoded & 0x3F); decoded >>= 6;
-        case 3: *(--out_ptr) = 0x80 | static_cast<uint8_t>(decoded & 0x3F); decoded >>= 6;
-        case 2: *(--out_ptr) = 0x80 | static_cast<uint8_t>(decoded & 0x3F); decoded >>= 6;
+        case 6: *(--out_ptr) = 0x80 | static_cast<uint8_t>(decoded & 0x3F); decoded >>= 6; [[fallthrough]];
+        case 5: *(--out_ptr) = 0x80 | static_cast<uint8_t>(decoded & 0x3F); decoded >>= 6; [[fallthrough]];
+        case 4: *(--out_ptr) = 0x80 | static_cast<uint8_t>(decoded & 0x3F); decoded >>= 6; [[fallthrough]];
+        case 3: *(--out_ptr) = 0x80 | static_cast<uint8_t>(decoded & 0x3F); decoded >>= 6; [[fallthrough]];
+        case 2: *(--out_ptr) = 0x80 | static_cast<uint8_t>(decoded & 0x3F); decoded >>= 6; [[fallthrough]];
         case 1: *(--out_ptr) = static_cast<uint8_t>(decoded | s_first_byte_masks[bytes_to_write]); break;
 
         default:

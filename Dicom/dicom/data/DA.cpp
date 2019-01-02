@@ -34,9 +34,9 @@ namespace {
     [[nodiscard]] std::string to_iso_string(const dicom::data::date& value) {
         std::ostringstream ss;
         ss << std::setfill('0');
-        ss << std::setw(4) << (uint32_t)value.Year();
-        ss << std::setw(2) << (uint32_t)value.Month();
-        ss                 << (uint32_t)value.Day();
+        ss << std::setw(4) << static_cast<uint32_t>(value.Year());
+        ss << std::setw(2) << static_cast<uint32_t>(value.Month());
+        ss                 << static_cast<uint32_t>(value.Day());
         return ss.str();
     }
 }

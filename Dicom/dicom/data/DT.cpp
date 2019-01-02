@@ -15,12 +15,12 @@ namespace {
 
         dest << std::setfill('0');
 
-                          dest << std::setw(4) << (uint32_t)date.Year();
-        if (parts >= 1) { dest << std::setw(2) << (uint32_t)date.Month(); }
-        if (parts >= 2) { dest << std::setw(2) << (uint32_t)date.Day(); }
-        if (parts >= 3) { dest << std::setw(2) << (uint32_t)time.Hour(); }
-        if (parts >= 4) { dest << std::setw(2) << (uint32_t)time.Minute(); }
-        if (parts >= 5) { dest << std::setw(2) << (uint32_t)time.Second(); }
+                          dest << std::setw(4) << static_cast<uint32_t>(date.Year());
+        if (parts >= 1) { dest << std::setw(2) << static_cast<uint32_t>(date.Month()); }
+        if (parts >= 2) { dest << std::setw(2) << static_cast<uint32_t>(date.Day()); }
+        if (parts >= 3) { dest << std::setw(2) << static_cast<uint32_t>(time.Hour()); }
+        if (parts >= 4) { dest << std::setw(2) << static_cast<uint32_t>(time.Minute()); }
+        if (parts >= 5) { dest << std::setw(2) << static_cast<uint32_t>(time.Second()); }
         if (parts == 6) {
             dest << '.' << std::setw(0) << time.Millisecond();
         }
@@ -31,7 +31,7 @@ namespace {
     void output_offset_to_string(const dicom::data::time_offset& offset, std::ostringstream& dest) {
         dest << std::setw(0) << (offset.IsNegative() ? '-' : '+');
         dest << std::setfill('0') << std::setw(2);
-        dest << (uint32_t)offset.Hour() << (uint32_t)offset.Minute();
+        dest << static_cast<uint32_t>(offset.Hour()) << static_cast<uint32_t>(offset.Minute());
     }
 
     //--------------------------------------------------------------------------------------------------------

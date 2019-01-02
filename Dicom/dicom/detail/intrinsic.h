@@ -8,7 +8,7 @@
 namespace dicom::detail {
     inline int32_t bit_scan_forward32(uint32_t value) {
         if (value != 0) {
-            return __builtin_ffs(value) - 1;
+            return __builtin_ffs(static_cast<int32_t>(value)) - 1;
         } else {
             return -1;
         }
@@ -16,7 +16,7 @@ namespace dicom::detail {
 
     inline int32_t bit_scan_forward64(uint64_t value) {
         if (value != 0) {
-            return __builtin_ffsll(value) - 1;
+            return __builtin_ffsll(static_cast<int64_t>(value)) - 1;
         } else {
             return -1;
         }

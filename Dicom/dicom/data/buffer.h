@@ -31,7 +31,7 @@ namespace dicom::data {
 	      : m_length(length)
 		{
             if (length != 0) {
-                m_buffer = (T*)std::malloc(ByteLength());
+                m_buffer = reinterpret_cast<T*>(std::malloc(ByteLength()));
                 m_owns_buffer = true;
             } else {
                 m_buffer = nullptr;

@@ -135,7 +135,7 @@ namespace dicom::io::file::detail {
         template <typename TVR>
         [[nodiscard]] std::unique_ptr<TVR> ReadString(std::streamsize length) {
             // Simply read the string and return it.
-            std::string s((size_t)length, '\0');
+            std::string s(static_cast<size_t>(length), '\0');
             if (!TryReadString(length, s)) { return nullptr; }
             return std::make_unique<TVR>(std::move(s));
         }

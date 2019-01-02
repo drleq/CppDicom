@@ -28,7 +28,7 @@ namespace dicom::io {
 
         //----------------------------------------------------------------------------------------------------
 
-        [[nodiscard]] bool IsLoaded() const { return (bool)m_loaded_vr; }
+        [[nodiscard]] bool IsLoaded() const { return static_cast<bool>(m_loaded_vr); }
         bool Load();
         void Unload();
 

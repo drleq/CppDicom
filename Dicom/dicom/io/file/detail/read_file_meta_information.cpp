@@ -20,7 +20,8 @@ namespace dicom::io::file::detail {
         while (*stream && !ctx.Failed()) {
             // Peek the tag group
             auto group = stream->ReadValue<tag_group>();
-            stream->Seek(-(int)sizeof(tag_group), std::ios::cur);
+            int seek_distance = static_cast<int>(sizeof(tag_group));
+            stream->Seek(-seek_distance, std::ios::cur);
 
             // Stop if we reach the end of the group
             if (group != tags::FileMetaInformationGroupLength.Group()) { break; }

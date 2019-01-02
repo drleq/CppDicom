@@ -6,8 +6,8 @@ namespace {
         std::tm tm = { 0 };
         tm.tm_isdst = 0;
         switch (precision) {
-        case dicom::data::DatePrecision::Days:   tm.tm_mday = day;
-        case dicom::data::DatePrecision::Months: tm.tm_mon = month - 1;
+        case dicom::data::DatePrecision::Days:   tm.tm_mday = day; [[fallthrough]];
+        case dicom::data::DatePrecision::Months: tm.tm_mon = month - 1; [[fallthrough]];
         case dicom::data::DatePrecision::Years:  tm.tm_year = int(year) - 1900;
         }
 

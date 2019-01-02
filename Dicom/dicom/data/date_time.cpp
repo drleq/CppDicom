@@ -18,11 +18,11 @@ namespace {
         tm.tm_isdst = 0;
         switch (precision) {
         case DateTimePrecision::Milliseconds:
-        case DateTimePrecision::Seconds: tm.tm_sec  = _time.Second();
-        case DateTimePrecision::Minutes: tm.tm_min  = _time.Minute();
-        case DateTimePrecision::Hours:   tm.tm_hour = _time.Hour();
-        case DateTimePrecision::Days:    tm.tm_mday = _date.Day();
-        case DateTimePrecision::Months:  tm.tm_mon  = _date.Month() - 1;
+        case DateTimePrecision::Seconds: tm.tm_sec  = _time.Second(); [[fallthrough]];
+        case DateTimePrecision::Minutes: tm.tm_min  = _time.Minute(); [[fallthrough]];
+        case DateTimePrecision::Hours:   tm.tm_hour = _time.Hour(); [[fallthrough]];
+        case DateTimePrecision::Days:    tm.tm_mday = _date.Day(); [[fallthrough]];
+        case DateTimePrecision::Months:  tm.tm_mon  = _date.Month() - 1; [[fallthrough]];
         case DateTimePrecision::Years:   tm.tm_year = _date.Year() - 1900;
         }
 
