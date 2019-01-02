@@ -150,7 +150,7 @@ namespace dicom::data {
     //--------------------------------------------------------------------------------------------------------
 
     string_view ComponentGroup::FamilyName() const {
-        if (Validity() == ValidityType::Invalid) { return string_view(); }
+        if (m_value.Empty()) { return string_view(); }
         return At(0);
     }
 

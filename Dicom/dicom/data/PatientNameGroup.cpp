@@ -83,20 +83,33 @@ namespace dicom::data {
 
     //--------------------------------------------------------------------------------------------------------
 
-    PatientNameGroup::PatientNameGroup(const PatientNameGroup& other)
-      : m_validity(other.m_validity),
-        m_value(other.m_value),
-        m_parsed_offsets(other.m_parsed_offsets)
-    {}
+    PatientNameGroup::PatientNameGroup(const PatientNameGroup& other) {
+        *this = other;
+    }
 
     //--------------------------------------------------------------------------------------------------------
 
-    PatientNameGroup::PatientNameGroup(PatientNameGroup&& other)
-      : m_validity(other.m_validity),
-        m_value(move(other.m_value)),
-        m_parsed_offsets(move(other.m_parsed_offsets))
-    {
+    PatientNameGroup::PatientNameGroup(PatientNameGroup&& other) {
+        *this = std::forward<PatientNameGroup>(other);
+    }
+
+    //--------------------------------------------------------------------------------------------------------
+
+    PatientNameGroup& PatientNameGroup::operator = (const PatientNameGroup& other) {
+        m_validity = other.m_validity;
+        m_value = other.m_value;
+        m_parsed_offsets = other.m_parsed_offsets;
+        return *this;
+    }
+
+    //--------------------------------------------------------------------------------------------------------
+
+    PatientNameGroup& PatientNameGroup::operator = (PatientNameGroup&& other) {
+        m_validity = other.m_validity;
+        m_value = std::move(other.m_value);
+        m_parsed_offsets = std::move(other.m_parsed_offsets);
         other.m_validity = ValidityType::Deinitialized;
+        return *this;
     }
 
     //--------------------------------------------------------------------------------------------------------
@@ -151,7 +164,7 @@ namespace dicom::data {
     //--------------------------------------------------------------------------------------------------------
 
     ComponentGroup PatientNameGroup::Alphabetic() const {
-        if (Validity() == ValidityType::Invalid) { return ComponentGroup(); }
+        if (Empty() || Validity() == ValidityType::Invalid) { return ComponentGroup(); }
         return At(0);
     }
 

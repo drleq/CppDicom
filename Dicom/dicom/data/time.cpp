@@ -1,6 +1,11 @@
 #include "dicom_pch.h"
 #include "dicom/data/time.h"
 
+#include "dicom/data/value_invalid.h"
+
+#include <iomanip>
+#include <sstream>
+
 namespace {
     [[nodiscard]] bool is_valid_time(uint8_t hour, uint8_t minute, uint8_t second, uint32_t millisecond) {
         return (hour <= 23) &&
@@ -49,6 +54,10 @@ namespace dicom::data {
     //---------------------------------------------------------------------------------------------
 
     int32_t time::Compare(const time& other) const {
+        if (m_is_valid != other.m_is_valid) {
+            return m_is_valid ? 1 : -1;
+        }
+
         TimePrecision other_precision = other.m_precision;
         int result;
 
@@ -73,6 +82,28 @@ namespace dicom::data {
         }
 
         return int32_t(m_precision) - int32_t(other_precision);
+    }
+
+    //---------------------------------------------------------------------------------------------
+
+    std::string time::AsString() const {
+        if (!m_is_valid) {
+            throw value_invalid_error();
+        }
+
+        std::ostringstream ss;
+        ss << std::setw(2) << std::setfill('0');
+        ss << static_cast<uint16_t>(m_hour);
+        if (m_precision >= TimePrecision::Minutes) {
+            ss << static_cast<uint16_t>(m_minute);
+        }
+        if (m_precision >= TimePrecision::Seconds) {
+            ss << static_cast<uint16_t>(m_second);
+        }
+        if (m_precision >= TimePrecision::Milliseconds) {
+            ss << "." << std::setw(6) << m_millisecond;
+        }
+        return ss.str();
     }
 
 }

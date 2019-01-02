@@ -10,6 +10,7 @@ namespace dicom::data::detail {
 
         bool neg = false;
         auto s = str.data();
+        auto s_end = s + str.size();
 
         if constexpr (std::is_signed_v<TInt>) {
             // Signed integer expected.
@@ -18,7 +19,7 @@ namespace dicom::data::detail {
         if (neg || *s == '+') { s++; }
 
         TInt i = 0;
-        while (isdigit(*s)) {
+        while (isdigit(*s) && (s < s_end)) {
             i = (i * 10) + (*s++ - '0');
         }
 
@@ -44,6 +45,7 @@ namespace dicom::data::detail {
 
         auto end_ptr = str.data() + str.size();
         auto s = str.data();
+        auto s_end = s + str.size();
         bool neg = false;
         TInt i = 0;
         
@@ -54,7 +56,7 @@ namespace dicom::data::detail {
 
         if constexpr (std::is_signed_v<TInt>) {
             if (neg) {
-                while (isdigit(*s)) {
+                while (isdigit(*s) && (s < s_end)) {
                     if (i < (MinNegativeValue / 10)) {
                         // Overflow.
                         errno = EINVAL;
@@ -74,7 +76,7 @@ namespace dicom::data::detail {
         } 
 
         if (!neg) {
-            while (isdigit(*s)) {
+            while (isdigit(*s) && (s < s_end)) {
                 if (i > (MaxPositiveValue / 10)) {
                     // Overflow.
                     errno = EINVAL;

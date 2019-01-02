@@ -64,6 +64,7 @@ add_executable(DicomTest
     dicom_test/data/ASTest.cpp
     dicom_test/data/ATTest.cpp
     dicom_test/data/buffer_test.cpp
+    dicom_test/data/ComponentGroupTest.cpp
     dicom_test/data/CSTest.cpp
     dicom_test/data/DATest.cpp
     dicom_test/data/DSTest.cpp
@@ -74,8 +75,21 @@ add_executable(DicomTest
     dicom_test/data/ISTest.cpp
     dicom_test/data/LOTest.cpp
     dicom_test/data/LTTest.cpp
+    dicom_test/data/OBTest.cpp
+    dicom_test/data/ODTest.cpp
+    dicom_test/data/OFTest.cpp
+    dicom_test/data/OLTest.cpp
+    dicom_test/data/OWTest.cpp
+    dicom_test/data/PatientNameGroupTest.cpp
+    dicom_test/data/PNTest.cpp
+    dicom_test/data/SLTest.cpp
     dicom_test/data/SHTest.cpp
+    dicom_test/data/SSTest.cpp
     dicom_test/data/STTest.cpp
+    dicom_test/data/time_offset_test.cpp
+    dicom_test/data/time_test.cpp
+    dicom_test/data/TMTest.cpp
+    dicom_test/data/UCTest.cpp
     dicom_test/data/UITest.cpp
     dicom_test/data/ULTest.cpp
     dicom_test/data/UNTest.cpp
@@ -84,7 +98,8 @@ add_executable(DicomTest
     dicom_test/data/USTest.cpp
     dicom_test/data/UTTest.cpp
     dicom_test/DicomTest.cpp
-    dicomtest_pch.cpp)
+    dicomtest_pch.cpp
+    ToString.cpp)
 
 target_include_directories(DicomTest
     PUBLIC .)

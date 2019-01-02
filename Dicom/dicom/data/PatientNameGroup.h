@@ -29,14 +29,18 @@ namespace dicom::data {
         PatientNameGroup(PatientNameGroup&& other);
         virtual ~PatientNameGroup();
 
+        PatientNameGroup& operator = (const PatientNameGroup& other);
+        PatientNameGroup& operator = (PatientNameGroup&& other);
+
         //----------------------------------------------------------------------------------------------------
 
+        [[nodiscard]] bool Empty() const { return m_value.Empty(); }
         [[nodiscard]] const encoded_string& Value() const { return m_value; }
 
         //----------------------------------------------------------------------------------------------------
 
         [[nodiscard]] size_t ParsedCount() const {
-            if (Validity() == ValidityType::Invalid) { return 0; }
+            if (Validity() == ValidityType::Invalid || Empty()) { return 0; }
             return m_parsed_offsets.size() + 1;
         }
 
@@ -66,6 +70,11 @@ namespace dicom::data {
         [[nodiscard]] int32_t Compare(const PatientNameGroup& other) const;
         [[nodiscard]] bool operator == (const PatientNameGroup& other) const;
         [[nodiscard]] bool operator != (const PatientNameGroup& other) const;
+
+        [[nodiscard]] bool operator <  (const PatientNameGroup& other) const { return Compare(other) <  0; }
+        [[nodiscard]] bool operator <= (const PatientNameGroup& other) const { return Compare(other) <= 0; }
+        [[nodiscard]] bool operator >  (const PatientNameGroup& other) const { return Compare(other) >  0; }
+        [[nodiscard]] bool operator >= (const PatientNameGroup& other) const { return Compare(other) >= 0; }
 
     private:
         ValidityType m_validity;

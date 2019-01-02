@@ -41,8 +41,8 @@ namespace CppUnitTestFramework {
     //--------------------------------------------------------------------------------------------------------
 
     struct RunOptions {
-        bool Verbose = false;
         bool DiscoveryMode = false;
+        bool Verbose = false;
         bool AdapterInfo = false;
         std::vector<std::string> Keywords;
 
