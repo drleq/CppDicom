@@ -1,6 +1,6 @@
 #pragma once
 
-#include "dicom/io/file/detail/InputStream.h"
+#include "dicom/io/file/InputStream.h"
 
 namespace dicom::io::file::detail {
 

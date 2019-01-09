@@ -2,7 +2,7 @@
 
 #include "dicom/io/ILoadResult.h"
 #include "dicom/io/TransferSyntax.h"
-#include "dicom/io/file/detail/InputStream.h"
+#include "dicom/io/file/InputStream.h"
 #include "dicom/io/file/PixelDataRange.h"
 
 namespace dicom::io::file {
@@ -11,7 +11,7 @@ namespace dicom::io::file {
     {
     public:
         FileLoadResult(
-            detail::ReOpenStreamFunction file_stream_factory,
+            ReOpenStreamFunction file_stream_factory,
             data::AttributeSetPtr metadata,
             std::vector<PixelDataRange> pixel_data_ranges
         );
@@ -28,7 +28,7 @@ namespace dicom::io::file {
         [[nodiscard]] data::buffer<int8_t> GetPixelData(size_t frame_index) const override final;
 
     private:
-        detail::ReOpenStreamFunction m_file_stream_factory;
+        ReOpenStreamFunction m_file_stream_factory;
         data::AttributeSetPtr m_metadata;
         std::vector<PixelDataRange> m_pixel_data_ranges;
 

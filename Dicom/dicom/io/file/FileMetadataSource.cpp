@@ -4,10 +4,10 @@
 #include <filesystem>
 
 #include "dicom/io/file/detail/derive_pixel_data_ranges.h"
-#include "dicom/io/file/detail/FileInputStream.h"
 #include "dicom/io/file/detail/read_file_meta_information.h"
 #include "dicom/io/file/detail/read_attributes.h"
 #include "dicom/io/file/detail/verify_header.h"
+#include "dicom/io/file/FileInputStream.h"
 #include "dicom/io/file/FileLoadResult.h"
 
 #include "dicom/data/AttributeSet.h"
@@ -18,28 +18,17 @@ using namespace std;
 
 namespace dicom::io::file {
 
-    FileMetadataSource::FileMetadataSource(
-        AttributeFilter attribute_filter,
-        PrivateAttributeFilter private_attribute_filter
-    ) : m_attribute_filter(attribute_filter),
-        m_private_attribute_filter(private_attribute_filter)
-    {}
-
-    //--------------------------------------------------------------------------------------------------------
-
-    FileMetadataSource::~FileMetadataSource() = default;
-
-    //--------------------------------------------------------------------------------------------------------
-
     LoadResultPtr FileMetadataSource::Load(
         const string_view& filename,
-        const DataDictionaryPtr& data_dictionary
-    ) const {
+        const DataDictionaryPtr& data_dictionary,
+        AttributeFilter attribute_filter,
+        PrivateAttributeFilter private_attribute_filter
+    ) {
         // Verify the file exists
         if (!filesystem::exists(filesystem::path(filename))) { return nullptr; }
 
         // Open the file for reading
-        auto stream = make_shared<detail::FileInputStream>(filename);
+        auto stream = make_shared<FileInputStream>(filename);
 
         // Verify the header
         if (!detail::verify_header(stream)) { return nullptr; }
@@ -64,8 +53,8 @@ namespace dicom::io::file {
             stream,
             data_dictionary,
             transfer_syntax,
-            m_attribute_filter,
-            m_private_attribute_filter
+            attribute_filter,
+            private_attribute_filter
         );
 
         // Read the remaining attributes

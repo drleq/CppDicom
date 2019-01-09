@@ -1,6 +1,6 @@
 #pragma once
 
-#include "dicom/io/file/detail/OutputStream.h"
+#include "dicom/io/file/OutputStream.h"
 namespace dicom::data { class AttributeSet; }
 namespace dicom::io { struct TransferSyntax; }
 

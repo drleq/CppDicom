@@ -4,9 +4,9 @@
 #include "dicom/data/AttributeSet.h"
 #include "dicom/data/encoded_string.h"
 #include "dicom/detail/intrinsic.h"
-#include "dicom/io/file/AttributeFilter.h"
 #include "dicom/io/file/detail/apply_endian.h"
-#include "dicom/io/file/detail/InputStream.h"
+#include "dicom/io/file/AttributeFilter.h"
+#include "dicom/io/file/InputStream.h"
 #include "dicom/io/TransferSyntax.h"
 
 namespace dicom::io::file::detail {
@@ -161,16 +161,11 @@ namespace dicom::io::file::detail {
             // Sanity check the length
             if (length % sizeof(typename TVR::value_type) != 0) { return nullptr; }
 
-            typename TVR::buffer_type binary;
+            auto binary = typename TVR::buffer_type(m_stream->ReadBinary(length));
+            if (!m_stream->Good()) { return nullptr; }
 
-            if (m_endian == EndianType::Little) {
-                // No endian conversion is required. Just forward the binary from the stream.
-                binary = typename TVR::buffer_type(m_stream->ReadBinary(length));
-                if (!m_stream->Good()) { return nullptr; }
-            } else {
-                // Endian conversion is required. We need to force a copy.
-                binary = typename TVR::buffer_type(static_cast<size_t>(length) / sizeof(typename TVR::value_type));
-                if (!m_stream->Read(binary, binary.ByteLength())) { return nullptr; }
+            if (m_endian == EndianType::Big) {
+                // Endian conversion is required.
                 apply_endian<sizeof(typename TVR::value_type)>::Apply(binary, binary.Length());
             }
 

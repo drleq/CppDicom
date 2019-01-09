@@ -40,11 +40,12 @@ int main(int argc, const char* argv[]) {
 
     auto start = high_resolution_clock::now();
     for (int i = 0; i < LoopCount; ++i) {
-        FileMetadataSource source(
+        auto load_result = FileMetadataSource::Load(
+            input_file,
+            data_dictionary,
             nullptr,
             [](const std::string_view*, tag_number) { return AttributeFilterResult::Load; }
         );
-        auto load_result = source.Load(input_file, data_dictionary);
         
         [[maybe_unused]] auto frame_count = load_result->FrameCount();
         // for (size_t j = 0; j < frame_count; ++j) {

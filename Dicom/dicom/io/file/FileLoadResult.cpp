@@ -3,9 +3,9 @@
 
 #include "dicom/io/file/detail/derive_pixel_data_vrtype.h"
 #include "dicom/io/file/detail/discover_pixel_data_fragments.h"
-#include "dicom/io/file/detail/FileInputStream.h"
 #include "dicom/io/file/detail/InputContext.h"
 #include "dicom/io/file/detail/read_pixel_data.h"
+#include "dicom/io/file/FileInputStream.h"
 
 #include "dicom/data/UI.h"
 #include "dicom/data/US.h"
@@ -18,7 +18,7 @@ using namespace dicom::data;
 namespace dicom::io::file {
 
     FileLoadResult::FileLoadResult(
-        detail::ReOpenStreamFunction file_stream_factory,
+        ReOpenStreamFunction file_stream_factory,
         data::AttributeSetPtr metadata,
         vector<PixelDataRange> pixel_data_ranges
     ) : m_file_stream_factory(move(file_stream_factory)),

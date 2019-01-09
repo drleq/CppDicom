@@ -1,11 +1,11 @@
 #include "dicom_pch.h"
 #include "dicom/io/file/FileMetadataSink.h"
 
-#include "dicom/io/file/detail/FileOutputStream.h"
 #include "dicom/io/file/detail/OutputContext.h"
 #include "dicom/io/file/detail/write_attributes.h"
 #include "dicom/io/file/detail/write_file_meta_information.h"
 #include "dicom/io/file/detail/write_header.h"
+#include "dicom/io/file/FileOutputStream.h"
 
 #include "dicom/data/AttributeSet.h"
 #include "dicom/data/CS.h"
@@ -341,22 +341,14 @@ namespace {
 
 namespace dicom::io::file {
 
-    FileMetadataSink::FileMetadataSink() = default;
-
-    //--------------------------------------------------------------------------------------------------------
-
-    FileMetadataSink::~FileMetadataSink() = default;
-
-    //--------------------------------------------------------------------------------------------------------
-
     bool FileMetadataSink::Save(
         const string& location,
         const TransferSyntax* transfer_syntax,
         const data::AttributeSetConstPtr& metadata,
         WritePixelDataCallback write_pixel_data_callback
-    ) const {
+    ) {
         // Open the file for writing
-        detail::OutputStreamPtr stream = make_shared<detail::FileOutputStream>(location);
+        OutputStreamPtr stream = make_shared<FileOutputStream>(location);
 
         // Write the header
         detail::write_header(stream);

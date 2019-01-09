@@ -117,12 +117,8 @@ add_library(Dicom SHARED
     dicom/io/file/detail/derive_pixel_data_ranges.cpp
     dicom/io/file/detail/derive_pixel_data_vrtype.cpp
     dicom/io/file/detail/discover_pixel_data_fragments.cpp
-    dicom/io/file/detail/FileInputStream.cpp
-    dicom/io/file/detail/FileOutputStream.cpp
     dicom/io/file/detail/InputContext.cpp
-    dicom/io/file/detail/InputStream.cpp
     dicom/io/file/detail/OutputContext.cpp
-    dicom/io/file/detail/OutputStream.cpp
     dicom/io/file/detail/read_attributes.cpp
     dicom/io/file/detail/read_data_element.cpp
     dicom/io/file/detail/read_file_meta_information.cpp
@@ -140,9 +136,13 @@ add_library(Dicom SHARED
     dicom/io/file/detail/write_sq.cpp
     dicom/io/file/detail/write_vr.cpp
     dicom/io/file/AttributeFilter.cpp
+    dicom/io/file/FileInputStream.cpp
     dicom/io/file/FileLoadResult.cpp
     dicom/io/file/FileMetadataSink.cpp
     dicom/io/file/FileMetadataSource.cpp
+    dicom/io/file/FileOutputStream.cpp
+    dicom/io/file/InputStream.cpp
+    dicom/io/file/OutputStream.cpp
     dicom/io/file/PixelDataRange.cpp
     dicom/io/Deferred.cpp
     dicom/io/TransferSyntax.cpp

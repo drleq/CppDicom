@@ -6,7 +6,7 @@
 #include "dicom/data/VRType.h"
 #include "dicom/detail/intrinsic.h"
 #include "dicom/io/file/detail/apply_endian.h"
-#include "dicom/io/file/detail/OutputStream.h"
+#include "dicom/io/file/OutputStream.h"
 #include "dicom/io/TransferSyntax.h"
 #include "dicom/tag_number.h"
 

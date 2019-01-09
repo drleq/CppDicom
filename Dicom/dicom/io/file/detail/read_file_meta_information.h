@@ -1,7 +1,7 @@
 #pragma once
 
 #include "dicom/DataDictionary.h"
-#include "dicom/io/file/detail/InputStream.h"
+#include "dicom/io/file/InputStream.h"
 
 namespace dicom::data { class AttributeSet; }
 
