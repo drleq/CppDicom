@@ -113,37 +113,37 @@ add_library(Dicom SHARED
     dicom/io/codec/ICodec.cpp
     dicom/io/codec/ICodecFactory.cpp
     dicom/io/codec/ICodecImage.cpp
-    dicom/io/file/detail/create_deferred_vr.cpp
-    dicom/io/file/detail/derive_pixel_data_ranges.cpp
-    dicom/io/file/detail/derive_pixel_data_vrtype.cpp
-    dicom/io/file/detail/discover_pixel_data_fragments.cpp
-    dicom/io/file/detail/FileInputStream.cpp
-    dicom/io/file/detail/FileOutputStream.cpp
-    dicom/io/file/detail/InputContext.cpp
-    dicom/io/file/detail/InputStream.cpp
-    dicom/io/file/detail/OutputContext.cpp
-    dicom/io/file/detail/OutputStream.cpp
-    dicom/io/file/detail/read_attributes.cpp
-    dicom/io/file/detail/read_data_element.cpp
-    dicom/io/file/detail/read_file_meta_information.cpp
-    dicom/io/file/detail/read_pixel_data.cpp
-    dicom/io/file/detail/read_sq_item.cpp
-    dicom/io/file/detail/read_sq.cpp
-    dicom/io/file/detail/read_vr_type_and_length.cpp
-    dicom/io/file/detail/read_vr.cpp
-    dicom/io/file/detail/verify_header.cpp
-    dicom/io/file/detail/write_attributes.cpp
-    dicom/io/file/detail/write_data_element.cpp
-    dicom/io/file/detail/write_file_meta_information.cpp
-    dicom/io/file/detail/write_header.cpp
-    dicom/io/file/detail/write_sq_item.cpp
-    dicom/io/file/detail/write_sq.cpp
-    dicom/io/file/detail/write_vr.cpp
-    dicom/io/file/AttributeFilter.cpp
-    dicom/io/file/FileLoadResult.cpp
-    dicom/io/file/FileMetadataSink.cpp
-    dicom/io/file/FileMetadataSource.cpp
-    dicom/io/file/PixelDataRange.cpp
+    dicom/io/part10/detail/create_deferred_vr.cpp
+    dicom/io/part10/detail/derive_pixel_data_ranges.cpp
+    dicom/io/part10/detail/derive_pixel_data_vrtype.cpp
+    dicom/io/part10/detail/discover_pixel_data_fragments.cpp
+    dicom/io/part10/detail/InputContext.cpp
+    dicom/io/part10/detail/OutputContext.cpp
+    dicom/io/part10/detail/read_attributes.cpp
+    dicom/io/part10/detail/read_data_element.cpp
+    dicom/io/part10/detail/read_file_meta_information.cpp
+    dicom/io/part10/detail/read_pixel_data.cpp
+    dicom/io/part10/detail/read_sq_item.cpp
+    dicom/io/part10/detail/read_sq.cpp
+    dicom/io/part10/detail/read_vr_type_and_length.cpp
+    dicom/io/part10/detail/read_vr.cpp
+    dicom/io/part10/detail/verify_header.cpp
+    dicom/io/part10/detail/write_attributes.cpp
+    dicom/io/part10/detail/write_data_element.cpp
+    dicom/io/part10/detail/write_file_meta_information.cpp
+    dicom/io/part10/detail/write_header.cpp
+    dicom/io/part10/detail/write_sq_item.cpp
+    dicom/io/part10/detail/write_sq.cpp
+    dicom/io/part10/detail/write_vr.cpp
+    dicom/io/part10/AttributeFilter.cpp
+    dicom/io/part10/FileInputStream.cpp
+    dicom/io/part10/FileOutputStream.cpp
+    dicom/io/part10/InputStream.cpp
+    dicom/io/part10/OutputStream.cpp
+    dicom/io/part10/Part10LoadResult.cpp
+    dicom/io/part10/Part10Reader.cpp
+    dicom/io/part10/Part10Writer.cpp
+    dicom/io/part10/PixelDataRange.cpp
     dicom/io/Deferred.cpp
     dicom/io/TransferSyntax.cpp
     dicom/multiframe/frame_index.cpp

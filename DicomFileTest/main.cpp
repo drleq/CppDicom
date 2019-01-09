@@ -7,8 +7,9 @@
 #include "dicom/multiframe/PrivateTags.h"
 
 #include "dicom/io/TransferSyntax.h"
-#include "dicom/io/file/FileMetadataSource.h"
-#include "dicom/io/file/FileMetadataSink.h"
+#include "dicom/io/part10/FileInputStream.h"
+#include "dicom/io/part10/Part10Reader.h"
+#include "dicom/io/part10/Part10Writer.h"
 #include "dicom/multiframe/FrameCache.h"
 
 #include <chrono>
@@ -21,7 +22,7 @@
 
 using namespace dicom;
 using namespace dicom::io;
-using namespace dicom::io::file;
+using namespace dicom::io::part10;
 
 const int LoopCount = 1000;
 
@@ -40,11 +41,13 @@ int main(int argc, const char* argv[]) {
 
     auto start = high_resolution_clock::now();
     for (int i = 0; i < LoopCount; ++i) {
-        FileMetadataSource source(
+        auto stream = std::make_shared<FileInputStream>(input_file);
+        auto load_result = Part10Reader::Read(
+            stream,
+            data_dictionary,
             nullptr,
             [](const std::string_view*, tag_number) { return AttributeFilterResult::Load; }
         );
-        auto load_result = source.Load(input_file, data_dictionary);
         
         [[maybe_unused]] auto frame_count = load_result->FrameCount();
         // for (size_t j = 0; j < frame_count; ++j) {
