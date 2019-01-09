@@ -7,15 +7,15 @@
 
 namespace dicom::io::part10 {
 
-    class DICOM_EXPORT FileLoadResult : public ILoadResult
+    class DICOM_EXPORT Part10LoadResult : public ILoadResult
     {
     public:
-        FileLoadResult(
+        Part10LoadResult(
             ReOpenStreamFunction file_stream_factory,
             data::AttributeSetPtr metadata,
             std::vector<PixelDataRange> pixel_data_ranges
         );
-        virtual ~FileLoadResult();
+        virtual ~Part10LoadResult();
 
         //----------------------------------------------------------------------------------------------------
 

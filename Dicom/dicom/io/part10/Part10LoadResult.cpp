@@ -1,5 +1,5 @@
 #include "dicom_pch.h"
-#include "dicom/io/part10/FileLoadResult.h"
+#include "dicom/io/part10/Part10LoadResult.h"
 
 #include "dicom/io/part10/detail/derive_pixel_data_vrtype.h"
 #include "dicom/io/part10/detail/discover_pixel_data_fragments.h"
@@ -17,7 +17,7 @@ using namespace dicom::data;
 
 namespace dicom::io::part10 {
 
-    FileLoadResult::FileLoadResult(
+    Part10LoadResult::Part10LoadResult(
         ReOpenStreamFunction file_stream_factory,
         data::AttributeSetPtr metadata,
         vector<PixelDataRange> pixel_data_ranges
@@ -42,11 +42,11 @@ namespace dicom::io::part10 {
 
     //--------------------------------------------------------------------------------------------------------
 
-    FileLoadResult::~FileLoadResult() = default;
+    Part10LoadResult::~Part10LoadResult() = default;
 
     //--------------------------------------------------------------------------------------------------------
 
-    bool FileLoadResult::StreamPixelData(size_t frame_index, HandleBulkDataCallback callback) const {
+    bool Part10LoadResult::StreamPixelData(size_t frame_index, HandleBulkDataCallback callback) const {
         // Verify the frame index is valid
         if (frame_index >= m_pixel_data_ranges.size()) { return false; }
 
@@ -82,7 +82,7 @@ namespace dicom::io::part10 {
 
     //--------------------------------------------------------------------------------------------------------
 
-    data::buffer<int8_t> FileLoadResult::GetPixelData(size_t frame_index) const {
+    data::buffer<int8_t> Part10LoadResult::GetPixelData(size_t frame_index) const {
         // Verify the frame index is valid
         if (frame_index >= m_pixel_data_ranges.size()) { return buffer<int8_t>(); }
 

@@ -137,12 +137,12 @@ add_library(Dicom SHARED
     dicom/io/part10/detail/write_vr.cpp
     dicom/io/part10/AttributeFilter.cpp
     dicom/io/part10/FileInputStream.cpp
-    dicom/io/part10/FileLoadResult.cpp
-    dicom/io/part10/FileMetadataSink.cpp
-    dicom/io/part10/FileMetadataSource.cpp
     dicom/io/part10/FileOutputStream.cpp
     dicom/io/part10/InputStream.cpp
     dicom/io/part10/OutputStream.cpp
+    dicom/io/part10/Part10LoadResult.cpp
+    dicom/io/part10/Part10Reader.cpp
+    dicom/io/part10/Part10Writer.cpp
     dicom/io/part10/PixelDataRange.cpp
     dicom/io/Deferred.cpp
     dicom/io/TransferSyntax.cpp

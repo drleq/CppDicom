@@ -1,5 +1,5 @@
 #include "dicom_pch.h"
-#include "dicom/io/part10/FileMetadataSource.h"
+#include "dicom/io/part10/Part10Reader.h"
 
 #include <filesystem>
 
@@ -7,8 +7,7 @@
 #include "dicom/io/part10/detail/read_file_meta_information.h"
 #include "dicom/io/part10/detail/read_attributes.h"
 #include "dicom/io/part10/detail/verify_header.h"
-#include "dicom/io/part10/FileInputStream.h"
-#include "dicom/io/part10/FileLoadResult.h"
+#include "dicom/io/part10/Part10LoadResult.h"
 
 #include "dicom/data/AttributeSet.h"
 #include "dicom/data/UI.h"
@@ -18,17 +17,14 @@ using namespace std;
 
 namespace dicom::io::part10 {
 
-    LoadResultPtr FileMetadataSource::Load(
-        const string_view& filename,
+    LoadResultPtr Part10Reader::Read(
+        const InputStreamPtr& stream,
         const DataDictionaryPtr& data_dictionary,
         AttributeFilter attribute_filter,
         PrivateAttributeFilter private_attribute_filter
     ) {
-        // Verify the file exists
-        if (!filesystem::exists(filesystem::path(filename))) { return nullptr; }
-
-        // Open the file for reading
-        auto stream = make_shared<FileInputStream>(filename);
+        // Verify the stream is OK
+        if (!stream || !stream->Good()) { return nullptr; }
 
         // Verify the header
         if (!detail::verify_header(stream)) { return nullptr; }
@@ -63,7 +59,7 @@ namespace dicom::io::part10 {
             return nullptr;
         }
         
-        return make_shared<FileLoadResult>(stream->CreateReOpenFunction(), metadata, pixel_ranges);
+        return make_shared<Part10LoadResult>(stream->CreateReOpenFunction(), metadata, pixel_ranges);
     }
 
 }

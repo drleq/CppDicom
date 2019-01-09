@@ -1,5 +1,5 @@
 #include "dicom_pch.h"
-#include "dicom/io/part10/FileMetadataSink.h"
+#include "dicom/io/part10/Part10Writer.h"
 
 #include "dicom/io/part10/detail/OutputContext.h"
 #include "dicom/io/part10/detail/write_attributes.h"
@@ -341,15 +341,12 @@ namespace {
 
 namespace dicom::io::part10 {
 
-    bool FileMetadataSink::Save(
-        const string& location,
+    bool Part10Writer::Write(
+        const OutputStreamPtr& stream,
         const TransferSyntax* transfer_syntax,
         const data::AttributeSetConstPtr& metadata,
         WritePixelDataCallback write_pixel_data_callback
     ) {
-        // Open the file for writing
-        OutputStreamPtr stream = make_shared<FileOutputStream>(location);
-
         // Write the header
         detail::write_header(stream);
 
