@@ -7,8 +7,8 @@
 #include "dicom/multiframe/PrivateTags.h"
 
 #include "dicom/io/TransferSyntax.h"
-#include "dicom/io/file/FileMetadataSource.h"
-#include "dicom/io/file/FileMetadataSink.h"
+#include "dicom/io/part10/FileMetadataSource.h"
+#include "dicom/io/part10/FileMetadataSink.h"
 #include "dicom/multiframe/FrameCache.h"
 
 #include <chrono>
@@ -21,7 +21,7 @@
 
 using namespace dicom;
 using namespace dicom::io;
-using namespace dicom::io::file;
+using namespace dicom::io::part10;
 
 const int LoopCount = 1000;
 
