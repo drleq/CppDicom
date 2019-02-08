@@ -144,6 +144,7 @@ add_library(Dicom SHARED
     dicom/io/part10/Part10Reader.cpp
     dicom/io/part10/Part10Writer.cpp
     dicom/io/part10/PixelDataRange.cpp
+    dicom/io/part19/Part19Writer.cpp
     dicom/io/Deferred.cpp
     dicom/io/TransferSyntax.cpp
     dicom/multiframe/frame_index.cpp
@@ -153,7 +154,8 @@ add_library(Dicom SHARED
     dicom/private_tag.cpp
     dicom/tag.cpp
     dicom/Tags.cpp
-    dicom/UIDs.cpp)
+    dicom/UIDs.cpp
+    pugixml/pugixml.cpp)
 
 target_include_directories(Dicom
     PUBLIC .)
