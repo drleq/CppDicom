@@ -80,4 +80,8 @@ namespace dicom::data {
         mutable container_type m_parsed;
     };
 
+    // STL ADL functions
+    inline auto begin(const DA& x) { return x.ParsedBegin(); }
+    inline auto end(const DA& x) { return x.ParsedEnd(); }
+
 }

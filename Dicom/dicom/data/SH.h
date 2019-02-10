@@ -77,4 +77,8 @@ namespace dicom::data {
         mutable std::vector<size_t> m_parsed_offsets;
     };
 
+    // STL ADL functions
+    inline auto begin(const SH& x) { return x.ParsedBegin(); }
+    inline auto end(const SH& x) { return x.ParsedEnd(); }
+
 }

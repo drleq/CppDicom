@@ -154,8 +154,7 @@ add_library(Dicom SHARED
     dicom/private_tag.cpp
     dicom/tag.cpp
     dicom/Tags.cpp
-    dicom/UIDs.cpp
-    pugixml/pugixml.cpp)
+    dicom/UIDs.cpp)
 
 target_include_directories(Dicom
     PUBLIC .)

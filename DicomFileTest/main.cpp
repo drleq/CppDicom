@@ -10,6 +10,7 @@
 #include "dicom/io/part10/FileInputStream.h"
 #include "dicom/io/part10/Part10Reader.h"
 #include "dicom/io/part10/Part10Writer.h"
+#include "dicom/io/part19/Part19Writer.h"
 #include "dicom/multiframe/FrameCache.h"
 
 #include <chrono>
@@ -24,7 +25,7 @@ using namespace dicom;
 using namespace dicom::io;
 using namespace dicom::io::part10;
 
-const int LoopCount = 1000;
+const int LoopCount = 1;
 
 int main(int argc, const char* argv[]) {
     using namespace std::chrono;
@@ -53,6 +54,11 @@ int main(int argc, const char* argv[]) {
         // for (size_t j = 0; j < frame_count; ++j) {
         //     load_result->GetPixelData(j);
         // }
+
+        part19::Part19Writer::Write(
+            "test.xml",
+            load_result->Metadata()
+        );
     }
     auto end = high_resolution_clock::now();
     duration<float, std::milli> delta = end - start;

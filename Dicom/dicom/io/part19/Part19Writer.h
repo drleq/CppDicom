@@ -15,10 +15,11 @@ namespace dicom::io::part19 {
     {
     public:
         static [[nodiscard]] bool Write(
+            std::string filename,
             //const OutputStreamPtr& stream,
-            const TransferSyntax* transfer_syntax,
-            const data::AttributeSetConstPtr& metadata,
-            WritePixelDataCallback write_pixel_data_callback
+            //const TransferSyntax* transfer_syntax,
+            const data::AttributeSetConstPtr& metadata//,
+            //WritePixelDataCallback write_pixel_data_callback
         );
     };
 

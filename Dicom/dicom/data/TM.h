@@ -72,4 +72,8 @@ namespace dicom::data {
         mutable std::vector<time> m_parsed_times;
     };
 
+    // STL ADL functions
+    inline auto begin(const TM& x) { return x.ParsedBegin(); }
+    inline auto end(const TM& x) { return x.ParsedEnd(); }
+
 }
