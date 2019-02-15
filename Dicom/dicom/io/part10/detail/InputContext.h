@@ -150,7 +150,7 @@ namespace dicom::io::part10::detail {
 
             // Return it
             return std::make_unique<TVR>(
-                data::encoded_string(std::move(raw_string), m_string_encoding)
+                data::encoded_string(std::move(raw_string), m_string_encoding, true)
             );
         }
 

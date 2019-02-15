@@ -18,6 +18,11 @@ namespace dicom::data {
         // Raw constructor
         encoded_string();
         encoded_string(buffer<char>&& value, StringEncodingType encoding);
+        encoded_string(
+            buffer<char>&& value,
+            StringEncodingType encoding,
+            bool strip_single_padding_char
+        );
 
         encoded_string(const char* utf8_value);
         encoded_string(const char* utf8_value, StringEncodingType encoding);

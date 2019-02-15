@@ -21,10 +21,26 @@ namespace dicom::data {
     //--------------------------------------------------------------------------------------------------------
 
     encoded_string::encoded_string(buffer<char>&& value, StringEncodingType encoding)
-      : m_value(forward<buffer<char>>(value)),
+      : encoded_string(std::forward<buffer<char>>(value), encoding, false)
+    {}
+
+    //--------------------------------------------------------------------------------------------------------
+
+    encoded_string::encoded_string(
+        buffer<char>&& value,
+        StringEncodingType encoding,
+        bool strip_single_padding_char
+    ) : m_value(forward<buffer<char>>(value)),
         m_encoding(encoding)
     {
         string_view buffer_view(m_value, m_value.ByteLength());
+
+        if (!buffer_view.empty() && strip_single_padding_char) {
+            if (buffer_view.back() == ' ') {
+                buffer_view.remove_suffix(1);
+            }
+        }
+
         string parsed;
         if (string_converter::convert_to_utf8(encoding, buffer_view, parsed)) {
             m_parsed = move(parsed);

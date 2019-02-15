@@ -128,7 +128,7 @@ namespace {
     bool write_multi_value_vr(std::ostream& dest, const T* vr) {
         int number = 1;
         for (auto value : *vr) {
-            dest << "<Value number=\"" << number << "\">" << value << "</Value>";
+            dest << "<Value number=\"" << number++ << "\">" << value << "</Value>";
         }
         return true;
     }
@@ -167,7 +167,7 @@ namespace {
     bool write_patient_name_vr(std::ostream& dest, const PN* vr) {
         int number = 1;
         for (auto value : *vr) {
-            dest << "<PatientName number=\"" << number << "\">";
+            dest << "<PatientName number=\"" << number++ << "\">";
 
             write_component_group(dest, "Alphabetic", value.Alphabetic());
             write_component_group(dest, "Ideographic", value.Ideographic());
@@ -181,8 +181,29 @@ namespace {
 
     //--------------------------------------------------------------------------------------------------------
 
-    bool write_attribute_set(std::ostream& dest, const dicom::data::AttributeSetConstPtr& attribs) {
+    bool write_attribute_set(std::ostream& dest, const dicom::data::AttributeSet* attribs);
+
+    bool write_sq_vr(std::ostream& dest, const SQ* vr) {
+        int number = 1;
+        for (auto& attrib_set : *vr) {
+            dest << "<Item number=\"" << number++ << "\">";
+
+            write_attribute_set(dest, attrib_set.get());
+
+            dest << "</Item>";
+        }
+
+        return true;
+    }
+
+    //--------------------------------------------------------------------------------------------------------
+
+    bool write_attribute_set(std::ostream& dest, const dicom::data::AttributeSet* attribs) {
         for (auto& kvp : *attribs) {
+            if (kvp.second->Empty() || !kvp.second->IsValid()) {
+                continue;
+            }
+
             dest << "<DicomAttribute";
 
             // keyword?
@@ -198,7 +219,7 @@ namespace {
 
             const std::string_view* private_creator;
             if (attribs->TryGetPrivateCreator(kvp.first, &private_creator)) {
-                dest << "privateCreator=\"" << *private_creator << "\"";
+                dest << " privateCreator=\"" << *private_creator << "\"";
             }
 
             dest << ">";
@@ -245,7 +266,9 @@ namespace {
                 break;
 
             // Handle SQ specifically
-            //case VRType::SQ: write_sq(ctx, as<SQ>(kvp.second), false); break;
+            case VRType::SQ:
+                write_sq_vr(dest, as<SQ>(kvp.second));
+                break;
 
             case VRType::Deferred: // We should not see Deferred items here.
             default:
@@ -273,7 +296,7 @@ namespace dicom::io::part19 {
         //std::ostringstream ss;
         fs << "<NativeDicomModel>";
 
-        if (!write_attribute_set(fs, metadata)) {
+        if (!write_attribute_set(fs, metadata.get())) {
             return false;
         }
 
