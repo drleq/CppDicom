@@ -50,121 +50,174 @@ namespace {
 
     //--------------------------------------------------------------------------------------------------------
 
-    std::ostream& operator << (std::ostream& dest, dicom::data::VRType vr_type) {
+    void write_vr_type(std::ostream& dest, dicom::data::VRType vr_type) {
+        // The VRType enum uses values equivalent to two character ASCII for Part10.  This also works when
+        // writing out UTF-8.
         dest.write(
             reinterpret_cast<const char*>(&vr_type),
             2
         );
-        return dest;
     }
-    
+
     //--------------------------------------------------------------------------------------------------------
     
-    std::ostream& operator << (std::ostream& dest, const std::string& str) {
-        // TODO: Escape XML characters.
-        dest.write(str.data(), str.size());
-        return dest;
+    void write_escaped_string(std::ostream& dest, const std::string_view& str) {
+        std::string_view s = str;
+
+        while (!s.empty()) {
+            // Search for the next character that needs escaping.
+            size_t next_escape_index = s.find_first_of("\"&'<>");
+            if (next_escape_index == std::string_view::npos) {
+                // Nothing to escape.  Just write everything else then stop.
+                dest.write(s.data(), s.size());
+                break;
+            }
+
+            if (next_escape_index != 0) {
+                // Write out all data before the escaped character.
+                dest.write(s.data(), next_escape_index);
+            }
+
+            // Write out the escape sequence.
+            switch (s[next_escape_index]) {
+            case '"': dest.write("&quot;", 6); break;
+            case '&': dest.write("&amp;", 5); break;
+            case '\'': dest.write("&apos;", 6); break;
+            case '<': dest.write("&lt;", 4); break;
+            case '>': dest.write("&gt;", 4); break;
+            }
+
+            s.remove_prefix(next_escape_index + 1);
+        }
     }
 
     //--------------------------------------------------------------------------------------------------------
 
     template <typename T>
-    std::ostream& operator << (std::ostream& dest, const dicom::data::buffer<T>& /*binary*/) {
+    void write_value(std::ostream& /*dest*/, const dicom::data::buffer<T>& /*binary*/) {
         // TODO: Base64 encoding of binary data.
-        return dest;
     }
 
     //--------------------------------------------------------------------------------------------------------
 
-    std::ostream& operator << (std::ostream& dest, const dicom::data::uri& value) {
-        dest << value.Value();
-        return dest;
-    }
-
-    //--------------------------------------------------------------------------------------------------------
-
-    std::ostream& operator << (std::ostream& dest, const dicom::data::date& value) {
+    void write_value(std::ostream& dest, const dicom::data::date& value) {
         // YYYYMMDD
         dest << std::dec << std::setw(4) << std::setfill('0') << value.Year();
         dest << std::dec << std::setw(2) << std::setfill('0') << static_cast<int>(value.Month());
         dest << std::dec << std::setw(2) << std::setfill('0') << static_cast<int>(value.Day());
-        return dest;
     }
 
     //--------------------------------------------------------------------------------------------------------
 
-    std::ostream& operator << (std::ostream& dest, const dicom::data::time& value) {
-        //hhmmss.ffffff
+    void write_value(std::ostream& dest, const dicom::data::time& value) {
+        // hhmmss.ffffff
         dest << std::dec << std::setw(2) << std::setfill('0') << static_cast<int>(value.Hour());
         dest << std::dec << std::setw(2) << std::setfill('0') << static_cast<int>(value.Minute());
         dest << std::dec << std::setw(2) << std::setfill('0') << static_cast<int>(value.Second());
         dest << ".";
         dest << std::dec << std::setw(6) << std::setfill('0') << value.Millisecond();
-        return dest;
     }
 
     //--------------------------------------------------------------------------------------------------------
 
-    std::ostream& operator << (std::ostream& dest, const dicom::data::encoded_string& value) {
-        if (value.Validity() == ValidityType::Valid) {
-            dest << value.Parsed();
-        } else {
-            // TODO: Decide what to do here.
-        }
-        return dest;
+    void write_value(std::ostream& dest, const dicom::data::uri& value) {
+        write_escaped_string(dest, value.Value());
+    }
+
+    //--------------------------------------------------------------------------------------------------------
+
+    void write_value(std::ostream& dest, const std::string_view& value) {
+        write_escaped_string(dest, value);
+    }
+
+    //--------------------------------------------------------------------------------------------------------
+
+    void write_value(std::ostream& dest, const std::string& value) {
+        write_escaped_string(dest, value);
+    }
+
+    //--------------------------------------------------------------------------------------------------------
+
+    void write_value(std::ostream& dest, const dicom::data::encoded_string& value) {
+        write_escaped_string(dest, value.Parsed());
     }
 
     //--------------------------------------------------------------------------------------------------------
 
     template <typename T>
-    bool write_single_value_vr(std::ostream& dest, const T* vr) {
-        dest << "<Value number=\"1\">" << vr->Value() << "</Value>";
-        return true;
+    void write_value(std::ostream& dest, const T& value) {
+        dest << std::dec << value;
     }
 
     //--------------------------------------------------------------------------------------------------------
 
     template <typename T>
-    bool write_multi_value_vr(std::ostream& dest, const T* vr) {
+    void write_single_value_vr(std::ostream& dest, const T* vr) {
+        dest << "<Value number=\"1\">";
+        write_value(dest, vr->Value());
+        dest << "</Value>";
+    }
+
+    //--------------------------------------------------------------------------------------------------------
+
+    template <typename T>
+    void write_multi_value_vr(std::ostream& dest, const T* vr) {
         int number = 1;
         for (auto value : *vr) {
-            dest << "<Value number=\"" << number++ << "\">" << value << "</Value>";
+            dest << "<Value number=\"" << number++ << "\">";
+            write_value(dest, value);
+            dest << "</Value>";
         }
-        return true;
     }
 
     //--------------------------------------------------------------------------------------------------------
 
-    bool write_component_group(std::ostream& dest, const char* name, const dicom::data::ComponentGroup& value) {
+    template <typename T>
+    void write_binary_vr(std::ostream& dest, const T* vr) {
+        write_value(dest, vr->Value());
+    }
+
+    //--------------------------------------------------------------------------------------------------------
+
+    void write_component_group(std::ostream& dest, const char* name, const dicom::data::ComponentGroup& value) {
         if (value.Empty()) {
-            return true;
+            return;
         }
 
         dest << "<" << name << ">";
 
         if (!value.FamilyName().empty()) {
-            dest << "<FamilyName>" << value.FamilyName() << "</FamilyName>";
+            dest << "<FamilyName>";
+            write_escaped_string(dest, value.FamilyName());
+            dest << "</FamilyName>";
         }
         if (!value.GivenName().empty()) {
-            dest << "<GivenName>" << value.GivenName() << "</GivenName>";
+            dest << "<GivenName>";
+            write_escaped_string(dest, value.GivenName());
+            dest << "</GivenName>";
         }
         if (!value.MiddleName().empty()) {
-            dest << "<MiddleName>" << value.MiddleName() << "</MiddleName>";
+            dest << "<MiddleName>";
+            write_escaped_string(dest, value.MiddleName());
+            dest << "</MiddleName>";
         }
         if (!value.Prefix().empty()) {
-            dest << "<NamePrefix>" << value.Prefix() << "</NamePrefix>";
+            dest << "<NamePrefix>";
+            write_escaped_string(dest, value.Prefix());
+            dest << "</NamePrefix>";
         }
         if (!value.Suffix().empty()) {
-            dest << "<NameSuffix>" << value.Suffix() << "</NameSuffix>";
+            dest << "<NameSuffix>";
+            write_escaped_string(dest, value.Suffix());
+            dest << "</NameSuffix>";
         }
 
         dest << "</" << name << ">";
-        return true;
     }
 
     //--------------------------------------------------------------------------------------------------------
 
-    bool write_patient_name_vr(std::ostream& dest, const PN* vr) {
+    void write_patient_name_vr(std::ostream& dest, const PN* vr) {
         int number = 1;
         for (auto value : *vr) {
             dest << "<PatientName number=\"" << number++ << "\">";
@@ -175,15 +228,13 @@ namespace {
 
             dest << "</PatientName>";
         }
-
-        return true;
     }
 
     //--------------------------------------------------------------------------------------------------------
 
-    bool write_attribute_set(std::ostream& dest, const dicom::data::AttributeSet* attribs);
+    void write_attribute_set(std::ostream& dest, const dicom::data::AttributeSet* attribs);
 
-    bool write_sq_vr(std::ostream& dest, const SQ* vr) {
+    void write_sq_vr(std::ostream& dest, const SQ* vr) {
         int number = 1;
         for (auto& attrib_set : *vr) {
             dest << "<Item number=\"" << number++ << "\">";
@@ -192,13 +243,11 @@ namespace {
 
             dest << "</Item>";
         }
-
-        return true;
     }
 
     //--------------------------------------------------------------------------------------------------------
 
-    bool write_attribute_set(std::ostream& dest, const dicom::data::AttributeSet* attribs) {
+    void write_attribute_set(std::ostream& dest, const dicom::data::AttributeSet* attribs) {
         for (auto& kvp : *attribs) {
             if (kvp.second->Empty() || !kvp.second->IsValid()) {
                 continue;
@@ -215,7 +264,9 @@ namespace {
                 << std::hex << std::setw(4) << std::setfill('0') << element 
                 << "\"";
 
-            dest << " vr=\"" << kvp.second->Type() << "\"";
+            dest << " vr=\"";
+            write_vr_type(dest, kvp.second->Type());
+            dest << "\"";
 
             const std::string_view* private_creator;
             if (attribs->TryGetPrivateCreator(kvp.first, &private_creator)) {
@@ -225,44 +276,44 @@ namespace {
             dest << ">";
 
             switch (kvp.second->Type()) {
-            // Handle tags that are represented by the Default Character Repertoire.
+            // Handle tags that can contain a single value.
             case VRType::AE: write_single_value_vr(dest, as<AE>(kvp.second)); break;
             case VRType::AS: write_single_value_vr(dest, as<AS>(kvp.second)); break;
+            case VRType::DT: write_single_value_vr(dest, as<DT>(kvp.second)); break;
+            case VRType::LT: write_single_value_vr(dest, as<LT>(kvp.second)); break;
+            case VRType::ST: write_single_value_vr(dest, as<ST>(kvp.second)); break;
+            case VRType::UR: write_single_value_vr(dest, as<UR>(kvp.second)); break;
+            case VRType::UT: write_single_value_vr(dest, as<UT>(kvp.second)); break;
+
+            // Handle tags that can contain multiple values
+            case VRType::AT: write_multi_value_vr(dest, as<AT>(kvp.second)); break;
             case VRType::CS: write_multi_value_vr(dest, as<CS>(kvp.second)); break;
             case VRType::DA: write_multi_value_vr(dest, as<DA>(kvp.second)); break;
             case VRType::DS: write_multi_value_vr(dest, as<DS>(kvp.second)); break;
-            case VRType::DT: write_single_value_vr(dest, as<DT>(kvp.second)); break;
             case VRType::IS: write_multi_value_vr(dest, as<IS>(kvp.second)); break;
-            case VRType::TM: write_multi_value_vr(dest, as<TM>(kvp.second)); break;
-            case VRType::UI: write_multi_value_vr(dest, as<UI>(kvp.second)); break;
-            case VRType::UR: write_single_value_vr(dest, as<UR>(kvp.second)); break;
-
-            // Handle tags that are represented by Unicode.
             case VRType::LO: write_multi_value_vr(dest, as<LO>(kvp.second)); break;
-            case VRType::LT: write_single_value_vr(dest, as<LT>(kvp.second)); break;
-            case VRType::PN: write_patient_name_vr(dest, as<PN>(kvp.second)); break;
             case VRType::SH: write_multi_value_vr(dest, as<SH>(kvp.second)); break;
-            case VRType::ST: write_single_value_vr(dest, as<ST>(kvp.second)); break;
+            case VRType::TM: write_multi_value_vr(dest, as<TM>(kvp.second)); break;
             case VRType::UC: write_multi_value_vr(dest, as<UC>(kvp.second)); break;
-            case VRType::UT: write_single_value_vr(dest, as<UT>(kvp.second)); break;
+            case VRType::UI: write_multi_value_vr(dest, as<UI>(kvp.second)); break;
 
             // Handle tags that are represented as binary.
-            case VRType::FD: dest << as<FD>(kvp.second)->Value(); break;
-            case VRType::FL: dest << as<FL>(kvp.second)->Value(); break;
-            case VRType::OB: dest << as<OB>(kvp.second)->Value(); break;
-            case VRType::OD: dest << as<OD>(kvp.second)->Value(); break;
-            case VRType::OF: dest << as<OF>(kvp.second)->Value(); break;
-            case VRType::OL: dest << as<OL>(kvp.second)->Value(); break;
-            case VRType::OW: dest << as<OW>(kvp.second)->Value(); break;
-            case VRType::SL: dest << as<SL>(kvp.second)->Value(); break;
-            case VRType::SS: dest << as<SS>(kvp.second)->Value(); break;
-            case VRType::UL: dest << as<UL>(kvp.second)->Value(); break;
-            case VRType::UN: dest << as<UN>(kvp.second)->Value(); break;
-            case VRType::US: dest << as<US>(kvp.second)->Value(); break;
+            case VRType::FD: write_binary_vr(dest, as<FD>(kvp.second)); break;
+            case VRType::FL: write_binary_vr(dest, as<FL>(kvp.second)); break;
+            case VRType::OB: write_binary_vr(dest, as<OB>(kvp.second)); break;
+            case VRType::OD: write_binary_vr(dest, as<OD>(kvp.second)); break;
+            case VRType::OF: write_binary_vr(dest, as<OF>(kvp.second)); break;
+            case VRType::OL: write_binary_vr(dest, as<OL>(kvp.second)); break;
+            case VRType::OW: write_binary_vr(dest, as<OW>(kvp.second)); break;
+            case VRType::SL: write_binary_vr(dest, as<SL>(kvp.second)); break;
+            case VRType::SS: write_binary_vr(dest, as<SS>(kvp.second)); break;
+            case VRType::UL: write_binary_vr(dest, as<UL>(kvp.second)); break;
+            case VRType::UN: write_binary_vr(dest, as<UN>(kvp.second)); break;
+            case VRType::US: write_binary_vr(dest, as<US>(kvp.second)); break;
 
-            // Handle AT specifically
-            case VRType::AT:
-                write_multi_value_vr(dest, as<AT>(kvp.second));
+            // Handle PN specifically.
+            case VRType::PN:
+                write_patient_name_vr(dest, as<PN>(kvp.second));
                 break;
 
             // Handle SQ specifically
@@ -273,13 +324,11 @@ namespace {
             case VRType::Deferred: // We should not see Deferred items here.
             default:
                 // Unknown VRType. Something very bad has happened.
-                return false;
+                continue;
             }
 
             dest << "</DicomAttribute>";
         }
-
-        return true;
     }
 }
 
@@ -293,15 +342,11 @@ namespace dicom::io::part19 {
         //WritePixelDataCallback /*write_pixel_data_callback*/
     ) {
         std::ofstream fs{ filename };
-        //std::ostringstream ss;
+
         fs << "<NativeDicomModel>";
-
-        if (!write_attribute_set(fs, metadata.get())) {
-            return false;
-        }
-
+        write_attribute_set(fs, metadata.get());
         fs << "</NativeDicomModel>";
-        
+
         return true;
     }
 
