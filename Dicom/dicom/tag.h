@@ -13,6 +13,7 @@ namespace dicom {
 
     struct DICOM_EXPORT tag
     {
+        const std::string_view Keyword;
         const tag_number Number;
         const multiplicity_range Multiplicity;
         const data::VRType Type;
@@ -25,6 +26,7 @@ namespace dicom {
 
     struct DICOM_EXPORT range_tag
     {
+        const std::string_view Keyword;
         const tag_number RangeMin;
         const tag_number RangeMax;
         const tag_number RangeStep;
@@ -39,14 +41,14 @@ namespace dicom {
         [[nodiscard]] constexpr std::optional<tag> FromIndex(uint32_t index) const {
             auto number = RangeMin + (index * RangeStep);
             if (number < RangeMin || number > RangeMax) { return std::nullopt; }
-            tag _tag = { number, Multiplicity, Type, ContextBasedType };
+            tag _tag = { std::string_view(), number, Multiplicity, Type, ContextBasedType };
             return _tag;
         }
 
         [[nodiscard]] constexpr std::optional<tag> FromNumber(tag_number number) const {
             if (number < RangeMin || number > RangeMax) { return std::nullopt; }
             if (((number - RangeMin) % RangeStep) != 0) { return std::nullopt; }
-            tag _tag = { number, Multiplicity, Type, ContextBasedType };
+            tag _tag = { std::string_view(), number, Multiplicity, Type, ContextBasedType };
             return _tag;
         }
     };

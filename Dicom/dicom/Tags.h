@@ -3,7217 +3,8579 @@
 #include "dicom/DataDictionary.h"
 #include "dicom/tag.h"
 
-namespace dicom {
-namespace tags {
+namespace dicom::tags {
     DICOM_EXPORT void populate_data_dictionary(const DataDictionaryPtr& data_dictionary);
 
-    /** AbortFlag, (4010,1024), CS, 1,  */
+    /** AbortFlag, 0x40101024, CS, 1, RET */
     extern DICOM_EXPORT const tag AbortFlag;
-    /** AbortReason, (4010,1021), CS, 1-n,  */
+    /** AbortReason, 0x40101021, CS, 1, RET */
     extern DICOM_EXPORT const tag AbortReason;
-    /** AbsoluteChannelDisplayScale, (003A,0248), FL, 1,  */
+    /** AbsoluteChannelDisplayScale, 0x003A0248, FL, 1 */
     extern DICOM_EXPORT const tag AbsoluteChannelDisplayScale;
-    /** AbstractPriorCodeSequence, (0072,003E), SQ, 1,  */
+    /** AbstractPriorCodeSequence, 0x0072003E, SQ, 1 */
     extern DICOM_EXPORT const tag AbstractPriorCodeSequence;
-    /** AbstractPriorValue, (0072,003C), SS, 2,  */
+    /** AbstractPriorValue, 0x0072003C, SS, 2 */
     extern DICOM_EXPORT const tag AbstractPriorValue;
-    /** AccessionNumber, (0008,0050), SH, 1,  */
+    /** AccessionNumber, 0x00080050, SH, 1 */
     extern DICOM_EXPORT const tag AccessionNumber;
-    /** AccessoryCode, (300A,00F9), LO, 1,  */
+    /** AccessoryCode, 0x300A00F9, LO, 1 */
     extern DICOM_EXPORT const tag AccessoryCode;
-    /** AcquiredImageAreaDoseProduct, (0018,9473), FL, 1,  */
+    /** AcquiredImageAreaDoseProduct, 0x00189473, FL, 1 */
     extern DICOM_EXPORT const tag AcquiredImageAreaDoseProduct;
-    /** AcquiredSoundpathLength, (0014,4031), DS, 1,  */
+    /** AcquiredSoundpathLength, 0x00144031, DS, 1, RET */
     extern DICOM_EXPORT const tag AcquiredSoundpathLength;
-    /** AcquisitionComments, (0018,4000), LT, 1, RET */
+    /** AcquisitionComments, 0x00184000, LT, 1, RET */
     extern DICOM_EXPORT const tag AcquisitionComments;
-    /** AcquisitionCompressionType, (0014,4032), CS, 1,  */
+    /** AcquisitionCompressionType, 0x00144032, CS, 1, RET */
     extern DICOM_EXPORT const tag AcquisitionCompressionType;
-    /** AcquisitionContextDescription, (0040,0556), ST, 1,  */
+    /** AcquisitionContextDescription, 0x00400556, ST, 1 */
     extern DICOM_EXPORT const tag AcquisitionContextDescription;
-    /** AcquisitionContextSequence, (0040,0555), SQ, 1,  */
+    /** AcquisitionContextSequence, 0x00400555, SQ, 1 */
     extern DICOM_EXPORT const tag AcquisitionContextSequence;
-    /** AcquisitionContrast, (0008,9209), CS, 1,  */
+    /** AcquisitionContrast, 0x00089209, CS, 1 */
     extern DICOM_EXPORT const tag AcquisitionContrast;
-    /** AcquisitionDate, (0008,0022), DA, 1,  */
+    /** AcquisitionDate, 0x00080022, DA, 1 */
     extern DICOM_EXPORT const tag AcquisitionDate;
-    /** AcquisitionDateTime, (0008,002A), DT, 1,  */
+    /** AcquisitionDateTime, 0x0008002A, DT, 1 */
     extern DICOM_EXPORT const tag AcquisitionDateTime;
-    /** AcquisitionDeviceProcessingCode, (0018,1401), LO, 1,  */
+    /** AcquisitionDeviceProcessingCode, 0x00181401, LO, 1 */
     extern DICOM_EXPORT const tag AcquisitionDeviceProcessingCode;
-    /** AcquisitionDeviceProcessingDescription, (0018,1400), LO, 1,  */
+    /** AcquisitionDeviceProcessingDescription, 0x00181400, LO, 1 */
     extern DICOM_EXPORT const tag AcquisitionDeviceProcessingDescription;
-    /** AcquisitionDeviceTypeCodeSequence, (0022,0015), SQ, 1,  */
+    /** AcquisitionDeviceTypeCodeSequence, 0x00220015, SQ, 1 */
     extern DICOM_EXPORT const tag AcquisitionDeviceTypeCodeSequence;
-    /** AcquisitionDuration, (0018,9073), FD, 1,  */
+    /** AcquisitionDuration, 0x00189073, FD, 1 */
     extern DICOM_EXPORT const tag AcquisitionDuration;
-    /** AcquisitionIndex, (0020,9518), US, 1-n,  */
+    /** AcquisitionEndLocationSequence, 0x00189932, SQ, 1 */
+    extern DICOM_EXPORT const tag AcquisitionEndLocationSequence;
+    /** AcquisitionIndex, 0x00209518, US, 1 */
     extern DICOM_EXPORT const tag AcquisitionIndex;
-    /** AcquisitionMatrix, (0018,1310), US, 4,  */
+    /** AcquisitionMatrix, 0x00181310, US, 4 */
     extern DICOM_EXPORT const tag AcquisitionMatrix;
-    /** AcquisitionNumber, (0020,0012), IS, 1,  */
+    /** AcquisitionMethodAlgorithmSequence, 0x00221423, SQ, 1 */
+    extern DICOM_EXPORT const tag AcquisitionMethodAlgorithmSequence;
+    /** AcquisitionMethodCodeSequence, 0x00221420, SQ, 1 */
+    extern DICOM_EXPORT const tag AcquisitionMethodCodeSequence;
+    /** AcquisitionMotion, 0x00189930, CS, 1 */
+    extern DICOM_EXPORT const tag AcquisitionMotion;
+    /** AcquisitionNumber, 0x00200012, IS, 1 */
     extern DICOM_EXPORT const tag AcquisitionNumber;
-    /** AcquisitionProtocolDescription, (0018,9424), LT, 1,  */
+    /** AcquisitionProtocolDescription, 0x00189424, LT, 1 */
     extern DICOM_EXPORT const tag AcquisitionProtocolDescription;
-    /** AcquisitionProtocolName, (0018,9423), LO, 1,  */
+    /** AcquisitionProtocolElementSequence, 0x00189920, SQ, 1 */
+    extern DICOM_EXPORT const tag AcquisitionProtocolElementSequence;
+    /** AcquisitionProtocolElementSpecificationSequence, 0x0018991F, SQ, 1 */
+    extern DICOM_EXPORT const tag AcquisitionProtocolElementSpecificationSequence;
+    /** AcquisitionProtocolName, 0x00189423, LO, 1 */
     extern DICOM_EXPORT const tag AcquisitionProtocolName;
-    /** AcquisitionSampleSize, (0014,4033), IS, 1,  */
+    /** AcquisitionSampleSize, 0x00144033, IS, 1, RET */
     extern DICOM_EXPORT const tag AcquisitionSampleSize;
-    /** AcquisitionsInSeries, (0020,1001), IS, 1, RET */
+    /** AcquisitionsInSeries, 0x00201001, IS, 1, RET */
     extern DICOM_EXPORT const tag AcquisitionsInSeries;
-    /** AcquisitionsInStudy, (0020,1004), IS, 1, RET */
+    /** AcquisitionsInStudy, 0x00201004, IS, 1, RET */
     extern DICOM_EXPORT const tag AcquisitionsInStudy;
-    /** AcquisitionStartCondition, (0018,0073), CS, 1,  */
+    /** AcquisitionStartCondition, 0x00180073, CS, 1 */
     extern DICOM_EXPORT const tag AcquisitionStartCondition;
-    /** AcquisitionStartConditionData, (0018,0074), IS, 1,  */
+    /** AcquisitionStartConditionData, 0x00180074, IS, 1 */
     extern DICOM_EXPORT const tag AcquisitionStartConditionData;
-    /** AcquisitionStatus, (4010,1044), CS, 1,  */
+    /** AcquisitionStartLocationSequence, 0x00189931, SQ, 1 */
+    extern DICOM_EXPORT const tag AcquisitionStartLocationSequence;
+    /** AcquisitionStatus, 0x40101044, CS, 1, RET */
     extern DICOM_EXPORT const tag AcquisitionStatus;
-    /** AcquisitionTerminationCondition, (0018,0071), CS, 1,  */
+    /** AcquisitionTerminationCondition, 0x00180071, CS, 1 */
     extern DICOM_EXPORT const tag AcquisitionTerminationCondition;
-    /** AcquisitionTerminationConditionData, (0018,0075), IS, 1,  */
+    /** AcquisitionTerminationConditionData, 0x00180075, IS, 1 */
     extern DICOM_EXPORT const tag AcquisitionTerminationConditionData;
-    /** AcquisitionTime, (0008,0032), TM, 1,  */
+    /** AcquisitionTime, 0x00080032, TM, 1 */
     extern DICOM_EXPORT const tag AcquisitionTime;
-    /** AcquisitionTimeSynchronized, (0018,1800), CS, 1,  */
+    /** AcquisitionTimeSynchronized, 0x00181800, CS, 1 */
     extern DICOM_EXPORT const tag AcquisitionTimeSynchronized;
-    /** AcquisitionType, (0018,9302), CS, 1,  */
+    /** AcquisitionType, 0x00189302, CS, 1 */
     extern DICOM_EXPORT const tag AcquisitionType;
-    /** AcrossScanSpatialResolution, (0022,0048), FL, 1,  */
+    /** AcrossScanSpatialResolution, 0x00220048, FL, 1 */
     extern DICOM_EXPORT const tag AcrossScanSpatialResolution;
-    /** ActiveSourceDiameter, (300A,0218), DS, 1,  */
+    /** ActiveAperture, 0x00145100, US, 1, RET */
+    extern DICOM_EXPORT const tag ActiveAperture;
+    /** ActiveSourceDiameter, 0x300A0218, DS, 1 */
     extern DICOM_EXPORT const tag ActiveSourceDiameter;
-    /** ActiveSourceLength, (300A,021A), DS, 1,  */
+    /** ActiveSourceLength, 0x300A021A, DS, 1 */
     extern DICOM_EXPORT const tag ActiveSourceLength;
-    /** ActualCardiacTriggerDelayTime, (0020,9252), FD, 1,  */
+    /** ActualCardiacTriggerDelayTime, 0x00209252, FD, 1 */
     extern DICOM_EXPORT const tag ActualCardiacTriggerDelayTime;
-    /** ActualCardiacTriggerTimePriorToRPeak, (0020,9155), FL, 1,  */
+    /** ActualCardiacTriggerTimePriorToRPeak, 0x00209155, FL, 1 */
     extern DICOM_EXPORT const tag ActualCardiacTriggerTimePriorToRPeak;
-    /** ActualEnvironmentalConditions, (0014,1010), ST, 1,  */
+    /** ActualEnvironmentalConditions, 0x00141010, ST, 1, RET */
     extern DICOM_EXPORT const tag ActualEnvironmentalConditions;
-    /** ActualFrameDuration, (0018,1242), IS, 1,  */
+    /** ActualFrameDuration, 0x00181242, IS, 1 */
     extern DICOM_EXPORT const tag ActualFrameDuration;
-    /** ActualHumanPerformersSequence, (0040,4035), SQ, 1,  */
+    /** ActualHumanPerformersSequence, 0x00404035, SQ, 1 */
     extern DICOM_EXPORT const tag ActualHumanPerformersSequence;
-    /** ActualRespiratoryTriggerDelayTime, (0020,9257), FD, 1,  */
+    /** ActualRespiratoryTriggerDelayTime, 0x00209257, FD, 1 */
     extern DICOM_EXPORT const tag ActualRespiratoryTriggerDelayTime;
-    /** AdaptiveMapFormat, (0028,0730), US, 1, RET */
+    /** AdaptiveMapFormat, 0x00280730, US, 1, RET */
     extern DICOM_EXPORT const tag AdaptiveMapFormat;
-    /** AddIntermediateSequence, (0046,0101), SQ, 1,  */
+    /** AddIntermediateSequence, 0x00460101, SQ, 1 */
     extern DICOM_EXPORT const tag AddIntermediateSequence;
-    /** AdditionalDrugSequence, (0018,002A), SQ, 1,  */
+    /** AdditionalDrugSequence, 0x0018002A, SQ, 1 */
     extern DICOM_EXPORT const tag AdditionalDrugSequence;
-    /** AdditionalPatientHistory, (0010,21B0), LT, 1,  */
+    /** AdditionalInspectionMethodSequence, 0x4010106F, SQ, 1, RET */
+    extern DICOM_EXPORT const tag AdditionalInspectionMethodSequence;
+    /** AdditionalInspectionSelectionCriteria, 0x4010106E, CS, 1, RET */
+    extern DICOM_EXPORT const tag AdditionalInspectionSelectionCriteria;
+    /** AdditionalPatientHistory, 0x001021B0, LT, 1 */
     extern DICOM_EXPORT const tag AdditionalPatientHistory;
-    /** AddNearSequence, (0046,0100), SQ, 1,  */
+    /** AdditionalRTROIIdentificationCodeSequence, 0x300600B9, SQ, 1, RET */
+    extern DICOM_EXPORT const tag AdditionalRTROIIdentificationCodeSequence;
+    /** AdditionalScreeningPerformed, 0x4010106D, CS, 1, RET */
+    extern DICOM_EXPORT const tag AdditionalScreeningPerformed;
+    /** AddNearSequence, 0x00460100, SQ, 1 */
     extern DICOM_EXPORT const tag AddNearSequence;
-    /** AddOtherSequence, (0046,0102), SQ, 1,  */
+    /** AddOtherSequence, 0x00460102, SQ, 1 */
     extern DICOM_EXPORT const tag AddOtherSequence;
-    /** AddPower, (0046,0104), FD, 1,  */
+    /** AddPower, 0x00460104, FD, 1 */
     extern DICOM_EXPORT const tag AddPower;
-    /** AddressTrial, (0040,A353), ST, 1, RET */
+    /** AddressTrial, 0x0040A353, ST, 1, RET */
     extern DICOM_EXPORT const tag AddressTrial;
-    /** AdministrationRouteCodeSequence, (0054,0302), SQ, 1,  */
+    /** AdministrationRouteCodeSequence, 0x00540302, SQ, 1 */
     extern DICOM_EXPORT const tag AdministrationRouteCodeSequence;
-    /** AdmissionID, (0038,0010), LO, 1,  */
+    /** AdmissionID, 0x00380010, LO, 1 */
     extern DICOM_EXPORT const tag AdmissionID;
-    /** AdmittingDate, (0038,0020), DA, 1,  */
+    /** AdmittingDate, 0x00380020, DA, 1 */
     extern DICOM_EXPORT const tag AdmittingDate;
-    /** AdmittingDiagnosesCodeSequence, (0008,1084), SQ, 1,  */
+    /** AdmittingDiagnosesCodeSequence, 0x00081084, SQ, 1 */
     extern DICOM_EXPORT const tag AdmittingDiagnosesCodeSequence;
-    /** AdmittingDiagnosesDescription, (0008,1080), LO, 1-n,  */
+    /** AdmittingDiagnosesDescription, 0x00081080, LO, 1 */
     extern DICOM_EXPORT const tag AdmittingDiagnosesDescription;
-    /** AdmittingTime, (0038,0021), TM, 1,  */
+    /** AdmittingTime, 0x00380021, TM, 1 */
     extern DICOM_EXPORT const tag AdmittingTime;
-    /** AgeCorrectedSensitivityDeviationAlgorithmSequence, (0024,0065), SQ, 1,  */
+    /** AdvancedBlendingSequence, 0x00701B01, SQ, 1 */
+    extern DICOM_EXPORT const tag AdvancedBlendingSequence;
+    /** AfterloaderChannelID, 0x300A0273, SH, 1 */
+    extern DICOM_EXPORT const tag AfterloaderChannelID;
+    /** AgeCorrectedSensitivityDeviationAlgorithmSequence, 0x00240065, SQ, 1 */
     extern DICOM_EXPORT const tag AgeCorrectedSensitivityDeviationAlgorithmSequence;
-    /** AgeCorrectedSensitivityDeviationProbabilityValue, (0024,0100), FL, 1,  */
+    /** AgeCorrectedSensitivityDeviationProbabilityValue, 0x00240100, FL, 1 */
     extern DICOM_EXPORT const tag AgeCorrectedSensitivityDeviationProbabilityValue;
-    /** AgeCorrectedSensitivityDeviationValue, (0024,0092), FL, 1,  */
+    /** AgeCorrectedSensitivityDeviationValue, 0x00240092, FL, 1 */
     extern DICOM_EXPORT const tag AgeCorrectedSensitivityDeviationValue;
-    /** AirCounts, (0014,3070), OB or OW, 1,  */
+    /** AirCounts, 0x00143070, OB or OW, 1, RET */
     extern DICOM_EXPORT const tag AirCounts;
-    /** AlarmDecision, (4010,1031), CS, 1,  */
+    /** AITDeviceType, 0x40101070, CS, 1, RET */
+    extern DICOM_EXPORT const tag AITDeviceType;
+    /** AlarmDecision, 0x40101031, CS, 1, RET */
     extern DICOM_EXPORT const tag AlarmDecision;
-    /** AlarmDecisionTime, (4010,102B), DT, 1,  */
+    /** AlarmDecisionTime, 0x4010102B, DT, 1, RET */
     extern DICOM_EXPORT const tag AlarmDecisionTime;
-    /** AlgorithmCodeSequenceTrial, (0040,A296), SQ, 1, RET */
+    /** AlgorithmCodeSequenceTrial, 0x0040A296, SQ, 1, RET */
     extern DICOM_EXPORT const tag AlgorithmCodeSequenceTrial;
-    /** AlgorithmDescription, (0018,9528), LO, 1,  */
+    /** AlgorithmDescription, 0x00189528, LO, 1 */
     extern DICOM_EXPORT const tag AlgorithmDescription;
-    /** AlgorithmDescriptionTrial, (0040,A297), ST, 1, RET */
+    /** AlgorithmDescriptionTrial, 0x0040A297, ST, 1, RET */
     extern DICOM_EXPORT const tag AlgorithmDescriptionTrial;
-    /** AlgorithmFamilyCodeSequence, (0066,002F), SQ, 1,  */
+    /** AlgorithmFamilyCodeSequence, 0x0066002F, SQ, 1 */
     extern DICOM_EXPORT const tag AlgorithmFamilyCodeSequence;
-    /** AlgorithmName, (0066,0036), LO, 1,  */
+    /** AlgorithmName, 0x00660036, LO, 1 */
     extern DICOM_EXPORT const tag AlgorithmName;
-    /** AlgorithmNameCodeSequence, (0066,0030), SQ, 1,  */
+    /** AlgorithmNameCodeSequence, 0x00660030, SQ, 1 */
     extern DICOM_EXPORT const tag AlgorithmNameCodeSequence;
-    /** AlgorithmParameters, (0066,0032), LT, 1,  */
+    /** AlgorithmParameters, 0x00660032, LT, 1 */
     extern DICOM_EXPORT const tag AlgorithmParameters;
-    /** AlgorithmRoutingCodeSequence, (4010,1064), SQ, 1,  */
+    /** AlgorithmRoutingCodeSequence, 0x40101064, SQ, 1, RET */
     extern DICOM_EXPORT const tag AlgorithmRoutingCodeSequence;
-    /** AlgorithmSource, (0024,0202), LO, 1,  */
+    /** AlgorithmSource, 0x00240202, LO, 1 */
     extern DICOM_EXPORT const tag AlgorithmSource;
-    /** AlgorithmType, (0018,9527), CS, 1,  */
+    /** AlgorithmType, 0x00189527, CS, 1 */
     extern DICOM_EXPORT const tag AlgorithmType;
-    /** AlgorithmVersion, (0066,0031), LO, 1,  */
+    /** AlgorithmVersion, 0x00660031, LO, 1 */
     extern DICOM_EXPORT const tag AlgorithmVersion;
-    /** AliasedDataType, (0018,980B), CS, 1,  */
+    /** AliasedDataType, 0x0018980B, CS, 1 */
     extern DICOM_EXPORT const tag AliasedDataType;
-    /** ALinePixelSpacing, (0052,0014), FD, 1,  */
+    /** ALinePixelSpacing, 0x00520014, FD, 1 */
     extern DICOM_EXPORT const tag ALinePixelSpacing;
-    /** ALineRate, (0052,0011), FD, 1,  */
+    /** ALineRate, 0x00520011, FD, 1 */
     extern DICOM_EXPORT const tag ALineRate;
-    /** ALinesPerFrame, (0052,0012), US, 1,  */
+    /** ALinesPerFrame, 0x00520012, US, 1 */
     extern DICOM_EXPORT const tag ALinesPerFrame;
-    /** Allergies, (0010,2110), LO, 1-n,  */
+    /** Allergies, 0x00102110, LO, 1 */
     extern DICOM_EXPORT const tag Allergies;
-    /** AllowLossyCompression, (2200,000F), CS, 1,  */
+    /** AllowLossyCompression, 0x2200000F, CS, 1 */
     extern DICOM_EXPORT const tag AllowLossyCompression;
-    /** AllowMediaSplitting, (2200,0007), CS, 1,  */
+    /** AllowMediaSplitting, 0x22000007, CS, 1 */
     extern DICOM_EXPORT const tag AllowMediaSplitting;
-    /** AlongScanSpatialResolution, (0022,0037), FL, 1,  */
+    /** AlongScanSpatialResolution, 0x00220037, FL, 1 */
     extern DICOM_EXPORT const tag AlongScanSpatialResolution;
-    /** AlphaLUTTransferFunction, (0028,1410), CS, 1,  */
+    /** AlphaLUTTransferFunction, 0x00281410, CS, 1 */
     extern DICOM_EXPORT const tag AlphaLUTTransferFunction;
-    /** AlphaPaletteColorLookupTableData, (0028,1204), OW, 1,  */
+    /** AlphaPaletteColorLookupTableData, 0x00281204, OW, 1 */
     extern DICOM_EXPORT const tag AlphaPaletteColorLookupTableData;
-    /** AlphaPaletteColorLookupTableDescriptor, (0028,1104), US, 3,  */
+    /** AlphaPaletteColorLookupTableDescriptor, 0x00281104, US, 3 */
     extern DICOM_EXPORT const tag AlphaPaletteColorLookupTableDescriptor;
-    /** AlternateContainerIdentifierSequence, (0040,0515), SQ, 1,  */
+    /** AlternateBeamDose, 0x300A0091, DS, 1 */
+    extern DICOM_EXPORT const tag AlternateBeamDose;
+    /** AlternateBeamDoseType, 0x300A0092, CS, 1 */
+    extern DICOM_EXPORT const tag AlternateBeamDoseType;
+    /** AlternateContainerIdentifierSequence, 0x00400515, SQ, 1 */
     extern DICOM_EXPORT const tag AlternateContainerIdentifierSequence;
-    /** AlternateContentDescriptionSequence, (0070,0087), SQ, 1,  */
+    /** AlternateContentDescriptionSequence, 0x00700087, SQ, 1 */
     extern DICOM_EXPORT const tag AlternateContentDescriptionSequence;
-    /** AlternateRepresentationSequence, (0008,3001), SQ, 1,  */
+    /** AlternateRepresentationSequence, 0x00083001, SQ, 1 */
     extern DICOM_EXPORT const tag AlternateRepresentationSequence;
-    /** AmplifierType, (0014,400A), CS, 1,  */
+    /** AmbientLightValueSource, 0x00287025, CS, 1 */
+    extern DICOM_EXPORT const tag AmbientLightValueSource;
+    /** AmbientReflectionIntensity, 0x00701702, FD, 1 */
+    extern DICOM_EXPORT const tag AmbientReflectionIntensity;
+    /** AmplifierType, 0x0014400A, CS, 1, RET */
     extern DICOM_EXPORT const tag AmplifierType;
-    /** AnatomicalOrientationType, (0010,2210), CS, 1,  */
+    /** AnalyzedArea, 0x00460227, FL, 1 */
+    extern DICOM_EXPORT const tag AnalyzedArea;
+    /** AnatomicalOrientationType, 0x00102210, CS, 1 */
     extern DICOM_EXPORT const tag AnatomicalOrientationType;
-    /** AnatomicApproachDirectionCodeSequenceTrial, (0008,2255), SQ, 1, RET */
+    /** AnatomicApproachDirectionCodeSequenceTrial, 0x00082255, SQ, 1, RET */
     extern DICOM_EXPORT const tag AnatomicApproachDirectionCodeSequenceTrial;
-    /** AnatomicLocationOfExaminingInstrumentCodeSequenceTrial, (0008,2259), SQ, 1, RET */
+    /** AnatomicLocationOfExaminingInstrumentCodeSequenceTrial, 0x00082259, SQ, 1, RET */
     extern DICOM_EXPORT const tag AnatomicLocationOfExaminingInstrumentCodeSequenceTrial;
-    /** AnatomicLocationOfExaminingInstrumentDescriptionTrial, (0008,2258), ST, 1, RET */
+    /** AnatomicLocationOfExaminingInstrumentDescriptionTrial, 0x00082258, ST, 1, RET */
     extern DICOM_EXPORT const tag AnatomicLocationOfExaminingInstrumentDescriptionTrial;
-    /** AnatomicPerspectiveCodeSequenceTrial, (0008,2257), SQ, 1, RET */
+    /** AnatomicPerspectiveCodeSequenceTrial, 0x00082257, SQ, 1, RET */
     extern DICOM_EXPORT const tag AnatomicPerspectiveCodeSequenceTrial;
-    /** AnatomicPerspectiveDescriptionTrial, (0008,2256), ST, 1, RET */
+    /** AnatomicPerspectiveDescriptionTrial, 0x00082256, ST, 1, RET */
     extern DICOM_EXPORT const tag AnatomicPerspectiveDescriptionTrial;
-    /** AnatomicPortalOfEntranceCodeSequenceTrial, (0008,2253), SQ, 1, RET */
+    /** AnatomicPortalOfEntranceCodeSequenceTrial, 0x00082253, SQ, 1, RET */
     extern DICOM_EXPORT const tag AnatomicPortalOfEntranceCodeSequenceTrial;
-    /** AnatomicRegionModifierSequence, (0008,2220), SQ, 1,  */
+    /** AnatomicRegionModifierSequence, 0x00082220, SQ, 1 */
     extern DICOM_EXPORT const tag AnatomicRegionModifierSequence;
-    /** AnatomicRegionSequence, (0008,2218), SQ, 1,  */
+    /** AnatomicRegionSequence, 0x00082218, SQ, 1 */
     extern DICOM_EXPORT const tag AnatomicRegionSequence;
-    /** AnatomicStructure, (0008,2208), CS, 1, RET */
+    /** AnatomicRegionsInStudyCodeSequence, 0x00080063, SQ, 1 */
+    extern DICOM_EXPORT const tag AnatomicRegionsInStudyCodeSequence;
+    /** AnatomicStructure, 0x00082208, CS, 1, RET */
     extern DICOM_EXPORT const tag AnatomicStructure;
-    /** AnatomicStructureSpaceOrRegionCodeSequenceTrial, (0008,2251), SQ, 1, RET */
+    /** AnatomicStructureReferencePoint, 0x00221463, FL, 2 */
+    extern DICOM_EXPORT const tag AnatomicStructureReferencePoint;
+    /** AnatomicStructureSpaceOrRegionCodeSequenceTrial, 0x00082251, SQ, 1, RET */
     extern DICOM_EXPORT const tag AnatomicStructureSpaceOrRegionCodeSequenceTrial;
-    /** AnatomicStructureSpaceOrRegionModifierCodeSequenceTrial, (0008,225A), SQ, 1, RET */
+    /** AnatomicStructureSpaceOrRegionModifierCodeSequenceTrial, 0x0008225A, SQ, 1, RET */
     extern DICOM_EXPORT const tag AnatomicStructureSpaceOrRegionModifierCodeSequenceTrial;
-    /** AnatomicStructureSpaceOrRegionSequence, (0008,2229), SQ, 1,  */
+    /** AnatomicStructureSpaceOrRegionSequence, 0x00082229, SQ, 1, RET */
     extern DICOM_EXPORT const tag AnatomicStructureSpaceOrRegionSequence;
-    /** AnchorPoint, (0070,0014), FL, 2,  */
+    /** AnchorPoint, 0x00700014, FL, 2 */
     extern DICOM_EXPORT const tag AnchorPoint;
-    /** AnchorPointAnnotationUnits, (0070,0004), CS, 1,  */
+    /** AnchorPointAnnotationUnits, 0x00700004, CS, 1 */
     extern DICOM_EXPORT const tag AnchorPointAnnotationUnits;
-    /** AnchorPointVisibility, (0070,0015), CS, 1,  */
+    /** AnchorPointVisibility, 0x00700015, CS, 1 */
     extern DICOM_EXPORT const tag AnchorPointVisibility;
-    /** AngioFlag, (0018,0025), CS, 1,  */
+    /** AngioFlag, 0x00180025, CS, 1 */
     extern DICOM_EXPORT const tag AngioFlag;
-    /** AngleNumber, (0020,0018), IS, 1, RET */
+    /** AngleNumber, 0x00200018, IS, 1, RET */
     extern DICOM_EXPORT const tag AngleNumber;
-    /** AngularPosition, (0018,1141), DS, 1, RET */
+    /** AngularPosition, 0x00181141, DS, 1, RET */
     extern DICOM_EXPORT const tag AngularPosition;
-    /** AngularStep, (0018,1144), DS, 1,  */
+    /** AngularStep, 0x00181144, DS, 1 */
     extern DICOM_EXPORT const tag AngularStep;
-    /** AngularViewVector, (0054,0090), US, 1-n,  */
+    /** AngularViewVector, 0x00540090, US, 1 */
     extern DICOM_EXPORT const tag AngularViewVector;
-    /** AnnotationContentSequence, (2130,0050), SQ, 1, RET */
+    /** AnimationCurveSequence, 0x00701A04, SQ, 1 */
+    extern DICOM_EXPORT const tag AnimationCurveSequence;
+    /** AnimationStepSize, 0x00701A05, FD, 1 */
+    extern DICOM_EXPORT const tag AnimationStepSize;
+    /** AnnotationClipping, 0x00701907, CS, 1 */
+    extern DICOM_EXPORT const tag AnnotationClipping;
+    /** AnnotationContentSequence, 0x21300050, SQ, 1, RET */
     extern DICOM_EXPORT const tag AnnotationContentSequence;
-    /** AnnotationDisplayFormatID, (2010,0030), CS, 1,  */
+    /** AnnotationDisplayFormatID, 0x20100030, CS, 1 */
     extern DICOM_EXPORT const tag AnnotationDisplayFormatID;
-    /** AnnotationFlag, (2000,0065), CS, 1, RET */
+    /** AnnotationFlag, 0x20000065, CS, 1, RET */
     extern DICOM_EXPORT const tag AnnotationFlag;
-    /** AnnotationGroupNumber, (0040,A180), US, 1,  */
+    /** AnnotationGroupNumber, 0x0040A180, US, 1 */
     extern DICOM_EXPORT const tag AnnotationGroupNumber;
-    /** AnnotationPosition, (2030,0010), US, 1,  */
+    /** AnnotationPosition, 0x20300010, US, 1 */
     extern DICOM_EXPORT const tag AnnotationPosition;
-    /** AnodeTargetMaterial, (0018,1191), CS, 1,  */
+    /** AnodeTargetMaterial, 0x00181191, CS, 1 */
     extern DICOM_EXPORT const tag AnodeTargetMaterial;
-    /** AnteriorChamberDepth, (0022,1131), FL, 1,  */
+    /** AnomalyLocatorIndicator, 0x4010107A, FL, 3, RET */
+    extern DICOM_EXPORT const tag AnomalyLocatorIndicator;
+    /** AnomalyLocatorIndicatorSequence, 0x40101079, SQ, 1, RET */
+    extern DICOM_EXPORT const tag AnomalyLocatorIndicatorSequence;
+    /** AnteriorChamberDepth, 0x00221131, FL, 1 */
     extern DICOM_EXPORT const tag AnteriorChamberDepth;
-    /** AnteriorChamberDepthDefinitionCodeSequence, (0022,1125), SQ, 1,  */
+    /** AnteriorChamberDepthDefinitionCodeSequence, 0x00221125, SQ, 1 */
     extern DICOM_EXPORT const tag AnteriorChamberDepthDefinitionCodeSequence;
-    /** AnteriorChamberDepthSequence, (0022,1128), SQ, 1,  */
+    /** AnteriorChamberDepthSequence, 0x00221128, SQ, 1 */
     extern DICOM_EXPORT const tag AnteriorChamberDepthSequence;
-    /** ApexPosition, (0020,9308), FD, 3,  */
+    /** ApertureElevation, 0x00145102, DS, 1, RET */
+    extern DICOM_EXPORT const tag ApertureElevation;
+    /** ApexPosition, 0x00209308, FD, 3 */
     extern DICOM_EXPORT const tag ApexPosition;
-    /** ApplicableFrameRange, (0028,6102), US, 2-2n,  */
+    /** ApplicableFrameRange, 0x00286102, US, 2 */
     extern DICOM_EXPORT const tag ApplicableFrameRange;
-    /** ApplicableSafetyStandardAgency, (0018,9174), CS, 1,  */
+    /** ApplicableSafetyStandardAgency, 0x00189174, CS, 1 */
     extern DICOM_EXPORT const tag ApplicableSafetyStandardAgency;
-    /** ApplicableSafetyStandardDescription, (0018,9175), LO, 1,  */
+    /** ApplicableSafetyStandardDescription, 0x00189175, LO, 1 */
     extern DICOM_EXPORT const tag ApplicableSafetyStandardDescription;
-    /** ApplicationManufacturer, (0018,9526), LO, 1,  */
+    /** ApplicationManufacturer, 0x00189526, LO, 1 */
     extern DICOM_EXPORT const tag ApplicationManufacturer;
-    /** ApplicationMaximumRepaintTime, (0072,010E), US, 1,  */
+    /** ApplicationMaximumRepaintTime, 0x0072010E, US, 1 */
     extern DICOM_EXPORT const tag ApplicationMaximumRepaintTime;
-    /** ApplicationName, (0018,9524), LO, 1,  */
+    /** ApplicationName, 0x00189524, LO, 1 */
     extern DICOM_EXPORT const tag ApplicationName;
-    /** ApplicationSetupCheck, (3008,0116), CS, 1,  */
+    /** ApplicationSetupCheck, 0x30080116, CS, 1 */
     extern DICOM_EXPORT const tag ApplicationSetupCheck;
-    /** ApplicationSetupManufacturer, (300A,0238), LO, 1,  */
+    /** ApplicationSetupManufacturer, 0x300A0238, LO, 1 */
     extern DICOM_EXPORT const tag ApplicationSetupManufacturer;
-    /** ApplicationSetupName, (300A,0236), LO, 1,  */
+    /** ApplicationSetupName, 0x300A0236, LO, 1 */
     extern DICOM_EXPORT const tag ApplicationSetupName;
-    /** ApplicationSetupNumber, (300A,0234), IS, 1,  */
+    /** ApplicationSetupNumber, 0x300A0234, IS, 1 */
     extern DICOM_EXPORT const tag ApplicationSetupNumber;
-    /** ApplicationSetupSequence, (300A,0230), SQ, 1,  */
+    /** ApplicationSetupSequence, 0x300A0230, SQ, 1 */
     extern DICOM_EXPORT const tag ApplicationSetupSequence;
-    /** ApplicationSetupType, (300A,0232), CS, 1,  */
+    /** ApplicationSetupType, 0x300A0232, CS, 1 */
     extern DICOM_EXPORT const tag ApplicationSetupType;
-    /** ApplicationVersion, (0018,9525), LO, 1,  */
+    /** ApplicationVersion, 0x00189525, LO, 1 */
     extern DICOM_EXPORT const tag ApplicationVersion;
-    /** ApplicatorApertureShape, (300A,0432), CS, 1,  */
+    /** ApplicatorApertureShape, 0x300A0432, CS, 1 */
     extern DICOM_EXPORT const tag ApplicatorApertureShape;
-    /** ApplicatorDescription, (300A,010A), LO, 1,  */
+    /** ApplicatorDescription, 0x300A010A, LO, 1 */
     extern DICOM_EXPORT const tag ApplicatorDescription;
-    /** ApplicatorGeometrySequence, (300A,0431), SQ, 1,  */
+    /** ApplicatorGeometrySequence, 0x300A0431, SQ, 1 */
     extern DICOM_EXPORT const tag ApplicatorGeometrySequence;
-    /** ApplicatorID, (300A,0108), SH, 1,  */
+    /** ApplicatorID, 0x300A0108, SH, 1 */
     extern DICOM_EXPORT const tag ApplicatorID;
-    /** ApplicatorOpening, (300A,0433), FL, 1,  */
+    /** ApplicatorOpening, 0x300A0433, FL, 1 */
     extern DICOM_EXPORT const tag ApplicatorOpening;
-    /** ApplicatorOpeningX, (300A,0434), FL, 1,  */
+    /** ApplicatorOpeningX, 0x300A0434, FL, 1 */
     extern DICOM_EXPORT const tag ApplicatorOpeningX;
-    /** ApplicatorOpeningY, (300A,0435), FL, 1,  */
+    /** ApplicatorOpeningY, 0x300A0435, FL, 1 */
     extern DICOM_EXPORT const tag ApplicatorOpeningY;
-    /** ApplicatorSequence, (300A,0107), SQ, 1,  */
+    /** ApplicatorSequence, 0x300A0107, SQ, 1 */
     extern DICOM_EXPORT const tag ApplicatorSequence;
-    /** ApplicatorType, (300A,0109), CS, 1,  */
+    /** ApplicatorType, 0x300A0109, CS, 1 */
     extern DICOM_EXPORT const tag ApplicatorType;
-    /** ApprovalStatus, (300E,0002), CS, 1,  */
+    /** ApprovalSequence, 0x00440100, SQ, 1 */
+    extern DICOM_EXPORT const tag ApprovalSequence;
+    /** ApprovalStatus, 0x300E0002, CS, 1 */
     extern DICOM_EXPORT const tag ApprovalStatus;
-    /** ApprovalStatusDateTime, (0044,0004), DT, 1,  */
+    /** ApprovalStatusDateTime, 0x00440004, DT, 1 */
     extern DICOM_EXPORT const tag ApprovalStatusDateTime;
-    /** ApprovalStatusFurtherDescription, (0044,0003), LT, 1,  */
+    /** ApprovalStatusFurtherDescription, 0x00440003, LT, 1 */
     extern DICOM_EXPORT const tag ApprovalStatusFurtherDescription;
-    /** Arbitrary, (4000,0010), LT, 1, RET */
+    /** ApprovalSubjectSequence, 0x00440109, SQ, 1 */
+    extern DICOM_EXPORT const tag ApprovalSubjectSequence;
+    /** Arbitrary, 0x40000010, LT, 1, RET */
     extern DICOM_EXPORT const tag Arbitrary;
-    /** ArchiveRequested, (0040,A494), CS, 1,  */
+    /** ArchiveRequested, 0x0040A494, CS, 1 */
     extern DICOM_EXPORT const tag ArchiveRequested;
-    /** ArterialSpinLabelingContrast, (0018,9250), CS, 1,  */
+    /** ArterialSpinLabelingContrast, 0x00189250, CS, 1 */
     extern DICOM_EXPORT const tag ArterialSpinLabelingContrast;
-    /** ASLBolusCutoffDelayTime, (0018,925F), UL, 1,  */
+    /** AscanRate, 0x00221649, FL, 1 */
+    extern DICOM_EXPORT const tag AscanRate;
+    /** ASLBolusCutoffDelayTime, 0x0018925F, UL, 1 */
     extern DICOM_EXPORT const tag ASLBolusCutoffDelayTime;
-    /** ASLBolusCutoffFlag, (0018,925C), CS, 1,  */
+    /** ASLBolusCutoffFlag, 0x0018925C, CS, 1 */
     extern DICOM_EXPORT const tag ASLBolusCutoffFlag;
-    /** ASLBolusCutoffTechnique, (0018,925E), LO, 1,  */
+    /** ASLBolusCutoffTechnique, 0x0018925E, LO, 1 */
     extern DICOM_EXPORT const tag ASLBolusCutoffTechnique;
-    /** ASLBolusCutoffTimingSequence, (0018,925D), SQ, 1,  */
+    /** ASLBolusCutoffTimingSequence, 0x0018925D, SQ, 1 */
     extern DICOM_EXPORT const tag ASLBolusCutoffTimingSequence;
-    /** ASLContext, (0018,9257), CS, 1,  */
+    /** ASLContext, 0x00189257, CS, 1 */
     extern DICOM_EXPORT const tag ASLContext;
-    /** ASLCrusherDescription, (0018,925B), LO, 1,  */
+    /** ASLCrusherDescription, 0x0018925B, LO, 1 */
     extern DICOM_EXPORT const tag ASLCrusherDescription;
-    /** ASLCrusherFlag, (0018,9259), CS, 1,  */
+    /** ASLCrusherFlag, 0x00189259, CS, 1 */
     extern DICOM_EXPORT const tag ASLCrusherFlag;
-    /** ASLCrusherFlow, (0018,925A), FD, 1,  */
-    extern DICOM_EXPORT const tag ASLCrusherFlow;
-    /** ASLMidSlabPosition, (0018,9256), FD, 3,  */
+    /** ASLCrusherFlowLimit, 0x0018925A, FD, 1 */
+    extern DICOM_EXPORT const tag ASLCrusherFlowLimit;
+    /** ASLMidSlabPosition, 0x00189256, FD, 3 */
     extern DICOM_EXPORT const tag ASLMidSlabPosition;
-    /** ASLPulseTrainDuration, (0018,9258), UL, 1,  */
+    /** ASLPulseTrainDuration, 0x00189258, UL, 1 */
     extern DICOM_EXPORT const tag ASLPulseTrainDuration;
-    /** ASLSlabNumber, (0018,9253), US, 1,  */
+    /** ASLSlabNumber, 0x00189253, US, 1 */
     extern DICOM_EXPORT const tag ASLSlabNumber;
-    /** ASLSlabOrientation, (0018,9255), FD, 3,  */
+    /** ASLSlabOrientation, 0x00189255, FD, 3 */
     extern DICOM_EXPORT const tag ASLSlabOrientation;
-    /** ASLSlabSequence, (0018,9260), SQ, 1,  */
+    /** ASLSlabSequence, 0x00189260, SQ, 1 */
     extern DICOM_EXPORT const tag ASLSlabSequence;
-    /** ASLSlabThickness, (0018,9254), FD, 1,  */
+    /** ASLSlabThickness, 0x00189254, FD, 1 */
     extern DICOM_EXPORT const tag ASLSlabThickness;
-    /** ASLTechniqueDescription, (0018,9252), LO, 1,  */
+    /** ASLTechniqueDescription, 0x00189252, LO, 1 */
     extern DICOM_EXPORT const tag ASLTechniqueDescription;
-    /** AssignedLocation, (4010,102A), SH, 1,  */
+    /** AsserterIdentificationSequence, 0x00440103, SQ, 1 */
+    extern DICOM_EXPORT const tag AsserterIdentificationSequence;
+    /** AssertionCodeSequence, 0x00440101, SQ, 1 */
+    extern DICOM_EXPORT const tag AssertionCodeSequence;
+    /** AssertionComments, 0x00440106, UT, 1 */
+    extern DICOM_EXPORT const tag AssertionComments;
+    /** AssertionDateTime, 0x00440104, DT, 1 */
+    extern DICOM_EXPORT const tag AssertionDateTime;
+    /** AssertionExpirationDateTime, 0x00440105, DT, 1 */
+    extern DICOM_EXPORT const tag AssertionExpirationDateTime;
+    /** AssertionUID, 0x00440102, UI, 1 */
+    extern DICOM_EXPORT const tag AssertionUID;
+    /** AssessedAttributeValueSequence, 0x00820010, SQ, 1 */
+    extern DICOM_EXPORT const tag AssessedAttributeValueSequence;
+    /** AssessedSOPInstanceSequence, 0x00820004, SQ, 1 */
+    extern DICOM_EXPORT const tag AssessedSOPInstanceSequence;
+    /** AssessmentLabel, 0x00820023, LO, 1 */
+    extern DICOM_EXPORT const tag AssessmentLabel;
+    /** AssessmentObservationsSequence, 0x00820007, SQ, 1 */
+    extern DICOM_EXPORT const tag AssessmentObservationsSequence;
+    /** AssessmentRequesterSequence, 0x00820017, SQ, 1 */
+    extern DICOM_EXPORT const tag AssessmentRequesterSequence;
+    /** AssessmentSetID, 0x00820016, LO, 1 */
+    extern DICOM_EXPORT const tag AssessmentSetID;
+    /** AssessmentSummary, 0x00820001, CS, 1 */
+    extern DICOM_EXPORT const tag AssessmentSummary;
+    /** AssessmentSummaryDescription, 0x00820003, UT, 1 */
+    extern DICOM_EXPORT const tag AssessmentSummaryDescription;
+    /** AssessmentTypeCodeSequence, 0x00820021, SQ, 1 */
+    extern DICOM_EXPORT const tag AssessmentTypeCodeSequence;
+    /** AssignedLocation, 0x4010102A, SH, 1, RET */
     extern DICOM_EXPORT const tag AssignedLocation;
-    /** AssigningAgencyOrDepartmentCodeSequence, (0040,003A), SQ, 1,  */
+    /** AssigningAgencyOrDepartmentCodeSequence, 0x0040003A, SQ, 1 */
     extern DICOM_EXPORT const tag AssigningAgencyOrDepartmentCodeSequence;
-    /** AssigningFacilitySequence, (0040,0036), SQ, 1,  */
+    /** AssigningFacilitySequence, 0x00400036, SQ, 1 */
     extern DICOM_EXPORT const tag AssigningFacilitySequence;
-    /** AssigningJurisdictionCodeSequence, (0040,0039), SQ, 1,  */
+    /** AssigningJurisdictionCodeSequence, 0x00400039, SQ, 1 */
     extern DICOM_EXPORT const tag AssigningJurisdictionCodeSequence;
-    /** ATDAbilityAssessment, (4010,1014), CS, 1,  */
+    /** ATDAbilityAssessment, 0x40101014, CS, 1, RET */
     extern DICOM_EXPORT const tag ATDAbilityAssessment;
-    /** ATDAssessmentFlag, (4010,1015), CS, 1,  */
+    /** ATDAssessmentFlag, 0x40101015, CS, 1, RET */
     extern DICOM_EXPORT const tag ATDAssessmentFlag;
-    /** ATDAssessmentProbability, (4010,1016), FL, 1,  */
+    /** ATDAssessmentProbability, 0x40101016, FL, 1, RET */
     extern DICOM_EXPORT const tag ATDAssessmentProbability;
-    /** ATDAssessmentSequence, (4010,1038), SQ, 1,  */
+    /** ATDAssessmentSequence, 0x40101038, SQ, 1, RET */
     extern DICOM_EXPORT const tag ATDAssessmentSequence;
-    /** AttachedContours, (3006,0049), IS, 1-n,  */
+    /** AttachedContours, 0x30060049, IS, 1 */
     extern DICOM_EXPORT const tag AttachedContours;
-    /** AttenuationCorrected, (0018,9759), CS, 1,  */
+    /** AttenuationCorrected, 0x00189759, CS, 1 */
     extern DICOM_EXPORT const tag AttenuationCorrected;
-    /** AttenuationCorrectionMethod, (0054,1101), LO, 1,  */
+    /** AttenuationCorrectionMethod, 0x00541101, LO, 1 */
     extern DICOM_EXPORT const tag AttenuationCorrectionMethod;
-    /** AttenuationCorrectionSource, (0018,9738), CS, 1,  */
+    /** AttenuationCorrectionSource, 0x00189738, CS, 1 */
     extern DICOM_EXPORT const tag AttenuationCorrectionSource;
-    /** AttenuationCorrectionTemporalRelationship, (0018,9770), CS, 1,  */
+    /** AttenuationCorrectionTemporalRelationship, 0x00189770, CS, 1 */
     extern DICOM_EXPORT const tag AttenuationCorrectionTemporalRelationship;
-    /** AttributeItemSelector, (0074,1054), UL, 1,  */
+    /** AttributeItemSelector, 0x00741054, UL, 1 */
     extern DICOM_EXPORT const tag AttributeItemSelector;
-    /** AttributeModificationDateTime, (0400,0562), DT, 1,  */
+    /** AttributeModificationDateTime, 0x04000562, DT, 1 */
     extern DICOM_EXPORT const tag AttributeModificationDateTime;
-    /** AttributeOccurrencePointer, (0074,1052), AT, 1,  */
+    /** AttributeOccurrencePointer, 0x00741052, AT, 1 */
     extern DICOM_EXPORT const tag AttributeOccurrencePointer;
-    /** AttributeOccurrencePrivateCreator, (0074,1056), LO, 1,  */
+    /** AttributeOccurrencePrivateCreator, 0x00741056, LO, 1 */
     extern DICOM_EXPORT const tag AttributeOccurrencePrivateCreator;
-    /** AttributeOccurrenceSequence, (0074,1050), SQ, 1,  */
+    /** AttributeOccurrenceSequence, 0x00741050, SQ, 1 */
     extern DICOM_EXPORT const tag AttributeOccurrenceSequence;
-    /** AudioComments, (50XX,200E), LT, 1, RET */
-    extern const range_tag AudioComments;
-    /** AudioSampleData, (50XX,200C), OW or OB, 1, RET */
-    extern const range_tag AudioSampleData;
-    /** AudioSampleFormat, (50XX,2002), US, 1, RET */
-    extern const range_tag AudioSampleFormat;
-    /** AudioType, (50XX,2000), US, 1, RET */
-    extern const range_tag AudioType;
-    /** AuthorizationEquipmentCertificationNumber, (0100,0426), LO, 1,  */
+    /** AudioComments, 0x5000200E, LT, 1, RET */
+    extern DICOM_EXPORT const range_tag AudioComments;
+    /** AudioSampleData, 0x5000200C, OB or OW, 1, RET */
+    extern DICOM_EXPORT const range_tag AudioSampleData;
+    /** AudioSampleFormat, 0x50002002, US, 1, RET */
+    extern DICOM_EXPORT const range_tag AudioSampleFormat;
+    /** AudioType, 0x50002000, US, 1, RET */
+    extern DICOM_EXPORT const range_tag AudioType;
+    /** AuthorizationEquipmentCertificationNumber, 0x01000426, LO, 1 */
     extern DICOM_EXPORT const tag AuthorizationEquipmentCertificationNumber;
-    /** AuthorObserverSequence, (0040,A078), SQ, 1,  */
+    /** AuthorObserverSequence, 0x0040A078, SQ, 1 */
     extern DICOM_EXPORT const tag AuthorObserverSequence;
-    /** AutorefractionLeftEyeSequence, (0046,0052), SQ, 1,  */
+    /** AutoKVPLowerBound, 0x00189946, FD, 1 */
+    extern DICOM_EXPORT const tag AutoKVPLowerBound;
+    /** AutoKVPSelectionType, 0x00189944, CS, 1 */
+    extern DICOM_EXPORT const tag AutoKVPSelectionType;
+    /** AutoKVPUpperBound, 0x00189945, FD, 1 */
+    extern DICOM_EXPORT const tag AutoKVPUpperBound;
+    /** AutorefractionLeftEyeSequence, 0x00460052, SQ, 1 */
     extern DICOM_EXPORT const tag AutorefractionLeftEyeSequence;
-    /** AutorefractionRightEyeSequence, (0046,0050), SQ, 1,  */
+    /** AutorefractionRightEyeSequence, 0x00460050, SQ, 1 */
     extern DICOM_EXPORT const tag AutorefractionRightEyeSequence;
-    /** AveragePulseWidth, (0018,1154), DS, 1,  */
+    /** AutosequenceFlag, 0x00741025, CS, 1 */
+    extern DICOM_EXPORT const tag AutosequenceFlag;
+    /** AverageBeamDosePointDepth, 0x300A008D, FL, 1, RET */
+    extern DICOM_EXPORT const tag AverageBeamDosePointDepth;
+    /** AverageBeamDosePointEquivalentDepth, 0x300A008E, FL, 1, RET */
+    extern DICOM_EXPORT const tag AverageBeamDosePointEquivalentDepth;
+    /** AverageBeamDosePointSourceToExternalContourDistance, 0x300A0131, FL, 1 */
+    extern DICOM_EXPORT const tag AverageBeamDosePointSourceToExternalContourDistance;
+    /** AverageBeamDosePointSSD, 0x300A008F, FL, 1, RET */
+    extern DICOM_EXPORT const tag AverageBeamDosePointSSD;
+    /** AverageCornealPower, 0x00460220, FL, 1 */
+    extern DICOM_EXPORT const tag AverageCornealPower;
+    /** AveragePulseWidth, 0x00181154, DS, 1 */
     extern DICOM_EXPORT const tag AveragePulseWidth;
-    /** AxialAcceptance, (0054,1200), DS, 1,  */
+    /** AxialAcceptance, 0x00541200, DS, 1 */
     extern DICOM_EXPORT const tag AxialAcceptance;
-    /** AxialDetectorDimension, (0018,9727), FD, 1,  */
+    /** AxialDetectorDimension, 0x00189727, FD, 1 */
     extern DICOM_EXPORT const tag AxialDetectorDimension;
-    /** AxialLengthOfTheEye, (0022,0030), FL, 1,  */
+    /** AxialLengthOfTheEye, 0x00220030, FL, 1 */
     extern DICOM_EXPORT const tag AxialLengthOfTheEye;
-    /** AxialMash, (0054,1201), IS, 2,  */
+    /** AxialMash, 0x00541201, IS, 2 */
     extern DICOM_EXPORT const tag AxialMash;
-    /** AxialResolution, (0052,0008), FD, 1,  */
+    /** AxialPower, 0x00460249, FL, 1 */
+    extern DICOM_EXPORT const tag AxialPower;
+    /** AxialResolution, 0x00520008, FD, 1 */
     extern DICOM_EXPORT const tag AxialResolution;
-    /** AxisLabels, (50XX,0040), SH, 1-n, RET */
-    extern const range_tag AxisLabels;
-    /** AxisOfRotation, (0066,001B), FL, 3,  */
+    /** AxisLabels, 0x50000040, SH, 1, RET */
+    extern DICOM_EXPORT const range_tag AxisLabels;
+    /** AxisOfRotation, 0x0066001B, FL, 3 */
     extern DICOM_EXPORT const tag AxisOfRotation;
-    /** AxisUnits, (50XX,0030), SH, 1-n, RET */
-    extern const range_tag AxisUnits;
-    /** BackgroundColor, (0046,0092), CS, 1,  */
+    /** AxisUnits, 0x50000030, SH, 1, RET */
+    extern DICOM_EXPORT const range_tag AxisUnits;
+    /** B1rms, 0x00181320, FL, 1 */
+    extern DICOM_EXPORT const tag B1rms;
+    /** BackgroundColor, 0x00460092, CS, 1 */
     extern DICOM_EXPORT const tag BackgroundColor;
-    /** BackgroundIlluminationColorCodeSequence, (0024,0024), SQ, 1,  */
+    /** BackgroundIlluminationColorCodeSequence, 0x00240024, SQ, 1 */
     extern DICOM_EXPORT const tag BackgroundIlluminationColorCodeSequence;
-    /** BackgroundLuminance, (0024,0020), FL, 1,  */
+    /** BackgroundLuminance, 0x00240020, FL, 1 */
     extern DICOM_EXPORT const tag BackgroundLuminance;
-    /** BadPixelImage, (0014,3080), OB, 1,  */
+    /** BadPixelImage, 0x00143080, OB, 1, RET */
     extern DICOM_EXPORT const tag BadPixelImage;
-    /** BarcodeSymbology, (2200,0006), CS, 1,  */
+    /** BarcodeSymbology, 0x22000006, CS, 1 */
     extern DICOM_EXPORT const tag BarcodeSymbology;
-    /** BarcodeValue, (2200,0005), LT, 1,  */
+    /** BarcodeValue, 0x22000005, LT, 1 */
     extern DICOM_EXPORT const tag BarcodeValue;
-    /** BaselineCorrection, (0018,9067), CS, 1,  */
+    /** BaselineCorrection, 0x00189067, CS, 1 */
     extern DICOM_EXPORT const tag BaselineCorrection;
-    /** BasicColorImageSequence, (2020,0111), SQ, 1,  */
+    /** BasicColorImageSequence, 0x20200111, SQ, 1 */
     extern DICOM_EXPORT const tag BasicColorImageSequence;
-    /** BasicGrayscaleImageSequence, (2020,0110), SQ, 1,  */
+    /** BasicGrayscaleImageSequence, 0x20200110, SQ, 1 */
     extern DICOM_EXPORT const tag BasicGrayscaleImageSequence;
-    /** BasisMaterialsCodeSequence, (4010,1045), SQ, 1,  */
+    /** BasisMaterialsCodeSequence, 0x40101045, SQ, 1, RET */
     extern DICOM_EXPORT const tag BasisMaterialsCodeSequence;
-    /** BeamAngle, (0018,9449), FL, 1,  */
+    /** BeamAngle, 0x00189449, FL, 1 */
     extern DICOM_EXPORT const tag BeamAngle;
-    /** BeamCurrentModulationID, (300A,034C), SH, 1,  */
+    /** BeamCurrentModulationID, 0x300A034C, SH, 1 */
     extern DICOM_EXPORT const tag BeamCurrentModulationID;
-    /** BeamDescription, (300A,00C3), ST, 1,  */
+    /** BeamDeliveryDurationLimit, 0x300A00C5, FD, 1 */
+    extern DICOM_EXPORT const tag BeamDeliveryDurationLimit;
+    /** BeamDescription, 0x300A00C3, ST, 1 */
     extern DICOM_EXPORT const tag BeamDescription;
-    /** BeamDose, (300A,0084), DS, 1,  */
+    /** BeamDose, 0x300A0084, DS, 1 */
     extern DICOM_EXPORT const tag BeamDose;
-    /** BeamDosePointDepth, (300A,0088), FL, 1,  */
+    /** BeamDoseMeaning, 0x300A008B, CS, 1 */
+    extern DICOM_EXPORT const tag BeamDoseMeaning;
+    /** BeamDosePointDepth, 0x300A0088, FL, 1 */
     extern DICOM_EXPORT const tag BeamDosePointDepth;
-    /** BeamDosePointEquivalentDepth, (300A,0089), FL, 1,  */
+    /** BeamDosePointEquivalentDepth, 0x300A0089, FL, 1 */
     extern DICOM_EXPORT const tag BeamDosePointEquivalentDepth;
-    /** BeamDosePointSSD, (300A,008A), FL, 1,  */
+    /** BeamDosePointSSD, 0x300A008A, FL, 1 */
     extern DICOM_EXPORT const tag BeamDosePointSSD;
-    /** BeamDoseSpecificationPoint, (300A,0082), DS, 3,  */
+    /** BeamDoseSpecificationPoint, 0x300A0082, DS, 3 */
     extern DICOM_EXPORT const tag BeamDoseSpecificationPoint;
-    /** BeamLimitingDeviceAngle, (300A,0120), DS, 1,  */
+    /** BeamDoseType, 0x300A0090, CS, 1 */
+    extern DICOM_EXPORT const tag BeamDoseType;
+    /** BeamDoseVerificationControlPointSequence, 0x300A008C, SQ, 1 */
+    extern DICOM_EXPORT const tag BeamDoseVerificationControlPointSequence;
+    /** BeamLimitingDeviceAngle, 0x300A0120, DS, 1 */
     extern DICOM_EXPORT const tag BeamLimitingDeviceAngle;
-    /** BeamLimitingDeviceAngleTolerance, (300A,0046), DS, 1,  */
+    /** BeamLimitingDeviceAngleTolerance, 0x300A0046, DS, 1 */
     extern DICOM_EXPORT const tag BeamLimitingDeviceAngleTolerance;
-    /** BeamLimitingDeviceLeafPairsSequence, (3008,00A0), SQ, 1,  */
+    /** BeamLimitingDeviceLeafPairsSequence, 0x300800A0, SQ, 1 */
     extern DICOM_EXPORT const tag BeamLimitingDeviceLeafPairsSequence;
-    /** BeamLimitingDevicePositionSequence, (300A,011A), SQ, 1,  */
+    /** BeamLimitingDevicePositionSequence, 0x300A011A, SQ, 1 */
     extern DICOM_EXPORT const tag BeamLimitingDevicePositionSequence;
-    /** BeamLimitingDevicePositionTolerance, (300A,004A), DS, 1,  */
+    /** BeamLimitingDevicePositionTolerance, 0x300A004A, DS, 1 */
     extern DICOM_EXPORT const tag BeamLimitingDevicePositionTolerance;
-    /** BeamLimitingDeviceRotationDirection, (300A,0121), CS, 1,  */
+    /** BeamLimitingDeviceRotationDirection, 0x300A0121, CS, 1 */
     extern DICOM_EXPORT const tag BeamLimitingDeviceRotationDirection;
-    /** BeamLimitingDeviceSequence, (300A,00B6), SQ, 1,  */
+    /** BeamLimitingDeviceSequence, 0x300A00B6, SQ, 1 */
     extern DICOM_EXPORT const tag BeamLimitingDeviceSequence;
-    /** BeamLimitingDeviceToleranceSequence, (300A,0048), SQ, 1,  */
+    /** BeamLimitingDeviceToleranceSequence, 0x300A0048, SQ, 1 */
     extern DICOM_EXPORT const tag BeamLimitingDeviceToleranceSequence;
-    /** BeamMeterset, (300A,0086), DS, 1,  */
+    /** BeamMeterset, 0x300A0086, DS, 1 */
     extern DICOM_EXPORT const tag BeamMeterset;
-    /** BeamName, (300A,00C2), LO, 1,  */
+    /** BeamName, 0x300A00C2, LO, 1 */
     extern DICOM_EXPORT const tag BeamName;
-    /** BeamNumber, (300A,00C0), IS, 1,  */
+    /** BeamNumber, 0x300A00C0, IS, 1 */
     extern DICOM_EXPORT const tag BeamNumber;
-    /** BeamOrderIndex, (0074,1324), UL, 1,  */
+    /** BeamOrderIndex, 0x00741324, UL, 1 */
     extern DICOM_EXPORT const tag BeamOrderIndex;
-    /** BeamOrderIndexTrial, (0074,1024), IS, 1, RET */
+    /** BeamOrderIndexTrial, 0x00741024, IS, 1, RET */
     extern DICOM_EXPORT const tag BeamOrderIndexTrial;
-    /** BeamSequence, (300A,00B0), SQ, 1,  */
+    /** BeamSequence, 0x300A00B0, SQ, 1 */
     extern DICOM_EXPORT const tag BeamSequence;
-    /** BeamSpotSize, (0052,0003), FD, 1,  */
+    /** BeamSpotSize, 0x00520003, FD, 1 */
     extern DICOM_EXPORT const tag BeamSpotSize;
-    /** BeamStopperPosition, (3008,0230), CS, 1,  */
+    /** BeamStopperPosition, 0x30080230, CS, 1 */
     extern DICOM_EXPORT const tag BeamStopperPosition;
-    /** BeamTaskSequence, (0074,1020), SQ, 1,  */
+    /** BeamTaskSequence, 0x00741020, SQ, 1 */
     extern DICOM_EXPORT const tag BeamTaskSequence;
-    /** BeamTaskType, (0074,1022), CS, 1,  */
+    /** BeamTaskType, 0x00741022, CS, 1 */
     extern DICOM_EXPORT const tag BeamTaskType;
-    /** BeamType, (300A,00C4), CS, 1,  */
+    /** BeamType, 0x300A00C4, CS, 1 */
     extern DICOM_EXPORT const tag BeamType;
-    /** BeatRejectionFlag, (0018,1080), CS, 1,  */
+    /** BeatRejectionFlag, 0x00181080, CS, 1 */
     extern DICOM_EXPORT const tag BeatRejectionFlag;
-    /** BeltHeight, (4010,1062), FL, 1,  */
+    /** BeltHeight, 0x40101062, FL, 1, RET */
     extern DICOM_EXPORT const tag BeltHeight;
-    /** BibliographicCitationTrial, (0040,A16A), ST, 1, RET */
+    /** BibliographicCitationTrial, 0x0040A16A, ST, 1, RET */
     extern DICOM_EXPORT const tag BibliographicCitationTrial;
-    /** BillingItemSequence, (0040,0296), SQ, 1,  */
+    /** BillingItemSequence, 0x00400296, SQ, 1 */
     extern DICOM_EXPORT const tag BillingItemSequence;
-    /** BillingProcedureStepSequence, (0040,0320), SQ, 1,  */
+    /** BillingProcedureStepSequence, 0x00400320, SQ, 1 */
     extern DICOM_EXPORT const tag BillingProcedureStepSequence;
-    /** BillingSuppliesAndDevicesSequence, (0040,0324), SQ, 1,  */
+    /** BillingSuppliesAndDevicesSequence, 0x00400324, SQ, 1 */
     extern DICOM_EXPORT const tag BillingSuppliesAndDevicesSequence;
-    /** BiPlaneAcquisitionSequence, (0028,5000), SQ, 1, RET */
+    /** BiopsyTargetSequence, 0x00182041, SQ, 1 */
+    extern DICOM_EXPORT const tag BiopsyTargetSequence;
+    /** BiPlaneAcquisitionSequence, 0x00285000, SQ, 1, RET */
     extern DICOM_EXPORT const tag BiPlaneAcquisitionSequence;
-    /** BitsAllocated, (0028,0100), US, 1,  */
+    /** BitsAllocated, 0x00280100, US, 1 */
     extern DICOM_EXPORT const tag BitsAllocated;
-    /** BitsForCodeWord, (0028,08X4), US, 1, RET */
-    extern const range_tag BitsForCodeWord;
-    /** BitsGrouped, (0028,0069), US, 1, RET */
+    /** BitsForCodeWord, 0x00280804, US, 1, RET */
+    extern DICOM_EXPORT const range_tag BitsForCodeWord;
+    /** BitsGrouped, 0x00280069, US, 1, RET */
     extern DICOM_EXPORT const tag BitsGrouped;
-    /** BitsMappedToColorLookupTable, (0028,1403), US, 1,  */
+    /** BitsMappedToColorLookupTable, 0x00281403, US, 1 */
     extern DICOM_EXPORT const tag BitsMappedToColorLookupTable;
-    /** BitsStored, (0028,0101), US, 1,  */
+    /** BitsStored, 0x00280101, US, 1 */
     extern DICOM_EXPORT const tag BitsStored;
-    /** BlendingLookupTableData, (0028,1408), OW, 1,  */
+    /** BlendingDisplayInputSequence, 0x00701B03, SQ, 1 */
+    extern DICOM_EXPORT const tag BlendingDisplayInputSequence;
+    /** BlendingDisplaySequence, 0x00701B04, SQ, 1 */
+    extern DICOM_EXPORT const tag BlendingDisplaySequence;
+    /** BlendingInputNumber, 0x00701B02, US, 1 */
+    extern DICOM_EXPORT const tag BlendingInputNumber;
+    /** BlendingLookupTableData, 0x00281408, OW, 1 */
     extern DICOM_EXPORT const tag BlendingLookupTableData;
-    /** BlendingLookupTableDescriptor, (0028,1407), US, 3,  */
+    /** BlendingLookupTableDescriptor, 0x00281407, US, 3 */
     extern DICOM_EXPORT const tag BlendingLookupTableDescriptor;
-    /** BlendingLUT1Sequence, (0028,1404), SQ, 1,  */
+    /** BlendingLUT1Sequence, 0x00281404, SQ, 1 */
     extern DICOM_EXPORT const tag BlendingLUT1Sequence;
-    /** BlendingLUT1TransferFunction, (0028,1405), CS, 1,  */
+    /** BlendingLUT1TransferFunction, 0x00281405, CS, 1 */
     extern DICOM_EXPORT const tag BlendingLUT1TransferFunction;
-    /** BlendingLUT2Sequence, (0028,140C), SQ, 1,  */
+    /** BlendingLUT2Sequence, 0x0028140C, SQ, 1 */
     extern DICOM_EXPORT const tag BlendingLUT2Sequence;
-    /** BlendingLUT2TransferFunction, (0028,140D), CS, 1,  */
+    /** BlendingLUT2TransferFunction, 0x0028140D, CS, 1 */
     extern DICOM_EXPORT const tag BlendingLUT2TransferFunction;
-    /** BlendingOperationType, (0072,0500), CS, 1,  */
+    /** BlendingMode, 0x00701B06, CS, 1 */
+    extern DICOM_EXPORT const tag BlendingMode;
+    /** BlendingOperationType, 0x00720500, CS, 1 */
     extern DICOM_EXPORT const tag BlendingOperationType;
-    /** BlendingPosition, (0070,0405), CS, 1,  */
+    /** BlendingPosition, 0x00700405, CS, 1 */
     extern DICOM_EXPORT const tag BlendingPosition;
-    /** BlendingSequence, (0070,0402), SQ, 1,  */
+    /** BlendingSequence, 0x00700402, SQ, 1 */
     extern DICOM_EXPORT const tag BlendingSequence;
-    /** BlendingWeightConstant, (0028,1406), FD, 1,  */
+    /** BlendingWeightConstant, 0x00281406, FD, 1 */
     extern DICOM_EXPORT const tag BlendingWeightConstant;
-    /** BlindSpotLocalized, (0024,0106), CS, 1,  */
+    /** BlindSpotLocalized, 0x00240106, CS, 1 */
     extern DICOM_EXPORT const tag BlindSpotLocalized;
-    /** BlindSpotXCoordinate, (0024,0107), FL, 1,  */
+    /** BlindSpotXCoordinate, 0x00240107, FL, 1 */
     extern DICOM_EXPORT const tag BlindSpotXCoordinate;
-    /** BlindSpotYCoordinate, (0024,0108), FL, 1,  */
+    /** BlindSpotYCoordinate, 0x00240108, FL, 1 */
     extern DICOM_EXPORT const tag BlindSpotYCoordinate;
-    /** BlockColumns, (0028,0092), US, 1, RET */
+    /** BlockColumns, 0x00280092, US, 1, RET */
     extern DICOM_EXPORT const tag BlockColumns;
-    /** BlockData, (300A,0106), DS, 2-2n,  */
+    /** BlockData, 0x300A0106, DS, 2 */
     extern DICOM_EXPORT const tag BlockData;
-    /** BlockDivergence, (300A,00FA), CS, 1,  */
+    /** BlockDivergence, 0x300A00FA, CS, 1 */
     extern DICOM_EXPORT const tag BlockDivergence;
-    /** BlockedPixels, (0028,0090), CS, 1, RET */
+    /** BlockedPixels, 0x00280090, CS, 1, RET */
     extern DICOM_EXPORT const tag BlockedPixels;
-    /** BlockMountingPosition, (300A,00FB), CS, 1,  */
+    /** BlockIdentifyingInformationStatus, 0x00080303, CS, 1 */
+    extern DICOM_EXPORT const tag BlockIdentifyingInformationStatus;
+    /** BlockMountingPosition, 0x300A00FB, CS, 1 */
     extern DICOM_EXPORT const tag BlockMountingPosition;
-    /** BlockName, (300A,00FE), LO, 1,  */
+    /** BlockName, 0x300A00FE, LO, 1 */
     extern DICOM_EXPORT const tag BlockName;
-    /** BlockNumber, (300A,00FC), IS, 1,  */
+    /** BlockNumber, 0x300A00FC, IS, 1 */
     extern DICOM_EXPORT const tag BlockNumber;
-    /** BlockNumberOfPoints, (300A,0104), IS, 1,  */
+    /** BlockNumberOfPoints, 0x300A0104, IS, 1 */
     extern DICOM_EXPORT const tag BlockNumberOfPoints;
-    /** BlockRows, (0028,0091), US, 1, RET */
+    /** BlockRows, 0x00280091, US, 1, RET */
     extern DICOM_EXPORT const tag BlockRows;
-    /** BlockSequence, (300A,00F4), SQ, 1,  */
+    /** BlockSequence, 0x300A00F4, SQ, 1 */
     extern DICOM_EXPORT const tag BlockSequence;
-    /** BlockThickness, (300A,0100), DS, 1,  */
+    /** BlockSlabNumber, 0x300A0443, US, 1 */
+    extern DICOM_EXPORT const tag BlockSlabNumber;
+    /** BlockSlabSequence, 0x300A0441, SQ, 1 */
+    extern DICOM_EXPORT const tag BlockSlabSequence;
+    /** BlockSlabThickness, 0x300A0442, DS, 1 */
+    extern DICOM_EXPORT const tag BlockSlabThickness;
+    /** BlockThickness, 0x300A0100, DS, 1 */
     extern DICOM_EXPORT const tag BlockThickness;
-    /** BlockTransmission, (300A,0102), DS, 1,  */
+    /** BlockTransmission, 0x300A0102, DS, 1 */
     extern DICOM_EXPORT const tag BlockTransmission;
-    /** BlockTrayID, (300A,00F5), SH, 1,  */
+    /** BlockTrayID, 0x300A00F5, SH, 1 */
     extern DICOM_EXPORT const tag BlockTrayID;
-    /** BlockType, (300A,00F8), CS, 1,  */
+    /** BlockType, 0x300A00F8, CS, 1 */
     extern DICOM_EXPORT const tag BlockType;
-    /** BloodSignalNulling, (0018,9022), CS, 1,  */
+    /** BloodSignalNulling, 0x00189022, CS, 1 */
     extern DICOM_EXPORT const tag BloodSignalNulling;
-    /** BluePaletteColorLookupTableData, (0028,1203), OW, 1,  */
+    /** BluePaletteColorLookupTableData, 0x00281203, OW, 1 */
     extern DICOM_EXPORT const tag BluePaletteColorLookupTableData;
-    /** BluePaletteColorLookupTableDescriptor, (0028,1103), US or SS, 3,  */
+    /** BluePaletteColorLookupTableDescriptor, 0x00281103, US or SS, 3 */
     extern DICOM_EXPORT const tag BluePaletteColorLookupTableDescriptor;
-    /** BoardingPassID, (4010,101A), SH, 1,  */
+    /** BoardingPassID, 0x4010101A, SH, 1, RET */
     extern DICOM_EXPORT const tag BoardingPassID;
-    /** BodyPartExamined, (0018,0015), CS, 1,  */
+    /** BodyPartExamined, 0x00180015, CS, 1 */
     extern DICOM_EXPORT const tag BodyPartExamined;
-    /** BodyPartThickness, (0018,11A0), DS, 1,  */
+    /** BodyPartThickness, 0x001811A0, DS, 1 */
     extern DICOM_EXPORT const tag BodyPartThickness;
-    /** Bold, (0070,0249), CS, 1,  */
+    /** Bold, 0x00700249, CS, 1 */
     extern DICOM_EXPORT const tag Bold;
-    /** BolusDescription, (300A,00DD), ST, 1,  */
+    /** BolusDescription, 0x300A00DD, ST, 1 */
     extern DICOM_EXPORT const tag BolusDescription;
-    /** BolusID, (300A,00DC), SH, 1,  */
+    /** BolusID, 0x300A00DC, SH, 1 */
     extern DICOM_EXPORT const tag BolusID;
-    /** BoneThermalIndex, (0018,5024), DS, 1,  */
+    /** BoneThermalIndex, 0x00185024, DS, 1 */
     extern DICOM_EXPORT const tag BoneThermalIndex;
-    /** BorderDensity, (2010,0100), CS, 1,  */
+    /** BorderDensity, 0x20100100, CS, 1 */
     extern DICOM_EXPORT const tag BorderDensity;
-    /** BottomRightHandCornerOfLocalizerArea, (0048,0202), US, 2,  */
+    /** BottomRightHandCornerOfLocalizerArea, 0x00480202, US, 2 */
     extern DICOM_EXPORT const tag BottomRightHandCornerOfLocalizerArea;
-    /** BoundingBoxAnnotationUnits, (0070,0003), CS, 1,  */
+    /** BoundingBoxAnnotationUnits, 0x00700003, CS, 1 */
     extern DICOM_EXPORT const tag BoundingBoxAnnotationUnits;
-    /** BoundingBoxBottomRightHandCorner, (0070,0011), FL, 2,  */
+    /** BoundingBoxBottomRightHandCorner, 0x00700011, FL, 2 */
     extern DICOM_EXPORT const tag BoundingBoxBottomRightHandCorner;
-    /** BoundingBoxTextHorizontalJustification, (0070,0012), CS, 1,  */
+    /** BoundingBoxCrop, 0x00701303, FD, 6 */
+    extern DICOM_EXPORT const tag BoundingBoxCrop;
+    /** BoundingBoxTextHorizontalJustification, 0x00700012, CS, 1 */
     extern DICOM_EXPORT const tag BoundingBoxTextHorizontalJustification;
-    /** BoundingBoxTopLeftHandCorner, (0070,0010), FL, 2,  */
+    /** BoundingBoxTopLeftHandCorner, 0x00700010, FL, 2 */
     extern DICOM_EXPORT const tag BoundingBoxTopLeftHandCorner;
-    /** BoundingPolygon, (4010,101D), FL, 6-n,  */
+    /** BoundingPolygon, 0x4010101D, FL, 6, RET */
     extern DICOM_EXPORT const tag BoundingPolygon;
-    /** BoundingRectangle, (0068,6347), FD, 4,  */
+    /** BoundingRectangle, 0x00686347, FD, 4 */
     extern DICOM_EXPORT const tag BoundingRectangle;
-    /** BrachyAccessoryDeviceID, (300A,0263), SH, 1,  */
+    /** BrachyAccessoryDeviceID, 0x300A0263, SH, 1 */
     extern DICOM_EXPORT const tag BrachyAccessoryDeviceID;
-    /** BrachyAccessoryDeviceName, (300A,0266), LO, 1,  */
+    /** BrachyAccessoryDeviceName, 0x300A0266, LO, 1 */
     extern DICOM_EXPORT const tag BrachyAccessoryDeviceName;
-    /** BrachyAccessoryDeviceNominalThickness, (300A,026A), DS, 1,  */
+    /** BrachyAccessoryDeviceNominalThickness, 0x300A026A, DS, 1 */
     extern DICOM_EXPORT const tag BrachyAccessoryDeviceNominalThickness;
-    /** BrachyAccessoryDeviceNominalTransmission, (300A,026C), DS, 1,  */
+    /** BrachyAccessoryDeviceNominalTransmission, 0x300A026C, DS, 1 */
     extern DICOM_EXPORT const tag BrachyAccessoryDeviceNominalTransmission;
-    /** BrachyAccessoryDeviceNumber, (300A,0262), IS, 1,  */
+    /** BrachyAccessoryDeviceNumber, 0x300A0262, IS, 1 */
     extern DICOM_EXPORT const tag BrachyAccessoryDeviceNumber;
-    /** BrachyAccessoryDeviceSequence, (300A,0260), SQ, 1,  */
+    /** BrachyAccessoryDeviceSequence, 0x300A0260, SQ, 1 */
     extern DICOM_EXPORT const tag BrachyAccessoryDeviceSequence;
-    /** BrachyAccessoryDeviceType, (300A,0264), CS, 1,  */
+    /** BrachyAccessoryDeviceType, 0x300A0264, CS, 1 */
     extern DICOM_EXPORT const tag BrachyAccessoryDeviceType;
-    /** BrachyApplicationSetupDose, (300A,00A4), DS, 1,  */
+    /** BrachyApplicationSetupDose, 0x300A00A4, DS, 1 */
     extern DICOM_EXPORT const tag BrachyApplicationSetupDose;
-    /** BrachyApplicationSetupDoseSpecificationPoint, (300A,00A2), DS, 3,  */
+    /** BrachyApplicationSetupDoseSpecificationPoint, 0x300A00A2, DS, 3 */
     extern DICOM_EXPORT const tag BrachyApplicationSetupDoseSpecificationPoint;
-    /** BrachyControlPointDeliveredSequence, (3008,0160), SQ, 1,  */
+    /** BrachyControlPointDeliveredSequence, 0x30080160, SQ, 1 */
     extern DICOM_EXPORT const tag BrachyControlPointDeliveredSequence;
-    /** BrachyControlPointSequence, (300A,02D0), SQ, 1,  */
+    /** BrachyControlPointSequence, 0x300A02D0, SQ, 1 */
     extern DICOM_EXPORT const tag BrachyControlPointSequence;
-    /** BrachyReferencedDoseReferenceSequence, (300C,0055), SQ, 1,  */
+    /** BrachyPulseControlPointDeliveredSequence, 0x30080173, SQ, 1 */
+    extern DICOM_EXPORT const tag BrachyPulseControlPointDeliveredSequence;
+    /** BrachyReferencedDoseReferenceSequence, 0x300C0055, SQ, 1 */
     extern DICOM_EXPORT const tag BrachyReferencedDoseReferenceSequence;
-    /** BrachyTreatmentTechnique, (300A,0200), CS, 1,  */
+    /** BrachyTaskSequence, 0x00741401, SQ, 1 */
+    extern DICOM_EXPORT const tag BrachyTaskSequence;
+    /** BrachyTreatmentTechnique, 0x300A0200, CS, 1 */
     extern DICOM_EXPORT const tag BrachyTreatmentTechnique;
-    /** BrachyTreatmentType, (300A,0202), CS, 1,  */
+    /** BrachyTreatmentType, 0x300A0202, CS, 1 */
     extern DICOM_EXPORT const tag BrachyTreatmentType;
-    /** BranchOfService, (0010,1081), LO, 1,  */
+    /** BranchOfService, 0x00101081, LO, 1 */
     extern DICOM_EXPORT const tag BranchOfService;
-    /** BreastImplantPresent, (0028,1300), CS, 1,  */
+    /** BreastImplantPresent, 0x00281300, CS, 1 */
     extern DICOM_EXPORT const tag BreastImplantPresent;
-    /** BreedRegistrationNumber, (0010,2295), LO, 1,  */
+    /** BreastSupportIsocenterPrimaryAngle, 0x00189545, FD, 1 */
+    extern DICOM_EXPORT const tag BreastSupportIsocenterPrimaryAngle;
+    /** BreastSupportIsocenterSecondaryAngle, 0x00189546, FD, 1 */
+    extern DICOM_EXPORT const tag BreastSupportIsocenterSecondaryAngle;
+    /** BreastSupportXPositionToIsocenter, 0x00189547, FD, 1 */
+    extern DICOM_EXPORT const tag BreastSupportXPositionToIsocenter;
+    /** BreastSupportYPositionToIsocenter, 0x00189548, FD, 1 */
+    extern DICOM_EXPORT const tag BreastSupportYPositionToIsocenter;
+    /** BreastSupportZPositionToIsocenter, 0x00189549, FD, 1 */
+    extern DICOM_EXPORT const tag BreastSupportZPositionToIsocenter;
+    /** BreedRegistrationNumber, 0x00102295, LO, 1 */
     extern DICOM_EXPORT const tag BreedRegistrationNumber;
-    /** BreedRegistrationSequence, (0010,2294), SQ, 1,  */
+    /** BreedRegistrationSequence, 0x00102294, SQ, 1 */
     extern DICOM_EXPORT const tag BreedRegistrationSequence;
-    /** BreedRegistryCodeSequence, (0010,2296), SQ, 1,  */
+    /** BreedRegistryCodeSequence, 0x00102296, SQ, 1 */
     extern DICOM_EXPORT const tag BreedRegistryCodeSequence;
-    /** BulkMotionCompensationTechnique, (0018,9172), CS, 1,  */
+    /** BridgeResistors, 0x00144088, DS, 1, RET */
+    extern DICOM_EXPORT const tag BridgeResistors;
+    /** BscanCycleTime, 0x00221645, FL, 1 */
+    extern DICOM_EXPORT const tag BscanCycleTime;
+    /** BscanCycleTimeVector, 0x00221646, FL, 1 */
+    extern DICOM_EXPORT const tag BscanCycleTimeVector;
+    /** BscanRate, 0x00221650, FL, 1 */
+    extern DICOM_EXPORT const tag BscanRate;
+    /** BscanSlabThickness, 0x00221643, FL, 1 */
+    extern DICOM_EXPORT const tag BscanSlabThickness;
+    /** BulkMotionCompensationTechnique, 0x00189172, CS, 1 */
     extern DICOM_EXPORT const tag BulkMotionCompensationTechnique;
-    /** BulkMotionSignalSource, (0018,9173), CS, 1,  */
+    /** BulkMotionSignalSource, 0x00189173, CS, 1 */
     extern DICOM_EXPORT const tag BulkMotionSignalSource;
-    /** BulkMotionStatus, (0018,9166), CS, 1, RET */
+    /** BulkMotionStatus, 0x00189166, CS, 1, RET */
     extern DICOM_EXPORT const tag BulkMotionStatus;
-    /** BurnedInAnnotation, (0028,0301), CS, 1,  */
+    /** BurnedInAnnotation, 0x00280301, CS, 1 */
     extern DICOM_EXPORT const tag BurnedInAnnotation;
-    /** CADFileFormat, (0014,0023), ST, 1-n,  */
+    /** CADFileFormat, 0x00140023, ST, 1, RET */
     extern DICOM_EXPORT const tag CADFileFormat;
-    /** CalciumScoringMassFactorDevice, (0018,9352), FL, 3,  */
+    /** CalciumScoringMassFactorDevice, 0x00189352, FL, 3 */
     extern DICOM_EXPORT const tag CalciumScoringMassFactorDevice;
-    /** CalciumScoringMassFactorPatient, (0018,9351), FL, 1,  */
+    /** CalciumScoringMassFactorPatient, 0x00189351, FL, 1 */
     extern DICOM_EXPORT const tag CalciumScoringMassFactorPatient;
-    /** CalculatedAnatomyThickness, (0018,9452), FL, 1,  */
+    /** CalculatedAnatomyThickness, 0x00189452, FL, 1 */
     extern DICOM_EXPORT const tag CalculatedAnatomyThickness;
-    /** CalculatedDoseReferenceDescription, (3008,0074), ST, 1,  */
+    /** CalculatedDoseReferenceDescription, 0x30080074, ST, 1 */
     extern DICOM_EXPORT const tag CalculatedDoseReferenceDescription;
-    /** CalculatedDoseReferenceDoseValue, (3008,0076), DS, 1,  */
+    /** CalculatedDoseReferenceDoseValue, 0x30080076, DS, 1 */
     extern DICOM_EXPORT const tag CalculatedDoseReferenceDoseValue;
-    /** CalculatedDoseReferenceNumber, (3008,0072), IS, 1,  */
+    /** CalculatedDoseReferenceNumber, 0x30080072, IS, 1 */
     extern DICOM_EXPORT const tag CalculatedDoseReferenceNumber;
-    /** CalculatedDoseReferenceSequence, (3008,0070), SQ, 1,  */
+    /** CalculatedDoseReferenceSequence, 0x30080070, SQ, 1 */
     extern DICOM_EXPORT const tag CalculatedDoseReferenceSequence;
-    /** CalculatedFrameList, (0008,1162), UL, 3-3n,  */
+    /** CalculatedFrameList, 0x00081162, UL, 3 */
     extern DICOM_EXPORT const tag CalculatedFrameList;
-    /** CalibrationDataSequence, (0054,0306), SQ, 1,  */
+    /** CalculatedTargetPosition, 0x00182044, FL, 3 */
+    extern DICOM_EXPORT const tag CalculatedTargetPosition;
+    /** CalibrationDataSequence, 0x00540306, SQ, 1 */
     extern DICOM_EXPORT const tag CalibrationDataSequence;
-    /** CalibrationDate, (0014,407E), DA, 1-n,  */
+    /** CalibrationDate, 0x0014407E, DA, 1, RET */
     extern DICOM_EXPORT const tag CalibrationDate;
-    /** CalibrationImage, (0050,0004), CS, 1,  */
+    /** CalibrationImage, 0x00500004, CS, 1 */
     extern DICOM_EXPORT const tag CalibrationImage;
-    /** CalibrationNotes, (0014,3099), LT, 1,  */
+    /** CalibrationNotes, 0x00143099, LT, 1, RET */
     extern DICOM_EXPORT const tag CalibrationNotes;
-    /** CalibrationProcedure, (0014,4072), ST, 1,  */
+    /** CalibrationProcedure, 0x00144072, ST, 1, RET */
     extern DICOM_EXPORT const tag CalibrationProcedure;
-    /** CalibrationSequence, (0018,9455), SQ, 1,  */
+    /** CalibrationSequence, 0x00189455, SQ, 1 */
     extern DICOM_EXPORT const tag CalibrationSequence;
-    /** CalibrationSettingsSequence, (0014,4070), SQ, 1,  */
+    /** CalibrationSettingsSequence, 0x00144070, SQ, 1, RET */
     extern DICOM_EXPORT const tag CalibrationSettingsSequence;
-    /** CalibrationTime, (0014,407C), TM, 1-n,  */
+    /** CalibrationTime, 0x0014407C, TM, 1, RET */
     extern DICOM_EXPORT const tag CalibrationTime;
-    /** CameraAngleOfView, (0022,001E), FL, 1,  */
+    /** CameraAngleOfView, 0x0022001E, FL, 1 */
     extern DICOM_EXPORT const tag CameraAngleOfView;
-    /** CardiacBeatRejectionTechnique, (0018,9169), CS, 1,  */
+    /** CardiacBeatRejectionTechnique, 0x00189169, CS, 1 */
     extern DICOM_EXPORT const tag CardiacBeatRejectionTechnique;
-    /** CardiacCyclePosition, (0018,9236), CS, 1,  */
+    /** CardiacCyclePosition, 0x00189236, CS, 1 */
     extern DICOM_EXPORT const tag CardiacCyclePosition;
-    /** CardiacFramingType, (0018,1064), LO, 1,  */
+    /** CardiacFramingType, 0x00181064, LO, 1 */
     extern DICOM_EXPORT const tag CardiacFramingType;
-    /** CardiacNumberOfImages, (0018,1090), IS, 1,  */
+    /** CardiacNumberOfImages, 0x00181090, IS, 1 */
     extern DICOM_EXPORT const tag CardiacNumberOfImages;
-    /** CardiacRRIntervalSpecified, (0018,9070), FD, 1,  */
+    /** CardiacRRIntervalSpecified, 0x00189070, FD, 1 */
     extern DICOM_EXPORT const tag CardiacRRIntervalSpecified;
-    /** CardiacSignalSource, (0018,9085), CS, 1,  */
+    /** CardiacSignalSource, 0x00189085, CS, 1 */
     extern DICOM_EXPORT const tag CardiacSignalSource;
-    /** CardiacSynchronizationSequence, (0018,9118), SQ, 1,  */
+    /** CardiacSynchronizationSequence, 0x00189118, SQ, 1 */
     extern DICOM_EXPORT const tag CardiacSynchronizationSequence;
-    /** CardiacSynchronizationTechnique, (0018,9037), CS, 1,  */
+    /** CardiacSynchronizationTechnique, 0x00189037, CS, 1 */
     extern DICOM_EXPORT const tag CardiacSynchronizationTechnique;
-    /** CArmPositionerTabletopRelationship, (0018,9474), CS, 1,  */
+    /** CArmPositionerTabletopRelationship, 0x00189474, CS, 1 */
     extern DICOM_EXPORT const tag CArmPositionerTabletopRelationship;
-    /** CarrierID, (4010,1058), SH, 1,  */
+    /** CarrierID, 0x40101058, SH, 1, RET */
     extern DICOM_EXPORT const tag CarrierID;
-    /** CarrierIDAssigningAuthority, (4010,1059), CS, 1,  */
+    /** CarrierIDAssigningAuthority, 0x40101059, CS, 1, RET */
     extern DICOM_EXPORT const tag CarrierIDAssigningAuthority;
-    /** CassetteID, (0018,1007), LO, 1,  */
+    /** CassetteID, 0x00181007, LO, 1 */
     extern DICOM_EXPORT const tag CassetteID;
-    /** CassetteOrientation, (0018,1402), CS, 1,  */
+    /** CassetteOrientation, 0x00181402, CS, 1 */
     extern DICOM_EXPORT const tag CassetteOrientation;
-    /** CassetteSize, (0018,1403), CS, 1,  */
+    /** CassetteSize, 0x00181403, CS, 1 */
     extern DICOM_EXPORT const tag CassetteSize;
-    /** CatchTrialsDataFlag, (0024,0055), CS, 1,  */
+    /** CatchTrialsDataFlag, 0x00240055, CS, 1 */
     extern DICOM_EXPORT const tag CatchTrialsDataFlag;
-    /** CatheterDirectionOfRotation, (0052,0031), CS, 1,  */
+    /** CatheterDirectionOfRotation, 0x00520031, CS, 1 */
     extern DICOM_EXPORT const tag CatheterDirectionOfRotation;
-    /** CatheterRotationalRate, (0052,0013), FD, 1,  */
+    /** CatheterRotationalRate, 0x00520013, FD, 1 */
     extern DICOM_EXPORT const tag CatheterRotationalRate;
-    /** CenterOfCircularCollimator, (0018,1710), IS, 2,  */
+    /** CenterOfCircularCollimator, 0x00181710, IS, 2 */
     extern DICOM_EXPORT const tag CenterOfCircularCollimator;
-    /** CenterOfCircularExposureControlSensingRegion, (0018,9440), SS, 2,  */
+    /** CenterOfCircularExposureControlSensingRegion, 0x00189440, SS, 2 */
     extern DICOM_EXPORT const tag CenterOfCircularExposureControlSensingRegion;
-    /** CenterOfCircularShutter, (0018,1610), IS, 2,  */
+    /** CenterOfCircularShutter, 0x00181610, IS, 2 */
     extern DICOM_EXPORT const tag CenterOfCircularShutter;
-    /** CenterOfMass, (4010,101B), FL, 3,  */
+    /** CenterOfMass, 0x4010101B, FL, 3, RET */
     extern DICOM_EXPORT const tag CenterOfMass;
-    /** CenterOfPTO, (4010,101C), FL, 3,  */
+    /** CenterOfPTO, 0x4010101C, FL, 3, RET */
     extern DICOM_EXPORT const tag CenterOfPTO;
-    /** CenterOfRotation, (0066,001C), FL, 3,  */
+    /** CenterOfRotation, 0x0066001C, FL, 3 */
     extern DICOM_EXPORT const tag CenterOfRotation;
-    /** CenterOfRotationOffset, (0018,1145), DS, 1,  */
+    /** CenterOfRotationOffset, 0x00181145, DS, 1 */
     extern DICOM_EXPORT const tag CenterOfRotationOffset;
-    /** CertificateOfSigner, (0400,0115), OB, 1,  */
+    /** CertificateOfSigner, 0x04000115, OB, 1 */
     extern DICOM_EXPORT const tag CertificateOfSigner;
-    /** CertificateType, (0400,0110), CS, 1,  */
+    /** CertificateType, 0x04000110, CS, 1 */
     extern DICOM_EXPORT const tag CertificateType;
-    /** CertifiedTimestamp, (0400,0310), OB, 1,  */
+    /** CertifiedTimestamp, 0x04000310, OB, 1 */
     extern DICOM_EXPORT const tag CertifiedTimestamp;
-    /** CertifiedTimestampType, (0400,0305), CS, 1,  */
+    /** CertifiedTimestampType, 0x04000305, CS, 1 */
     extern DICOM_EXPORT const tag CertifiedTimestampType;
-    /** ChannelBaseline, (003A,0213), DS, 1,  */
+    /** ChairHeadFramePosition, 0x300A0151, DS, 1 */
+    extern DICOM_EXPORT const tag ChairHeadFramePosition;
+    /** ChairHeadFramePositionTolerance, 0x300A0153, DS, 1 */
+    extern DICOM_EXPORT const tag ChairHeadFramePositionTolerance;
+    /** ChannelBaseline, 0x003A0213, DS, 1 */
     extern DICOM_EXPORT const tag ChannelBaseline;
-    /** ChannelDefinitionSequence, (003A,0200), SQ, 1,  */
+    /** ChannelDefinitionSequence, 0x003A0200, SQ, 1 */
     extern DICOM_EXPORT const tag ChannelDefinitionSequence;
-    /** ChannelDerivationDescription, (003A,020C), LO, 1,  */
+    /** ChannelDeliveryContinuationSequence, 0x0074140D, SQ, 1 */
+    extern DICOM_EXPORT const tag ChannelDeliveryContinuationSequence;
+    /** ChannelDeliveryOrderIndex, 0x0074140C, IS, 1 */
+    extern DICOM_EXPORT const tag ChannelDeliveryOrderIndex;
+    /** ChannelDeliveryOrderSequence, 0x00741405, SQ, 1 */
+    extern DICOM_EXPORT const tag ChannelDeliveryOrderSequence;
+    /** ChannelDerivationDescription, 0x003A020C, LO, 1 */
     extern DICOM_EXPORT const tag ChannelDerivationDescription;
-    /** ChannelDescriptionCodeSequence, (0022,001A), SQ, 1,  */
+    /** ChannelDescriptionCodeSequence, 0x0022001A, SQ, 1 */
     extern DICOM_EXPORT const tag ChannelDescriptionCodeSequence;
-    /** ChannelDisplaySequence, (003A,0242), SQ, 1,  */
+    /** ChannelDisplaySequence, 0x003A0242, SQ, 1 */
     extern DICOM_EXPORT const tag ChannelDisplaySequence;
-    /** ChannelIdentificationCode, (003A,0301), IS, 1,  */
+    /** ChannelEffectiveLength, 0x300A0271, DS, 1 */
+    extern DICOM_EXPORT const tag ChannelEffectiveLength;
+    /** ChannelIdentificationCode, 0x003A0301, IS, 1 */
     extern DICOM_EXPORT const tag ChannelIdentificationCode;
-    /** ChannelLabel, (003A,0203), SH, 1,  */
+    /** ChannelInnerLength, 0x300A0272, DS, 1 */
+    extern DICOM_EXPORT const tag ChannelInnerLength;
+    /** ChannelLabel, 0x003A0203, SH, 1 */
     extern DICOM_EXPORT const tag ChannelLabel;
-    /** ChannelLength, (300A,0284), DS, 1,  */
+    /** ChannelLength, 0x300A0284, DS, 1 */
     extern DICOM_EXPORT const tag ChannelLength;
-    /** ChannelMaximumValue, (5400,0112), OB or OW, 1,  */
+    /** ChannelMaximumValue, 0x54000112, OB or OW, 1 */
     extern DICOM_EXPORT const tag ChannelMaximumValue;
-    /** ChannelMinimumValue, (5400,0110), OB or OW, 1,  */
+    /** ChannelMinimumValue, 0x54000110, OB or OW, 1 */
     extern DICOM_EXPORT const tag ChannelMinimumValue;
-    /** ChannelMode, (003A,0302), CS, 1,  */
+    /** ChannelMode, 0x003A0302, CS, 1 */
     extern DICOM_EXPORT const tag ChannelMode;
-    /** ChannelNumber, (300A,0282), IS, 1,  */
+    /** ChannelNumber, 0x300A0282, IS, 1 */
     extern DICOM_EXPORT const tag ChannelNumber;
-    /** ChannelOffset, (003A,0218), DS, 1,  */
+    /** ChannelOffset, 0x003A0218, DS, 1 */
     extern DICOM_EXPORT const tag ChannelOffset;
-    /** ChannelPosition, (003A,0245), FL, 1,  */
+    /** ChannelOverlap, 0x0014409F, DS, 1, RET */
+    extern DICOM_EXPORT const tag ChannelOverlap;
+    /** ChannelPosition, 0x003A0245, FL, 1 */
     extern DICOM_EXPORT const tag ChannelPosition;
-    /** ChannelRecommendedDisplayCIELabValue, (003A,0244), US, 3,  */
+    /** ChannelRecommendedDisplayCIELabValue, 0x003A0244, US, 3 */
     extern DICOM_EXPORT const tag ChannelRecommendedDisplayCIELabValue;
-    /** ChannelSampleSkew, (003A,0215), DS, 1,  */
+    /** ChannelSampleSkew, 0x003A0215, DS, 1 */
     extern DICOM_EXPORT const tag ChannelSampleSkew;
-    /** ChannelSensitivity, (003A,0210), DS, 1,  */
+    /** ChannelSensitivity, 0x003A0210, DS, 1 */
     extern DICOM_EXPORT const tag ChannelSensitivity;
-    /** ChannelSensitivityCorrectionFactor, (003A,0212), DS, 1,  */
+    /** ChannelSensitivityCorrectionFactor, 0x003A0212, DS, 1 */
     extern DICOM_EXPORT const tag ChannelSensitivityCorrectionFactor;
-    /** ChannelSensitivityUnitsSequence, (003A,0211), SQ, 1,  */
+    /** ChannelSensitivityUnitsSequence, 0x003A0211, SQ, 1 */
     extern DICOM_EXPORT const tag ChannelSensitivityUnitsSequence;
-    /** ChannelSequence, (300A,0280), SQ, 1,  */
+    /** ChannelSequence, 0x300A0280, SQ, 1 */
     extern DICOM_EXPORT const tag ChannelSequence;
-    /** ChannelShieldID, (300A,02B3), SH, 1,  */
+    /** ChannelSettingsSequence, 0x00144091, SQ, 1, RET */
+    extern DICOM_EXPORT const tag ChannelSettingsSequence;
+    /** ChannelShieldID, 0x300A02B3, SH, 1 */
     extern DICOM_EXPORT const tag ChannelShieldID;
-    /** ChannelShieldName, (300A,02B4), LO, 1,  */
+    /** ChannelShieldName, 0x300A02B4, LO, 1 */
     extern DICOM_EXPORT const tag ChannelShieldName;
-    /** ChannelShieldNominalThickness, (300A,02B8), DS, 1,  */
+    /** ChannelShieldNominalThickness, 0x300A02B8, DS, 1 */
     extern DICOM_EXPORT const tag ChannelShieldNominalThickness;
-    /** ChannelShieldNominalTransmission, (300A,02BA), DS, 1,  */
+    /** ChannelShieldNominalTransmission, 0x300A02BA, DS, 1 */
     extern DICOM_EXPORT const tag ChannelShieldNominalTransmission;
-    /** ChannelShieldNumber, (300A,02B2), IS, 1,  */
+    /** ChannelShieldNumber, 0x300A02B2, IS, 1 */
     extern DICOM_EXPORT const tag ChannelShieldNumber;
-    /** ChannelShieldSequence, (300A,02B0), SQ, 1,  */
+    /** ChannelShieldSequence, 0x300A02B0, SQ, 1 */
     extern DICOM_EXPORT const tag ChannelShieldSequence;
-    /** ChannelSourceModifiersSequence, (003A,0209), SQ, 1,  */
+    /** ChannelSourceModifiersSequence, 0x003A0209, SQ, 1 */
     extern DICOM_EXPORT const tag ChannelSourceModifiersSequence;
-    /** ChannelSourceSequence, (003A,0208), SQ, 1,  */
+    /** ChannelSourceSequence, 0x003A0208, SQ, 1 */
     extern DICOM_EXPORT const tag ChannelSourceSequence;
-    /** ChannelStatus, (003A,0205), CS, 1-n,  */
+    /** ChannelStatus, 0x003A0205, CS, 1 */
     extern DICOM_EXPORT const tag ChannelStatus;
-    /** ChannelTimeSkew, (003A,0214), DS, 1,  */
+    /** ChannelThreshold, 0x00144092, DS, 1, RET */
+    extern DICOM_EXPORT const tag ChannelThreshold;
+    /** ChannelTimeSkew, 0x003A0214, DS, 1 */
     extern DICOM_EXPORT const tag ChannelTimeSkew;
-    /** ChannelTotalTime, (300A,0286), DS, 1,  */
+    /** ChannelTotalTime, 0x300A0286, DS, 1 */
     extern DICOM_EXPORT const tag ChannelTotalTime;
-    /** ChannelWidth, (0046,0042), FD, 1,  */
+    /** ChannelWidth, 0x00460042, FD, 1 */
     extern DICOM_EXPORT const tag ChannelWidth;
-    /** ChemicalShiftMaximumIntegrationLimitInHz, (0018,9196), FD, 1, RET */
+    /** ChemicalShiftMaximumIntegrationLimitInHz, 0x00189196, FD, 1, RET */
     extern DICOM_EXPORT const tag ChemicalShiftMaximumIntegrationLimitInHz;
-    /** ChemicalShiftMaximumIntegrationLimitInppm, (0018,9296), FD, 1,  */
+    /** ChemicalShiftMaximumIntegrationLimitInppm, 0x00189296, FD, 1 */
     extern DICOM_EXPORT const tag ChemicalShiftMaximumIntegrationLimitInppm;
-    /** ChemicalShiftMinimumIntegrationLimitInHz, (0018,9195), FD, 1, RET */
+    /** ChemicalShiftMinimumIntegrationLimitInHz, 0x00189195, FD, 1, RET */
     extern DICOM_EXPORT const tag ChemicalShiftMinimumIntegrationLimitInHz;
-    /** ChemicalShiftMinimumIntegrationLimitInppm, (0018,9295), FD, 1,  */
+    /** ChemicalShiftMinimumIntegrationLimitInppm, 0x00189295, FD, 1 */
     extern DICOM_EXPORT const tag ChemicalShiftMinimumIntegrationLimitInppm;
-    /** ChemicalShiftReference, (0018,9053), FD, 1-2,  */
+    /** ChemicalShiftReference, 0x00189053, FD, 1 */
     extern DICOM_EXPORT const tag ChemicalShiftReference;
-    /** ChemicalShiftSequence, (0018,9084), SQ, 1,  */
+    /** ChemicalShiftSequence, 0x00189084, SQ, 1 */
     extern DICOM_EXPORT const tag ChemicalShiftSequence;
-    /** CineRate, (0018,0040), IS, 1,  */
+    /** CIExyWhitePoint, 0x00287018, FL, 2 */
+    extern DICOM_EXPORT const tag CIExyWhitePoint;
+    /** CineRate, 0x00180040, IS, 1 */
     extern DICOM_EXPORT const tag CineRate;
-    /** CineRelativeToRealTime, (0072,0330), FD, 1,  */
+    /** CineRelativeToRealTime, 0x00720330, FD, 1 */
     extern DICOM_EXPORT const tag CineRelativeToRealTime;
-    /** ClinicalTrialCoordinatingCenterName, (0012,0060), LO, 1,  */
+    /** ClinicalTrialCoordinatingCenterName, 0x00120060, LO, 1 */
     extern DICOM_EXPORT const tag ClinicalTrialCoordinatingCenterName;
-    /** ClinicalTrialProtocolEthicsCommitteeApprovalNumber, (0012,0082), LO, 1,  */
+    /** ClinicalTrialProtocolEthicsCommitteeApprovalNumber, 0x00120082, LO, 1 */
     extern DICOM_EXPORT const tag ClinicalTrialProtocolEthicsCommitteeApprovalNumber;
-    /** ClinicalTrialProtocolEthicsCommitteeName, (0012,0081), LO, 1,  */
+    /** ClinicalTrialProtocolEthicsCommitteeName, 0x00120081, LO, 1 */
     extern DICOM_EXPORT const tag ClinicalTrialProtocolEthicsCommitteeName;
-    /** ClinicalTrialProtocolID, (0012,0020), LO, 1,  */
+    /** ClinicalTrialProtocolID, 0x00120020, LO, 1 */
     extern DICOM_EXPORT const tag ClinicalTrialProtocolID;
-    /** ClinicalTrialProtocolName, (0012,0021), LO, 1,  */
+    /** ClinicalTrialProtocolName, 0x00120021, LO, 1 */
     extern DICOM_EXPORT const tag ClinicalTrialProtocolName;
-    /** ClinicalTrialSeriesDescription, (0012,0072), LO, 1,  */
+    /** ClinicalTrialSeriesDescription, 0x00120072, LO, 1 */
     extern DICOM_EXPORT const tag ClinicalTrialSeriesDescription;
-    /** ClinicalTrialSeriesID, (0012,0071), LO, 1,  */
+    /** ClinicalTrialSeriesID, 0x00120071, LO, 1 */
     extern DICOM_EXPORT const tag ClinicalTrialSeriesID;
-    /** ClinicalTrialSiteID, (0012,0030), LO, 1,  */
+    /** ClinicalTrialSiteID, 0x00120030, LO, 1 */
     extern DICOM_EXPORT const tag ClinicalTrialSiteID;
-    /** ClinicalTrialSiteName, (0012,0031), LO, 1,  */
+    /** ClinicalTrialSiteName, 0x00120031, LO, 1 */
     extern DICOM_EXPORT const tag ClinicalTrialSiteName;
-    /** ClinicalTrialSponsorName, (0012,0010), LO, 1,  */
+    /** ClinicalTrialSponsorName, 0x00120010, LO, 1 */
     extern DICOM_EXPORT const tag ClinicalTrialSponsorName;
-    /** ClinicalTrialSubjectID, (0012,0040), LO, 1,  */
+    /** ClinicalTrialSubjectID, 0x00120040, LO, 1 */
     extern DICOM_EXPORT const tag ClinicalTrialSubjectID;
-    /** ClinicalTrialSubjectReadingID, (0012,0042), LO, 1,  */
+    /** ClinicalTrialSubjectReadingID, 0x00120042, LO, 1 */
     extern DICOM_EXPORT const tag ClinicalTrialSubjectReadingID;
-    /** ClinicalTrialTimePointDescription, (0012,0051), ST, 1,  */
+    /** ClinicalTrialTimePointDescription, 0x00120051, ST, 1 */
     extern DICOM_EXPORT const tag ClinicalTrialTimePointDescription;
-    /** ClinicalTrialTimePointID, (0012,0050), LO, 1,  */
+    /** ClinicalTrialTimePointID, 0x00120050, LO, 1 */
     extern DICOM_EXPORT const tag ClinicalTrialTimePointID;
-    /** CoatingMaterialsCodeSequence, (0068,63A4), SQ, 1,  */
+    /** CoatingMaterialsCodeSequence, 0x006863A4, SQ, 1 */
     extern DICOM_EXPORT const tag CoatingMaterialsCodeSequence;
-    /** CodeLabel, (0028,08X0), CS, 1-n, RET */
-    extern const range_tag CodeLabel;
-    /** CodeMeaning, (0008,0104), LO, 1,  */
+    /** CodeLabel, 0x00280800, CS, 1, RET */
+    extern DICOM_EXPORT const range_tag CodeLabel;
+    /** CodeMeaning, 0x00080104, LO, 1 */
     extern DICOM_EXPORT const tag CodeMeaning;
-    /** CodeNumberFormat, (0028,0740), US, 1, RET */
+    /** CodeNumberFormat, 0x00280740, US, 1, RET */
     extern DICOM_EXPORT const tag CodeNumberFormat;
-    /** CodeTableLocation, (0028,08X3), AT, 1-n, RET */
-    extern const range_tag CodeTableLocation;
-    /** CodeValue, (0008,0100), SH, 1,  */
+    /** CodeTableLocation, 0x00280803, AT, 1, RET */
+    extern DICOM_EXPORT const range_tag CodeTableLocation;
+    /** CodeValue, 0x00080100, SH, 1 */
     extern DICOM_EXPORT const tag CodeValue;
-    /** CodingSchemeDesignator, (0008,0102), SH, 1,  */
+    /** CodingSchemeDesignator, 0x00080102, SH, 1 */
     extern DICOM_EXPORT const tag CodingSchemeDesignator;
-    /** CodingSchemeExternalID, (0008,0114), ST, 1,  */
+    /** CodingSchemeExternalID, 0x00080114, ST, 1 */
     extern DICOM_EXPORT const tag CodingSchemeExternalID;
-    /** CodingSchemeIdentificationSequence, (0008,0110), SQ, 1,  */
+    /** CodingSchemeIdentificationSequence, 0x00080110, SQ, 1 */
     extern DICOM_EXPORT const tag CodingSchemeIdentificationSequence;
-    /** CodingSchemeName, (0008,0115), ST, 1,  */
+    /** CodingSchemeName, 0x00080115, ST, 1 */
     extern DICOM_EXPORT const tag CodingSchemeName;
-    /** CodingSchemeRegistry, (0008,0112), LO, 1,  */
+    /** CodingSchemeRegistry, 0x00080112, LO, 1 */
     extern DICOM_EXPORT const tag CodingSchemeRegistry;
-    /** CodingSchemeResponsibleOrganization, (0008,0116), ST, 1,  */
+    /** CodingSchemeResourcesSequence, 0x00080109, SQ, 1 */
+    extern DICOM_EXPORT const tag CodingSchemeResourcesSequence;
+    /** CodingSchemeResponsibleOrganization, 0x00080116, ST, 1 */
     extern DICOM_EXPORT const tag CodingSchemeResponsibleOrganization;
-    /** CodingSchemeUID, (0008,010C), UI, 1,  */
+    /** CodingSchemeUID, 0x0008010C, UI, 1 */
     extern DICOM_EXPORT const tag CodingSchemeUID;
-    /** CodingSchemeVersion, (0008,0103), SH, 1,  */
+    /** CodingSchemeURL, 0x0008010E, UR, 1 */
+    extern DICOM_EXPORT const tag CodingSchemeURL;
+    /** CodingSchemeURLType, 0x0008010A, CS, 1 */
+    extern DICOM_EXPORT const tag CodingSchemeURLType;
+    /** CodingSchemeVersion, 0x00080103, SH, 1 */
     extern DICOM_EXPORT const tag CodingSchemeVersion;
-    /** CoefficientCoding, (0028,04X2), LO, 1-n, RET */
-    extern const range_tag CoefficientCoding;
-    /** CoefficientCodingPointers, (0028,04X3), AT, 1-n, RET */
-    extern const range_tag CoefficientCodingPointers;
-    /** CoefficientsSDDN, (7FE0,0040), OW, 1, RET */
+    /** CoefficientCoding, 0x00280402, LO, 1, RET */
+    extern DICOM_EXPORT const range_tag CoefficientCoding;
+    /** CoefficientCodingPointers, 0x00280403, AT, 1, RET */
+    extern DICOM_EXPORT const range_tag CoefficientCodingPointers;
+    /** CoefficientsSDDN, 0x7FE00040, OW, 1, RET */
     extern DICOM_EXPORT const tag CoefficientsSDDN;
-    /** CoefficientsSDHN, (7FE0,0030), OW, 1, RET */
+    /** CoefficientsSDHN, 0x7FE00030, OW, 1, RET */
     extern DICOM_EXPORT const tag CoefficientsSDHN;
-    /** CoefficientsSDVN, (7FE0,0020), OW, 1, RET */
+    /** CoefficientsSDVN, 0x7FE00020, OW, 1, RET */
     extern DICOM_EXPORT const tag CoefficientsSDVN;
-    /** CoincidenceWindowWidth, (0054,1210), DS, 1,  */
+    /** CoincidenceWindowWidth, 0x00541210, DS, 1 */
     extern DICOM_EXPORT const tag CoincidenceWindowWidth;
-    /** CollationFlag, (2000,0063), CS, 1, RET */
+    /** CollationFlag, 0x20000063, CS, 1, RET */
     extern DICOM_EXPORT const tag CollationFlag;
-    /** CollimatorGridName, (0018,1180), SH, 1,  */
+    /** CollimatorGridName, 0x00181180, SH, 1 */
     extern DICOM_EXPORT const tag CollimatorGridName;
-    /** CollimatorLeftVerticalEdge, (0018,1702), IS, 1,  */
+    /** CollimatorLeftVerticalEdge, 0x00181702, IS, 1 */
     extern DICOM_EXPORT const tag CollimatorLeftVerticalEdge;
-    /** CollimatorLowerHorizontalEdge, (0018,1708), IS, 1,  */
+    /** CollimatorLowerHorizontalEdge, 0x00181708, IS, 1 */
     extern DICOM_EXPORT const tag CollimatorLowerHorizontalEdge;
-    /** CollimatorRightVerticalEdge, (0018,1704), IS, 1,  */
+    /** CollimatorRightVerticalEdge, 0x00181704, IS, 1 */
     extern DICOM_EXPORT const tag CollimatorRightVerticalEdge;
-    /** CollimatorShape, (0018,1700), CS, 1-3,  */
+    /** CollimatorShape, 0x00181700, CS, 1 */
     extern DICOM_EXPORT const tag CollimatorShape;
-    /** CollimatorShapeSequence, (0018,9407), SQ, 1,  */
+    /** CollimatorShapeSequence, 0x00189407, SQ, 1 */
     extern DICOM_EXPORT const tag CollimatorShapeSequence;
-    /** CollimatorType, (0018,1181), CS, 1,  */
+    /** CollimatorType, 0x00181181, CS, 1 */
     extern DICOM_EXPORT const tag CollimatorType;
-    /** CollimatorUpperHorizontalEdge, (0018,1706), IS, 1,  */
+    /** CollimatorUpperHorizontalEdge, 0x00181706, IS, 1 */
     extern DICOM_EXPORT const tag CollimatorUpperHorizontalEdge;
-    /** ColorImagePrintingFlag, (2000,0062), CS, 1, RET */
+    /** ColorImagePrintingFlag, 0x20000062, CS, 1, RET */
     extern DICOM_EXPORT const tag ColorImagePrintingFlag;
-    /** ColumnAngulation, (0018,1450), DS, 1,  */
+    /** ColorSpace, 0x00282002, CS, 1 */
+    extern DICOM_EXPORT const tag ColorSpace;
+    /** ColumnAngulation, 0x00181450, DS, 1 */
     extern DICOM_EXPORT const tag ColumnAngulation;
-    /** ColumnAngulationPatient, (0018,9447), FL, 1,  */
+    /** ColumnAngulationPatient, 0x00189447, FL, 1 */
     extern DICOM_EXPORT const tag ColumnAngulationPatient;
-    /** ColumnOverlap, (0028,0094), US, 1, RET */
+    /** ColumnOverlap, 0x00280094, US, 1, RET */
     extern DICOM_EXPORT const tag ColumnOverlap;
-    /** ColumnPositionInTotalImagePixelMatrix, (0048,021F), SL, 1,  */
+    /** ColumnPositionInTotalImagePixelMatrix, 0x0048021E, SL, 1 */
     extern DICOM_EXPORT const tag ColumnPositionInTotalImagePixelMatrix;
-    /** Columns, (0028,0011), US, 1,  */
+    /** Columns, 0x00280011, US, 1 */
     extern DICOM_EXPORT const tag Columns;
-    /** ColumnsForNthOrderCoefficients, (0028,04X1), US, 1, RET */
-    extern const range_tag ColumnsForNthOrderCoefficients;
-    /** CommentsOnPatientPerformanceOfVisualField, (0024,0044), LT, 1,  */
+    /** ColumnsForNthOrderCoefficients, 0x00280401, US, 1, RET */
+    extern DICOM_EXPORT const range_tag ColumnsForNthOrderCoefficients;
+    /** CommentsOnPatientPerformanceOfVisualField, 0x00240044, LT, 1 */
     extern DICOM_EXPORT const tag CommentsOnPatientPerformanceOfVisualField;
-    /** CommentsOnRadiationDose, (0040,0310), ST, 1,  */
+    /** CommentsOnRadiationDose, 0x00400310, ST, 1 */
     extern DICOM_EXPORT const tag CommentsOnRadiationDose;
-    /** CommentsOnThePerformedProcedureStep, (0040,0280), ST, 1,  */
+    /** CommentsOnThePerformedProcedureStep, 0x00400280, ST, 1 */
     extern DICOM_EXPORT const tag CommentsOnThePerformedProcedureStep;
-    /** CommentsOnTheScheduledProcedureStep, (0040,0400), LT, 1,  */
+    /** CommentsOnTheScheduledProcedureStep, 0x00400400, LT, 1 */
     extern DICOM_EXPORT const tag CommentsOnTheScheduledProcedureStep;
-    /** CompensatorColumnOffset, (300A,02E5), FL, 1,  */
+    /** CompensatorColumnOffset, 0x300A02E5, FL, 1 */
     extern DICOM_EXPORT const tag CompensatorColumnOffset;
-    /** CompensatorColumns, (300A,00E8), IS, 1,  */
+    /** CompensatorColumns, 0x300A00E8, IS, 1 */
     extern DICOM_EXPORT const tag CompensatorColumns;
-    /** CompensatorDescription, (300A,02EB), LT, 1,  */
+    /** CompensatorDescription, 0x300A02EB, LT, 1 */
     extern DICOM_EXPORT const tag CompensatorDescription;
-    /** CompensatorDivergence, (300A,02E0), CS, 1,  */
+    /** CompensatorDivergence, 0x300A02E0, CS, 1 */
     extern DICOM_EXPORT const tag CompensatorDivergence;
-    /** CompensatorID, (300A,00E5), SH, 1,  */
+    /** CompensatorID, 0x300A00E5, SH, 1 */
     extern DICOM_EXPORT const tag CompensatorID;
-    /** CompensatorMillingToolDiameter, (300A,02E8), FL, 1,  */
+    /** CompensatorMillingToolDiameter, 0x300A02E8, FL, 1 */
     extern DICOM_EXPORT const tag CompensatorMillingToolDiameter;
-    /** CompensatorMountingPosition, (300A,02E1), CS, 1,  */
+    /** CompensatorMountingPosition, 0x300A02E1, CS, 1 */
     extern DICOM_EXPORT const tag CompensatorMountingPosition;
-    /** CompensatorNumber, (300A,00E4), IS, 1,  */
+    /** CompensatorNumber, 0x300A00E4, IS, 1 */
     extern DICOM_EXPORT const tag CompensatorNumber;
-    /** CompensatorPixelSpacing, (300A,00E9), DS, 2,  */
+    /** CompensatorPixelSpacing, 0x300A00E9, DS, 2 */
     extern DICOM_EXPORT const tag CompensatorPixelSpacing;
-    /** CompensatorPosition, (300A,00EA), DS, 2,  */
+    /** CompensatorPosition, 0x300A00EA, DS, 2 */
     extern DICOM_EXPORT const tag CompensatorPosition;
-    /** CompensatorRelativeStoppingPowerRatio, (300A,02E7), FL, 1,  */
+    /** CompensatorRelativeStoppingPowerRatio, 0x300A02E7, FL, 1 */
     extern DICOM_EXPORT const tag CompensatorRelativeStoppingPowerRatio;
-    /** CompensatorRows, (300A,00E7), IS, 1,  */
+    /** CompensatorRows, 0x300A00E7, IS, 1 */
     extern DICOM_EXPORT const tag CompensatorRows;
-    /** CompensatorSequence, (300A,00E3), SQ, 1,  */
+    /** CompensatorSequence, 0x300A00E3, SQ, 1 */
     extern DICOM_EXPORT const tag CompensatorSequence;
-    /** CompensatorThicknessData, (300A,00EC), DS, 1-n,  */
+    /** CompensatorThicknessData, 0x300A00EC, DS, 1 */
     extern DICOM_EXPORT const tag CompensatorThicknessData;
-    /** CompensatorTransmissionData, (300A,00EB), DS, 1-n,  */
+    /** CompensatorTransmissionData, 0x300A00EB, DS, 1 */
     extern DICOM_EXPORT const tag CompensatorTransmissionData;
-    /** CompensatorType, (300A,00EE), CS, 1,  */
+    /** CompensatorTrayID, 0x300A00EF, SH, 1 */
+    extern DICOM_EXPORT const tag CompensatorTrayID;
+    /** CompensatorType, 0x300A00EE, CS, 1 */
     extern DICOM_EXPORT const tag CompensatorType;
-    /** CompletionFlag, (0040,A491), CS, 1,  */
+    /** CompletionFlag, 0x0040A491, CS, 1 */
     extern DICOM_EXPORT const tag CompletionFlag;
-    /** CompletionFlagDescription, (0040,A492), LO, 1,  */
+    /** CompletionFlagDescription, 0x0040A492, LO, 1 */
     extern DICOM_EXPORT const tag CompletionFlagDescription;
-    /** ComplexImageComponent, (0008,9208), CS, 1,  */
+    /** ComplexImageComponent, 0x00089208, CS, 1 */
     extern DICOM_EXPORT const tag ComplexImageComponent;
-    /** Component1ReferencedID, (0076,0070), US, 1,  */
+    /** Component1ReferencedID, 0x00760070, US, 1 */
     extern DICOM_EXPORT const tag Component1ReferencedID;
-    /** Component1ReferencedMatingFeatureID, (0076,0090), US, 1,  */
+    /** Component1ReferencedMatingFeatureID, 0x00760090, US, 1 */
     extern DICOM_EXPORT const tag Component1ReferencedMatingFeatureID;
-    /** Component1ReferencedMatingFeatureSetID, (0076,0080), US, 1,  */
+    /** Component1ReferencedMatingFeatureSetID, 0x00760080, US, 1 */
     extern DICOM_EXPORT const tag Component1ReferencedMatingFeatureSetID;
-    /** Component2ReferencedID, (0076,00A0), US, 1,  */
+    /** Component2ReferencedID, 0x007600A0, US, 1 */
     extern DICOM_EXPORT const tag Component2ReferencedID;
-    /** Component2ReferencedMatingFeatureID, (0076,00C0), US, 1,  */
+    /** Component2ReferencedMatingFeatureID, 0x007600C0, US, 1 */
     extern DICOM_EXPORT const tag Component2ReferencedMatingFeatureID;
-    /** Component2ReferencedMatingFeatureSetID, (0076,00B0), US, 1,  */
+    /** Component2ReferencedMatingFeatureSetID, 0x007600B0, US, 1 */
     extern DICOM_EXPORT const tag Component2ReferencedMatingFeatureSetID;
-    /** ComponentAssemblySequence, (0076,0060), SQ, 1,  */
+    /** ComponentAssemblySequence, 0x00760060, SQ, 1 */
     extern DICOM_EXPORT const tag ComponentAssemblySequence;
-    /** ComponentID, (0076,0055), US, 1,  */
+    /** ComponentID, 0x00760055, US, 1 */
     extern DICOM_EXPORT const tag ComponentID;
-    /** ComponentManufacturer, (0014,0028), ST, 1-n,  */
+    /** ComponentInputSequence, 0x00701803, SQ, 1 */
+    extern DICOM_EXPORT const tag ComponentInputSequence;
+    /** ComponentManufacturer, 0x00140028, ST, 1, RET */
     extern DICOM_EXPORT const tag ComponentManufacturer;
-    /** ComponentManufacturingProcedure, (0014,0025), ST, 1-n,  */
+    /** ComponentManufacturingProcedure, 0x00140025, ST, 1, RET */
     extern DICOM_EXPORT const tag ComponentManufacturingProcedure;
-    /** ComponentReferenceSystem, (0014,0024), ST, 1-n,  */
+    /** ComponentReferenceSystem, 0x00140024, ST, 1, RET */
     extern DICOM_EXPORT const tag ComponentReferenceSystem;
-    /** ComponentSequence, (0076,0040), SQ, 1,  */
+    /** ComponentSequence, 0x00760040, SQ, 1 */
     extern DICOM_EXPORT const tag ComponentSequence;
-    /** ComponentShape, (0014,0050), CS, 1,  */
+    /** ComponentShape, 0x00140050, CS, 1, RET */
     extern DICOM_EXPORT const tag ComponentShape;
-    /** ComponentTypeCodeSequence, (0076,0034), CS, 1,  */
+    /** ComponentType, 0x00701802, CS, 1 */
+    extern DICOM_EXPORT const tag ComponentType;
+    /** ComponentTypeCodeSequence, 0x00760034, SQ, 1 */
     extern DICOM_EXPORT const tag ComponentTypeCodeSequence;
-    /** ComponentTypesSequence, (0076,0032), SQ, 1,  */
+    /** ComponentTypesSequence, 0x00760032, SQ, 1 */
     extern DICOM_EXPORT const tag ComponentTypesSequence;
-    /** CompoundGraphicInstanceID, (0070,0226), UL, 1,  */
+    /** ComponentWelderIDs, 0x00140100, LO, 1, RET */
+    extern DICOM_EXPORT const tag ComponentWelderIDs;
+    /** CompositingMethod, 0x00701206, CS, 1, RET */
+    extern DICOM_EXPORT const tag CompositingMethod;
+    /** CompoundGraphicInstanceID, 0x00700226, UL, 1 */
     extern DICOM_EXPORT const tag CompoundGraphicInstanceID;
-    /** CompoundGraphicSequence, (0070,0209), SQ, 1,  */
+    /** CompoundGraphicSequence, 0x00700209, SQ, 1 */
     extern DICOM_EXPORT const tag CompoundGraphicSequence;
-    /** CompoundGraphicType, (0070,0294), CS, 1,  */
+    /** CompoundGraphicType, 0x00700294, CS, 1 */
     extern DICOM_EXPORT const tag CompoundGraphicType;
-    /** CompoundGraphicUnits, (0070,0282), CS, 1,  */
+    /** CompoundGraphicUnits, 0x00700282, CS, 1 */
     extern DICOM_EXPORT const tag CompoundGraphicUnits;
-    /** CompressionCode, (0028,0060), CS, 1, RET */
+    /** CompressionCode, 0x00280060, CS, 1, RET */
     extern DICOM_EXPORT const tag CompressionCode;
-    /** CompressionDescription, (0028,0063), SH, 1, RET */
+    /** CompressionContactArea, 0x001811A5, DS, 1 */
+    extern DICOM_EXPORT const tag CompressionContactArea;
+    /** CompressionDescription, 0x00280063, SH, 1, RET */
     extern DICOM_EXPORT const tag CompressionDescription;
-    /** CompressionForce, (0018,11A2), DS, 1,  */
+    /** CompressionForce, 0x001811A2, DS, 1 */
     extern DICOM_EXPORT const tag CompressionForce;
-    /** CompressionLabel, (0028,0062), LO, 1, RET */
+    /** CompressionLabel, 0x00280062, LO, 1, RET */
     extern DICOM_EXPORT const tag CompressionLabel;
-    /** CompressionOriginator, (0028,0061), SH, 1, RET */
+    /** CompressionOriginator, 0x00280061, SH, 1, RET */
     extern DICOM_EXPORT const tag CompressionOriginator;
-    /** CompressionRecognitionCode, (0028,005F), LO, 1, RET */
+    /** CompressionPressure, 0x001811A3, DS, 1 */
+    extern DICOM_EXPORT const tag CompressionPressure;
+    /** CompressionRecognitionCode, 0x0028005F, LO, 1, RET */
     extern DICOM_EXPORT const tag CompressionRecognitionCode;
-    /** CompressionSequence, (0028,0065), CS, 1-n, RET */
+    /** CompressionSequence, 0x00280065, CS, 1, RET */
     extern DICOM_EXPORT const tag CompressionSequence;
-    /** CompressionStepPointers, (0028,0066), AT, 1-n, RET */
+    /** CompressionStepPointers, 0x00280066, AT, 1, RET */
     extern DICOM_EXPORT const tag CompressionStepPointers;
-    /** ConcatenationFrameOffsetNumber, (0020,9228), UL, 1,  */
+    /** ConcatenationFrameOffsetNumber, 0x00209228, UL, 1 */
     extern DICOM_EXPORT const tag ConcatenationFrameOffsetNumber;
-    /** ConcatenationUID, (0020,9161), UI, 1,  */
+    /** ConcatenationUID, 0x00209161, UI, 1 */
     extern DICOM_EXPORT const tag ConcatenationUID;
-    /** ConceptCodeSequence, (0040,A168), SQ, 1,  */
+    /** ConceptCodeSequence, 0x0040A168, SQ, 1 */
     extern DICOM_EXPORT const tag ConceptCodeSequence;
-    /** ConceptNameCodeSequence, (0040,A043), SQ, 1,  */
+    /** ConceptNameCodeSequence, 0x0040A043, SQ, 1 */
     extern DICOM_EXPORT const tag ConceptNameCodeSequence;
-    /** CondenserLensPower, (0048,0111), DS, 1,  */
+    /** CondenserLensPower, 0x00480111, DS, 1 */
     extern DICOM_EXPORT const tag CondenserLensPower;
-    /** ConfidentialityCode, (0040,1008), LO, 1,  */
+    /** ConfidentialityCode, 0x00401008, LO, 1 */
     extern DICOM_EXPORT const tag ConfidentialityCode;
-    /** ConfidentialityConstraintOnPatientDataDescription, (0040,3001), LO, 1,  */
+    /** ConfidentialityConstraintOnPatientDataDescription, 0x00403001, LO, 1 */
     extern DICOM_EXPORT const tag ConfidentialityConstraintOnPatientDataDescription;
-    /** ConfigurationInformation, (2010,0150), ST, 1,  */
+    /** ConfigurationDescription, 0x0028700D, LO, 1 */
+    extern DICOM_EXPORT const tag ConfigurationDescription;
+    /** ConfigurationID, 0x0028700B, US, 1 */
+    extern DICOM_EXPORT const tag ConfigurationID;
+    /** ConfigurationInformation, 0x20100150, ST, 1 */
     extern DICOM_EXPORT const tag ConfigurationInformation;
-    /** ConfigurationInformationDescription, (2010,0152), LT, 1,  */
+    /** ConfigurationInformationDescription, 0x20100152, LT, 1 */
     extern DICOM_EXPORT const tag ConfigurationInformationDescription;
-    /** ConsentForClinicalTrialUseSequence, (0012,0083), SQ, 1,  */
+    /** ConfigurationName, 0x0028700C, SH, 1 */
+    extern DICOM_EXPORT const tag ConfigurationName;
+    /** ConfigurationQAResultsSequence, 0x00287011, SQ, 1 */
+    extern DICOM_EXPORT const tag ConfigurationQAResultsSequence;
+    /** ConnectorType, 0x00145105, CS, 1, RET */
+    extern DICOM_EXPORT const tag ConnectorType;
+    /** ConsentForClinicalTrialUseSequence, 0x00120083, SQ, 1 */
     extern DICOM_EXPORT const tag ConsentForClinicalTrialUseSequence;
-    /** ConsentForDistributionFlag, (0012,0085), CS, 1,  */
+    /** ConsentForDistributionFlag, 0x00120085, CS, 1 */
     extern DICOM_EXPORT const tag ConsentForDistributionFlag;
-    /** ConstantVolumeFlag, (0018,9333), CS, 1,  */
+    /** ConstantVolumeFlag, 0x00189333, CS, 1 */
     extern DICOM_EXPORT const tag ConstantVolumeFlag;
-    /** ConstraintWeight, (300A,0021), DS, 1,  */
+    /** ConstraintType, 0x00820032, CS, 1 */
+    extern DICOM_EXPORT const tag ConstraintType;
+    /** ConstraintValueSequence, 0x00820034, SQ, 1 */
+    extern DICOM_EXPORT const tag ConstraintValueSequence;
+    /** ConstraintViolationCondition, 0x00820037, UT, 1 */
+    extern DICOM_EXPORT const tag ConstraintViolationCondition;
+    /** ConstraintViolationSignificance, 0x00820036, CS, 1 */
+    extern DICOM_EXPORT const tag ConstraintViolationSignificance;
+    /** ConstraintWeight, 0x300A0021, DS, 1 */
     extern DICOM_EXPORT const tag ConstraintWeight;
-    /** ContactDisplayName, (0074,100C), LO, 1,  */
+    /** ConsultingPhysicianIdentificationSequence, 0x0008009D, SQ, 1 */
+    extern DICOM_EXPORT const tag ConsultingPhysicianIdentificationSequence;
+    /** ConsultingPhysicianName, 0x0008009C, PN, 1 */
+    extern DICOM_EXPORT const tag ConsultingPhysicianName;
+    /** ContactDisplayName, 0x0074100C, LO, 1 */
     extern DICOM_EXPORT const tag ContactDisplayName;
-    /** ContactURI, (0074,100A), ST, 1,  */
+    /** ContactURI, 0x0074100A, UR, 1 */
     extern DICOM_EXPORT const tag ContactURI;
-    /** ContainerComponentDescription, (0050,001E), LO, 1,  */
+    /** ContainerComponentDescription, 0x0050001E, LO, 1 */
     extern DICOM_EXPORT const tag ContainerComponentDescription;
-    /** ContainerComponentDiameter, (0050,001D), FD, 1,  */
+    /** ContainerComponentDiameter, 0x0050001D, FD, 1 */
     extern DICOM_EXPORT const tag ContainerComponentDiameter;
-    /** ContainerComponentID, (0050,001B), LO, 1,  */
+    /** ContainerComponentID, 0x0050001B, LO, 1 */
     extern DICOM_EXPORT const tag ContainerComponentID;
-    /** ContainerComponentLength, (0050,001C), FD, 1,  */
+    /** ContainerComponentLength, 0x0050001C, FD, 1 */
     extern DICOM_EXPORT const tag ContainerComponentLength;
-    /** ContainerComponentMaterial, (0050,001A), CS, 1,  */
+    /** ContainerComponentMaterial, 0x0050001A, CS, 1 */
     extern DICOM_EXPORT const tag ContainerComponentMaterial;
-    /** ContainerComponentSequence, (0040,0520), SQ, 1,  */
+    /** ContainerComponentSequence, 0x00400520, SQ, 1 */
     extern DICOM_EXPORT const tag ContainerComponentSequence;
-    /** ContainerComponentThickness, (0050,0013), FD, 1,  */
+    /** ContainerComponentThickness, 0x00500013, FD, 1 */
     extern DICOM_EXPORT const tag ContainerComponentThickness;
-    /** ContainerComponentTypeCodeSequence, (0050,0012), SQ, 1,  */
+    /** ContainerComponentTypeCodeSequence, 0x00500012, SQ, 1 */
     extern DICOM_EXPORT const tag ContainerComponentTypeCodeSequence;
-    /** ContainerComponentWidth, (0050,0015), FD, 1,  */
+    /** ContainerComponentWidth, 0x00500015, FD, 1 */
     extern DICOM_EXPORT const tag ContainerComponentWidth;
-    /** ContainerDescription, (0040,051A), LO, 1,  */
+    /** ContainerDescription, 0x0040051A, LO, 1 */
     extern DICOM_EXPORT const tag ContainerDescription;
-    /** ContainerIdentifier, (0040,0512), LO, 1,  */
+    /** ContainerIdentifier, 0x00400512, LO, 1 */
     extern DICOM_EXPORT const tag ContainerIdentifier;
-    /** ContainerTypeCodeSequence, (0040,0518), SQ, 1,  */
+    /** ContainerTypeCodeSequence, 0x00400518, SQ, 1 */
     extern DICOM_EXPORT const tag ContainerTypeCodeSequence;
-    /** ContentCreatorIdentificationCodeSequence, (0070,0086), SQ, 1,  */
+    /** ContentCreatorIdentificationCodeSequence, 0x00700086, SQ, 1 */
     extern DICOM_EXPORT const tag ContentCreatorIdentificationCodeSequence;
-    /** ContentCreatorName, (0070,0084), PN, 1,  */
+    /** ContentCreatorName, 0x00700084, PN, 1 */
     extern DICOM_EXPORT const tag ContentCreatorName;
-    /** ContentDate, (0008,0023), DA, 1,  */
+    /** ContentDate, 0x00080023, DA, 1 */
     extern DICOM_EXPORT const tag ContentDate;
-    /** ContentDescription, (0070,0081), LO, 1,  */
+    /** ContentDescription, 0x00700081, LO, 1 */
     extern DICOM_EXPORT const tag ContentDescription;
-    /** ContentItemModifierSequence, (0040,0441), SQ, 1,  */
+    /** ContentItemModifierSequence, 0x00400441, SQ, 1 */
     extern DICOM_EXPORT const tag ContentItemModifierSequence;
-    /** ContentLabel, (0070,0080), CS, 1,  */
+    /** ContentLabel, 0x00700080, CS, 1 */
     extern DICOM_EXPORT const tag ContentLabel;
-    /** ContentQualification, (0018,9004), CS, 1,  */
+    /** ContentQualification, 0x00189004, CS, 1 */
     extern DICOM_EXPORT const tag ContentQualification;
-    /** ContentSequence, (0040,A730), SQ, 1,  */
+    /** ContentSequence, 0x0040A730, SQ, 1 */
     extern DICOM_EXPORT const tag ContentSequence;
-    /** ContentTemplateSequence, (0040,A504), SQ, 1,  */
+    /** ContentTemplateSequence, 0x0040A504, SQ, 1 */
     extern DICOM_EXPORT const tag ContentTemplateSequence;
-    /** ContentTime, (0008,0033), TM, 1,  */
+    /** ContentTime, 0x00080033, TM, 1 */
     extern DICOM_EXPORT const tag ContentTime;
-    /** ContextGroupExtensionCreatorUID, (0008,010D), UI, 1,  */
+    /** ContextGroupExtensionCreatorUID, 0x0008010D, UI, 1 */
     extern DICOM_EXPORT const tag ContextGroupExtensionCreatorUID;
-    /** ContextGroupExtensionFlag, (0008,010B), CS, 1,  */
+    /** ContextGroupExtensionFlag, 0x0008010B, CS, 1 */
     extern DICOM_EXPORT const tag ContextGroupExtensionFlag;
-    /** ContextGroupLocalVersion, (0008,0107), DT, 1,  */
+    /** ContextGroupIdentificationSequence, 0x00080123, SQ, 1 */
+    extern DICOM_EXPORT const tag ContextGroupIdentificationSequence;
+    /** ContextGroupLocalVersion, 0x00080107, DT, 1 */
     extern DICOM_EXPORT const tag ContextGroupLocalVersion;
-    /** ContextGroupVersion, (0008,0106), DT, 1,  */
+    /** ContextGroupVersion, 0x00080106, DT, 1 */
     extern DICOM_EXPORT const tag ContextGroupVersion;
-    /** ContextIdentifier, (0008,010F), CS, 1,  */
+    /** ContextIdentifier, 0x0008010F, CS, 1 */
     extern DICOM_EXPORT const tag ContextIdentifier;
-    /** ContextUID, (0008,0117), UI, 1,  */
+    /** ContextUID, 0x00080117, UI, 1 */
     extern DICOM_EXPORT const tag ContextUID;
-    /** ContinuationEndMeterset, (0074,0121), FD, 1,  */
+    /** ContinuationEndMeterset, 0x00740121, FD, 1 */
     extern DICOM_EXPORT const tag ContinuationEndMeterset;
-    /** ContinuationStartMeterset, (0074,0120), FD, 1,  */
+    /** ContinuationEndTotalReferenceAirKerma, 0x00741403, DS, 1 */
+    extern DICOM_EXPORT const tag ContinuationEndTotalReferenceAirKerma;
+    /** ContinuationPulseNumber, 0x00741404, IS, 1 */
+    extern DICOM_EXPORT const tag ContinuationPulseNumber;
+    /** ContinuationStartMeterset, 0x00740120, FD, 1 */
     extern DICOM_EXPORT const tag ContinuationStartMeterset;
-    /** ContinuityOfContent, (0040,A050), CS, 1,  */
+    /** ContinuationStartTotalReferenceAirKerma, 0x00741402, DS, 1 */
+    extern DICOM_EXPORT const tag ContinuationStartTotalReferenceAirKerma;
+    /** ContinuityOfContent, 0x0040A050, CS, 1 */
     extern DICOM_EXPORT const tag ContinuityOfContent;
-    /** ContourData, (3006,0050), DS, 3-3n,  */
+    /** ContourData, 0x30060050, DS, 3 */
     extern DICOM_EXPORT const tag ContourData;
-    /** ContourGeometricType, (3006,0042), CS, 1,  */
+    /** ContourGeometricType, 0x30060042, CS, 1 */
     extern DICOM_EXPORT const tag ContourGeometricType;
-    /** ContourImageSequence, (3006,0016), SQ, 1,  */
+    /** ContourImageSequence, 0x30060016, SQ, 1 */
     extern DICOM_EXPORT const tag ContourImageSequence;
-    /** ContourNumber, (3006,0048), IS, 1,  */
+    /** ContourNumber, 0x30060048, IS, 1 */
     extern DICOM_EXPORT const tag ContourNumber;
-    /** ContourOffsetVector, (3006,0045), DS, 3,  */
+    /** ContourOffsetVector, 0x30060045, DS, 3 */
     extern DICOM_EXPORT const tag ContourOffsetVector;
-    /** ContourSequence, (3006,0040), SQ, 1,  */
+    /** ContourSequence, 0x30060040, SQ, 1 */
     extern DICOM_EXPORT const tag ContourSequence;
-    /** ContourSlabThickness, (3006,0044), DS, 1,  */
+    /** ContourSlabThickness, 0x30060044, DS, 1 */
     extern DICOM_EXPORT const tag ContourSlabThickness;
-    /** ContourUncertaintyRadius, (0070,0312), FD, 1,  */
+    /** ContourUncertaintyRadius, 0x00700312, FD, 1 */
     extern DICOM_EXPORT const tag ContourUncertaintyRadius;
-    /** ContrastAdministrationProfileSequence, (0018,9340), SQ, 1,  */
+    /** ContraindicationsCodeSequence, 0x0018990B, SQ, 1 */
+    extern DICOM_EXPORT const tag ContraindicationsCodeSequence;
+    /** ContrastAdministrationProfileSequence, 0x00189340, SQ, 1 */
     extern DICOM_EXPORT const tag ContrastAdministrationProfileSequence;
-    /** ContrastBolusAdministrationRouteSequence, (0018,0014), SQ, 1,  */
+    /** ContrastBolusAdministrationRouteSequence, 0x00180014, SQ, 1 */
     extern DICOM_EXPORT const tag ContrastBolusAdministrationRouteSequence;
-    /** ContrastBolusAgent, (0018,0010), LO, 1,  */
+    /** ContrastBolusAgent, 0x00180010, LO, 1 */
     extern DICOM_EXPORT const tag ContrastBolusAgent;
-    /** ContrastBolusAgentAdministered, (0018,9342), CS, 1,  */
+    /** ContrastBolusAgentAdministered, 0x00189342, CS, 1 */
     extern DICOM_EXPORT const tag ContrastBolusAgentAdministered;
-    /** ContrastBolusAgentDetected, (0018,9343), CS, 1,  */
+    /** ContrastBolusAgentDetected, 0x00189343, CS, 1 */
     extern DICOM_EXPORT const tag ContrastBolusAgentDetected;
-    /** ContrastBolusAgentNumber, (0018,9337), US, 1,  */
+    /** ContrastBolusAgentNumber, 0x00189337, US, 1 */
     extern DICOM_EXPORT const tag ContrastBolusAgentNumber;
-    /** ContrastBolusAgentPhase, (0018,9344), CS, 1,  */
+    /** ContrastBolusAgentPhase, 0x00189344, CS, 1 */
     extern DICOM_EXPORT const tag ContrastBolusAgentPhase;
-    /** ContrastBolusAgentSequence, (0018,0012), SQ, 1,  */
+    /** ContrastBolusAgentSequence, 0x00180012, SQ, 1 */
     extern DICOM_EXPORT const tag ContrastBolusAgentSequence;
-    /** ContrastBolusIngredient, (0018,1048), CS, 1,  */
+    /** ContrastBolusIngredient, 0x00181048, CS, 1 */
     extern DICOM_EXPORT const tag ContrastBolusIngredient;
-    /** ContrastBolusIngredientCodeSequence, (0018,9338), SQ, 1,  */
+    /** ContrastBolusIngredientCodeSequence, 0x00189338, SQ, 1 */
     extern DICOM_EXPORT const tag ContrastBolusIngredientCodeSequence;
-    /** ContrastBolusIngredientConcentration, (0018,1049), DS, 1,  */
+    /** ContrastBolusIngredientConcentration, 0x00181049, DS, 1 */
     extern DICOM_EXPORT const tag ContrastBolusIngredientConcentration;
-    /** ContrastBolusIngredientOpaque, (0018,9425), CS, 1,  */
+    /** ContrastBolusIngredientOpaque, 0x00189425, CS, 1 */
     extern DICOM_EXPORT const tag ContrastBolusIngredientOpaque;
-    /** ContrastBolusIngredientPercentByVolume, (0052,0001), FL, 1,  */
+    /** ContrastBolusIngredientPercentByVolume, 0x00520001, FL, 1 */
     extern DICOM_EXPORT const tag ContrastBolusIngredientPercentByVolume;
-    /** ContrastBolusRoute, (0018,1040), LO, 1,  */
+    /** ContrastBolusRoute, 0x00181040, LO, 1 */
     extern DICOM_EXPORT const tag ContrastBolusRoute;
-    /** ContrastBolusStartTime, (0018,1042), TM, 1,  */
+    /** ContrastBolusStartTime, 0x00181042, TM, 1 */
     extern DICOM_EXPORT const tag ContrastBolusStartTime;
-    /** ContrastBolusStopTime, (0018,1043), TM, 1,  */
+    /** ContrastBolusStopTime, 0x00181043, TM, 1 */
     extern DICOM_EXPORT const tag ContrastBolusStopTime;
-    /** ContrastBolusTotalDose, (0018,1044), DS, 1,  */
+    /** ContrastBolusT1Relaxivity, 0x00180013, FL, 1 */
+    extern DICOM_EXPORT const tag ContrastBolusT1Relaxivity;
+    /** ContrastBolusTotalDose, 0x00181044, DS, 1 */
     extern DICOM_EXPORT const tag ContrastBolusTotalDose;
-    /** ContrastBolusUsageSequence, (0018,9341), SQ, 1,  */
+    /** ContrastBolusUsageSequence, 0x00189341, SQ, 1 */
     extern DICOM_EXPORT const tag ContrastBolusUsageSequence;
-    /** ContrastBolusVolume, (0018,1041), DS, 1,  */
+    /** ContrastBolusVolume, 0x00181041, DS, 1 */
     extern DICOM_EXPORT const tag ContrastBolusVolume;
-    /** ContrastFlowDuration, (0018,1047), DS, 1-n,  */
+    /** ContrastFlowDuration, 0x00181047, DS, 1 */
     extern DICOM_EXPORT const tag ContrastFlowDuration;
-    /** ContrastFlowRate, (0018,1046), DS, 1-n,  */
+    /** ContrastFlowRate, 0x00181046, DS, 1 */
     extern DICOM_EXPORT const tag ContrastFlowRate;
-    /** ContrastFrameAveraging, (0028,6112), US, 1,  */
+    /** ContrastFrameAveraging, 0x00286112, US, 1 */
     extern DICOM_EXPORT const tag ContrastFrameAveraging;
-    /** ContributingEquipmentSequence, (0018,A001), SQ, 1,  */
+    /** ContributingEquipmentSequence, 0x0018A001, SQ, 1 */
     extern DICOM_EXPORT const tag ContributingEquipmentSequence;
-    /** ContributingSOPInstancesReferenceSequence, (0020,9529), SQ, 1,  */
+    /** ContributingSOPInstancesReferenceSequence, 0x00209529, SQ, 1 */
     extern DICOM_EXPORT const tag ContributingSOPInstancesReferenceSequence;
-    /** ContributingSourcesSequence, (0018,9506), SQ, 1,  */
+    /** ContributingSourcesSequence, 0x00189506, SQ, 1 */
     extern DICOM_EXPORT const tag ContributingSourcesSequence;
-    /** ContributionDateTime, (0018,A002), DT, 1,  */
+    /** ContributionDateTime, 0x0018A002, DT, 1 */
     extern DICOM_EXPORT const tag ContributionDateTime;
-    /** ContributionDescription, (0018,A003), ST, 1,  */
+    /** ContributionDescription, 0x0018A003, ST, 1 */
     extern DICOM_EXPORT const tag ContributionDescription;
-    /** ControlPoint3DPosition, (300A,02D4), DS, 3,  */
+    /** ControlPoint3DPosition, 0x300A02D4, DS, 3 */
     extern DICOM_EXPORT const tag ControlPoint3DPosition;
-    /** ControlPointDeliverySequence, (3008,0040), SQ, 1,  */
+    /** ControlPointDeliverySequence, 0x30080040, SQ, 1 */
     extern DICOM_EXPORT const tag ControlPointDeliverySequence;
-    /** ControlPointIndex, (300A,0112), IS, 1,  */
+    /** ControlPointIndex, 0x300A0112, IS, 1 */
     extern DICOM_EXPORT const tag ControlPointIndex;
-    /** ControlPointOrientation, (300A,0412), FL, 3,  */
+    /** ControlPointOrientation, 0x300A0412, FL, 3 */
     extern DICOM_EXPORT const tag ControlPointOrientation;
-    /** ControlPointRelativePosition, (300A,02D2), DS, 1,  */
+    /** ControlPointRelativePosition, 0x300A02D2, DS, 1 */
     extern DICOM_EXPORT const tag ControlPointRelativePosition;
-    /** ControlPointSequence, (300A,0111), SQ, 1,  */
+    /** ControlPointSequence, 0x300A0111, SQ, 1 */
     extern DICOM_EXPORT const tag ControlPointSequence;
-    /** ConventionalControlPointVerificationSequence, (0074,104C), SQ, 1,  */
+    /** ConventionalControlPointVerificationSequence, 0x0074104C, SQ, 1 */
     extern DICOM_EXPORT const tag ConventionalControlPointVerificationSequence;
-    /** ConventionalMachineVerificationSequence, (0074,1044), SQ, 1,  */
+    /** ConventionalMachineVerificationSequence, 0x00741044, SQ, 1 */
     extern DICOM_EXPORT const tag ConventionalMachineVerificationSequence;
-    /** ConversionType, (0008,0064), CS, 1,  */
+    /** ConversionSourceAttributesSequence, 0x00209172, SQ, 1 */
+    extern DICOM_EXPORT const tag ConversionSourceAttributesSequence;
+    /** ConversionType, 0x00080064, CS, 1 */
     extern DICOM_EXPORT const tag ConversionType;
-    /** ConvolutionKernel, (0018,1210), SH, 1-n,  */
+    /** ConvolutionKernel, 0x00181210, SH, 1 */
     extern DICOM_EXPORT const tag ConvolutionKernel;
-    /** ConvolutionKernelGroup, (0018,9316), CS, 1,  */
+    /** ConvolutionKernelGroup, 0x00189316, CS, 1 */
     extern DICOM_EXPORT const tag ConvolutionKernelGroup;
-    /** CoordinatesSetGeometricTypeTrial, (0040,A290), CS, 1, RET */
+    /** CoordinatesSetGeometricTypeTrial, 0x0040A290, CS, 1, RET */
     extern DICOM_EXPORT const tag CoordinatesSetGeometricTypeTrial;
-    /** CoordinateStartValue, (50XX,0112), US, 1-n, RET */
-    extern const range_tag CoordinateStartValue;
-    /** CoordinateStepValue, (50XX,0114), US, 1-n, RET */
-    extern const range_tag CoordinateStepValue;
-    /** CoordinateSystemAxesSequence, (0014,2204), SQ, 1,  */
+    /** CoordinateStartValue, 0x50000112, US, 1, RET */
+    extern DICOM_EXPORT const range_tag CoordinateStartValue;
+    /** CoordinateStepValue, 0x50000114, US, 1, RET */
+    extern DICOM_EXPORT const range_tag CoordinateStepValue;
+    /** CoordinateSystemAxesSequence, 0x00142204, SQ, 1, RET */
     extern DICOM_EXPORT const tag CoordinateSystemAxesSequence;
-    /** CoordinateSystemAxisCodeSequence, (0040,08DA), SQ, 1, RET */
+    /** CoordinateSystemAxisCodeSequence, 0x004008DA, SQ, 1, RET */
     extern DICOM_EXPORT const tag CoordinateSystemAxisCodeSequence;
-    /** CoordinateSystemAxisDescription, (0014,2206), ST, 1,  */
+    /** CoordinateSystemAxisDescription, 0x00142206, ST, 1, RET */
     extern DICOM_EXPORT const tag CoordinateSystemAxisDescription;
-    /** CoordinateSystemAxisNumber, (0014,220A), IS, 1,  */
+    /** CoordinateSystemAxisNumber, 0x0014220A, IS, 1, RET */
     extern DICOM_EXPORT const tag CoordinateSystemAxisNumber;
-    /** CoordinateSystemAxisType, (0014,220C), CS, 1,  */
+    /** CoordinateSystemAxisType, 0x0014220C, CS, 1, RET */
     extern DICOM_EXPORT const tag CoordinateSystemAxisType;
-    /** CoordinateSystemAxisUnits, (0014,220E), CS, 1,  */
+    /** CoordinateSystemAxisUnits, 0x0014220E, CS, 1, RET */
     extern DICOM_EXPORT const tag CoordinateSystemAxisUnits;
-    /** CoordinateSystemAxisValues, (0014,2210), OB, 1,  */
+    /** CoordinateSystemAxisValues, 0x00142210, OB, 1, RET */
     extern DICOM_EXPORT const tag CoordinateSystemAxisValues;
-    /** CoordinateSystemDataSetMapping, (0014,2208), CS, 1,  */
+    /** CoordinateSystemDataSetMapping, 0x00142208, CS, 1, RET */
     extern DICOM_EXPORT const tag CoordinateSystemDataSetMapping;
-    /** CoordinateSystemNumberOfAxes, (0014,2202), IS, 1,  */
+    /** CoordinateSystemNumberOfAxes, 0x00142202, IS, 1, RET */
     extern DICOM_EXPORT const tag CoordinateSystemNumberOfAxes;
-    /** CoordinateSystemTransformRotationAndScaleMatrix, (0014,222A), DS, 1-n,  */
+    /** CoordinateSystemTransformRotationAndScaleMatrix, 0x0014222A, DS, 1, RET */
     extern DICOM_EXPORT const tag CoordinateSystemTransformRotationAndScaleMatrix;
-    /** CoordinateSystemTransformSequence, (0014,2220), SQ, 1,  */
+    /** CoordinateSystemTransformSequence, 0x00142220, SQ, 1, RET */
     extern DICOM_EXPORT const tag CoordinateSystemTransformSequence;
-    /** CoordinateSystemTransformTranslationMatrix, (0014,222C), DS, 1-n,  */
+    /** CoordinateSystemTransformTranslationMatrix, 0x0014222C, DS, 1, RET */
     extern DICOM_EXPORT const tag CoordinateSystemTransformTranslationMatrix;
-    /** CornealSize, (0046,0046), FD, 1,  */
+    /** CornealEccentricityIndex, 0x00460234, FL, 1 */
+    extern DICOM_EXPORT const tag CornealEccentricityIndex;
+    /** CornealISValue, 0x00460224, FL, 1 */
+    extern DICOM_EXPORT const tag CornealISValue;
+    /** CornealPointEstimated, 0x00460248, CS, 1 */
+    extern DICOM_EXPORT const tag CornealPointEstimated;
+    /** CornealPointLocation, 0x00460247, FL, 3 */
+    extern DICOM_EXPORT const tag CornealPointLocation;
+    /** CornealSize, 0x00460046, FD, 1 */
     extern DICOM_EXPORT const tag CornealSize;
-    /** CorrectedImage, (0028,0051), CS, 1-n,  */
+    /** CornealTopographyMappingNormalsSequence, 0x00460210, SQ, 1 */
+    extern DICOM_EXPORT const tag CornealTopographyMappingNormalsSequence;
+    /** CornealTopographyMapQualityEvaluation, 0x00460242, CS, 1 */
+    extern DICOM_EXPORT const tag CornealTopographyMapQualityEvaluation;
+    /** CornealTopographyMapTypeCodeSequence, 0x00460207, SQ, 1 */
+    extern DICOM_EXPORT const tag CornealTopographyMapTypeCodeSequence;
+    /** CornealTopographySurface, 0x00460201, CS, 1 */
+    extern DICOM_EXPORT const tag CornealTopographySurface;
+    /** CornealVertexLocation, 0x00460202, FL, 2 */
+    extern DICOM_EXPORT const tag CornealVertexLocation;
+    /** CornealWavefront, 0x00460253, FL, 1 */
+    extern DICOM_EXPORT const tag CornealWavefront;
+    /** CorrectedImage, 0x00280051, CS, 1 */
     extern DICOM_EXPORT const tag CorrectedImage;
-    /** CorrectedLocalizedDeviationFromNormal, (0024,0079), FL, 1,  */
+    /** CorrectedLocalizedDeviationFromNormal, 0x00240079, FL, 1 */
     extern DICOM_EXPORT const tag CorrectedLocalizedDeviationFromNormal;
-    /** CorrectedLocalizedDeviationFromNormalCalculated, (0024,0078), CS, 1,  */
+    /** CorrectedLocalizedDeviationFromNormalCalculated, 0x00240078, CS, 1 */
     extern DICOM_EXPORT const tag CorrectedLocalizedDeviationFromNormalCalculated;
-    /** CorrectedLocalizedDeviationFromNormalProbability, (0024,0081), FL, 1,  */
+    /** CorrectedLocalizedDeviationFromNormalProbability, 0x00240081, FL, 1 */
     extern DICOM_EXPORT const tag CorrectedLocalizedDeviationFromNormalProbability;
-    /** CorrectedLocalizedDeviationFromNormalProbabilityCalculated, (0024,0080), CS, 1,  */
+    /** CorrectedLocalizedDeviationFromNormalProbabilityCalculated, 0x00240080, CS, 1 */
     extern DICOM_EXPORT const tag CorrectedLocalizedDeviationFromNormalProbabilityCalculated;
-    /** CorrectedParameterSequence, (3008,0068), SQ, 1,  */
+    /** CorrectedParameterSequence, 0x30080068, SQ, 1 */
     extern DICOM_EXPORT const tag CorrectedParameterSequence;
-    /** CorrectionValue, (3008,006A), FL, 1,  */
+    /** CorrectionValue, 0x3008006A, FL, 1 */
     extern DICOM_EXPORT const tag CorrectionValue;
-    /** CountLossNormalizationCorrected, (0018,9764), CS, 1,  */
+    /** CountLossNormalizationCorrected, 0x00189764, CS, 1 */
     extern DICOM_EXPORT const tag CountLossNormalizationCorrected;
-    /** CountRate, (0018,1243), IS, 1,  */
+    /** CountRate, 0x00181243, IS, 1 */
     extern DICOM_EXPORT const tag CountRate;
-    /** CountryOfResidence, (0010,2150), LO, 1,  */
+    /** CountryOfResidence, 0x00102150, LO, 1 */
     extern DICOM_EXPORT const tag CountryOfResidence;
-    /** CountsAccumulated, (0018,0070), IS, 1,  */
+    /** CountsAccumulated, 0x00180070, IS, 1 */
     extern DICOM_EXPORT const tag CountsAccumulated;
-    /** CountsIncluded, (0054,1400), CS, 1-n, RET */
+    /** CountsIncluded, 0x00541400, CS, 1, RET */
     extern DICOM_EXPORT const tag CountsIncluded;
-    /** CountsSource, (0054,1002), CS, 1,  */
+    /** CountsSource, 0x00541002, CS, 1 */
     extern DICOM_EXPORT const tag CountsSource;
-    /** CouplingMedium, (0014,4056), ST, 1,  */
+    /** CouplingMedium, 0x00144056, ST, 1, RET */
     extern DICOM_EXPORT const tag CouplingMedium;
-    /** CouplingTechnique, (0014,4054), ST, 1,  */
+    /** CouplingTechnique, 0x00144054, ST, 1, RET */
     extern DICOM_EXPORT const tag CouplingTechnique;
-    /** CouplingVelocity, (0014,4057), DS, 1,  */
+    /** CouplingVelocity, 0x00144057, DS, 1, RET */
     extern DICOM_EXPORT const tag CouplingVelocity;
-    /** CoverageOfKSpace, (0018,9094), CS, 1,  */
+    /** CoverageOfKSpace, 0x00189094, CS, 1 */
     extern DICOM_EXPORT const tag CoverageOfKSpace;
-    /** CranialThermalIndex, (0018,5026), DS, 1,  */
+    /** CranialThermalIndex, 0x00185026, DS, 1 */
     extern DICOM_EXPORT const tag CranialThermalIndex;
-    /** CreationDate, (2100,0040), DA, 1,  */
+    /** CreationDate, 0x21000040, DA, 1 */
     extern DICOM_EXPORT const tag CreationDate;
-    /** CreationTime, (2100,0050), TM, 1,  */
+    /** CreationTime, 0x21000050, TM, 1 */
     extern DICOM_EXPORT const tag CreationTime;
-    /** CreatorVersionUID, (0008,9123), UI, 1,  */
+    /** CreatorVersionUID, 0x00089123, UI, 1 */
     extern DICOM_EXPORT const tag CreatorVersionUID;
-    /** CrystalCenterLocationX, (0014,4058), DS, 1,  */
-    extern DICOM_EXPORT const tag CrystalCenterLocationX;
-    /** CrystalCenterLocationZ, (0014,4059), DS, 1,  */
-    extern DICOM_EXPORT const tag CrystalCenterLocationZ;
-    /** CSSFontName, (0070,0229), LO, 1,  */
+    /** Crop, 0x00701204, CS, 1 */
+    extern DICOM_EXPORT const tag Crop;
+    /** CroppingSpecificationIndex, 0x00701205, US, 1 */
+    extern DICOM_EXPORT const tag CroppingSpecificationIndex;
+    /** CroppingSpecificationNumber, 0x00701309, US, 1 */
+    extern DICOM_EXPORT const tag CroppingSpecificationNumber;
+    /** CSSFontName, 0x00700229, LO, 1 */
     extern DICOM_EXPORT const tag CSSFontName;
-    /** CTAcquisitionDetailsSequence, (0018,9304), SQ, 1,  */
+    /** CTAcquisitionDetailsSequence, 0x00189304, SQ, 1 */
     extern DICOM_EXPORT const tag CTAcquisitionDetailsSequence;
-    /** CTAcquisitionTypeSequence, (0018,9301), SQ, 1,  */
+    /** CTAcquisitionTypeSequence, 0x00189301, SQ, 1 */
     extern DICOM_EXPORT const tag CTAcquisitionTypeSequence;
-    /** CTAdditionalXRaySourceSequence, (0018,9360), SQ, 1,  */
+    /** CTAdditionalXRaySourceSequence, 0x00189360, SQ, 1 */
     extern DICOM_EXPORT const tag CTAdditionalXRaySourceSequence;
-    /** CTDIPhantomTypeCodeSequence, (0018,9346), SQ, 1,  */
+    /** CTDIPhantomTypeCodeSequence, 0x00189346, SQ, 1 */
     extern DICOM_EXPORT const tag CTDIPhantomTypeCodeSequence;
-    /** CTDIvol, (0018,9345), FD, 1,  */
+    /** CTDIvol, 0x00189345, FD, 1 */
     extern DICOM_EXPORT const tag CTDIvol;
-    /** CTExposureSequence, (0018,9321), SQ, 1,  */
+    /** CTDIvolNotificationTrigger, 0x00189942, FD, 1 */
+    extern DICOM_EXPORT const tag CTDIvolNotificationTrigger;
+    /** CTExposureSequence, 0x00189321, SQ, 1 */
     extern DICOM_EXPORT const tag CTExposureSequence;
-    /** CTGeometrySequence, (0018,9312), SQ, 1,  */
+    /** CTGeometrySequence, 0x00189312, SQ, 1 */
     extern DICOM_EXPORT const tag CTGeometrySequence;
-    /** CTImageFrameTypeSequence, (0018,9329), SQ, 1,  */
+    /** CTImageFrameTypeSequence, 0x00189329, SQ, 1 */
     extern DICOM_EXPORT const tag CTImageFrameTypeSequence;
-    /** CTPositionSequence, (0018,9326), SQ, 1,  */
+    /** CTPositionSequence, 0x00189326, SQ, 1 */
     extern DICOM_EXPORT const tag CTPositionSequence;
-    /** CTReconstructionSequence, (0018,9314), SQ, 1,  */
+    /** CTReconstructionSequence, 0x00189314, SQ, 1 */
     extern DICOM_EXPORT const tag CTReconstructionSequence;
-    /** CTTableDynamicsSequence, (0018,9308), SQ, 1,  */
+    /** CTTableDynamicsSequence, 0x00189308, SQ, 1 */
     extern DICOM_EXPORT const tag CTTableDynamicsSequence;
-    /** CTXRayDetailsSequence, (0018,9325), SQ, 1,  */
+    /** CTXRayDetailsSequence, 0x00189325, SQ, 1 */
     extern DICOM_EXPORT const tag CTXRayDetailsSequence;
-    /** CumulativeDoseReferenceCoefficient, (300A,010C), DS, 1,  */
+    /** CumulativeDoseReferenceCoefficient, 0x300A010C, DS, 1 */
     extern DICOM_EXPORT const tag CumulativeDoseReferenceCoefficient;
-    /** CumulativeDoseToDoseReference, (3008,0052), DS, 1,  */
+    /** CumulativeDoseToDoseReference, 0x30080052, DS, 1 */
     extern DICOM_EXPORT const tag CumulativeDoseToDoseReference;
-    /** CumulativeMetersetWeight, (300A,0134), DS, 1,  */
+    /** CumulativeMetersetWeight, 0x300A0134, DS, 1 */
     extern DICOM_EXPORT const tag CumulativeMetersetWeight;
-    /** CumulativeTimeWeight, (300A,02D6), DS, 1,  */
+    /** CumulativeTimeWeight, 0x300A02D6, DS, 1 */
     extern DICOM_EXPORT const tag CumulativeTimeWeight;
-    /** CurrentFractionNumber, (3008,0022), IS, 1,  */
+    /** CurrentConfigurationID, 0x00287002, US, 1 */
+    extern DICOM_EXPORT const tag CurrentConfigurationID;
+    /** CurrentFractionNumber, 0x30080022, IS, 1 */
     extern DICOM_EXPORT const tag CurrentFractionNumber;
-    /** CurrentObserverTrial, (0040,A307), PN, 1, RET */
+    /** CurrentObserverTrial, 0x0040A307, PN, 1, RET */
     extern DICOM_EXPORT const tag CurrentObserverTrial;
-    /** CurrentPatientLocation, (0038,0300), LO, 1,  */
+    /** CurrentPatientLocation, 0x00380300, LO, 1 */
     extern DICOM_EXPORT const tag CurrentPatientLocation;
-    /** CurrentRequestedProcedureEvidenceSequence, (0040,A375), SQ, 1,  */
+    /** CurrentRequestedProcedureEvidenceSequence, 0x0040A375, SQ, 1 */
     extern DICOM_EXPORT const tag CurrentRequestedProcedureEvidenceSequence;
-    /** CurrentTreatmentStatus, (3008,0200), CS, 1,  */
+    /** CurrentTreatmentStatus, 0x30080200, CS, 1 */
     extern DICOM_EXPORT const tag CurrentTreatmentStatus;
-    /** CurvatureType, (0014,0052), CS, 1,  */
+    /** CurvatureType, 0x00140052, CS, 1, RET */
     extern DICOM_EXPORT const tag CurvatureType;
-    /** CurveActivationLayer, (50XX,1001), CS, 1, RET */
-    extern const range_tag CurveActivationLayer;
-    /** CurveData, (50XX,3000), OW or OB, 1, RET */
-    extern const range_tag CurveData;
-    /** CurveDataDescriptor, (50XX,0110), US, 1-n, RET */
-    extern const range_tag CurveDataDescriptor;
-    /** CurveDate, (0008,0025), DA, 1, RET */
+    /** CurveActivationLayer, 0x50001001, CS, 1, RET */
+    extern DICOM_EXPORT const range_tag CurveActivationLayer;
+    /** CurveData, 0x50003000, OB or OW, 1, RET */
+    extern DICOM_EXPORT const range_tag CurveData;
+    /** CurveDataDescriptor, 0x50000110, US, 1, RET */
+    extern DICOM_EXPORT const range_tag CurveDataDescriptor;
+    /** CurveDate, 0x00080025, DA, 1, RET */
     extern DICOM_EXPORT const tag CurveDate;
-    /** CurveDescription, (50XX,0022), LO, 1, RET */
-    extern const range_tag CurveDescription;
-    /** CurveDimensions, (50XX,0005), US, 1, RET */
-    extern const range_tag CurveDimensions;
-    /** CurveLabel, (50XX,2500), LO, 1, RET */
-    extern const range_tag CurveLabel;
-    /** CurveNumber, (0020,0024), IS, 1, RET */
+    /** CurveDescription, 0x50000022, LO, 1, RET */
+    extern DICOM_EXPORT const range_tag CurveDescription;
+    /** CurveDimensions, 0x50000005, US, 1, RET */
+    extern DICOM_EXPORT const range_tag CurveDimensions;
+    /** CurveLabel, 0x50002500, LO, 1, RET */
+    extern DICOM_EXPORT const range_tag CurveLabel;
+    /** CurveNumber, 0x00200024, IS, 1, RET */
     extern DICOM_EXPORT const tag CurveNumber;
-    /** CurveRange, (50XX,0106), SH, 1-n, RET */
-    extern const range_tag CurveRange;
-    /** CurveReferencedOverlayGroup, (50XX,2610), US, 1, RET */
-    extern const range_tag CurveReferencedOverlayGroup;
-    /** CurveReferencedOverlaySequence, (50XX,2600), SQ, 1, RET */
-    extern const range_tag CurveReferencedOverlaySequence;
-    /** CurveTime, (0008,0035), TM, 1, RET */
+    /** CurveRange, 0x50000106, SH, 1, RET */
+    extern DICOM_EXPORT const range_tag CurveRange;
+    /** CurveReferencedOverlayGroup, 0x50002610, US, 1, RET */
+    extern DICOM_EXPORT const range_tag CurveReferencedOverlayGroup;
+    /** CurveReferencedOverlaySequence, 0x50002600, SQ, 1, RET */
+    extern DICOM_EXPORT const range_tag CurveReferencedOverlaySequence;
+    /** CurveTime, 0x00080035, TM, 1, RET */
     extern DICOM_EXPORT const tag CurveTime;
-    /** CustodialOrganizationSequence, (0040,A07C), SQ, 1,  */
+    /** CustodialOrganizationSequence, 0x0040A07C, SQ, 1 */
     extern DICOM_EXPORT const tag CustodialOrganizationSequence;
-    /** CylinderAxis, (0022,0009), FL, 1,  */
+    /** CylinderAxis, 0x00220009, FL, 1 */
     extern DICOM_EXPORT const tag CylinderAxis;
-    /** CylinderLensPower, (0022,0008), FL, 1,  */
+    /** CylinderLensPower, 0x00220008, FL, 1 */
     extern DICOM_EXPORT const tag CylinderLensPower;
-    /** CylinderPower, (0046,0147), FD, 1,  */
+    /** CylinderPower, 0x00460147, FD, 1 */
     extern DICOM_EXPORT const tag CylinderPower;
-    /** CylinderSequence, (0046,0018), SQ, 1,  */
+    /** CylinderSequence, 0x00460018, SQ, 1 */
     extern DICOM_EXPORT const tag CylinderSequence;
-    /** DACAmplitude, (0014,403C), DS, 1-n,  */
+    /** DACAmplitude, 0x0014403C, DS, 1, RET */
     extern DICOM_EXPORT const tag DACAmplitude;
-    /** DACGainPoints, (0014,4038), DS, 1-n,  */
+    /** DACGainPoints, 0x00144038, DS, 1, RET */
     extern DICOM_EXPORT const tag DACGainPoints;
-    /** DACSequence, (0014,4035), SQ, 1,  */
+    /** DACSequence, 0x00144035, SQ, 1, RET */
     extern DICOM_EXPORT const tag DACSequence;
-    /** DACTimePoints, (0014,403A), DS, 1-n,  */
+    /** DACTimePoints, 0x0014403A, DS, 1, RET */
     extern DICOM_EXPORT const tag DACTimePoints;
-    /** DACType, (0014,4036), CS, 1,  */
+    /** DACType, 0x00144036, CS, 1, RET */
     extern DICOM_EXPORT const tag DACType;
-    /** Damping, (0014,4028), DS, 1,  */
+    /** Damping, 0x00144028, DS, 1, RET */
     extern DICOM_EXPORT const tag Damping;
-    /** DarkCurrentCounts, (0014,3050), OB or OW, 1,  */
+    /** DarkCurrentCounts, 0x00143050, OB or OW, 1, RET */
     extern DICOM_EXPORT const tag DarkCurrentCounts;
-    /** DarkCurrentSequence, (0014,3040), SQ, 1,  */
+    /** DarkCurrentSequence, 0x00143040, SQ, 1, RET */
     extern DICOM_EXPORT const tag DarkCurrentSequence;
-    /** DataBlock, (0028,0702), AT, 1-n, RET */
+    /** DataBlock, 0x00280702, AT, 1, RET */
     extern DICOM_EXPORT const tag DataBlock;
-    /** DataBlockDescription, (0028,0701), CS, 1-n, RET */
+    /** DataBlockDescription, 0x00280701, CS, 1, RET */
     extern DICOM_EXPORT const tag DataBlockDescription;
-    /** DataCollectionCenterPatient, (0018,9313), FD, 3,  */
+    /** DataCollectionCenterPatient, 0x00189313, FD, 3 */
     extern DICOM_EXPORT const tag DataCollectionCenterPatient;
-    /** DataCollectionDiameter, (0018,0090), DS, 1,  */
+    /** DataCollectionDiameter, 0x00180090, DS, 1 */
     extern DICOM_EXPORT const tag DataCollectionDiameter;
-    /** DataElementsSigned, (0400,0020), AT, 1-n,  */
+    /** DataElementsSigned, 0x04000020, AT, 1 */
     extern DICOM_EXPORT const tag DataElementsSigned;
-    /** DataFrameAssignmentSequence, (0028,1401), SQ, 1,  */
+    /** DataFrameAssignmentSequence, 0x00281401, SQ, 1 */
     extern DICOM_EXPORT const tag DataFrameAssignmentSequence;
-    /** DataInformationSequence, (0054,0063), SQ, 1,  */
+    /** DataInformationSequence, 0x00540063, SQ, 1 */
     extern DICOM_EXPORT const tag DataInformationSequence;
-    /** DataObservationSequence, (0024,0325), SQ, 1,  */
+    /** DataObservationSequence, 0x00240325, SQ, 1 */
     extern DICOM_EXPORT const tag DataObservationSequence;
-    /** DataPathAssignment, (0028,1402), CS, 1,  */
+    /** DataPathAssignment, 0x00281402, CS, 1 */
     extern DICOM_EXPORT const tag DataPathAssignment;
-    /** DataPathID, (0028,140E), CS, 1,  */
+    /** DataPathID, 0x0028140E, CS, 1 */
     extern DICOM_EXPORT const tag DataPathID;
-    /** DataPointColumns, (0028,9002), UL, 1,  */
+    /** DataPointColumns, 0x00289002, UL, 1 */
     extern DICOM_EXPORT const tag DataPointColumns;
-    /** DataPointRows, (0028,9001), UL, 1,  */
+    /** DataPointRows, 0x00289001, UL, 1 */
     extern DICOM_EXPORT const tag DataPointRows;
-    /** DataRepresentation, (0028,9108), CS, 1,  */
+    /** DataRepresentation, 0x00289108, CS, 1 */
     extern DICOM_EXPORT const tag DataRepresentation;
-    /** DataSetDescription, (0024,0309), LO, 1,  */
+    /** DataSetDescription, 0x00240309, LO, 1 */
     extern DICOM_EXPORT const tag DataSetDescription;
-    /** DataSetName, (0024,0306), LO, 1,  */
+    /** DataSetName, 0x00240306, LO, 1 */
     extern DICOM_EXPORT const tag DataSetName;
-    /** DataSetSource, (0024,0308), LO, 1,  */
+    /** DataSetSource, 0x00240308, LO, 1 */
     extern DICOM_EXPORT const tag DataSetSource;
-    /** DataSetSubtype, (0008,0041), LO, 1, RET */
+    /** DataSetSubtype, 0x00080041, LO, 1, RET */
     extern DICOM_EXPORT const tag DataSetSubtype;
-    /** DataSetTrailingPadding, (FFFC,FFFC), OB, 1,  */
+    /** DataSetTrailingPadding, 0xFFFCFFFC, OB, 1 */
     extern DICOM_EXPORT const tag DataSetTrailingPadding;
-    /** DataSetType, (0008,0040), US, 1, RET */
+    /** DataSetType, 0x00080040, US, 1, RET */
     extern DICOM_EXPORT const tag DataSetType;
-    /** DataSetVersion, (0024,0307), LO, 1,  */
+    /** DataSetVersion, 0x00240307, LO, 1 */
     extern DICOM_EXPORT const tag DataSetVersion;
-    /** DataType, (0018,9808), CS, 1,  */
+    /** DataType, 0x00189808, CS, 1 */
     extern DICOM_EXPORT const tag DataType;
-    /** DataValueRepresentation, (50XX,0103), US, 1, RET */
-    extern const range_tag DataValueRepresentation;
-    /** Date, (0040,A121), DA, 1,  */
+    /** DataValueRepresentation, 0x50000103, US, 1, RET */
+    extern DICOM_EXPORT const range_tag DataValueRepresentation;
+    /** Date, 0x0040A121, DA, 1 */
     extern DICOM_EXPORT const tag Date;
-    /** DateOfDocumentOrVerbalTransactionTrial, (0040,A110), DA, 1, RET */
+    /** DateOfDocumentOrVerbalTransactionTrial, 0x0040A110, DA, 1, RET */
     extern DICOM_EXPORT const tag DateOfDocumentOrVerbalTransactionTrial;
-    /** DateOfGainCalibration, (0014,3076), DA, 1,  */
+    /** DateOfGainCalibration, 0x00143076, DA, 1, RET */
     extern DICOM_EXPORT const tag DateOfGainCalibration;
-    /** DateOfLastCalibration, (0018,1200), DA, 1-n,  */
+    /** DateOfLastCalibration, 0x00181200, DA, 1 */
     extern DICOM_EXPORT const tag DateOfLastCalibration;
-    /** DateOfLastDetectorCalibration, (0018,700C), DA, 1,  */
+    /** DateOfLastDetectorCalibration, 0x0018700C, DA, 1 */
     extern DICOM_EXPORT const tag DateOfLastDetectorCalibration;
-    /** DateOfSecondaryCapture, (0018,1012), DA, 1,  */
+    /** DateOfSecondaryCapture, 0x00181012, DA, 1 */
     extern DICOM_EXPORT const tag DateOfSecondaryCapture;
-    /** DateTime, (0040,A120), DT, 1,  */
+    /** DateTime, 0x0040A120, DT, 1 */
     extern DICOM_EXPORT const tag DateTime;
-    /** dBdt, (0018,1318), DS, 1,  */
+    /** DateTimeOfLastCalibration, 0x00181202, DT, 1 */
+    extern DICOM_EXPORT const tag DateTimeOfLastCalibration;
+    /** dBdt, 0x00181318, DS, 1 */
     extern DICOM_EXPORT const tag dBdt;
-    /** DCTLabel, (0028,0700), LO, 1, RET */
+    /** DCTLabel, 0x00280700, LO, 1, RET */
     extern DICOM_EXPORT const tag DCTLabel;
-    /** DeadTimeCorrected, (0018,9761), CS, 1,  */
+    /** DDLValue, 0x00287017, US, 1 */
+    extern DICOM_EXPORT const tag DDLValue;
+    /** DeadTimeCorrected, 0x00189761, CS, 1 */
     extern DICOM_EXPORT const tag DeadTimeCorrected;
-    /** DeadTimeCorrectionFlag, (0054,1401), CS, 1, RET */
+    /** DeadTimeCorrectionFlag, 0x00541401, CS, 1, RET */
     extern DICOM_EXPORT const tag DeadTimeCorrectionFlag;
-    /** DeadTimeFactor, (0054,1324), DS, 1,  */
+    /** DeadTimeFactor, 0x00541324, DS, 1 */
     extern DICOM_EXPORT const tag DeadTimeFactor;
-    /** DecayCorrected, (0018,9758), CS, 1,  */
+    /** DecayCorrected, 0x00189758, CS, 1 */
     extern DICOM_EXPORT const tag DecayCorrected;
-    /** DecayCorrection, (0054,1102), CS, 1,  */
+    /** DecayCorrection, 0x00541102, CS, 1 */
     extern DICOM_EXPORT const tag DecayCorrection;
-    /** DecayCorrectionDateTime, (0018,9701), DT, 1,  */
+    /** DecayCorrectionDateTime, 0x00189701, DT, 1 */
     extern DICOM_EXPORT const tag DecayCorrectionDateTime;
-    /** DecayFactor, (0054,1321), DS, 1,  */
+    /** DecayFactor, 0x00541321, DS, 1 */
     extern DICOM_EXPORT const tag DecayFactor;
-    /** DecimalVisualAcuity, (0046,0137), FD, 1,  */
+    /** DecimalPotentialVisualAcuity, 0x00460238, FL, 1 */
+    extern DICOM_EXPORT const tag DecimalPotentialVisualAcuity;
+    /** DecimalVisualAcuity, 0x00460137, FD, 1 */
     extern DICOM_EXPORT const tag DecimalVisualAcuity;
-    /** DecimateCropResult, (2020,00A2), CS, 1,  */
+    /** DecimateCropResult, 0x202000A2, CS, 1 */
     extern DICOM_EXPORT const tag DecimateCropResult;
-    /** DecoupledNucleus, (0018,9060), CS, 1-2,  */
+    /** DecoupledNucleus, 0x00189060, CS, 1 */
     extern DICOM_EXPORT const tag DecoupledNucleus;
-    /** Decoupling, (0018,9059), CS, 1,  */
+    /** Decoupling, 0x00189059, CS, 1 */
     extern DICOM_EXPORT const tag Decoupling;
-    /** DecouplingChemicalShiftReference, (0018,9063), FD, 1-2,  */
+    /** DecouplingChemicalShiftReference, 0x00189063, FD, 1 */
     extern DICOM_EXPORT const tag DecouplingChemicalShiftReference;
-    /** DecouplingFrequency, (0018,9061), FD, 1-2,  */
+    /** DecouplingFrequency, 0x00189061, FD, 1 */
     extern DICOM_EXPORT const tag DecouplingFrequency;
-    /** DecouplingMethod, (0018,9062), CS, 1,  */
+    /** DecouplingMethod, 0x00189062, CS, 1 */
     extern DICOM_EXPORT const tag DecouplingMethod;
-    /** DefaultMagnificationType, (2010,00A6), CS, 1,  */
+    /** DefaultMagnificationType, 0x201000A6, CS, 1 */
     extern DICOM_EXPORT const tag DefaultMagnificationType;
-    /** DefaultPrinterResolutionID, (2010,0054), CS, 1,  */
+    /** DefaultPrinterResolutionID, 0x20100054, CS, 1 */
     extern DICOM_EXPORT const tag DefaultPrinterResolutionID;
-    /** DefaultSmoothingType, (2010,00A8), CS, 1,  */
+    /** DefaultSmoothingType, 0x201000A8, CS, 1 */
     extern DICOM_EXPORT const tag DefaultSmoothingType;
-    /** DeformableRegistrationGridSequence, (0064,0005), SQ, 1,  */
+    /** DefinitionSourceSequence, 0x00081156, SQ, 1 */
+    extern DICOM_EXPORT const tag DefinitionSourceSequence;
+    /** DeformableRegistrationGridSequence, 0x00640005, SQ, 1 */
     extern DICOM_EXPORT const tag DeformableRegistrationGridSequence;
-    /** DeformableRegistrationSequence, (0064,0002), SQ, 1,  */
+    /** DeformableRegistrationSequence, 0x00640002, SQ, 1 */
     extern DICOM_EXPORT const tag DeformableRegistrationSequence;
-    /** DegreeOfDilation, (0022,000E), FL, 1,  */
+    /** DegreeOfDilation, 0x0022000E, FL, 1 */
     extern DICOM_EXPORT const tag DegreeOfDilation;
-    /** DegreeOfFreedomID, (0068,6410), US, 1,  */
+    /** DegreeOfFreedomID, 0x00686410, US, 1 */
     extern DICOM_EXPORT const tag DegreeOfFreedomID;
-    /** DegreeOfFreedomType, (0068,6420), CS, 1,  */
+    /** DegreeOfFreedomType, 0x00686420, CS, 1 */
     extern DICOM_EXPORT const tag DegreeOfFreedomType;
-    /** DeidentificationMethod, (0012,0063), LO, 1-n,  */
+    /** DeidentificationAction, 0x00080307, CS, 1 */
+    extern DICOM_EXPORT const tag DeidentificationAction;
+    /** DeidentificationActionSequence, 0x00080305, SQ, 1 */
+    extern DICOM_EXPORT const tag DeidentificationActionSequence;
+    /** DeidentificationMethod, 0x00120063, LO, 1 */
     extern DICOM_EXPORT const tag DeidentificationMethod;
-    /** DeidentificationMethodCodeSequence, (0012,0064), SQ, 1,  */
+    /** DeidentificationMethodCodeSequence, 0x00120064, SQ, 1 */
     extern DICOM_EXPORT const tag DeidentificationMethodCodeSequence;
-    /** DelayLawIdentifier, (0014,405C), ST, 1,  */
+    /** DelayLawIdentifier, 0x0014405C, ST, 1, RET */
     extern DICOM_EXPORT const tag DelayLawIdentifier;
-    /** DeletionLock, (0074,1230), LO, 1,  */
+    /** DeletionLock, 0x00741230, LO, 1 */
     extern DICOM_EXPORT const tag DeletionLock;
-    /** DeliveredChannelTotalTime, (3008,0134), DS, 1,  */
+    /** DeliveredChannelTotalTime, 0x30080134, DS, 1 */
     extern DICOM_EXPORT const tag DeliveredChannelTotalTime;
-    /** DeliveredMeterset, (3008,0044), DS, 1,  */
+    /** DeliveredDepthDoseParametersSequence, 0x300A0506, SQ, 1 */
+    extern DICOM_EXPORT const tag DeliveredDepthDoseParametersSequence;
+    /** DeliveredDistalDepth, 0x300A0508, FL, 1 */
+    extern DICOM_EXPORT const tag DeliveredDistalDepth;
+    /** DeliveredDistalDepthFraction, 0x300A0507, FL, 1 */
+    extern DICOM_EXPORT const tag DeliveredDistalDepthFraction;
+    /** DeliveredMeterset, 0x30080044, DS, 1 */
     extern DICOM_EXPORT const tag DeliveredMeterset;
-    /** DeliveredNumberOfPulses, (3008,0138), IS, 1,  */
+    /** DeliveredNominalRangeModulatedRegionDepths, 0x300A0510, FL, 2 */
+    extern DICOM_EXPORT const tag DeliveredNominalRangeModulatedRegionDepths;
+    /** DeliveredNominalRangeModulationFractions, 0x300A0509, FL, 2 */
+    extern DICOM_EXPORT const tag DeliveredNominalRangeModulationFractions;
+    /** DeliveredNumberOfPulses, 0x30080138, IS, 1 */
     extern DICOM_EXPORT const tag DeliveredNumberOfPulses;
-    /** DeliveredPrimaryMeterset, (3008,0036), DS, 1,  */
+    /** DeliveredPrimaryMeterset, 0x30080036, DS, 1 */
     extern DICOM_EXPORT const tag DeliveredPrimaryMeterset;
-    /** DeliveredPulseRepetitionInterval, (3008,013C), DS, 1,  */
+    /** DeliveredPulseRepetitionInterval, 0x3008013C, DS, 1 */
     extern DICOM_EXPORT const tag DeliveredPulseRepetitionInterval;
-    /** DeliveredSecondaryMeterset, (3008,0037), DS, 1,  */
+    /** DeliveredReferenceDoseDefinition, 0x300A0511, CS, 1 */
+    extern DICOM_EXPORT const tag DeliveredReferenceDoseDefinition;
+    /** DeliveredSecondaryMeterset, 0x30080037, DS, 1 */
     extern DICOM_EXPORT const tag DeliveredSecondaryMeterset;
-    /** DeliveredTreatmentTime, (3008,003B), DS, 1,  */
+    /** DeliveredTreatmentTime, 0x3008003B, DS, 1 */
     extern DICOM_EXPORT const tag DeliveredTreatmentTime;
-    /** DeliveryMaximumDose, (300A,0023), DS, 1,  */
+    /** DeliveryMaximumDose, 0x300A0023, DS, 1 */
     extern DICOM_EXPORT const tag DeliveryMaximumDose;
-    /** DeliveryVerificationImageSequence, (0074,1030), SQ, 1,  */
+    /** DeliveryVerificationImageSequence, 0x00741030, SQ, 1 */
     extern DICOM_EXPORT const tag DeliveryVerificationImageSequence;
-    /** DeliveryWarningDose, (300A,0022), DS, 1,  */
+    /** DeliveryWarningDose, 0x300A0022, DS, 1 */
     extern DICOM_EXPORT const tag DeliveryWarningDose;
-    /** Density, (4010,1018), FL, 1,  */
+    /** Density, 0x40101018, FL, 1, RET */
     extern DICOM_EXPORT const tag Density;
-    /** DepthOfScanField, (0018,5050), IS, 1,  */
+    /** DepthDoseParametersSequence, 0x300A0505, SQ, 1 */
+    extern DICOM_EXPORT const tag DepthDoseParametersSequence;
+    /** DepthOfScanField, 0x00185050, IS, 1 */
     extern DICOM_EXPORT const tag DepthOfScanField;
-    /** DepthOfTransverseImage, (0022,0041), FL, 1,  */
+    /** DepthOfTransverseImage, 0x00220041, FL, 1 */
     extern DICOM_EXPORT const tag DepthOfTransverseImage;
-    /** DepthsOfFocus, (0018,9801), FD, 1-n,  */
+    /** DepthsOfFocus, 0x00189801, FD, 1 */
     extern DICOM_EXPORT const tag DepthsOfFocus;
-    /** DepthSpatialResolution, (0022,0035), FL, 1,  */
+    /** DepthSpatialResolution, 0x00220035, FL, 1 */
     extern DICOM_EXPORT const tag DepthSpatialResolution;
-    /** DerivationCodeSequence, (0008,9215), SQ, 1,  */
+    /** DepthValueAveragingFlag, 0x300A0093, CS, 1 */
+    extern DICOM_EXPORT const tag DepthValueAveragingFlag;
+    /** DerivationAlgorithmSequence, 0x00221612, SQ, 1 */
+    extern DICOM_EXPORT const tag DerivationAlgorithmSequence;
+    /** DerivationCodeSequence, 0x00089215, SQ, 1 */
     extern DICOM_EXPORT const tag DerivationCodeSequence;
-    /** DerivationDescription, (0008,2111), ST, 1,  */
+    /** DerivationDescription, 0x00082111, ST, 1 */
     extern DICOM_EXPORT const tag DerivationDescription;
-    /** DerivationImageSequence, (0008,9124), SQ, 1,  */
+    /** DerivationImageSequence, 0x00089124, SQ, 1 */
     extern DICOM_EXPORT const tag DerivationImageSequence;
-    /** DerivationImplantAssemblyTemplateSequence, (0076,000E), SQ, 1,  */
+    /** DerivationImplantAssemblyTemplateSequence, 0x0076000E, SQ, 1 */
     extern DICOM_EXPORT const tag DerivationImplantAssemblyTemplateSequence;
-    /** DerivationImplantTemplateSequence, (0068,6224), SQ, 1,  */
+    /** DerivationImplantTemplateSequence, 0x00686224, SQ, 1 */
     extern DICOM_EXPORT const tag DerivationImplantTemplateSequence;
-    /** DestinationAE, (2100,0140), AE, 1, RET */
+    /** DestinationAE, 0x21000140, AE, 1 */
     extern DICOM_EXPORT const tag DestinationAE;
-    /** DetailsOfCoefficients, (0028,0404), AT, 1-n, RET */
+    /** DetailsOfCoefficients, 0x00280404, AT, 1, RET */
     extern DICOM_EXPORT const tag DetailsOfCoefficients;
-    /** DetectorActivationOffsetFromExposure, (0018,7016), DS, 1,  */
+    /** DetectorActivationOffsetFromExposure, 0x00187016, DS, 1 */
     extern DICOM_EXPORT const tag DetectorActivationOffsetFromExposure;
-    /** DetectorActiveDimensions, (0018,7026), DS, 1-2,  */
+    /** DetectorActiveAreaOrientation, 0x00189558, FD, 6 */
+    extern DICOM_EXPORT const tag DetectorActiveAreaOrientation;
+    /** DetectorActiveAreaTLHCPosition, 0x00189557, FD, 3 */
+    extern DICOM_EXPORT const tag DetectorActiveAreaTLHCPosition;
+    /** DetectorActiveDimensions, 0x00187026, DS, 1 */
     extern DICOM_EXPORT const tag DetectorActiveDimensions;
-    /** DetectorActiveOrigin, (0018,7028), DS, 2,  */
+    /** DetectorActiveOrigin, 0x00187028, DS, 2 */
     extern DICOM_EXPORT const tag DetectorActiveOrigin;
-    /** DetectorActiveShape, (0018,7024), CS, 1,  */
+    /** DetectorActiveShape, 0x00187024, CS, 1 */
     extern DICOM_EXPORT const tag DetectorActiveShape;
-    /** DetectorActiveTime, (0018,7014), DS, 1,  */
+    /** DetectorActiveTime, 0x00187014, DS, 1 */
     extern DICOM_EXPORT const tag DetectorActiveTime;
-    /** DetectorBinning, (0018,701A), DS, 2,  */
+    /** DetectorBinning, 0x0018701A, DS, 2 */
     extern DICOM_EXPORT const tag DetectorBinning;
-    /** DetectorCalibrationData, (4010,106C), OB, 1,  */
+    /** DetectorCalibrationData, 0x4010106C, OB, 1, RET */
     extern DICOM_EXPORT const tag DetectorCalibrationData;
-    /** DetectorConditionsNominalFlag, (0018,7000), CS, 1,  */
+    /** DetectorConditionsNominalFlag, 0x00187000, CS, 1 */
     extern DICOM_EXPORT const tag DetectorConditionsNominalFlag;
-    /** DetectorConfiguration, (0018,7005), CS, 1,  */
+    /** DetectorConfiguration, 0x00187005, CS, 1 */
     extern DICOM_EXPORT const tag DetectorConfiguration;
-    /** DetectorDescription, (0018,7006), LT, 1,  */
+    /** DetectorDescription, 0x00187006, LT, 1 */
     extern DICOM_EXPORT const tag DetectorDescription;
-    /** DetectorElementPhysicalSize, (0018,7020), DS, 2,  */
+    /** DetectorElementPhysicalSize, 0x00187020, DS, 2 */
     extern DICOM_EXPORT const tag DetectorElementPhysicalSize;
-    /** DetectorElementSize, (0054,1203), DS, 2,  */
+    /** DetectorElementSize, 0x00541203, DS, 2 */
     extern DICOM_EXPORT const tag DetectorElementSize;
-    /** DetectorElementSpacing, (0018,7022), DS, 2,  */
+    /** DetectorElementSpacing, 0x00187022, DS, 2 */
     extern DICOM_EXPORT const tag DetectorElementSpacing;
-    /** DetectorGeometry, (0018,9725), CS, 1,  */
+    /** DetectorGeometry, 0x00189725, CS, 1 */
     extern DICOM_EXPORT const tag DetectorGeometry;
-    /** DetectorGeometrySequence, (4010,0004), SQ, 1,  */
+    /** DetectorGeometrySequence, 0x40100004, SQ, 1, RET */
     extern DICOM_EXPORT const tag DetectorGeometrySequence;
-    /** DetectorID, (0018,700A), SH, 1,  */
+    /** DetectorID, 0x0018700A, SH, 1 */
     extern DICOM_EXPORT const tag DetectorID;
-    /** DetectorInformationSequence, (0054,0022), SQ, 1,  */
+    /** DetectorInformationSequence, 0x00540022, SQ, 1 */
     extern DICOM_EXPORT const tag DetectorInformationSequence;
-    /** DetectorLinesOfResponseUsed, (0054,1104), LO, 1,  */
+    /** DetectorIsocenterPrimaryAngle, 0x00189550, FD, 1 */
+    extern DICOM_EXPORT const tag DetectorIsocenterPrimaryAngle;
+    /** DetectorIsocenterSecondaryAngle, 0x00189551, FD, 1 */
+    extern DICOM_EXPORT const tag DetectorIsocenterSecondaryAngle;
+    /** DetectorLinesOfResponseUsed, 0x00541104, LO, 1 */
     extern DICOM_EXPORT const tag DetectorLinesOfResponseUsed;
-    /** DetectorManufacturerModelName, (0018,702B), LO, 1,  */
+    /** DetectorManufacturerModelName, 0x0018702B, LO, 1 */
     extern DICOM_EXPORT const tag DetectorManufacturerModelName;
-    /** DetectorManufacturerName, (0018,702A), LO, 1,  */
+    /** DetectorManufacturerName, 0x0018702A, LO, 1 */
     extern DICOM_EXPORT const tag DetectorManufacturerName;
-    /** DetectorMode, (0018,7008), LT, 1,  */
+    /** DetectorMode, 0x00187008, LT, 1 */
     extern DICOM_EXPORT const tag DetectorMode;
-    /** DetectorNormalizationCorrection, (0018,9768), CS, 1,  */
+    /** DetectorNormalizationCorrection, 0x00189768, CS, 1 */
     extern DICOM_EXPORT const tag DetectorNormalizationCorrection;
-    /** DetectorPrimaryAngle, (0018,1530), DS, 1,  */
+    /** DetectorPositionSequence, 0x00189541, SQ, 1 */
+    extern DICOM_EXPORT const tag DetectorPositionSequence;
+    /** DetectorPrimaryAngle, 0x00181530, DS, 1 */
     extern DICOM_EXPORT const tag DetectorPrimaryAngle;
-    /** DetectorSecondaryAngle, (0018,1531), DS, 1,  */
+    /** DetectorSecondaryAngle, 0x00181531, DS, 1 */
     extern DICOM_EXPORT const tag DetectorSecondaryAngle;
-    /** DetectorTemperature, (0018,7001), DS, 1,  */
+    /** DetectorTemperature, 0x00187001, DS, 1 */
     extern DICOM_EXPORT const tag DetectorTemperature;
-    /** DetectorTemperatureSequence, (0014,3020), SQ, 1,  */
+    /** DetectorTemperatureSequence, 0x00143020, SQ, 1, RET */
     extern DICOM_EXPORT const tag DetectorTemperatureSequence;
-    /** DetectorTimeSinceLastExposure, (0018,7012), DS, 1,  */
+    /** DetectorTimeSinceLastExposure, 0x00187012, DS, 1 */
     extern DICOM_EXPORT const tag DetectorTimeSinceLastExposure;
-    /** DetectorType, (0018,7004), CS, 1,  */
+    /** DetectorType, 0x00187004, CS, 1 */
     extern DICOM_EXPORT const tag DetectorType;
-    /** DetectorVector, (0054,0020), US, 1-n,  */
+    /** DetectorVector, 0x00540020, US, 1 */
     extern DICOM_EXPORT const tag DetectorVector;
-    /** DeviationIndex, (0018,1413), DS, 1,  */
+    /** DetectorXPositionToIsocenter, 0x00189552, FD, 1 */
+    extern DICOM_EXPORT const tag DetectorXPositionToIsocenter;
+    /** DetectorYPositionToIsocenter, 0x00189553, FD, 1 */
+    extern DICOM_EXPORT const tag DetectorYPositionToIsocenter;
+    /** DetectorZPositionToIsocenter, 0x00189554, FD, 1 */
+    extern DICOM_EXPORT const tag DetectorZPositionToIsocenter;
+    /** DeviationIndex, 0x00181413, DS, 1 */
     extern DICOM_EXPORT const tag DeviationIndex;
-    /** DeviceDescription, (0050,0020), LO, 1,  */
+    /** DeviceDescription, 0x00500020, LO, 1 */
     extern DICOM_EXPORT const tag DeviceDescription;
-    /** DeviceDiameter, (0050,0016), DS, 1,  */
+    /** DeviceDiameter, 0x00500016, DS, 1 */
     extern DICOM_EXPORT const tag DeviceDiameter;
-    /** DeviceDiameterUnits, (0050,0017), CS, 1,  */
+    /** DeviceDiameterUnits, 0x00500017, CS, 1 */
     extern DICOM_EXPORT const tag DeviceDiameterUnits;
-    /** DeviceID, (0018,1003), LO, 1,  */
+    /** DeviceID, 0x00181003, LO, 1 */
     extern DICOM_EXPORT const tag DeviceID;
-    /** DeviceLength, (0050,0014), DS, 1,  */
+    /** DeviceLength, 0x00500014, DS, 1 */
     extern DICOM_EXPORT const tag DeviceLength;
-    /** DeviceSequence, (0050,0010), SQ, 1,  */
+    /** DeviceMotionControlSequence, 0x300A0450, SQ, 1 */
+    extern DICOM_EXPORT const tag DeviceMotionControlSequence;
+    /** DeviceMotionExecutionMode, 0x300A0451, CS, 1 */
+    extern DICOM_EXPORT const tag DeviceMotionExecutionMode;
+    /** DeviceMotionObservationMode, 0x300A0452, CS, 1 */
+    extern DICOM_EXPORT const tag DeviceMotionObservationMode;
+    /** DeviceMotionParameterCodeSequence, 0x300A0453, SQ, 1 */
+    extern DICOM_EXPORT const tag DeviceMotionParameterCodeSequence;
+    /** DeviceSequence, 0x00500010, SQ, 1 */
     extern DICOM_EXPORT const tag DeviceSequence;
-    /** DeviceSerialNumber, (0018,1000), LO, 1,  */
+    /** DeviceSerialNumber, 0x00181000, LO, 1 */
     extern DICOM_EXPORT const tag DeviceSerialNumber;
-    /** DeviceUID, (0018,1002), UI, 1,  */
+    /** DeviceUID, 0x00181002, UI, 1 */
     extern DICOM_EXPORT const tag DeviceUID;
-    /** DeviceVolume, (0050,0018), DS, 1,  */
+    /** DeviceVolume, 0x00500018, DS, 1 */
     extern DICOM_EXPORT const tag DeviceVolume;
-    /** DiameterOfVisibility, (0070,0262), FL, 1,  */
+    /** DiameterOfVisibility, 0x00700262, FL, 1 */
     extern DICOM_EXPORT const tag DiameterOfVisibility;
-    /** DiaphragmPosition, (3002,0034), DS, 4,  */
+    /** DiaphragmPosition, 0x30020034, DS, 4 */
     extern DICOM_EXPORT const tag DiaphragmPosition;
-    /** DICOMMediaRetrievalSequence, (0040,E022), SQ, 1,  */
+    /** DICOMMediaRetrievalSequence, 0x0040E022, SQ, 1 */
     extern DICOM_EXPORT const tag DICOMMediaRetrievalSequence;
-    /** DICOMRetrievalSequence, (0040,E021), SQ, 1,  */
+    /** DICOMRetrievalSequence, 0x0040E021, SQ, 1 */
     extern DICOM_EXPORT const tag DICOMRetrievalSequence;
-    /** DICOSVersion, (4010,103A), CS, 1,  */
+    /** DICOMStorageSequence, 0x00404071, SQ, 1 */
+    extern DICOM_EXPORT const tag DICOMStorageSequence;
+    /** DICOSVersion, 0x4010103A, CS, 1, RET */
     extern DICOM_EXPORT const tag DICOSVersion;
-    /** DiffusionAnisotropyType, (0018,9147), CS, 1,  */
+    /** DiffuseReflectionIntensity, 0x00701704, FD, 1 */
+    extern DICOM_EXPORT const tag DiffuseReflectionIntensity;
+    /** DiffusionAcquisitionCodeSequence, 0x00660133, SQ, 1 */
+    extern DICOM_EXPORT const tag DiffusionAcquisitionCodeSequence;
+    /** DiffusionAnisotropyType, 0x00189147, CS, 1 */
     extern DICOM_EXPORT const tag DiffusionAnisotropyType;
-    /** DiffusionBMatrixSequence, (0018,9601), SQ, 1,  */
+    /** DiffusionBMatrixSequence, 0x00189601, SQ, 1 */
     extern DICOM_EXPORT const tag DiffusionBMatrixSequence;
-    /** DiffusionBValue, (0018,9087), FD, 1,  */
+    /** DiffusionBValue, 0x00189087, FD, 1 */
     extern DICOM_EXPORT const tag DiffusionBValue;
-    /** DiffusionBValueXX, (0018,9602), FD, 1,  */
+    /** DiffusionBValueXX, 0x00189602, FD, 1 */
     extern DICOM_EXPORT const tag DiffusionBValueXX;
-    /** DiffusionBValueXY, (0018,9603), FD, 1,  */
+    /** DiffusionBValueXY, 0x00189603, FD, 1 */
     extern DICOM_EXPORT const tag DiffusionBValueXY;
-    /** DiffusionBValueXZ, (0018,9604), FD, 1,  */
+    /** DiffusionBValueXZ, 0x00189604, FD, 1 */
     extern DICOM_EXPORT const tag DiffusionBValueXZ;
-    /** DiffusionBValueYY, (0018,9605), FD, 1,  */
+    /** DiffusionBValueYY, 0x00189605, FD, 1 */
     extern DICOM_EXPORT const tag DiffusionBValueYY;
-    /** DiffusionBValueYZ, (0018,9606), FD, 1,  */
+    /** DiffusionBValueYZ, 0x00189606, FD, 1 */
     extern DICOM_EXPORT const tag DiffusionBValueYZ;
-    /** DiffusionBValueZZ, (0018,9607), FD, 1,  */
+    /** DiffusionBValueZZ, 0x00189607, FD, 1 */
     extern DICOM_EXPORT const tag DiffusionBValueZZ;
-    /** DiffusionDirectionality, (0018,9075), CS, 1,  */
+    /** DiffusionDirectionality, 0x00189075, CS, 1 */
     extern DICOM_EXPORT const tag DiffusionDirectionality;
-    /** DiffusionGradientDirectionSequence, (0018,9076), SQ, 1,  */
+    /** DiffusionGradientDirectionSequence, 0x00189076, SQ, 1 */
     extern DICOM_EXPORT const tag DiffusionGradientDirectionSequence;
-    /** DiffusionGradientOrientation, (0018,9089), FD, 3,  */
+    /** DiffusionGradientOrientation, 0x00189089, FD, 3 */
     extern DICOM_EXPORT const tag DiffusionGradientOrientation;
-    /** DigitalImageFormatAcquired, (0018,1023), LO, 1,  */
+    /** DiffusionModelCodeSequence, 0x00660134, SQ, 1 */
+    extern DICOM_EXPORT const tag DiffusionModelCodeSequence;
+    /** DigitalImageFormatAcquired, 0x00181023, LO, 1 */
     extern DICOM_EXPORT const tag DigitalImageFormatAcquired;
-    /** DigitalSignatureDateTime, (0400,0105), DT, 1,  */
+    /** DigitalSignatureDateTime, 0x04000105, DT, 1 */
     extern DICOM_EXPORT const tag DigitalSignatureDateTime;
-    /** DigitalSignaturePurposeCodeSequence, (0400,0401), SQ, 1,  */
+    /** DigitalSignaturePurposeCodeSequence, 0x04000401, SQ, 1 */
     extern DICOM_EXPORT const tag DigitalSignaturePurposeCodeSequence;
-    /** DigitalSignaturesSequence, (FFFA,FFFA), SQ, 1,  */
+    /** DigitalSignaturesSequence, 0xFFFAFFFA, SQ, 1 */
     extern DICOM_EXPORT const tag DigitalSignaturesSequence;
-    /** DigitalSignatureUID, (0400,0100), UI, 1,  */
+    /** DigitalSignatureUID, 0x04000100, UI, 1 */
     extern DICOM_EXPORT const tag DigitalSignatureUID;
-    /** DigitizingDeviceTransportDirection, (0018,2020), CS, 1,  */
+    /** DigitizingDeviceTransportDirection, 0x00182020, CS, 1 */
     extern DICOM_EXPORT const tag DigitizingDeviceTransportDirection;
-    /** DimensionDescriptionLabel, (0020,9421), LO, 1,  */
+    /** DimensionDescriptionLabel, 0x00209421, LO, 1 */
     extern DICOM_EXPORT const tag DimensionDescriptionLabel;
-    /** DimensionIndexPointer, (0020,9165), AT, 1,  */
+    /** DimensionIndexPointer, 0x00209165, AT, 1 */
     extern DICOM_EXPORT const tag DimensionIndexPointer;
-    /** DimensionIndexPrivateCreator, (0020,9213), LO, 1,  */
+    /** DimensionIndexPrivateCreator, 0x00209213, LO, 1 */
     extern DICOM_EXPORT const tag DimensionIndexPrivateCreator;
-    /** DimensionIndexSequence, (0020,9222), SQ, 1,  */
+    /** DimensionIndexSequence, 0x00209222, SQ, 1 */
     extern DICOM_EXPORT const tag DimensionIndexSequence;
-    /** DimensionIndexValues, (0020,9157), UL, 1-n,  */
+    /** DimensionIndexValues, 0x00209157, UL, 1 */
     extern DICOM_EXPORT const tag DimensionIndexValues;
-    /** DimensionOrganizationSequence, (0020,9221), SQ, 1,  */
+    /** DimensionOrganizationSequence, 0x00209221, SQ, 1 */
     extern DICOM_EXPORT const tag DimensionOrganizationSequence;
-    /** DimensionOrganizationType, (0020,9311), CS, 1,  */
+    /** DimensionOrganizationType, 0x00209311, CS, 1 */
     extern DICOM_EXPORT const tag DimensionOrganizationType;
-    /** DimensionOrganizationUID, (0020,9164), UI, 1,  */
+    /** DimensionOrganizationUID, 0x00209164, UI, 1 */
     extern DICOM_EXPORT const tag DimensionOrganizationUID;
-    /** DirectoryRecordSequence, (0004,1220), SQ, 1,  */
+    /** DirectoryRecordSequence, 0x00041220, SQ, 1 */
     extern DICOM_EXPORT const tag DirectoryRecordSequence;
-    /** DirectoryRecordType, (0004,1430), CS, 1,  */
+    /** DirectoryRecordType, 0x00041430, CS, 1 */
     extern DICOM_EXPORT const tag DirectoryRecordType;
-    /** DischargeDate, (0038,0030), DA, 1, RET */
+    /** DischargeDate, 0x00380030, DA, 1, RET */
     extern DICOM_EXPORT const tag DischargeDate;
-    /** DischargeDiagnosisCodeSequence, (0038,0044), SQ, 1, RET */
+    /** DischargeDiagnosisCodeSequence, 0x00380044, SQ, 1, RET */
     extern DICOM_EXPORT const tag DischargeDiagnosisCodeSequence;
-    /** DischargeDiagnosisDescription, (0038,0040), LO, 1, RET */
+    /** DischargeDiagnosisDescription, 0x00380040, LO, 1, RET */
     extern DICOM_EXPORT const tag DischargeDiagnosisDescription;
-    /** DischargeTime, (0038,0032), TM, 1, RET */
+    /** DischargeTime, 0x00380032, TM, 1, RET */
     extern DICOM_EXPORT const tag DischargeTime;
-    /** DisplayedAreaBottomRightHandCorner, (0070,0053), SL, 2,  */
+    /** DisplayCalibrationResultSequence, 0x00287016, SQ, 1 */
+    extern DICOM_EXPORT const tag DisplayCalibrationResultSequence;
+    /** DisplayDeviceTypeCodeSequence, 0x00287022, SQ, 1 */
+    extern DICOM_EXPORT const tag DisplayDeviceTypeCodeSequence;
+    /** DisplayedAreaBottomRightHandCorner, 0x00700053, SL, 2 */
     extern DICOM_EXPORT const tag DisplayedAreaBottomRightHandCorner;
-    /** DisplayedAreaBottomRightHandCornerTrial, (0070,0051), US, 2, RET */
+    /** DisplayedAreaBottomRightHandCornerTrial, 0x00700051, US, 2, RET */
     extern DICOM_EXPORT const tag DisplayedAreaBottomRightHandCornerTrial;
-    /** DisplayedAreaSelectionSequence, (0070,005A), SQ, 1,  */
+    /** DisplayedAreaSelectionSequence, 0x0070005A, SQ, 1 */
     extern DICOM_EXPORT const tag DisplayedAreaSelectionSequence;
-    /** DisplayedAreaTopLeftHandCorner, (0070,0052), SL, 2,  */
+    /** DisplayedAreaTopLeftHandCorner, 0x00700052, SL, 2 */
     extern DICOM_EXPORT const tag DisplayedAreaTopLeftHandCorner;
-    /** DisplayedAreaTopLeftHandCornerTrial, (0070,0050), US, 2, RET */
+    /** DisplayedAreaTopLeftHandCornerTrial, 0x00700050, US, 2, RET */
     extern DICOM_EXPORT const tag DisplayedAreaTopLeftHandCornerTrial;
-    /** DisplayEnvironmentSpatialPosition, (0072,0108), FD, 4,  */
+    /** DisplayedZValue, 0x00182046, FL, 1 */
+    extern DICOM_EXPORT const tag DisplayedZValue;
+    /** DisplayEnvironmentSpatialPosition, 0x00720108, FD, 4 */
     extern DICOM_EXPORT const tag DisplayEnvironmentSpatialPosition;
-    /** DisplayFilterPercentage, (0028,9411), FL, 1,  */
+    /** DisplayFilterPercentage, 0x00289411, FL, 1 */
     extern DICOM_EXPORT const tag DisplayFilterPercentage;
-    /** DisplaySetHorizontalJustification, (0072,0717), CS, 1,  */
+    /** DisplayFunctionType, 0x00287019, CS, 1 */
+    extern DICOM_EXPORT const tag DisplayFunctionType;
+    /** DisplaySetHorizontalJustification, 0x00720717, CS, 1 */
     extern DICOM_EXPORT const tag DisplaySetHorizontalJustification;
-    /** DisplaySetLabel, (0072,0203), LO, 1,  */
+    /** DisplaySetLabel, 0x00720203, LO, 1 */
     extern DICOM_EXPORT const tag DisplaySetLabel;
-    /** DisplaySetNumber, (0072,0202), US, 1,  */
+    /** DisplaySetNumber, 0x00720202, US, 1 */
     extern DICOM_EXPORT const tag DisplaySetNumber;
-    /** DisplaySetPatientOrientation, (0072,0700), CS, 2,  */
+    /** DisplaySetPatientOrientation, 0x00720700, CS, 2 */
     extern DICOM_EXPORT const tag DisplaySetPatientOrientation;
-    /** DisplaySetPresentationGroup, (0072,0204), US, 1,  */
+    /** DisplaySetPresentationGroup, 0x00720204, US, 1 */
     extern DICOM_EXPORT const tag DisplaySetPresentationGroup;
-    /** DisplaySetPresentationGroupDescription, (0072,0206), LO, 1,  */
+    /** DisplaySetPresentationGroupDescription, 0x00720206, LO, 1 */
     extern DICOM_EXPORT const tag DisplaySetPresentationGroupDescription;
-    /** DisplaySetScrollingGroup, (0072,0212), US, 2-n,  */
+    /** DisplaySetScrollingGroup, 0x00720212, US, 2 */
     extern DICOM_EXPORT const tag DisplaySetScrollingGroup;
-    /** DisplaySetsSequence, (0072,0200), SQ, 1,  */
+    /** DisplaySetsSequence, 0x00720200, SQ, 1 */
     extern DICOM_EXPORT const tag DisplaySetsSequence;
-    /** DisplaySetVerticalJustification, (0072,0718), CS, 1,  */
+    /** DisplaySetVerticalJustification, 0x00720718, CS, 1 */
     extern DICOM_EXPORT const tag DisplaySetVerticalJustification;
-    /** DisplayShadingFlag, (003A,0246), CS, 1,  */
+    /** DisplayShadingFlag, 0x003A0246, CS, 1 */
     extern DICOM_EXPORT const tag DisplayShadingFlag;
-    /** DisplayWindowLabelVector, (0018,2006), SH, 1-n,  */
+    /** DisplaySubsystemConfigurationSequence, 0x0028700A, SQ, 1 */
+    extern DICOM_EXPORT const tag DisplaySubsystemConfigurationSequence;
+    /** DisplaySubsystemDescription, 0x00287005, LO, 1 */
+    extern DICOM_EXPORT const tag DisplaySubsystemDescription;
+    /** DisplaySubsystemID, 0x00287003, US, 1 */
+    extern DICOM_EXPORT const tag DisplaySubsystemID;
+    /** DisplaySubsystemName, 0x00287004, SH, 1 */
+    extern DICOM_EXPORT const tag DisplaySubsystemName;
+    /** DisplaySubsystemQAResultsSequence, 0x00287010, SQ, 1 */
+    extern DICOM_EXPORT const tag DisplaySubsystemQAResultsSequence;
+    /** DisplaySubsystemSequence, 0x00287023, SQ, 1 */
+    extern DICOM_EXPORT const tag DisplaySubsystemSequence;
+    /** DisplayWindowLabelVector, 0x00182006, SH, 1 */
     extern DICOM_EXPORT const tag DisplayWindowLabelVector;
-    /** DistanceBetweenFocalPlanes, (0048,0014), FL, 1,  */
+    /** DistalDepth, 0x300A0502, FL, 1 */
+    extern DICOM_EXPORT const tag DistalDepth;
+    /** DistalDepthFraction, 0x300A0501, FL, 1 */
+    extern DICOM_EXPORT const tag DistalDepthFraction;
+    /** DistanceBetweenBscanSlabs, 0x00221644, FL, 1 */
+    extern DICOM_EXPORT const tag DistanceBetweenBscanSlabs;
+    /** DistanceBetweenFocalPlanes, 0x00480014, FL, 1 */
     extern DICOM_EXPORT const tag DistanceBetweenFocalPlanes;
-    /** DistanceObjectToTableTop, (0018,9403), FL, 1,  */
+    /** DistanceObjectToTableTop, 0x00189403, FL, 1 */
     extern DICOM_EXPORT const tag DistanceObjectToTableTop;
-    /** DistancePupillaryDistance, (0046,0060), FD, 1,  */
+    /** DistancePupillaryDistance, 0x00460060, FD, 1 */
     extern DICOM_EXPORT const tag DistancePupillaryDistance;
-    /** DistanceReceptorPlaneToDetectorHousing, (0018,9426), FL, 1,  */
+    /** DistanceReceptorPlaneToDetectorHousing, 0x00189426, FL, 1 */
     extern DICOM_EXPORT const tag DistanceReceptorPlaneToDetectorHousing;
-    /** DistanceSourceToDataCollectionCenter, (0018,9335), FD, 1,  */
+    /** DistanceSourceToDataCollectionCenter, 0x00189335, FD, 1 */
     extern DICOM_EXPORT const tag DistanceSourceToDataCollectionCenter;
-    /** DistanceSourceToDetector, (0018,1110), DS, 1,  */
+    /** DistanceSourceToDetector, 0x00181110, DS, 1 */
     extern DICOM_EXPORT const tag DistanceSourceToDetector;
-    /** DistanceSourceToEntrance, (0040,0306), DS, 1,  */
+    /** DistanceSourceToEntrance, 0x00400306, DS, 1 */
     extern DICOM_EXPORT const tag DistanceSourceToEntrance;
-    /** DistanceSourceToIsocenter, (0018,9402), FL, 1,  */
+    /** DistanceSourceToIsocenter, 0x00189402, FL, 1 */
     extern DICOM_EXPORT const tag DistanceSourceToIsocenter;
-    /** DistanceSourceToPatient, (0018,1111), DS, 1,  */
+    /** DistanceSourceToPatient, 0x00181111, DS, 1 */
     extern DICOM_EXPORT const tag DistanceSourceToPatient;
-    /** DistanceSourceToSupport, (0040,0307), DS, 1, RET */
+    /** DistanceSourceToSupport, 0x00400307, DS, 1, RET */
     extern DICOM_EXPORT const tag DistanceSourceToSupport;
-    /** DistributionAddress, (4008,011A), LO, 1, RET */
+    /** DistributionAddress, 0x4008011A, LO, 1, RET */
     extern DICOM_EXPORT const tag DistributionAddress;
-    /** DistributionName, (4008,0119), PN, 1, RET */
+    /** DistributionName, 0x40080119, PN, 1, RET */
     extern DICOM_EXPORT const tag DistributionName;
-    /** DistributionType, (0012,0084), CS, 1,  */
+    /** DistributionType, 0x00120084, CS, 1 */
     extern DICOM_EXPORT const tag DistributionType;
-    /** DocumentAuthorIdentifierCodeSequenceTrial, (0040,A068), SQ, 1, RET */
+    /** DLPNotificationTrigger, 0x00189943, FD, 1 */
+    extern DICOM_EXPORT const tag DLPNotificationTrigger;
+    /** DocumentAuthorIdentifierCodeSequenceTrial, 0x0040A068, SQ, 1, RET */
     extern DICOM_EXPORT const tag DocumentAuthorIdentifierCodeSequenceTrial;
-    /** DocumentAuthorTrial, (0040,A067), PN, 1, RET */
+    /** DocumentAuthorTrial, 0x0040A067, PN, 1, RET */
     extern DICOM_EXPORT const tag DocumentAuthorTrial;
-    /** DocumentClassCodeSequence, (0040,E008), SQ, 1,  */
+    /** DocumentClassCodeSequence, 0x0040E008, SQ, 1 */
     extern DICOM_EXPORT const tag DocumentClassCodeSequence;
-    /** DocumentIdentifierCodeSequenceTrial, (0040,A066), SQ, 1, RET */
+    /** DocumentIdentifierCodeSequenceTrial, 0x0040A066, SQ, 1, RET */
     extern DICOM_EXPORT const tag DocumentIdentifierCodeSequenceTrial;
-    /** DocumentingObserverIdentifierCodeSequenceTrial, (0040,A076), SQ, 1, RET */
+    /** DocumentingObserverIdentifierCodeSequenceTrial, 0x0040A076, SQ, 1, RET */
     extern DICOM_EXPORT const tag DocumentingObserverIdentifierCodeSequenceTrial;
-    /** DocumentingOrganizationIdentifierCodeSequenceTrial, (0040,A028), SQ, 1, RET */
+    /** DocumentingOrganizationIdentifierCodeSequenceTrial, 0x0040A028, SQ, 1, RET */
     extern DICOM_EXPORT const tag DocumentingOrganizationIdentifierCodeSequenceTrial;
-    /** DocumentTitle, (0042,0010), ST, 1,  */
+    /** DocumentTitle, 0x00420010, ST, 1 */
     extern DICOM_EXPORT const tag DocumentTitle;
-    /** DopplerCorrectionAngle, (0018,6034), FD, 1,  */
+    /** DopplerCorrectionAngle, 0x00186034, FD, 1 */
     extern DICOM_EXPORT const tag DopplerCorrectionAngle;
-    /** DopplerSampleVolumeXPosition, (0018,6039), SL, 1,  */
+    /** DopplerSampleVolumeXPosition, 0x00186039, SL, 1 */
     extern DICOM_EXPORT const tag DopplerSampleVolumeXPosition;
-    /** DopplerSampleVolumeXPositionRetired, (0018,6038), UL, 1, RET */
+    /** DopplerSampleVolumeXPositionRetired, 0x00186038, UL, 1, RET */
     extern DICOM_EXPORT const tag DopplerSampleVolumeXPositionRetired;
-    /** DopplerSampleVolumeYPosition, (0018,603B), SL, 1,  */
+    /** DopplerSampleVolumeYPosition, 0x0018603B, SL, 1 */
     extern DICOM_EXPORT const tag DopplerSampleVolumeYPosition;
-    /** DopplerSampleVolumeYPositionRetired, (0018,603A), UL, 1, RET */
+    /** DopplerSampleVolumeYPositionRetired, 0x0018603A, UL, 1, RET */
     extern DICOM_EXPORT const tag DopplerSampleVolumeYPositionRetired;
-    /** DoseCalibrationFactor, (0054,1322), DS, 1,  */
+    /** DoseCalibrationFactor, 0x00541322, DS, 1 */
     extern DICOM_EXPORT const tag DoseCalibrationFactor;
-    /** DoseComment, (3004,0006), LO, 1,  */
+    /** DoseComment, 0x30040006, LO, 1 */
     extern DICOM_EXPORT const tag DoseComment;
-    /** DoseGridScaling, (3004,000E), DS, 1,  */
+    /** DoseGridScaling, 0x3004000E, DS, 1 */
     extern DICOM_EXPORT const tag DoseGridScaling;
-    /** DoseRateDelivered, (3008,0048), DS, 1,  */
+    /** DoseRateDelivered, 0x30080048, DS, 1 */
     extern DICOM_EXPORT const tag DoseRateDelivered;
-    /** DoseRateSet, (300A,0115), DS, 1,  */
+    /** DoseRateSet, 0x300A0115, DS, 1 */
     extern DICOM_EXPORT const tag DoseRateSet;
-    /** DoseReferenceDescription, (300A,0016), LO, 1,  */
+    /** DoseReferenceDescription, 0x300A0016, LO, 1 */
     extern DICOM_EXPORT const tag DoseReferenceDescription;
-    /** DoseReferenceNumber, (300A,0012), IS, 1,  */
+    /** DoseReferenceNumber, 0x300A0012, IS, 1 */
     extern DICOM_EXPORT const tag DoseReferenceNumber;
-    /** DoseReferencePointCoordinates, (300A,0018), DS, 3,  */
+    /** DoseReferencePointCoordinates, 0x300A0018, DS, 3 */
     extern DICOM_EXPORT const tag DoseReferencePointCoordinates;
-    /** DoseReferenceSequence, (300A,0010), SQ, 1,  */
+    /** DoseReferenceSequence, 0x300A0010, SQ, 1 */
     extern DICOM_EXPORT const tag DoseReferenceSequence;
-    /** DoseReferenceStructureType, (300A,0014), CS, 1,  */
+    /** DoseReferenceStructureType, 0x300A0014, CS, 1 */
     extern DICOM_EXPORT const tag DoseReferenceStructureType;
-    /** DoseReferenceType, (300A,0020), CS, 1,  */
+    /** DoseReferenceType, 0x300A0020, CS, 1 */
     extern DICOM_EXPORT const tag DoseReferenceType;
-    /** DoseReferenceUID, (300A,0013), UI, 1,  */
+    /** DoseReferenceUID, 0x300A0013, UI, 1 */
     extern DICOM_EXPORT const tag DoseReferenceUID;
-    /** DoseSummationType, (3004,000A), CS, 1,  */
+    /** DoseSummationType, 0x3004000A, CS, 1 */
     extern DICOM_EXPORT const tag DoseSummationType;
-    /** DoseType, (3004,0004), CS, 1,  */
+    /** DoseType, 0x30040004, CS, 1 */
     extern DICOM_EXPORT const tag DoseType;
-    /** DoseUnits, (3004,0002), CS, 1,  */
+    /** DoseUnits, 0x30040002, CS, 1 */
     extern DICOM_EXPORT const tag DoseUnits;
-    /** DoseValue, (3004,0012), DS, 1,  */
+    /** DoseValue, 0x30040012, DS, 1 */
     extern DICOM_EXPORT const tag DoseValue;
-    /** DoubleExposureFieldDelta, (0074,133A), FD, 4,  */
+    /** DoubleExposureFieldDelta, 0x0074133A, FD, 4 */
     extern DICOM_EXPORT const tag DoubleExposureFieldDelta;
-    /** DoubleExposureFieldDeltaTrial, (0074,103A), DS, 4, RET */
+    /** DoubleExposureFieldDeltaTrial, 0x0074103A, DS, 4, RET */
     extern DICOM_EXPORT const tag DoubleExposureFieldDeltaTrial;
-    /** DoubleExposureFlag, (0074,1034), CS, 1,  */
+    /** DoubleExposureFlag, 0x00741034, CS, 1 */
     extern DICOM_EXPORT const tag DoubleExposureFlag;
-    /** DoubleExposureMeterset, (0074,1338), FD, 1,  */
+    /** DoubleExposureMeterset, 0x00741338, FD, 1 */
     extern DICOM_EXPORT const tag DoubleExposureMeterset;
-    /** DoubleExposureMetersetTrial, (0074,1038), DS, 1, RET */
+    /** DoubleExposureMetersetTrial, 0x00741038, DS, 1, RET */
     extern DICOM_EXPORT const tag DoubleExposureMetersetTrial;
-    /** DoubleExposureOrdering, (0074,1036), CS, 1,  */
+    /** DoubleExposureOrdering, 0x00741036, CS, 1 */
     extern DICOM_EXPORT const tag DoubleExposureOrdering;
-    /** DVHData, (3004,0058), DS, 2-2n,  */
+    /** DoubleFloatPixelData, 0x7FE00009, OD, 1 */
+    extern DICOM_EXPORT const tag DoubleFloatPixelData;
+    /** DoubleFloatPixelPaddingRangeLimit, 0x00280125, FD, 1 */
+    extern DICOM_EXPORT const tag DoubleFloatPixelPaddingRangeLimit;
+    /** DoubleFloatPixelPaddingValue, 0x00280123, FD, 1 */
+    extern DICOM_EXPORT const tag DoubleFloatPixelPaddingValue;
+    /** DoubleFloatRealWorldValueFirstValueMapped, 0x00409214, FD, 1 */
+    extern DICOM_EXPORT const tag DoubleFloatRealWorldValueFirstValueMapped;
+    /** DoubleFloatRealWorldValueLastValueMapped, 0x00409213, FD, 1 */
+    extern DICOM_EXPORT const tag DoubleFloatRealWorldValueLastValueMapped;
+    /** DriveProbeSequence, 0x00144083, SQ, 1, RET */
+    extern DICOM_EXPORT const tag DriveProbeSequence;
+    /** DriveType, 0x00144081, CS, 1, RET */
+    extern DICOM_EXPORT const tag DriveType;
+    /** DVHData, 0x30040058, DS, 2 */
     extern DICOM_EXPORT const tag DVHData;
-    /** DVHDoseScaling, (3004,0052), DS, 1,  */
+    /** DVHDoseScaling, 0x30040052, DS, 1 */
     extern DICOM_EXPORT const tag DVHDoseScaling;
-    /** DVHMaximumDose, (3004,0072), DS, 1,  */
+    /** DVHMaximumDose, 0x30040072, DS, 1 */
     extern DICOM_EXPORT const tag DVHMaximumDose;
-    /** DVHMeanDose, (3004,0074), DS, 1,  */
+    /** DVHMeanDose, 0x30040074, DS, 1 */
     extern DICOM_EXPORT const tag DVHMeanDose;
-    /** DVHMinimumDose, (3004,0070), DS, 1,  */
+    /** DVHMinimumDose, 0x30040070, DS, 1 */
     extern DICOM_EXPORT const tag DVHMinimumDose;
-    /** DVHNormalizationDoseValue, (3004,0042), DS, 1,  */
+    /** DVHNormalizationDoseValue, 0x30040042, DS, 1 */
     extern DICOM_EXPORT const tag DVHNormalizationDoseValue;
-    /** DVHNormalizationPoint, (3004,0040), DS, 3,  */
+    /** DVHNormalizationPoint, 0x30040040, DS, 3 */
     extern DICOM_EXPORT const tag DVHNormalizationPoint;
-    /** DVHNumberOfBins, (3004,0056), IS, 1,  */
+    /** DVHNumberOfBins, 0x30040056, IS, 1 */
     extern DICOM_EXPORT const tag DVHNumberOfBins;
-    /** DVHReferencedROISequence, (3004,0060), SQ, 1,  */
+    /** DVHReferencedROISequence, 0x30040060, SQ, 1 */
     extern DICOM_EXPORT const tag DVHReferencedROISequence;
-    /** DVHROIContributionType, (3004,0062), CS, 1,  */
+    /** DVHROIContributionType, 0x30040062, CS, 1 */
     extern DICOM_EXPORT const tag DVHROIContributionType;
-    /** DVHSequence, (3004,0050), SQ, 1,  */
+    /** DVHSequence, 0x30040050, SQ, 1 */
     extern DICOM_EXPORT const tag DVHSequence;
-    /** DVHType, (3004,0001), CS, 1,  */
+    /** DVHType, 0x30040001, CS, 1 */
     extern DICOM_EXPORT const tag DVHType;
-    /** DVHVolumeUnits, (3004,0054), CS, 1,  */
+    /** DVHVolumeUnits, 0x30040054, CS, 1 */
     extern DICOM_EXPORT const tag DVHVolumeUnits;
-    /** DynamicRange, (0018,5030), DS, 1, RET */
+    /** DynamicRange, 0x00185030, DS, 1, RET */
     extern DICOM_EXPORT const tag DynamicRange;
-    /** EchoNumbers, (0018,0086), IS, 1-n,  */
+    /** EchoNumbers, 0x00180086, IS, 1 */
     extern DICOM_EXPORT const tag EchoNumbers;
-    /** EchoPlanarPulseSequence, (0018,9018), CS, 1,  */
+    /** EchoPeakPosition, 0x00189298, IS, 1 */
+    extern DICOM_EXPORT const tag EchoPeakPosition;
+    /** EchoPlanarPulseSequence, 0x00189018, CS, 1 */
     extern DICOM_EXPORT const tag EchoPlanarPulseSequence;
-    /** EchoPulseSequence, (0018,9008), CS, 1,  */
+    /** EchoPulseSequence, 0x00189008, CS, 1 */
     extern DICOM_EXPORT const tag EchoPulseSequence;
-    /** EchoTime, (0018,0081), DS, 1,  */
+    /** EchoTime, 0x00180081, DS, 1 */
     extern DICOM_EXPORT const tag EchoTime;
-    /** EchoTrainLength, (0018,0091), IS, 1,  */
+    /** EchoTrainLength, 0x00180091, IS, 1 */
     extern DICOM_EXPORT const tag EchoTrainLength;
-    /** EdgePointIndexList, (0066,0024), OW, 1,  */
+    /** EdgePointIndexList, 0x00660024, OW, 1, RET */
     extern DICOM_EXPORT const tag EdgePointIndexList;
-    /** EffectiveDateTime, (0068,6226), DT, 1,  */
+    /** EffectiveDateTime, 0x00686226, DT, 1 */
     extern DICOM_EXPORT const tag EffectiveDateTime;
-    /** EffectiveDuration, (0018,0072), DS, 1,  */
+    /** EffectiveDuration, 0x00180072, DS, 1 */
     extern DICOM_EXPORT const tag EffectiveDuration;
-    /** EffectiveEchoTime, (0018,9082), FD, 1,  */
+    /** EffectiveEchoTime, 0x00189082, FD, 1 */
     extern DICOM_EXPORT const tag EffectiveEchoTime;
-    /** EffectiveRefractiveIndex, (0052,0004), FD, 1,  */
+    /** EffectiveRefractiveIndex, 0x00520004, FD, 1 */
     extern DICOM_EXPORT const tag EffectiveRefractiveIndex;
-    /** ElementDimensionA, (0014,4014), DS, 1,  */
+    /** EffectiveWedgeAngle, 0x300A00DE, DS, 1 */
+    extern DICOM_EXPORT const tag EffectiveWedgeAngle;
+    /** ElementDimensionA, 0x00144014, DS, 1, RET */
     extern DICOM_EXPORT const tag ElementDimensionA;
-    /** ElementDimensionB, (0014,4015), DS, 1,  */
+    /** ElementDimensionB, 0x00144015, DS, 1, RET */
     extern DICOM_EXPORT const tag ElementDimensionB;
-    /** ElementPitch, (0014,4016), DS, 1,  */
-    extern DICOM_EXPORT const tag ElementPitch;
-    /** ElementShape, (0014,4013), CS, 1,  */
+    /** ElementPitchA, 0x00144016, DS, 1, RET */
+    extern DICOM_EXPORT const tag ElementPitchA;
+    /** ElementPitchB, 0x0014401D, DS, 1, RET */
+    extern DICOM_EXPORT const tag ElementPitchB;
+    /** ElementShape, 0x00144013, CS, 1, RET */
     extern DICOM_EXPORT const tag ElementShape;
-    /** EmmetropicMagnification, (0022,000A), FL, 1,  */
+    /** EmmetropicMagnification, 0x0022000A, FL, 1 */
     extern DICOM_EXPORT const tag EmmetropicMagnification;
-    /** EmptyImageBoxCIELabValue, (0072,0421), US, 3,  */
+    /** EmptyImageBoxCIELabValue, 0x00720421, US, 3 */
     extern DICOM_EXPORT const tag EmptyImageBoxCIELabValue;
-    /** EmptyImageDensity, (2010,0110), CS, 1,  */
+    /** EmptyImageDensity, 0x20100110, CS, 1 */
     extern DICOM_EXPORT const tag EmptyImageDensity;
-    /** EncapsulatedDocument, (0042,0011), OB, 1,  */
+    /** EncapsulatedDocument, 0x00420011, OB, 1 */
     extern DICOM_EXPORT const tag EncapsulatedDocument;
-    /** EncryptedAttributesSequence, (0400,0500), SQ, 1,  */
+    /** EncryptedAttributesSequence, 0x04000500, SQ, 1 */
     extern DICOM_EXPORT const tag EncryptedAttributesSequence;
-    /** EncryptedContent, (0400,0520), OB, 1,  */
+    /** EncryptedContent, 0x04000520, OB, 1 */
     extern DICOM_EXPORT const tag EncryptedContent;
-    /** EncryptedContentTransferSyntaxUID, (0400,0510), UI, 1,  */
+    /** EncryptedContentTransferSyntaxUID, 0x04000510, UI, 1 */
     extern DICOM_EXPORT const tag EncryptedContentTransferSyntaxUID;
-    /** EndAcquisitionDateTime, (0018,9517), DT, 1,  */
+    /** EndAcquisitionDateTime, 0x00189517, DT, 1 */
     extern DICOM_EXPORT const tag EndAcquisitionDateTime;
-    /** EndCumulativeMetersetWeight, (300C,0009), DS, 1,  */
+    /** EndCumulativeMetersetWeight, 0x300C0009, DS, 1 */
     extern DICOM_EXPORT const tag EndCumulativeMetersetWeight;
-    /** EndingRespiratoryAmplitude, (0020,9248), FL, 1,  */
+    /** EndCumulativeTimeWeight, 0x00741408, DS, 1 */
+    extern DICOM_EXPORT const tag EndCumulativeTimeWeight;
+    /** EndingRespiratoryAmplitude, 0x00209248, FL, 1 */
     extern DICOM_EXPORT const tag EndingRespiratoryAmplitude;
-    /** EndingRespiratoryPhase, (0020,9249), CS, 1,  */
+    /** EndingRespiratoryPhase, 0x00209249, CS, 1 */
     extern DICOM_EXPORT const tag EndingRespiratoryPhase;
-    /** EndMeterset, (3008,007A), DS, 1,  */
+    /** EndMeterset, 0x3008007A, DS, 1 */
     extern DICOM_EXPORT const tag EndMeterset;
-    /** EnergyWeightingFactor, (0018,9353), FL, 1,  */
+    /** EnergyWeightingFactor, 0x00189353, FL, 1 */
     extern DICOM_EXPORT const tag EnergyWeightingFactor;
-    /** EnergyWindowCenterline, (0018,0032), DS, 1, RET */
+    /** EnergyWindowCenterline, 0x00180032, DS, 1, RET */
     extern DICOM_EXPORT const tag EnergyWindowCenterline;
-    /** EnergyWindowInformationSequence, (0054,0012), SQ, 1,  */
+    /** EnergyWindowInformationSequence, 0x00540012, SQ, 1 */
     extern DICOM_EXPORT const tag EnergyWindowInformationSequence;
-    /** EnergyWindowLowerLimit, (0054,0014), DS, 1,  */
+    /** EnergyWindowLowerLimit, 0x00540014, DS, 1 */
     extern DICOM_EXPORT const tag EnergyWindowLowerLimit;
-    /** EnergyWindowName, (0054,0018), SH, 1,  */
+    /** EnergyWindowName, 0x00540018, SH, 1 */
     extern DICOM_EXPORT const tag EnergyWindowName;
-    /** EnergyWindowNumber, (0054,0308), US, 1,  */
+    /** EnergyWindowNumber, 0x00540308, US, 1 */
     extern DICOM_EXPORT const tag EnergyWindowNumber;
-    /** EnergyWindowRangeSequence, (0054,0013), SQ, 1,  */
+    /** EnergyWindowRangeSequence, 0x00540013, SQ, 1 */
     extern DICOM_EXPORT const tag EnergyWindowRangeSequence;
-    /** EnergyWindowTotalWidth, (0018,0033), DS, 1-n, RET */
+    /** EnergyWindowTotalWidth, 0x00180033, DS, 1, RET */
     extern DICOM_EXPORT const tag EnergyWindowTotalWidth;
-    /** EnergyWindowUpperLimit, (0054,0015), DS, 1,  */
+    /** EnergyWindowUpperLimit, 0x00540015, DS, 1 */
     extern DICOM_EXPORT const tag EnergyWindowUpperLimit;
-    /** EnergyWindowVector, (0054,0010), US, 1-n,  */
+    /** EnergyWindowVector, 0x00540010, US, 1 */
     extern DICOM_EXPORT const tag EnergyWindowVector;
-    /** EnhancedPaletteColorLookupTableSequence, (0028,140B), SQ, 1,  */
+    /** EnhancedPaletteColorLookupTableSequence, 0x0028140B, SQ, 1 */
     extern DICOM_EXPORT const tag EnhancedPaletteColorLookupTableSequence;
-    /** EntranceDose, (0040,0302), US, 1,  */
+    /** EntranceDose, 0x00400302, US, 1 */
     extern DICOM_EXPORT const tag EntranceDose;
-    /** EntranceDoseInmGy, (0040,8302), DS, 1,  */
+    /** EntranceDoseDerivation, 0x00408303, CS, 1 */
+    extern DICOM_EXPORT const tag EntranceDoseDerivation;
+    /** EntranceDoseInmGy, 0x00408302, DS, 1 */
     extern DICOM_EXPORT const tag EntranceDoseInmGy;
-    /** EnvironmentalConditions, (0014,1040), ST, 1,  */
+    /** EnvironmentalConditions, 0x00141040, ST, 1, RET */
     extern DICOM_EXPORT const tag EnvironmentalConditions;
-    /** EquipmentCoordinateSystemIdentification, (0028,9537), CS, 1,  */
+    /** EquipmentAdministratorSequence, 0x00287000, SQ, 1 */
+    extern DICOM_EXPORT const tag EquipmentAdministratorSequence;
+    /** EquipmentCoordinateSystemIdentification, 0x00289537, CS, 1 */
     extern DICOM_EXPORT const tag EquipmentCoordinateSystemIdentification;
-    /** EquivalentCDADocumentSequence, (0040,A090), SQ, 1, RET */
+    /** EquipmentModality, 0x00080221, CS, 1 */
+    extern DICOM_EXPORT const tag EquipmentModality;
+    /** EquivalentCDADocumentSequence, 0x0040A090, SQ, 1, RET */
     extern DICOM_EXPORT const tag EquivalentCDADocumentSequence;
-    /** EscapeTriplet, (1000,XXX0), US, 3, RET */
-    extern const range_tag EscapeTriplet;
-    /** EstimatedDoseSaving, (0018,9324), FD, 1,  */
+    /** EquivalentCodeSequence, 0x00080121, SQ, 1 */
+    extern DICOM_EXPORT const tag EquivalentCodeSequence;
+    /** EquivalentPupilRadius, 0x00460205, FL, 1 */
+    extern DICOM_EXPORT const tag EquivalentPupilRadius;
+    /** EscapeTriplet, 0x10000000, US, 3, RET */
+    extern DICOM_EXPORT const range_tag EscapeTriplet;
+    /** EstimatedDoseSaving, 0x00189324, FD, 1 */
     extern DICOM_EXPORT const tag EstimatedDoseSaving;
-    /** EstimatedRadiographicMagnificationFactor, (0018,1114), DS, 1,  */
+    /** EstimatedRadiographicMagnificationFactor, 0x00181114, DS, 1 */
     extern DICOM_EXPORT const tag EstimatedRadiographicMagnificationFactor;
-    /** EthnicGroup, (0010,2160), SH, 1,  */
+    /** EthicsCommitteeApprovalEffectivenessEndDate, 0x00120087, DA, 1 */
+    extern DICOM_EXPORT const tag EthicsCommitteeApprovalEffectivenessEndDate;
+    /** EthicsCommitteeApprovalEffectivenessStartDate, 0x00120086, DA, 1 */
+    extern DICOM_EXPORT const tag EthicsCommitteeApprovalEffectivenessStartDate;
+    /** EthnicGroup, 0x00102160, SH, 1 */
     extern DICOM_EXPORT const tag EthnicGroup;
-    /** EvaluationAttempt, (0014,2008), IS, 1,  */
+    /** EvaluationAttempt, 0x00142008, IS, 1, RET */
     extern DICOM_EXPORT const tag EvaluationAttempt;
-    /** EvaluatorName, (0014,2006), PN, 1,  */
+    /** EvaluatorName, 0x00142006, PN, 1, RET */
     extern DICOM_EXPORT const tag EvaluatorName;
-    /** EvaluatorNumber, (0014,2004), IS, 1,  */
+    /** EvaluatorNumber, 0x00142004, IS, 1, RET */
     extern DICOM_EXPORT const tag EvaluatorNumber;
-    /** EvaluatorSequence, (0014,2002), SQ, 1,  */
+    /** EvaluatorSequence, 0x00142002, SQ, 1, RET */
     extern DICOM_EXPORT const tag EvaluatorSequence;
-    /** EventCodeSequence, (0008,2135), SQ, 1,  */
+    /** EventCodeSequence, 0x00082135, SQ, 1 */
     extern DICOM_EXPORT const tag EventCodeSequence;
-    /** EventElapsedTimes, (0008,2130), DS, 1-n,  */
+    /** EventElapsedTimes, 0x00082130, DS, 1 */
     extern DICOM_EXPORT const tag EventElapsedTimes;
-    /** EventTimeOffset, (0008,2134), FD, 1,  */
+    /** EventTimeOffset, 0x00082134, FD, 1 */
     extern DICOM_EXPORT const tag EventTimeOffset;
-    /** EventTimerNames, (0008,2132), LO, 1-n,  */
+    /** EventTimerNames, 0x00082132, LO, 1 */
     extern DICOM_EXPORT const tag EventTimerNames;
-    /** EventTimerSequence, (0008,2133), SQ, 1,  */
+    /** EventTimerSequence, 0x00082133, SQ, 1 */
     extern DICOM_EXPORT const tag EventTimerSequence;
-    /** ExaminedBodyThickness, (0010,9431), FL, 1,  */
+    /** ExaminedBodyThickness, 0x00109431, FL, 1 */
     extern DICOM_EXPORT const tag ExaminedBodyThickness;
-    /** ExcessiveFalseNegatives, (0024,0052), CS, 1,  */
+    /** ExcessiveFalseNegatives, 0x00240052, CS, 1 */
     extern DICOM_EXPORT const tag ExcessiveFalseNegatives;
-    /** ExcessiveFalseNegativesDataFlag, (0024,0051), CS, 1,  */
+    /** ExcessiveFalseNegativesDataFlag, 0x00240051, CS, 1 */
     extern DICOM_EXPORT const tag ExcessiveFalseNegativesDataFlag;
-    /** ExcessiveFalsePositives, (0024,0062), CS, 1,  */
+    /** ExcessiveFalsePositives, 0x00240062, CS, 1 */
     extern DICOM_EXPORT const tag ExcessiveFalsePositives;
-    /** ExcessiveFalsePositivesDataFlag, (0024,0061), CS, 1,  */
+    /** ExcessiveFalsePositivesDataFlag, 0x00240061, CS, 1 */
     extern DICOM_EXPORT const tag ExcessiveFalsePositivesDataFlag;
-    /** ExcessiveFixationLosses, (0024,0040), CS, 1,  */
+    /** ExcessiveFixationLosses, 0x00240040, CS, 1 */
     extern DICOM_EXPORT const tag ExcessiveFixationLosses;
-    /** ExcessiveFixationLossesDataFlag, (0024,0039), CS, 1,  */
+    /** ExcessiveFixationLossesDataFlag, 0x00240039, CS, 1 */
     extern DICOM_EXPORT const tag ExcessiveFixationLossesDataFlag;
-    /** ExcitationFrequency, (0014,4024), DS, 1,  */
+    /** ExcitationFrequency, 0x00144024, DS, 1, RET */
     extern DICOM_EXPORT const tag ExcitationFrequency;
-    /** ExcludedIntervalsSequence, (0018,9803), SQ, 1,  */
+    /** ExcludedIntervalsSequence, 0x00189803, SQ, 1 */
     extern DICOM_EXPORT const tag ExcludedIntervalsSequence;
-    /** ExclusionDuration, (0018,9805), FD, 1,  */
+    /** ExclusionDuration, 0x00189805, FD, 1 */
     extern DICOM_EXPORT const tag ExclusionDuration;
-    /** ExclusionStartDatetime, (0018,9804), DT, 1,  */
-    extern DICOM_EXPORT const tag ExclusionStartDatetime;
-    /** ExclusiveComponentType, (0076,0036), CS, 1,  */
+    /** ExclusionStartDateTime, 0x00189804, DT, 1 */
+    extern DICOM_EXPORT const tag ExclusionStartDateTime;
+    /** ExclusiveComponentType, 0x00760036, CS, 1 */
     extern DICOM_EXPORT const tag ExclusiveComponentType;
-    /** ExecutionStatus, (2100,0020), CS, 1,  */
+    /** ExecutionStatus, 0x21000020, CS, 1 */
     extern DICOM_EXPORT const tag ExecutionStatus;
-    /** ExecutionStatusInfo, (2100,0030), CS, 1,  */
+    /** ExecutionStatusInfo, 0x21000030, CS, 1 */
     extern DICOM_EXPORT const tag ExecutionStatusInfo;
-    /** ExpectedCompletionDateTime, (0040,4011), DT, 1,  */
+    /** ExpectedCompletionDateTime, 0x00404011, DT, 1 */
     extern DICOM_EXPORT const tag ExpectedCompletionDateTime;
-    /** ExpiryDate, (0014,1020), DA, 1,  */
+    /** ExpiryDate, 0x00141020, DA, 1, RET */
     extern DICOM_EXPORT const tag ExpiryDate;
-    /** ExposedArea, (0040,0303), US, 1-2,  */
+    /** ExposedArea, 0x00400303, US, 1 */
     extern DICOM_EXPORT const tag ExposedArea;
-    /** Exposure, (0018,1152), IS, 1,  */
+    /** Exposure, 0x00181152, IS, 1 */
     extern DICOM_EXPORT const tag Exposure;
-    /** ExposureControlMode, (0018,7060), CS, 1,  */
+    /** ExposureControlMode, 0x00187060, CS, 1 */
     extern DICOM_EXPORT const tag ExposureControlMode;
-    /** ExposureControlModeDescription, (0018,7062), LT, 1,  */
+    /** ExposureControlModeDescription, 0x00187062, LT, 1 */
     extern DICOM_EXPORT const tag ExposureControlModeDescription;
-    /** ExposureControlSensingRegionLeftVerticalEdge, (0018,9436), SS, 1,  */
+    /** ExposureControlSensingRegionLeftVerticalEdge, 0x00189436, SS, 1 */
     extern DICOM_EXPORT const tag ExposureControlSensingRegionLeftVerticalEdge;
-    /** ExposureControlSensingRegionLowerHorizontalEdge, (0018,9439), SS, 1,  */
+    /** ExposureControlSensingRegionLowerHorizontalEdge, 0x00189439, SS, 1 */
     extern DICOM_EXPORT const tag ExposureControlSensingRegionLowerHorizontalEdge;
-    /** ExposureControlSensingRegionRightVerticalEdge, (0018,9437), SS, 1,  */
+    /** ExposureControlSensingRegionRightVerticalEdge, 0x00189437, SS, 1 */
     extern DICOM_EXPORT const tag ExposureControlSensingRegionRightVerticalEdge;
-    /** ExposureControlSensingRegionShape, (0018,9435), CS, 1,  */
+    /** ExposureControlSensingRegionShape, 0x00189435, CS, 1 */
     extern DICOM_EXPORT const tag ExposureControlSensingRegionShape;
-    /** ExposureControlSensingRegionsSequence, (0018,9434), SQ, 1,  */
+    /** ExposureControlSensingRegionsSequence, 0x00189434, SQ, 1 */
     extern DICOM_EXPORT const tag ExposureControlSensingRegionsSequence;
-    /** ExposureControlSensingRegionUpperHorizontalEdge, (0018,9438), SS, 1,  */
+    /** ExposureControlSensingRegionUpperHorizontalEdge, 0x00189438, SS, 1 */
     extern DICOM_EXPORT const tag ExposureControlSensingRegionUpperHorizontalEdge;
-    /** ExposureDoseSequence, (0040,030E), SQ, 1,  */
+    /** ExposureDoseSequence, 0x0040030E, SQ, 1, RET */
     extern DICOM_EXPORT const tag ExposureDoseSequence;
-    /** ExposureIndex, (0018,1411), DS, 1,  */
+    /** ExposureIndex, 0x00181411, DS, 1 */
     extern DICOM_EXPORT const tag ExposureIndex;
-    /** ExposureInmAs, (0018,9332), FD, 1,  */
+    /** ExposureInmAs, 0x00189332, FD, 1 */
     extern DICOM_EXPORT const tag ExposureInmAs;
-    /** ExposureInuAs, (0018,1153), IS, 1,  */
+    /** ExposureInuAs, 0x00181153, IS, 1 */
     extern DICOM_EXPORT const tag ExposureInuAs;
-    /** ExposureModulationType, (0018,9323), CS, 1,  */
+    /** ExposureModulationType, 0x00189323, CS, 1 */
     extern DICOM_EXPORT const tag ExposureModulationType;
-    /** ExposureSequence, (3002,0030), SQ, 1,  */
+    /** ExposureSequence, 0x30020030, SQ, 1 */
     extern DICOM_EXPORT const tag ExposureSequence;
-    /** ExposuresOnDetectorSinceLastCalibration, (0018,7010), IS, 1,  */
+    /** ExposuresOnDetectorSinceLastCalibration, 0x00187010, IS, 1 */
     extern DICOM_EXPORT const tag ExposuresOnDetectorSinceLastCalibration;
-    /** ExposuresOnDetectorSinceManufactured, (0018,7011), IS, 1,  */
+    /** ExposuresOnDetectorSinceManufactured, 0x00187011, IS, 1 */
     extern DICOM_EXPORT const tag ExposuresOnDetectorSinceManufactured;
-    /** ExposuresOnPlate, (0018,1404), US, 1,  */
+    /** ExposuresOnPlate, 0x00181404, US, 1 */
     extern DICOM_EXPORT const tag ExposuresOnPlate;
-    /** ExposureStatus, (0018,7064), CS, 1,  */
+    /** ExposureStatus, 0x00187064, CS, 1 */
     extern DICOM_EXPORT const tag ExposureStatus;
-    /** ExposureTime, (0018,1150), IS, 1,  */
+    /** ExposureTime, 0x00181150, IS, 1 */
     extern DICOM_EXPORT const tag ExposureTime;
-    /** ExposureTimeInms, (0018,9328), FD, 1,  */
+    /** ExposureTimeInms, 0x00189328, FD, 1 */
     extern DICOM_EXPORT const tag ExposureTimeInms;
-    /** ExposureTimeInuS, (0018,8150), DS, 1,  */
+    /** ExposureTimeInuS, 0x00188150, DS, 1 */
     extern DICOM_EXPORT const tag ExposureTimeInuS;
-    /** ExtendedDepthOfField, (0048,0012), CS, 1,  */
+    /** ExtendedCodeMeaning, 0x00080108, LT, 1, RET */
+    extern DICOM_EXPORT const tag ExtendedCodeMeaning;
+    /** ExtendedCodeValue, 0x00080101, LO, 1, RET */
+    extern DICOM_EXPORT const tag ExtendedCodeValue;
+    /** ExtendedDepthOfField, 0x00480012, CS, 1 */
     extern DICOM_EXPORT const tag ExtendedDepthOfField;
-    /** FacetSequence, (0066,0034), SQ, 1,  */
+    /** ExternalContourEntryPoint, 0x300A0133, FL, 3 */
+    extern DICOM_EXPORT const tag ExternalContourEntryPoint;
+    /** FacetSequence, 0x00660034, SQ, 1 */
     extern DICOM_EXPORT const tag FacetSequence;
-    /** FailedAttributesSequence, (0074,1048), SQ, 1,  */
+    /** FailedAttributesSequence, 0x00741048, SQ, 1 */
     extern DICOM_EXPORT const tag FailedAttributesSequence;
-    /** FailedSOPInstanceUIDList, (0008,0058), UI, 1-n,  */
+    /** FailedSOPInstanceUIDList, 0x00080058, UI, 1 */
     extern DICOM_EXPORT const tag FailedSOPInstanceUIDList;
-    /** FailedSOPSequence, (0008,1198), SQ, 1,  */
+    /** FailedSOPSequence, 0x00081198, SQ, 1 */
     extern DICOM_EXPORT const tag FailedSOPSequence;
-    /** FailureAttributes, (2200,000E), AT, 1-n,  */
+    /** FailureAttributes, 0x2200000E, AT, 1 */
     extern DICOM_EXPORT const tag FailureAttributes;
-    /** FailureReason, (0008,1197), US, 1,  */
+    /** FailureReason, 0x00081197, US, 1 */
     extern DICOM_EXPORT const tag FailureReason;
-    /** FalseNegativesEstimate, (0024,0046), FL, 1,  */
+    /** FalseNegativesEstimate, 0x00240046, FL, 1 */
     extern DICOM_EXPORT const tag FalseNegativesEstimate;
-    /** FalseNegativesEstimateFlag, (0024,0045), CS, 1,  */
+    /** FalseNegativesEstimateFlag, 0x00240045, CS, 1 */
     extern DICOM_EXPORT const tag FalseNegativesEstimateFlag;
-    /** FalseNegativesQuantity, (0024,0050), US, 1,  */
+    /** FalseNegativesQuantity, 0x00240050, US, 1 */
     extern DICOM_EXPORT const tag FalseNegativesQuantity;
-    /** FalsePositivesEstimate, (0024,0054), FL, 1,  */
+    /** FalsePositivesEstimate, 0x00240054, FL, 1 */
     extern DICOM_EXPORT const tag FalsePositivesEstimate;
-    /** FalsePositivesEstimateFlag, (0024,0053), CS, 1,  */
+    /** FalsePositivesEstimateFlag, 0x00240053, CS, 1 */
     extern DICOM_EXPORT const tag FalsePositivesEstimateFlag;
-    /** FalsePositivesQuantity, (0024,0060), US, 1,  */
+    /** FalsePositivesQuantity, 0x00240060, US, 1 */
     extern DICOM_EXPORT const tag FalsePositivesQuantity;
-    /** FiducialDescription, (0070,030F), ST, 1,  */
+    /** FiducialDescription, 0x0070030F, ST, 1 */
     extern DICOM_EXPORT const tag FiducialDescription;
-    /** FiducialIdentifier, (0070,0310), SH, 1,  */
+    /** FiducialIdentifier, 0x00700310, SH, 1 */
     extern DICOM_EXPORT const tag FiducialIdentifier;
-    /** FiducialIdentifierCodeSequence, (0070,0311), SQ, 1,  */
+    /** FiducialIdentifierCodeSequence, 0x00700311, SQ, 1 */
     extern DICOM_EXPORT const tag FiducialIdentifierCodeSequence;
-    /** FiducialSequence, (0070,031E), SQ, 1,  */
+    /** FiducialSequence, 0x0070031E, SQ, 1 */
     extern DICOM_EXPORT const tag FiducialSequence;
-    /** FiducialSetSequence, (0070,031C), SQ, 1,  */
+    /** FiducialSetSequence, 0x0070031C, SQ, 1 */
     extern DICOM_EXPORT const tag FiducialSetSequence;
-    /** FiducialUID, (0070,031A), UI, 1,  */
+    /** FiducialsPropertyCategoryCodeSequence, 0x0070031F, SQ, 1 */
+    extern DICOM_EXPORT const tag FiducialsPropertyCategoryCodeSequence;
+    /** FiducialUID, 0x0070031A, UI, 1 */
     extern DICOM_EXPORT const tag FiducialUID;
-    /** FieldOfViewDescription, (0018,9433), LO, 1,  */
+    /** FieldOfViewDescription, 0x00189433, LO, 1 */
     extern DICOM_EXPORT const tag FieldOfViewDescription;
-    /** FieldOfViewDimensions, (0018,1149), IS, 1-2,  */
+    /** FieldOfViewDimensions, 0x00181149, IS, 1 */
     extern DICOM_EXPORT const tag FieldOfViewDimensions;
-    /** FieldOfViewDimensionsInFloat, (0018,9461), FL, 1-2,  */
+    /** FieldOfViewDimensionsInFloat, 0x00189461, FL, 1 */
     extern DICOM_EXPORT const tag FieldOfViewDimensionsInFloat;
-    /** FieldOfViewHorizontalFlip, (0018,7034), CS, 1,  */
+    /** FieldOfViewHorizontalFlip, 0x00187034, CS, 1 */
     extern DICOM_EXPORT const tag FieldOfViewHorizontalFlip;
-    /** FieldOfViewOrigin, (0018,7030), DS, 2,  */
+    /** FieldOfViewOrigin, 0x00187030, DS, 2 */
     extern DICOM_EXPORT const tag FieldOfViewOrigin;
-    /** FieldOfViewRotation, (0018,7032), DS, 1,  */
+    /** FieldOfViewRotation, 0x00187032, DS, 1 */
     extern DICOM_EXPORT const tag FieldOfViewRotation;
-    /** FieldOfViewSequence, (0018,9432), SQ, 1,  */
+    /** FieldOfViewSequence, 0x00189432, SQ, 1 */
     extern DICOM_EXPORT const tag FieldOfViewSequence;
-    /** FieldOfViewShape, (0018,1147), CS, 1,  */
+    /** FieldOfViewShape, 0x00181147, CS, 1 */
     extern DICOM_EXPORT const tag FieldOfViewShape;
-    /** FileMetaInformationGroupLength, (0002,0000), UL, 1,  */
+    /** FileMetaInformationGroupLength, 0x00020000, UL, 1 */
     extern DICOM_EXPORT const tag FileMetaInformationGroupLength;
-    /** FileMetaInformationVersion, (0002,0001), OB, 1,  */
+    /** FileMetaInformationVersion, 0x00020001, OB, 1 */
     extern DICOM_EXPORT const tag FileMetaInformationVersion;
-    /** FileSetConsistencyFlag, (0004,1212), US, 1,  */
+    /** FileSetConsistencyFlag, 0x00041212, US, 1 */
     extern DICOM_EXPORT const tag FileSetConsistencyFlag;
-    /** FileSetDescriptorFileID, (0004,1141), CS, 1-8,  */
+    /** FileSetDescriptorFileID, 0x00041141, CS, 1 */
     extern DICOM_EXPORT const tag FileSetDescriptorFileID;
-    /** FileSetID, (0004,1130), CS, 1,  */
+    /** FileSetID, 0x00041130, CS, 1 */
     extern DICOM_EXPORT const tag FileSetID;
-    /** FillerOrderNumberImagingServiceRequest, (0040,2017), LO, 1,  */
+    /** FillerOrderNumberImagingServiceRequest, 0x00402017, LO, 1 */
     extern DICOM_EXPORT const tag FillerOrderNumberImagingServiceRequest;
-    /** FillerOrderNumberImagingServiceRequestRetired, (0040,2007), SH, 1, RET */
+    /** FillerOrderNumberImagingServiceRequestRetired, 0x00402007, SH, 1, RET */
     extern DICOM_EXPORT const tag FillerOrderNumberImagingServiceRequestRetired;
-    /** FillerOrderNumberProcedure, (0040,1007), SH, 1, RET */
+    /** FillerOrderNumberProcedure, 0x00401007, SH, 1, RET */
     extern DICOM_EXPORT const tag FillerOrderNumberProcedure;
-    /** FillMode, (0070,0257), CS, 1,  */
+    /** FillMode, 0x00700257, CS, 1 */
     extern DICOM_EXPORT const tag FillMode;
-    /** FillPattern, (0070,0256), OB, 1,  */
+    /** FillPattern, 0x00700256, OB, 1 */
     extern DICOM_EXPORT const tag FillPattern;
-    /** FillStyleSequence, (0070,0233), SQ, 1,  */
+    /** FillStyleSequence, 0x00700233, SQ, 1 */
     extern DICOM_EXPORT const tag FillStyleSequence;
-    /** FilmBoxContentSequence, (2130,0030), SQ, 1, RET */
+    /** FilmBoxContentSequence, 0x21300030, SQ, 1, RET */
     extern DICOM_EXPORT const tag FilmBoxContentSequence;
-    /** FilmConsumptionSequence, (0040,0321), SQ, 1,  */
+    /** FilmConsumptionSequence, 0x00400321, SQ, 1 */
     extern DICOM_EXPORT const tag FilmConsumptionSequence;
-    /** FilmDestination, (2000,0040), CS, 1,  */
+    /** FilmDestination, 0x20000040, CS, 1 */
     extern DICOM_EXPORT const tag FilmDestination;
-    /** FilmOrientation, (2010,0040), CS, 1,  */
+    /** FilmOrientation, 0x20100040, CS, 1 */
     extern DICOM_EXPORT const tag FilmOrientation;
-    /** FilmSessionLabel, (2000,0050), LO, 1,  */
+    /** FilmSessionLabel, 0x20000050, LO, 1 */
     extern DICOM_EXPORT const tag FilmSessionLabel;
-    /** FilmSizeID, (2010,0050), CS, 1,  */
+    /** FilmSizeID, 0x20100050, CS, 1 */
     extern DICOM_EXPORT const tag FilmSizeID;
-    /** FilterBeamPathLengthMaximum, (0018,7058), FL, 1-n,  */
+    /** FilterBeamPathLengthMaximum, 0x00187058, FL, 1 */
     extern DICOM_EXPORT const tag FilterBeamPathLengthMaximum;
-    /** FilterBeamPathLengthMinimum, (0018,7056), FL, 1-n,  */
+    /** FilterBeamPathLengthMinimum, 0x00187056, FL, 1 */
     extern DICOM_EXPORT const tag FilterBeamPathLengthMinimum;
-    /** FilterByAttributePresence, (0072,0404), CS, 1,  */
+    /** FilterByAttributePresence, 0x00720404, CS, 1 */
     extern DICOM_EXPORT const tag FilterByAttributePresence;
-    /** FilterByCategory, (0072,0402), CS, 1,  */
+    /** FilterByCategory, 0x00720402, CS, 1 */
     extern DICOM_EXPORT const tag FilterByCategory;
-    /** FilterByOperator, (0072,0406), CS, 1,  */
+    /** FilterByOperator, 0x00720406, CS, 1 */
     extern DICOM_EXPORT const tag FilterByOperator;
-    /** FilterHighFrequency, (003A,0221), DS, 1,  */
+    /** FilterHighFrequency, 0x003A0221, DS, 1 */
     extern DICOM_EXPORT const tag FilterHighFrequency;
-    /** FilterLowFrequency, (003A,0220), DS, 1,  */
+    /** FilterLowFrequency, 0x003A0220, DS, 1 */
     extern DICOM_EXPORT const tag FilterLowFrequency;
-    /** FilterMaterial, (0018,7050), CS, 1-n,  */
+    /** FilterMaterial, 0x00187050, CS, 1 */
     extern DICOM_EXPORT const tag FilterMaterial;
-    /** FilterMaterialUsedInGainCalibration, (0014,3074), LO, 1,  */
+    /** FilterMaterialUsedInGainCalibration, 0x00143074, LO, 1, RET */
     extern DICOM_EXPORT const tag FilterMaterialUsedInGainCalibration;
-    /** FilterOperationsSequence, (0072,0400), SQ, 1,  */
+    /** FilterOperationsSequence, 0x00720400, SQ, 1 */
     extern DICOM_EXPORT const tag FilterOperationsSequence;
-    /** FilterThicknessMaximum, (0018,7054), DS, 1-n,  */
+    /** FilterThicknessMaximum, 0x00187054, DS, 1 */
     extern DICOM_EXPORT const tag FilterThicknessMaximum;
-    /** FilterThicknessMinimum, (0018,7052), DS, 1-n,  */
+    /** FilterThicknessMinimum, 0x00187052, DS, 1 */
     extern DICOM_EXPORT const tag FilterThicknessMinimum;
-    /** FilterThicknessUsedInGainCalibration, (0014,3075), DS, 1,  */
+    /** FilterThicknessUsedInGainCalibration, 0x00143075, DS, 1, RET */
     extern DICOM_EXPORT const tag FilterThicknessUsedInGainCalibration;
-    /** FilterType, (0018,1160), SH, 1,  */
+    /** FilterType, 0x00181160, SH, 1 */
     extern DICOM_EXPORT const tag FilterType;
-    /** FinalCumulativeMetersetWeight, (300A,010E), DS, 1,  */
+    /** FinalCumulativeMetersetWeight, 0x300A010E, DS, 1 */
     extern DICOM_EXPORT const tag FinalCumulativeMetersetWeight;
-    /** FinalCumulativeTimeWeight, (300A,02C8), DS, 1,  */
+    /** FinalCumulativeTimeWeight, 0x300A02C8, DS, 1 */
     extern DICOM_EXPORT const tag FinalCumulativeTimeWeight;
-    /** FindingsFlagTrial, (0040,A007), CS, 1, RET */
+    /** FindingsFlagTrial, 0x0040A007, CS, 1, RET */
     extern DICOM_EXPORT const tag FindingsFlagTrial;
-    /** FindingsGroupRecordingDateTrial, (0040,A023), DA, 1, RET */
+    /** FindingsGroupRecordingDateTrial, 0x0040A023, DA, 1, RET */
     extern DICOM_EXPORT const tag FindingsGroupRecordingDateTrial;
-    /** FindingsGroupRecordingTimeTrial, (0040,A024), TM, 1, RET */
+    /** FindingsGroupRecordingTimeTrial, 0x0040A024, TM, 1, RET */
     extern DICOM_EXPORT const tag FindingsGroupRecordingTimeTrial;
-    /** FindingsGroupUIDTrial, (0040,A021), UI, 1, RET */
+    /** FindingsGroupUIDTrial, 0x0040A021, UI, 1, RET */
     extern DICOM_EXPORT const tag FindingsGroupUIDTrial;
-    /** FindingsSequenceTrial, (0040,A020), SQ, 1, RET */
+    /** FindingsSequenceTrial, 0x0040A020, SQ, 1, RET */
     extern DICOM_EXPORT const tag FindingsSequenceTrial;
-    /** FindingsSourceCategoryCodeSequenceTrial, (0040,A026), SQ, 1, RET */
+    /** FindingsSourceCategoryCodeSequenceTrial, 0x0040A026, SQ, 1, RET */
     extern DICOM_EXPORT const tag FindingsSourceCategoryCodeSequenceTrial;
-    /** FiniteVolume, (0066,000E), CS, 1,  */
+    /** FiniteVolume, 0x0066000E, CS, 1 */
     extern DICOM_EXPORT const tag FiniteVolume;
-    /** FirstALineLocation, (0052,0034), FD, 1,  */
+    /** FirstALineLocation, 0x00520034, FD, 1 */
     extern DICOM_EXPORT const tag FirstALineLocation;
-    /** FirstOrderPhaseCorrection, (0018,9198), CS, 1,  */
+    /** FirstOrderPhaseCorrection, 0x00189198, CS, 1 */
     extern DICOM_EXPORT const tag FirstOrderPhaseCorrection;
-    /** FirstOrderPhaseCorrectionAngle, (5600,0010), OF, 1,  */
+    /** FirstOrderPhaseCorrectionAngle, 0x56000010, OF, 1 */
     extern DICOM_EXPORT const tag FirstOrderPhaseCorrectionAngle;
-    /** FirstTreatmentDate, (3008,0054), DA, 1,  */
+    /** FirstTreatmentDate, 0x30080054, DA, 1 */
     extern DICOM_EXPORT const tag FirstTreatmentDate;
-    /** FixationCheckedQuantity, (0024,0035), US, 1,  */
+    /** FixationCheckedQuantity, 0x00240035, US, 1 */
     extern DICOM_EXPORT const tag FixationCheckedQuantity;
-    /** FixationDeviceDescription, (300A,0196), ST, 1,  */
+    /** FixationDeviceDescription, 0x300A0196, ST, 1 */
     extern DICOM_EXPORT const tag FixationDeviceDescription;
-    /** FixationDeviceLabel, (300A,0194), SH, 1,  */
+    /** FixationDeviceLabel, 0x300A0194, SH, 1 */
     extern DICOM_EXPORT const tag FixationDeviceLabel;
-    /** FixationDevicePitchAngle, (300A,0199), FL, 1,  */
+    /** FixationDevicePitchAngle, 0x300A0199, FL, 1 */
     extern DICOM_EXPORT const tag FixationDevicePitchAngle;
-    /** FixationDevicePosition, (300A,0198), SH, 1,  */
+    /** FixationDevicePosition, 0x300A0198, SH, 1 */
     extern DICOM_EXPORT const tag FixationDevicePosition;
-    /** FixationDeviceRollAngle, (300A,019A), FL, 1,  */
+    /** FixationDeviceRollAngle, 0x300A019A, FL, 1 */
     extern DICOM_EXPORT const tag FixationDeviceRollAngle;
-    /** FixationDeviceSequence, (300A,0190), SQ, 1,  */
+    /** FixationDeviceSequence, 0x300A0190, SQ, 1 */
     extern DICOM_EXPORT const tag FixationDeviceSequence;
-    /** FixationDeviceType, (300A,0192), CS, 1,  */
+    /** FixationDeviceType, 0x300A0192, CS, 1 */
     extern DICOM_EXPORT const tag FixationDeviceType;
-    /** FixationLightAzimuthalAngle, (300A,0356), FL, 1,  */
+    /** FixationEye, 0x300A0150, CS, 1 */
+    extern DICOM_EXPORT const tag FixationEye;
+    /** FixationLightAzimuthalAngle, 0x300A0356, FL, 1 */
     extern DICOM_EXPORT const tag FixationLightAzimuthalAngle;
-    /** FixationLightPolarAngle, (300A,0358), FL, 1,  */
+    /** FixationLightAzimuthalAngleTolerance, 0x300A0154, DS, 1 */
+    extern DICOM_EXPORT const tag FixationLightAzimuthalAngleTolerance;
+    /** FixationLightPolarAngle, 0x300A0358, FL, 1 */
     extern DICOM_EXPORT const tag FixationLightPolarAngle;
-    /** FixationMethodCodeSequence, (0068,63AC), SQ, 1,  */
+    /** FixationLightPolarAngleTolerance, 0x300A0155, DS, 1 */
+    extern DICOM_EXPORT const tag FixationLightPolarAngleTolerance;
+    /** FixationMethodCodeSequence, 0x006863AC, SQ, 1 */
     extern DICOM_EXPORT const tag FixationMethodCodeSequence;
-    /** FixationMonitoringCodeSequence, (0024,0033), SQ, 1,  */
+    /** FixationMonitoringCodeSequence, 0x00240033, SQ, 1 */
     extern DICOM_EXPORT const tag FixationMonitoringCodeSequence;
-    /** FixationSequence, (0024,0032), SQ, 1,  */
+    /** FixationSequence, 0x00240032, SQ, 1 */
     extern DICOM_EXPORT const tag FixationSequence;
-    /** FlatKeratometricAxisSequence, (0046,0080), SQ, 1,  */
+    /** FlatKeratometricAxisSequence, 0x00460080, SQ, 1 */
     extern DICOM_EXPORT const tag FlatKeratometricAxisSequence;
-    /** FlipAngle, (0018,1314), DS, 1,  */
+    /** FlipAngle, 0x00181314, DS, 1 */
     extern DICOM_EXPORT const tag FlipAngle;
-    /** FlowCompensation, (0018,9010), CS, 1,  */
+    /** FloatingPointValue, 0x0040A161, FD, 1 */
+    extern DICOM_EXPORT const tag FloatingPointValue;
+    /** FloatingPointValues, 0x00660125, OF, 1 */
+    extern DICOM_EXPORT const tag FloatingPointValues;
+    /** FloatPixelData, 0x7FE00008, OF, 1 */
+    extern DICOM_EXPORT const tag FloatPixelData;
+    /** FloatPixelPaddingRangeLimit, 0x00280124, FL, 1 */
+    extern DICOM_EXPORT const tag FloatPixelPaddingRangeLimit;
+    /** FloatPixelPaddingValue, 0x00280122, FL, 1 */
+    extern DICOM_EXPORT const tag FloatPixelPaddingValue;
+    /** FlowCompensation, 0x00189010, CS, 1 */
     extern DICOM_EXPORT const tag FlowCompensation;
-    /** FlowCompensationDirection, (0018,9183), CS, 1,  */
+    /** FlowCompensationDirection, 0x00189183, CS, 1 */
     extern DICOM_EXPORT const tag FlowCompensationDirection;
-    /** FluenceDataScale, (3002,0042), DS, 1,  */
+    /** FluenceDataScale, 0x30020042, DS, 1 */
     extern DICOM_EXPORT const tag FluenceDataScale;
-    /** FluenceDataSource, (3002,0041), CS, 1,  */
+    /** FluenceDataSource, 0x30020041, CS, 1 */
     extern DICOM_EXPORT const tag FluenceDataSource;
-    /** FluenceMapSequence, (3002,0040), SQ, 1,  */
+    /** FluenceMapSequence, 0x30020040, SQ, 1 */
     extern DICOM_EXPORT const tag FluenceMapSequence;
-    /** FluenceMode, (3002,0051), CS, 1,  */
+    /** FluenceMode, 0x30020051, CS, 1 */
     extern DICOM_EXPORT const tag FluenceMode;
-    /** FluenceModeID, (3002,0052), SH, 1,  */
+    /** FluenceModeID, 0x30020052, SH, 1 */
     extern DICOM_EXPORT const tag FluenceModeID;
-    /** FluoroscopyFlag, (0018,9334), CS, 1,  */
+    /** FluoroscopyFlag, 0x00189334, CS, 1 */
     extern DICOM_EXPORT const tag FluoroscopyFlag;
-    /** FocalDistance, (0018,1182), IS, 1-2,  */
+    /** FocalDistance, 0x00181182, IS, 1 */
     extern DICOM_EXPORT const tag FocalDistance;
-    /** FocalSpots, (0018,1190), DS, 1-n,  */
+    /** FocalSpots, 0x00181190, DS, 1 */
     extern DICOM_EXPORT const tag FocalSpots;
-    /** FocusDepth, (0018,5012), DS, 1,  */
+    /** FocusDepth, 0x00185012, DS, 1 */
     extern DICOM_EXPORT const tag FocusDepth;
-    /** FocusMethod, (0048,0011), CS, 1,  */
+    /** FocusMethod, 0x00480011, CS, 1 */
     extern DICOM_EXPORT const tag FocusMethod;
-    /** FontName, (0070,0227), LO, 1,  */
+    /** FontName, 0x00700227, LO, 1 */
     extern DICOM_EXPORT const tag FontName;
-    /** FontNameType, (0070,0228), CS, 1,  */
+    /** FontNameType, 0x00700228, CS, 1 */
     extern DICOM_EXPORT const tag FontNameType;
-    /** FovealPointNormativeDataFlag, (0024,0117), CS, 1,  */
+    /** FovealPointNormativeDataFlag, 0x00240117, CS, 1 */
     extern DICOM_EXPORT const tag FovealPointNormativeDataFlag;
-    /** FovealPointProbabilityValue, (0024,0118), FL, 1,  */
+    /** FovealPointProbabilityValue, 0x00240118, FL, 1 */
     extern DICOM_EXPORT const tag FovealPointProbabilityValue;
-    /** FovealSensitivity, (0024,0087), FL, 1,  */
+    /** FovealSensitivity, 0x00240087, FL, 1 */
     extern DICOM_EXPORT const tag FovealSensitivity;
-    /** FovealSensitivityMeasured, (0024,0086), CS, 1,  */
+    /** FovealSensitivityMeasured, 0x00240086, CS, 1 */
     extern DICOM_EXPORT const tag FovealSensitivityMeasured;
-    /** FractionalChannelDisplayScale, (003A,0247), FL, 1,  */
+    /** FractionalChannelDisplayScale, 0x003A0247, FL, 1 */
     extern DICOM_EXPORT const tag FractionalChannelDisplayScale;
-    /** FractionGroupDescription, (300A,0072), LO, 1,  */
+    /** FractionGroupDescription, 0x300A0072, LO, 1 */
     extern DICOM_EXPORT const tag FractionGroupDescription;
-    /** FractionGroupNumber, (300A,0071), IS, 1,  */
+    /** FractionGroupNumber, 0x300A0071, IS, 1 */
     extern DICOM_EXPORT const tag FractionGroupNumber;
-    /** FractionGroupSequence, (300A,0070), SQ, 1,  */
+    /** FractionGroupSequence, 0x300A0070, SQ, 1 */
     extern DICOM_EXPORT const tag FractionGroupSequence;
-    /** FractionGroupSummarySequence, (3008,0220), SQ, 1,  */
+    /** FractionGroupSummarySequence, 0x30080220, SQ, 1 */
     extern DICOM_EXPORT const tag FractionGroupSummarySequence;
-    /** FractionGroupType, (3008,0224), CS, 1,  */
+    /** FractionGroupType, 0x30080224, CS, 1 */
     extern DICOM_EXPORT const tag FractionGroupType;
-    /** FractionNumber, (3002,0029), IS, 1,  */
+    /** FractionNumber, 0x30020029, IS, 1 */
     extern DICOM_EXPORT const tag FractionNumber;
-    /** FractionPattern, (300A,007B), LT, 1,  */
+    /** FractionPattern, 0x300A007B, LT, 1 */
     extern DICOM_EXPORT const tag FractionPattern;
-    /** FractionStatusSummarySequence, (3008,0240), SQ, 1,  */
+    /** FractionStatusSummarySequence, 0x30080240, SQ, 1 */
     extern DICOM_EXPORT const tag FractionStatusSummarySequence;
-    /** FrameAcquisitionDateTime, (0018,9074), DT, 1,  */
+    /** FrameAcquisitionDateTime, 0x00189074, DT, 1 */
     extern DICOM_EXPORT const tag FrameAcquisitionDateTime;
-    /** FrameAcquisitionDuration, (0018,9220), FD, 1,  */
+    /** FrameAcquisitionDuration, 0x00189220, FD, 1 */
     extern DICOM_EXPORT const tag FrameAcquisitionDuration;
-    /** FrameAcquisitionNumber, (0020,9156), US, 1,  */
+    /** FrameAcquisitionNumber, 0x00209156, US, 1 */
     extern DICOM_EXPORT const tag FrameAcquisitionNumber;
-    /** FrameAcquisitionSequence, (0018,9417), SQ, 1,  */
+    /** FrameAcquisitionSequence, 0x00189417, SQ, 1 */
     extern DICOM_EXPORT const tag FrameAcquisitionSequence;
-    /** FrameAnatomySequence, (0020,9071), SQ, 1,  */
+    /** FrameAnatomySequence, 0x00209071, SQ, 1 */
     extern DICOM_EXPORT const tag FrameAnatomySequence;
-    /** FrameComments, (0020,9158), LT, 1,  */
+    /** FrameComments, 0x00209158, LT, 1 */
     extern DICOM_EXPORT const tag FrameComments;
-    /** FrameContentSequence, (0020,9111), SQ, 1,  */
+    /** FrameContentSequence, 0x00209111, SQ, 1 */
     extern DICOM_EXPORT const tag FrameContentSequence;
-    /** FrameDelay, (0018,1066), DS, 1,  */
+    /** FrameDelay, 0x00181066, DS, 1 */
     extern DICOM_EXPORT const tag FrameDelay;
-    /** FrameDetectorParametersSequence, (0018,9451), SQ, 1,  */
+    /** FrameDetectorParametersSequence, 0x00189451, SQ, 1 */
     extern DICOM_EXPORT const tag FrameDetectorParametersSequence;
-    /** FrameDimensionPointer, (0028,000A), AT, 1-n,  */
+    /** FrameDimensionPointer, 0x0028000A, AT, 1 */
     extern DICOM_EXPORT const tag FrameDimensionPointer;
-    /** FrameDisplaySequence, (0008,9458), SQ, 1,  */
+    /** FrameDisplaySequence, 0x00089458, SQ, 1 */
     extern DICOM_EXPORT const tag FrameDisplaySequence;
-    /** FrameDisplayShutterSequence, (0018,9472), SQ, 1,  */
+    /** FrameDisplayShutterSequence, 0x00189472, SQ, 1 */
     extern DICOM_EXPORT const tag FrameDisplayShutterSequence;
-    /** FrameExtractionSequence, (0008,1164), SQ, 1,  */
+    /** FrameExtractionSequence, 0x00081164, SQ, 1 */
     extern DICOM_EXPORT const tag FrameExtractionSequence;
-    /** FrameIncrementPointer, (0028,0009), AT, 1-n,  */
+    /** FrameIncrementPointer, 0x00280009, AT, 1 */
     extern DICOM_EXPORT const tag FrameIncrementPointer;
-    /** FrameLabel, (0020,9453), LO, 1,  */
+    /** FrameLabel, 0x00209453, LO, 1 */
     extern DICOM_EXPORT const tag FrameLabel;
-    /** FrameLabelVector, (0018,2002), SH, 1-n,  */
+    /** FrameLabelVector, 0x00182002, SH, 1 */
     extern DICOM_EXPORT const tag FrameLabelVector;
-    /** FrameLaterality, (0020,9072), CS, 1,  */
+    /** FrameLaterality, 0x00209072, CS, 1 */
     extern DICOM_EXPORT const tag FrameLaterality;
-    /** FrameNumbersOfInterest, (0028,6020), US, 1-n,  */
+    /** FrameNumbersOfInterest, 0x00286020, US, 1 */
     extern DICOM_EXPORT const tag FrameNumbersOfInterest;
-    /** FrameOfInterestDescription, (0028,6022), LO, 1-n,  */
+    /** FrameOfInterestDescription, 0x00286022, LO, 1 */
     extern DICOM_EXPORT const tag FrameOfInterestDescription;
-    /** FrameOfInterestType, (0028,6023), CS, 1-n,  */
+    /** FrameOfInterestType, 0x00286023, CS, 1 */
     extern DICOM_EXPORT const tag FrameOfInterestType;
-    /** FrameOfReferenceRelationshipSequence, (3006,00C0), SQ, 1,  */
+    /** FrameOfReferenceRelationshipSequence, 0x300600C0, SQ, 1, RET */
     extern DICOM_EXPORT const tag FrameOfReferenceRelationshipSequence;
-    /** FrameOfReferenceTransformationComment, (3006,00C8), LO, 1,  */
+    /** FrameOfReferenceToDisplayedCoordinateSystemTransformationMatrix, 0x0070030B, FD, 16 */
+    extern DICOM_EXPORT const tag FrameOfReferenceToDisplayedCoordinateSystemTransformationMatrix;
+    /** FrameOfReferenceTransformationComment, 0x300600C8, LO, 1 */
     extern DICOM_EXPORT const tag FrameOfReferenceTransformationComment;
-    /** FrameOfReferenceTransformationMatrix, (3006,00C6), DS, 16,  */
+    /** FrameOfReferenceTransformationMatrix, 0x300600C6, DS, 16 */
     extern DICOM_EXPORT const tag FrameOfReferenceTransformationMatrix;
-    /** FrameOfReferenceTransformationMatrixType, (0070,030C), CS, 1,  */
+    /** FrameOfReferenceTransformationMatrixType, 0x0070030C, CS, 1 */
     extern DICOM_EXPORT const tag FrameOfReferenceTransformationMatrixType;
-    /** FrameOfReferenceTransformationType, (3006,00C4), CS, 1,  */
+    /** FrameOfReferenceTransformationType, 0x300600C4, CS, 1, RET */
     extern DICOM_EXPORT const tag FrameOfReferenceTransformationType;
-    /** FrameOfReferenceUID, (0020,0052), UI, 1,  */
+    /** FrameOfReferenceUID, 0x00200052, UI, 1 */
     extern DICOM_EXPORT const tag FrameOfReferenceUID;
-    /** FramePixelDataPropertiesSequence, (0028,9443), SQ, 1,  */
+    /** FramePixelDataPropertiesSequence, 0x00289443, SQ, 1 */
     extern DICOM_EXPORT const tag FramePixelDataPropertiesSequence;
-    /** FramePixelShiftSequence, (0028,9415), SQ, 1,  */
+    /** FramePixelShiftSequence, 0x00289415, SQ, 1 */
     extern DICOM_EXPORT const tag FramePixelShiftSequence;
-    /** FramePrimaryAngleVector, (0018,2003), DS, 1-n,  */
+    /** FramePrimaryAngleVector, 0x00182003, DS, 1 */
     extern DICOM_EXPORT const tag FramePrimaryAngleVector;
-    /** FrameReferenceDateTime, (0018,9151), DT, 1,  */
+    /** FrameReferenceDateTime, 0x00189151, DT, 1 */
     extern DICOM_EXPORT const tag FrameReferenceDateTime;
-    /** FrameReferenceTime, (0054,1300), DS, 1,  */
+    /** FrameReferenceTime, 0x00541300, DS, 1 */
     extern DICOM_EXPORT const tag FrameReferenceTime;
-    /** FrameSecondaryAngleVector, (0018,2004), DS, 1-n,  */
+    /** FrameSecondaryAngleVector, 0x00182004, DS, 1 */
     extern DICOM_EXPORT const tag FrameSecondaryAngleVector;
-    /** FrameTime, (0018,1063), DS, 1,  */
+    /** FrameTime, 0x00181063, DS, 1 */
     extern DICOM_EXPORT const tag FrameTime;
-    /** FrameTimeVector, (0018,1065), DS, 1-n,  */
+    /** FrameTimeVector, 0x00181065, DS, 1 */
     extern DICOM_EXPORT const tag FrameTimeVector;
-    /** FrameType, (0008,9007), CS, 4,  */
+    /** FrameType, 0x00089007, CS, 4 */
     extern DICOM_EXPORT const tag FrameType;
-    /** FrameVOILUTSequence, (0028,9132), SQ, 1,  */
+    /** FrameVOILUTSequence, 0x00289132, SQ, 1 */
     extern DICOM_EXPORT const tag FrameVOILUTSequence;
-    /** FrequencyCorrection, (0018,9101), CS, 1,  */
+    /** FrequencyCorrection, 0x00189101, CS, 1 */
     extern DICOM_EXPORT const tag FrequencyCorrection;
-    /** FunctionalGroupPointer, (0020,9167), AT, 1,  */
+    /** FunctionalGroupPointer, 0x00209167, AT, 1 */
     extern DICOM_EXPORT const tag FunctionalGroupPointer;
-    /** FunctionalGroupPrivateCreator, (0020,9238), LO, 1,  */
+    /** FunctionalGroupPrivateCreator, 0x00209238, LO, 1 */
     extern DICOM_EXPORT const tag FunctionalGroupPrivateCreator;
-    /** GainCorrectionReferenceSequence, (0014,3060), SQ, 1,  */
+    /** FunctionalMRSequence, 0x00189621, SQ, 1 */
+    extern DICOM_EXPORT const tag FunctionalMRSequence;
+    /** FunctionalSettlingPhaseFramesPresent, 0x00189622, CS, 1 */
+    extern DICOM_EXPORT const tag FunctionalSettlingPhaseFramesPresent;
+    /** FunctionalSyncPulse, 0x00189623, DT, 1 */
+    extern DICOM_EXPORT const tag FunctionalSyncPulse;
+    /** GainCorrectionReferenceSequence, 0x00143060, SQ, 1, RET */
     extern DICOM_EXPORT const tag GainCorrectionReferenceSequence;
-    /** GantryAngle, (300A,011E), DS, 1,  */
+    /** GammaValue, 0x0028701A, FL, 1 */
+    extern DICOM_EXPORT const tag GammaValue;
+    /** GantryAngle, 0x300A011E, DS, 1 */
     extern DICOM_EXPORT const tag GantryAngle;
-    /** GantryAngleTolerance, (300A,0044), DS, 1,  */
+    /** GantryAngleTolerance, 0x300A0044, DS, 1 */
     extern DICOM_EXPORT const tag GantryAngleTolerance;
-    /** GantryDetectorSlew, (0018,1121), DS, 1,  */
+    /** GantryDetectorSlew, 0x00181121, DS, 1 */
     extern DICOM_EXPORT const tag GantryDetectorSlew;
-    /** GantryDetectorTilt, (0018,1120), DS, 1,  */
+    /** GantryDetectorTilt, 0x00181120, DS, 1 */
     extern DICOM_EXPORT const tag GantryDetectorTilt;
-    /** GantryID, (0018,1008), LO, 1,  */
+    /** GantryID, 0x00181008, LO, 1 */
     extern DICOM_EXPORT const tag GantryID;
-    /** GantryMotionCorrected, (0018,9762), CS, 1,  */
+    /** GantryMotionCorrected, 0x00189762, CS, 1 */
     extern DICOM_EXPORT const tag GantryMotionCorrected;
-    /** GantryPitchAngle, (300A,014A), FL, 1,  */
+    /** GantryPitchAngle, 0x300A014A, FL, 1 */
     extern DICOM_EXPORT const tag GantryPitchAngle;
-    /** GantryPitchAngleTolerance, (300A,014E), FL, 1,  */
+    /** GantryPitchAngleTolerance, 0x300A014E, FL, 1 */
     extern DICOM_EXPORT const tag GantryPitchAngleTolerance;
-    /** GantryPitchRotationDirection, (300A,014C), CS, 1,  */
+    /** GantryPitchRotationDirection, 0x300A014C, CS, 1 */
     extern DICOM_EXPORT const tag GantryPitchRotationDirection;
-    /** GantryRotationDirection, (300A,011F), CS, 1,  */
+    /** GantryRotationDirection, 0x300A011F, CS, 1 */
     extern DICOM_EXPORT const tag GantryRotationDirection;
-    /** GantryType, (4010,1008), CS, 1,  */
+    /** GantryType, 0x40101008, CS, 1, RET */
     extern DICOM_EXPORT const tag GantryType;
-    /** GapLength, (0070,0261), FL, 1,  */
+    /** GapLength, 0x00700261, FL, 1 */
     extern DICOM_EXPORT const tag GapLength;
-    /** GatedInformationSequence, (0054,0062), SQ, 1,  */
+    /** GatedInformationSequence, 0x00540062, SQ, 1 */
     extern DICOM_EXPORT const tag GatedInformationSequence;
-    /** GateSettingsSequence, (0014,4060), SQ, 1,  */
+    /** GateSettingsSequence, 0x00144060, SQ, 1, RET */
     extern DICOM_EXPORT const tag GateSettingsSequence;
-    /** GateThreshold, (0014,4062), DS, 1,  */
+    /** GateThreshold, 0x00144062, DS, 1, RET */
     extern DICOM_EXPORT const tag GateThreshold;
-    /** GeneralAccessoryDescription, (300A,0422), ST, 1,  */
+    /** GeneralAccessoryDescription, 0x300A0422, ST, 1 */
     extern DICOM_EXPORT const tag GeneralAccessoryDescription;
-    /** GeneralAccessoryID, (300A,0421), SH, 1,  */
+    /** GeneralAccessoryID, 0x300A0421, SH, 1 */
     extern DICOM_EXPORT const tag GeneralAccessoryID;
-    /** GeneralAccessoryNumber, (300A,0424), IS, 1,  */
+    /** GeneralAccessoryNumber, 0x300A0424, IS, 1 */
     extern DICOM_EXPORT const tag GeneralAccessoryNumber;
-    /** GeneralAccessorySequence, (300A,0420), SQ, 1,  */
+    /** GeneralAccessorySequence, 0x300A0420, SQ, 1 */
     extern DICOM_EXPORT const tag GeneralAccessorySequence;
-    /** GeneralAccessoryType, (300A,0423), CS, 1,  */
+    /** GeneralAccessoryType, 0x300A0423, CS, 1 */
     extern DICOM_EXPORT const tag GeneralAccessoryType;
-    /** GeneralizedDefectCorrectedSensitivityDeviationFlag, (0024,0102), CS, 1,  */
+    /** GeneralizedDefectCorrectedSensitivityDeviationFlag, 0x00240102, CS, 1 */
     extern DICOM_EXPORT const tag GeneralizedDefectCorrectedSensitivityDeviationFlag;
-    /** GeneralizedDefectCorrectedSensitivityDeviationProbabilityValue, (0024,0104), FL, 1,  */
+    /** GeneralizedDefectCorrectedSensitivityDeviationProbabilityValue, 0x00240104, FL, 1 */
     extern DICOM_EXPORT const tag GeneralizedDefectCorrectedSensitivityDeviationProbabilityValue;
-    /** GeneralizedDefectCorrectedSensitivityDeviationValue, (0024,0103), FL, 1,  */
+    /** GeneralizedDefectCorrectedSensitivityDeviationValue, 0x00240103, FL, 1 */
     extern DICOM_EXPORT const tag GeneralizedDefectCorrectedSensitivityDeviationValue;
-    /** GeneralizedDefectSensitivityDeviationAlgorithmSequence, (0024,0067), SQ, 1,  */
+    /** GeneralizedDefectSensitivityDeviationAlgorithmSequence, 0x00240067, SQ, 1 */
     extern DICOM_EXPORT const tag GeneralizedDefectSensitivityDeviationAlgorithmSequence;
-    /** GeneralMachineVerificationSequence, (0074,1042), SQ, 1,  */
+    /** GeneralMachineVerificationSequence, 0x00741042, SQ, 1 */
     extern DICOM_EXPORT const tag GeneralMachineVerificationSequence;
-    /** GeneralPurposePerformedProcedureStepStatus, (0040,4002), CS, 1,  */
+    /** GeneralPurposePerformedProcedureStepStatus, 0x00404002, CS, 1, RET */
     extern DICOM_EXPORT const tag GeneralPurposePerformedProcedureStepStatus;
-    /** GeneralPurposeScheduledProcedureStepPriority, (0040,4003), CS, 1,  */
+    /** GeneralPurposeScheduledProcedureStepPriority, 0x00404003, CS, 1, RET */
     extern DICOM_EXPORT const tag GeneralPurposeScheduledProcedureStepPriority;
-    /** GeneralPurposeScheduledProcedureStepStatus, (0040,4001), CS, 1,  */
+    /** GeneralPurposeScheduledProcedureStepStatus, 0x00404001, CS, 1, RET */
     extern DICOM_EXPORT const tag GeneralPurposeScheduledProcedureStepStatus;
-    /** GeneratorID, (0018,1005), LO, 1,  */
+    /** GeneratorID, 0x00181005, LO, 1 */
     extern DICOM_EXPORT const tag GeneratorID;
-    /** GeneratorPower, (0018,1170), IS, 1,  */
+    /** GeneratorPower, 0x00181170, IS, 1 */
     extern DICOM_EXPORT const tag GeneratorPower;
-    /** GeometricalProperties, (0028,9444), CS, 1,  */
+    /** GeneticModificationsCodeSequence, 0x00100229, SQ, 1 */
+    extern DICOM_EXPORT const tag GeneticModificationsCodeSequence;
+    /** GeneticModificationsDescription, 0x00100222, UC, 1 */
+    extern DICOM_EXPORT const tag GeneticModificationsDescription;
+    /** GeneticModificationsNomenclature, 0x00100223, LO, 1 */
+    extern DICOM_EXPORT const tag GeneticModificationsNomenclature;
+    /** GeneticModificationsSequence, 0x00100221, SQ, 1 */
+    extern DICOM_EXPORT const tag GeneticModificationsSequence;
+    /** GeometricalProperties, 0x00289444, CS, 1 */
     extern DICOM_EXPORT const tag GeometricalProperties;
-    /** GeometricMaximumDistortion, (0028,9445), FL, 1,  */
+    /** GeometricMaximumDistortion, 0x00289445, FL, 1 */
     extern DICOM_EXPORT const tag GeometricMaximumDistortion;
-    /** GeometryOfKSpaceTraversal, (0018,9032), CS, 1,  */
+    /** GeometryForDisplay, 0x00701B08, CS, 1 */
+    extern DICOM_EXPORT const tag GeometryForDisplay;
+    /** GeometryOfKSpaceTraversal, 0x00189032, CS, 1 */
     extern DICOM_EXPORT const tag GeometryOfKSpaceTraversal;
-    /** GlobalDeviationFromNormal, (0024,0066), FL, 1,  */
+    /** GlobalCrop, 0x0070120B, CS, 1 */
+    extern DICOM_EXPORT const tag GlobalCrop;
+    /** GlobalCroppingSpecificationIndex, 0x0070120C, US, 1 */
+    extern DICOM_EXPORT const tag GlobalCroppingSpecificationIndex;
+    /** GlobalDeviationFromNormal, 0x00240066, FL, 1 */
     extern DICOM_EXPORT const tag GlobalDeviationFromNormal;
-    /** GlobalDeviationProbability, (0024,0071), FL, 1,  */
+    /** GlobalDeviationProbability, 0x00240071, FL, 1 */
     extern DICOM_EXPORT const tag GlobalDeviationProbability;
-    /** GlobalDeviationProbabilityNormalsFlag, (0024,0059), CS, 1,  */
+    /** GlobalDeviationProbabilityNormalsFlag, 0x00240059, CS, 1 */
     extern DICOM_EXPORT const tag GlobalDeviationProbabilityNormalsFlag;
-    /** GlobalDeviationProbabilitySequence, (0024,0083), SQ, 1,  */
+    /** GlobalDeviationProbabilitySequence, 0x00240083, SQ, 1 */
     extern DICOM_EXPORT const tag GlobalDeviationProbabilitySequence;
-    /** GradientEchoTrainLength, (0018,9241), US, 1,  */
+    /** GradientEchoTrainLength, 0x00189241, US, 1 */
     extern DICOM_EXPORT const tag GradientEchoTrainLength;
-    /** GradientOutput, (0018,9182), FD, 1,  */
+    /** GradientOutput, 0x00189182, FD, 1 */
     extern DICOM_EXPORT const tag GradientOutput;
-    /** GradientOutputType, (0018,9180), CS, 1,  */
+    /** GradientOutputType, 0x00189180, CS, 1 */
     extern DICOM_EXPORT const tag GradientOutputType;
-    /** GraphicAnnotationSequence, (0070,0001), SQ, 1,  */
+    /** GraphicAnnotationSequence, 0x00700001, SQ, 1 */
     extern DICOM_EXPORT const tag GraphicAnnotationSequence;
-    /** GraphicAnnotationUnits, (0070,0005), CS, 1,  */
+    /** GraphicAnnotationUnits, 0x00700005, CS, 1 */
     extern DICOM_EXPORT const tag GraphicAnnotationUnits;
-    /** GraphicCoordinatesDataSequence, (0070,0318), SQ, 1,  */
+    /** GraphicCoordinatesDataSequence, 0x00700318, SQ, 1 */
     extern DICOM_EXPORT const tag GraphicCoordinatesDataSequence;
-    /** GraphicData, (0070,0022), FL, 2-n,  */
+    /** GraphicData, 0x00700022, FL, 2 */
     extern DICOM_EXPORT const tag GraphicData;
-    /** GraphicDimensions, (0070,0020), US, 1,  */
+    /** GraphicDimensions, 0x00700020, US, 1 */
     extern DICOM_EXPORT const tag GraphicDimensions;
-    /** GraphicFilled, (0070,0024), CS, 1,  */
+    /** GraphicFilled, 0x00700024, CS, 1 */
     extern DICOM_EXPORT const tag GraphicFilled;
-    /** GraphicGroupDescription, (0070,0208), ST, 1,  */
+    /** GraphicGroupDescription, 0x00700208, ST, 1 */
     extern DICOM_EXPORT const tag GraphicGroupDescription;
-    /** GraphicGroupID, (0070,0295), UL, 1,  */
+    /** GraphicGroupID, 0x00700295, UL, 1 */
     extern DICOM_EXPORT const tag GraphicGroupID;
-    /** GraphicGroupLabel, (0070,0207), LO, 1,  */
+    /** GraphicGroupLabel, 0x00700207, LO, 1 */
     extern DICOM_EXPORT const tag GraphicGroupLabel;
-    /** GraphicGroupSequence, (0070,0234), SQ, 1,  */
+    /** GraphicGroupSequence, 0x00700234, SQ, 1 */
     extern DICOM_EXPORT const tag GraphicGroupSequence;
-    /** GraphicLayer, (0070,0002), CS, 1,  */
+    /** GraphicLayer, 0x00700002, CS, 1 */
     extern DICOM_EXPORT const tag GraphicLayer;
-    /** GraphicLayerDescription, (0070,0068), LO, 1,  */
+    /** GraphicLayerDescription, 0x00700068, LO, 1 */
     extern DICOM_EXPORT const tag GraphicLayerDescription;
-    /** GraphicLayerOrder, (0070,0062), IS, 1,  */
+    /** GraphicLayerOrder, 0x00700062, IS, 1 */
     extern DICOM_EXPORT const tag GraphicLayerOrder;
-    /** GraphicLayerRecommendedDisplayCIELabValue, (0070,0401), US, 3,  */
+    /** GraphicLayerRecommendedDisplayCIELabValue, 0x00700401, US, 3 */
     extern DICOM_EXPORT const tag GraphicLayerRecommendedDisplayCIELabValue;
-    /** GraphicLayerRecommendedDisplayGrayscaleValue, (0070,0066), US, 1,  */
+    /** GraphicLayerRecommendedDisplayGrayscaleValue, 0x00700066, US, 1 */
     extern DICOM_EXPORT const tag GraphicLayerRecommendedDisplayGrayscaleValue;
-    /** GraphicLayerRecommendedDisplayRGBValue, (0070,0067), US, 3, RET */
+    /** GraphicLayerRecommendedDisplayRGBValue, 0x00700067, US, 3, RET */
     extern DICOM_EXPORT const tag GraphicLayerRecommendedDisplayRGBValue;
-    /** GraphicLayerSequence, (0070,0060), SQ, 1,  */
+    /** GraphicLayerSequence, 0x00700060, SQ, 1 */
     extern DICOM_EXPORT const tag GraphicLayerSequence;
-    /** GraphicObjectSequence, (0070,0009), SQ, 1,  */
+    /** GraphicObjectSequence, 0x00700009, SQ, 1 */
     extern DICOM_EXPORT const tag GraphicObjectSequence;
-    /** GraphicType, (0070,0023), CS, 1,  */
+    /** GraphicType, 0x00700023, CS, 1 */
     extern DICOM_EXPORT const tag GraphicType;
-    /** GrayLookupTableData, (0028,1200), US or SSor OW, 1-n1, RET */
+    /** GrayLookupTableData, 0x00281200, US or SS or OW, 1, RET */
     extern DICOM_EXPORT const tag GrayLookupTableData;
-    /** GrayLookupTableDescriptor, (0028,1100), US or SS, 3, RET */
+    /** GrayLookupTableDescriptor, 0x00281100, US or SS, 3, RET */
     extern DICOM_EXPORT const tag GrayLookupTableDescriptor;
-    /** GrayScale, (0028,1080), CS, 1, RET */
+    /** GrayScale, 0x00281080, CS, 1, RET */
     extern DICOM_EXPORT const tag GrayScale;
-    /** GreenPaletteColorLookupTableData, (0028,1202), OW, 1,  */
+    /** GreenPaletteColorLookupTableData, 0x00281202, OW, 1 */
     extern DICOM_EXPORT const tag GreenPaletteColorLookupTableData;
-    /** GreenPaletteColorLookupTableDescriptor, (0028,1102), US or SS, 3,  */
+    /** GreenPaletteColorLookupTableDescriptor, 0x00281102, US or SS, 3 */
     extern DICOM_EXPORT const tag GreenPaletteColorLookupTableDescriptor;
-    /** Grid, (0018,1166), CS, 1-n,  */
+    /** Grid, 0x00181166, CS, 1 */
     extern DICOM_EXPORT const tag Grid;
-    /** GridAbsorbingMaterial, (0018,7040), LT, 1,  */
+    /** GridAbsorbingMaterial, 0x00187040, LT, 1 */
     extern DICOM_EXPORT const tag GridAbsorbingMaterial;
-    /** GridAspectRatio, (0018,7046), IS, 2,  */
+    /** GridAspectRatio, 0x00187046, IS, 2 */
     extern DICOM_EXPORT const tag GridAspectRatio;
-    /** GridDimensions, (0064,0007), UL, 3,  */
+    /** GridDimensions, 0x00640007, UL, 3 */
     extern DICOM_EXPORT const tag GridDimensions;
-    /** GridFocalDistance, (0018,704C), DS, 1,  */
+    /** GridFocalDistance, 0x0018704C, DS, 1 */
     extern DICOM_EXPORT const tag GridFocalDistance;
-    /** GridFrameOffsetVector, (3004,000C), DS, 2-n,  */
+    /** GridFrameOffsetVector, 0x3004000C, DS, 2 */
     extern DICOM_EXPORT const tag GridFrameOffsetVector;
-    /** GridID, (0018,1006), LO, 1,  */
+    /** GridID, 0x00181006, LO, 1 */
     extern DICOM_EXPORT const tag GridID;
-    /** GridPeriod, (0018,7048), DS, 1,  */
+    /** GridPeriod, 0x00187048, DS, 1 */
     extern DICOM_EXPORT const tag GridPeriod;
-    /** GridPitch, (0018,7044), DS, 1,  */
+    /** GridPitch, 0x00187044, DS, 1 */
     extern DICOM_EXPORT const tag GridPitch;
-    /** GridResolution, (0064,0008), FD, 3,  */
+    /** GridResolution, 0x00640008, FD, 3 */
     extern DICOM_EXPORT const tag GridResolution;
-    /** GridSpacingMaterial, (0018,7041), LT, 1,  */
+    /** GridSpacingMaterial, 0x00187041, LT, 1 */
     extern DICOM_EXPORT const tag GridSpacingMaterial;
-    /** GridThickness, (0018,7042), DS, 1,  */
+    /** GridThickness, 0x00187042, DS, 1 */
     extern DICOM_EXPORT const tag GridThickness;
-    /** HalfValueLayer, (0040,0314), DS, 1,  */
+    /** GroupOfPatientsIdentificationSequence, 0x00100027, SQ, 1 */
+    extern DICOM_EXPORT const tag GroupOfPatientsIdentificationSequence;
+    /** HalfValueLayer, 0x00400314, DS, 1 */
     extern DICOM_EXPORT const tag HalfValueLayer;
-    /** HangingProtocolCreationDateTime, (0072,000A), DT, 1,  */
+    /** HangingProtocolCreationDateTime, 0x0072000A, DT, 1 */
     extern DICOM_EXPORT const tag HangingProtocolCreationDateTime;
-    /** HangingProtocolCreator, (0072,0008), LO, 1,  */
+    /** HangingProtocolCreator, 0x00720008, LO, 1 */
     extern DICOM_EXPORT const tag HangingProtocolCreator;
-    /** HangingProtocolDefinitionSequence, (0072,000C), SQ, 1,  */
+    /** HangingProtocolDefinitionSequence, 0x0072000C, SQ, 1 */
     extern DICOM_EXPORT const tag HangingProtocolDefinitionSequence;
-    /** HangingProtocolDescription, (0072,0004), LO, 1,  */
+    /** HangingProtocolDescription, 0x00720004, LO, 1 */
     extern DICOM_EXPORT const tag HangingProtocolDescription;
-    /** HangingProtocolLevel, (0072,0006), CS, 1,  */
+    /** HangingProtocolLevel, 0x00720006, CS, 1 */
     extern DICOM_EXPORT const tag HangingProtocolLevel;
-    /** HangingProtocolName, (0072,0002), SH, 1,  */
+    /** HangingProtocolName, 0x00720002, SH, 1 */
     extern DICOM_EXPORT const tag HangingProtocolName;
-    /** HangingProtocolUserGroupName, (0072,0010), LO, 1,  */
+    /** HangingProtocolUserGroupName, 0x00720010, LO, 1 */
     extern DICOM_EXPORT const tag HangingProtocolUserGroupName;
-    /** HangingProtocolUserIdentificationCodeSequence, (0072,000E), SQ, 1,  */
+    /** HangingProtocolUserIdentificationCodeSequence, 0x0072000E, SQ, 1 */
     extern DICOM_EXPORT const tag HangingProtocolUserIdentificationCodeSequence;
-    /** HardcopyCreationDeviceID, (0018,1011), LO, 1, RET */
+    /** HardcopyCreationDeviceID, 0x00181011, LO, 1, RET */
     extern DICOM_EXPORT const tag HardcopyCreationDeviceID;
-    /** HardcopyDeviceManufacturer, (0018,1017), LO, 1, RET */
+    /** HardcopyDeviceManufacturer, 0x00181017, LO, 1, RET */
     extern DICOM_EXPORT const tag HardcopyDeviceManufacturer;
-    /** HardcopyDeviceManufacturerModelName, (0018,101B), LO, 1, RET */
+    /** HardcopyDeviceManufacturerModelName, 0x0018101B, LO, 1, RET */
     extern DICOM_EXPORT const tag HardcopyDeviceManufacturerModelName;
-    /** HardcopyDeviceSoftwareVersion, (0018,101A), LO, 1-n, RET */
+    /** HardcopyDeviceSoftwareVersion, 0x0018101A, LO, 1, RET */
     extern DICOM_EXPORT const tag HardcopyDeviceSoftwareVersion;
-    /** HeadFixationAngle, (300A,0148), FL, 1,  */
+    /** HeadFixationAngle, 0x300A0148, FL, 1 */
     extern DICOM_EXPORT const tag HeadFixationAngle;
-    /** HeartRate, (0018,1088), IS, 1,  */
+    /** HeadFixationAngleTolerance, 0x300A0152, DS, 1 */
+    extern DICOM_EXPORT const tag HeadFixationAngleTolerance;
+    /** HeartRate, 0x00181088, IS, 1 */
     extern DICOM_EXPORT const tag HeartRate;
-    /** HighBit, (0028,0102), US, 1,  */
+    /** HighBit, 0x00280102, US, 1 */
     extern DICOM_EXPORT const tag HighBit;
-    /** HighDoseTechniqueType, (300A,00C7), CS, 1,  */
+    /** HighDoseTechniqueType, 0x300A00C7, CS, 1 */
     extern DICOM_EXPORT const tag HighDoseTechniqueType;
-    /** HighEnergyDetectors, (4010,0002), CS, 1,  */
+    /** HighEnergyDetectors, 0x40100002, CS, 1, RET */
     extern DICOM_EXPORT const tag HighEnergyDetectors;
-    /** HighRRValue, (0018,1082), IS, 1,  */
+    /** HighRRValue, 0x00181082, IS, 1 */
     extern DICOM_EXPORT const tag HighRRValue;
-    /** HistogramBinWidth, (0060,3008), US, 1,  */
+    /** HistogramBinWidth, 0x00603008, US, 1 */
     extern DICOM_EXPORT const tag HistogramBinWidth;
-    /** HistogramData, (0060,3020), UL, 1-n,  */
+    /** HistogramData, 0x00603020, UL, 1 */
     extern DICOM_EXPORT const tag HistogramData;
-    /** HistogramExplanation, (0060,3010), LO, 1,  */
+    /** HistogramExplanation, 0x00603010, LO, 1 */
     extern DICOM_EXPORT const tag HistogramExplanation;
-    /** HistogramFirstBinValue, (0060,3004), US or SS, 1,  */
+    /** HistogramFirstBinValue, 0x00603004, US or SS, 1 */
     extern DICOM_EXPORT const tag HistogramFirstBinValue;
-    /** HistogramLastBinValue, (0060,3006), US or SS, 1,  */
+    /** HistogramLastBinValue, 0x00603006, US or SS, 1 */
     extern DICOM_EXPORT const tag HistogramLastBinValue;
-    /** HistogramNumberOfBins, (0060,3002), US, 1,  */
+    /** HistogramNumberOfBins, 0x00603002, US, 1 */
     extern DICOM_EXPORT const tag HistogramNumberOfBins;
-    /** HistogramSequence, (0060,3000), SQ, 1,  */
+    /** HistogramSequence, 0x00603000, SQ, 1 */
     extern DICOM_EXPORT const tag HistogramSequence;
-    /** HL7DocumentEffectiveTime, (0040,E004), DT, 1,  */
+    /** HL7DocumentEffectiveTime, 0x0040E004, DT, 1 */
     extern DICOM_EXPORT const tag HL7DocumentEffectiveTime;
-    /** HL7DocumentTypeCodeSequence, (0040,E006), SQ, 1,  */
+    /** HL7DocumentTypeCodeSequence, 0x0040E006, SQ, 1 */
     extern DICOM_EXPORT const tag HL7DocumentTypeCodeSequence;
-    /** HL7InstanceIdentifier, (0040,E001), ST, 1,  */
+    /** HL7InstanceIdentifier, 0x0040E001, ST, 1 */
     extern DICOM_EXPORT const tag HL7InstanceIdentifier;
-    /** HL7StructuredDocumentReferenceSequence, (0040,A390), SQ, 1,  */
+    /** HL7StructuredDocumentReferenceSequence, 0x0040A390, SQ, 1 */
     extern DICOM_EXPORT const tag HL7StructuredDocumentReferenceSequence;
-    /** HomeCommunityID, (0040,E031), UI, 1,  */
+    /** HomeCommunityID, 0x0040E031, UI, 1 */
     extern DICOM_EXPORT const tag HomeCommunityID;
-    /** HorizontalAlignment, (0070,0242), CS, 1,  */
+    /** HorizontalAlignment, 0x00700242, CS, 1 */
     extern DICOM_EXPORT const tag HorizontalAlignment;
-    /** HorizontalFieldOfView, (0022,000C), FL, 1,  */
+    /** HorizontalFieldOfView, 0x0022000C, FL, 1 */
     extern DICOM_EXPORT const tag HorizontalFieldOfView;
-    /** HorizontalOffsetOfSensor, (0014,3024), DS, 1,  */
+    /** HorizontalOffsetOfSensor, 0x00143024, DS, 1, RET */
     extern DICOM_EXPORT const tag HorizontalOffsetOfSensor;
-    /** HorizontalPrismBase, (0046,0032), CS, 1,  */
+    /** HorizontalPrismBase, 0x00460032, CS, 1 */
     extern DICOM_EXPORT const tag HorizontalPrismBase;
-    /** HorizontalPrismPower, (0046,0030), FD, 1,  */
+    /** HorizontalPrismPower, 0x00460030, FD, 1 */
     extern DICOM_EXPORT const tag HorizontalPrismPower;
-    /** HPGLContourPenNumber, (0068,6310), US, 1,  */
+    /** HPGLContourPenNumber, 0x00686310, US, 1 */
     extern DICOM_EXPORT const tag HPGLContourPenNumber;
-    /** HPGLDocument, (0068,6300), OB, 1,  */
+    /** HPGLDocument, 0x00686300, OB, 1 */
     extern DICOM_EXPORT const tag HPGLDocument;
-    /** HPGLDocumentID, (0068,62D0), US, 1,  */
+    /** HPGLDocumentID, 0x006862D0, US, 1 */
     extern DICOM_EXPORT const tag HPGLDocumentID;
-    /** HPGLDocumentLabel, (0068,62D5), LO, 1,  */
+    /** HPGLDocumentLabel, 0x006862D5, LO, 1 */
     extern DICOM_EXPORT const tag HPGLDocumentLabel;
-    /** HPGLDocumentScaling, (0068,62F2), FD, 1,  */
+    /** HPGLDocumentScaling, 0x006862F2, FD, 1 */
     extern DICOM_EXPORT const tag HPGLDocumentScaling;
-    /** HPGLDocumentSequence, (0068,62C0), SQ, 1,  */
+    /** HPGLDocumentSequence, 0x006862C0, SQ, 1 */
     extern DICOM_EXPORT const tag HPGLDocumentSequence;
-    /** HPGLPenDescription, (0068,6345), ST, 1,  */
+    /** HPGLPenDescription, 0x00686345, ST, 1 */
     extern DICOM_EXPORT const tag HPGLPenDescription;
-    /** HPGLPenLabel, (0068,6340), LO, 1,  */
+    /** HPGLPenLabel, 0x00686340, LO, 1 */
     extern DICOM_EXPORT const tag HPGLPenLabel;
-    /** HPGLPenNumber, (0068,6330), US, 1,  */
+    /** HPGLPenNumber, 0x00686330, US, 1 */
     extern DICOM_EXPORT const tag HPGLPenNumber;
-    /** HPGLPenSequence, (0068,6320), SQ, 1,  */
+    /** HPGLPenSequence, 0x00686320, SQ, 1 */
     extern DICOM_EXPORT const tag HPGLPenSequence;
-    /** HuffmanTableSize, (1000,XXX2), US, 1, RET */
-    extern const range_tag HuffmanTableSize;
-    /** HuffmanTableTriplet, (1000,XXX3), US, 3, RET */
-    extern const range_tag HuffmanTableTriplet;
-    /** HumanPerformerCodeSequence, (0040,4009), SQ, 1,  */
+    /** HuffmanTableSize, 0x10000002, US, 1, RET */
+    extern DICOM_EXPORT const range_tag HuffmanTableSize;
+    /** HuffmanTableTriplet, 0x10000003, US, 3, RET */
+    extern DICOM_EXPORT const range_tag HuffmanTableTriplet;
+    /** HumanPerformerCodeSequence, 0x00404009, SQ, 1 */
     extern DICOM_EXPORT const tag HumanPerformerCodeSequence;
-    /** HumanPerformerName, (0040,4037), PN, 1,  */
+    /** HumanPerformerName, 0x00404037, PN, 1 */
     extern DICOM_EXPORT const tag HumanPerformerName;
-    /** HumanPerformerOrganization, (0040,4036), LO, 1,  */
+    /** HumanPerformerOrganization, 0x00404036, LO, 1 */
     extern DICOM_EXPORT const tag HumanPerformerOrganization;
-    /** ICCProfile, (0028,2000), OB, 1,  */
+    /** ICCProfile, 0x00282000, OB, 1 */
     extern DICOM_EXPORT const tag ICCProfile;
-    /** IconImageSequence, (0088,0200), SQ, 1,  */
+    /** IconImageSequence, 0x00880200, SQ, 1 */
     extern DICOM_EXPORT const tag IconImageSequence;
-    /** IdenticalDocumentsSequence, (0040,A525), SQ, 1,  */
+    /** IdenticalDocumentsSequence, 0x0040A525, SQ, 1 */
     extern DICOM_EXPORT const tag IdenticalDocumentsSequence;
-    /** IdentificationDescriptionTrial, (0040,A224), ST, 1, RET */
+    /** IdentificationDescriptionTrial, 0x0040A224, ST, 1, RET */
     extern DICOM_EXPORT const tag IdentificationDescriptionTrial;
-    /** IdentifierCodeSequenceTrial, (0040,A070), SQ, 1, RET */
+    /** IdentifierCodeSequenceTrial, 0x0040A070, SQ, 1, RET */
     extern DICOM_EXPORT const tag IdentifierCodeSequenceTrial;
-    /** IdentifierTypeCode, (0040,0035), CS, 1,  */
+    /** IdentifierTypeCode, 0x00400035, CS, 1 */
     extern DICOM_EXPORT const tag IdentifierTypeCode;
-    /** IdentifyingComments, (0008,4000), LT, 1, RET */
+    /** IdentifyingComments, 0x00084000, LT, 1, RET */
     extern DICOM_EXPORT const tag IdentifyingComments;
-    /** Illumination, (2010,015E), US, 1,  */
+    /** IdentifyingPrivateElements, 0x00080306, US, 1 */
+    extern DICOM_EXPORT const tag IdentifyingPrivateElements;
+    /** Illumination, 0x2010015E, US, 1 */
     extern DICOM_EXPORT const tag Illumination;
-    /** IlluminationBandwidth, (0022,0057), FL, 1,  */
+    /** IlluminationBandwidth, 0x00220057, FL, 1 */
     extern DICOM_EXPORT const tag IlluminationBandwidth;
-    /** IlluminationColorCodeSequence, (0048,0108), SQ, 1,  */
+    /** IlluminationColorCodeSequence, 0x00480108, SQ, 1 */
     extern DICOM_EXPORT const tag IlluminationColorCodeSequence;
-    /** IlluminationPower, (0022,0056), FL, 1,  */
+    /** IlluminationPower, 0x00220056, FL, 1 */
     extern DICOM_EXPORT const tag IlluminationPower;
-    /** IlluminationTypeCodeSequence, (0022,0016), SQ, 1,  */
+    /** IlluminationTypeCodeSequence, 0x00220016, SQ, 1 */
     extern DICOM_EXPORT const tag IlluminationTypeCodeSequence;
-    /** IlluminationWaveLength, (0022,0055), FL, 1,  */
+    /** IlluminationWaveLength, 0x00220055, FL, 1 */
     extern DICOM_EXPORT const tag IlluminationWaveLength;
-    /** IlluminatorTypeCodeSequence, (0048,0100), SQ, 1,  */
+    /** IlluminatorTypeCodeSequence, 0x00480100, SQ, 1 */
     extern DICOM_EXPORT const tag IlluminatorTypeCodeSequence;
-    /** ImageAndFluoroscopyAreaDoseProduct, (0018,115E), DS, 1,  */
+    /** ImageAndFluoroscopyAreaDoseProduct, 0x0018115E, DS, 1 */
     extern DICOM_EXPORT const tag ImageAndFluoroscopyAreaDoseProduct;
-    /** ImageBoxContentSequence, (2130,0040), SQ, 1, RET */
+    /** ImageBoxContentSequence, 0x21300040, SQ, 1, RET */
     extern DICOM_EXPORT const tag ImageBoxContentSequence;
-    /** ImageBoxesSequence, (0072,0300), SQ, 1,  */
+    /** ImageBoxesSequence, 0x00720300, SQ, 1 */
     extern DICOM_EXPORT const tag ImageBoxesSequence;
-    /** ImageBoxLargeScrollAmount, (0072,0318), US, 1,  */
+    /** ImageBoxLargeScrollAmount, 0x00720318, US, 1 */
     extern DICOM_EXPORT const tag ImageBoxLargeScrollAmount;
-    /** ImageBoxLargeScrollType, (0072,0316), CS, 1,  */
+    /** ImageBoxLargeScrollType, 0x00720316, CS, 1 */
     extern DICOM_EXPORT const tag ImageBoxLargeScrollType;
-    /** ImageBoxLayoutType, (0072,0304), CS, 1,  */
+    /** ImageBoxLayoutType, 0x00720304, CS, 1 */
     extern DICOM_EXPORT const tag ImageBoxLayoutType;
-    /** ImageBoxNumber, (0072,0302), US, 1,  */
+    /** ImageBoxNumber, 0x00720302, US, 1 */
     extern DICOM_EXPORT const tag ImageBoxNumber;
-    /** ImageBoxOverlapPriority, (0072,0320), US, 1,  */
+    /** ImageBoxOverlapPriority, 0x00720320, US, 1 */
     extern DICOM_EXPORT const tag ImageBoxOverlapPriority;
-    /** ImageBoxPosition, (2020,0010), US, 1,  */
+    /** ImageBoxPosition, 0x20200010, US, 1 */
     extern DICOM_EXPORT const tag ImageBoxPosition;
-    /** ImageBoxPresentationLUTFlag, (2000,006A), CS, 1, RET */
+    /** ImageBoxPresentationLUTFlag, 0x2000006A, CS, 1, RET */
     extern DICOM_EXPORT const tag ImageBoxPresentationLUTFlag;
-    /** ImageBoxScrollDirection, (0072,0310), CS, 1,  */
+    /** ImageBoxScrollDirection, 0x00720310, CS, 1 */
     extern DICOM_EXPORT const tag ImageBoxScrollDirection;
-    /** ImageBoxSmallScrollAmount, (0072,0314), US, 1,  */
+    /** ImageBoxSmallScrollAmount, 0x00720314, US, 1 */
     extern DICOM_EXPORT const tag ImageBoxSmallScrollAmount;
-    /** ImageBoxSmallScrollType, (0072,0312), CS, 1,  */
+    /** ImageBoxSmallScrollType, 0x00720312, CS, 1 */
     extern DICOM_EXPORT const tag ImageBoxSmallScrollType;
-    /** ImageBoxSynchronizationSequence, (0072,0430), SQ, 1,  */
+    /** ImageBoxSynchronizationSequence, 0x00720430, SQ, 1 */
     extern DICOM_EXPORT const tag ImageBoxSynchronizationSequence;
-    /** ImageBoxTileHorizontalDimension, (0072,0306), US, 1,  */
+    /** ImageBoxTileHorizontalDimension, 0x00720306, US, 1 */
     extern DICOM_EXPORT const tag ImageBoxTileHorizontalDimension;
-    /** ImageBoxTileVerticalDimension, (0072,0308), US, 1,  */
+    /** ImageBoxTileVerticalDimension, 0x00720308, US, 1 */
     extern DICOM_EXPORT const tag ImageBoxTileVerticalDimension;
-    /** ImageCenterPointCoordinatesSequence, (0040,071A), SQ, 1,  */
+    /** ImageCenterPointCoordinatesSequence, 0x0040071A, SQ, 1 */
     extern DICOM_EXPORT const tag ImageCenterPointCoordinatesSequence;
-    /** ImageComments, (0020,4000), LT, 1,  */
+    /** ImageComments, 0x00204000, LT, 1 */
     extern DICOM_EXPORT const tag ImageComments;
-    /** ImageDataLocation, (0028,08X8), AT, 1-n, RET */
-    extern const range_tag ImageDataLocation;
-    /** ImageDataTypeSequence, (0018,9807), SQ, 1,  */
+    /** ImageDataLocation, 0x00280808, AT, 1, RET */
+    extern DICOM_EXPORT const range_tag ImageDataLocation;
+    /** ImageDataTypeSequence, 0x00189807, SQ, 1 */
     extern DICOM_EXPORT const tag ImageDataTypeSequence;
-    /** ImageDimensions, (0028,0005), US, 1, RET */
+    /** ImageDimensions, 0x00280005, US, 1, RET */
     extern DICOM_EXPORT const tag ImageDimensions;
-    /** ImageDisplayFormat, (2010,0010), ST, 1,  */
+    /** ImageDisplayFormat, 0x20100010, ST, 1 */
     extern DICOM_EXPORT const tag ImageDisplayFormat;
-    /** ImagedNucleus, (0018,0085), SH, 1,  */
+    /** ImagedNucleus, 0x00180085, SH, 1 */
     extern DICOM_EXPORT const tag ImagedNucleus;
-    /** ImagedVolumeDepth, (0048,0003), FL, 1,  */
+    /** ImagedVolumeDepth, 0x00480003, FL, 1 */
     extern DICOM_EXPORT const tag ImagedVolumeDepth;
-    /** ImagedVolumeHeight, (0048,0002), FL, 1,  */
+    /** ImagedVolumeHeight, 0x00480002, FL, 1 */
     extern DICOM_EXPORT const tag ImagedVolumeHeight;
-    /** ImagedVolumeWidth, (0048,0001), FL, 1,  */
+    /** ImagedVolumeWidth, 0x00480001, FL, 1 */
     extern DICOM_EXPORT const tag ImagedVolumeWidth;
-    /** ImageFilter, (0018,9320), SH, 1,  */
+    /** ImageFilter, 0x00189320, SH, 1 */
     extern DICOM_EXPORT const tag ImageFilter;
-    /** ImageFormat, (0028,0040), CS, 1, RET */
+    /** ImageFilterDescription, 0x00189941, UT, 1 */
+    extern DICOM_EXPORT const tag ImageFilterDescription;
+    /** ImageFormat, 0x00280040, CS, 1, RET */
     extern DICOM_EXPORT const tag ImageFormat;
-    /** ImageFrameOrigin, (60XX,0051), US, 1,  */
-    extern const range_tag ImageFrameOrigin;
-    /** ImageGeometryType, (0020,0070), LO, 1, RET */
+    /** ImageFrameOrigin, 0x60000051, US, 1 */
+    extern DICOM_EXPORT const range_tag ImageFrameOrigin;
+    /** ImageGeometryType, 0x00200070, LO, 1, RET */
     extern DICOM_EXPORT const tag ImageGeometryType;
-    /** ImageHorizontalFlip, (0070,0041), CS, 1,  */
+    /** ImageHorizontalFlip, 0x00700041, CS, 1 */
     extern DICOM_EXPORT const tag ImageHorizontalFlip;
-    /** ImageID, (0054,0400), SH, 1,  */
+    /** ImageID, 0x00540400, SH, 1 */
     extern DICOM_EXPORT const tag ImageID;
-    /** ImageIndex, (0054,1330), US, 1,  */
+    /** ImageIndex, 0x00541330, US, 1 */
     extern DICOM_EXPORT const tag ImageIndex;
-    /** ImageLaterality, (0020,0062), CS, 1,  */
+    /** ImageLaterality, 0x00200062, CS, 1 */
     extern DICOM_EXPORT const tag ImageLaterality;
-    /** ImageLocation, (0028,0200), US, 1, RET */
+    /** ImageLocation, 0x00280200, US, 1, RET */
     extern DICOM_EXPORT const tag ImageLocation;
-    /** ImageOrientation, (0020,0035), DS, 6, RET */
+    /** ImageOrientation, 0x00200035, DS, 6, RET */
     extern DICOM_EXPORT const tag ImageOrientation;
-    /** ImageOrientationPatient, (0020,0037), DS, 6,  */
+    /** ImageOrientationPatient, 0x00200037, DS, 6 */
     extern DICOM_EXPORT const tag ImageOrientationPatient;
-    /** ImageOrientationSlide, (0048,0102), DS, 6,  */
+    /** ImageOrientationSlide, 0x00480102, DS, 6 */
     extern DICOM_EXPORT const tag ImageOrientationSlide;
-    /** ImageOrientationVolume, (0020,9302), FD, 6,  */
+    /** ImageOrientationVolume, 0x00209302, FD, 6 */
     extern DICOM_EXPORT const tag ImageOrientationVolume;
-    /** ImageOverlayBoxContentSequence, (2130,0060), SQ, 1, RET */
+    /** ImageOverlayBoxContentSequence, 0x21300060, SQ, 1, RET */
     extern DICOM_EXPORT const tag ImageOverlayBoxContentSequence;
-    /** ImageOverlayFlag, (2000,0067), CS, 1, RET */
+    /** ImageOverlayFlag, 0x20000067, CS, 1, RET */
     extern DICOM_EXPORT const tag ImageOverlayFlag;
-    /** ImagePathFilterPassBand, (0022,0004), US, 2,  */
+    /** ImagePathFilterPassBand, 0x00220004, US, 2 */
     extern DICOM_EXPORT const tag ImagePathFilterPassBand;
-    /** ImagePathFilterPassThroughWavelength, (0022,0003), US, 1,  */
+    /** ImagePathFilterPassThroughWavelength, 0x00220003, US, 1 */
     extern DICOM_EXPORT const tag ImagePathFilterPassThroughWavelength;
-    /** ImagePathFilterTypeStackCodeSequence, (0022,0018), SQ, 1,  */
+    /** ImagePathFilterTypeStackCodeSequence, 0x00220018, SQ, 1 */
     extern DICOM_EXPORT const tag ImagePathFilterTypeStackCodeSequence;
-    /** ImagePlanePixelSpacing, (3002,0011), DS, 2,  */
+    /** ImagePlanePixelSpacing, 0x30020011, DS, 2 */
     extern DICOM_EXPORT const tag ImagePlanePixelSpacing;
-    /** ImagePosition, (0020,0030), DS, 3, RET */
+    /** ImagePosition, 0x00200030, DS, 3, RET */
     extern DICOM_EXPORT const tag ImagePosition;
-    /** ImagePositionPatient, (0020,0032), DS, 3,  */
+    /** ImagePositionPatient, 0x00200032, DS, 3 */
     extern DICOM_EXPORT const tag ImagePositionPatient;
-    /** ImagePositionVolume, (0020,9301), FD, 3,  */
+    /** ImagePositionVolume, 0x00209301, FD, 3 */
     extern DICOM_EXPORT const tag ImagePositionVolume;
-    /** ImagePresentationComments, (0028,4000), LT, 1, RET */
+    /** ImagePresentationComments, 0x00284000, LT, 1, RET */
     extern DICOM_EXPORT const tag ImagePresentationComments;
-    /** ImageProcessingApplied, (0028,9446), CS, 1-n,  */
+    /** ImageProcessingApplied, 0x00289446, CS, 1 */
     extern DICOM_EXPORT const tag ImageProcessingApplied;
-    /** ImageRotation, (0070,0042), US, 1,  */
+    /** ImageQualityIndicatorMaterial, 0x001440A1, LO, 1, RET */
+    extern DICOM_EXPORT const tag ImageQualityIndicatorMaterial;
+    /** ImageQualityIndicatorSize, 0x001440A2, LO, 1, RET */
+    extern DICOM_EXPORT const tag ImageQualityIndicatorSize;
+    /** ImageQualityIndicatorType, 0x001440A0, LO, 1, RET */
+    extern DICOM_EXPORT const tag ImageQualityIndicatorType;
+    /** ImageRotation, 0x00700042, US, 1 */
     extern DICOM_EXPORT const tag ImageRotation;
-    /** ImageRotationRetired, (0070,0040), IS, 1, RET */
+    /** ImageRotationRetired, 0x00700040, IS, 1, RET */
     extern DICOM_EXPORT const tag ImageRotationRetired;
-    /** ImagerPixelSpacing, (0018,1164), DS, 2,  */
+    /** ImagerPixelSpacing, 0x00181164, DS, 2 */
     extern DICOM_EXPORT const tag ImagerPixelSpacing;
-    /** ImageSetLabel, (0072,0040), LO, 1,  */
+    /** ImageScaleRepresentation, 0x40101075, DS, 1, RET */
+    extern DICOM_EXPORT const tag ImageScaleRepresentation;
+    /** ImageSetLabel, 0x00720040, LO, 1 */
     extern DICOM_EXPORT const tag ImageSetLabel;
-    /** ImageSetNumber, (0072,0032), US, 1,  */
+    /** ImageSetNumber, 0x00720032, US, 1 */
     extern DICOM_EXPORT const tag ImageSetNumber;
-    /** ImageSetSelectorCategory, (0072,0034), CS, 1,  */
+    /** ImageSetSelectorCategory, 0x00720034, CS, 1 */
     extern DICOM_EXPORT const tag ImageSetSelectorCategory;
-    /** ImageSetSelectorSequence, (0072,0022), SQ, 1,  */
+    /** ImageSetSelectorSequence, 0x00720022, SQ, 1 */
     extern DICOM_EXPORT const tag ImageSetSelectorSequence;
-    /** ImageSetSelectorUsageFlag, (0072,0024), CS, 1,  */
+    /** ImageSetSelectorUsageFlag, 0x00720024, CS, 1 */
     extern DICOM_EXPORT const tag ImageSetSelectorUsageFlag;
-    /** ImageSetsSequence, (0072,0020), SQ, 1,  */
+    /** ImageSetsSequence, 0x00720020, SQ, 1 */
     extern DICOM_EXPORT const tag ImageSetsSequence;
-    /** ImagesInAcquisition, (0020,1002), IS, 1,  */
+    /** ImagesInAcquisition, 0x00201002, IS, 1 */
     extern DICOM_EXPORT const tag ImagesInAcquisition;
-    /** ImagesInSeries, (0020,1003), IS, 1, RET */
+    /** ImagesInSeries, 0x00201003, IS, 1, RET */
     extern DICOM_EXPORT const tag ImagesInSeries;
-    /** ImagesInStudy, (0020,1005), IS, 1, RET */
+    /** ImagesInStudy, 0x00201005, IS, 1, RET */
     extern DICOM_EXPORT const tag ImagesInStudy;
-    /** ImageToEquipmentMappingMatrix, (0028,9520), DS, 16,  */
+    /** ImageToEquipmentMappingMatrix, 0x00289520, DS, 16 */
     extern DICOM_EXPORT const tag ImageToEquipmentMappingMatrix;
-    /** ImageTransformationMatrix, (0018,5210), DS, 6, RET */
+    /** ImageTransformationMatrix, 0x00185210, DS, 6, RET */
     extern DICOM_EXPORT const tag ImageTransformationMatrix;
-    /** ImageTranslationVector, (0018,5212), DS, 3, RET */
+    /** ImageTranslationVector, 0x00185212, DS, 3, RET */
     extern DICOM_EXPORT const tag ImageTranslationVector;
-    /** ImageTriggerDelay, (0018,1067), DS, 1,  */
+    /** ImageTriggerDelay, 0x00181067, DS, 1 */
     extern DICOM_EXPORT const tag ImageTriggerDelay;
-    /** ImageType, (0008,0008), CS, 2-n,  */
+    /** ImageType, 0x00080008, CS, 2 */
     extern DICOM_EXPORT const tag ImageType;
-    /** ImagingDeviceSpecificAcquisitionParameters, (300A,00CC), LO, 1-n,  */
+    /** ImageVolumeGeometry, 0x00701208, CS, 1 */
+    extern DICOM_EXPORT const tag ImageVolumeGeometry;
+    /** ImagingDeviceSpecificAcquisitionParameters, 0x300A00CC, LO, 1 */
     extern DICOM_EXPORT const tag ImagingDeviceSpecificAcquisitionParameters;
-    /** ImagingFrequency, (0018,0084), DS, 1,  */
+    /** ImagingFrequency, 0x00180084, DS, 1 */
     extern DICOM_EXPORT const tag ImagingFrequency;
-    /** ImagingServiceRequestComments, (0040,2400), LT, 1,  */
+    /** ImagingServiceRequestComments, 0x00402400, LT, 1 */
     extern DICOM_EXPORT const tag ImagingServiceRequestComments;
-    /** ImplantAssemblyTemplateIssuer, (0076,0003), LO, 1,  */
+    /** ImplantAssemblyTemplateIssuer, 0x00760003, LO, 1 */
     extern DICOM_EXPORT const tag ImplantAssemblyTemplateIssuer;
-    /** ImplantAssemblyTemplateName, (0076,0001), LO, 1,  */
+    /** ImplantAssemblyTemplateName, 0x00760001, LO, 1 */
     extern DICOM_EXPORT const tag ImplantAssemblyTemplateName;
-    /** ImplantAssemblyTemplateTargetAnatomySequence, (0076,0010), SQ, 1,  */
+    /** ImplantAssemblyTemplateTargetAnatomySequence, 0x00760010, SQ, 1 */
     extern DICOM_EXPORT const tag ImplantAssemblyTemplateTargetAnatomySequence;
-    /** ImplantAssemblyTemplateType, (0076,000A), CS, 1,  */
+    /** ImplantAssemblyTemplateType, 0x0076000A, CS, 1 */
     extern DICOM_EXPORT const tag ImplantAssemblyTemplateType;
-    /** ImplantAssemblyTemplateVersion, (0076,0006), LO, 1,  */
+    /** ImplantAssemblyTemplateVersion, 0x00760006, LO, 1 */
     extern DICOM_EXPORT const tag ImplantAssemblyTemplateVersion;
-    /** ImplantName, (0022,1095), LO, 1,  */
+    /** ImplantName, 0x00221095, LO, 1 */
     extern DICOM_EXPORT const tag ImplantName;
-    /** ImplantPartNumber, (0022,1097), LO, 1,  */
+    /** ImplantPartNumber, 0x00221097, LO, 1 */
     extern DICOM_EXPORT const tag ImplantPartNumber;
-    /** ImplantRegulatoryDisapprovalCodeSequence, (0068,62A0), SQ, 1,  */
+    /** ImplantRegulatoryDisapprovalCodeSequence, 0x006862A0, SQ, 1 */
     extern DICOM_EXPORT const tag ImplantRegulatoryDisapprovalCodeSequence;
-    /** ImplantSize, (0068,6210), LO, 1,  */
+    /** ImplantSize, 0x00686210, LO, 1 */
     extern DICOM_EXPORT const tag ImplantSize;
-    /** ImplantTargetAnatomySequence, (0068,6230), SQ, 1,  */
+    /** ImplantTargetAnatomySequence, 0x00686230, SQ, 1 */
     extern DICOM_EXPORT const tag ImplantTargetAnatomySequence;
-    /** ImplantTemplate3DModelSurfaceNumber, (0068,6350), US, 1-n,  */
+    /** ImplantTemplate3DModelSurfaceNumber, 0x00686350, US, 1 */
     extern DICOM_EXPORT const tag ImplantTemplate3DModelSurfaceNumber;
-    /** ImplantTemplateGroupDescription, (0078,0010), ST, 1,  */
+    /** ImplantTemplateGroupDescription, 0x00780010, ST, 1 */
     extern DICOM_EXPORT const tag ImplantTemplateGroupDescription;
-    /** ImplantTemplateGroupIssuer, (0078,0020), LO, 1,  */
+    /** ImplantTemplateGroupIssuer, 0x00780020, LO, 1 */
     extern DICOM_EXPORT const tag ImplantTemplateGroupIssuer;
-    /** ImplantTemplateGroupMemberID, (0078,002E), US, 1,  */
+    /** ImplantTemplateGroupMemberID, 0x0078002E, US, 1 */
     extern DICOM_EXPORT const tag ImplantTemplateGroupMemberID;
-    /** ImplantTemplateGroupMemberMatching2DCoordinatesSequence, (0078,0070), SQ, 1,  */
+    /** ImplantTemplateGroupMemberMatching2DCoordinatesSequence, 0x00780070, SQ, 1 */
     extern DICOM_EXPORT const tag ImplantTemplateGroupMemberMatching2DCoordinatesSequence;
-    /** ImplantTemplateGroupMembersSequence, (0078,002A), SQ, 1,  */
+    /** ImplantTemplateGroupMembersSequence, 0x0078002A, SQ, 1 */
     extern DICOM_EXPORT const tag ImplantTemplateGroupMembersSequence;
-    /** ImplantTemplateGroupName, (0078,0001), LO, 1,  */
+    /** ImplantTemplateGroupName, 0x00780001, LO, 1 */
     extern DICOM_EXPORT const tag ImplantTemplateGroupName;
-    /** ImplantTemplateGroupTargetAnatomySequence, (0078,0028), SQ, 1,  */
+    /** ImplantTemplateGroupTargetAnatomySequence, 0x00780028, SQ, 1 */
     extern DICOM_EXPORT const tag ImplantTemplateGroupTargetAnatomySequence;
-    /** ImplantTemplateGroupVariationDimensionName, (0078,00B2), LO, 1,  */
+    /** ImplantTemplateGroupVariationDimensionName, 0x007800B2, LO, 1 */
     extern DICOM_EXPORT const tag ImplantTemplateGroupVariationDimensionName;
-    /** ImplantTemplateGroupVariationDimensionRank, (0078,00B8), US, 1,  */
+    /** ImplantTemplateGroupVariationDimensionRank, 0x007800B8, US, 1 */
     extern DICOM_EXPORT const tag ImplantTemplateGroupVariationDimensionRank;
-    /** ImplantTemplateGroupVariationDimensionRankSequence, (0078,00B4), SQ, 1,  */
+    /** ImplantTemplateGroupVariationDimensionRankSequence, 0x007800B4, SQ, 1 */
     extern DICOM_EXPORT const tag ImplantTemplateGroupVariationDimensionRankSequence;
-    /** ImplantTemplateGroupVariationDimensionSequence, (0078,00B0), SQ, 1,  */
+    /** ImplantTemplateGroupVariationDimensionSequence, 0x007800B0, SQ, 1 */
     extern DICOM_EXPORT const tag ImplantTemplateGroupVariationDimensionSequence;
-    /** ImplantTemplateGroupVersion, (0078,0024), LO, 1,  */
+    /** ImplantTemplateGroupVersion, 0x00780024, LO, 1 */
     extern DICOM_EXPORT const tag ImplantTemplateGroupVersion;
-    /** ImplantTemplateVersion, (0068,6221), LO, 1,  */
+    /** ImplantTemplateVersion, 0x00686221, LO, 1 */
     extern DICOM_EXPORT const tag ImplantTemplateVersion;
-    /** ImplantType, (0068,6223), CS, 1,  */
+    /** ImplantType, 0x00686223, CS, 1 */
     extern DICOM_EXPORT const tag ImplantType;
-    /** ImplantTypeCodeSequence, (0068,63A8), SQ, 1,  */
+    /** ImplantTypeCodeSequence, 0x006863A8, SQ, 1 */
     extern DICOM_EXPORT const tag ImplantTypeCodeSequence;
-    /** ImplementationClassUID, (0002,0012), UI, 1,  */
+    /** ImplementationClassUID, 0x00020012, UI, 1 */
     extern DICOM_EXPORT const tag ImplementationClassUID;
-    /** ImplementationVersionName, (0002,0013), SH, 1,  */
+    /** ImplementationVersionName, 0x00020013, SH, 1 */
     extern DICOM_EXPORT const tag ImplementationVersionName;
-    /** Impressions, (4008,0300), ST, 1, RET */
+    /** Impressions, 0x40080300, ST, 1, RET */
     extern DICOM_EXPORT const tag Impressions;
-    /** InboundArrivalType, (4010,1056), CS, 1,  */
+    /** InboundArrivalType, 0x40101056, CS, 1, RET */
     extern DICOM_EXPORT const tag InboundArrivalType;
-    /** IncidentAngle, (0014,4052), DS, 1,  */
+    /** IncidentAngle, 0x00144052, DS, 1, RET */
     extern DICOM_EXPORT const tag IncidentAngle;
-    /** IncludeDisplayApplication, (2200,0009), CS, 1,  */
+    /** IncludeDisplayApplication, 0x22000009, CS, 1 */
     extern DICOM_EXPORT const tag IncludeDisplayApplication;
-    /** IncludeNonDICOMObjects, (2200,0008), CS, 1,  */
+    /** IncludeNonDICOMObjects, 0x22000008, CS, 1 */
     extern DICOM_EXPORT const tag IncludeNonDICOMObjects;
-    /** InConcatenationNumber, (0020,9162), US, 1,  */
+    /** InConcatenationNumber, 0x00209162, US, 1 */
     extern DICOM_EXPORT const tag InConcatenationNumber;
-    /** InConcatenationTotalNumber, (0020,9163), US, 1,  */
+    /** InConcatenationTotalNumber, 0x00209163, US, 1 */
     extern DICOM_EXPORT const tag InConcatenationTotalNumber;
-    /** IndexNormalsFlag, (0024,0338), CS, 1,  */
+    /** IndexNormalsFlag, 0x00240338, CS, 1 */
     extern DICOM_EXPORT const tag IndexNormalsFlag;
-    /** IndexProbability, (0024,0341), FL, 1,  */
+    /** IndexProbability, 0x00240341, FL, 1 */
     extern DICOM_EXPORT const tag IndexProbability;
-    /** IndexProbabilitySequence, (0024,0344), SQ, 1,  */
+    /** IndexProbabilitySequence, 0x00240344, SQ, 1 */
     extern DICOM_EXPORT const tag IndexProbabilitySequence;
-    /** IndicationDescription, (0014,2018), ST, 1,  */
+    /** IndicationDescription, 0x00142018, ST, 1, RET */
     extern DICOM_EXPORT const tag IndicationDescription;
-    /** IndicationDisposition, (0014,201C), CS, 1,  */
+    /** IndicationDisposition, 0x0014201C, CS, 1, RET */
     extern DICOM_EXPORT const tag IndicationDisposition;
-    /** IndicationLabel, (0014,2016), SH, 1,  */
+    /** IndicationLabel, 0x00142016, SH, 1, RET */
     extern DICOM_EXPORT const tag IndicationLabel;
-    /** IndicationNumber, (0014,2014), IS, 1,  */
+    /** IndicationNumber, 0x00142014, IS, 1, RET */
     extern DICOM_EXPORT const tag IndicationNumber;
-    /** IndicationPhysicalPropertySequence, (0014,2030), SQ, 1,  */
+    /** IndicationPhysicalPropertySequence, 0x00142030, SQ, 1, RET */
     extern DICOM_EXPORT const tag IndicationPhysicalPropertySequence;
-    /** IndicationROISequence, (0014,201E), SQ, 1,  */
+    /** IndicationROISequence, 0x0014201E, SQ, 1, RET */
     extern DICOM_EXPORT const tag IndicationROISequence;
-    /** IndicationSequence, (0014,2012), SQ, 1,  */
+    /** IndicationSequence, 0x00142012, SQ, 1, RET */
     extern DICOM_EXPORT const tag IndicationSequence;
-    /** IndicationType, (0014,201A), CS, 1-n,  */
+    /** IndicationType, 0x0014201A, CS, 1, RET */
     extern DICOM_EXPORT const tag IndicationType;
-    /** InformationFromManufacturerSequence, (0068,6260), SQ, 1,  */
+    /** InformationFromManufacturerSequence, 0x00686260, SQ, 1 */
     extern DICOM_EXPORT const tag InformationFromManufacturerSequence;
-    /** InformationIssueDateTime, (0068,6270), DT, 1,  */
+    /** InformationIssueDateTime, 0x00686270, DT, 1 */
     extern DICOM_EXPORT const tag InformationIssueDateTime;
-    /** InformationSummary, (0068,6280), ST, 1,  */
+    /** InformationSummary, 0x00686280, ST, 1 */
     extern DICOM_EXPORT const tag InformationSummary;
-    /** InitialCineRunState, (0018,0042), CS, 1,  */
+    /** InitialCineRunState, 0x00180042, CS, 1 */
     extern DICOM_EXPORT const tag InitialCineRunState;
-    /** InnerDiameter, (0014,0056), DS, 1,  */
+    /** InnerDiameter, 0x00140056, DS, 1, RET */
     extern DICOM_EXPORT const tag InnerDiameter;
-    /** InPlanePhaseEncodingDirection, (0018,1312), CS, 1,  */
+    /** InPlanePhaseEncodingDirection, 0x00181312, CS, 1 */
     extern DICOM_EXPORT const tag InPlanePhaseEncodingDirection;
-    /** InputAvailabilityFlag, (0040,4020), CS, 1,  */
+    /** InputAvailabilityFlag, 0x00404020, CS, 1, RET */
     extern DICOM_EXPORT const tag InputAvailabilityFlag;
-    /** InputInformationSequence, (0040,4021), SQ, 1,  */
+    /** InputInformationSequence, 0x00404021, SQ, 1 */
     extern DICOM_EXPORT const tag InputInformationSequence;
-    /** InputReadinessState, (0040,4041), CS, 1,  */
+    /** InputReadinessState, 0x00404041, CS, 1 */
     extern DICOM_EXPORT const tag InputReadinessState;
-    /** InStackPositionNumber, (0020,9057), UL, 1,  */
+    /** InputSequencePositionIndex, 0x00701203, US, 1 */
+    extern DICOM_EXPORT const tag InputSequencePositionIndex;
+    /** InspectionSelectionCriteria, 0x4010107C, CS, 1, RET */
+    extern DICOM_EXPORT const tag InspectionSelectionCriteria;
+    /** InStackPositionNumber, 0x00209057, UL, 1 */
     extern DICOM_EXPORT const tag InStackPositionNumber;
-    /** InstanceAvailability, (0008,0056), CS, 1,  */
+    /** InstanceAvailability, 0x00080056, CS, 1 */
     extern DICOM_EXPORT const tag InstanceAvailability;
-    /** InstanceCreationDate, (0008,0012), DA, 1,  */
+    /** InstanceCoercionDateTime, 0x00080015, DT, 1 */
+    extern DICOM_EXPORT const tag InstanceCoercionDateTime;
+    /** InstanceCreationDate, 0x00080012, DA, 1 */
     extern DICOM_EXPORT const tag InstanceCreationDate;
-    /** InstanceCreationTime, (0008,0013), TM, 1,  */
+    /** InstanceCreationTime, 0x00080013, TM, 1 */
     extern DICOM_EXPORT const tag InstanceCreationTime;
-    /** InstanceCreatorUID, (0008,0014), UI, 1,  */
+    /** InstanceCreatorUID, 0x00080014, UI, 1 */
     extern DICOM_EXPORT const tag InstanceCreatorUID;
-    /** InstanceNumber, (0020,0013), IS, 1,  */
+    /** InstanceNumber, 0x00200013, IS, 1 */
     extern DICOM_EXPORT const tag InstanceNumber;
-    /** InstitutionAddress, (0008,0081), ST, 1,  */
+    /** InstitutionAddress, 0x00080081, ST, 1 */
     extern DICOM_EXPORT const tag InstitutionAddress;
-    /** InstitutionalDepartmentName, (0008,1040), LO, 1,  */
+    /** InstitutionalDepartmentName, 0x00081040, LO, 1 */
     extern DICOM_EXPORT const tag InstitutionalDepartmentName;
-    /** InstitutionCodeSequence, (0008,0082), SQ, 1,  */
+    /** InstitutionCodeSequence, 0x00080082, SQ, 1 */
     extern DICOM_EXPORT const tag InstitutionCodeSequence;
-    /** InstitutionName, (0008,0080), LO, 1,  */
+    /** InstitutionName, 0x00080080, LO, 1 */
     extern DICOM_EXPORT const tag InstitutionName;
-    /** InsurancePlanIdentification, (0010,1050), LO, 1-n, RET */
+    /** InstructionDescription, 0x00189917, UT, 1 */
+    extern DICOM_EXPORT const tag InstructionDescription;
+    /** InstructionIndex, 0x00189915, US, 1 */
+    extern DICOM_EXPORT const tag InstructionIndex;
+    /** InstructionPerformanceComment, 0x0018991A, UT, 1 */
+    extern DICOM_EXPORT const tag InstructionPerformanceComment;
+    /** InstructionPerformedDateTime, 0x00189919, DT, 1 */
+    extern DICOM_EXPORT const tag InstructionPerformedDateTime;
+    /** InstructionPerformedFlag, 0x00189918, CS, 1 */
+    extern DICOM_EXPORT const tag InstructionPerformedFlag;
+    /** InstructionSequence, 0x00189914, SQ, 1 */
+    extern DICOM_EXPORT const tag InstructionSequence;
+    /** InstructionText, 0x00189916, LO, 1 */
+    extern DICOM_EXPORT const tag InstructionText;
+    /** InsurancePlanIdentification, 0x00101050, LO, 1, RET */
     extern DICOM_EXPORT const tag InsurancePlanIdentification;
-    /** IntendedRecipientsOfResultsIdentificationSequence, (0040,1011), SQ, 1,  */
+    /** IntendedRecipientsOfResultsIdentificationSequence, 0x00401011, SQ, 1 */
     extern DICOM_EXPORT const tag IntendedRecipientsOfResultsIdentificationSequence;
-    /** IntensifierActiveDimensions, (0018,9428), FL, 1-2,  */
+    /** IntensifierActiveDimensions, 0x00189428, FL, 1 */
     extern DICOM_EXPORT const tag IntensifierActiveDimensions;
-    /** IntensifierActiveShape, (0018,9427), CS, 1,  */
+    /** IntensifierActiveShape, 0x00189427, CS, 1 */
     extern DICOM_EXPORT const tag IntensifierActiveShape;
-    /** IntensifierSize, (0018,1162), DS, 1,  */
+    /** IntensifierSize, 0x00181162, DS, 1 */
     extern DICOM_EXPORT const tag IntensifierSize;
-    /** InterMarkerDistance, (0050,0019), DS, 1,  */
+    /** InterMarkerDistance, 0x00500019, DS, 1 */
     extern DICOM_EXPORT const tag InterMarkerDistance;
-    /** IntermediatePupillaryDistance, (0046,0063), FD, 1,  */
+    /** IntermediatePupillaryDistance, 0x00460063, FD, 1 */
     extern DICOM_EXPORT const tag IntermediatePupillaryDistance;
-    /** InternalDetectorFrameTime, (0014,3011), DS, 1,  */
+    /** InternalDetectorFrameTime, 0x00143011, DS, 1, RET */
     extern DICOM_EXPORT const tag InternalDetectorFrameTime;
-    /** InternationalRouteSegment, (4010,1028), CS, 1,  */
+    /** InternationalRouteSegment, 0x40101028, CS, 1, RET */
     extern DICOM_EXPORT const tag InternationalRouteSegment;
-    /** InterpolationType, (0052,0039), CS, 1,  */
+    /** InterpolationType, 0x00520039, CS, 1 */
     extern DICOM_EXPORT const tag InterpolationType;
-    /** InterpretationApprovalDate, (4008,0112), DA, 1, RET */
+    /** InterpretationApprovalDate, 0x40080112, DA, 1, RET */
     extern DICOM_EXPORT const tag InterpretationApprovalDate;
-    /** InterpretationApprovalTime, (4008,0113), TM, 1, RET */
+    /** InterpretationApprovalTime, 0x40080113, TM, 1, RET */
     extern DICOM_EXPORT const tag InterpretationApprovalTime;
-    /** InterpretationApproverSequence, (4008,0111), SQ, 1, RET */
+    /** InterpretationApproverSequence, 0x40080111, SQ, 1, RET */
     extern DICOM_EXPORT const tag InterpretationApproverSequence;
-    /** InterpretationAuthor, (4008,010C), PN, 1, RET */
+    /** InterpretationAuthor, 0x4008010C, PN, 1, RET */
     extern DICOM_EXPORT const tag InterpretationAuthor;
-    /** InterpretationDiagnosisCodeSequence, (4008,0117), SQ, 1, RET */
+    /** InterpretationDiagnosisCodeSequence, 0x40080117, SQ, 1, RET */
     extern DICOM_EXPORT const tag InterpretationDiagnosisCodeSequence;
-    /** InterpretationDiagnosisDescription, (4008,0115), LT, 1, RET */
+    /** InterpretationDiagnosisDescription, 0x40080115, LT, 1, RET */
     extern DICOM_EXPORT const tag InterpretationDiagnosisDescription;
-    /** InterpretationID, (4008,0200), SH, 1, RET */
+    /** InterpretationID, 0x40080200, SH, 1, RET */
     extern DICOM_EXPORT const tag InterpretationID;
-    /** InterpretationIDIssuer, (4008,0202), LO, 1, RET */
+    /** InterpretationIDIssuer, 0x40080202, LO, 1, RET */
     extern DICOM_EXPORT const tag InterpretationIDIssuer;
-    /** InterpretationRecordedDate, (4008,0100), DA, 1, RET */
+    /** InterpretationRecordedDate, 0x40080100, DA, 1, RET */
     extern DICOM_EXPORT const tag InterpretationRecordedDate;
-    /** InterpretationRecordedTime, (4008,0101), TM, 1, RET */
+    /** InterpretationRecordedTime, 0x40080101, TM, 1, RET */
     extern DICOM_EXPORT const tag InterpretationRecordedTime;
-    /** InterpretationRecorder, (4008,0102), PN, 1, RET */
+    /** InterpretationRecorder, 0x40080102, PN, 1, RET */
     extern DICOM_EXPORT const tag InterpretationRecorder;
-    /** InterpretationStatusID, (4008,0212), CS, 1, RET */
+    /** InterpretationStatusID, 0x40080212, CS, 1, RET */
     extern DICOM_EXPORT const tag InterpretationStatusID;
-    /** InterpretationText, (4008,010B), ST, 1, RET */
+    /** InterpretationText, 0x4008010B, ST, 1, RET */
     extern DICOM_EXPORT const tag InterpretationText;
-    /** InterpretationTranscriber, (4008,010A), PN, 1, RET */
+    /** InterpretationTranscriber, 0x4008010A, PN, 1, RET */
     extern DICOM_EXPORT const tag InterpretationTranscriber;
-    /** InterpretationTranscriptionDate, (4008,0108), DA, 1, RET */
+    /** InterpretationTranscriptionDate, 0x40080108, DA, 1, RET */
     extern DICOM_EXPORT const tag InterpretationTranscriptionDate;
-    /** InterpretationTranscriptionTime, (4008,0109), TM, 1, RET */
+    /** InterpretationTranscriptionTime, 0x40080109, TM, 1, RET */
     extern DICOM_EXPORT const tag InterpretationTranscriptionTime;
-    /** InterpretationTypeID, (4008,0210), CS, 1, RET */
+    /** InterpretationTypeID, 0x40080210, CS, 1, RET */
     extern DICOM_EXPORT const tag InterpretationTypeID;
-    /** IntervalNumber, (0020,0016), IS, 1, RET */
+    /** IntervalNumber, 0x00200016, IS, 1, RET */
     extern DICOM_EXPORT const tag IntervalNumber;
-    /** IntervalsAcquired, (0018,1083), IS, 1,  */
+    /** IntervalsAcquired, 0x00181083, IS, 1 */
     extern DICOM_EXPORT const tag IntervalsAcquired;
-    /** IntervalsRejected, (0018,1084), IS, 1,  */
+    /** IntervalsRejected, 0x00181084, IS, 1 */
     extern DICOM_EXPORT const tag IntervalsRejected;
-    /** InterventionDescription, (0018,003A), ST, 1,  */
+    /** InterventionDescription, 0x0018003A, ST, 1 */
     extern DICOM_EXPORT const tag InterventionDescription;
-    /** InterventionDrugCodeSequence, (0018,0029), SQ, 1,  */
+    /** InterventionDrugCodeSequence, 0x00180029, SQ, 1 */
     extern DICOM_EXPORT const tag InterventionDrugCodeSequence;
-    /** InterventionDrugDose, (0018,0028), DS, 1,  */
+    /** InterventionDrugDose, 0x00180028, DS, 1 */
     extern DICOM_EXPORT const tag InterventionDrugDose;
-    /** InterventionDrugInformationSequence, (0018,0026), SQ, 1,  */
+    /** InterventionDrugInformationSequence, 0x00180026, SQ, 1 */
     extern DICOM_EXPORT const tag InterventionDrugInformationSequence;
-    /** InterventionDrugName, (0018,0034), LO, 1,  */
+    /** InterventionDrugName, 0x00180034, LO, 1 */
     extern DICOM_EXPORT const tag InterventionDrugName;
-    /** InterventionDrugStartTime, (0018,0035), TM, 1,  */
+    /** InterventionDrugStartTime, 0x00180035, TM, 1 */
     extern DICOM_EXPORT const tag InterventionDrugStartTime;
-    /** InterventionDrugStopTime, (0018,0027), TM, 1,  */
+    /** InterventionDrugStopTime, 0x00180027, TM, 1 */
     extern DICOM_EXPORT const tag InterventionDrugStopTime;
-    /** InterventionSequence, (0018,0036), SQ, 1,  */
+    /** InterventionSequence, 0x00180036, SQ, 1 */
     extern DICOM_EXPORT const tag InterventionSequence;
-    /** InterventionStatus, (0018,0038), CS, 1,  */
+    /** InterventionStatus, 0x00180038, CS, 1 */
     extern DICOM_EXPORT const tag InterventionStatus;
-    /** IntraocularLensCalculationsLeftEyeSequence, (0022,1310), SQ, 1,  */
+    /** IntraocularLensCalculationsLeftEyeSequence, 0x00221310, SQ, 1 */
     extern DICOM_EXPORT const tag IntraocularLensCalculationsLeftEyeSequence;
-    /** IntraocularLensCalculationsRightEyeSequence, (0022,1300), SQ, 1,  */
+    /** IntraocularLensCalculationsRightEyeSequence, 0x00221300, SQ, 1 */
     extern DICOM_EXPORT const tag IntraocularLensCalculationsRightEyeSequence;
-    /** IntraOcularPressure, (0022,000B), FL, 1,  */
+    /** IntraOcularPressure, 0x0022000B, FL, 1 */
     extern DICOM_EXPORT const tag IntraOcularPressure;
-    /** IntravascularFrameContentSequence, (0052,0027), SQ, 1,  */
+    /** IntravascularFrameContentSequence, 0x00520027, SQ, 1 */
     extern DICOM_EXPORT const tag IntravascularFrameContentSequence;
-    /** IntravascularLongitudinalDistance, (0052,0028), FD, 1,  */
+    /** IntravascularLongitudinalDistance, 0x00520028, FD, 1 */
     extern DICOM_EXPORT const tag IntravascularLongitudinalDistance;
-    /** IntravascularOCTFrameContentSequence, (0052,0029), SQ, 1,  */
+    /** IntravascularOCTFrameContentSequence, 0x00520029, SQ, 1 */
     extern DICOM_EXPORT const tag IntravascularOCTFrameContentSequence;
-    /** IntravascularOCTFrameTypeSequence, (0052,0025), SQ, 1,  */
+    /** IntravascularOCTFrameTypeSequence, 0x00520025, SQ, 1 */
     extern DICOM_EXPORT const tag IntravascularOCTFrameTypeSequence;
-    /** InversionRecovery, (0018,9009), CS, 1,  */
+    /** InversionRecovery, 0x00189009, CS, 1 */
     extern DICOM_EXPORT const tag InversionRecovery;
-    /** InversionTime, (0018,0082), DS, 1,  */
+    /** InversionTime, 0x00180082, DS, 1 */
     extern DICOM_EXPORT const tag InversionTime;
-    /** InversionTimes, (0018,9079), FD, 1-n,  */
+    /** InversionTimes, 0x00189079, FD, 1 */
     extern DICOM_EXPORT const tag InversionTimes;
-    /** IOLFormulaCodeSequence, (0022,1028), SQ, 1,  */
+    /** IOLFormulaCodeSequence, 0x00221028, SQ, 1 */
     extern DICOM_EXPORT const tag IOLFormulaCodeSequence;
-    /** IOLFormulaDetail, (0022,1029), LO, 1,  */
+    /** IOLFormulaDetail, 0x00221029, LO, 1 */
     extern DICOM_EXPORT const tag IOLFormulaDetail;
-    /** IOLManufacturer, (0022,1093), LO, 1,  */
+    /** IOLManufacturer, 0x00221093, LO, 1 */
     extern DICOM_EXPORT const tag IOLManufacturer;
-    /** IOLPower, (0022,1053), FL, 1,  */
+    /** IOLPower, 0x00221053, FL, 1 */
     extern DICOM_EXPORT const tag IOLPower;
-    /** IOLPowerForExactEmmetropia, (0022,1121), FL, 1,  */
+    /** IOLPowerForExactEmmetropia, 0x00221121, FL, 1 */
     extern DICOM_EXPORT const tag IOLPowerForExactEmmetropia;
-    /** IOLPowerForExactTargetRefraction, (0022,1122), FL, 1,  */
+    /** IOLPowerForExactTargetRefraction, 0x00221122, FL, 1 */
     extern DICOM_EXPORT const tag IOLPowerForExactTargetRefraction;
-    /** IOLPowerSequence, (0022,1090), SQ, 1,  */
+    /** IOLPowerSequence, 0x00221090, SQ, 1 */
     extern DICOM_EXPORT const tag IOLPowerSequence;
-    /** IonBeamLimitingDeviceSequence, (300A,03A4), SQ, 1,  */
+    /** IonBeamLimitingDeviceSequence, 0x300A03A4, SQ, 1 */
     extern DICOM_EXPORT const tag IonBeamLimitingDeviceSequence;
-    /** IonBeamSequence, (300A,03A2), SQ, 1,  */
+    /** IonBeamSequence, 0x300A03A2, SQ, 1 */
     extern DICOM_EXPORT const tag IonBeamSequence;
-    /** IonBlockSequence, (300A,03A6), SQ, 1,  */
+    /** IonBlockSequence, 0x300A03A6, SQ, 1 */
     extern DICOM_EXPORT const tag IonBlockSequence;
-    /** IonControlPointDeliverySequence, (3008,0041), SQ, 1,  */
+    /** IonControlPointDeliverySequence, 0x30080041, SQ, 1 */
     extern DICOM_EXPORT const tag IonControlPointDeliverySequence;
-    /** IonControlPointSequence, (300A,03A8), SQ, 1,  */
+    /** IonControlPointSequence, 0x300A03A8, SQ, 1 */
     extern DICOM_EXPORT const tag IonControlPointSequence;
-    /** IonControlPointVerificationSequence, (0074,104E), SQ, 1,  */
+    /** IonControlPointVerificationSequence, 0x0074104E, SQ, 1 */
     extern DICOM_EXPORT const tag IonControlPointVerificationSequence;
-    /** IonMachineVerificationSequence, (0074,1046), SQ, 1,  */
+    /** IonMachineVerificationSequence, 0x00741046, SQ, 1 */
     extern DICOM_EXPORT const tag IonMachineVerificationSequence;
-    /** IonRangeCompensatorSequence, (300A,02EA), SQ, 1,  */
+    /** IonRangeCompensatorSequence, 0x300A02EA, SQ, 1 */
     extern DICOM_EXPORT const tag IonRangeCompensatorSequence;
-    /** IonToleranceTableSequence, (300A,03A0), SQ, 1,  */
+    /** IonToleranceTableSequence, 0x300A03A0, SQ, 1 */
     extern DICOM_EXPORT const tag IonToleranceTableSequence;
-    /** IonWedgePositionSequence, (300A,03AC), SQ, 1,  */
+    /** IonWedgePositionSequence, 0x300A03AC, SQ, 1 */
     extern DICOM_EXPORT const tag IonWedgePositionSequence;
-    /** IonWedgeSequence, (300A,03AA), SQ, 1,  */
+    /** IonWedgeSequence, 0x300A03AA, SQ, 1 */
     extern DICOM_EXPORT const tag IonWedgeSequence;
-    /** IrradiationEventIdentificationSequence, (0018,9477), SQ, 1,  */
+    /** IrradiationEventIdentificationSequence, 0x00189477, SQ, 1 */
     extern DICOM_EXPORT const tag IrradiationEventIdentificationSequence;
-    /** IrradiationEventUID, (0008,3010), UI, 1,  */
+    /** IrradiationEventUID, 0x00083010, UI, 1 */
     extern DICOM_EXPORT const tag IrradiationEventUID;
-    /** IsocenterPosition, (300A,012C), DS, 3,  */
+    /** IsocenterPosition, 0x300A012C, DS, 3 */
     extern DICOM_EXPORT const tag IsocenterPosition;
-    /** IsocenterReferenceSystemSequence, (0018,9462), SQ, 1,  */
+    /** IsocenterReferenceSystemSequence, 0x00189462, SQ, 1 */
     extern DICOM_EXPORT const tag IsocenterReferenceSystemSequence;
-    /** IsocenterToBeamLimitingDeviceDistance, (300A,00BB), FL, 1,  */
+    /** IsocenterToBeamLimitingDeviceDistance, 0x300A00BB, FL, 1 */
     extern DICOM_EXPORT const tag IsocenterToBeamLimitingDeviceDistance;
-    /** IsocenterToBlockTrayDistance, (300A,00F7), FL, 1,  */
+    /** IsocenterToBlockTrayDistance, 0x300A00F7, FL, 1 */
     extern DICOM_EXPORT const tag IsocenterToBlockTrayDistance;
-    /** IsocenterToCompensatorDistances, (300A,02E6), FL, 1-n,  */
+    /** IsocenterToCompensatorDistances, 0x300A02E6, FL, 1 */
     extern DICOM_EXPORT const tag IsocenterToCompensatorDistances;
-    /** IsocenterToCompensatorTrayDistance, (300A,02E4), FL, 1,  */
+    /** IsocenterToCompensatorTrayDistance, 0x300A02E4, FL, 1 */
     extern DICOM_EXPORT const tag IsocenterToCompensatorTrayDistance;
-    /** IsocenterToLateralSpreadingDeviceDistance, (300A,0374), FL, 1,  */
+    /** IsocenterToLateralSpreadingDeviceDistance, 0x300A0374, FL, 1 */
     extern DICOM_EXPORT const tag IsocenterToLateralSpreadingDeviceDistance;
-    /** IsocenterToRangeModulatorDistance, (300A,038A), FL, 1,  */
+    /** IsocenterToRangeModulatorDistance, 0x300A038A, FL, 1 */
     extern DICOM_EXPORT const tag IsocenterToRangeModulatorDistance;
-    /** IsocenterToRangeShifterDistance, (300A,0364), FL, 1,  */
+    /** IsocenterToRangeShifterDistance, 0x300A0364, FL, 1 */
     extern DICOM_EXPORT const tag IsocenterToRangeShifterDistance;
-    /** IsocenterToWedgeTrayDistance, (300A,00D9), FL, 1,  */
+    /** IsocenterToWedgeTrayDistance, 0x300A00D9, FL, 1 */
     extern DICOM_EXPORT const tag IsocenterToWedgeTrayDistance;
-    /** IsotopeNumber, (0020,0014), IS, 1, RET */
+    /** IsotopeNumber, 0x00200014, IS, 1, RET */
     extern DICOM_EXPORT const tag IsotopeNumber;
-    /** IssueDateOfImagingServiceRequest, (0040,2004), DA, 1,  */
+    /** IssueDateOfImagingServiceRequest, 0x00402004, DA, 1 */
     extern DICOM_EXPORT const tag IssueDateOfImagingServiceRequest;
-    /** IssuerOfAccessionNumberSequence, (0008,0051), SQ, 1,  */
+    /** IssuerOfAccessionNumberSequence, 0x00080051, SQ, 1 */
     extern DICOM_EXPORT const tag IssuerOfAccessionNumberSequence;
-    /** IssuerOfAdmissionID, (0038,0011), LO, 1, RET */
+    /** IssuerOfAdmissionID, 0x00380011, LO, 1, RET */
     extern DICOM_EXPORT const tag IssuerOfAdmissionID;
-    /** IssuerOfAdmissionIDSequence, (0038,0014), SQ, 1,  */
+    /** IssuerOfAdmissionIDSequence, 0x00380014, SQ, 1 */
     extern DICOM_EXPORT const tag IssuerOfAdmissionIDSequence;
-    /** IssuerOfPatientID, (0010,0021), LO, 1,  */
+    /** IssuerOfPatientID, 0x00100021, LO, 1 */
     extern DICOM_EXPORT const tag IssuerOfPatientID;
-    /** IssuerOfPatientIDQualifiersSequence, (0010,0024), SQ, 1,  */
+    /** IssuerOfPatientIDQualifiersSequence, 0x00100024, SQ, 1 */
     extern DICOM_EXPORT const tag IssuerOfPatientIDQualifiersSequence;
-    /** IssuerOfServiceEpisodeID, (0038,0061), LO, 1, RET */
+    /** IssuerOfServiceEpisodeID, 0x00380061, LO, 1, RET */
     extern DICOM_EXPORT const tag IssuerOfServiceEpisodeID;
-    /** IssuerOfServiceEpisodeIDSequence, (0038,0064), SQ, 1,  */
+    /** IssuerOfServiceEpisodeIDSequence, 0x00380064, SQ, 1 */
     extern DICOM_EXPORT const tag IssuerOfServiceEpisodeIDSequence;
-    /** IssuerOfTheContainerIdentifierSequence, (0040,0513), SQ, 1,  */
+    /** IssuerOfTheContainerIdentifierSequence, 0x00400513, SQ, 1 */
     extern DICOM_EXPORT const tag IssuerOfTheContainerIdentifierSequence;
-    /** IssuerOfTheSpecimenIdentifierSequence, (0040,0562), SQ, 1,  */
+    /** IssuerOfTheSpecimenIdentifierSequence, 0x00400562, SQ, 1 */
     extern DICOM_EXPORT const tag IssuerOfTheSpecimenIdentifierSequence;
-    /** IssueTimeOfImagingServiceRequest, (0040,2005), TM, 1,  */
+    /** IssueTimeOfImagingServiceRequest, 0x00402005, TM, 1 */
     extern DICOM_EXPORT const tag IssueTimeOfImagingServiceRequest;
-    /** Italic, (0070,0250), CS, 1,  */
+    /** Italic, 0x00700250, CS, 1 */
     extern DICOM_EXPORT const tag Italic;
-    /** ItemNumber, (0020,0019), IS, 1,  */
+    /** ItemNumber, 0x00200019, IS, 1 */
     extern DICOM_EXPORT const tag ItemNumber;
-    /** IterativeReconstructionMethod, (0018,9769), CS, 1,  */
+    /** IterativeReconstructionMethod, 0x00189769, CS, 1 */
     extern DICOM_EXPORT const tag IterativeReconstructionMethod;
-    /** ItineraryID, (4010,1051), LO, 1,  */
+    /** ItineraryID, 0x40101051, LO, 1, RET */
     extern DICOM_EXPORT const tag ItineraryID;
-    /** ItineraryIDAssigningAuthority, (4010,1053), LO, 1,  */
+    /** ItineraryIDAssigningAuthority, 0x40101053, LO, 1, RET */
     extern DICOM_EXPORT const tag ItineraryIDAssigningAuthority;
-    /** ItineraryIDType, (4010,1052), SH, 1,  */
+    /** ItineraryIDType, 0x40101052, SH, 1, RET */
     extern DICOM_EXPORT const tag ItineraryIDType;
-    /** IVUSAcquisition, (0018,3100), CS, 1,  */
+    /** IVUSAcquisition, 0x00183100, CS, 1 */
     extern DICOM_EXPORT const tag IVUSAcquisition;
-    /** IVUSGatedRate, (0018,3102), DS, 1,  */
+    /** IVUSGatedRate, 0x00183102, DS, 1 */
     extern DICOM_EXPORT const tag IVUSGatedRate;
-    /** IVUSPullbackRate, (0018,3101), DS, 1,  */
+    /** IVUSPullbackRate, 0x00183101, DS, 1 */
     extern DICOM_EXPORT const tag IVUSPullbackRate;
-    /** IVUSPullbackStartFrameNumber, (0018,3103), IS, 1,  */
+    /** IVUSPullbackStartFrameNumber, 0x00183103, IS, 1 */
     extern DICOM_EXPORT const tag IVUSPullbackStartFrameNumber;
-    /** IVUSPullbackStopFrameNumber, (0018,3104), IS, 1,  */
+    /** IVUSPullbackStopFrameNumber, 0x00183104, IS, 1 */
     extern DICOM_EXPORT const tag IVUSPullbackStopFrameNumber;
-    /** KeratometerIndex, (0022,1033), FL, 1,  */
+    /** KeratoconusPredictionIndex, 0x00460236, FL, 1 */
+    extern DICOM_EXPORT const tag KeratoconusPredictionIndex;
+    /** KeratometerIndex, 0x00221033, FL, 1 */
     extern DICOM_EXPORT const tag KeratometerIndex;
-    /** KeratometricAxis, (0046,0077), FD, 1,  */
+    /** KeratometricAxis, 0x00460077, FD, 1 */
     extern DICOM_EXPORT const tag KeratometricAxis;
-    /** KeratometricPower, (0046,0076), FD, 1,  */
+    /** KeratometricPower, 0x00460076, FD, 1 */
     extern DICOM_EXPORT const tag KeratometricPower;
-    /** KeratometryLeftEyeSequence, (0046,0071), SQ, 1,  */
+    /** KeratometryLeftEyeSequence, 0x00460071, SQ, 1 */
     extern DICOM_EXPORT const tag KeratometryLeftEyeSequence;
-    /** KeratometryMeasurementTypeCodeSequence, (0022,1096), SQ, 1,  */
+    /** KeratometryMeasurementTypeCodeSequence, 0x00221096, SQ, 1 */
     extern DICOM_EXPORT const tag KeratometryMeasurementTypeCodeSequence;
-    /** KeratometryRightEyeSequence, (0046,0070), SQ, 1,  */
+    /** KeratometryRightEyeSequence, 0x00460070, SQ, 1 */
     extern DICOM_EXPORT const tag KeratometryRightEyeSequence;
-    /** KSpaceFiltering, (0018,9064), CS, 1,  */
+    /** KSpaceFiltering, 0x00189064, CS, 1 */
     extern DICOM_EXPORT const tag KSpaceFiltering;
-    /** KVP, (0018,0060), DS, 1,  */
+    /** KVP, 0x00180060, DS, 1 */
     extern DICOM_EXPORT const tag KVP;
-    /** KVUsedInGainCalibration, (0014,3071), DS, 1,  */
+    /** KVUsedInGainCalibration, 0x00143071, DS, 1, RET */
     extern DICOM_EXPORT const tag KVUsedInGainCalibration;
-    /** LabelStyleSelection, (2200,0003), CS, 1,  */
+    /** LabelStyleSelection, 0x22000003, CS, 1 */
     extern DICOM_EXPORT const tag LabelStyleSelection;
-    /** LabelText, (2200,0002), UT, 1,  */
+    /** LabelText, 0x22000002, UT, 1 */
     extern DICOM_EXPORT const tag LabelText;
-    /** LabelUsingInformationExtractedFromInstances, (2200,0001), CS, 1,  */
+    /** LabelUsingInformationExtractedFromInstances, 0x22000001, CS, 1 */
     extern DICOM_EXPORT const tag LabelUsingInformationExtractedFromInstances;
-    /** LanguageCodeSequence, (0008,0006), SQ, 1,  */
+    /** LanguageCodeSequence, 0x00080006, SQ, 1 */
     extern DICOM_EXPORT const tag LanguageCodeSequence;
-    /** LanguageCodeSequenceTrial, (0040,A744), SQ, 1, RET */
+    /** LanguageCodeSequenceTrial, 0x0040A744, SQ, 1, RET */
     extern DICOM_EXPORT const tag LanguageCodeSequenceTrial;
-    /** LargeBluePaletteColorLookupTableData, (0028,1213), OW, 1, RET */
+    /** LargeBluePaletteColorLookupTableData, 0x00281213, OW, 1, RET */
     extern DICOM_EXPORT const tag LargeBluePaletteColorLookupTableData;
-    /** LargeBluePaletteColorLookupTableDescriptor, (0028,1113), US or SS, 4, RET */
+    /** LargeBluePaletteColorLookupTableDescriptor, 0x00281113, US or SS, 4, RET */
     extern DICOM_EXPORT const tag LargeBluePaletteColorLookupTableDescriptor;
-    /** LargeGreenPaletteColorLookupTableData, (0028,1212), OW, 1, RET */
+    /** LargeGreenPaletteColorLookupTableData, 0x00281212, OW, 1, RET */
     extern DICOM_EXPORT const tag LargeGreenPaletteColorLookupTableData;
-    /** LargeGreenPaletteColorLookupTableDescriptor, (0028,1112), US or SS, 4, RET */
+    /** LargeGreenPaletteColorLookupTableDescriptor, 0x00281112, US or SS, 4, RET */
     extern DICOM_EXPORT const tag LargeGreenPaletteColorLookupTableDescriptor;
-    /** LargePaletteColorLookupTableUID, (0028,1214), UI, 1, RET */
+    /** LargePaletteColorLookupTableUID, 0x00281214, UI, 1, RET */
     extern DICOM_EXPORT const tag LargePaletteColorLookupTableUID;
-    /** LargeRedPaletteColorLookupTableData, (0028,1211), OW, 1, RET */
+    /** LargeRedPaletteColorLookupTableData, 0x00281211, OW, 1, RET */
     extern DICOM_EXPORT const tag LargeRedPaletteColorLookupTableData;
-    /** LargeRedPaletteColorLookupTableDescriptor, (0028,1111), US or SS, 4, RET */
+    /** LargeRedPaletteColorLookupTableDescriptor, 0x00281111, US or SS, 4, RET */
     extern DICOM_EXPORT const tag LargeRedPaletteColorLookupTableDescriptor;
-    /** LargestImagePixelValue, (0028,0107), US or SS, 1,  */
+    /** LargestImagePixelValue, 0x00280107, US or SS, 1 */
     extern DICOM_EXPORT const tag LargestImagePixelValue;
-    /** LargestImagePixelValueInPlane, (0028,0111), US or SS, 1, RET */
+    /** LargestImagePixelValueInPlane, 0x00280111, US or SS, 1, RET */
     extern DICOM_EXPORT const tag LargestImagePixelValueInPlane;
-    /** LargestMonochromePixelValue, (0028,9099), US, 1, RET */
+    /** LargestMonochromePixelValue, 0x00289099, US, 1, RET */
     extern DICOM_EXPORT const tag LargestMonochromePixelValue;
-    /** LargestPixelValueInSeries, (0028,0109), US or SS, 1,  */
+    /** LargestPixelValueInSeries, 0x00280109, US or SS, 1 */
     extern DICOM_EXPORT const tag LargestPixelValueInSeries;
-    /** LargestValidPixelValue, (0028,0105), US or SS, 1, RET */
+    /** LargestValidPixelValue, 0x00280105, US or SS, 1, RET */
     extern DICOM_EXPORT const tag LargestValidPixelValue;
-    /** LastMenstrualDate, (0010,21D0), DA, 1,  */
+    /** LastMenstrualDate, 0x001021D0, DA, 1 */
     extern DICOM_EXPORT const tag LastMenstrualDate;
-    /** Laterality, (0020,0060), CS, 1,  */
+    /** Laterality, 0x00200060, CS, 1 */
     extern DICOM_EXPORT const tag Laterality;
-    /** LateralSpreadingDeviceDescription, (300A,033A), LO, 1,  */
+    /** LateralSpreadingDeviceDescription, 0x300A033A, LO, 1 */
     extern DICOM_EXPORT const tag LateralSpreadingDeviceDescription;
-    /** LateralSpreadingDeviceID, (300A,0336), SH, 1,  */
+    /** LateralSpreadingDeviceID, 0x300A0336, SH, 1 */
     extern DICOM_EXPORT const tag LateralSpreadingDeviceID;
-    /** LateralSpreadingDeviceNumber, (300A,0334), IS, 1,  */
+    /** LateralSpreadingDeviceNumber, 0x300A0334, IS, 1 */
     extern DICOM_EXPORT const tag LateralSpreadingDeviceNumber;
-    /** LateralSpreadingDeviceSequence, (300A,0332), SQ, 1,  */
+    /** LateralSpreadingDeviceSequence, 0x300A0332, SQ, 1 */
     extern DICOM_EXPORT const tag LateralSpreadingDeviceSequence;
-    /** LateralSpreadingDeviceSetting, (300A,0372), LO, 1,  */
+    /** LateralSpreadingDeviceSetting, 0x300A0372, LO, 1 */
     extern DICOM_EXPORT const tag LateralSpreadingDeviceSetting;
-    /** LateralSpreadingDeviceSettingsSequence, (300A,0370), SQ, 1,  */
+    /** LateralSpreadingDeviceSettingsSequence, 0x300A0370, SQ, 1 */
     extern DICOM_EXPORT const tag LateralSpreadingDeviceSettingsSequence;
-    /** LateralSpreadingDeviceType, (300A,0338), CS, 1,  */
+    /** LateralSpreadingDeviceType, 0x300A0338, CS, 1 */
     extern DICOM_EXPORT const tag LateralSpreadingDeviceType;
-    /** LateralSpreadingDeviceWaterEquivalentThickness, (300A,033C), FL, 1,  */
+    /** LateralSpreadingDeviceWaterEquivalentThickness, 0x300A033C, FL, 1 */
     extern DICOM_EXPORT const tag LateralSpreadingDeviceWaterEquivalentThickness;
-    /** LeafJawPositions, (300A,011C), DS, 2-2n,  */
+    /** LeafJawPositions, 0x300A011C, DS, 2 */
     extern DICOM_EXPORT const tag LeafJawPositions;
-    /** LeafPositionBoundaries, (300A,00BE), DS, 3-n,  */
+    /** LeafPositionBoundaries, 0x300A00BE, DS, 3 */
     extern DICOM_EXPORT const tag LeafPositionBoundaries;
-    /** LeftImageSequence, (0022,0021), SQ, 1,  */
+    /** LeftImageSequence, 0x00220021, SQ, 1 */
     extern DICOM_EXPORT const tag LeftImageSequence;
-    /** LeftLensSequence, (0046,0015), SQ, 1,  */
+    /** LeftLensSequence, 0x00460015, SQ, 1 */
     extern DICOM_EXPORT const tag LeftLensSequence;
-    /** LengthToEnd, (0008,0001), UL, 1, RET */
+    /** LengthToEnd, 0x00080001, UL, 1, RET */
     extern DICOM_EXPORT const tag LengthToEnd;
-    /** LensConstantDescription, (0022,1094), LO, 1,  */
+    /** LensConstantDescription, 0x00221094, LO, 1, RET */
     extern DICOM_EXPORT const tag LensConstantDescription;
-    /** LensConstantSequence, (0022,1092), SQ, 1,  */
+    /** LensConstantSequence, 0x00221092, SQ, 1 */
     extern DICOM_EXPORT const tag LensConstantSequence;
-    /** LensDescription, (0046,0012), LO, 1,  */
+    /** LensDescription, 0x00460012, LO, 1 */
     extern DICOM_EXPORT const tag LensDescription;
-    /** LensesCodeSequence, (0022,0019), SQ, 1,  */
+    /** LensesCodeSequence, 0x00220019, SQ, 1 */
     extern DICOM_EXPORT const tag LensesCodeSequence;
-    /** LensSegmentType, (0046,0038), CS, 1,  */
+    /** LensSegmentType, 0x00460038, CS, 1 */
     extern DICOM_EXPORT const tag LensSegmentType;
-    /** LensStatusCodeSequence, (0022,1024), SQ, 1,  */
+    /** LensStatusCodeSequence, 0x00221024, SQ, 1 */
     extern DICOM_EXPORT const tag LensStatusCodeSequence;
-    /** LensStatusDescription, (0022,1065), LO, 1,  */
+    /** LensStatusDescription, 0x00221065, LO, 1 */
     extern DICOM_EXPORT const tag LensStatusDescription;
-    /** LensThickness, (0022,1130), FL, 1,  */
+    /** LensThickness, 0x00221130, FL, 1 */
     extern DICOM_EXPORT const tag LensThickness;
-    /** LensThicknessSequence, (0022,1127), SQ, 1,  */
+    /** LensThicknessSequence, 0x00221127, SQ, 1 */
     extern DICOM_EXPORT const tag LensThicknessSequence;
-    /** LesionNumber, (0018,3105), IS, 1-n,  */
+    /** LesionNumber, 0x00183105, IS, 1 */
     extern DICOM_EXPORT const tag LesionNumber;
-    /** LightPathFilterPassBand, (0022,0002), US, 2,  */
+    /** LightDirection, 0x00701703, FD, 3 */
+    extern DICOM_EXPORT const tag LightDirection;
+    /** LightPathFilterPassBand, 0x00220002, US, 2 */
     extern DICOM_EXPORT const tag LightPathFilterPassBand;
-    /** LightPathFilterPassThroughWavelength, (0022,0001), US, 1,  */
+    /** LightPathFilterPassThroughWavelength, 0x00220001, US, 1 */
     extern DICOM_EXPORT const tag LightPathFilterPassThroughWavelength;
-    /** LightPathFilterTypeStackCodeSequence, (0022,0017), SQ, 1,  */
+    /** LightPathFilterTypeStackCodeSequence, 0x00220017, SQ, 1 */
     extern DICOM_EXPORT const tag LightPathFilterTypeStackCodeSequence;
-    /** LINACEnergy, (0014,5002), IS, 1,  */
+    /** LINACEnergy, 0x00145002, IS, 1, RET */
     extern DICOM_EXPORT const tag LINACEnergy;
-    /** LINACOutput, (0014,5004), IS, 1,  */
+    /** LINACOutput, 0x00145004, IS, 1, RET */
     extern DICOM_EXPORT const tag LINACOutput;
-    /** LineDashingStyle, (0070,0254), CS, 1,  */
+    /** LineDashingStyle, 0x00700254, CS, 1 */
     extern DICOM_EXPORT const tag LineDashingStyle;
-    /** LinePattern, (0070,0255), UL, 1,  */
+    /** LinePattern, 0x00700255, UL, 1 */
     extern DICOM_EXPORT const tag LinePattern;
-    /** LineSequence, (0066,0028), SQ, 1,  */
+    /** LineSequence, 0x00660028, SQ, 1 */
     extern DICOM_EXPORT const tag LineSequence;
-    /** LineStyleSequence, (0070,0232), SQ, 1,  */
+    /** LineStyleSequence, 0x00700232, SQ, 1 */
     extern DICOM_EXPORT const tag LineStyleSequence;
-    /** LineThickness, (0070,0253), FL, 1,  */
+    /** LineThickness, 0x00700253, FL, 1 */
     extern DICOM_EXPORT const tag LineThickness;
-    /** ListOfMIMETypes, (0042,0014), LO, 1-n,  */
+    /** ListOfMIMETypes, 0x00420014, LO, 1 */
     extern DICOM_EXPORT const tag ListOfMIMETypes;
-    /** LocalDeviationProbabilityNormalsFlag, (0024,0072), CS, 1,  */
+    /** LocalDeviationProbabilityNormalsFlag, 0x00240072, CS, 1 */
     extern DICOM_EXPORT const tag LocalDeviationProbabilityNormalsFlag;
-    /** LocalizedDeviationfromNormal, (0024,0068), FL, 1,  */
-    extern DICOM_EXPORT const tag LocalizedDeviationfromNormal;
-    /** LocalizedDeviationProbability, (0024,0073), FL, 1,  */
+    /** LocalizedDeviationFromNormal, 0x00240068, FL, 1 */
+    extern DICOM_EXPORT const tag LocalizedDeviationFromNormal;
+    /** LocalizedDeviationProbability, 0x00240073, FL, 1 */
     extern DICOM_EXPORT const tag LocalizedDeviationProbability;
-    /** LocalizedDeviationProbabilitySequence, (0024,0085), SQ, 1,  */
+    /** LocalizedDeviationProbabilitySequence, 0x00240085, SQ, 1 */
     extern DICOM_EXPORT const tag LocalizedDeviationProbabilitySequence;
-    /** LocalNamespaceEntityID, (0040,0031), UT, 1,  */
+    /** LocalizingCursorPosition, 0x00182043, FL, 2 */
+    extern DICOM_EXPORT const tag LocalizingCursorPosition;
+    /** LocalNamespaceEntityID, 0x00400031, UT, 1 */
     extern DICOM_EXPORT const tag LocalNamespaceEntityID;
-    /** Location, (0020,0050), DS, 1, RET */
+    /** Location, 0x00200050, DS, 1, RET */
     extern DICOM_EXPORT const tag Location;
-    /** LocationOfMeasuredBeamDiameter, (0014,4019), DS, 1,  */
+    /** LocationOfMeasuredBeamDiameter, 0x00144019, DS, 1, RET */
     extern DICOM_EXPORT const tag LocationOfMeasuredBeamDiameter;
-    /** LongitudinalTemporalInformationModified, (0028,0303), CS, 1,  */
+    /** LongCodeValue, 0x00080119, UC, 1 */
+    extern DICOM_EXPORT const tag LongCodeValue;
+    /** LongEdgePointIndexList, 0x00660042, OL, 1 */
+    extern DICOM_EXPORT const tag LongEdgePointIndexList;
+    /** LongitudinalTemporalEventType, 0x00120053, CS, 1 */
+    extern DICOM_EXPORT const tag LongitudinalTemporalEventType;
+    /** LongitudinalTemporalInformationModified, 0x00280303, CS, 1 */
     extern DICOM_EXPORT const tag LongitudinalTemporalInformationModified;
-    /** LossyImageCompression, (0028,2110), CS, 1,  */
+    /** LongitudinalTemporalOffsetFromEvent, 0x00120052, FD, 1 */
+    extern DICOM_EXPORT const tag LongitudinalTemporalOffsetFromEvent;
+    /** LongPrimitivePointIndexList, 0x00660040, OL, 1 */
+    extern DICOM_EXPORT const tag LongPrimitivePointIndexList;
+    /** LongTrianglePointIndexList, 0x00660041, OL, 1 */
+    extern DICOM_EXPORT const tag LongTrianglePointIndexList;
+    /** LongVertexPointIndexList, 0x00660043, OL, 1 */
+    extern DICOM_EXPORT const tag LongVertexPointIndexList;
+    /** LossyImageCompression, 0x00282110, CS, 1 */
     extern DICOM_EXPORT const tag LossyImageCompression;
-    /** LossyImageCompressionMethod, (0028,2114), CS, 1-n,  */
+    /** LossyImageCompressionMethod, 0x00282114, CS, 1 */
     extern DICOM_EXPORT const tag LossyImageCompressionMethod;
-    /** LossyImageCompressionRatio, (0028,2112), DS, 1-n,  */
+    /** LossyImageCompressionRatio, 0x00282112, DS, 1 */
     extern DICOM_EXPORT const tag LossyImageCompressionRatio;
-    /** LossyImageCompressionRetired, (0008,2110), CS, 1, RET */
+    /** LossyImageCompressionRetired, 0x00082110, CS, 1, RET */
     extern DICOM_EXPORT const tag LossyImageCompressionRetired;
-    /** LowEnergyDetectors, (4010,0001), CS, 1,  */
+    /** LowEnergyDetectors, 0x40100001, CS, 1, RET */
     extern DICOM_EXPORT const tag LowEnergyDetectors;
-    /** LowRRValue, (0018,1081), IS, 1,  */
+    /** LowRRValue, 0x00181081, IS, 1 */
     extern DICOM_EXPORT const tag LowRRValue;
-    /** LUTData, (0028,3006), US or OW, 1-n1,  */
+    /** LuminanceCharacteristicsID, 0x00287009, US, 1 */
+    extern DICOM_EXPORT const tag LuminanceCharacteristicsID;
+    /** LuminanceResponseDescription, 0x00287020, LO, 1 */
+    extern DICOM_EXPORT const tag LuminanceResponseDescription;
+    /** LuminanceResponseSequence, 0x0028701C, SQ, 1 */
+    extern DICOM_EXPORT const tag LuminanceResponseSequence;
+    /** LuminanceResultSequence, 0x00287024, SQ, 1 */
+    extern DICOM_EXPORT const tag LuminanceResultSequence;
+    /** LuminanceUniformityResultSequence, 0x00287027, SQ, 1 */
+    extern DICOM_EXPORT const tag LuminanceUniformityResultSequence;
+    /** LuminanceValue, 0x0028701F, FL, 1 */
+    extern DICOM_EXPORT const tag LuminanceValue;
+    /** LUTData, 0x00283006, US or OW, 1 */
     extern DICOM_EXPORT const tag LUTData;
-    /** LUTDescriptor, (0028,3002), US or SS, 3,  */
+    /** LUTDescriptor, 0x00283002, US or SS, 3 */
     extern DICOM_EXPORT const tag LUTDescriptor;
-    /** LUTExplanation, (0028,3003), LO, 1,  */
+    /** LUTExplanation, 0x00283003, LO, 1 */
     extern DICOM_EXPORT const tag LUTExplanation;
-    /** LUTFrameRange, (0028,9507), US, 2-2n,  */
+    /** LUTFrameRange, 0x00289507, US, 2 */
     extern DICOM_EXPORT const tag LUTFrameRange;
-    /** LUTFunction, (0028,9474), CS, 1,  */
+    /** LUTFunction, 0x00289474, CS, 1 */
     extern DICOM_EXPORT const tag LUTFunction;
-    /** LUTLabel, (0040,9210), SH, 1,  */
+    /** LUTLabel, 0x00409210, SH, 1 */
     extern DICOM_EXPORT const tag LUTLabel;
-    /** LUTNumber, (0020,0026), IS, 1, RET */
+    /** LUTNumber, 0x00200026, IS, 1, RET */
     extern DICOM_EXPORT const tag LUTNumber;
-    /** MAC, (0400,0404), OB, 1,  */
+    /** MAC, 0x04000404, OB, 1 */
     extern DICOM_EXPORT const tag MAC;
-    /** MACAlgorithm, (0400,0015), CS, 1,  */
+    /** MACAlgorithm, 0x04000015, CS, 1 */
     extern DICOM_EXPORT const tag MACAlgorithm;
-    /** MACCalculationTransferSyntaxUID, (0400,0010), UI, 1,  */
+    /** MACCalculationTransferSyntaxUID, 0x04000010, UI, 1 */
     extern DICOM_EXPORT const tag MACCalculationTransferSyntaxUID;
-    /** MACIDNumber, (0400,0005), US, 1,  */
+    /** MACIDNumber, 0x04000005, US, 1 */
     extern DICOM_EXPORT const tag MACIDNumber;
-    /** MACParametersSequence, (4FFE,0001), SQ, 1,  */
+    /** MACParametersSequence, 0x4FFE0001, SQ, 1 */
     extern DICOM_EXPORT const tag MACParametersSequence;
-    /** MagneticFieldStrength, (0018,0087), DS, 1,  */
+    /** MagneticFieldStrength, 0x00180087, DS, 1 */
     extern DICOM_EXPORT const tag MagneticFieldStrength;
-    /** MagnetizationTransfer, (0018,9020), CS, 1,  */
+    /** MagnetizationTransfer, 0x00189020, CS, 1 */
     extern DICOM_EXPORT const tag MagnetizationTransfer;
-    /** MagnificationType, (2010,0060), CS, 1,  */
+    /** MagnificationType, 0x20100060, CS, 1 */
     extern DICOM_EXPORT const tag MagnificationType;
-    /** MagnifyToNumberOfColumns, (2040,0074), US, 1, RET */
+    /** MagnifyToNumberOfColumns, 0x20400074, US, 1, RET */
     extern DICOM_EXPORT const tag MagnifyToNumberOfColumns;
-    /** MajorTicksSequence, (0070,0287), SQ, 1,  */
+    /** MainLobeAngle, 0x00145103, DS, 1, RET */
+    extern DICOM_EXPORT const tag MainLobeAngle;
+    /** MainRoofAngle, 0x00145104, DS, 1, RET */
+    extern DICOM_EXPORT const tag MainRoofAngle;
+    /** MajorTicksSequence, 0x00700287, SQ, 1 */
     extern DICOM_EXPORT const tag MajorTicksSequence;
-    /** MandatoryComponentType, (0076,0038), CS, 1,  */
+    /** MandatoryComponentType, 0x00760038, CS, 1 */
     extern DICOM_EXPORT const tag MandatoryComponentType;
-    /** Manifold, (0066,0010), CS, 1,  */
+    /** Manifold, 0x00660010, CS, 1 */
     extern DICOM_EXPORT const tag Manifold;
-    /** ManipulatedImage, (0028,0050), LO, 1-n, RET */
+    /** ManipulatedImage, 0x00280050, LO, 1, RET */
     extern DICOM_EXPORT const tag ManipulatedImage;
-    /** Manufacturer, (0008,0070), LO, 1,  */
+    /** Manufacturer, 0x00080070, LO, 1 */
     extern DICOM_EXPORT const tag Manufacturer;
-    /** ManufacturerModelName, (0008,1090), LO, 1,  */
+    /** ManufacturerModelName, 0x00081090, LO, 1 */
     extern DICOM_EXPORT const tag ManufacturerModelName;
-    /** MappingResource, (0008,0105), CS, 1,  */
+    /** ManufacturerRelatedModelGroup, 0x00080222, LO, 1 */
+    extern DICOM_EXPORT const tag ManufacturerRelatedModelGroup;
+    /** MappedPixelValue, 0x00221452, US or SS, 1 */
+    extern DICOM_EXPORT const tag MappedPixelValue;
+    /** MappingResource, 0x00080105, CS, 1 */
     extern DICOM_EXPORT const tag MappingResource;
-    /** MaskFrameNumbers, (0028,6110), US, 1-n,  */
+    /** MappingResourceIdentificationSequence, 0x00080124, SQ, 1 */
+    extern DICOM_EXPORT const tag MappingResourceIdentificationSequence;
+    /** MappingResourceName, 0x00080122, LO, 1 */
+    extern DICOM_EXPORT const tag MappingResourceName;
+    /** MappingResourceUID, 0x00080118, UI, 1 */
+    extern DICOM_EXPORT const tag MappingResourceUID;
+    /** MaskFrameNumbers, 0x00286110, US, 1 */
     extern DICOM_EXPORT const tag MaskFrameNumbers;
-    /** MaskingImage, (0020,0080), CS, 1-n, RET */
+    /** MaskingImage, 0x00200080, CS, 1, RET */
     extern DICOM_EXPORT const tag MaskingImage;
-    /** MaskOperation, (0028,6101), CS, 1,  */
+    /** MaskOperation, 0x00286101, CS, 1 */
     extern DICOM_EXPORT const tag MaskOperation;
-    /** MaskOperationExplanation, (0028,6190), ST, 1,  */
+    /** MaskOperationExplanation, 0x00286190, ST, 1 */
     extern DICOM_EXPORT const tag MaskOperationExplanation;
-    /** MaskPointers, (0028,6030), US, 1-n, RET */
+    /** MaskPointers, 0x00286030, US, 1, RET */
     extern DICOM_EXPORT const tag MaskPointers;
-    /** MaskSelectionMode, (0028,9454), CS, 1,  */
+    /** MaskSelectionMode, 0x00289454, CS, 1 */
     extern DICOM_EXPORT const tag MaskSelectionMode;
-    /** MaskSubPixelShift, (0028,6114), FL, 2,  */
+    /** MaskSubPixelShift, 0x00286114, FL, 2 */
     extern DICOM_EXPORT const tag MaskSubPixelShift;
-    /** MaskSubtractionSequence, (0028,6100), SQ, 1,  */
+    /** MaskSubtractionSequence, 0x00286100, SQ, 1 */
     extern DICOM_EXPORT const tag MaskSubtractionSequence;
-    /** MaskVisibilityPercentage, (0028,9478), FL, 1,  */
+    /** MaskVisibilityPercentage, 0x00289478, FL, 1 */
     extern DICOM_EXPORT const tag MaskVisibilityPercentage;
-    /** Mass, (4010,1017), FL, 1,  */
+    /** Mass, 0x40101017, FL, 1, RET */
     extern DICOM_EXPORT const tag Mass;
-    /** MaterialGrade, (0014,0042), ST, 1-n,  */
+    /** MaterialGrade, 0x00140042, ST, 1, RET */
     extern DICOM_EXPORT const tag MaterialGrade;
-    /** MaterialID, (300A,00E1), SH, 1,  */
+    /** MaterialID, 0x300A00E1, SH, 1 */
     extern DICOM_EXPORT const tag MaterialID;
-    /** MaterialIsolationDiameter, (0014,0034), DS, 1-n,  */
+    /** MaterialIsolationDiameter, 0x00140034, DS, 1, RET */
     extern DICOM_EXPORT const tag MaterialIsolationDiameter;
-    /** MaterialNotes, (0014,0046), LT, 1,  */
+    /** MaterialNotes, 0x00140046, LT, 1, RET */
     extern DICOM_EXPORT const tag MaterialNotes;
-    /** MaterialPipeDiameter, (0014,0032), DS, 1-n,  */
+    /** MaterialPipeDiameter, 0x00140032, DS, 1, RET */
     extern DICOM_EXPORT const tag MaterialPipeDiameter;
-    /** MaterialPropertiesFileFormat, (0014,0045), ST, 1-n,  */
-    extern DICOM_EXPORT const tag MaterialPropertiesFileFormat;
-    /** MaterialPropertiesFileID, (0014,0044), ST, 1-n,  */
-    extern DICOM_EXPORT const tag MaterialPropertiesFileID;
-    /** MaterialsCodeSequence, (0068,63A0), SQ, 1,  */
+    /** MaterialPropertiesDescription, 0x00140044, ST, 1, RET */
+    extern DICOM_EXPORT const tag MaterialPropertiesDescription;
+    /** MaterialPropertiesFileFormatRetired, 0x00140045, ST, 1, RET */
+    extern DICOM_EXPORT const tag MaterialPropertiesFileFormatRetired;
+    /** MaterialsCodeSequence, 0x006863A0, SQ, 1 */
     extern DICOM_EXPORT const tag MaterialsCodeSequence;
-    /** MaterialThickness, (0014,0030), DS, 1-n,  */
+    /** MaterialThickness, 0x00140030, DS, 1, RET */
     extern DICOM_EXPORT const tag MaterialThickness;
-    /** MatingFeatureDegreeOfFreedomSequence, (0068,6400), SQ, 1,  */
+    /** MatingFeatureDegreeOfFreedomSequence, 0x00686400, SQ, 1 */
     extern DICOM_EXPORT const tag MatingFeatureDegreeOfFreedomSequence;
-    /** MatingFeatureID, (0068,63F0), US, 1,  */
+    /** MatingFeatureID, 0x006863F0, US, 1 */
     extern DICOM_EXPORT const tag MatingFeatureID;
-    /** MatingFeatureSequence, (0068,63E0), SQ, 1,  */
+    /** MatingFeatureSequence, 0x006863E0, SQ, 1 */
     extern DICOM_EXPORT const tag MatingFeatureSequence;
-    /** MatingFeatureSetID, (0068,63C0), US, 1,  */
+    /** MatingFeatureSetID, 0x006863C0, US, 1 */
     extern DICOM_EXPORT const tag MatingFeatureSetID;
-    /** MatingFeatureSetLabel, (0068,63D0), LO, 1,  */
+    /** MatingFeatureSetLabel, 0x006863D0, LO, 1 */
     extern DICOM_EXPORT const tag MatingFeatureSetLabel;
-    /** MatingFeatureSetsSequence, (0068,63B0), SQ, 1,  */
+    /** MatingFeatureSetsSequence, 0x006863B0, SQ, 1 */
     extern DICOM_EXPORT const tag MatingFeatureSetsSequence;
-    /** MatrixRegistrationSequence, (0070,0309), SQ, 1,  */
+    /** MatrixRegistrationSequence, 0x00700309, SQ, 1 */
     extern DICOM_EXPORT const tag MatrixRegistrationSequence;
-    /** MatrixSequence, (0070,030A), SQ, 1,  */
+    /** MatrixSequence, 0x0070030A, SQ, 1 */
     extern DICOM_EXPORT const tag MatrixSequence;
-    /** MAUsedInGainCalibration, (0014,3072), DS, 1,  */
+    /** MAUsedInGainCalibration, 0x00143072, DS, 1, RET */
     extern DICOM_EXPORT const tag MAUsedInGainCalibration;
-    /** MaxDensity, (2010,0130), US, 1,  */
+    /** MaxDensity, 0x20100130, US, 1 */
     extern DICOM_EXPORT const tag MaxDensity;
-    /** MaximumAcrossScanDistortion, (0022,0049), FL, 1,  */
+    /** MaximumAcrossScanDistortion, 0x00220049, FL, 1 */
     extern DICOM_EXPORT const tag MaximumAcrossScanDistortion;
-    /** MaximumAlongScanDistortion, (0022,0038), FL, 1,  */
+    /** MaximumAlongScanDistortion, 0x00220038, FL, 1 */
     extern DICOM_EXPORT const tag MaximumAlongScanDistortion;
-    /** MaximumCollatedFilms, (2010,0154), IS, 1,  */
+    /** MaximumCollatedFilms, 0x20100154, IS, 1 */
     extern DICOM_EXPORT const tag MaximumCollatedFilms;
-    /** MaximumCoordinateValue, (50XX,0105), US, 1-n, RET */
-    extern const range_tag MaximumCoordinateValue;
-    /** MaximumDepthDistortion, (0022,0036), FL, 1,  */
+    /** MaximumCoordinateValue, 0x50000105, US, 1, RET */
+    extern DICOM_EXPORT const range_tag MaximumCoordinateValue;
+    /** MaximumCornealCurvature, 0x00460212, FL, 1 */
+    extern DICOM_EXPORT const tag MaximumCornealCurvature;
+    /** MaximumCornealCurvatureLocation, 0x00460213, FL, 2 */
+    extern DICOM_EXPORT const tag MaximumCornealCurvatureLocation;
+    /** MaximumCornealCurvatureSequence, 0x00460211, SQ, 1 */
+    extern DICOM_EXPORT const tag MaximumCornealCurvatureSequence;
+    /** MaximumDepthDistortion, 0x00220036, FL, 1 */
     extern DICOM_EXPORT const tag MaximumDepthDistortion;
-    /** MaximumFractionalValue, (0062,000E), US, 1,  */
+    /** MaximumFractionalValue, 0x0062000E, US, 1 */
     extern DICOM_EXPORT const tag MaximumFractionalValue;
-    /** MaximumMemoryAllocation, (2000,0061), IS, 1,  */
+    /** MaximumMemoryAllocation, 0x20000061, IS, 1 */
     extern DICOM_EXPORT const tag MaximumMemoryAllocation;
-    /** MaximumPointDistance, (0066,0019), FL, 1,  */
+    /** MaximumPointDistance, 0x00660019, FL, 1 */
     extern DICOM_EXPORT const tag MaximumPointDistance;
-    /** MaximumStimulusLuminance, (0024,0018), FL, 1,  */
+    /** MaximumStimulusLuminance, 0x00240018, FL, 1 */
     extern DICOM_EXPORT const tag MaximumStimulusLuminance;
-    /** MeanPointDistance, (0066,0018), FL, 1,  */
+    /** MaximumStoredValueMapped, 0x00281232, FD, 1 */
+    extern DICOM_EXPORT const tag MaximumStoredValueMapped;
+    /** MeanPointDistance, 0x00660018, FL, 1 */
     extern DICOM_EXPORT const tag MeanPointDistance;
-    /** MeasuredBandwidth, (0014,401C), DS, 1,  */
+    /** MeasuredAPDimension, 0x00101023, DS, 1 */
+    extern DICOM_EXPORT const tag MeasuredAPDimension;
+    /** MeasuredBandwidth, 0x0014401C, DS, 1, RET */
     extern DICOM_EXPORT const tag MeasuredBandwidth;
-    /** MeasuredBeamDimensionA, (0014,4017), DS, 1,  */
+    /** MeasuredBeamDimensionA, 0x00144017, DS, 1, RET */
     extern DICOM_EXPORT const tag MeasuredBeamDimensionA;
-    /** MeasuredBeamDimensionB, (0014,4018), DS, 1,  */
+    /** MeasuredBeamDimensionB, 0x00144018, DS, 1, RET */
     extern DICOM_EXPORT const tag MeasuredBeamDimensionB;
-    /** MeasuredCenterFrequency, (0014,401B), DS, 1,  */
+    /** MeasuredCenterFrequency, 0x0014401B, DS, 1, RET */
     extern DICOM_EXPORT const tag MeasuredCenterFrequency;
-    /** MeasuredDoseDescription, (3008,0012), ST, 1,  */
+    /** MeasuredCharacteristics, 0x00287026, CS, 1 */
+    extern DICOM_EXPORT const tag MeasuredCharacteristics;
+    /** MeasuredDoseDescription, 0x30080012, ST, 1 */
     extern DICOM_EXPORT const tag MeasuredDoseDescription;
-    /** MeasuredDoseReferenceNumber, (3008,0064), IS, 1,  */
+    /** MeasuredDoseReferenceNumber, 0x30080064, IS, 1 */
     extern DICOM_EXPORT const tag MeasuredDoseReferenceNumber;
-    /** MeasuredDoseReferenceSequence, (3008,0010), SQ, 1,  */
+    /** MeasuredDoseReferenceSequence, 0x30080010, SQ, 1 */
     extern DICOM_EXPORT const tag MeasuredDoseReferenceSequence;
-    /** MeasuredDoseType, (3008,0014), CS, 1,  */
+    /** MeasuredDoseType, 0x30080014, CS, 1 */
     extern DICOM_EXPORT const tag MeasuredDoseType;
-    /** MeasuredDoseValue, (3008,0016), DS, 1,  */
+    /** MeasuredDoseValue, 0x30080016, DS, 1 */
     extern DICOM_EXPORT const tag MeasuredDoseValue;
-    /** MeasuredValueSequence, (0040,A300), SQ, 1,  */
+    /** MeasuredLateralDimension, 0x00101024, DS, 1 */
+    extern DICOM_EXPORT const tag MeasuredLateralDimension;
+    /** MeasuredValueSequence, 0x0040A300, SQ, 1 */
     extern DICOM_EXPORT const tag MeasuredValueSequence;
-    /** MeasurementAutomationTrial, (0040,A194), CS, 1, RET */
+    /** MeasurementAutomationTrial, 0x0040A194, CS, 1, RET */
     extern DICOM_EXPORT const tag MeasurementAutomationTrial;
-    /** MeasurementLaterality, (0024,0113), CS, 1,  */
+    /** MeasurementEquipmentSequence, 0x00287012, SQ, 1 */
+    extern DICOM_EXPORT const tag MeasurementEquipmentSequence;
+    /** MeasurementEquipmentType, 0x00287014, CS, 1 */
+    extern DICOM_EXPORT const tag MeasurementEquipmentType;
+    /** MeasurementFunctions, 0x00287013, CS, 1 */
+    extern DICOM_EXPORT const tag MeasurementFunctions;
+    /** MeasurementLaterality, 0x00240113, CS, 1 */
     extern DICOM_EXPORT const tag MeasurementLaterality;
-    /** MeasurementPrecisionDescriptionTrial, (0040,A047), LO, 1, RET */
+    /** MeasurementPatternCodeSequence, 0x0028702D, SQ, 1 */
+    extern DICOM_EXPORT const tag MeasurementPatternCodeSequence;
+    /** MeasurementPrecisionDescriptionTrial, 0x0040A047, LO, 1, RET */
     extern DICOM_EXPORT const tag MeasurementPrecisionDescriptionTrial;
-    /** MeasurementUnitsCodeSequence, (0040,08EA), SQ, 1,  */
+    /** MeasurementsSequence, 0x00660121, SQ, 1 */
+    extern DICOM_EXPORT const tag MeasurementsSequence;
+    /** MeasurementUnitsCodeSequence, 0x004008EA, SQ, 1 */
     extern DICOM_EXPORT const tag MeasurementUnitsCodeSequence;
-    /** MeasuringUnitsSequence, (0040,0295), SQ, 1,  */
+    /** MeasurementValuesSequence, 0x00660132, SQ, 1 */
+    extern DICOM_EXPORT const tag MeasurementValuesSequence;
+    /** MeasuringUnitsSequence, 0x00400295, SQ, 1 */
     extern DICOM_EXPORT const tag MeasuringUnitsSequence;
-    /** MechanicalIndex, (0018,5022), DS, 1,  */
+    /** MechanicalIndex, 0x00185022, DS, 1 */
     extern DICOM_EXPORT const tag MechanicalIndex;
-    /** MediaDisposition, (2200,0004), LT, 1,  */
+    /** MediaDisposition, 0x22000004, LT, 1 */
     extern DICOM_EXPORT const tag MediaDisposition;
-    /** MediaInstalledSequence, (2000,00A2), SQ, 1,  */
+    /** MediaInstalledSequence, 0x200000A2, SQ, 1 */
     extern DICOM_EXPORT const tag MediaInstalledSequence;
-    /** MediaStorageSOPClassUID, (0002,0002), UI, 1,  */
+    /** MediaStorageSOPClassUID, 0x00020002, UI, 1 */
     extern DICOM_EXPORT const tag MediaStorageSOPClassUID;
-    /** MediaStorageSOPInstanceUID, (0002,0003), UI, 1,  */
+    /** MediaStorageSOPInstanceUID, 0x00020003, UI, 1 */
     extern DICOM_EXPORT const tag MediaStorageSOPInstanceUID;
-    /** MedicalAlerts, (0010,2000), LO, 1-n,  */
+    /** MedicalAlerts, 0x00102000, LO, 1 */
     extern DICOM_EXPORT const tag MedicalAlerts;
-    /** MedicalRecordLocator, (0010,1090), LO, 1,  */
+    /** MedicalRecordLocator, 0x00101090, LO, 1, RET */
     extern DICOM_EXPORT const tag MedicalRecordLocator;
-    /** MediumType, (2000,0030), CS, 1,  */
+    /** MediumType, 0x20000030, CS, 1 */
     extern DICOM_EXPORT const tag MediumType;
-    /** MemoryAllocation, (2000,0060), IS, 1,  */
+    /** MemoryAllocation, 0x20000060, IS, 1 */
     extern DICOM_EXPORT const tag MemoryAllocation;
-    /** MemoryBitDepth, (2000,00A0), US, 1,  */
+    /** MemoryBitDepth, 0x200000A0, US, 1 */
     extern DICOM_EXPORT const tag MemoryBitDepth;
-    /** MetaboliteMapCodeSequence, (0018,9083), SQ, 1,  */
+    /** MetaboliteMapCodeSequence, 0x00189083, SQ, 1 */
     extern DICOM_EXPORT const tag MetaboliteMapCodeSequence;
-    /** MetaboliteMapDescription, (0018,9080), ST, 1,  */
+    /** MetaboliteMapDescription, 0x00189080, ST, 1 */
     extern DICOM_EXPORT const tag MetaboliteMapDescription;
-    /** MetersetExposure, (3002,0032), DS, 1,  */
+    /** MetersetExposure, 0x30020032, DS, 1 */
     extern DICOM_EXPORT const tag MetersetExposure;
-    /** MetersetRate, (300A,035A), FL, 1,  */
+    /** MetersetRate, 0x300A035A, FL, 1 */
     extern DICOM_EXPORT const tag MetersetRate;
-    /** MetersetRateDelivered, (3008,0046), FL, 1,  */
+    /** MetersetRateDelivered, 0x30080046, FL, 1 */
     extern DICOM_EXPORT const tag MetersetRateDelivered;
-    /** MetersetRateSet, (3008,0045), FL, 1,  */
+    /** MetersetRateSet, 0x30080045, FL, 1 */
     extern DICOM_EXPORT const tag MetersetRateSet;
-    /** MidSlabPosition, (0018,9106), FD, 3,  */
+    /** MidSlabPosition, 0x00189106, FD, 3 */
     extern DICOM_EXPORT const tag MidSlabPosition;
-    /** MilitaryRank, (0010,1080), LO, 1,  */
+    /** MilitaryRank, 0x00101080, LO, 1 */
     extern DICOM_EXPORT const tag MilitaryRank;
-    /** MIMETypeOfEncapsulatedDocument, (0042,0012), LO, 1,  */
+    /** MIMETypeOfEncapsulatedDocument, 0x00420012, LO, 1 */
     extern DICOM_EXPORT const tag MIMETypeOfEncapsulatedDocument;
-    /** MinDensity, (2010,0120), US, 1,  */
+    /** MinDensity, 0x20100120, US, 1 */
     extern DICOM_EXPORT const tag MinDensity;
-    /** MinimumCoordinateValue, (50XX,0104), US, 1-n, RET */
-    extern const range_tag MinimumCoordinateValue;
-    /** MinimumSensitivityValue, (0024,0105), FL, 1,  */
+    /** MinimumCoordinateValue, 0x50000104, US, 1, RET */
+    extern DICOM_EXPORT const range_tag MinimumCoordinateValue;
+    /** MinimumKeratometricSequence, 0x00460215, SQ, 1 */
+    extern DICOM_EXPORT const tag MinimumKeratometricSequence;
+    /** MinimumSensitivityValue, 0x00240105, FL, 1 */
     extern DICOM_EXPORT const tag MinimumSensitivityValue;
-    /** ModalitiesInStudy, (0008,0061), CS, 1-n,  */
+    /** MinimumStoredValueMapped, 0x00281231, FD, 1 */
+    extern DICOM_EXPORT const tag MinimumStoredValueMapped;
+    /** ModalitiesInStudy, 0x00080061, CS, 1 */
     extern DICOM_EXPORT const tag ModalitiesInStudy;
-    /** Modality, (0008,0060), CS, 1,  */
+    /** Modality, 0x00080060, CS, 1 */
     extern DICOM_EXPORT const tag Modality;
-    /** ModalityLUTSequence, (0028,3000), SQ, 1,  */
+    /** ModalityLUTSequence, 0x00283000, SQ, 1 */
     extern DICOM_EXPORT const tag ModalityLUTSequence;
-    /** ModalityLUTType, (0028,3004), LO, 1,  */
+    /** ModalityLUTType, 0x00283004, LO, 1 */
     extern DICOM_EXPORT const tag ModalityLUTType;
-    /** ModeOfPercutaneousAccessSequence, (0052,0016), SQ, 1,  */
+    /** ModelMirroring, 0x00687002, CS, 1 */
+    extern DICOM_EXPORT const tag ModelMirroring;
+    /** ModelModification, 0x00687001, CS, 1 */
+    extern DICOM_EXPORT const tag ModelModification;
+    /** ModelSpecificationSequence, 0x00189912, SQ, 1 */
+    extern DICOM_EXPORT const tag ModelSpecificationSequence;
+    /** ModelUsageCodeSequence, 0x00687003, SQ, 1 */
+    extern DICOM_EXPORT const tag ModelUsageCodeSequence;
+    /** ModeOfPercutaneousAccessSequence, 0x00520016, SQ, 1 */
     extern DICOM_EXPORT const tag ModeOfPercutaneousAccessSequence;
-    /** ModifiedAttributesSequence, (0400,0550), SQ, 1,  */
+    /** ModifiableConstraintFlag, 0x00820038, CS, 1 */
+    extern DICOM_EXPORT const tag ModifiableConstraintFlag;
+    /** ModifiedAttributesSequence, 0x04000550, SQ, 1 */
     extern DICOM_EXPORT const tag ModifiedAttributesSequence;
-    /** ModifiedImageDate, (0020,3403), DA, 1, RET */
+    /** ModifiedImageDate, 0x00203403, DA, 1, RET */
     extern DICOM_EXPORT const tag ModifiedImageDate;
-    /** ModifiedImageDescription, (0020,3406), LO, 1, RET */
+    /** ModifiedImageDescription, 0x00203406, LO, 1, RET */
     extern DICOM_EXPORT const tag ModifiedImageDescription;
-    /** ModifiedImageID, (0020,3402), CS, 1, RET */
+    /** ModifiedImageID, 0x00203402, CS, 1, RET */
     extern DICOM_EXPORT const tag ModifiedImageID;
-    /** ModifiedImageTime, (0020,3405), TM, 1, RET */
+    /** ModifiedImageTime, 0x00203405, TM, 1, RET */
     extern DICOM_EXPORT const tag ModifiedImageTime;
-    /** ModifierCodeSequence, (0040,A195), SQ, 1,  */
+    /** ModifierCodeSequence, 0x0040A195, SQ, 1 */
     extern DICOM_EXPORT const tag ModifierCodeSequence;
-    /** ModifyingDeviceID, (0020,3401), CS, 1, RET */
+    /** ModifyingDeviceID, 0x00203401, CS, 1, RET */
     extern DICOM_EXPORT const tag ModifyingDeviceID;
-    /** ModifyingDeviceManufacturer, (0020,3404), LO, 1, RET */
+    /** ModifyingDeviceManufacturer, 0x00203404, LO, 1, RET */
     extern DICOM_EXPORT const tag ModifyingDeviceManufacturer;
-    /** ModifyingSystem, (0400,0563), LO, 1,  */
+    /** ModifyingSystem, 0x04000563, LO, 1 */
     extern DICOM_EXPORT const tag ModifyingSystem;
-    /** ModulationType, (0014,4026), CS, 1,  */
+    /** ModulatedScanModeType, 0x300A0309, CS, 1 */
+    extern DICOM_EXPORT const tag ModulatedScanModeType;
+    /** ModulationType, 0x00144026, CS, 1, RET */
     extern DICOM_EXPORT const tag ModulationType;
-    /** MostRecentTreatmentDate, (3008,0056), DA, 1,  */
+    /** MostRecentTreatmentDate, 0x30080056, DA, 1 */
     extern DICOM_EXPORT const tag MostRecentTreatmentDate;
-    /** MotionSynchronizationSequence, (300A,0410), SQ, 1,  */
+    /** MotionSynchronizationSequence, 0x300A0410, SQ, 1 */
     extern DICOM_EXPORT const tag MotionSynchronizationSequence;
-    /** MRAcquisitionFrequencyEncodingSteps, (0018,9058), US, 1,  */
+    /** MPRSlabThickness, 0x00701503, FD, 1 */
+    extern DICOM_EXPORT const tag MPRSlabThickness;
+    /** MPRThicknessType, 0x00701502, CS, 1 */
+    extern DICOM_EXPORT const tag MPRThicknessType;
+    /** MPRTopLeftHandCorner, 0x00701505, FD, 3 */
+    extern DICOM_EXPORT const tag MPRTopLeftHandCorner;
+    /** MPRViewHeight, 0x00701512, FD, 1 */
+    extern DICOM_EXPORT const tag MPRViewHeight;
+    /** MPRViewHeightDirection, 0x00701511, FD, 3 */
+    extern DICOM_EXPORT const tag MPRViewHeightDirection;
+    /** MPRViewWidth, 0x00701508, FD, 1 */
+    extern DICOM_EXPORT const tag MPRViewWidth;
+    /** MPRViewWidthDirection, 0x00701507, FD, 3 */
+    extern DICOM_EXPORT const tag MPRViewWidthDirection;
+    /** MRAcquisitionFrequencyEncodingSteps, 0x00189058, US, 1 */
     extern DICOM_EXPORT const tag MRAcquisitionFrequencyEncodingSteps;
-    /** MRAcquisitionPhaseEncodingStepsInPlane, (0018,9231), US, 1,  */
+    /** MRAcquisitionPhaseEncodingStepsInPlane, 0x00189231, US, 1 */
     extern DICOM_EXPORT const tag MRAcquisitionPhaseEncodingStepsInPlane;
-    /** MRAcquisitionPhaseEncodingStepsOutOfPlane, (0018,9232), US, 1,  */
+    /** MRAcquisitionPhaseEncodingStepsOutOfPlane, 0x00189232, US, 1 */
     extern DICOM_EXPORT const tag MRAcquisitionPhaseEncodingStepsOutOfPlane;
-    /** MRAcquisitionType, (0018,0023), CS, 1,  */
+    /** MRAcquisitionType, 0x00180023, CS, 1 */
     extern DICOM_EXPORT const tag MRAcquisitionType;
-    /** MRArterialSpinLabelingSequence, (0018,9251), SQ, 1,  */
+    /** MRArterialSpinLabelingSequence, 0x00189251, SQ, 1 */
     extern DICOM_EXPORT const tag MRArterialSpinLabelingSequence;
-    /** MRAveragesSequence, (0018,9119), SQ, 1,  */
+    /** MRAveragesSequence, 0x00189119, SQ, 1 */
     extern DICOM_EXPORT const tag MRAveragesSequence;
-    /** MRDiffusionSequence, (0018,9117), SQ, 1,  */
+    /** MRDiffusionSequence, 0x00189117, SQ, 1 */
     extern DICOM_EXPORT const tag MRDiffusionSequence;
-    /** MRDRDirectoryRecordOffset, (0004,1504), UL, 1, RET */
+    /** MRDRDirectoryRecordOffset, 0x00041504, UL, 1, RET */
     extern DICOM_EXPORT const tag MRDRDirectoryRecordOffset;
-    /** MREchoSequence, (0018,9114), SQ, 1,  */
+    /** MREchoSequence, 0x00189114, SQ, 1 */
     extern DICOM_EXPORT const tag MREchoSequence;
-    /** MRFOVGeometrySequence, (0018,9125), SQ, 1,  */
+    /** MRFOVGeometrySequence, 0x00189125, SQ, 1 */
     extern DICOM_EXPORT const tag MRFOVGeometrySequence;
-    /** MRImageFrameTypeSequence, (0018,9226), SQ, 1,  */
+    /** MRImageFrameTypeSequence, 0x00189226, SQ, 1 */
     extern DICOM_EXPORT const tag MRImageFrameTypeSequence;
-    /** MRImagingModifierSequence, (0018,9006), SQ, 1,  */
+    /** MRImagingModifierSequence, 0x00189006, SQ, 1 */
     extern DICOM_EXPORT const tag MRImagingModifierSequence;
-    /** MRMetaboliteMapSequence, (0018,9152), SQ, 1,  */
+    /** MRMetaboliteMapSequence, 0x00189152, SQ, 1 */
     extern DICOM_EXPORT const tag MRMetaboliteMapSequence;
-    /** MRModifierSequence, (0018,9115), SQ, 1,  */
+    /** MRModifierSequence, 0x00189115, SQ, 1 */
     extern DICOM_EXPORT const tag MRModifierSequence;
-    /** MRReceiveCoilSequence, (0018,9042), SQ, 1,  */
+    /** MRReceiveCoilSequence, 0x00189042, SQ, 1 */
     extern DICOM_EXPORT const tag MRReceiveCoilSequence;
-    /** MRSpatialSaturationSequence, (0018,9107), SQ, 1,  */
+    /** MRSpatialSaturationSequence, 0x00189107, SQ, 1 */
     extern DICOM_EXPORT const tag MRSpatialSaturationSequence;
-    /** MRSpectroscopyAcquisitionType, (0018,9200), CS, 1,  */
+    /** MRSpectroscopyAcquisitionType, 0x00189200, CS, 1 */
     extern DICOM_EXPORT const tag MRSpectroscopyAcquisitionType;
-    /** MRSpectroscopyFOVGeometrySequence, (0018,9103), SQ, 1,  */
+    /** MRSpectroscopyFOVGeometrySequence, 0x00189103, SQ, 1 */
     extern DICOM_EXPORT const tag MRSpectroscopyFOVGeometrySequence;
-    /** MRSpectroscopyFrameTypeSequence, (0018,9227), SQ, 1,  */
+    /** MRSpectroscopyFrameTypeSequence, 0x00189227, SQ, 1 */
     extern DICOM_EXPORT const tag MRSpectroscopyFrameTypeSequence;
-    /** MRTimingAndRelatedParametersSequence, (0018,9112), SQ, 1,  */
+    /** MRTimingAndRelatedParametersSequence, 0x00189112, SQ, 1 */
     extern DICOM_EXPORT const tag MRTimingAndRelatedParametersSequence;
-    /** MRTransmitCoilSequence, (0018,9049), SQ, 1,  */
+    /** MRTransmitCoilSequence, 0x00189049, SQ, 1 */
     extern DICOM_EXPORT const tag MRTransmitCoilSequence;
-    /** MRVelocityEncodingSequence, (0018,9197), SQ, 1,  */
+    /** MRVelocityEncodingSequence, 0x00189197, SQ, 1 */
     extern DICOM_EXPORT const tag MRVelocityEncodingSequence;
-    /** MultiCoilConfiguration, (0018,9046), LO, 1,  */
+    /** MultiCoilConfiguration, 0x00189046, LO, 1 */
     extern DICOM_EXPORT const tag MultiCoilConfiguration;
-    /** MultiCoilDefinitionSequence, (0018,9045), SQ, 1,  */
+    /** MultiCoilDefinitionSequence, 0x00189045, SQ, 1 */
     extern DICOM_EXPORT const tag MultiCoilDefinitionSequence;
-    /** MultiCoilElementName, (0018,9047), SH, 1,  */
+    /** MultiCoilElementName, 0x00189047, SH, 1 */
     extern DICOM_EXPORT const tag MultiCoilElementName;
-    /** MultiCoilElementUsed, (0018,9048), CS, 1,  */
+    /** MultiCoilElementUsed, 0x00189048, CS, 1 */
     extern DICOM_EXPORT const tag MultiCoilElementUsed;
-    /** MultiFramePresentationSequence, (0028,9505), SQ, 1,  */
+    /** MultiFramePresentationSequence, 0x00289505, SQ, 1 */
     extern DICOM_EXPORT const tag MultiFramePresentationSequence;
-    /** MultiFrameSourceSOPInstanceUID, (0008,1167), UI, 1,  */
+    /** MultiFrameSourceSOPInstanceUID, 0x00081167, UI, 1 */
     extern DICOM_EXPORT const tag MultiFrameSourceSOPInstanceUID;
-    /** MultiPlanarExcitation, (0018,9012), CS, 1,  */
+    /** MultiPlanarExcitation, 0x00189012, CS, 1 */
     extern DICOM_EXPORT const tag MultiPlanarExcitation;
-    /** MultipleCopiesFlag, (0040,4006), CS, 1,  */
+    /** MultiPlanarReconstructionStyle, 0x00701501, CS, 1 */
+    extern DICOM_EXPORT const tag MultiPlanarReconstructionStyle;
+    /** MultipleComponentApprovalSequence, 0x00140106, SQ, 1, RET */
+    extern DICOM_EXPORT const tag MultipleComponentApprovalSequence;
+    /** MultipleCopiesFlag, 0x00404006, CS, 1, RET */
     extern DICOM_EXPORT const tag MultipleCopiesFlag;
-    /** MultipleSpinEcho, (0018,9011), CS, 1,  */
+    /** MultipleSpinEcho, 0x00189011, CS, 1 */
     extern DICOM_EXPORT const tag MultipleSpinEcho;
-    /** MultiplexedAudioChannelsDescriptionCodeSequence, (003A,0300), SQ, 1,  */
+    /** MultiplexedAudioChannelsDescriptionCodeSequence, 0x003A0300, SQ, 1 */
     extern DICOM_EXPORT const tag MultiplexedAudioChannelsDescriptionCodeSequence;
-    /** MultiplexGroupLabel, (003A,0020), SH, 1,  */
+    /** MultiplexGroupLabel, 0x003A0020, SH, 1 */
     extern DICOM_EXPORT const tag MultiplexGroupLabel;
-    /** MultiplexGroupTimeOffset, (0018,1068), DS, 1,  */
+    /** MultiplexGroupTimeOffset, 0x00181068, DS, 1 */
     extern DICOM_EXPORT const tag MultiplexGroupTimeOffset;
-    /** MydriaticAgentCodeSequence, (0022,001C), SQ, 1,  */
+    /** MydriaticAgentCodeSequence, 0x0022001C, SQ, 1 */
     extern DICOM_EXPORT const tag MydriaticAgentCodeSequence;
-    /** MydriaticAgentConcentration, (0022,004E), DS, 1,  */
+    /** MydriaticAgentConcentration, 0x0022004E, DS, 1 */
     extern DICOM_EXPORT const tag MydriaticAgentConcentration;
-    /** MydriaticAgentConcentrationUnitsSequence, (0022,0042), SQ, 1,  */
+    /** MydriaticAgentConcentrationUnitsSequence, 0x00220042, SQ, 1 */
     extern DICOM_EXPORT const tag MydriaticAgentConcentrationUnitsSequence;
-    /** MydriaticAgentSequence, (0022,0058), SQ, 1,  */
+    /** MydriaticAgentSequence, 0x00220058, SQ, 1 */
     extern DICOM_EXPORT const tag MydriaticAgentSequence;
-    /** NameOfPhysiciansReadingStudy, (0008,1060), PN, 1-n,  */
+    /** NameOfPhysiciansReadingStudy, 0x00081060, PN, 1 */
     extern DICOM_EXPORT const tag NameOfPhysiciansReadingStudy;
-    /** NamesOfIntendedRecipientsOfResults, (0040,1010), PN, 1-n,  */
+    /** NamesOfIntendedRecipientsOfResults, 0x00401010, PN, 1 */
     extern DICOM_EXPORT const tag NamesOfIntendedRecipientsOfResults;
-    /** NavigationDisplaySet, (0072,0216), US, 1,  */
+    /** NavigationDisplaySet, 0x00720216, US, 1 */
     extern DICOM_EXPORT const tag NavigationDisplaySet;
-    /** NavigationIndicatorSequence, (0072,0214), SQ, 1,  */
+    /** NavigationIndicatorSequence, 0x00720214, SQ, 1 */
     extern DICOM_EXPORT const tag NavigationIndicatorSequence;
-    /** NearPupillaryDistance, (0046,0062), FD, 1,  */
+    /** NearPupillaryDistance, 0x00460062, FD, 1 */
     extern DICOM_EXPORT const tag NearPupillaryDistance;
-    /** NegativeCatchTrialsQuantity, (0024,0048), US, 1,  */
+    /** NegativeCatchTrialsQuantity, 0x00240048, US, 1 */
     extern DICOM_EXPORT const tag NegativeCatchTrialsQuantity;
-    /** NetworkID, (0008,1000), AE, 1, RET */
+    /** NetworkID, 0x00081000, AE, 1, RET */
     extern DICOM_EXPORT const tag NetworkID;
-    /** NominalBeamEnergy, (300A,0114), DS, 1,  */
+    /** NominalBeamAngle, 0x00145112, DS, 1, RET */
+    extern DICOM_EXPORT const tag NominalBeamAngle;
+    /** NominalBeamEnergy, 0x300A0114, DS, 1 */
     extern DICOM_EXPORT const tag NominalBeamEnergy;
-    /** NominalBeamEnergyUnit, (300A,0015), CS, 1,  */
+    /** NominalBeamEnergyUnit, 0x300A0015, CS, 1 */
     extern DICOM_EXPORT const tag NominalBeamEnergyUnit;
-    /** NominalCardiacTriggerDelayTime, (0020,9153), FD, 1,  */
+    /** NominalCardiacTriggerDelayTime, 0x00209153, FD, 1 */
     extern DICOM_EXPORT const tag NominalCardiacTriggerDelayTime;
-    /** NominalCardiacTriggerTimePriorToRPeak, (0020,9154), FL, 1,  */
+    /** NominalCardiacTriggerTimePriorToRPeak, 0x00209154, FL, 1 */
     extern DICOM_EXPORT const tag NominalCardiacTriggerTimePriorToRPeak;
-    /** NominalFrequency, (0014,401A), DS, 1,  */
+    /** NominalFrequency, 0x0014401A, DS, 1, RET */
     extern DICOM_EXPORT const tag NominalFrequency;
-    /** NominalInterval, (0018,1062), IS, 1,  */
+    /** NominalInterval, 0x00181062, IS, 1 */
     extern DICOM_EXPORT const tag NominalInterval;
-    /** NominalPercentageOfCardiacPhase, (0020,9241), FL, 1,  */
+    /** NominalPercentageOfCardiacPhase, 0x00209241, FL, 1 */
     extern DICOM_EXPORT const tag NominalPercentageOfCardiacPhase;
-    /** NominalPercentageOfRespiratoryPhase, (0020,9245), FL, 1,  */
+    /** NominalPercentageOfRespiratoryPhase, 0x00209245, FL, 1 */
     extern DICOM_EXPORT const tag NominalPercentageOfRespiratoryPhase;
-    /** NominalPriorDose, (300A,001A), DS, 1,  */
+    /** NominalPriorDose, 0x300A001A, DS, 1 */
     extern DICOM_EXPORT const tag NominalPriorDose;
-    /** NominalRespiratoryTriggerDelayTime, (0020,9255), FD, 1,  */
+    /** NominalRangeModulatedRegionDepths, 0x300A0504, FL, 2 */
+    extern DICOM_EXPORT const tag NominalRangeModulatedRegionDepths;
+    /** NominalRangeModulationFractions, 0x300A0503, FL, 2 */
+    extern DICOM_EXPORT const tag NominalRangeModulationFractions;
+    /** NominalRespiratoryTriggerDelayTime, 0x00209255, FD, 1 */
     extern DICOM_EXPORT const tag NominalRespiratoryTriggerDelayTime;
-    /** NominalScannedPixelSpacing, (0018,2010), DS, 2,  */
+    /** NominalScannedPixelSpacing, 0x00182010, DS, 2 */
     extern DICOM_EXPORT const tag NominalScannedPixelSpacing;
-    /** NominalScreenDefinitionSequence, (0072,0102), SQ, 1,  */
+    /** NominalScreenDefinitionSequence, 0x00720102, SQ, 1 */
     extern DICOM_EXPORT const tag NominalScreenDefinitionSequence;
-    /** NonDICOMOutputCodeSequence, (0040,4032), SQ, 1,  */
+    /** NonDICOMOutputCodeSequence, 0x00404032, SQ, 1, RET */
     extern DICOM_EXPORT const tag NonDICOMOutputCodeSequence;
-    /** NonUniformRadialSamplingCorrected, (0018,9766), CS, 1,  */
+    /** NonidentifyingPrivateElements, 0x00080304, US, 1 */
+    extern DICOM_EXPORT const tag NonidentifyingPrivateElements;
+    /** NonUniformRadialSamplingCorrected, 0x00189766, CS, 1 */
     extern DICOM_EXPORT const tag NonUniformRadialSamplingCorrected;
-    /** NormalizationFactorFormat, (0028,0710), US, 1, RET */
+    /** NormalizationFactorFormat, 0x00280710, US, 1, RET */
     extern DICOM_EXPORT const tag NormalizationFactorFormat;
-    /** NormalizationPoint, (3004,0008), DS, 3,  */
+    /** NormalizationPoint, 0x30040008, DS, 3 */
     extern DICOM_EXPORT const tag NormalizationPoint;
-    /** NotchFilterBandwidth, (003A,0223), DS, 1,  */
+    /** NotchFilterBandwidth, 0x003A0223, DS, 1 */
     extern DICOM_EXPORT const tag NotchFilterBandwidth;
-    /** NotchFilterFrequency, (003A,0222), DS, 1,  */
+    /** NotchFilterFrequency, 0x003A0222, DS, 1 */
     extern DICOM_EXPORT const tag NotchFilterFrequency;
-    /** NotificationFromManufacturerSequence, (0068,6265), SQ, 1,  */
+    /** NotificationFromManufacturerSequence, 0x00686265, SQ, 1 */
     extern DICOM_EXPORT const tag NotificationFromManufacturerSequence;
-    /** NTPSourceAddress, (0018,1803), LO, 1,  */
+    /** NTPSourceAddress, 0x00181803, LO, 1 */
     extern DICOM_EXPORT const tag NTPSourceAddress;
-    /** NuclearMedicineSeriesType, (0008,0042), CS, 1, RET */
+    /** NuclearMedicineSeriesType, 0x00080042, CS, 1, RET */
     extern DICOM_EXPORT const tag NuclearMedicineSeriesType;
-    /** NumberOfAlarmObjects, (4010,1034), US, 1,  */
+    /** NumberOfAlarmObjects, 0x40101034, US, 1, RET */
     extern DICOM_EXPORT const tag NumberOfAlarmObjects;
-    /** NumberOfAverages, (0018,0083), DS, 1,  */
+    /** NumberOfAssessmentObservations, 0x00820006, UL, 1 */
+    extern DICOM_EXPORT const tag NumberOfAssessmentObservations;
+    /** NumberOfAverages, 0x00180083, DS, 1 */
     extern DICOM_EXPORT const tag NumberOfAverages;
-    /** NumberOfBeams, (300A,0080), IS, 1,  */
+    /** NumberOfBeams, 0x300A0080, IS, 1 */
     extern DICOM_EXPORT const tag NumberOfBeams;
-    /** NumberOfBlocks, (300A,00F0), IS, 1,  */
+    /** NumberOfBlocks, 0x300A00F0, IS, 1 */
     extern DICOM_EXPORT const tag NumberOfBlocks;
-    /** NumberOfBoli, (300A,00ED), IS, 1,  */
+    /** NumberOfBlockSlabItems, 0x300A0440, IS, 1 */
+    extern DICOM_EXPORT const tag NumberOfBlockSlabItems;
+    /** NumberOfBoli, 0x300A00ED, IS, 1 */
     extern DICOM_EXPORT const tag NumberOfBoli;
-    /** NumberOfBrachyApplicationSetups, (300A,00A0), IS, 1,  */
+    /** NumberOfBrachyApplicationSetups, 0x300A00A0, IS, 1 */
     extern DICOM_EXPORT const tag NumberOfBrachyApplicationSetups;
-    /** NumberOfChannels, (50XX,2004), US, 1, RET */
-    extern const range_tag NumberOfChannels;
-    /** NumberOfCompensators, (300A,00E0), IS, 1,  */
+    /** NumberofBscansPerFrame, 0x00221642, UL, 1 */
+    extern DICOM_EXPORT const tag NumberofBscansPerFrame;
+    /** NumberOfChannels, 0x50002004, US, 1, RET */
+    extern DICOM_EXPORT const range_tag NumberOfChannels;
+    /** NumberOfCompensators, 0x300A00E0, IS, 1 */
     extern DICOM_EXPORT const tag NumberOfCompensators;
-    /** NumberOfContourPoints, (3006,0046), IS, 1,  */
+    /** NumberOfContourPoints, 0x30060046, IS, 1 */
     extern DICOM_EXPORT const tag NumberOfContourPoints;
-    /** NumberOfControlPoints, (300A,0110), IS, 1,  */
+    /** NumberOfControlPoints, 0x300A0110, IS, 1 */
     extern DICOM_EXPORT const tag NumberOfControlPoints;
-    /** NumberOfCopies, (2000,0010), IS, 1,  */
+    /** NumberOfCopies, 0x20000010, IS, 1 */
     extern DICOM_EXPORT const tag NumberOfCopies;
-    /** NumberOfDetectors, (0054,0021), US, 1,  */
+    /** NumberOfDetectors, 0x00540021, US, 1 */
     extern DICOM_EXPORT const tag NumberOfDetectors;
-    /** NumberOfElements, (0014,4012), US, 1,  */
+    /** NumberOfDisplaySubsystems, 0x00287001, US, 1 */
+    extern DICOM_EXPORT const tag NumberOfDisplaySubsystems;
+    /** NumberOfElements, 0x00144012, US, 1, RET */
     extern DICOM_EXPORT const tag NumberOfElements;
-    /** NumberOfEnergyWindows, (0054,0011), US, 1,  */
+    /** NumberOfEnergyWindows, 0x00540011, US, 1 */
     extern DICOM_EXPORT const tag NumberOfEnergyWindows;
-    /** NumberOfEventTimers, (0008,2129), IS, 1,  */
+    /** NumberOfEventTimers, 0x00082129, IS, 1 */
     extern DICOM_EXPORT const tag NumberOfEventTimers;
-    /** NumberOfFilms, (2100,0170), IS, 1,  */
+    /** NumberOfFilms, 0x21000170, IS, 1 */
     extern DICOM_EXPORT const tag NumberOfFilms;
-    /** NumberOfFocalPlanes, (0048,0013), US, 1,  */
+    /** NumberOfFocalPlanes, 0x00480013, US, 1 */
     extern DICOM_EXPORT const tag NumberOfFocalPlanes;
-    /** NumberOfFractionPatternDigitsPerDay, (300A,0079), IS, 1,  */
+    /** NumberOfFractionPatternDigitsPerDay, 0x300A0079, IS, 1 */
     extern DICOM_EXPORT const tag NumberOfFractionPatternDigitsPerDay;
-    /** NumberOfFractionsDelivered, (3008,005A), IS, 1,  */
+    /** NumberOfFractionsDelivered, 0x3008005A, IS, 1 */
     extern DICOM_EXPORT const tag NumberOfFractionsDelivered;
-    /** NumberOfFractionsPlanned, (300A,0078), IS, 1,  */
+    /** NumberOfFractionsPlanned, 0x300A0078, IS, 1 */
     extern DICOM_EXPORT const tag NumberOfFractionsPlanned;
-    /** NumberOfFrames, (0028,0008), IS, 1,  */
+    /** NumberOfFrames, 0x00280008, IS, 1 */
     extern DICOM_EXPORT const tag NumberOfFrames;
-    /** NumberOfFramesInOverlay, (60XX,0015), IS, 1,  */
-    extern const range_tag NumberOfFramesInOverlay;
-    /** NumberOfFramesInPhase, (0054,0033), US, 1,  */
+    /** NumberOfFramesInOverlay, 0x60000015, IS, 1 */
+    extern DICOM_EXPORT const range_tag NumberOfFramesInOverlay;
+    /** NumberOfFramesInPhase, 0x00540033, US, 1 */
     extern DICOM_EXPORT const tag NumberOfFramesInPhase;
-    /** NumberOfFramesInRotation, (0054,0053), US, 1,  */
+    /** NumberOfFramesInRotation, 0x00540053, US, 1 */
     extern DICOM_EXPORT const tag NumberOfFramesInRotation;
-    /** NumberOfFramesIntegrated, (0014,3012), DS, 1,  */
+    /** NumberOfFramesIntegrated, 0x00143012, DS, 1, RET */
     extern DICOM_EXPORT const tag NumberOfFramesIntegrated;
-    /** NumberOfFramesUsedForIntegration, (0014,3073), DS, 1,  */
+    /** NumberOfFramesUsedForIntegration, 0x00143073, DS, 1, RET */
     extern DICOM_EXPORT const tag NumberOfFramesUsedForIntegration;
-    /** NumberOfGraphicPoints, (0070,0021), US, 1,  */
+    /** NumberOfGraphicPoints, 0x00700021, US, 1 */
     extern DICOM_EXPORT const tag NumberOfGraphicPoints;
-    /** NumberOfHorizontalPixels, (0072,0106), US, 1,  */
+    /** NumberOfHorizontalPixels, 0x00720106, US, 1 */
     extern DICOM_EXPORT const tag NumberOfHorizontalPixels;
-    /** NumberOfIterations, (0018,9739), US, 1,  */
+    /** NumberOfIterations, 0x00189739, US, 1 */
     extern DICOM_EXPORT const tag NumberOfIterations;
-    /** NumberOfKSpaceTrajectories, (0018,9093), US, 1,  */
+    /** NumberOfKSpaceTrajectories, 0x00189093, US, 1 */
     extern DICOM_EXPORT const tag NumberOfKSpaceTrajectories;
-    /** NumberOfLateralSpreadingDevices, (300A,0330), IS, 1,  */
+    /** NumberOfLateralSpreadingDevices, 0x300A0330, IS, 1 */
     extern DICOM_EXPORT const tag NumberOfLateralSpreadingDevices;
-    /** NumberOfLeafJawPairs, (300A,00BC), IS, 1,  */
+    /** NumberOfLeafJawPairs, 0x300A00BC, IS, 1 */
     extern DICOM_EXPORT const tag NumberOfLeafJawPairs;
-    /** NumberOfPaddedAlines, (0052,0038), US, 1,  */
-    extern DICOM_EXPORT const tag NumberOfPaddedAlines;
-    /** NumberOfPaintings, (300A,039A), IS, 1,  */
+    /** NumberOfLuminancePoints, 0x0028701B, US, 1 */
+    extern DICOM_EXPORT const tag NumberOfLuminancePoints;
+    /** NumberOfMapPoints, 0x00221530, UL, 1 */
+    extern DICOM_EXPORT const tag NumberOfMapPoints;
+    /** NumberOfOpticalPaths, 0x00480302, UL, 1 */
+    extern DICOM_EXPORT const tag NumberOfOpticalPaths;
+    /** NumberOfPaddedALines, 0x00520038, US, 1 */
+    extern DICOM_EXPORT const tag NumberOfPaddedALines;
+    /** NumberOfPaintings, 0x300A039A, IS, 1 */
     extern DICOM_EXPORT const tag NumberOfPaintings;
-    /** NumberOfPatientRelatedInstances, (0020,1204), IS, 1,  */
+    /** NumberOfPatientRelatedInstances, 0x00201204, IS, 1 */
     extern DICOM_EXPORT const tag NumberOfPatientRelatedInstances;
-    /** NumberOfPatientRelatedSeries, (0020,1202), IS, 1,  */
+    /** NumberOfPatientRelatedSeries, 0x00201202, IS, 1 */
     extern DICOM_EXPORT const tag NumberOfPatientRelatedSeries;
-    /** NumberOfPatientRelatedStudies, (0020,1200), IS, 1,  */
+    /** NumberOfPatientRelatedStudies, 0x00201200, IS, 1 */
     extern DICOM_EXPORT const tag NumberOfPatientRelatedStudies;
-    /** NumberOfPhaseEncodingSteps, (0018,0089), IS, 1,  */
+    /** NumberOfPhaseEncodingSteps, 0x00180089, IS, 1 */
     extern DICOM_EXPORT const tag NumberOfPhaseEncodingSteps;
-    /** NumberOfPhases, (0054,0031), US, 1,  */
+    /** NumberOfPhases, 0x00540031, US, 1 */
     extern DICOM_EXPORT const tag NumberOfPhases;
-    /** NumberOfPoints, (50XX,0010), US, 1, RET */
-    extern const range_tag NumberOfPoints;
-    /** NumberOfPriorsReferenced, (0072,0014), US, 1,  */
+    /** NumberOfPoints, 0x50000010, US, 1, RET */
+    extern DICOM_EXPORT const range_tag NumberOfPoints;
+    /** NumberOfPriorsReferenced, 0x00720014, US, 1 */
     extern DICOM_EXPORT const tag NumberOfPriorsReferenced;
-    /** NumberOfPulses, (300A,028A), IS, 1,  */
+    /** NumberOfPulses, 0x300A028A, IS, 1 */
     extern DICOM_EXPORT const tag NumberOfPulses;
-    /** NumberOfRangeModulators, (300A,0340), IS, 1,  */
+    /** NumberOfRangeModulators, 0x300A0340, IS, 1 */
     extern DICOM_EXPORT const tag NumberOfRangeModulators;
-    /** NumberOfRangeShifters, (300A,0312), IS, 1,  */
+    /** NumberOfRangeShifters, 0x300A0312, IS, 1 */
     extern DICOM_EXPORT const tag NumberOfRangeShifters;
-    /** NumberOfReferences, (0004,1600), UL, 1, RET */
+    /** NumberOfReferences, 0x00041600, UL, 1, RET */
     extern DICOM_EXPORT const tag NumberOfReferences;
-    /** NumberOfRotations, (0054,0051), US, 1,  */
+    /** NumberOfRotations, 0x00540051, US, 1 */
     extern DICOM_EXPORT const tag NumberOfRotations;
-    /** NumberOfRRIntervals, (0054,0061), US, 1,  */
+    /** NumberOfRRIntervals, 0x00540061, US, 1 */
     extern DICOM_EXPORT const tag NumberOfRRIntervals;
-    /** NumberOfSamples, (50XX,2006), UL, 1, RET */
-    extern const range_tag NumberOfSamples;
-    /** NumberOfScanSpotPositions, (300A,0392), IS, 1,  */
+    /** NumberOfSamples, 0x50002006, UL, 1, RET */
+    extern DICOM_EXPORT const range_tag NumberOfSamples;
+    /** NumberOfScanSpotPositions, 0x300A0392, IS, 1 */
     extern DICOM_EXPORT const tag NumberOfScanSpotPositions;
-    /** NumberOfScreens, (0072,0100), US, 1,  */
+    /** NumberOfScreens, 0x00720100, US, 1 */
     extern DICOM_EXPORT const tag NumberOfScreens;
-    /** NumberOfSeriesRelatedInstances, (0020,1209), IS, 1,  */
+    /** NumberOfSeriesRelatedInstances, 0x00201209, IS, 1 */
     extern DICOM_EXPORT const tag NumberOfSeriesRelatedInstances;
-    /** NumberOfSlices, (0054,0081), US, 1,  */
+    /** NumberOfSlices, 0x00540081, US, 1 */
     extern DICOM_EXPORT const tag NumberOfSlices;
-    /** NumberOfStages, (0008,2124), IS, 1,  */
+    /** NumberOfStages, 0x00082124, IS, 1 */
     extern DICOM_EXPORT const tag NumberOfStages;
-    /** NumberOfStudyRelatedInstances, (0020,1208), IS, 1,  */
+    /** NumberOfStudyRelatedInstances, 0x00201208, IS, 1 */
     extern DICOM_EXPORT const tag NumberOfStudyRelatedInstances;
-    /** NumberOfStudyRelatedSeries, (0020,1206), IS, 1,  */
+    /** NumberOfStudyRelatedSeries, 0x00201206, IS, 1 */
     extern DICOM_EXPORT const tag NumberOfStudyRelatedSeries;
-    /** NumberOfSubsets, (0018,9740), US, 1,  */
+    /** NumberOfSubsets, 0x00189740, US, 1 */
     extern DICOM_EXPORT const tag NumberOfSubsets;
-    /** NumberOfSurfacePoints, (0066,0015), UL, 1,  */
+    /** NumberOfSurfacePoints, 0x00660015, UL, 1 */
     extern DICOM_EXPORT const tag NumberOfSurfacePoints;
-    /** NumberOfSurfaces, (0066,0001), UL, 1,  */
+    /** NumberOfSurfaces, 0x00660001, UL, 1 */
     extern DICOM_EXPORT const tag NumberOfSurfaces;
-    /** NumberOfTableBreakPoints, (0018,6050), UL, 1,  */
+    /** NumberOfTableBreakPoints, 0x00186050, UL, 1 */
     extern DICOM_EXPORT const tag NumberOfTableBreakPoints;
-    /** NumberOfTableEntries, (0018,6056), UL, 1,  */
+    /** NumberOfTableEntries, 0x00186056, UL, 1 */
     extern DICOM_EXPORT const tag NumberOfTableEntries;
-    /** NumberOfTables, (0028,08X2), US, 1, RET */
-    extern const range_tag NumberOfTables;
-    /** NumberOfTemporalPositions, (0020,0105), IS, 1,  */
+    /** NumberOfTables, 0x00280802, US, 1, RET */
+    extern DICOM_EXPORT const range_tag NumberOfTables;
+    /** NumberOfTemporalPositions, 0x00200105, IS, 1 */
     extern DICOM_EXPORT const tag NumberOfTemporalPositions;
-    /** NumberOfTimeSlices, (0054,0101), US, 1,  */
+    /** NumberOfTimeSlices, 0x00540101, US, 1 */
     extern DICOM_EXPORT const tag NumberOfTimeSlices;
-    /** NumberOfTimeSlots, (0054,0071), US, 1,  */
+    /** NumberOfTimeSlots, 0x00540071, US, 1 */
     extern DICOM_EXPORT const tag NumberOfTimeSlots;
-    /** NumberOfTomosynthesisSourceImages, (0018,1495), IS, 1,  */
+    /** NumberOfTomosynthesisSourceImages, 0x00181495, IS, 1 */
     extern DICOM_EXPORT const tag NumberOfTomosynthesisSourceImages;
-    /** NumberOfTotalObjects, (4010,1033), US, 1,  */
+    /** NumberOfTotalObjects, 0x40101033, US, 1, RET */
     extern DICOM_EXPORT const tag NumberOfTotalObjects;
-    /** NumberOfTransformSteps, (0028,0402), US, 1, RET */
+    /** NumberOfTransformSteps, 0x00280402, US, 1, RET */
     extern DICOM_EXPORT const tag NumberOfTransformSteps;
-    /** NumberOfTriggersInPhase, (0054,0211), US, 1,  */
+    /** NumberOfTriggersInPhase, 0x00540211, US, 1 */
     extern DICOM_EXPORT const tag NumberOfTriggersInPhase;
-    /** NumberOfVectors, (0066,001E), UL, 1,  */
+    /** NumberOfVectors, 0x0066001E, UL, 1 */
     extern DICOM_EXPORT const tag NumberOfVectors;
-    /** NumberOfVerticalPixels, (0072,0104), US, 1,  */
+    /** NumberOfVerticalPixels, 0x00720104, US, 1 */
     extern DICOM_EXPORT const tag NumberOfVerticalPixels;
-    /** NumberOfViewsInStage, (0008,212A), IS, 1,  */
+    /** NumberOfViewsInStage, 0x0008212A, IS, 1 */
     extern DICOM_EXPORT const tag NumberOfViewsInStage;
-    /** NumberOfVisualStimuli, (0024,0038), US, 1,  */
+    /** NumberOfVisualStimuli, 0x00240038, US, 1 */
     extern DICOM_EXPORT const tag NumberOfVisualStimuli;
-    /** NumberOfWaveformChannels, (003A,0005), US, 1,  */
+    /** NumberOfVolumetricCurvePoints, 0x0070150C, UL, 1 */
+    extern DICOM_EXPORT const tag NumberOfVolumetricCurvePoints;
+    /** NumberOfWaveformChannels, 0x003A0005, US, 1 */
     extern DICOM_EXPORT const tag NumberOfWaveformChannels;
-    /** NumberOfWaveformSamples, (003A,0010), UL, 1,  */
+    /** NumberOfWaveformSamples, 0x003A0010, UL, 1 */
     extern DICOM_EXPORT const tag NumberOfWaveformSamples;
-    /** NumberOfWedges, (300A,00D0), IS, 1,  */
+    /** NumberOfWedges, 0x300A00D0, IS, 1 */
     extern DICOM_EXPORT const tag NumberOfWedges;
-    /** NumberOfZeroFills, (0018,9066), US, 1-2,  */
+    /** NumberOfZeroFills, 0x00189066, US, 1 */
     extern DICOM_EXPORT const tag NumberOfZeroFills;
-    /** NumericValue, (0040,A30A), DS, 1-n,  */
+    /** NumericValue, 0x0040A30A, DS, 1 */
     extern DICOM_EXPORT const tag NumericValue;
-    /** NumericValueQualifierCodeSequence, (0040,A301), SQ, 1,  */
+    /** NumericValueQualifierCodeSequence, 0x0040A301, SQ, 1 */
     extern DICOM_EXPORT const tag NumericValueQualifierCodeSequence;
-    /** ObjectBinaryIdentifierTrial, (0040,A074), OB, 1, RET */
+    /** ObjectBinaryIdentifierTrial, 0x0040A074, OB, 1, RET */
     extern DICOM_EXPORT const tag ObjectBinaryIdentifierTrial;
-    /** ObjectDirectoryBinaryIdentifierTrial, (0040,A089), OB, 1, RET */
+    /** ObjectDirectoryBinaryIdentifierTrial, 0x0040A089, OB, 1, RET */
     extern DICOM_EXPORT const tag ObjectDirectoryBinaryIdentifierTrial;
-    /** ObjectiveLensNumericalAperture, (0048,0113), DS, 1,  */
+    /** ObjectiveLensNumericalAperture, 0x00480113, DS, 1 */
     extern DICOM_EXPORT const tag ObjectiveLensNumericalAperture;
-    /** ObjectiveLensPower, (0048,0112), DS, 1,  */
+    /** ObjectiveLensPower, 0x00480112, DS, 1 */
     extern DICOM_EXPORT const tag ObjectiveLensPower;
-    /** ObjectPixelSpacingInCenterOfBeam, (0018,9404), FL, 2,  */
+    /** ObjectPixelSpacingInCenterOfBeam, 0x00189404, FL, 2 */
     extern DICOM_EXPORT const tag ObjectPixelSpacingInCenterOfBeam;
-    /** ObjectThicknessSequence, (0018,9456), SQ, 1,  */
+    /** ObjectThicknessSequence, 0x00189456, SQ, 1 */
     extern DICOM_EXPORT const tag ObjectThicknessSequence;
-    /** ObservationCategoryCodeSequenceTrial, (0040,A167), SQ, 1, RET */
+    /** ObliqueCroppingPlaneSequence, 0x00701304, SQ, 1 */
+    extern DICOM_EXPORT const tag ObliqueCroppingPlaneSequence;
+    /** ObservationBasisCodeSequence, 0x00820022, SQ, 1 */
+    extern DICOM_EXPORT const tag ObservationBasisCodeSequence;
+    /** ObservationCategoryCodeSequenceTrial, 0x0040A167, SQ, 1, RET */
     extern DICOM_EXPORT const tag ObservationCategoryCodeSequenceTrial;
-    /** ObservationDateTime, (0040,A032), DT, 1,  */
+    /** ObservationDateTime, 0x0040A032, DT, 1 */
     extern DICOM_EXPORT const tag ObservationDateTime;
-    /** ObservationDateTrial, (0040,A192), DA, 1, RET */
+    /** ObservationDateTrial, 0x0040A192, DA, 1, RET */
     extern DICOM_EXPORT const tag ObservationDateTrial;
-    /** ObservationNumber, (3006,0082), IS, 1,  */
+    /** ObservationDescription, 0x0082000A, UT, 1 */
+    extern DICOM_EXPORT const tag ObservationDescription;
+    /** ObservationNumber, 0x30060082, IS, 1 */
     extern DICOM_EXPORT const tag ObservationNumber;
-    /** ObservationSubjectClassTrial, (0040,A403), CS, 1, RET */
+    /** ObservationSignificance, 0x00820008, CS, 1 */
+    extern DICOM_EXPORT const tag ObservationSignificance;
+    /** ObservationSubjectClassTrial, 0x0040A403, CS, 1, RET */
     extern DICOM_EXPORT const tag ObservationSubjectClassTrial;
-    /** ObservationSubjectContextFlagTrial, (0040,A600), CS, 1, RET */
+    /** ObservationSubjectContextFlagTrial, 0x0040A600, CS, 1, RET */
     extern DICOM_EXPORT const tag ObservationSubjectContextFlagTrial;
-    /** ObservationSubjectTypeCodeSequenceTrial, (0040,A404), SQ, 1, RET */
+    /** ObservationSubjectTypeCodeSequenceTrial, 0x0040A404, SQ, 1, RET */
     extern DICOM_EXPORT const tag ObservationSubjectTypeCodeSequenceTrial;
-    /** ObservationSubjectUIDTrial, (0040,A402), UI, 1, RET */
+    /** ObservationSubjectUIDTrial, 0x0040A402, UI, 1, RET */
     extern DICOM_EXPORT const tag ObservationSubjectUIDTrial;
-    /** ObservationTimeTrial, (0040,A193), TM, 1, RET */
+    /** ObservationTimeTrial, 0x0040A193, TM, 1, RET */
     extern DICOM_EXPORT const tag ObservationTimeTrial;
-    /** ObservationUIDTrial, (0040,A171), UI, 1, RET */
-    extern DICOM_EXPORT const tag ObservationUIDTrial;
-    /** ObserverContextFlagTrial, (0040,A601), CS, 1, RET */
+    /** ObservationUID, 0x0040A171, UI, 1 */
+    extern DICOM_EXPORT const tag ObservationUID;
+    /** ObserverContextFlagTrial, 0x0040A601, CS, 1, RET */
     extern DICOM_EXPORT const tag ObserverContextFlagTrial;
-    /** ObserverType, (0040,A084), CS, 1,  */
+    /** ObserverType, 0x0040A084, CS, 1 */
     extern DICOM_EXPORT const tag ObserverType;
-    /** Occupation, (0010,2180), SH, 1,  */
+    /** Occupation, 0x00102180, SH, 1 */
     extern DICOM_EXPORT const tag Occupation;
-    /** OCTAcquisitionDomain, (0052,0006), CS, 1,  */
+    /** OCTAcquisitionDomain, 0x00520006, CS, 1 */
     extern DICOM_EXPORT const tag OCTAcquisitionDomain;
-    /** OCTFocalDistance, (0052,0002), FD, 1,  */
+    /** OCTBscanAnalysisAcquisitionParametersSequence, 0x00221640, SQ, 1 */
+    extern DICOM_EXPORT const tag OCTBscanAnalysisAcquisitionParametersSequence;
+    /** OCTFocalDistance, 0x00520002, FD, 1 */
     extern DICOM_EXPORT const tag OCTFocalDistance;
-    /** OCTOpticalCenterWavelength, (0052,0007), FD, 1,  */
+    /** OCTOpticalCenterWavelength, 0x00520007, FD, 1 */
     extern DICOM_EXPORT const tag OCTOpticalCenterWavelength;
-    /** OCTZOffsetApplied, (0052,0026), CS, 1,  */
+    /** OCTZOffsetApplied, 0x00520026, CS, 1 */
     extern DICOM_EXPORT const tag OCTZOffsetApplied;
-    /** OCTZOffsetCorrection, (0052,0030), SS, 1,  */
+    /** OCTZOffsetCorrection, 0x00520030, SS, 1 */
     extern DICOM_EXPORT const tag OCTZOffsetCorrection;
-    /** OffsetOfReferencedLowerLevelDirectoryEntity, (0004,1420), UL, 1,  */
+    /** OffsetDirection, 0x00189905, CS, 1 */
+    extern DICOM_EXPORT const tag OffsetDirection;
+    /** OffsetDistance, 0x00189904, DS, 1 */
+    extern DICOM_EXPORT const tag OffsetDistance;
+    /** OffsetOfReferencedLowerLevelDirectoryEntity, 0x00041420, UL, 1 */
     extern DICOM_EXPORT const tag OffsetOfReferencedLowerLevelDirectoryEntity;
-    /** OffsetOfTheFirstDirectoryRecordOfTheRootDirectoryEntity, (0004,1200), UL, 1,  */
+    /** OffsetOfTheFirstDirectoryRecordOfTheRootDirectoryEntity, 0x00041200, UL, 1 */
     extern DICOM_EXPORT const tag OffsetOfTheFirstDirectoryRecordOfTheRootDirectoryEntity;
-    /** OffsetOfTheLastDirectoryRecordOfTheRootDirectoryEntity, (0004,1202), UL, 1,  */
+    /** OffsetOfTheLastDirectoryRecordOfTheRootDirectoryEntity, 0x00041202, UL, 1 */
     extern DICOM_EXPORT const tag OffsetOfTheLastDirectoryRecordOfTheRootDirectoryEntity;
-    /** OffsetOfTheNextDirectoryRecord, (0004,1400), UL, 1,  */
+    /** OffsetOfTheNextDirectoryRecord, 0x00041400, UL, 1 */
     extern DICOM_EXPORT const tag OffsetOfTheNextDirectoryRecord;
-    /** OnAxisBackgroundAnatomicStructureCodeSequenceTrial, (0008,225C), SQ, 1, RET */
+    /** OmittedApplicationSetupSequence, 0x0074140E, SQ, 1 */
+    extern DICOM_EXPORT const tag OmittedApplicationSetupSequence;
+    /** OmittedBeamTaskSequence, 0x300C0111, SQ, 1 */
+    extern DICOM_EXPORT const tag OmittedBeamTaskSequence;
+    /** OmittedChannelSequence, 0x00741409, SQ, 1 */
+    extern DICOM_EXPORT const tag OmittedChannelSequence;
+    /** OnAxisBackgroundAnatomicStructureCodeSequenceTrial, 0x0008225C, SQ, 1, RET */
     extern DICOM_EXPORT const tag OnAxisBackgroundAnatomicStructureCodeSequenceTrial;
-    /** OOIOwnerCreationTime, (4010,1041), DT, 1,  */
+    /** OOIOwnerCreationTime, 0x40101041, DT, 1, RET */
     extern DICOM_EXPORT const tag OOIOwnerCreationTime;
-    /** OOIOwnerSequence, (4010,1047), SQ, 1,  */
+    /** OOIOwnerSequence, 0x40101047, SQ, 1, RET */
     extern DICOM_EXPORT const tag OOIOwnerSequence;
-    /** OOIOwnerType, (4010,1009), CS, 1,  */
+    /** OOIOwnerType, 0x40101009, CS, 1, RET */
     extern DICOM_EXPORT const tag OOIOwnerType;
-    /** OOISize, (4010,1043), FL, 3,  */
+    /** OOISize, 0x40101043, FL, 3, RET */
     extern DICOM_EXPORT const tag OOISize;
-    /** OOIType, (4010,1042), CS, 1,  */
+    /** OOIType, 0x40101042, CS, 1, RET */
     extern DICOM_EXPORT const tag OOIType;
-    /** OOITypeDescriptor, (4010,1068), LT, 1,  */
+    /** OOITypeDescriptor, 0x40101068, LT, 1, RET */
     extern DICOM_EXPORT const tag OOITypeDescriptor;
-    /** OperatingMode, (0018,9178), CS, 1,  */
+    /** OperatingMode, 0x00189178, CS, 1 */
     extern DICOM_EXPORT const tag OperatingMode;
-    /** OperatingModeSequence, (0018,9176), SQ, 1,  */
+    /** OperatingModeSequence, 0x00189176, SQ, 1 */
     extern DICOM_EXPORT const tag OperatingModeSequence;
-    /** OperatingModeType, (0018,9177), CS, 1,  */
+    /** OperatingModeType, 0x00189177, CS, 1 */
     extern DICOM_EXPORT const tag OperatingModeType;
-    /** OperatorIdentificationSequence, (0008,1072), SQ, 1,  */
+    /** OperatorIdentificationSequence, 0x00081072, SQ, 1 */
     extern DICOM_EXPORT const tag OperatorIdentificationSequence;
-    /** OperatorsName, (0008,1070), PN, 1-n,  */
+    /** OperatorsName, 0x00081070, PN, 1 */
     extern DICOM_EXPORT const tag OperatorsName;
-    /** OphthalmicAxialLength, (0022,1019), FL, 1,  */
+    /** OphthalmicAnatomicReferencePointXCoordinate, 0x00221624, FL, 1 */
+    extern DICOM_EXPORT const tag OphthalmicAnatomicReferencePointXCoordinate;
+    /** OphthalmicAnatomicReferencePointYCoordinate, 0x00221626, FL, 1 */
+    extern DICOM_EXPORT const tag OphthalmicAnatomicReferencePointYCoordinate;
+    /** OphthalmicAxialLength, 0x00221019, FL, 1 */
     extern DICOM_EXPORT const tag OphthalmicAxialLength;
-    /** OphthalmicAxialLengthAcquisitionMethodCodeSequence, (0022,1153), SQ, 1,  */
+    /** OphthalmicAxialLengthAcquisitionMethodCodeSequence, 0x00221153, SQ, 1, RET */
     extern DICOM_EXPORT const tag OphthalmicAxialLengthAcquisitionMethodCodeSequence;
-    /** OphthalmicAxialLengthDataSourceCodeSequence, (0022,1150), SQ, 1,  */
+    /** OphthalmicAxialLengthDataSourceCodeSequence, 0x00221150, SQ, 1 */
     extern DICOM_EXPORT const tag OphthalmicAxialLengthDataSourceCodeSequence;
-    /** OphthalmicAxialLengthDataSourceDescription, (0022,1159), LO, 1,  */
+    /** OphthalmicAxialLengthDataSourceDescription, 0x00221159, LO, 1 */
     extern DICOM_EXPORT const tag OphthalmicAxialLengthDataSourceDescription;
-    /** OphthalmicAxialLengthMeasurementModified, (0022,1140), CS, 1,  */
+    /** OphthalmicAxialLengthMeasurementModified, 0x00221140, CS, 1 */
     extern DICOM_EXPORT const tag OphthalmicAxialLengthMeasurementModified;
-    /** OphthalmicAxialLengthMeasurementsLengthSummationSequence, (0022,1212), SQ, 1,  */
+    /** OphthalmicAxialLengthMeasurementsLengthSummationSequence, 0x00221212, SQ, 1 */
     extern DICOM_EXPORT const tag OphthalmicAxialLengthMeasurementsLengthSummationSequence;
-    /** OphthalmicAxialLengthMeasurementsSegmentalLengthSequence, (0022,1211), SQ, 1,  */
+    /** OphthalmicAxialLengthMeasurementsSegmentalLengthSequence, 0x00221211, SQ, 1 */
     extern DICOM_EXPORT const tag OphthalmicAxialLengthMeasurementsSegmentalLengthSequence;
-    /** OphthalmicAxialLengthMeasurementsSegmentNameCodeSequence, (0022,1101), SQ, 1,  */
+    /** OphthalmicAxialLengthMeasurementsSegmentNameCodeSequence, 0x00221101, SQ, 1 */
     extern DICOM_EXPORT const tag OphthalmicAxialLengthMeasurementsSegmentNameCodeSequence;
-    /** OphthalmicAxialLengthMeasurementsSequence, (0022,1050), SQ, 1,  */
+    /** OphthalmicAxialLengthMeasurementsSequence, 0x00221050, SQ, 1 */
     extern DICOM_EXPORT const tag OphthalmicAxialLengthMeasurementsSequence;
-    /** OphthalmicAxialLengthMeasurementsTotalLengthSequence, (0022,1210), SQ, 1,  */
+    /** OphthalmicAxialLengthMeasurementsTotalLengthSequence, 0x00221210, SQ, 1 */
     extern DICOM_EXPORT const tag OphthalmicAxialLengthMeasurementsTotalLengthSequence;
-    /** OphthalmicAxialLengthMeasurementsType, (0022,1010), CS, 1,  */
+    /** OphthalmicAxialLengthMeasurementsType, 0x00221010, CS, 1 */
     extern DICOM_EXPORT const tag OphthalmicAxialLengthMeasurementsType;
-    /** OphthalmicAxialLengthQualityMetricSequence, (0022,1262), SQ, 1,  */
+    /** OphthalmicAxialLengthMethod, 0x00221515, CS, 1 */
+    extern DICOM_EXPORT const tag OphthalmicAxialLengthMethod;
+    /** OphthalmicAxialLengthQualityMetricSequence, 0x00221262, SQ, 1 */
     extern DICOM_EXPORT const tag OphthalmicAxialLengthQualityMetricSequence;
-    /** OphthalmicAxialLengthQualityMetricTypeDescription, (0022,1273), LO, 1,  */
+    /** OphthalmicAxialLengthQualityMetricTypeCodeSequence, 0x00221265, SQ, 1, RET */
+    extern DICOM_EXPORT const tag OphthalmicAxialLengthQualityMetricTypeCodeSequence;
+    /** OphthalmicAxialLengthQualityMetricTypeDescription, 0x00221273, LO, 1, RET */
     extern DICOM_EXPORT const tag OphthalmicAxialLengthQualityMetricTypeDescription;
-    /** OphthalmicAxialLengthSelectionMethodCodeSequence, (0022,1250), SQ, 1,  */
+    /** OphthalmicAxialLengthSelectionMethodCodeSequence, 0x00221250, SQ, 1 */
     extern DICOM_EXPORT const tag OphthalmicAxialLengthSelectionMethodCodeSequence;
-    /** OphthalmicAxialLengthSequence, (0022,1012), SQ, 1,  */
+    /** OphthalmicAxialLengthSequence, 0x00221012, SQ, 1 */
     extern DICOM_EXPORT const tag OphthalmicAxialLengthSequence;
-    /** OphthalmicAxialLengthVelocity, (0022,1059), FL, 1,  */
+    /** OphthalmicAxialLengthVelocity, 0x00221059, FL, 1 */
     extern DICOM_EXPORT const tag OphthalmicAxialLengthVelocity;
-    /** OphthalmicAxialMeasurementsDeviceType, (0022,1009), CS, 1,  */
+    /** OphthalmicAxialMeasurementsDeviceType, 0x00221009, CS, 1 */
     extern DICOM_EXPORT const tag OphthalmicAxialMeasurementsDeviceType;
-    /** OphthalmicAxialMeasurementsLeftEyeSequence, (0022,1008), SQ, 1,  */
+    /** OphthalmicAxialMeasurementsLeftEyeSequence, 0x00221008, SQ, 1 */
     extern DICOM_EXPORT const tag OphthalmicAxialMeasurementsLeftEyeSequence;
-    /** OphthalmicAxialMeasurementsRightEyeSequence, (0022,1007), SQ, 1,  */
+    /** OphthalmicAxialMeasurementsRightEyeSequence, 0x00221007, SQ, 1 */
     extern DICOM_EXPORT const tag OphthalmicAxialMeasurementsRightEyeSequence;
-    /** OphthalmicFrameLocationSequence, (0022,0031), SQ, 1,  */
+    /** OphthalmicEnFaceImageQualityRatingSequence, 0x00221628, SQ, 1 */
+    extern DICOM_EXPORT const tag OphthalmicEnFaceImageQualityRatingSequence;
+    /** OphthalmicFOV, 0x00221517, FL, 1 */
+    extern DICOM_EXPORT const tag OphthalmicFOV;
+    /** OphthalmicFrameLocationSequence, 0x00220031, SQ, 1 */
     extern DICOM_EXPORT const tag OphthalmicFrameLocationSequence;
-    /** OphthalmicImageOrientation, (0022,0039), CS, 1,  */
+    /** OphthalmicImageOrientation, 0x00220039, CS, 1 */
     extern DICOM_EXPORT const tag OphthalmicImageOrientation;
-    /** OphthalmicPatientClinicalInformationLeftEyeSequence, (0024,0114), SQ, 1,  */
+    /** OphthalmicImageTypeCodeSequence, 0x00221615, SQ, 1 */
+    extern DICOM_EXPORT const tag OphthalmicImageTypeCodeSequence;
+    /** OphthalmicImageTypeDescription, 0x00221616, LO, 1 */
+    extern DICOM_EXPORT const tag OphthalmicImageTypeDescription;
+    /** OphthalmicMappingDeviceType, 0x00221415, CS, 1 */
+    extern DICOM_EXPORT const tag OphthalmicMappingDeviceType;
+    /** OphthalmicPatientClinicalInformationLeftEyeSequence, 0x00240114, SQ, 1 */
     extern DICOM_EXPORT const tag OphthalmicPatientClinicalInformationLeftEyeSequence;
-    /** OphthalmicPatientClinicalInformationRightEyeSequence, (0024,0115), SQ, 1,  */
+    /** OphthalmicPatientClinicalInformationRightEyeSequence, 0x00240115, SQ, 1 */
     extern DICOM_EXPORT const tag OphthalmicPatientClinicalInformationRightEyeSequence;
-    /** OphthalmicUltrasoundAxialMeasurementsTypeCodeSequence, (0022,1044), SQ, 1,  */
-    extern DICOM_EXPORT const tag OphthalmicUltrasoundAxialMeasurementsTypeCodeSequence;
-    /** OpticalOphthalmicAxialLengthMeasurementsSequence, (0022,1225), SQ, 1,  */
+    /** OphthalmicThicknessMappingNormalsSequence, 0x00221443, SQ, 1 */
+    extern DICOM_EXPORT const tag OphthalmicThicknessMappingNormalsSequence;
+    /** OphthalmicThicknessMapQualityRatingSequence, 0x00221470, SQ, 1 */
+    extern DICOM_EXPORT const tag OphthalmicThicknessMapQualityRatingSequence;
+    /** OphthalmicThicknessMapQualityThresholdSequence, 0x00221458, SQ, 1 */
+    extern DICOM_EXPORT const tag OphthalmicThicknessMapQualityThresholdSequence;
+    /** OphthalmicThicknessMapThresholdQualityRating, 0x00221460, FL, 1 */
+    extern DICOM_EXPORT const tag OphthalmicThicknessMapThresholdQualityRating;
+    /** OphthalmicThicknessMapTypeCodeSequence, 0x00221436, SQ, 1 */
+    extern DICOM_EXPORT const tag OphthalmicThicknessMapTypeCodeSequence;
+    /** OphthalmicUltrasoundMethodCodeSequence, 0x00221044, SQ, 1 */
+    extern DICOM_EXPORT const tag OphthalmicUltrasoundMethodCodeSequence;
+    /** OphthalmicVolumetricPropertiesFlag, 0x00221622, CS, 1 */
+    extern DICOM_EXPORT const tag OphthalmicVolumetricPropertiesFlag;
+    /** OpticalOphthalmicAxialLengthMeasurementsSequence, 0x00221225, SQ, 1 */
     extern DICOM_EXPORT const tag OpticalOphthalmicAxialLengthMeasurementsSequence;
-    /** OpticalPathDescription, (0048,0107), ST, 1,  */
+    /** OpticalPathDescription, 0x00480107, ST, 1 */
     extern DICOM_EXPORT const tag OpticalPathDescription;
-    /** OpticalPathIdentificationSequence, (0048,0207), SQ, 1,  */
+    /** OpticalPathIdentificationSequence, 0x00480207, SQ, 1 */
     extern DICOM_EXPORT const tag OpticalPathIdentificationSequence;
-    /** OpticalPathIdentifier, (0048,0106), SH, 1,  */
+    /** OpticalPathIdentifier, 0x00480106, SH, 1 */
     extern DICOM_EXPORT const tag OpticalPathIdentifier;
-    /** OpticalPathSequence, (0048,0105), SQ, 1,  */
+    /** OpticalPathSequence, 0x00480105, SQ, 1 */
     extern DICOM_EXPORT const tag OpticalPathSequence;
-    /** OpticalSelectedOphthalmicAxialLengthSequence, (0022,1255), SQ, 1,  */
+    /** OpticalSelectedOphthalmicAxialLengthSequence, 0x00221255, SQ, 1 */
     extern DICOM_EXPORT const tag OpticalSelectedOphthalmicAxialLengthSequence;
-    /** OpticalTransmittance, (0046,0040), FD, 1,  */
+    /** OpticalTransmittance, 0x00460040, FD, 1 */
     extern DICOM_EXPORT const tag OpticalTransmittance;
-    /** Optotype, (0046,0094), CS, 1,  */
+    /** Optotype, 0x00460094, CS, 1 */
     extern DICOM_EXPORT const tag Optotype;
-    /** OptotypeDetailedDefinition, (0046,0139), LO, 1,  */
+    /** OptotypeDetailedDefinition, 0x00460139, LO, 1 */
     extern DICOM_EXPORT const tag OptotypeDetailedDefinition;
-    /** OptotypePresentation, (0046,0095), CS, 1,  */
+    /** OptotypePresentation, 0x00460095, CS, 1 */
     extern DICOM_EXPORT const tag OptotypePresentation;
-    /** OrderCallbackPhoneNumber, (0040,2010), SH, 1,  */
+    /** OrderCallbackPhoneNumber, 0x00402010, SH, 1 */
     extern DICOM_EXPORT const tag OrderCallbackPhoneNumber;
-    /** OrderEnteredBy, (0040,2008), PN, 1,  */
+    /** OrderCallbackTelecomInformation, 0x00402011, LT, 1 */
+    extern DICOM_EXPORT const tag OrderCallbackTelecomInformation;
+    /** OrderEnteredBy, 0x00402008, PN, 1 */
     extern DICOM_EXPORT const tag OrderEnteredBy;
-    /** OrderEntererLocation, (0040,2009), SH, 1,  */
+    /** OrderEntererLocation, 0x00402009, SH, 1 */
     extern DICOM_EXPORT const tag OrderEntererLocation;
-    /** OrderFillerIdentifierSequence, (0040,0027), SQ, 1,  */
+    /** OrderFillerIdentifierSequence, 0x00400027, SQ, 1 */
     extern DICOM_EXPORT const tag OrderFillerIdentifierSequence;
-    /** OrderPlacerIdentifierSequence, (0040,0026), SQ, 1,  */
+    /** OrderPlacerIdentifierSequence, 0x00400026, SQ, 1 */
     extern DICOM_EXPORT const tag OrderPlacerIdentifierSequence;
-    /** OrganAtRiskFullVolumeDose, (300A,002A), DS, 1,  */
+    /** OrganAtRiskFullVolumeDose, 0x300A002A, DS, 1 */
     extern DICOM_EXPORT const tag OrganAtRiskFullVolumeDose;
-    /** OrganAtRiskLimitDose, (300A,002B), DS, 1,  */
+    /** OrganAtRiskLimitDose, 0x300A002B, DS, 1 */
     extern DICOM_EXPORT const tag OrganAtRiskLimitDose;
-    /** OrganAtRiskMaximumDose, (300A,002C), DS, 1,  */
+    /** OrganAtRiskMaximumDose, 0x300A002C, DS, 1 */
     extern DICOM_EXPORT const tag OrganAtRiskMaximumDose;
-    /** OrganAtRiskOverdoseVolumeFraction, (300A,002D), DS, 1,  */
+    /** OrganAtRiskOverdoseVolumeFraction, 0x300A002D, DS, 1 */
     extern DICOM_EXPORT const tag OrganAtRiskOverdoseVolumeFraction;
-    /** OrganDose, (0040,0316), DS, 1,  */
+    /** OrganDose, 0x00400316, DS, 1 */
     extern DICOM_EXPORT const tag OrganDose;
-    /** OrganExposed, (0040,0318), CS, 1,  */
+    /** OrganExposed, 0x00400318, CS, 1 */
     extern DICOM_EXPORT const tag OrganExposed;
-    /** OriginalAttributesSequence, (0400,0561), SQ, 1,  */
+    /** OrganizationalRoleCodeSequence, 0x0044010A, SQ, 1 */
+    extern DICOM_EXPORT const tag OrganizationalRoleCodeSequence;
+    /** OriginalAttributesSequence, 0x04000561, SQ, 1 */
     extern DICOM_EXPORT const tag OriginalAttributesSequence;
-    /** OriginalImageIdentification, (0020,5000), AT, 1-n, RET */
+    /** OriginalImageIdentification, 0x00205000, AT, 1, RET */
     extern DICOM_EXPORT const tag OriginalImageIdentification;
-    /** OriginalImageIdentificationNomenclature, (0020,5002), LO, 1-n, RET */
+    /** OriginalImageIdentificationNomenclature, 0x00205002, LO, 1, RET */
     extern DICOM_EXPORT const tag OriginalImageIdentificationNomenclature;
-    /** OriginalImageSequence, (2130,00C0), SQ, 1, RET */
+    /** OriginalImageSequence, 0x213000C0, SQ, 1, RET */
     extern DICOM_EXPORT const tag OriginalImageSequence;
-    /** OriginalImplantAssemblyTemplateSequence, (0076,000C), SQ, 1,  */
+    /** OriginalImplantAssemblyTemplateSequence, 0x0076000C, SQ, 1 */
     extern DICOM_EXPORT const tag OriginalImplantAssemblyTemplateSequence;
-    /** OriginalImplantTemplateSequence, (0068,6225), SQ, 1,  */
+    /** OriginalImplantTemplateSequence, 0x00686225, SQ, 1 */
     extern DICOM_EXPORT const tag OriginalImplantTemplateSequence;
-    /** OriginalSpecializedSOPClassUID, (0008,001B), UI, 1,  */
+    /** OriginalSpecializedSOPClassUID, 0x0008001B, UI, 1 */
     extern DICOM_EXPORT const tag OriginalSpecializedSOPClassUID;
-    /** Originator, (2100,0070), AE, 1,  */
+    /** Originator, 0x21000070, AE, 1 */
     extern DICOM_EXPORT const tag Originator;
-    /** OtherMagnificationTypesAvailable, (2010,00A7), CS, 1-n,  */
+    /** OtherApprovalStatus, 0x00140107, CS, 1, RET */
+    extern DICOM_EXPORT const tag OtherApprovalStatus;
+    /** OtherFailuresSequence, 0x0008119A, SQ, 1 */
+    extern DICOM_EXPORT const tag OtherFailuresSequence;
+    /** OtherMagnificationTypesAvailable, 0x201000A7, CS, 1 */
     extern DICOM_EXPORT const tag OtherMagnificationTypesAvailable;
-    /** OtherMediaAvailableSequence, (2000,00A4), SQ, 1,  */
+    /** OtherMediaAvailableSequence, 0x200000A4, SQ, 1 */
     extern DICOM_EXPORT const tag OtherMediaAvailableSequence;
-    /** OtherPatientIDs, (0010,1000), LO, 1-n,  */
+    /** OtherPatientIDs, 0x00101000, LO, 1, RET */
     extern DICOM_EXPORT const tag OtherPatientIDs;
-    /** OtherPatientIDsSequence, (0010,1002), SQ, 1,  */
+    /** OtherPatientIDsSequence, 0x00101002, SQ, 1 */
     extern DICOM_EXPORT const tag OtherPatientIDsSequence;
-    /** OtherPatientNames, (0010,1001), PN, 1-n,  */
+    /** OtherPatientNames, 0x00101001, PN, 1 */
     extern DICOM_EXPORT const tag OtherPatientNames;
-    /** OtherPupillaryDistance, (0046,0064), FD, 1,  */
+    /** OtherPupillaryDistance, 0x00460064, FD, 1 */
     extern DICOM_EXPORT const tag OtherPupillaryDistance;
-    /** OtherSmoothingTypesAvailable, (2010,00A9), CS, 1-n,  */
+    /** OtherSecondaryApprovalStatus, 0x00140108, CS, 1, RET */
+    extern DICOM_EXPORT const tag OtherSecondaryApprovalStatus;
+    /** OtherSmoothingTypesAvailable, 0x201000A9, CS, 1 */
     extern DICOM_EXPORT const tag OtherSmoothingTypesAvailable;
-    /** OtherStudyNumbers, (0020,1070), IS, 1-n, RET */
+    /** OtherStudyNumbers, 0x00201070, IS, 1, RET */
     extern DICOM_EXPORT const tag OtherStudyNumbers;
-    /** OuterDiameter, (0014,0054), DS, 1,  */
+    /** OuterDiameter, 0x00140054, DS, 1, RET */
     extern DICOM_EXPORT const tag OuterDiameter;
-    /** OutputInformationSequence, (0040,4033), SQ, 1,  */
+    /** OutputDestinationSequence, 0x00404070, SQ, 1 */
+    extern DICOM_EXPORT const tag OutputDestinationSequence;
+    /** OutputInformationSequence, 0x00404033, SQ, 1 */
     extern DICOM_EXPORT const tag OutputInformationSequence;
-    /** OutputPower, (0018,5000), SH, 1-n,  */
+    /** OutputPower, 0x00185000, SH, 1 */
     extern DICOM_EXPORT const tag OutputPower;
-    /** OverallTemplateSpatialTolerance, (0068,62A5), FD, 1,  */
+    /** OverallTemplateSpatialTolerance, 0x006862A5, FD, 1 */
     extern DICOM_EXPORT const tag OverallTemplateSpatialTolerance;
-    /** OverlayActivationLayer, (60XX,1001), CS, 1,  */
-    extern const range_tag OverlayActivationLayer;
-    /** OverlayBackgroundDensity, (2040,0082), CS, 1, RET */
+    /** OverlayActivationLayer, 0x60001001, CS, 1 */
+    extern DICOM_EXPORT const range_tag OverlayActivationLayer;
+    /** OverlayBackgroundDensity, 0x20400082, CS, 1, RET */
     extern DICOM_EXPORT const tag OverlayBackgroundDensity;
-    /** OverlayBitPosition, (60XX,0102), US, 1,  */
-    extern const range_tag OverlayBitPosition;
-    /** OverlayBitsAllocated, (60XX,0100), US, 1,  */
-    extern const range_tag OverlayBitsAllocated;
-    /** OverlayBitsForCodeWord, (60XX,0804), US, 1, RET */
-    extern const range_tag OverlayBitsForCodeWord;
-    /** OverlayBitsGrouped, (60XX,0069), US, 1, RET */
-    extern const range_tag OverlayBitsGrouped;
-    /** OverlayCodeLabel, (60XX,0800), CS, 1-n, RET */
-    extern const range_tag OverlayCodeLabel;
-    /** OverlayCodeTableLocation, (60XX,0803), AT, 1-n, RET */
-    extern const range_tag OverlayCodeTableLocation;
-    /** OverlayColumns, (60XX,0011), US, 1,  */
-    extern const range_tag OverlayColumns;
-    /** OverlayComments, (60XX,4000), LT, 1, RET */
-    extern const range_tag OverlayComments;
-    /** OverlayCompressionCode, (60XX,0060), CS, 1, RET */
-    extern const range_tag OverlayCompressionCode;
-    /** OverlayCompressionDescription, (60XX,0063), CS, 1, RET */
-    extern const range_tag OverlayCompressionDescription;
-    /** OverlayCompressionLabel, (60XX,0062), SH, 1, RET */
-    extern const range_tag OverlayCompressionLabel;
-    /** OverlayCompressionOriginator, (60XX,0061), SH, 1, RET */
-    extern const range_tag OverlayCompressionOriginator;
-    /** OverlayCompressionStepPointers, (60XX,0066), AT, 1-n, RET */
-    extern const range_tag OverlayCompressionStepPointers;
-    /** OverlayData, (60XX,3000), OB or OW, 1,  */
-    extern const range_tag OverlayData;
-    /** OverlayDate, (0008,0024), DA, 1, RET */
+    /** OverlayBitPosition, 0x60000102, US, 1 */
+    extern DICOM_EXPORT const range_tag OverlayBitPosition;
+    /** OverlayBitsAllocated, 0x60000100, US, 1 */
+    extern DICOM_EXPORT const range_tag OverlayBitsAllocated;
+    /** OverlayBitsForCodeWord, 0x60000804, US, 1, RET */
+    extern DICOM_EXPORT const range_tag OverlayBitsForCodeWord;
+    /** OverlayBitsGrouped, 0x60000069, US, 1, RET */
+    extern DICOM_EXPORT const range_tag OverlayBitsGrouped;
+    /** OverlayCodeLabel, 0x60000800, CS, 1, RET */
+    extern DICOM_EXPORT const range_tag OverlayCodeLabel;
+    /** OverlayCodeTableLocation, 0x60000803, AT, 1, RET */
+    extern DICOM_EXPORT const range_tag OverlayCodeTableLocation;
+    /** OverlayColumns, 0x60000011, US, 1 */
+    extern DICOM_EXPORT const range_tag OverlayColumns;
+    /** OverlayComments, 0x60004000, LT, 1, RET */
+    extern DICOM_EXPORT const range_tag OverlayComments;
+    /** OverlayCompressionCode, 0x60000060, CS, 1, RET */
+    extern DICOM_EXPORT const range_tag OverlayCompressionCode;
+    /** OverlayCompressionDescription, 0x60000063, CS, 1, RET */
+    extern DICOM_EXPORT const range_tag OverlayCompressionDescription;
+    /** OverlayCompressionLabel, 0x60000062, SH, 1, RET */
+    extern DICOM_EXPORT const range_tag OverlayCompressionLabel;
+    /** OverlayCompressionOriginator, 0x60000061, SH, 1, RET */
+    extern DICOM_EXPORT const range_tag OverlayCompressionOriginator;
+    /** OverlayCompressionStepPointers, 0x60000066, AT, 1, RET */
+    extern DICOM_EXPORT const range_tag OverlayCompressionStepPointers;
+    /** OverlayData, 0x60003000, OB or OW, 1 */
+    extern DICOM_EXPORT const range_tag OverlayData;
+    /** OverlayDate, 0x00080024, DA, 1, RET */
     extern DICOM_EXPORT const tag OverlayDate;
-    /** OverlayDescription, (60XX,0022), LO, 1,  */
-    extern const range_tag OverlayDescription;
-    /** OverlayDescriptorBlue, (60XX,1103), US, 1, RET */
-    extern const range_tag OverlayDescriptorBlue;
-    /** OverlayDescriptorGray, (60XX,1100), US, 1, RET */
-    extern const range_tag OverlayDescriptorGray;
-    /** OverlayDescriptorGreen, (60XX,1102), US, 1, RET */
-    extern const range_tag OverlayDescriptorGreen;
-    /** OverlayDescriptorRed, (60XX,1101), US, 1, RET */
-    extern const range_tag OverlayDescriptorRed;
-    /** OverlayForegroundDensity, (2040,0080), CS, 1, RET */
+    /** OverlayDescription, 0x60000022, LO, 1 */
+    extern DICOM_EXPORT const range_tag OverlayDescription;
+    /** OverlayDescriptorBlue, 0x60001103, US, 1, RET */
+    extern DICOM_EXPORT const range_tag OverlayDescriptorBlue;
+    /** OverlayDescriptorGray, 0x60001100, US, 1, RET */
+    extern DICOM_EXPORT const range_tag OverlayDescriptorGray;
+    /** OverlayDescriptorGreen, 0x60001102, US, 1, RET */
+    extern DICOM_EXPORT const range_tag OverlayDescriptorGreen;
+    /** OverlayDescriptorRed, 0x60001101, US, 1, RET */
+    extern DICOM_EXPORT const range_tag OverlayDescriptorRed;
+    /** OverlayForegroundDensity, 0x20400080, CS, 1, RET */
     extern DICOM_EXPORT const tag OverlayForegroundDensity;
-    /** OverlayFormat, (60XX,0110), CS, 1, RET */
-    extern const range_tag OverlayFormat;
-    /** OverlayLabel, (60XX,1500), LO, 1,  */
-    extern const range_tag OverlayLabel;
-    /** OverlayLocation, (60XX,0200), US, 1, RET */
-    extern const range_tag OverlayLocation;
-    /** OverlayMagnificationType, (2040,0060), CS, 1, RET */
+    /** OverlayFormat, 0x60000110, CS, 1, RET */
+    extern DICOM_EXPORT const range_tag OverlayFormat;
+    /** OverlayLabel, 0x60001500, LO, 1 */
+    extern DICOM_EXPORT const range_tag OverlayLabel;
+    /** OverlayLocation, 0x60000200, US, 1, RET */
+    extern DICOM_EXPORT const range_tag OverlayLocation;
+    /** OverlayMagnificationType, 0x20400060, CS, 1, RET */
     extern DICOM_EXPORT const tag OverlayMagnificationType;
-    /** OverlayMode, (2040,0090), CS, 1, RET */
+    /** OverlayMode, 0x20400090, CS, 1, RET */
     extern DICOM_EXPORT const tag OverlayMode;
-    /** OverlayNumber, (0020,0022), IS, 1, RET */
+    /** OverlayNumber, 0x00200022, IS, 1, RET */
     extern DICOM_EXPORT const tag OverlayNumber;
-    /** OverlayNumberOfTables, (60XX,0802), US, 1, RET */
-    extern const range_tag OverlayNumberOfTables;
-    /** OverlayOrigin, (60XX,0050), SS, 2,  */
-    extern const range_tag OverlayOrigin;
-    /** OverlayOrImageMagnification, (2040,0072), CS, 1, RET */
+    /** OverlayNumberOfTables, 0x60000802, US, 1, RET */
+    extern DICOM_EXPORT const range_tag OverlayNumberOfTables;
+    /** OverlayOrigin, 0x60000050, SS, 2 */
+    extern DICOM_EXPORT const range_tag OverlayOrigin;
+    /** OverlayOrImageMagnification, 0x20400072, CS, 1, RET */
     extern DICOM_EXPORT const tag OverlayOrImageMagnification;
-    /** OverlayPixelDataSequence, (2040,0020), SQ, 1, RET */
+    /** OverlayPixelDataSequence, 0x20400020, SQ, 1, RET */
     extern DICOM_EXPORT const tag OverlayPixelDataSequence;
-    /** OverlayPlaneOrigin, (60XX,0052), US, 1, RET */
-    extern const range_tag OverlayPlaneOrigin;
-    /** OverlayPlanes, (60XX,0012), US, 1, RET */
-    extern const range_tag OverlayPlanes;
-    /** OverlayRepeatInterval, (60XX,0068), US, 1, RET */
-    extern const range_tag OverlayRepeatInterval;
-    /** OverlayRows, (60XX,0010), US, 1,  */
-    extern const range_tag OverlayRows;
-    /** OverlaysBlue, (60XX,1203), US, 1-n, RET */
-    extern const range_tag OverlaysBlue;
-    /** OverlaysGray, (60XX,1200), US, 1-n, RET */
-    extern const range_tag OverlaysGray;
-    /** OverlaysGreen, (60XX,1202), US, 1-n, RET */
-    extern const range_tag OverlaysGreen;
-    /** OverlaySmoothingType, (2040,0070), CS, 1, RET */
+    /** OverlayPlaneOrigin, 0x60000052, US, 1, RET */
+    extern DICOM_EXPORT const range_tag OverlayPlaneOrigin;
+    /** OverlayPlanes, 0x60000012, US, 1, RET */
+    extern DICOM_EXPORT const range_tag OverlayPlanes;
+    /** OverlayRepeatInterval, 0x60000068, US, 1, RET */
+    extern DICOM_EXPORT const range_tag OverlayRepeatInterval;
+    /** OverlayRows, 0x60000010, US, 1 */
+    extern DICOM_EXPORT const range_tag OverlayRows;
+    /** OverlaysBlue, 0x60001203, US, 1, RET */
+    extern DICOM_EXPORT const range_tag OverlaysBlue;
+    /** OverlaysGray, 0x60001200, US, 1, RET */
+    extern DICOM_EXPORT const range_tag OverlaysGray;
+    /** OverlaysGreen, 0x60001202, US, 1, RET */
+    extern DICOM_EXPORT const range_tag OverlaysGreen;
+    /** OverlaySmoothingType, 0x20400070, CS, 1, RET */
     extern DICOM_EXPORT const tag OverlaySmoothingType;
-    /** OverlaysRed, (60XX,1201), US, 1-n, RET */
-    extern const range_tag OverlaysRed;
-    /** OverlaySubtype, (60XX,0045), LO, 1,  */
-    extern const range_tag OverlaySubtype;
-    /** OverlayTime, (0008,0034), TM, 1, RET */
+    /** OverlaysRed, 0x60001201, US, 1, RET */
+    extern DICOM_EXPORT const range_tag OverlaysRed;
+    /** OverlaySubtype, 0x60000045, LO, 1 */
+    extern DICOM_EXPORT const range_tag OverlaySubtype;
+    /** OverlayTime, 0x00080034, TM, 1, RET */
     extern DICOM_EXPORT const tag OverlayTime;
-    /** OverlayType, (60XX,0040), CS, 1,  */
-    extern const range_tag OverlayType;
-    /** OverriddenAttributesSequence, (0074,104A), SQ, 1,  */
+    /** OverlayType, 0x60000040, CS, 1 */
+    extern DICOM_EXPORT const range_tag OverlayType;
+    /** OverriddenAttributesSequence, 0x0074104A, SQ, 1 */
     extern DICOM_EXPORT const tag OverriddenAttributesSequence;
-    /** OverrideParameterPointer, (3008,0062), AT, 1,  */
+    /** OverrideParameterPointer, 0x30080062, AT, 1 */
     extern DICOM_EXPORT const tag OverrideParameterPointer;
-    /** OverrideReason, (3008,0066), ST, 1,  */
+    /** OverrideReason, 0x30080066, ST, 1 */
     extern DICOM_EXPORT const tag OverrideReason;
-    /** OverrideSequence, (3008,0060), SQ, 1,  */
+    /** OverrideSequence, 0x30080060, SQ, 1 */
     extern DICOM_EXPORT const tag OverrideSequence;
-    /** OversamplingPhase, (0018,9029), CS, 1,  */
+    /** OversamplingPhase, 0x00189029, CS, 1 */
     extern DICOM_EXPORT const tag OversamplingPhase;
-    /** OwnerID, (2100,0160), SH, 1,  */
+    /** OwnerID, 0x21000160, SH, 1 */
     extern DICOM_EXPORT const tag OwnerID;
-    /** PageNumberVector, (0018,2001), IS, 1-n,  */
+    /** PaddleDescription, 0x001811A4, LO, 1 */
+    extern DICOM_EXPORT const tag PaddleDescription;
+    /** PageNumberVector, 0x00182001, IS, 1 */
     extern DICOM_EXPORT const tag PageNumberVector;
-    /** PaletteColorLookupTableSequence, (0048,0120), SQ, 1,  */
+    /** PaletteColorLookupTableSequence, 0x00480120, SQ, 1 */
     extern DICOM_EXPORT const tag PaletteColorLookupTableSequence;
-    /** PaletteColorLookupTableUID, (0028,1199), UI, 1,  */
+    /** PaletteColorLookupTableUID, 0x00281199, UI, 1 */
     extern DICOM_EXPORT const tag PaletteColorLookupTableUID;
-    /** ParallelAcquisition, (0018,9077), CS, 1,  */
+    /** ParallelAcquisition, 0x00189077, CS, 1 */
     extern DICOM_EXPORT const tag ParallelAcquisition;
-    /** ParallelAcquisitionTechnique, (0018,9078), CS, 1,  */
+    /** ParallelAcquisitionTechnique, 0x00189078, CS, 1 */
     extern DICOM_EXPORT const tag ParallelAcquisitionTechnique;
-    /** ParallelReductionFactorInPlane, (0018,9069), FD, 1,  */
+    /** ParallelReductionFactorInPlane, 0x00189069, FD, 1 */
     extern DICOM_EXPORT const tag ParallelReductionFactorInPlane;
-    /** ParallelReductionFactorInPlaneRetired, (0018,9096), FD, 1, RET */
+    /** ParallelReductionFactorInPlaneRetired, 0x00189096, FD, 1, RET */
     extern DICOM_EXPORT const tag ParallelReductionFactorInPlaneRetired;
-    /** ParallelReductionFactorOutOfPlane, (0018,9155), FD, 1,  */
+    /** ParallelReductionFactorOutOfPlane, 0x00189155, FD, 1 */
     extern DICOM_EXPORT const tag ParallelReductionFactorOutOfPlane;
-    /** ParallelReductionFactorSecondInPlane, (0018,9168), FD, 1,  */
+    /** ParallelReductionFactorSecondInPlane, 0x00189168, FD, 1 */
     extern DICOM_EXPORT const tag ParallelReductionFactorSecondInPlane;
-    /** ParameterItemIndex, (3008,0063), IS, 1,  */
+    /** ParameterItemIndex, 0x30080063, IS, 1 */
     extern DICOM_EXPORT const tag ParameterItemIndex;
-    /** ParameterPointer, (3008,0065), AT, 1,  */
+    /** ParameterPointer, 0x30080065, AT, 1 */
     extern DICOM_EXPORT const tag ParameterPointer;
-    /** ParameterSequencePointer, (3008,0061), AT, 1,  */
+    /** ParameterSequencePointer, 0x30080061, AT, 1 */
     extern DICOM_EXPORT const tag ParameterSequencePointer;
-    /** PartialDataDisplayHandling, (0072,0208), CS, 1,  */
+    /** ParametersSpecificationSequence, 0x00189913, SQ, 1 */
+    extern DICOM_EXPORT const tag ParametersSpecificationSequence;
+    /** ParameterValueNumber, 0x30080067, US, 1 */
+    extern DICOM_EXPORT const tag ParameterValueNumber;
+    /** ParametricMapFrameTypeSequence, 0x00409092, SQ, 1 */
+    extern DICOM_EXPORT const tag ParametricMapFrameTypeSequence;
+    /** PartialDataDisplayHandling, 0x00720208, CS, 1 */
     extern DICOM_EXPORT const tag PartialDataDisplayHandling;
-    /** PartialFourier, (0018,9081), CS, 1,  */
+    /** PartialFourier, 0x00189081, CS, 1 */
     extern DICOM_EXPORT const tag PartialFourier;
-    /** PartialFourierDirection, (0018,9036), CS, 1,  */
+    /** PartialFourierDirection, 0x00189036, CS, 1 */
     extern DICOM_EXPORT const tag PartialFourierDirection;
-    /** PartialView, (0028,1350), CS, 1,  */
+    /** PartialView, 0x00281350, CS, 1 */
     extern DICOM_EXPORT const tag PartialView;
-    /** PartialViewCodeSequence, (0028,1352), SQ, 1,  */
+    /** PartialViewCodeSequence, 0x00281352, SQ, 1 */
     extern DICOM_EXPORT const tag PartialViewCodeSequence;
-    /** PartialViewDescription, (0028,1351), ST, 1,  */
+    /** PartialViewDescription, 0x00281351, ST, 1 */
     extern DICOM_EXPORT const tag PartialViewDescription;
-    /** ParticipantSequence, (0040,A07A), SQ, 1,  */
+    /** ParticipantSequence, 0x0040A07A, SQ, 1 */
     extern DICOM_EXPORT const tag ParticipantSequence;
-    /** ParticipationDateTime, (0040,A082), DT, 1,  */
+    /** ParticipationDateTime, 0x0040A082, DT, 1 */
     extern DICOM_EXPORT const tag ParticipationDateTime;
-    /** ParticipationType, (0040,A080), CS, 1,  */
+    /** ParticipationType, 0x0040A080, CS, 1 */
     extern DICOM_EXPORT const tag ParticipationType;
-    /** PatientAdditionalPosition, (300A,0184), LO, 1,  */
+    /** PatientAdditionalPosition, 0x300A0184, LO, 1 */
     extern DICOM_EXPORT const tag PatientAdditionalPosition;
-    /** PatientAddress, (0010,1040), LO, 1,  */
+    /** PatientAddress, 0x00101040, LO, 1 */
     extern DICOM_EXPORT const tag PatientAddress;
-    /** PatientAge, (0010,1010), AS, 1,  */
+    /** PatientAge, 0x00101010, AS, 1 */
     extern DICOM_EXPORT const tag PatientAge;
-    /** PatientBirthDate, (0010,0030), DA, 1,  */
+    /** PatientAlternativeCalendar, 0x00100035, CS, 1 */
+    extern DICOM_EXPORT const tag PatientAlternativeCalendar;
+    /** PatientBirthDate, 0x00100030, DA, 1 */
     extern DICOM_EXPORT const tag PatientBirthDate;
-    /** PatientBirthName, (0010,1005), PN, 1,  */
+    /** PatientBirthDateInAlternativeCalendar, 0x00100033, LO, 1 */
+    extern DICOM_EXPORT const tag PatientBirthDateInAlternativeCalendar;
+    /** PatientBirthName, 0x00101005, PN, 1 */
     extern DICOM_EXPORT const tag PatientBirthName;
-    /** PatientBirthTime, (0010,0032), TM, 1,  */
+    /** PatientBirthTime, 0x00100032, TM, 1 */
     extern DICOM_EXPORT const tag PatientBirthTime;
-    /** PatientBreedCodeSequence, (0010,2293), SQ, 1,  */
+    /** PatientBodyMassIndex, 0x00101022, DS, 1 */
+    extern DICOM_EXPORT const tag PatientBodyMassIndex;
+    /** PatientBreedCodeSequence, 0x00102293, SQ, 1 */
     extern DICOM_EXPORT const tag PatientBreedCodeSequence;
-    /** PatientBreedDescription, (0010,2292), LO, 1,  */
+    /** PatientBreedDescription, 0x00102292, LO, 1 */
     extern DICOM_EXPORT const tag PatientBreedDescription;
-    /** PatientClinicalTrialParticipationSequence, (0038,0502), SQ, 1,  */
+    /** PatientClinicalTrialParticipationSequence, 0x00380502, SQ, 1 */
     extern DICOM_EXPORT const tag PatientClinicalTrialParticipationSequence;
-    /** PatientComments, (0010,4000), LT, 1,  */
+    /** PatientComments, 0x00104000, LT, 1 */
     extern DICOM_EXPORT const tag PatientComments;
-    /** PatientEyeMovementCommandCodeSequence, (0022,0006), SQ, 1,  */
+    /** PatientDeathDateInAlternativeCalendar, 0x00100034, LO, 1 */
+    extern DICOM_EXPORT const tag PatientDeathDateInAlternativeCalendar;
+    /** PatientEyeMovementCommandCodeSequence, 0x00220006, SQ, 1 */
     extern DICOM_EXPORT const tag PatientEyeMovementCommandCodeSequence;
-    /** PatientEyeMovementCommanded, (0022,0005), CS, 1,  */
+    /** PatientEyeMovementCommanded, 0x00220005, CS, 1 */
     extern DICOM_EXPORT const tag PatientEyeMovementCommanded;
-    /** PatientFrameOfReferenceSource, (0020,930C), CS, 1,  */
+    /** PatientFrameOfReferenceSource, 0x0020930C, CS, 1 */
     extern DICOM_EXPORT const tag PatientFrameOfReferenceSource;
-    /** PatientGantryRelationshipCodeSequence, (0054,0414), SQ, 1,  */
+    /** PatientGantryRelationshipCodeSequence, 0x00540414, SQ, 1 */
     extern DICOM_EXPORT const tag PatientGantryRelationshipCodeSequence;
-    /** PatientID, (0010,0020), LO, 1,  */
+    /** PatientID, 0x00100020, LO, 1 */
     extern DICOM_EXPORT const tag PatientID;
-    /** PatientIdentityRemoved, (0012,0062), CS, 1,  */
+    /** PatientIdentityRemoved, 0x00120062, CS, 1 */
     extern DICOM_EXPORT const tag PatientIdentityRemoved;
-    /** PatientInstitutionResidence, (0038,0400), LO, 1,  */
+    /** PatientInstitutionResidence, 0x00380400, LO, 1 */
     extern DICOM_EXPORT const tag PatientInstitutionResidence;
-    /** PatientInsurancePlanCodeSequence, (0010,0050), SQ, 1,  */
+    /** PatientInsurancePlanCodeSequence, 0x00100050, SQ, 1 */
     extern DICOM_EXPORT const tag PatientInsurancePlanCodeSequence;
-    /** PatientMotherBirthName, (0010,1060), PN, 1,  */
+    /** PatientMotherBirthName, 0x00101060, PN, 1 */
     extern DICOM_EXPORT const tag PatientMotherBirthName;
-    /** PatientMotionCorrected, (0018,9763), CS, 1,  */
+    /** PatientMotionCorrected, 0x00189763, CS, 1 */
     extern DICOM_EXPORT const tag PatientMotionCorrected;
-    /** PatientName, (0010,0010), PN, 1,  */
+    /** PatientName, 0x00100010, PN, 1 */
     extern DICOM_EXPORT const tag PatientName;
-    /** PatientNotProperlyFixatedQuantity, (0024,0036), US, 1,  */
+    /** PatientNotProperlyFixatedQuantity, 0x00240036, US, 1 */
     extern DICOM_EXPORT const tag PatientNotProperlyFixatedQuantity;
-    /** PatientOrientation, (0020,0020), CS, 2,  */
+    /** PatientOrientation, 0x00200020, CS, 2 */
     extern DICOM_EXPORT const tag PatientOrientation;
-    /** PatientOrientationCodeSequence, (0054,0410), SQ, 1,  */
+    /** PatientOrientationCodeSequence, 0x00540410, SQ, 1 */
     extern DICOM_EXPORT const tag PatientOrientationCodeSequence;
-    /** PatientOrientationInFrameSequence, (0020,9450), SQ, 1,  */
+    /** PatientOrientationInFrameSequence, 0x00209450, SQ, 1 */
     extern DICOM_EXPORT const tag PatientOrientationInFrameSequence;
-    /** PatientOrientationModifierCodeSequence, (0054,0412), SQ, 1,  */
+    /** PatientOrientationModifierCodeSequence, 0x00540412, SQ, 1 */
     extern DICOM_EXPORT const tag PatientOrientationModifierCodeSequence;
-    /** PatientPhysiologicalStateCodeSequence, (0018,9772), SQ, 1,  */
+    /** PatientPhysiologicalStateCodeSequence, 0x00189772, SQ, 1 */
     extern DICOM_EXPORT const tag PatientPhysiologicalStateCodeSequence;
-    /** PatientPhysiologicalStateSequence, (0018,9771), SQ, 1,  */
+    /** PatientPhysiologicalStateSequence, 0x00189771, SQ, 1 */
     extern DICOM_EXPORT const tag PatientPhysiologicalStateSequence;
-    /** PatientPosition, (0018,5100), CS, 1,  */
+    /** PatientPosition, 0x00185100, CS, 1 */
     extern DICOM_EXPORT const tag PatientPosition;
-    /** PatientPrimaryLanguageCodeSequence, (0010,0101), SQ, 1,  */
+    /** PatientPositioningInstructionSequence, 0x0018991B, SQ, 1 */
+    extern DICOM_EXPORT const tag PatientPositioningInstructionSequence;
+    /** PatientPrimaryLanguageCodeSequence, 0x00100101, SQ, 1 */
     extern DICOM_EXPORT const tag PatientPrimaryLanguageCodeSequence;
-    /** PatientPrimaryLanguageModifierCodeSequence, (0010,0102), SQ, 1,  */
+    /** PatientPrimaryLanguageModifierCodeSequence, 0x00100102, SQ, 1 */
     extern DICOM_EXPORT const tag PatientPrimaryLanguageModifierCodeSequence;
-    /** PatientReliabilityIndicator, (0024,0069), LO, 1,  */
+    /** PatientReliabilityIndicator, 0x00240069, LO, 1 */
     extern DICOM_EXPORT const tag PatientReliabilityIndicator;
-    /** PatientReligiousPreference, (0010,21F0), LO, 1,  */
+    /** PatientReligiousPreference, 0x001021F0, LO, 1 */
     extern DICOM_EXPORT const tag PatientReligiousPreference;
-    /** PatientSetupLabel, (300A,0183), LO, 1,  */
+    /** PatientSetupLabel, 0x300A0183, LO, 1 */
     extern DICOM_EXPORT const tag PatientSetupLabel;
-    /** PatientSetupNumber, (300A,0182), IS, 1,  */
+    /** PatientSetupNumber, 0x300A0182, IS, 1 */
     extern DICOM_EXPORT const tag PatientSetupNumber;
-    /** PatientSetupSequence, (300A,0180), SQ, 1,  */
+    /** PatientSetupSequence, 0x300A0180, SQ, 1 */
     extern DICOM_EXPORT const tag PatientSetupSequence;
-    /** PatientSex, (0010,0040), CS, 1,  */
+    /** PatientSex, 0x00100040, CS, 1 */
     extern DICOM_EXPORT const tag PatientSex;
-    /** PatientSexNeutered, (0010,2203), CS, 1,  */
+    /** PatientSexNeutered, 0x00102203, CS, 1 */
     extern DICOM_EXPORT const tag PatientSexNeutered;
-    /** PatientSize, (0010,1020), DS, 1,  */
+    /** PatientSize, 0x00101020, DS, 1 */
     extern DICOM_EXPORT const tag PatientSize;
-    /** PatientSizeCodeSequence, (0010,1021), SQ, 1,  */
+    /** PatientSizeCodeSequence, 0x00101021, SQ, 1 */
     extern DICOM_EXPORT const tag PatientSizeCodeSequence;
-    /** PatientSpeciesCodeSequence, (0010,2202), SQ, 1,  */
+    /** PatientSpeciesCodeSequence, 0x00102202, SQ, 1 */
     extern DICOM_EXPORT const tag PatientSpeciesCodeSequence;
-    /** PatientSpeciesDescription, (0010,2201), LO, 1,  */
+    /** PatientSpeciesDescription, 0x00102201, LO, 1 */
     extern DICOM_EXPORT const tag PatientSpeciesDescription;
-    /** PatientState, (0038,0500), LO, 1,  */
+    /** PatientSpecificationSequence, 0x00189911, SQ, 1 */
+    extern DICOM_EXPORT const tag PatientSpecificationSequence;
+    /** PatientState, 0x00380500, LO, 1 */
     extern DICOM_EXPORT const tag PatientState;
-    /** PatientSupportAccessoryCode, (300A,0354), LO, 1,  */
+    /** PatientSupportAccessoryCode, 0x300A0354, LO, 1 */
     extern DICOM_EXPORT const tag PatientSupportAccessoryCode;
-    /** PatientSupportAdjustedAngle, (0074,102A), FD, 1,  */
+    /** PatientSupportAdjustedAngle, 0x0074102A, FD, 1 */
     extern DICOM_EXPORT const tag PatientSupportAdjustedAngle;
-    /** PatientSupportAngle, (300A,0122), DS, 1,  */
+    /** PatientSupportAngle, 0x300A0122, DS, 1 */
     extern DICOM_EXPORT const tag PatientSupportAngle;
-    /** PatientSupportAngleTolerance, (300A,004C), DS, 1,  */
+    /** PatientSupportAngleTolerance, 0x300A004C, DS, 1 */
     extern DICOM_EXPORT const tag PatientSupportAngleTolerance;
-    /** PatientSupportID, (300A,0352), SH, 1,  */
+    /** PatientSupportID, 0x300A0352, SH, 1 */
     extern DICOM_EXPORT const tag PatientSupportID;
-    /** PatientSupportRotationDirection, (300A,0123), CS, 1,  */
+    /** PatientSupportRotationDirection, 0x300A0123, CS, 1 */
     extern DICOM_EXPORT const tag PatientSupportRotationDirection;
-    /** PatientSupportType, (300A,0350), CS, 1,  */
+    /** PatientSupportType, 0x300A0350, CS, 1 */
     extern DICOM_EXPORT const tag PatientSupportType;
-    /** PatientTelephoneNumbers, (0010,2154), SH, 1-n,  */
+    /** PatientTelecomInformation, 0x00102155, LT, 1 */
+    extern DICOM_EXPORT const tag PatientTelecomInformation;
+    /** PatientTelephoneNumbers, 0x00102154, SH, 1 */
     extern DICOM_EXPORT const tag PatientTelephoneNumbers;
-    /** PatientTransportArrangements, (0040,1004), LO, 1,  */
+    /** PatientTransportArrangements, 0x00401004, LO, 1 */
     extern DICOM_EXPORT const tag PatientTransportArrangements;
-    /** PatientWeight, (0010,1030), DS, 1,  */
+    /** PatientWeight, 0x00101030, DS, 1 */
     extern DICOM_EXPORT const tag PatientWeight;
-    /** PatternOffColorCIELabValue, (0070,0252), US, 3,  */
+    /** PatternOffColorCIELabValue, 0x00700252, US, 3 */
     extern DICOM_EXPORT const tag PatternOffColorCIELabValue;
-    /** PatternOffOpacity, (0070,0285), FL, 1,  */
+    /** PatternOffOpacity, 0x00700285, FL, 1 */
     extern DICOM_EXPORT const tag PatternOffOpacity;
-    /** PatternOnColorCIELabValue, (0070,0251), US, 3,  */
+    /** PatternOnColorCIELabValue, 0x00700251, US, 3 */
     extern DICOM_EXPORT const tag PatternOnColorCIELabValue;
-    /** PatternOnOpacity, (0070,0284), FL, 1,  */
+    /** PatternOnOpacity, 0x00700284, FL, 1 */
     extern DICOM_EXPORT const tag PatternOnOpacity;
-    /** PauseBetweenFrames, (0054,0038), IS, 1,  */
+    /** PauseBetweenFrames, 0x00540038, IS, 1 */
     extern DICOM_EXPORT const tag PauseBetweenFrames;
-    /** PercentPhaseFieldOfView, (0018,0094), DS, 1,  */
+    /** PercentPhaseFieldOfView, 0x00180094, DS, 1 */
     extern DICOM_EXPORT const tag PercentPhaseFieldOfView;
-    /** PercentSampling, (0018,0093), DS, 1,  */
+    /** PercentSampling, 0x00180093, DS, 1 */
     extern DICOM_EXPORT const tag PercentSampling;
-    /** PerformedLocation, (0040,0243), SH, 1,  */
+    /** PerformedLocation, 0x00400243, SH, 1 */
     extern DICOM_EXPORT const tag PerformedLocation;
-    /** PerformedProcedureCodeSequence, (0040,A372), SQ, 1,  */
+    /** PerformedProcedureCodeSequence, 0x0040A372, SQ, 1 */
     extern DICOM_EXPORT const tag PerformedProcedureCodeSequence;
-    /** PerformedProcedureStepDescription, (0040,0254), LO, 1,  */
+    /** PerformedProcedureStepDescription, 0x00400254, LO, 1 */
     extern DICOM_EXPORT const tag PerformedProcedureStepDescription;
-    /** PerformedProcedureStepDiscontinuationReasonCodeSequence, (0040,0281), SQ, 1,  */
+    /** PerformedProcedureStepDiscontinuationReasonCodeSequence, 0x00400281, SQ, 1 */
     extern DICOM_EXPORT const tag PerformedProcedureStepDiscontinuationReasonCodeSequence;
-    /** PerformedProcedureStepEndDate, (0040,0250), DA, 1,  */
+    /** PerformedProcedureStepEndDate, 0x00400250, DA, 1 */
     extern DICOM_EXPORT const tag PerformedProcedureStepEndDate;
-    /** PerformedProcedureStepEndDateTime, (0040,4051), DT, 1,  */
+    /** PerformedProcedureStepEndDateTime, 0x00404051, DT, 1 */
     extern DICOM_EXPORT const tag PerformedProcedureStepEndDateTime;
-    /** PerformedProcedureStepEndTime, (0040,0251), TM, 1,  */
+    /** PerformedProcedureStepEndTime, 0x00400251, TM, 1 */
     extern DICOM_EXPORT const tag PerformedProcedureStepEndTime;
-    /** PerformedProcedureStepID, (0040,0253), SH, 1,  */
+    /** PerformedProcedureStepID, 0x00400253, SH, 1 */
     extern DICOM_EXPORT const tag PerformedProcedureStepID;
-    /** PerformedProcedureStepStartDate, (0040,0244), DA, 1,  */
+    /** PerformedProcedureStepStartDate, 0x00400244, DA, 1 */
     extern DICOM_EXPORT const tag PerformedProcedureStepStartDate;
-    /** PerformedProcedureStepStartDateTime, (0040,4050), DT, 1,  */
+    /** PerformedProcedureStepStartDateTime, 0x00404050, DT, 1 */
     extern DICOM_EXPORT const tag PerformedProcedureStepStartDateTime;
-    /** PerformedProcedureStepStartTime, (0040,0245), TM, 1,  */
+    /** PerformedProcedureStepStartTime, 0x00400245, TM, 1 */
     extern DICOM_EXPORT const tag PerformedProcedureStepStartTime;
-    /** PerformedProcedureStepStatus, (0040,0252), CS, 1,  */
+    /** PerformedProcedureStepStatus, 0x00400252, CS, 1 */
     extern DICOM_EXPORT const tag PerformedProcedureStepStatus;
-    /** PerformedProcedureTypeDescription, (0040,0255), LO, 1,  */
+    /** PerformedProcedureTypeDescription, 0x00400255, LO, 1 */
     extern DICOM_EXPORT const tag PerformedProcedureTypeDescription;
-    /** PerformedProcessingApplicationsCodeSequence, (0040,4007), SQ, 1,  */
+    /** PerformedProcessingApplicationsCodeSequence, 0x00404007, SQ, 1, RET */
     extern DICOM_EXPORT const tag PerformedProcessingApplicationsCodeSequence;
-    /** PerformedProcessingParametersSequence, (0074,1212), SQ, 1,  */
+    /** PerformedProcessingParametersSequence, 0x00741212, SQ, 1 */
     extern DICOM_EXPORT const tag PerformedProcessingParametersSequence;
-    /** PerformedProtocolCodeSequence, (0040,0260), SQ, 1,  */
+    /** PerformedProtocolCodeSequence, 0x00400260, SQ, 1 */
     extern DICOM_EXPORT const tag PerformedProtocolCodeSequence;
-    /** PerformedProtocolType, (0040,0261), CS, 1,  */
+    /** PerformedProtocolType, 0x00400261, CS, 1 */
     extern DICOM_EXPORT const tag PerformedProtocolType;
-    /** PerformedSeriesSequence, (0040,0340), SQ, 1,  */
+    /** PerformedSeriesSequence, 0x00400340, SQ, 1 */
     extern DICOM_EXPORT const tag PerformedSeriesSequence;
-    /** PerformedStationAETitle, (0040,0241), AE, 1,  */
+    /** PerformedStationAETitle, 0x00400241, AE, 1 */
     extern DICOM_EXPORT const tag PerformedStationAETitle;
-    /** PerformedStationClassCodeSequence, (0040,4029), SQ, 1,  */
+    /** PerformedStationClassCodeSequence, 0x00404029, SQ, 1 */
     extern DICOM_EXPORT const tag PerformedStationClassCodeSequence;
-    /** PerformedStationGeographicLocationCodeSequence, (0040,4030), SQ, 1,  */
+    /** PerformedStationGeographicLocationCodeSequence, 0x00404030, SQ, 1 */
     extern DICOM_EXPORT const tag PerformedStationGeographicLocationCodeSequence;
-    /** PerformedStationName, (0040,0242), SH, 1,  */
+    /** PerformedStationName, 0x00400242, SH, 1 */
     extern DICOM_EXPORT const tag PerformedStationName;
-    /** PerformedStationNameCodeSequence, (0040,4028), SQ, 1,  */
+    /** PerformedStationNameCodeSequence, 0x00404028, SQ, 1 */
     extern DICOM_EXPORT const tag PerformedStationNameCodeSequence;
-    /** PerformedWorkitemCodeSequence, (0040,4019), SQ, 1,  */
+    /** PerformedWorkitemCodeSequence, 0x00404019, SQ, 1 */
     extern DICOM_EXPORT const tag PerformedWorkitemCodeSequence;
-    /** PerformingPhysicianIdentificationSequence, (0008,1052), SQ, 1,  */
+    /** PerformingPhysicianIdentificationSequence, 0x00081052, SQ, 1 */
     extern DICOM_EXPORT const tag PerformingPhysicianIdentificationSequence;
-    /** PerformingPhysicianName, (0008,1050), PN, 1-n,  */
+    /** PerformingPhysicianName, 0x00081050, PN, 1 */
     extern DICOM_EXPORT const tag PerformingPhysicianName;
-    /** PerFrameFunctionalGroupsSequence, (5200,9230), SQ, 1,  */
+    /** PerFrameFunctionalGroupsSequence, 0x52009230, SQ, 1 */
     extern DICOM_EXPORT const tag PerFrameFunctionalGroupsSequence;
-    /** PerimeterTable, (0028,0070), US, 1-n, RET */
+    /** PerimeterTable, 0x00280070, US, 1, RET */
     extern DICOM_EXPORT const tag PerimeterTable;
-    /** PerimeterValue, (0028,0071), US or SS, 1, RET */
+    /** PerimeterValue, 0x00280071, US or SS, 1, RET */
     extern DICOM_EXPORT const tag PerimeterValue;
-    /** PerProjectionAcquisitionSequence, (0018,9538), SQ, 1,  */
+    /** PerProjectionAcquisitionSequence, 0x00189538, SQ, 1 */
     extern DICOM_EXPORT const tag PerProjectionAcquisitionSequence;
-    /** PersonAddress, (0040,1102), ST, 1,  */
+    /** PersonAddress, 0x00401102, ST, 1 */
     extern DICOM_EXPORT const tag PersonAddress;
-    /** PersonIdentificationCodeSequence, (0040,1101), SQ, 1,  */
+    /** PersonIdentificationCodeSequence, 0x00401101, SQ, 1 */
     extern DICOM_EXPORT const tag PersonIdentificationCodeSequence;
-    /** PersonName, (0040,A123), PN, 1,  */
+    /** PersonName, 0x0040A123, PN, 1 */
     extern DICOM_EXPORT const tag PersonName;
-    /** PersonTelephoneNumbers, (0040,1103), LO, 1-n,  */
+    /** PersonTelecomInformation, 0x00401104, LT, 1 */
+    extern DICOM_EXPORT const tag PersonTelecomInformation;
+    /** PersonTelephoneNumbers, 0x00401103, LO, 1 */
     extern DICOM_EXPORT const tag PersonTelephoneNumbers;
-    /** PertinentDocumentsSequence, (0038,0100), SQ, 1,  */
+    /** PertinentDocumentsSequence, 0x00380100, SQ, 1 */
     extern DICOM_EXPORT const tag PertinentDocumentsSequence;
-    /** PertinentOtherEvidenceSequence, (0040,A385), SQ, 1,  */
+    /** PertinentOtherEvidenceSequence, 0x0040A385, SQ, 1 */
     extern DICOM_EXPORT const tag PertinentOtherEvidenceSequence;
-    /** PETDetectorMotionDetailsSequence, (0018,9733), SQ, 1,  */
+    /** PertinentResourcesSequence, 0x00380101, SQ, 1 */
+    extern DICOM_EXPORT const tag PertinentResourcesSequence;
+    /** PETDetectorMotionDetailsSequence, 0x00189733, SQ, 1 */
     extern DICOM_EXPORT const tag PETDetectorMotionDetailsSequence;
-    /** PETFrameAcquisitionSequence, (0018,9732), SQ, 1,  */
+    /** PETFrameAcquisitionSequence, 0x00189732, SQ, 1 */
     extern DICOM_EXPORT const tag PETFrameAcquisitionSequence;
-    /** PETFrameCorrectionFactorsSequence, (0018,9736), SQ, 1,  */
+    /** PETFrameCorrectionFactorsSequence, 0x00189736, SQ, 1 */
     extern DICOM_EXPORT const tag PETFrameCorrectionFactorsSequence;
-    /** PETFrameTypeSequence, (0018,9751), SQ, 1,  */
+    /** PETFrameTypeSequence, 0x00189751, SQ, 1 */
     extern DICOM_EXPORT const tag PETFrameTypeSequence;
-    /** PETPositionSequence, (0018,9735), SQ, 1,  */
+    /** PETPositionSequence, 0x00189735, SQ, 1 */
     extern DICOM_EXPORT const tag PETPositionSequence;
-    /** PETReconstructionSequence, (0018,9749), SQ, 1,  */
+    /** PETReconstructionSequence, 0x00189749, SQ, 1 */
     extern DICOM_EXPORT const tag PETReconstructionSequence;
-    /** PETTableDynamicsSequence, (0018,9734), SQ, 1,  */
+    /** PETTableDynamicsSequence, 0x00189734, SQ, 1 */
     extern DICOM_EXPORT const tag PETTableDynamicsSequence;
-    /** PhantomType, (4010,1046), CS, 1,  */
+    /** PhantomType, 0x40101046, CS, 1, RET */
     extern DICOM_EXPORT const tag PhantomType;
-    /** PhaseContrast, (0018,9014), CS, 1,  */
+    /** PhaseContrast, 0x00189014, CS, 1 */
     extern DICOM_EXPORT const tag PhaseContrast;
-    /** PhaseDelay, (0054,0036), IS, 1,  */
+    /** PhaseDelay, 0x00540036, IS, 1 */
     extern DICOM_EXPORT const tag PhaseDelay;
-    /** PhaseDescription, (0054,0039), CS, 1,  */
+    /** PhaseDescription, 0x00540039, CS, 1 */
     extern DICOM_EXPORT const tag PhaseDescription;
-    /** PhaseInformationSequence, (0054,0032), SQ, 1,  */
+    /** PhaseInformationSequence, 0x00540032, SQ, 1 */
     extern DICOM_EXPORT const tag PhaseInformationSequence;
-    /** PhaseNumber, (0020,0015), IS, 1, RET */
+    /** PhaseNumber, 0x00200015, IS, 1, RET */
     extern DICOM_EXPORT const tag PhaseNumber;
-    /** PhaseVector, (0054,0030), US, 1-n,  */
+    /** PhaseVector, 0x00540030, US, 1 */
     extern DICOM_EXPORT const tag PhaseVector;
-    /** PhosphorType, (0018,1261), LO, 1,  */
+    /** PhosphorType, 0x00181261, LO, 1 */
     extern DICOM_EXPORT const tag PhosphorType;
-    /** PhotometricInterpretation, (0028,0004), CS, 1,  */
+    /** PhotometricInterpretation, 0x00280004, CS, 1 */
     extern DICOM_EXPORT const tag PhotometricInterpretation;
-    /** PhototimerSetting, (0018,7065), DS, 1,  */
+    /** PhototimerSetting, 0x00187065, DS, 1 */
     extern DICOM_EXPORT const tag PhototimerSetting;
-    /** PhysicalDeltaX, (0018,602C), FD, 1,  */
+    /** PhysicalDeltaX, 0x0018602C, FD, 1 */
     extern DICOM_EXPORT const tag PhysicalDeltaX;
-    /** PhysicalDeltaY, (0018,602E), FD, 1,  */
+    /** PhysicalDeltaY, 0x0018602E, FD, 1 */
     extern DICOM_EXPORT const tag PhysicalDeltaY;
-    /** PhysicalDetectorSize, (0018,9429), FL, 2,  */
+    /** PhysicalDetectorSize, 0x00189429, FL, 2 */
     extern DICOM_EXPORT const tag PhysicalDetectorSize;
-    /** PhysicalUnitsXDirection, (0018,6024), US, 1,  */
+    /** PhysicalUnitsXDirection, 0x00186024, US, 1 */
     extern DICOM_EXPORT const tag PhysicalUnitsXDirection;
-    /** PhysicalUnitsYDirection, (0018,6026), US, 1,  */
+    /** PhysicalUnitsYDirection, 0x00186026, US, 1 */
     extern DICOM_EXPORT const tag PhysicalUnitsYDirection;
-    /** PhysicianApprovingInterpretation, (4008,0114), PN, 1, RET */
+    /** PhysicianApprovingInterpretation, 0x40080114, PN, 1, RET */
     extern DICOM_EXPORT const tag PhysicianApprovingInterpretation;
-    /** PhysiciansOfRecord, (0008,1048), PN, 1-n,  */
+    /** PhysiciansOfRecord, 0x00081048, PN, 1 */
     extern DICOM_EXPORT const tag PhysiciansOfRecord;
-    /** PhysiciansOfRecordIdentificationSequence, (0008,1049), SQ, 1,  */
+    /** PhysiciansOfRecordIdentificationSequence, 0x00081049, SQ, 1 */
     extern DICOM_EXPORT const tag PhysiciansOfRecordIdentificationSequence;
-    /** PhysiciansReadingStudyIdentificationSequence, (0008,1062), SQ, 1,  */
+    /** PhysiciansReadingStudyIdentificationSequence, 0x00081062, SQ, 1 */
     extern DICOM_EXPORT const tag PhysiciansReadingStudyIdentificationSequence;
-    /** PixelAspectRatio, (0028,0034), IS, 2,  */
+    /** PixelAspectRatio, 0x00280034, IS, 2 */
     extern DICOM_EXPORT const tag PixelAspectRatio;
-    /** PixelBandwidth, (0018,0095), DS, 1,  */
+    /** PixelBandwidth, 0x00180095, DS, 1 */
     extern DICOM_EXPORT const tag PixelBandwidth;
-    /** PixelComponentDataType, (0018,604E), US, 1,  */
+    /** PixelComponentDataType, 0x0018604E, US, 1 */
     extern DICOM_EXPORT const tag PixelComponentDataType;
-    /** PixelComponentMask, (0018,6046), UL, 1,  */
+    /** PixelComponentMask, 0x00186046, UL, 1 */
     extern DICOM_EXPORT const tag PixelComponentMask;
-    /** PixelComponentOrganization, (0018,6044), US, 1,  */
+    /** PixelComponentOrganization, 0x00186044, US, 1 */
     extern DICOM_EXPORT const tag PixelComponentOrganization;
-    /** PixelComponentPhysicalUnits, (0018,604C), US, 1,  */
+    /** PixelComponentPhysicalUnits, 0x0018604C, US, 1 */
     extern DICOM_EXPORT const tag PixelComponentPhysicalUnits;
-    /** PixelComponentRangeStart, (0018,6048), UL, 1,  */
+    /** PixelComponentRangeStart, 0x00186048, UL, 1 */
     extern DICOM_EXPORT const tag PixelComponentRangeStart;
-    /** PixelComponentRangeStop, (0018,604A), UL, 1,  */
+    /** PixelComponentRangeStop, 0x0018604A, UL, 1 */
     extern DICOM_EXPORT const tag PixelComponentRangeStop;
-    /** PixelCoordinatesSetTrial, (0040,A29A), SL, 2-2n, RET */
+    /** PixelCoordinatesSetTrial, 0x0040A29A, SL, 2, RET */
     extern DICOM_EXPORT const tag PixelCoordinatesSetTrial;
-    /** PixelData, (7FE0,0010), OW or OB, 1,  */
+    /** PixelData, 0x7FE00010, OB or OW, 1 */
     extern DICOM_EXPORT const tag PixelData;
-    /** PixelDataAreaOriginRelativeToFOV, (0018,7036), FL, 2,  */
+    /** PixelDataAreaOriginRelativeToFOV, 0x00187036, FL, 2 */
     extern DICOM_EXPORT const tag PixelDataAreaOriginRelativeToFOV;
-    /** PixelDataAreaRotationAngleRelativeToFOV, (0018,7038), FL, 1,  */
+    /** PixelDataAreaRotationAngleRelativeToFOV, 0x00187038, FL, 1 */
     extern DICOM_EXPORT const tag PixelDataAreaRotationAngleRelativeToFOV;
-    /** PixelDataProviderURL, (0028,7FE0), UT, 1,  */
+    /** PixelDataProviderURL, 0x00287FE0, UR, 1 */
     extern DICOM_EXPORT const tag PixelDataProviderURL;
-    /** PixelIntensityRelationship, (0028,1040), CS, 1,  */
+    /** PixelIntensityRelationship, 0x00281040, CS, 1 */
     extern DICOM_EXPORT const tag PixelIntensityRelationship;
-    /** PixelIntensityRelationshipLUTSequence, (0028,9422), SQ, 1,  */
+    /** PixelIntensityRelationshipLUTSequence, 0x00289422, SQ, 1 */
     extern DICOM_EXPORT const tag PixelIntensityRelationshipLUTSequence;
-    /** PixelIntensityRelationshipSign, (0028,1041), SS, 1,  */
+    /** PixelIntensityRelationshipSign, 0x00281041, SS, 1 */
     extern DICOM_EXPORT const tag PixelIntensityRelationshipSign;
-    /** PixelMeasuresSequence, (0028,9110), SQ, 1,  */
+    /** PixelMeasuresSequence, 0x00289110, SQ, 1 */
     extern DICOM_EXPORT const tag PixelMeasuresSequence;
-    /** PixelOriginInterpretation, (0048,0301), CS, 1,  */
+    /** PixelOriginInterpretation, 0x00480301, CS, 1 */
     extern DICOM_EXPORT const tag PixelOriginInterpretation;
-    /** PixelPaddingRangeLimit, (0028,0121), US or SS, 1,  */
+    /** PixelPaddingRangeLimit, 0x00280121, US or SS, 1 */
     extern DICOM_EXPORT const tag PixelPaddingRangeLimit;
-    /** PixelPaddingValue, (0028,0120), US or SS, 1,  */
+    /** PixelPaddingValue, 0x00280120, US or SS, 1 */
     extern DICOM_EXPORT const tag PixelPaddingValue;
-    /** PixelPresentation, (0008,9205), CS, 1,  */
+    /** PixelPresentation, 0x00089205, CS, 1 */
     extern DICOM_EXPORT const tag PixelPresentation;
-    /** PixelRepresentation, (0028,0103), US, 1,  */
+    /** PixelRepresentation, 0x00280103, US, 1 */
     extern DICOM_EXPORT const tag PixelRepresentation;
-    /** PixelShiftFrameRange, (0028,9506), US, 2-2n,  */
+    /** PixelShiftFrameRange, 0x00289506, US, 2 */
     extern DICOM_EXPORT const tag PixelShiftFrameRange;
-    /** PixelShiftSequence, (0028,9501), SQ, 1,  */
+    /** PixelShiftSequence, 0x00289501, SQ, 1 */
     extern DICOM_EXPORT const tag PixelShiftSequence;
-    /** PixelSpacing, (0028,0030), DS, 2,  */
+    /** PixelSpacing, 0x00280030, DS, 2 */
     extern DICOM_EXPORT const tag PixelSpacing;
-    /** PixelSpacingCalibrationDescription, (0028,0A04), LO, 1,  */
+    /** PixelSpacingCalibrationDescription, 0x00280A04, LO, 1 */
     extern DICOM_EXPORT const tag PixelSpacingCalibrationDescription;
-    /** PixelSpacingCalibrationType, (0028,0A02), CS, 1,  */
+    /** PixelSpacingCalibrationType, 0x00280A02, CS, 1 */
     extern DICOM_EXPORT const tag PixelSpacingCalibrationType;
-    /** PixelSpacingSequence, (0040,08D8), SQ, 1, RET */
+    /** PixelSpacingSequence, 0x004008D8, SQ, 1, RET */
     extern DICOM_EXPORT const tag PixelSpacingSequence;
-    /** PixelValueMappingCodeSequence, (0040,9098), SQ, 1,  */
+    /** PixelValueMappingCodeSequence, 0x00409098, SQ, 1 */
     extern DICOM_EXPORT const tag PixelValueMappingCodeSequence;
-    /** PixelValueTransformationSequence, (0028,9145), SQ, 1,  */
+    /** PixelValueMappingExplanation, 0x00221454, LO, 1 */
+    extern DICOM_EXPORT const tag PixelValueMappingExplanation;
+    /** PixelValueMappingToCodedConceptSequence, 0x00221450, SQ, 1 */
+    extern DICOM_EXPORT const tag PixelValueMappingToCodedConceptSequence;
+    /** PixelValueTransformationSequence, 0x00289145, SQ, 1 */
     extern DICOM_EXPORT const tag PixelValueTransformationSequence;
-    /** PlacerOrderNumberImagingServiceRequest, (0040,2016), LO, 1,  */
+    /** PlacerOrderNumberImagingServiceRequest, 0x00402016, LO, 1 */
     extern DICOM_EXPORT const tag PlacerOrderNumberImagingServiceRequest;
-    /** PlacerOrderNumberImagingServiceRequestRetired, (0040,2006), SH, 1, RET */
+    /** PlacerOrderNumberImagingServiceRequestRetired, 0x00402006, SH, 1, RET */
     extern DICOM_EXPORT const tag PlacerOrderNumberImagingServiceRequestRetired;
-    /** PlacerOrderNumberProcedure, (0040,1006), SH, 1, RET */
+    /** PlacerOrderNumberProcedure, 0x00401006, SH, 1, RET */
     extern DICOM_EXPORT const tag PlacerOrderNumberProcedure;
-    /** PlanarConfiguration, (0028,0006), US, 1,  */
+    /** PlanarConfiguration, 0x00280006, US, 1 */
     extern DICOM_EXPORT const tag PlanarConfiguration;
-    /** PlaneIdentification, (0018,9457), CS, 1,  */
+    /** Plane, 0x00701305, FD, 4 */
+    extern DICOM_EXPORT const tag Plane;
+    /** PlaneIdentification, 0x00189457, CS, 1 */
     extern DICOM_EXPORT const tag PlaneIdentification;
-    /** PlaneOrientationSequence, (0020,9116), SQ, 1,  */
+    /** PlaneNormal, 0x00701306, FD, 3 */
+    extern DICOM_EXPORT const tag PlaneNormal;
+    /** PlaneOrientationSequence, 0x00209116, SQ, 1 */
     extern DICOM_EXPORT const tag PlaneOrientationSequence;
-    /** PlaneOrientationVolumeSequence, (0020,930F), SQ, 1,  */
+    /** PlaneOrientationVolumeSequence, 0x0020930F, SQ, 1 */
     extern DICOM_EXPORT const tag PlaneOrientationVolumeSequence;
-    /** PlanePositionSequence, (0020,9113), SQ, 1,  */
+    /** PlanePositionSequence, 0x00209113, SQ, 1 */
     extern DICOM_EXPORT const tag PlanePositionSequence;
-    /** PlanePositionSlideSequence, (0048,021A), SQ, 1,  */
+    /** PlanePositionSlideSequence, 0x0048021A, SQ, 1 */
     extern DICOM_EXPORT const tag PlanePositionSlideSequence;
-    /** PlanePositionVolumeSequence, (0020,930E), SQ, 1,  */
+    /** PlanePositionVolumeSequence, 0x0020930E, SQ, 1 */
     extern DICOM_EXPORT const tag PlanePositionVolumeSequence;
-    /** Planes, (0028,0012), US, 1, RET */
+    /** Planes, 0x00280012, US, 1, RET */
     extern DICOM_EXPORT const tag Planes;
-    /** PlanesInAcquisition, (0018,9410), CS, 1,  */
+    /** PlanesInAcquisition, 0x00189410, CS, 1 */
     extern DICOM_EXPORT const tag PlanesInAcquisition;
-    /** PlanIntent, (300A,000A), CS, 1,  */
+    /** PlanIntent, 0x300A000A, CS, 1 */
     extern DICOM_EXPORT const tag PlanIntent;
-    /** PlannedVerificationImageSequence, (300A,00CA), SQ, 1,  */
+    /** PlannedVerificationImageSequence, 0x300A00CA, SQ, 1 */
     extern DICOM_EXPORT const tag PlannedVerificationImageSequence;
-    /** PlanningLandmarkDescription, (0068,6540), LO, 1,  */
+    /** PlanningLandmarkDescription, 0x00686540, LO, 1 */
     extern DICOM_EXPORT const tag PlanningLandmarkDescription;
-    /** PlanningLandmarkID, (0068,6530), US, 1,  */
+    /** PlanningLandmarkID, 0x00686530, US, 1 */
     extern DICOM_EXPORT const tag PlanningLandmarkID;
-    /** PlanningLandmarkIdentificationCodeSequence, (0068,6545), SQ, 1,  */
+    /** PlanningLandmarkIdentificationCodeSequence, 0x00686545, SQ, 1 */
     extern DICOM_EXPORT const tag PlanningLandmarkIdentificationCodeSequence;
-    /** PlanningLandmarkLineSequence, (0068,6510), SQ, 1,  */
+    /** PlanningLandmarkLineSequence, 0x00686510, SQ, 1 */
     extern DICOM_EXPORT const tag PlanningLandmarkLineSequence;
-    /** PlanningLandmarkPlaneSequence, (0068,6520), SQ, 1,  */
+    /** PlanningLandmarkPlaneSequence, 0x00686520, SQ, 1 */
     extern DICOM_EXPORT const tag PlanningLandmarkPlaneSequence;
-    /** PlanningLandmarkPointSequence, (0068,6500), SQ, 1,  */
+    /** PlanningLandmarkPointSequence, 0x00686500, SQ, 1 */
     extern DICOM_EXPORT const tag PlanningLandmarkPointSequence;
-    /** PlateID, (0018,1004), LO, 1,  */
+    /** PlateID, 0x00181004, LO, 1 */
     extern DICOM_EXPORT const tag PlateID;
-    /** PlateType, (0018,1260), SH, 1,  */
+    /** PlateType, 0x00181260, SH, 1 */
     extern DICOM_EXPORT const tag PlateType;
-    /** PointCoordinatesData, (0066,0016), OF, 1,  */
+    /** PointCoordinatesData, 0x00660016, OF, 1 */
     extern DICOM_EXPORT const tag PointCoordinatesData;
-    /** PointPositionAccuracy, (0066,0017), FL, 3,  */
+    /** PointPositionAccuracy, 0x00660017, FL, 3 */
     extern DICOM_EXPORT const tag PointPositionAccuracy;
-    /** PointsBoundingBoxCoordinates, (0066,001A), FL, 6,  */
+    /** PointsBoundingBoxCoordinates, 0x0066001A, FL, 6 */
     extern DICOM_EXPORT const tag PointsBoundingBoxCoordinates;
-    /** Polarity, (2020,0020), CS, 1,  */
+    /** Polarity, 0x20200020, CS, 1 */
     extern DICOM_EXPORT const tag Polarity;
-    /** PositionerIsocenterDetectorRotationAngle, (0018,9465), FL, 1,  */
+    /** PositionerIsocenterDetectorRotationAngle, 0x00189465, FL, 1 */
     extern DICOM_EXPORT const tag PositionerIsocenterDetectorRotationAngle;
-    /** PositionerIsocenterPrimaryAngle, (0018,9463), FL, 1,  */
+    /** PositionerIsocenterPrimaryAngle, 0x00189463, FL, 1 */
     extern DICOM_EXPORT const tag PositionerIsocenterPrimaryAngle;
-    /** PositionerIsocenterSecondaryAngle, (0018,9464), FL, 1,  */
+    /** PositionerIsocenterSecondaryAngle, 0x00189464, FL, 1 */
     extern DICOM_EXPORT const tag PositionerIsocenterSecondaryAngle;
-    /** PositionerMotion, (0018,1500), CS, 1,  */
+    /** PositionerMotion, 0x00181500, CS, 1 */
     extern DICOM_EXPORT const tag PositionerMotion;
-    /** PositionerPositionSequence, (0018,9405), SQ, 1,  */
+    /** PositionerPositionSequence, 0x00189405, SQ, 1 */
     extern DICOM_EXPORT const tag PositionerPositionSequence;
-    /** PositionerPrimaryAngle, (0018,1510), DS, 1,  */
+    /** PositionerPrimaryAngle, 0x00181510, DS, 1 */
     extern DICOM_EXPORT const tag PositionerPrimaryAngle;
-    /** PositionerPrimaryAngleIncrement, (0018,1520), DS, 1-n,  */
+    /** PositionerPrimaryAngleDirection, 0x00189559, CS, 1 */
+    extern DICOM_EXPORT const tag PositionerPrimaryAngleDirection;
+    /** PositionerPrimaryAngleIncrement, 0x00181520, DS, 1 */
     extern DICOM_EXPORT const tag PositionerPrimaryAngleIncrement;
-    /** PositionerSecondaryAngle, (0018,1511), DS, 1,  */
+    /** PositionerSecondaryAngle, 0x00181511, DS, 1 */
     extern DICOM_EXPORT const tag PositionerSecondaryAngle;
-    /** PositionerSecondaryAngleIncrement, (0018,1521), DS, 1-n,  */
+    /** PositionerSecondaryAngleIncrement, 0x00181521, DS, 1 */
     extern DICOM_EXPORT const tag PositionerSecondaryAngleIncrement;
-    /** PositionerType, (0018,1508), CS, 1,  */
+    /** PositionerType, 0x00181508, CS, 1 */
     extern DICOM_EXPORT const tag PositionerType;
-    /** PositionMeasuringDeviceUsed, (0018,980C), CS, 1,  */
+    /** PositioningLandmarkSequence, 0x0018991D, SQ, 1 */
+    extern DICOM_EXPORT const tag PositioningLandmarkSequence;
+    /** PositioningMethodCodeSequence, 0x0018991C, SQ, 1 */
+    extern DICOM_EXPORT const tag PositioningMethodCodeSequence;
+    /** PositionMeasuringDeviceUsed, 0x0018980C, CS, 1 */
     extern DICOM_EXPORT const tag PositionMeasuringDeviceUsed;
-    /** PositionOfIsocenterProjection, (0018,9430), FL, 2,  */
+    /** PositionOfIsocenterProjection, 0x00189430, FL, 2 */
     extern DICOM_EXPORT const tag PositionOfIsocenterProjection;
-    /** PositionReferenceIndicator, (0020,1040), LO, 1,  */
+    /** PositionReferenceIndicator, 0x00201040, LO, 1 */
     extern DICOM_EXPORT const tag PositionReferenceIndicator;
-    /** PositiveCatchTrialsQuantity, (0024,0056), US, 1,  */
+    /** PositiveCatchTrialsQuantity, 0x00240056, US, 1 */
     extern DICOM_EXPORT const tag PositiveCatchTrialsQuantity;
-    /** PostDeformationMatrixRegistrationSequence, (0064,0010), SQ, 1,  */
+    /** PostDeformationMatrixRegistrationSequence, 0x00640010, SQ, 1 */
     extern DICOM_EXPORT const tag PostDeformationMatrixRegistrationSequence;
-    /** PostprocessingFunction, (0018,5021), LO, 1, RET */
+    /** PostprocessingFunction, 0x00185021, LO, 1, RET */
     extern DICOM_EXPORT const tag PostprocessingFunction;
-    /** PotentialThreatObjectID, (4010,1010), US, 1,  */
+    /** PotentialDiagnosticTasks, 0x0018990A, UC, 1 */
+    extern DICOM_EXPORT const tag PotentialDiagnosticTasks;
+    /** PotentialReasonsForProcedure, 0x00189908, UC, 1 */
+    extern DICOM_EXPORT const tag PotentialReasonsForProcedure;
+    /** PotentialReasonsForProcedureCodeSequence, 0x00189909, SQ, 1 */
+    extern DICOM_EXPORT const tag PotentialReasonsForProcedureCodeSequence;
+    /** PotentialRequestedProcedureCodeSequence, 0x00189907, SQ, 1 */
+    extern DICOM_EXPORT const tag PotentialRequestedProcedureCodeSequence;
+    /** PotentialScheduledProtocolCodeSequence, 0x00189906, SQ, 1 */
+    extern DICOM_EXPORT const tag PotentialScheduledProtocolCodeSequence;
+    /** PotentialThreatObjectID, 0x40101010, US, 1, RET */
     extern DICOM_EXPORT const tag PotentialThreatObjectID;
-    /** PreAmplifierEquipmentSequence, (0014,400E), SQ, 1,  */
+    /** PRCSToRCSOrientation, 0x4010107E, DS, 6, RET */
+    extern DICOM_EXPORT const tag PRCSToRCSOrientation;
+    /** PreAmplifierEquipmentSequence, 0x0014400E, SQ, 1, RET */
     extern DICOM_EXPORT const tag PreAmplifierEquipmentSequence;
-    /** PreAmplifierNotes, (0014,400F), LT, 1,  */
+    /** PreAmplifierNotes, 0x0014400F, LT, 1, RET */
     extern DICOM_EXPORT const tag PreAmplifierNotes;
-    /** PreAmplifierSettingsSequence, (0014,4040), SQ, 1,  */
+    /** PreAmplifierSettingsSequence, 0x00144040, SQ, 1, RET */
     extern DICOM_EXPORT const tag PreAmplifierSettingsSequence;
-    /** PredecessorDocumentsSequence, (0040,A360), SQ, 1,  */
+    /** PredecessorDocumentsSequence, 0x0040A360, SQ, 1 */
     extern DICOM_EXPORT const tag PredecessorDocumentsSequence;
-    /** PreDeformationMatrixRegistrationSequence, (0064,000F), SQ, 1,  */
+    /** PredecessorProtocolSequence, 0x0018990E, SQ, 1 */
+    extern DICOM_EXPORT const tag PredecessorProtocolSequence;
+    /** PredecessorStructureSetSequence, 0x30060018, SQ, 1 */
+    extern DICOM_EXPORT const tag PredecessorStructureSetSequence;
+    /** PreDeformationMatrixRegistrationSequence, 0x0064000F, SQ, 1 */
     extern DICOM_EXPORT const tag PreDeformationMatrixRegistrationSequence;
-    /** PredictedRefractiveError, (0022,1054), FL, 1,  */
+    /** PredictedRefractiveError, 0x00221054, FL, 1 */
     extern DICOM_EXPORT const tag PredictedRefractiveError;
-    /** PredictorColumns, (0028,0081), US, 1, RET */
+    /** PredictorColumns, 0x00280081, US, 1, RET */
     extern DICOM_EXPORT const tag PredictorColumns;
-    /** PredictorConstants, (0028,0082), US, 1-n, RET */
+    /** PredictorConstants, 0x00280082, US, 1, RET */
     extern DICOM_EXPORT const tag PredictorConstants;
-    /** PredictorRows, (0028,0080), US, 1, RET */
+    /** PredictorRows, 0x00280080, US, 1, RET */
     extern DICOM_EXPORT const tag PredictorRows;
-    /** PreferredPlaybackSequencing, (0018,1244), US, 1,  */
+    /** PreferredPlaybackSequencing, 0x00181244, US, 1 */
     extern DICOM_EXPORT const tag PreferredPlaybackSequencing;
-    /** PregnancyStatus, (0010,21C0), US, 1,  */
+    /** PregnancyStatus, 0x001021C0, US, 1 */
     extern DICOM_EXPORT const tag PregnancyStatus;
-    /** PreliminaryFlag, (0040,A496), CS, 1,  */
+    /** PreliminaryFlag, 0x0040A496, CS, 1 */
     extern DICOM_EXPORT const tag PreliminaryFlag;
-    /** PreMedication, (0040,0012), LO, 1,  */
+    /** PreMedication, 0x00400012, LO, 1 */
     extern DICOM_EXPORT const tag PreMedication;
-    /** PrescriptionDescription, (300A,000E), ST, 1,  */
+    /** PrescriptionDescription, 0x300A000E, ST, 1 */
     extern DICOM_EXPORT const tag PrescriptionDescription;
-    /** PresentationCreationDate, (0070,0082), DA, 1,  */
+    /** PresentationAnimationStyle, 0x00701A01, CS, 1 */
+    extern DICOM_EXPORT const tag PresentationAnimationStyle;
+    /** PresentationCreationDate, 0x00700082, DA, 1 */
     extern DICOM_EXPORT const tag PresentationCreationDate;
-    /** PresentationCreationTime, (0070,0083), TM, 1,  */
+    /** PresentationCreationTime, 0x00700083, TM, 1 */
     extern DICOM_EXPORT const tag PresentationCreationTime;
-    /** PresentationGroupNumber, (003A,0241), US, 1,  */
+    /** PresentationDisplayCollectionUID, 0x00701101, UI, 1 */
+    extern DICOM_EXPORT const tag PresentationDisplayCollectionUID;
+    /** PresentationGroupNumber, 0x003A0241, US, 1 */
     extern DICOM_EXPORT const tag PresentationGroupNumber;
-    /** PresentationIntentType, (0008,0068), CS, 1,  */
+    /** PresentationInputType, 0x00701202, CS, 1 */
+    extern DICOM_EXPORT const tag PresentationInputType;
+    /** PresentationIntentType, 0x00080068, CS, 1 */
     extern DICOM_EXPORT const tag PresentationIntentType;
-    /** PresentationLUTContentSequence, (2130,0080), SQ, 1, RET */
+    /** PresentationLUTContentSequence, 0x21300080, SQ, 1, RET */
     extern DICOM_EXPORT const tag PresentationLUTContentSequence;
-    /** PresentationLUTFlag, (2000,0069), CS, 1, RET */
+    /** PresentationLUTFlag, 0x20000069, CS, 1, RET */
     extern DICOM_EXPORT const tag PresentationLUTFlag;
-    /** PresentationLUTSequence, (2050,0010), SQ, 1,  */
+    /** PresentationLUTSequence, 0x20500010, SQ, 1 */
     extern DICOM_EXPORT const tag PresentationLUTSequence;
-    /** PresentationLUTShape, (2050,0020), CS, 1,  */
+    /** PresentationLUTShape, 0x20500020, CS, 1 */
     extern DICOM_EXPORT const tag PresentationLUTShape;
-    /** PresentationPixelAspectRatio, (0070,0102), IS, 2,  */
+    /** PresentationPixelAspectRatio, 0x00700102, IS, 2 */
     extern DICOM_EXPORT const tag PresentationPixelAspectRatio;
-    /** PresentationPixelMagnificationRatio, (0070,0103), FL, 1,  */
+    /** PresentationPixelMagnificationRatio, 0x00700103, FL, 1 */
     extern DICOM_EXPORT const tag PresentationPixelMagnificationRatio;
-    /** PresentationPixelSpacing, (0070,0101), DS, 2,  */
+    /** PresentationPixelSpacing, 0x00700101, DS, 2 */
     extern DICOM_EXPORT const tag PresentationPixelSpacing;
-    /** PresentationSizeMode, (0070,0100), CS, 1,  */
+    /** PresentationSequenceCollectionUID, 0x00701102, UI, 1 */
+    extern DICOM_EXPORT const tag PresentationSequenceCollectionUID;
+    /** PresentationSequencePositionIndex, 0x00701103, US, 1 */
+    extern DICOM_EXPORT const tag PresentationSequencePositionIndex;
+    /** PresentationSizeMode, 0x00700100, CS, 1 */
     extern DICOM_EXPORT const tag PresentationSizeMode;
-    /** PresentedVisualStimuliDataFlag, (0024,0037), CS, 1,  */
+    /** PresentationStateClassificationComponentSequence, 0x00701801, SQ, 1 */
+    extern DICOM_EXPORT const tag PresentationStateClassificationComponentSequence;
+    /** PresentationStateCompositorComponentSequence, 0x00701805, SQ, 1 */
+    extern DICOM_EXPORT const tag PresentationStateCompositorComponentSequence;
+    /** PresentedVisualStimuliDataFlag, 0x00240037, CS, 1 */
     extern DICOM_EXPORT const tag PresentedVisualStimuliDataFlag;
-    /** PreserveCompositeInstancesAfterMediaCreation, (2200,000A), CS, 1,  */
+    /** PreserveCompositeInstancesAfterMediaCreation, 0x2200000A, CS, 1 */
     extern DICOM_EXPORT const tag PreserveCompositeInstancesAfterMediaCreation;
-    /** PrimaryAnatomicStructureModifierSequence, (0008,2230), SQ, 1,  */
+    /** PrimaryAnatomicStructureModifierSequence, 0x00082230, SQ, 1 */
     extern DICOM_EXPORT const tag PrimaryAnatomicStructureModifierSequence;
-    /** PrimaryAnatomicStructureSequence, (0008,2228), SQ, 1,  */
+    /** PrimaryAnatomicStructureSequence, 0x00082228, SQ, 1 */
     extern DICOM_EXPORT const tag PrimaryAnatomicStructureSequence;
-    /** PrimaryDosimeterUnit, (300A,00B3), CS, 1,  */
+    /** PrimaryDosimeterUnit, 0x300A00B3, CS, 1 */
     extern DICOM_EXPORT const tag PrimaryDosimeterUnit;
-    /** PrimaryFluenceModeSequence, (3002,0050), SQ, 1,  */
+    /** PrimaryFluenceModeSequence, 0x30020050, SQ, 1 */
     extern DICOM_EXPORT const tag PrimaryFluenceModeSequence;
-    /** PrimaryPositionerIncrement, (0018,9514), FL, 1,  */
+    /** PrimaryPositionerIncrement, 0x00189514, FL, 1 */
     extern DICOM_EXPORT const tag PrimaryPositionerIncrement;
-    /** PrimaryPositionerScanArc, (0018,9508), FL, 1,  */
+    /** PrimaryPositionerIncrementSign, 0x00189518, SS, 1 */
+    extern DICOM_EXPORT const tag PrimaryPositionerIncrementSign;
+    /** PrimaryPositionerScanArc, 0x00189508, FL, 1 */
     extern DICOM_EXPORT const tag PrimaryPositionerScanArc;
-    /** PrimaryPositionerScanStartAngle, (0018,9510), FL, 1,  */
+    /** PrimaryPositionerScanStartAngle, 0x00189510, FL, 1 */
     extern DICOM_EXPORT const tag PrimaryPositionerScanStartAngle;
-    /** PrimaryPromptsCountsAccumulated, (0054,1310), IS, 1,  */
+    /** PrimaryPromptsCountsAccumulated, 0x00541310, IS, 1 */
     extern DICOM_EXPORT const tag PrimaryPromptsCountsAccumulated;
-    /** PrimitivePointIndexList, (0066,0029), OW, 1,  */
+    /** PrimitivePointIndexList, 0x00660029, OW, 1, RET */
     extern DICOM_EXPORT const tag PrimitivePointIndexList;
-    /** PrinterCharacteristicsSequence, (2130,0015), SQ, 1, RET */
+    /** PrinterCharacteristicsSequence, 0x21300015, SQ, 1, RET */
     extern DICOM_EXPORT const tag PrinterCharacteristicsSequence;
-    /** PrinterConfigurationSequence, (2000,001E), SQ, 1,  */
+    /** PrinterConfigurationSequence, 0x2000001E, SQ, 1 */
     extern DICOM_EXPORT const tag PrinterConfigurationSequence;
-    /** PrinterName, (2110,0030), LO, 1,  */
+    /** PrinterName, 0x21100030, LO, 1 */
     extern DICOM_EXPORT const tag PrinterName;
-    /** PrinterPixelSpacing, (2010,0376), DS, 2,  */
+    /** PrinterPixelSpacing, 0x20100376, DS, 2 */
     extern DICOM_EXPORT const tag PrinterPixelSpacing;
-    /** PrinterResolutionID, (2010,0052), CS, 1,  */
+    /** PrinterResolutionID, 0x20100052, CS, 1 */
     extern DICOM_EXPORT const tag PrinterResolutionID;
-    /** PrinterStatus, (2110,0010), CS, 1,  */
+    /** PrinterStatus, 0x21100010, CS, 1 */
     extern DICOM_EXPORT const tag PrinterStatus;
-    /** PrinterStatusInfo, (2110,0020), CS, 1,  */
+    /** PrinterStatusInfo, 0x21100020, CS, 1 */
     extern DICOM_EXPORT const tag PrinterStatusInfo;
-    /** PrintingBitDepth, (2000,00A1), US, 1,  */
+    /** PrintingBitDepth, 0x200000A1, US, 1 */
     extern DICOM_EXPORT const tag PrintingBitDepth;
-    /** PrintJobDescriptionSequence, (2120,0050), SQ, 1, RET */
+    /** PrintJobDescriptionSequence, 0x21200050, SQ, 1, RET */
     extern DICOM_EXPORT const tag PrintJobDescriptionSequence;
-    /** PrintJobID, (2100,0010), SH, 1, RET */
+    /** PrintJobID, 0x21000010, SH, 1, RET */
     extern DICOM_EXPORT const tag PrintJobID;
-    /** PrintManagementCapabilitiesSequence, (2130,0010), SQ, 1, RET */
+    /** PrintManagementCapabilitiesSequence, 0x21300010, SQ, 1, RET */
     extern DICOM_EXPORT const tag PrintManagementCapabilitiesSequence;
-    /** PrintPriority, (2000,0020), CS, 1,  */
+    /** PrintPriority, 0x20000020, CS, 1 */
     extern DICOM_EXPORT const tag PrintPriority;
-    /** PrintQueueID, (2110,0099), SH, 1, RET */
+    /** PrintQueueID, 0x21100099, SH, 1, RET */
     extern DICOM_EXPORT const tag PrintQueueID;
-    /** PrismSequence, (0046,0028), SQ, 1,  */
+    /** PrismSequence, 0x00460028, SQ, 1 */
     extern DICOM_EXPORT const tag PrismSequence;
-    /** PrivateInformation, (0002,0102), OB, 1,  */
+    /** PrivateCreatorReference, 0x00080302, LO, 1 */
+    extern DICOM_EXPORT const tag PrivateCreatorReference;
+    /** PrivateDataElement, 0x00080308, US, 1 */
+    extern DICOM_EXPORT const tag PrivateDataElement;
+    /** PrivateDataElementCharacteristicsSequence, 0x00080300, SQ, 1 */
+    extern DICOM_EXPORT const tag PrivateDataElementCharacteristicsSequence;
+    /** PrivateDataElementDefinitionSequence, 0x00080310, SQ, 1 */
+    extern DICOM_EXPORT const tag PrivateDataElementDefinitionSequence;
+    /** PrivateDataElementDescription, 0x0008030E, UT, 1 */
+    extern DICOM_EXPORT const tag PrivateDataElementDescription;
+    /** PrivateDataElementEncoding, 0x0008030F, UT, 1 */
+    extern DICOM_EXPORT const tag PrivateDataElementEncoding;
+    /** PrivateDataElementKeyword, 0x0008030D, UC, 1 */
+    extern DICOM_EXPORT const tag PrivateDataElementKeyword;
+    /** PrivateDataElementName, 0x0008030C, UC, 1 */
+    extern DICOM_EXPORT const tag PrivateDataElementName;
+    /** PrivateDataElementNumberOfItems, 0x0008030B, UL, 1 */
+    extern DICOM_EXPORT const tag PrivateDataElementNumberOfItems;
+    /** PrivateDataElementValueMultiplicity, 0x00080309, UL, 1 */
+    extern DICOM_EXPORT const tag PrivateDataElementValueMultiplicity;
+    /** PrivateDataElementValueRepresentation, 0x0008030A, CS, 1 */
+    extern DICOM_EXPORT const tag PrivateDataElementValueRepresentation;
+    /** PrivateGroupReference, 0x00080301, US, 1 */
+    extern DICOM_EXPORT const tag PrivateGroupReference;
+    /** PrivateInformation, 0x00020102, OB, 1 */
     extern DICOM_EXPORT const tag PrivateInformation;
-    /** PrivateInformationCreatorUID, (0002,0100), UI, 1,  */
+    /** PrivateInformationCreatorUID, 0x00020100, UI, 1 */
     extern DICOM_EXPORT const tag PrivateInformationCreatorUID;
-    /** PrivateRecordUID, (0004,1432), UI, 1,  */
+    /** PrivateRecordUID, 0x00041432, UI, 1 */
     extern DICOM_EXPORT const tag PrivateRecordUID;
-    /** ProcedureCodeSequence, (0008,1032), SQ, 1,  */
+    /** ProbeCenterLocationX, 0x00144058, DS, 1, RET */
+    extern DICOM_EXPORT const tag ProbeCenterLocationX;
+    /** ProbeCenterLocationZ, 0x00144059, DS, 1, RET */
+    extern DICOM_EXPORT const tag ProbeCenterLocationZ;
+    /** ProbeDriveEquipmentSequence, 0x00144080, SQ, 1, RET */
+    extern DICOM_EXPORT const tag ProbeDriveEquipmentSequence;
+    /** ProbeDriveNotes, 0x00144082, LT, 1, RET */
+    extern DICOM_EXPORT const tag ProbeDriveNotes;
+    /** ProbeDriveSettingsSequence, 0x00144087, SQ, 1, RET */
+    extern DICOM_EXPORT const tag ProbeDriveSettingsSequence;
+    /** ProbeInductance, 0x00144084, DS, 1, RET */
+    extern DICOM_EXPORT const tag ProbeInductance;
+    /** ProbeOrientationAngle, 0x00144089, DS, 1, RET */
+    extern DICOM_EXPORT const tag ProbeOrientationAngle;
+    /** ProbeResistance, 0x00144085, DS, 1, RET */
+    extern DICOM_EXPORT const tag ProbeResistance;
+    /** ProcedureCodeSequence, 0x00081032, SQ, 1 */
     extern DICOM_EXPORT const tag ProcedureCodeSequence;
-    /** ProcedureContextFlagTrial, (0040,A603), CS, 1, RET */
+    /** ProcedureContextFlagTrial, 0x0040A603, CS, 1, RET */
     extern DICOM_EXPORT const tag ProcedureContextFlagTrial;
-    /** ProcedureContextSequenceTrial, (0040,A340), SQ, 1, RET */
+    /** ProcedureContextSequenceTrial, 0x0040A340, SQ, 1, RET */
     extern DICOM_EXPORT const tag ProcedureContextSequenceTrial;
-    /** ProcedureCreationDate, (0014,4076), DA, 1,  */
+    /** ProcedureCreationDate, 0x00144076, DA, 1, RET */
     extern DICOM_EXPORT const tag ProcedureCreationDate;
-    /** ProcedureExpirationDate, (0014,4078), DA, 1,  */
+    /** ProcedureExpirationDate, 0x00144078, DA, 1, RET */
     extern DICOM_EXPORT const tag ProcedureExpirationDate;
-    /** ProcedureIdentifierCodeSequenceTrial, (0040,A085), SQ, 1, RET */
+    /** ProcedureIdentifierCodeSequenceTrial, 0x0040A085, SQ, 1, RET */
     extern DICOM_EXPORT const tag ProcedureIdentifierCodeSequenceTrial;
-    /** ProcedureLastModifiedDate, (0014,407A), DA, 1,  */
+    /** ProcedureLastModifiedDate, 0x0014407A, DA, 1, RET */
     extern DICOM_EXPORT const tag ProcedureLastModifiedDate;
-    /** ProcedureStepCancellationDateTime, (0040,4052), DT, 1,  */
+    /** ProcedureStepCancellationDateTime, 0x00404052, DT, 1 */
     extern DICOM_EXPORT const tag ProcedureStepCancellationDateTime;
-    /** ProcedureStepCommunicationsURISequence, (0074,1008), SQ, 1,  */
+    /** ProcedureStepCommunicationsURISequence, 0x00741008, SQ, 1 */
     extern DICOM_EXPORT const tag ProcedureStepCommunicationsURISequence;
-    /** ProcedureStepDiscontinuationReasonCodeSequence, (0074,100E), SQ, 1,  */
+    /** ProcedureStepDiscontinuationReasonCodeSequence, 0x0074100E, SQ, 1 */
     extern DICOM_EXPORT const tag ProcedureStepDiscontinuationReasonCodeSequence;
-    /** ProcedureStepLabel, (0074,1204), LO, 1,  */
+    /** ProcedureStepLabel, 0x00741204, LO, 1 */
     extern DICOM_EXPORT const tag ProcedureStepLabel;
-    /** ProcedureStepProgress, (0074,1004), DS, 1,  */
+    /** ProcedureStepProgress, 0x00741004, DS, 1 */
     extern DICOM_EXPORT const tag ProcedureStepProgress;
-    /** ProcedureStepProgressDescription, (0074,1006), ST, 1,  */
+    /** ProcedureStepProgressDescription, 0x00741006, ST, 1 */
     extern DICOM_EXPORT const tag ProcedureStepProgressDescription;
-    /** ProcedureStepProgressInformationSequence, (0074,1002), SQ, 1,  */
+    /** ProcedureStepProgressInformationSequence, 0x00741002, SQ, 1 */
     extern DICOM_EXPORT const tag ProcedureStepProgressInformationSequence;
-    /** ProcedureStepRelationshipType, (0074,1222), LO, 1, RET */
+    /** ProcedureStepProgressParametersSequence, 0x00741007, SQ, 1 */
+    extern DICOM_EXPORT const tag ProcedureStepProgressParametersSequence;
+    /** ProcedureStepRelationshipType, 0x00741222, LO, 1, RET */
     extern DICOM_EXPORT const tag ProcedureStepRelationshipType;
-    /** ProcedureStepState, (0074,1000), CS, 1,  */
+    /** ProcedureStepState, 0x00741000, CS, 1 */
     extern DICOM_EXPORT const tag ProcedureStepState;
-    /** ProcedureTypeCodeSequence, (0076,0020), SQ, 1,  */
+    /** ProcedureTypeCodeSequence, 0x00760020, SQ, 1 */
     extern DICOM_EXPORT const tag ProcedureTypeCodeSequence;
-    /** ProcedureVersion, (0014,4074), SH, 1,  */
+    /** ProcedureVersion, 0x00144074, SH, 1, RET */
     extern DICOM_EXPORT const tag ProcedureVersion;
-    /** ProcessingFunction, (0018,5020), LO, 1,  */
+    /** ProcessingFunction, 0x00185020, LO, 1 */
     extern DICOM_EXPORT const tag ProcessingFunction;
-    /** ProductDescription, (0044,0009), LT, 1,  */
+    /** ProductDescription, 0x00440009, LT, 1 */
     extern DICOM_EXPORT const tag ProductDescription;
-    /** ProductExpirationDateTime, (0044,000B), DT, 1,  */
+    /** ProductExpirationDateTime, 0x0044000B, DT, 1 */
     extern DICOM_EXPORT const tag ProductExpirationDateTime;
-    /** ProductLotIdentifier, (0044,000A), LO, 1,  */
+    /** ProductLotIdentifier, 0x0044000A, LO, 1 */
     extern DICOM_EXPORT const tag ProductLotIdentifier;
-    /** ProductName, (0044,0008), LO, 1-n,  */
+    /** ProductName, 0x00440008, LO, 1 */
     extern DICOM_EXPORT const tag ProductName;
-    /** ProductPackageIdentifier, (0044,0001), ST, 1,  */
+    /** ProductPackageIdentifier, 0x00440001, ST, 1 */
     extern DICOM_EXPORT const tag ProductPackageIdentifier;
-    /** ProductParameterSequence, (0044,0013), SQ, 1,  */
+    /** ProductParameterSequence, 0x00440013, SQ, 1 */
     extern DICOM_EXPORT const tag ProductParameterSequence;
-    /** ProductTypeCodeSequence, (0044,0007), SQ, 1,  */
+    /** ProductTypeCodeSequence, 0x00440007, SQ, 1 */
     extern DICOM_EXPORT const tag ProductTypeCodeSequence;
-    /** ProjectionEponymousNameCodeSequence, (0018,5104), SQ, 1,  */
+    /** ProjectionEponymousNameCodeSequence, 0x00185104, SQ, 1 */
     extern DICOM_EXPORT const tag ProjectionEponymousNameCodeSequence;
-    /** ProjectionPixelCalibrationSequence, (0018,9401), SQ, 1,  */
+    /** ProjectionPixelCalibrationSequence, 0x00189401, SQ, 1 */
     extern DICOM_EXPORT const tag ProjectionPixelCalibrationSequence;
-    /** PropertyLabel, (0014,2032), SH, 1,  */
+    /** PropertyLabel, 0x00142032, SH, 1, RET */
     extern DICOM_EXPORT const tag PropertyLabel;
-    /** ProposedStudySequence, (2130,00A0), SQ, 1, RET */
+    /** ProposedStudySequence, 0x213000A0, SQ, 1, RET */
     extern DICOM_EXPORT const tag ProposedStudySequence;
-    /** ProtocolContextSequence, (0040,0440), SQ, 1,  */
+    /** ProtocolContextSequence, 0x00400440, SQ, 1 */
     extern DICOM_EXPORT const tag ProtocolContextSequence;
-    /** ProtocolName, (0018,1030), LO, 1,  */
+    /** ProtocolDefinedPatientPosition, 0x00189947, CS, 1 */
+    extern DICOM_EXPORT const tag ProtocolDefinedPatientPosition;
+    /** ProtocolDesignRationale, 0x00189910, UT, 1 */
+    extern DICOM_EXPORT const tag ProtocolDesignRationale;
+    /** ProtocolElementCharacteristicsSummary, 0x00189923, UT, 1 */
+    extern DICOM_EXPORT const tag ProtocolElementCharacteristicsSummary;
+    /** ProtocolElementName, 0x00189922, LO, 1 */
+    extern DICOM_EXPORT const tag ProtocolElementName;
+    /** ProtocolElementNumber, 0x00189921, US, 1 */
+    extern DICOM_EXPORT const tag ProtocolElementNumber;
+    /** ProtocolElementPurpose, 0x00189924, UT, 1 */
+    extern DICOM_EXPORT const tag ProtocolElementPurpose;
+    /** ProtocolName, 0x00181030, LO, 1 */
     extern DICOM_EXPORT const tag ProtocolName;
-    /** PseudoColorPaletteInstanceReferenceSequence, (0072,0705), SQ, 1,  */
+    /** ProtocolPlanningInformation, 0x0018990F, UT, 1 */
+    extern DICOM_EXPORT const tag ProtocolPlanningInformation;
+    /** PseudoColorPaletteInstanceReferenceSequence, 0x00720705, SQ, 1 */
     extern DICOM_EXPORT const tag PseudoColorPaletteInstanceReferenceSequence;
-    /** PseudoColorType, (0072,0704), CS, 1,  */
+    /** PseudoColorType, 0x00720704, CS, 1 */
     extern DICOM_EXPORT const tag PseudoColorType;
-    /** PTORepresentationSequence, (4010,1037), SQ, 1,  */
+    /** PTOLocationDescription, 0x40101078, ST, 1, RET */
+    extern DICOM_EXPORT const tag PTOLocationDescription;
+    /** PTORegionSequence, 0x4010107B, SQ, 1, RET */
+    extern DICOM_EXPORT const tag PTORegionSequence;
+    /** PTORepresentationSequence, 0x40101037, SQ, 1, RET */
     extern DICOM_EXPORT const tag PTORepresentationSequence;
-    /** PulseRepetitionFrequency, (0018,6032), UL, 1,  */
+    /** PulseNumber, 0x30080172, US, 1 */
+    extern DICOM_EXPORT const tag PulseNumber;
+    /** PulseRepetitionFrequency, 0x00186032, UL, 1 */
     extern DICOM_EXPORT const tag PulseRepetitionFrequency;
-    /** PulseRepetitionInterval, (300A,028C), DS, 1,  */
+    /** PulseRepetitionInterval, 0x300A028C, DS, 1 */
     extern DICOM_EXPORT const tag PulseRepetitionInterval;
-    /** PulserEquipmentSequence, (0014,4002), SQ, 1,  */
+    /** PulserEquipmentSequence, 0x00144002, SQ, 1, RET */
     extern DICOM_EXPORT const tag PulserEquipmentSequence;
-    /** PulserNotes, (0014,4006), LT, 1,  */
+    /** PulserNotes, 0x00144006, LT, 1, RET */
     extern DICOM_EXPORT const tag PulserNotes;
-    /** PulserSettingsSequence, (0014,4020), SQ, 1,  */
+    /** PulserSettingsSequence, 0x00144020, SQ, 1, RET */
     extern DICOM_EXPORT const tag PulserSettingsSequence;
-    /** PulserType, (0014,4004), CS, 1,  */
+    /** PulserType, 0x00144004, CS, 1, RET */
     extern DICOM_EXPORT const tag PulserType;
-    /** PulseSequenceName, (0018,9005), SH, 1,  */
+    /** PulseSequenceName, 0x00189005, SH, 1 */
     extern DICOM_EXPORT const tag PulseSequenceName;
-    /** PulseWidth, (0014,4022), DS, 1,  */
+    /** PulseSpecificBrachyControlPointDeliveredSequence, 0x30080171, SQ, 1 */
+    extern DICOM_EXPORT const tag PulseSpecificBrachyControlPointDeliveredSequence;
+    /** PulseWidth, 0x00144022, DS, 1, RET */
     extern DICOM_EXPORT const tag PulseWidth;
-    /** PupilDilated, (0022,000D), CS, 1,  */
+    /** PupilCentroidXCoordinate, 0x00460203, FL, 1 */
+    extern DICOM_EXPORT const tag PupilCentroidXCoordinate;
+    /** PupilCentroidYCoordinate, 0x00460204, FL, 1 */
+    extern DICOM_EXPORT const tag PupilCentroidYCoordinate;
+    /** PupilDilated, 0x0022000D, CS, 1 */
     extern DICOM_EXPORT const tag PupilDilated;
-    /** PupilSize, (0046,0044), FD, 1,  */
+    /** PupilSize, 0x00460044, FD, 1 */
     extern DICOM_EXPORT const tag PupilSize;
-    /** PurposeOfReferenceCodeSequence, (0040,A170), SQ, 1,  */
+    /** PurposeOfReferenceCodeSequence, 0x0040A170, SQ, 1, RET */
     extern DICOM_EXPORT const tag PurposeOfReferenceCodeSequence;
-    /** PVCRejection, (0018,1085), LO, 1,  */
+    /** PVCRejection, 0x00181085, LO, 1 */
     extern DICOM_EXPORT const tag PVCRejection;
-    /** QuadratureReceiveCoil, (0018,9044), CS, 1,  */
+    /** QAResultsSequence, 0x0028700F, SQ, 1 */
+    extern DICOM_EXPORT const tag QAResultsSequence;
+    /** QRMeasurementsSequence, 0x40101071, SQ, 1, RET */
+    extern DICOM_EXPORT const tag QRMeasurementsSequence;
+    /** QuadratureReceiveCoil, 0x00189044, CS, 1 */
     extern DICOM_EXPORT const tag QuadratureReceiveCoil;
-    /** QualityControlImage, (0028,0300), CS, 1,  */
+    /** QualityControlImage, 0x00280300, CS, 1 */
     extern DICOM_EXPORT const tag QualityControlImage;
-    /** QuantifiedDefect, (0024,0098), FL, 1,  */
+    /** QualityControlSubject, 0x00100200, CS, 1 */
+    extern DICOM_EXPORT const tag QualityControlSubject;
+    /** QualityControlSubjectTypeCodeSequence, 0x00100201, SQ, 1 */
+    extern DICOM_EXPORT const tag QualityControlSubjectTypeCodeSequence;
+    /** QualityThreshold, 0x00221630, DS, 1 */
+    extern DICOM_EXPORT const tag QualityThreshold;
+    /** QuantifiedDefect, 0x00240098, FL, 1 */
     extern DICOM_EXPORT const tag QuantifiedDefect;
-    /** Quantity, (0040,0294), DS, 1,  */
+    /** Quantity, 0x00400294, DS, 1 */
     extern DICOM_EXPORT const tag Quantity;
-    /** QuantitySequence, (0040,0293), SQ, 1,  */
+    /** QuantityDefinitionSequence, 0x00409220, SQ, 1 */
+    extern DICOM_EXPORT const tag QuantityDefinitionSequence;
+    /** QuantitySequence, 0x00400293, SQ, 1 */
     extern DICOM_EXPORT const tag QuantitySequence;
-    /** QueryRetrieveLevel, (0008,0052), CS, 1,  */
+    /** QueryRetrieveLevel, 0x00080052, CS, 1 */
     extern DICOM_EXPORT const tag QueryRetrieveLevel;
-    /** QueueStatus, (2120,0010), CS, 1, RET */
+    /** QueryRetrieveView, 0x00080053, CS, 1 */
+    extern DICOM_EXPORT const tag QueryRetrieveView;
+    /** QueueStatus, 0x21200010, CS, 1, RET */
     extern DICOM_EXPORT const tag QueueStatus;
-    /** RadialPosition, (0018,1142), DS, 1-n,  */
+    /** RadialPosition, 0x00181142, DS, 1 */
     extern DICOM_EXPORT const tag RadialPosition;
-    /** RadiationAtomicNumber, (300A,0304), IS, 1,  */
+    /** RadiationAtomicNumber, 0x300A0304, IS, 1 */
     extern DICOM_EXPORT const tag RadiationAtomicNumber;
-    /** RadiationChargeState, (300A,0306), SS, 1,  */
+    /** RadiationChargeState, 0x300A0306, SS, 1 */
     extern DICOM_EXPORT const tag RadiationChargeState;
-    /** RadiationMachineName, (3002,0020), SH, 1,  */
+    /** RadiationMachineName, 0x30020020, SH, 1 */
     extern DICOM_EXPORT const tag RadiationMachineName;
-    /** RadiationMachineSAD, (3002,0022), DS, 1,  */
+    /** RadiationMachineSAD, 0x30020022, DS, 1 */
     extern DICOM_EXPORT const tag RadiationMachineSAD;
-    /** RadiationMachineSSD, (3002,0024), DS, 1,  */
+    /** RadiationMachineSSD, 0x30020024, DS, 1 */
     extern DICOM_EXPORT const tag RadiationMachineSSD;
-    /** RadiationMassNumber, (300A,0302), IS, 1,  */
+    /** RadiationMassNumber, 0x300A0302, IS, 1 */
     extern DICOM_EXPORT const tag RadiationMassNumber;
-    /** RadiationMode, (0018,115A), CS, 1,  */
+    /** RadiationMode, 0x0018115A, CS, 1 */
     extern DICOM_EXPORT const tag RadiationMode;
-    /** RadiationSetting, (0018,1155), CS, 1,  */
+    /** RadiationSetting, 0x00181155, CS, 1 */
     extern DICOM_EXPORT const tag RadiationSetting;
-    /** RadiationType, (300A,00C6), CS, 1,  */
+    /** RadiationType, 0x300A00C6, CS, 1 */
     extern DICOM_EXPORT const tag RadiationType;
-    /** Radionuclide, (0018,0030), LO, 1-n, RET */
+    /** Radionuclide, 0x00180030, LO, 1, RET */
     extern DICOM_EXPORT const tag Radionuclide;
-    /** RadionuclideCodeSequence, (0054,0300), SQ, 1,  */
+    /** RadionuclideCodeSequence, 0x00540300, SQ, 1 */
     extern DICOM_EXPORT const tag RadionuclideCodeSequence;
-    /** RadionuclideHalfLife, (0018,1075), DS, 1,  */
+    /** RadionuclideHalfLife, 0x00181075, DS, 1 */
     extern DICOM_EXPORT const tag RadionuclideHalfLife;
-    /** RadionuclidePositronFraction, (0018,1076), DS, 1,  */
+    /** RadionuclidePositronFraction, 0x00181076, DS, 1 */
     extern DICOM_EXPORT const tag RadionuclidePositronFraction;
-    /** RadionuclideTotalDose, (0018,1074), DS, 1,  */
+    /** RadionuclideTotalDose, 0x00181074, DS, 1 */
     extern DICOM_EXPORT const tag RadionuclideTotalDose;
-    /** Radiopharmaceutical, (0018,0031), LO, 1,  */
+    /** Radiopharmaceutical, 0x00180031, LO, 1 */
     extern DICOM_EXPORT const tag Radiopharmaceutical;
-    /** RadiopharmaceuticalAgentNumber, (0018,9729), US, 1,  */
+    /** RadiopharmaceuticalAdministrationEventUID, 0x00083012, UI, 1 */
+    extern DICOM_EXPORT const tag RadiopharmaceuticalAdministrationEventUID;
+    /** RadiopharmaceuticalAgentNumber, 0x00189729, US, 1 */
     extern DICOM_EXPORT const tag RadiopharmaceuticalAgentNumber;
-    /** RadiopharmaceuticalCodeSequence, (0054,0304), SQ, 1,  */
+    /** RadiopharmaceuticalCodeSequence, 0x00540304, SQ, 1 */
     extern DICOM_EXPORT const tag RadiopharmaceuticalCodeSequence;
-    /** RadiopharmaceuticalInformationSequence, (0054,0016), SQ, 1,  */
+    /** RadiopharmaceuticalInformationSequence, 0x00540016, SQ, 1 */
     extern DICOM_EXPORT const tag RadiopharmaceuticalInformationSequence;
-    /** RadiopharmaceuticalRoute, (0018,1070), LO, 1,  */
+    /** RadiopharmaceuticalRoute, 0x00181070, LO, 1 */
     extern DICOM_EXPORT const tag RadiopharmaceuticalRoute;
-    /** RadiopharmaceuticalSpecificActivity, (0018,1077), DS, 1,  */
+    /** RadiopharmaceuticalSpecificActivity, 0x00181077, DS, 1 */
     extern DICOM_EXPORT const tag RadiopharmaceuticalSpecificActivity;
-    /** RadiopharmaceuticalStartDateTime, (0018,1078), DT, 1,  */
+    /** RadiopharmaceuticalStartDateTime, 0x00181078, DT, 1 */
     extern DICOM_EXPORT const tag RadiopharmaceuticalStartDateTime;
-    /** RadiopharmaceuticalStartTime, (0018,1072), TM, 1,  */
+    /** RadiopharmaceuticalStartTime, 0x00181072, TM, 1 */
     extern DICOM_EXPORT const tag RadiopharmaceuticalStartTime;
-    /** RadiopharmaceuticalStopDateTime, (0018,1079), DT, 1,  */
+    /** RadiopharmaceuticalStopDateTime, 0x00181079, DT, 1 */
     extern DICOM_EXPORT const tag RadiopharmaceuticalStopDateTime;
-    /** RadiopharmaceuticalStopTime, (0018,1073), TM, 1,  */
+    /** RadiopharmaceuticalStopTime, 0x00181073, TM, 1 */
     extern DICOM_EXPORT const tag RadiopharmaceuticalStopTime;
-    /** RadiopharmaceuticalUsageSequence, (0018,9737), SQ, 1,  */
+    /** RadiopharmaceuticalUsageSequence, 0x00189737, SQ, 1 */
     extern DICOM_EXPORT const tag RadiopharmaceuticalUsageSequence;
-    /** RadiopharmaceuticalVolume, (0018,1071), DS, 1,  */
+    /** RadiopharmaceuticalVolume, 0x00181071, DS, 1 */
     extern DICOM_EXPORT const tag RadiopharmaceuticalVolume;
-    /** RadiusOfCircularCollimator, (0018,1712), IS, 1,  */
+    /** RadiusAlongWedge, 0x0014511F, DS, 1, RET */
+    extern DICOM_EXPORT const tag RadiusAlongWedge;
+    /** RadiusOfCircularCollimator, 0x00181712, IS, 1 */
     extern DICOM_EXPORT const tag RadiusOfCircularCollimator;
-    /** RadiusOfCircularExposureControlSensingRegion, (0018,9441), US, 1,  */
+    /** RadiusOfCircularExposureControlSensingRegion, 0x00189441, US, 1 */
     extern DICOM_EXPORT const tag RadiusOfCircularExposureControlSensingRegion;
-    /** RadiusOfCircularShutter, (0018,1612), IS, 1,  */
+    /** RadiusOfCircularShutter, 0x00181612, IS, 1 */
     extern DICOM_EXPORT const tag RadiusOfCircularShutter;
-    /** RadiusOfCurvature, (0046,0075), FD, 1,  */
+    /** RadiusOfCurvature, 0x00460075, FD, 1 */
     extern DICOM_EXPORT const tag RadiusOfCurvature;
-    /** RandomsCorrected, (0018,9765), CS, 1,  */
+    /** RandomsCorrected, 0x00189765, CS, 1 */
     extern DICOM_EXPORT const tag RandomsCorrected;
-    /** RandomsCorrectionMethod, (0054,1100), CS, 1,  */
+    /** RandomsCorrectionMethod, 0x00541100, CS, 1 */
     extern DICOM_EXPORT const tag RandomsCorrectionMethod;
-    /** RangeModulatorDescription, (300A,034A), LO, 1,  */
+    /** RangeModulatorDescription, 0x300A034A, LO, 1 */
     extern DICOM_EXPORT const tag RangeModulatorDescription;
-    /** RangeModulatorGatingStartValue, (300A,0382), FL, 1,  */
+    /** RangeModulatorGatingStartValue, 0x300A0382, FL, 1 */
     extern DICOM_EXPORT const tag RangeModulatorGatingStartValue;
-    /** RangeModulatorGatingStartWaterEquivalentThickness, (300A,0386), FL, 1,  */
+    /** RangeModulatorGatingStartWaterEquivalentThickness, 0x300A0386, FL, 1 */
     extern DICOM_EXPORT const tag RangeModulatorGatingStartWaterEquivalentThickness;
-    /** RangeModulatorGatingStopValue, (300A,0384), FL, 1,  */
+    /** RangeModulatorGatingStopValue, 0x300A0384, FL, 1 */
     extern DICOM_EXPORT const tag RangeModulatorGatingStopValue;
-    /** RangeModulatorGatingStopWaterEquivalentThickness, (300A,0388), FL, 1,  */
+    /** RangeModulatorGatingStopWaterEquivalentThickness, 0x300A0388, FL, 1 */
     extern DICOM_EXPORT const tag RangeModulatorGatingStopWaterEquivalentThickness;
-    /** RangeModulatorID, (300A,0346), SH, 1,  */
+    /** RangeModulatorID, 0x300A0346, SH, 1 */
     extern DICOM_EXPORT const tag RangeModulatorID;
-    /** RangeModulatorNumber, (300A,0344), IS, 1,  */
+    /** RangeModulatorNumber, 0x300A0344, IS, 1 */
     extern DICOM_EXPORT const tag RangeModulatorNumber;
-    /** RangeModulatorSequence, (300A,0342), SQ, 1,  */
+    /** RangeModulatorSequence, 0x300A0342, SQ, 1 */
     extern DICOM_EXPORT const tag RangeModulatorSequence;
-    /** RangeModulatorSettingsSequence, (300A,0380), SQ, 1,  */
+    /** RangeModulatorSettingsSequence, 0x300A0380, SQ, 1 */
     extern DICOM_EXPORT const tag RangeModulatorSettingsSequence;
-    /** RangeModulatorType, (300A,0348), CS, 1,  */
+    /** RangeModulatorType, 0x300A0348, CS, 1 */
     extern DICOM_EXPORT const tag RangeModulatorType;
-    /** RangeOfFreedom, (0068,64A0), FD, 2,  */
+    /** RangeOfFreedom, 0x006864A0, FD, 2 */
     extern DICOM_EXPORT const tag RangeOfFreedom;
-    /** RangeShifterDescription, (300A,0322), LO, 1,  */
+    /** RangeShifterDescription, 0x300A0322, LO, 1 */
     extern DICOM_EXPORT const tag RangeShifterDescription;
-    /** RangeShifterID, (300A,0318), SH, 1,  */
+    /** RangeShifterID, 0x300A0318, SH, 1 */
     extern DICOM_EXPORT const tag RangeShifterID;
-    /** RangeShifterNumber, (300A,0316), IS, 1,  */
+    /** RangeShifterNumber, 0x300A0316, IS, 1 */
     extern DICOM_EXPORT const tag RangeShifterNumber;
-    /** RangeShifterSequence, (300A,0314), SQ, 1,  */
+    /** RangeShifterSequence, 0x300A0314, SQ, 1 */
     extern DICOM_EXPORT const tag RangeShifterSequence;
-    /** RangeShifterSetting, (300A,0362), LO, 1,  */
+    /** RangeShifterSetting, 0x300A0362, LO, 1 */
     extern DICOM_EXPORT const tag RangeShifterSetting;
-    /** RangeShifterSettingsSequence, (300A,0360), SQ, 1,  */
+    /** RangeShifterSettingsSequence, 0x300A0360, SQ, 1 */
     extern DICOM_EXPORT const tag RangeShifterSettingsSequence;
-    /** RangeShifterType, (300A,0320), CS, 1,  */
+    /** RangeShifterType, 0x300A0320, CS, 1 */
     extern DICOM_EXPORT const tag RangeShifterType;
-    /** RangeShifterWaterEquivalentThickness, (300A,0366), FL, 1,  */
+    /** RangeShifterWaterEquivalentThickness, 0x300A0366, FL, 1 */
     extern DICOM_EXPORT const tag RangeShifterWaterEquivalentThickness;
-    /** RangingDepth, (0052,0009), FD, 1,  */
+    /** RangingDepth, 0x00520009, FD, 1 */
     extern DICOM_EXPORT const tag RangingDepth;
-    /** RawDataHandling, (0040,4040), CS, 1,  */
+    /** RationalDenominatorValue, 0x0040A163, UL, 1 */
+    extern DICOM_EXPORT const tag RationalDenominatorValue;
+    /** RationalNumeratorValue, 0x0040A162, SL, 1 */
+    extern DICOM_EXPORT const tag RationalNumeratorValue;
+    /** RawDataHandling, 0x00404040, CS, 1 */
     extern DICOM_EXPORT const tag RawDataHandling;
-    /** RealWorldValueFirstValueMapped, (0040,9216), US or SS, 1,  */
+    /** RealWorldValueFirstValueMapped, 0x00409216, US or SS, 1 */
     extern DICOM_EXPORT const tag RealWorldValueFirstValueMapped;
-    /** RealWorldValueIntercept, (0040,9224), FD, 1,  */
+    /** RealWorldValueIntercept, 0x00409224, FD, 1 */
     extern DICOM_EXPORT const tag RealWorldValueIntercept;
-    /** RealWorldValueLastValueMapped, (0040,9211), US or SS, 1,  */
+    /** RealWorldValueLastValueMapped, 0x00409211, US or SS, 1 */
     extern DICOM_EXPORT const tag RealWorldValueLastValueMapped;
-    /** RealWorldValueLUTData, (0040,9212), FD, 1-n,  */
+    /** RealWorldValueLUTData, 0x00409212, FD, 1 */
     extern DICOM_EXPORT const tag RealWorldValueLUTData;
-    /** RealWorldValueMappingSequence, (0040,9096), SQ, 1,  */
+    /** RealWorldValueMappingSequence, 0x00409096, SQ, 1 */
     extern DICOM_EXPORT const tag RealWorldValueMappingSequence;
-    /** RealWorldValueSlope, (0040,9225), FD, 1,  */
+    /** RealWorldValueSlope, 0x00409225, FD, 1 */
     extern DICOM_EXPORT const tag RealWorldValueSlope;
-    /** ReasonForCancellation, (0074,1238), LT, 1,  */
+    /** ReasonForCancellation, 0x00741238, LT, 1 */
     extern DICOM_EXPORT const tag ReasonForCancellation;
-    /** ReasonForPerformedProcedureCodeSequence, (0040,1012), SQ, 1,  */
+    /** ReasonForChannelOmission, 0x0074140A, CS, 1 */
+    extern DICOM_EXPORT const tag ReasonForChannelOmission;
+    /** ReasonForChannelOmissionDescription, 0x0074140B, LO, 1 */
+    extern DICOM_EXPORT const tag ReasonForChannelOmissionDescription;
+    /** ReasonForOmission, 0x300C0112, CS, 1 */
+    extern DICOM_EXPORT const tag ReasonForOmission;
+    /** ReasonForOmissionDescription, 0x300C0113, LO, 1 */
+    extern DICOM_EXPORT const tag ReasonForOmissionDescription;
+    /** ReasonForPerformedProcedureCodeSequence, 0x00401012, SQ, 1 */
     extern DICOM_EXPORT const tag ReasonForPerformedProcedureCodeSequence;
-    /** ReasonForRequestedProcedureCodeSequence, (0040,100A), SQ, 1,  */
+    /** ReasonForRequestedProcedureCodeSequence, 0x0040100A, SQ, 1 */
     extern DICOM_EXPORT const tag ReasonForRequestedProcedureCodeSequence;
-    /** ReasonForStudy, (0032,1030), LO, 1, RET */
+    /** ReasonForStudy, 0x00321030, LO, 1, RET */
     extern DICOM_EXPORT const tag ReasonForStudy;
-    /** ReasonForTheAttributeModification, (0400,0565), CS, 1,  */
+    /** ReasonForTheAttributeModification, 0x04000565, CS, 1 */
     extern DICOM_EXPORT const tag ReasonForTheAttributeModification;
-    /** ReasonForTheImagingServiceRequest, (0040,2001), LO, 1, RET */
+    /** ReasonForTheImagingServiceRequest, 0x00402001, LO, 1, RET */
     extern DICOM_EXPORT const tag ReasonForTheImagingServiceRequest;
-    /** ReasonForTheRequestedProcedure, (0040,1002), LO, 1,  */
+    /** ReasonForTheRequestedProcedure, 0x00401002, LO, 1 */
     extern DICOM_EXPORT const tag ReasonForTheRequestedProcedure;
-    /** ReceiveCoilManufacturerName, (0018,9041), LO, 1,  */
+    /** ReceiveCoilManufacturerName, 0x00189041, LO, 1 */
     extern DICOM_EXPORT const tag ReceiveCoilManufacturerName;
-    /** ReceiveCoilName, (0018,1250), SH, 1,  */
+    /** ReceiveCoilName, 0x00181250, SH, 1 */
     extern DICOM_EXPORT const tag ReceiveCoilName;
-    /** ReceiveCoilType, (0018,9043), CS, 1,  */
+    /** ReceiveCoilType, 0x00189043, CS, 1 */
     extern DICOM_EXPORT const tag ReceiveCoilType;
-    /** ReceiverEquipmentSequence, (0014,4008), SQ, 1,  */
+    /** ReceiveProbeSequence, 0x00144086, SQ, 1, RET */
+    extern DICOM_EXPORT const tag ReceiveProbeSequence;
+    /** ReceiverEquipmentSequence, 0x00144008, SQ, 1, RET */
     extern DICOM_EXPORT const tag ReceiverEquipmentSequence;
-    /** ReceiverNotes, (0014,400C), LT, 1,  */
+    /** ReceiverNotes, 0x0014400C, LT, 1, RET */
     extern DICOM_EXPORT const tag ReceiverNotes;
-    /** ReceiverSettingsSequence, (0014,4030), SQ, 1,  */
+    /** ReceiverSettingsSequence, 0x00144030, SQ, 1, RET */
     extern DICOM_EXPORT const tag ReceiverSettingsSequence;
-    /** ReceiveTransducerSequence, (0014,4011), SQ, 1,  */
+    /** ReceiveTransducerSequence, 0x00144011, SQ, 1, RET */
     extern DICOM_EXPORT const tag ReceiveTransducerSequence;
-    /** ReceiveTransducerSettingsSequence, (0014,4051), SQ, 1,  */
+    /** ReceiveTransducerSettingsSequence, 0x00144051, SQ, 1, RET */
     extern DICOM_EXPORT const tag ReceiveTransducerSettingsSequence;
-    /** ReceivingAE, (0074,1234), AE, 1,  */
+    /** ReceivingAE, 0x00741234, AE, 1 */
     extern DICOM_EXPORT const tag ReceivingAE;
-    /** RecognitionCode, (0008,0010), SH, 1, RET */
+    /** ReceivingApplicationEntityTitle, 0x00020018, AE, 1 */
+    extern DICOM_EXPORT const tag ReceivingApplicationEntityTitle;
+    /** RecognitionCode, 0x00080010, SH, 1, RET */
     extern DICOM_EXPORT const tag RecognitionCode;
-    /** RecognizableVisualFeatures, (0028,0302), CS, 1,  */
+    /** RecognizableVisualFeatures, 0x00280302, CS, 1 */
     extern DICOM_EXPORT const tag RecognizableVisualFeatures;
-    /** RecommendedAbsentPixelCIELabValue, (0048,0015), US, 3,  */
+    /** RecommendedAbsentPixelCIELabValue, 0x00480015, US, 3 */
     extern DICOM_EXPORT const tag RecommendedAbsentPixelCIELabValue;
-    /** RecommendedDisplayCIELabValue, (0062,000D), US, 3,  */
+    /** RecommendedAnimationRate, 0x00701A03, FD, 1 */
+    extern DICOM_EXPORT const tag RecommendedAnimationRate;
+    /** RecommendedDefaultValueSequence, 0x00820035, SQ, 1 */
+    extern DICOM_EXPORT const tag RecommendedDefaultValueSequence;
+    /** RecommendedDisplayCIELabValue, 0x0062000D, US, 3 */
     extern DICOM_EXPORT const tag RecommendedDisplayCIELabValue;
-    /** RecommendedDisplayFrameRate, (0008,2144), IS, 1,  */
+    /** RecommendedDisplayCIELabValueList, 0x00660103, OW, 1 */
+    extern DICOM_EXPORT const tag RecommendedDisplayCIELabValueList;
+    /** RecommendedDisplayFrameRate, 0x00082144, IS, 1 */
     extern DICOM_EXPORT const tag RecommendedDisplayFrameRate;
-    /** RecommendedDisplayFrameRateInFloat, (0008,9459), FL, 1,  */
+    /** RecommendedDisplayFrameRateInFloat, 0x00089459, FL, 1 */
     extern DICOM_EXPORT const tag RecommendedDisplayFrameRateInFloat;
-    /** RecommendedDisplayGrayscaleValue, (0062,000C), US, 1,  */
+    /** RecommendedDisplayGrayscaleValue, 0x0062000C, US, 1 */
     extern DICOM_EXPORT const tag RecommendedDisplayGrayscaleValue;
-    /** RecommendedPresentationOpacity, (0066,000C), FL, 1,  */
+    /** RecommendedLineThickness, 0x00660038, FL, 1 */
+    extern DICOM_EXPORT const tag RecommendedLineThickness;
+    /** RecommendedPointRadius, 0x00660037, FL, 1 */
+    extern DICOM_EXPORT const tag RecommendedPointRadius;
+    /** RecommendedPresentationOpacity, 0x0066000C, FL, 1 */
     extern DICOM_EXPORT const tag RecommendedPresentationOpacity;
-    /** RecommendedPresentationType, (0066,000D), CS, 1,  */
+    /** RecommendedPresentationType, 0x0066000D, CS, 1 */
     extern DICOM_EXPORT const tag RecommendedPresentationType;
-    /** RecommendedRotationPoint, (0068,6346), FD, 2,  */
+    /** RecommendedRotationPoint, 0x00686346, FD, 2 */
     extern DICOM_EXPORT const tag RecommendedRotationPoint;
-    /** RecommendedViewingMode, (0028,1090), CS, 1,  */
+    /** RecommendedViewingMode, 0x00281090, CS, 1 */
     extern DICOM_EXPORT const tag RecommendedViewingMode;
-    /** ReconstructionAlgorithm, (0018,9315), CS, 1,  */
+    /** ReconstructionAlgorithm, 0x00189315, CS, 1 */
     extern DICOM_EXPORT const tag ReconstructionAlgorithm;
-    /** ReconstructionAngle, (0018,9319), FD, 1,  */
+    /** ReconstructionAlgorithmSequence, 0x0018993D, SQ, 1 */
+    extern DICOM_EXPORT const tag ReconstructionAlgorithmSequence;
+    /** ReconstructionAngle, 0x00189319, FD, 1 */
     extern DICOM_EXPORT const tag ReconstructionAngle;
-    /** ReconstructionDescription, (0018,9531), LO, 1,  */
+    /** ReconstructionDescription, 0x00189531, LO, 1 */
     extern DICOM_EXPORT const tag ReconstructionDescription;
-    /** ReconstructionDiameter, (0018,1100), DS, 1,  */
+    /** ReconstructionDiameter, 0x00181100, DS, 1 */
     extern DICOM_EXPORT const tag ReconstructionDiameter;
-    /** ReconstructionFieldOfView, (0018,9317), FD, 2,  */
+    /** ReconstructionEndLocationSequence, 0x0018993C, SQ, 1 */
+    extern DICOM_EXPORT const tag ReconstructionEndLocationSequence;
+    /** ReconstructionFieldOfView, 0x00189317, FD, 2 */
     extern DICOM_EXPORT const tag ReconstructionFieldOfView;
-    /** ReconstructionIndex, (0020,9536), US, 1,  */
+    /** ReconstructionIndex, 0x00209536, US, 1 */
     extern DICOM_EXPORT const tag ReconstructionIndex;
-    /** ReconstructionMethod, (0054,1103), LO, 1,  */
+    /** ReconstructionMethod, 0x00541103, LO, 1 */
     extern DICOM_EXPORT const tag ReconstructionMethod;
-    /** ReconstructionPixelSpacing, (0018,9322), FD, 2,  */
+    /** ReconstructionPixelSpacing, 0x00189322, FD, 2 */
     extern DICOM_EXPORT const tag ReconstructionPixelSpacing;
-    /** ReconstructionTargetCenterPatient, (0018,9318), FD, 3,  */
+    /** ReconstructionProtocolElementSequence, 0x00189934, SQ, 1 */
+    extern DICOM_EXPORT const tag ReconstructionProtocolElementSequence;
+    /** ReconstructionProtocolElementSpecificationSequence, 0x00189933, SQ, 1 */
+    extern DICOM_EXPORT const tag ReconstructionProtocolElementSpecificationSequence;
+    /** ReconstructionStartLocationSequence, 0x0018993B, SQ, 1 */
+    extern DICOM_EXPORT const tag ReconstructionStartLocationSequence;
+    /** ReconstructionTargetCenterLocationSequence, 0x0018993E, SQ, 1 */
+    extern DICOM_EXPORT const tag ReconstructionTargetCenterLocationSequence;
+    /** ReconstructionTargetCenterPatient, 0x00189318, FD, 3 */
     extern DICOM_EXPORT const tag ReconstructionTargetCenterPatient;
-    /** ReconstructionType, (0018,9756), CS, 1,  */
+    /** ReconstructionType, 0x00189756, CS, 1 */
     extern DICOM_EXPORT const tag ReconstructionType;
-    /** RecordedBlockSequence, (3008,00D0), SQ, 1,  */
+    /** RecordedBlockSequence, 0x300800D0, SQ, 1 */
     extern DICOM_EXPORT const tag RecordedBlockSequence;
-    /** RecordedBrachyAccessoryDeviceSequence, (3008,0120), SQ, 1,  */
+    /** RecordedBrachyAccessoryDeviceSequence, 0x30080120, SQ, 1 */
     extern DICOM_EXPORT const tag RecordedBrachyAccessoryDeviceSequence;
-    /** RecordedChannelSequence, (3008,0130), SQ, 1,  */
+    /** RecordedChannelSequence, 0x30080130, SQ, 1 */
     extern DICOM_EXPORT const tag RecordedChannelSequence;
-    /** RecordedChannelShieldSequence, (3008,0150), SQ, 1,  */
+    /** RecordedChannelShieldSequence, 0x30080150, SQ, 1 */
     extern DICOM_EXPORT const tag RecordedChannelShieldSequence;
-    /** RecordedCompensatorSequence, (3008,00C0), SQ, 1,  */
+    /** RecordedCompensatorSequence, 0x300800C0, SQ, 1 */
     extern DICOM_EXPORT const tag RecordedCompensatorSequence;
-    /** RecordedLateralSpreadingDeviceSequence, (3008,00F4), SQ, 1,  */
+    /** RecordedLateralSpreadingDeviceSequence, 0x300800F4, SQ, 1 */
     extern DICOM_EXPORT const tag RecordedLateralSpreadingDeviceSequence;
-    /** RecordedRangeModulatorSequence, (3008,00F6), SQ, 1,  */
+    /** RecordedRangeModulatorSequence, 0x300800F6, SQ, 1 */
     extern DICOM_EXPORT const tag RecordedRangeModulatorSequence;
-    /** RecordedRangeShifterSequence, (3008,00F2), SQ, 1,  */
+    /** RecordedRangeShifterSequence, 0x300800F2, SQ, 1 */
     extern DICOM_EXPORT const tag RecordedRangeShifterSequence;
-    /** RecordedSnoutSequence, (3008,00F0), SQ, 1,  */
+    /** RecordedSnoutSequence, 0x300800F0, SQ, 1 */
     extern DICOM_EXPORT const tag RecordedSnoutSequence;
-    /** RecordedSourceApplicatorSequence, (3008,0140), SQ, 1,  */
+    /** RecordedSourceApplicatorSequence, 0x30080140, SQ, 1 */
     extern DICOM_EXPORT const tag RecordedSourceApplicatorSequence;
-    /** RecordedSourceSequence, (3008,0100), SQ, 1,  */
+    /** RecordedSourceSequence, 0x30080100, SQ, 1 */
     extern DICOM_EXPORT const tag RecordedSourceSequence;
-    /** RecordedWedgeSequence, (3008,00B0), SQ, 1,  */
+    /** RecordedWedgeSequence, 0x300800B0, SQ, 1 */
     extern DICOM_EXPORT const tag RecordedWedgeSequence;
-    /** RecordInUseFlag, (0004,1410), US, 1,  */
+    /** RecordInUseFlag, 0x00041410, US, 1 */
     extern DICOM_EXPORT const tag RecordInUseFlag;
-    /** RectificationType, (0018,1156), CS, 1,  */
+    /** RectificationType, 0x00181156, CS, 1 */
     extern DICOM_EXPORT const tag RectificationType;
-    /** RectifierSmoothing, (0014,4034), DS, 1,  */
+    /** RectifierSmoothing, 0x00144034, DS, 1, RET */
     extern DICOM_EXPORT const tag RectifierSmoothing;
-    /** RectilinearPhaseEncodeReordering, (0018,9034), CS, 1,  */
+    /** RectilinearPhaseEncodeReordering, 0x00189034, CS, 1 */
     extern DICOM_EXPORT const tag RectilinearPhaseEncodeReordering;
-    /** RedPaletteColorLookupTableData, (0028,1201), OW, 1,  */
+    /** RedPaletteColorLookupTableData, 0x00281201, OW, 1 */
     extern DICOM_EXPORT const tag RedPaletteColorLookupTableData;
-    /** RedPaletteColorLookupTableDescriptor, (0028,1101), US or SS, 3,  */
+    /** RedPaletteColorLookupTableDescriptor, 0x00281101, US or SS, 3 */
     extern DICOM_EXPORT const tag RedPaletteColorLookupTableDescriptor;
-    /** Reference, (0020,1020), LO, 1-n, RET */
+    /** Reference, 0x00201020, LO, 1, RET */
     extern DICOM_EXPORT const tag Reference;
-    /** ReferenceAirKermaRate, (300A,022A), DS, 1,  */
+    /** ReferenceAirKermaRate, 0x300A022A, DS, 1 */
     extern DICOM_EXPORT const tag ReferenceAirKermaRate;
-    /** ReferenceCoordinates, (0022,0032), FL, 2-2n,  */
+    /** ReferenceBasisCodeSequence, 0x00189902, SQ, 1 */
+    extern DICOM_EXPORT const tag ReferenceBasisCodeSequence;
+    /** ReferenceCoordinates, 0x00220032, FL, 2 */
     extern DICOM_EXPORT const tag ReferenceCoordinates;
-    /** ReferencedAccessionSequenceTrial, (0040,A313), SQ, 1, RET */
+    /** ReferencedAccessionSequenceTrial, 0x0040A313, SQ, 1, RET */
     extern DICOM_EXPORT const tag ReferencedAccessionSequenceTrial;
-    /** ReferencedBasicAnnotationBoxSequence, (2010,0520), SQ, 1,  */
+    /** ReferencedAssertionUID, 0x00440108, UI, 1 */
+    extern DICOM_EXPORT const tag ReferencedAssertionUID;
+    /** ReferencedBasicAnnotationBoxSequence, 0x20100520, SQ, 1 */
     extern DICOM_EXPORT const tag ReferencedBasicAnnotationBoxSequence;
-    /** ReferencedBeamNumber, (300C,0006), IS, 1,  */
+    /** ReferencedBeamNumber, 0x300C0006, IS, 1 */
     extern DICOM_EXPORT const tag ReferencedBeamNumber;
-    /** ReferencedBeamSequence, (300C,0004), SQ, 1,  */
+    /** ReferencedBeamSequence, 0x300C0004, SQ, 1 */
     extern DICOM_EXPORT const tag ReferencedBeamSequence;
-    /** ReferencedBlockNumber, (300C,00E0), IS, 1,  */
+    /** ReferencedBlockNumber, 0x300C00E0, IS, 1 */
     extern DICOM_EXPORT const tag ReferencedBlockNumber;
-    /** ReferencedBolusSequence, (300C,00B0), SQ, 1,  */
+    /** ReferencedBolusSequence, 0x300C00B0, SQ, 1 */
     extern DICOM_EXPORT const tag ReferencedBolusSequence;
-    /** ReferencedBrachyAccessoryDeviceNumber, (3008,0122), IS, 1,  */
+    /** ReferencedBrachyAccessoryDeviceNumber, 0x30080122, IS, 1 */
     extern DICOM_EXPORT const tag ReferencedBrachyAccessoryDeviceNumber;
-    /** ReferencedBrachyApplicationSetupNumber, (300C,000C), IS, 1,  */
+    /** ReferencedBrachyApplicationSetupNumber, 0x300C000C, IS, 1 */
     extern DICOM_EXPORT const tag ReferencedBrachyApplicationSetupNumber;
-    /** ReferencedBrachyApplicationSetupSequence, (300C,000A), SQ, 1,  */
+    /** ReferencedBrachyApplicationSetupSequence, 0x300C000A, SQ, 1 */
     extern DICOM_EXPORT const tag ReferencedBrachyApplicationSetupSequence;
-    /** ReferencedCalculatedDoseReferenceNumber, (3008,0092), IS, 1,  */
+    /** ReferencedCalculatedDoseReferenceNumber, 0x30080092, IS, 1 */
     extern DICOM_EXPORT const tag ReferencedCalculatedDoseReferenceNumber;
-    /** ReferencedCalculatedDoseReferenceSequence, (3008,0090), SQ, 1,  */
+    /** ReferencedCalculatedDoseReferenceSequence, 0x30080090, SQ, 1 */
     extern DICOM_EXPORT const tag ReferencedCalculatedDoseReferenceSequence;
-    /** ReferencedChannelShieldNumber, (3008,0152), IS, 1,  */
+    /** ReferencedChannelNumber, 0x00741406, IS, 1 */
+    extern DICOM_EXPORT const tag ReferencedChannelNumber;
+    /** ReferencedChannelShieldNumber, 0x30080152, IS, 1 */
     extern DICOM_EXPORT const tag ReferencedChannelShieldNumber;
-    /** ReferencedColorPaletteInstanceUID, (0028,0304), UI, 1,  */
+    /** ReferencedColorPaletteInstanceUID, 0x00280304, UI, 1 */
     extern DICOM_EXPORT const tag ReferencedColorPaletteInstanceUID;
-    /** ReferencedCompensatorNumber, (300C,00D0), IS, 1,  */
+    /** ReferencedComparisonSOPInstanceSequence, 0x00820005, SQ, 1 */
+    extern DICOM_EXPORT const tag ReferencedComparisonSOPInstanceSequence;
+    /** ReferencedCompensatorNumber, 0x300C00D0, IS, 1 */
     extern DICOM_EXPORT const tag ReferencedCompensatorNumber;
-    /** ReferencedContentItemIdentifier, (0040,DB73), UL, 1-n,  */
+    /** ReferencedContentItem, 0x00701904, UI, 1 */
+    extern DICOM_EXPORT const tag ReferencedContentItem;
+    /** ReferencedContentItemIdentifier, 0x0040DB73, UL, 1 */
     extern DICOM_EXPORT const tag ReferencedContentItemIdentifier;
-    /** ReferencedControlPointIndex, (300C,00F0), IS, 1,  */
+    /** ReferencedControlPointIndex, 0x300C00F0, IS, 1 */
     extern DICOM_EXPORT const tag ReferencedControlPointIndex;
-    /** ReferencedControlPointSequence, (300C,00F2), SQ, 1,  */
+    /** ReferencedControlPointSequence, 0x300C00F2, SQ, 1 */
     extern DICOM_EXPORT const tag ReferencedControlPointSequence;
-    /** ReferencedCurveSequence, (0008,1145), SQ, 1, RET */
+    /** ReferencedCurveSequence, 0x00081145, SQ, 1, RET */
     extern DICOM_EXPORT const tag ReferencedCurveSequence;
-    /** ReferencedDateTime, (0040,A13A), DT, 1-n,  */
+    /** ReferencedDateTime, 0x0040A13A, DT, 1 */
     extern DICOM_EXPORT const tag ReferencedDateTime;
-    /** ReferencedDigitalSignatureSequence, (0400,0402), SQ, 1,  */
+    /** ReferencedDefinedProtocolSequence, 0x0018990C, SQ, 1 */
+    extern DICOM_EXPORT const tag ReferencedDefinedProtocolSequence;
+    /** ReferencedDigitalSignatureSequence, 0x04000402, SQ, 1 */
     extern DICOM_EXPORT const tag ReferencedDigitalSignatureSequence;
-    /** ReferencedDoseReferenceNumber, (300C,0051), IS, 1,  */
+    /** ReferencedDoseReferenceNumber, 0x300C0051, IS, 1 */
     extern DICOM_EXPORT const tag ReferencedDoseReferenceNumber;
-    /** ReferencedDoseReferenceSequence, (300C,0050), SQ, 1,  */
+    /** ReferencedDoseReferenceSequence, 0x300C0050, SQ, 1 */
     extern DICOM_EXPORT const tag ReferencedDoseReferenceSequence;
-    /** ReferencedDoseSequence, (300C,0080), SQ, 1,  */
+    /** ReferencedDoseReferenceUID, 0x300A0083, UI, 1 */
+    extern DICOM_EXPORT const tag ReferencedDoseReferenceUID;
+    /** ReferencedDoseSequence, 0x300C0080, SQ, 1 */
     extern DICOM_EXPORT const tag ReferencedDoseSequence;
-    /** ReferencedFileID, (0004,1500), CS, 1-8,  */
+    /** ReferencedFiducialUID, 0x0070031B, UI, 1 */
+    extern DICOM_EXPORT const tag ReferencedFiducialUID;
+    /** ReferencedFileID, 0x00041500, CS, 1 */
     extern DICOM_EXPORT const tag ReferencedFileID;
-    /** ReferencedFilmBoxSequence, (2000,0500), SQ, 1,  */
+    /** ReferencedFilmBoxSequence, 0x20000500, SQ, 1 */
     extern DICOM_EXPORT const tag ReferencedFilmBoxSequence;
-    /** ReferencedFilmSessionSequence, (2010,0500), SQ, 1,  */
+    /** ReferencedFilmSessionSequence, 0x20100500, SQ, 1 */
     extern DICOM_EXPORT const tag ReferencedFilmSessionSequence;
-    /** ReferencedFindingsGroupUIDTrial, (0040,A022), UI, 1, RET */
+    /** ReferencedFindingsGroupUIDTrial, 0x0040A022, UI, 1, RET */
     extern DICOM_EXPORT const tag ReferencedFindingsGroupUIDTrial;
-    /** ReferencedFirstFrameSequence, (0072,0427), SQ, 1,  */
+    /** ReferencedFirstFrameSequence, 0x00720427, SQ, 1 */
     extern DICOM_EXPORT const tag ReferencedFirstFrameSequence;
-    /** ReferencedFractionGroupNumber, (300C,0022), IS, 1,  */
+    /** ReferencedFractionGroupNumber, 0x300C0022, IS, 1 */
     extern DICOM_EXPORT const tag ReferencedFractionGroupNumber;
-    /** ReferencedFractionGroupSequence, (300C,0020), SQ, 1,  */
+    /** ReferencedFractionGroupSequence, 0x300C0020, SQ, 1 */
     extern DICOM_EXPORT const tag ReferencedFractionGroupSequence;
-    /** ReferencedFractionNumber, (3008,0223), IS, 1,  */
+    /** ReferencedFractionNumber, 0x30080223, IS, 1 */
     extern DICOM_EXPORT const tag ReferencedFractionNumber;
-    /** ReferencedFrameNumber, (0008,1160), IS, 1-n,  */
+    /** ReferencedFrameNumber, 0x00081160, IS, 1 */
     extern DICOM_EXPORT const tag ReferencedFrameNumber;
-    /** ReferencedFrameNumbers, (0040,A136), US, 1-n,  */
+    /** ReferencedFrameNumbers, 0x0040A136, US, 1 */
     extern DICOM_EXPORT const tag ReferencedFrameNumbers;
-    /** ReferencedFrameOfReferenceSequence, (3006,0010), SQ, 1,  */
+    /** ReferencedFrameOfReferenceSequence, 0x30060010, SQ, 1 */
     extern DICOM_EXPORT const tag ReferencedFrameOfReferenceSequence;
-    /** ReferencedFrameOfReferenceUID, (3006,0024), UI, 1,  */
+    /** ReferencedFrameOfReferenceUID, 0x30060024, UI, 1 */
     extern DICOM_EXPORT const tag ReferencedFrameOfReferenceUID;
-    /** ReferencedGeneralPurposeScheduledProcedureStepSequence, (0040,4016), SQ, 1,  */
+    /** ReferencedGeneralPurposeScheduledProcedureStepSequence, 0x00404016, SQ, 1, RET */
     extern DICOM_EXPORT const tag ReferencedGeneralPurposeScheduledProcedureStepSequence;
-    /** ReferencedGeneralPurposeScheduledProcedureStepTransactionUID, (0040,4023), UI, 1,  */
+    /** ReferencedGeneralPurposeScheduledProcedureStepTransactionUID, 0x00404023, UI, 1, RET */
     extern DICOM_EXPORT const tag ReferencedGeneralPurposeScheduledProcedureStepTransactionUID;
-    /** ReferencedHPGLDocumentID, (0068,6440), US, 1,  */
+    /** ReferencedHPGLDocumentID, 0x00686440, US, 1 */
     extern DICOM_EXPORT const tag ReferencedHPGLDocumentID;
-    /** ReferencedImageBoxSequence, (2010,0510), SQ, 1,  */
+    /** ReferencedImageBoxSequence, 0x20100510, SQ, 1 */
     extern DICOM_EXPORT const tag ReferencedImageBoxSequence;
-    /** ReferencedImageBoxSequenceRetired, (2040,0500), SQ, 1, RET */
+    /** ReferencedImageBoxSequenceRetired, 0x20400500, SQ, 1, RET */
     extern DICOM_EXPORT const tag ReferencedImageBoxSequenceRetired;
-    /** ReferencedImageEvidenceSequence, (0008,9092), SQ, 1,  */
+    /** ReferencedImageEvidenceSequence, 0x00089092, SQ, 1 */
     extern DICOM_EXPORT const tag ReferencedImageEvidenceSequence;
-    /** ReferencedImageNavigationSequence, (0048,0200), SQ, 1,  */
+    /** ReferencedImageNavigationSequence, 0x00480200, SQ, 1 */
     extern DICOM_EXPORT const tag ReferencedImageNavigationSequence;
-    /** ReferencedImageOverlayBoxSequence, (2020,0130), SQ, 1, RET */
+    /** ReferencedImageOverlayBoxSequence, 0x20200130, SQ, 1, RET */
     extern DICOM_EXPORT const tag ReferencedImageOverlayBoxSequence;
-    /** ReferencedImageRealWorldValueMappingSequence, (0040,9094), SQ, 1,  */
+    /** ReferencedImageRealWorldValueMappingSequence, 0x00409094, SQ, 1 */
     extern DICOM_EXPORT const tag ReferencedImageRealWorldValueMappingSequence;
-    /** ReferencedImageSequence, (0008,1140), SQ, 1,  */
+    /** ReferencedImageSequence, 0x00081140, SQ, 1 */
     extern DICOM_EXPORT const tag ReferencedImageSequence;
-    /** ReferencedImplantTemplateGroupMemberID, (0078,00B6), US, 1,  */
+    /** ReferencedImplantTemplateGroupMemberID, 0x007800B6, US, 1 */
     extern DICOM_EXPORT const tag ReferencedImplantTemplateGroupMemberID;
-    /** ReferencedInstanceSequence, (0008,114A), SQ, 1,  */
+    /** ReferencedInstanceSequence, 0x0008114A, SQ, 1 */
     extern DICOM_EXPORT const tag ReferencedInstanceSequence;
-    /** ReferencedInterpretationSequence, (4008,0050), SQ, 1, RET */
+    /** ReferencedInterpretationSequence, 0x40080050, SQ, 1, RET */
     extern DICOM_EXPORT const tag ReferencedInterpretationSequence;
-    /** ReferenceDisplaySets, (0072,0218), US, 1-n,  */
+    /** ReferenceDisplaySets, 0x00720218, US, 1 */
     extern DICOM_EXPORT const tag ReferenceDisplaySets;
-    /** ReferencedLateralSpreadingDeviceNumber, (300C,0102), IS, 1,  */
+    /** ReferencedLateralSpreadingDeviceNumber, 0x300C0102, IS, 1 */
     extern DICOM_EXPORT const tag ReferencedLateralSpreadingDeviceNumber;
-    /** ReferencedMeasuredDoseReferenceNumber, (3008,0082), IS, 1,  */
+    /** ReferencedMeasuredDoseReferenceNumber, 0x30080082, IS, 1 */
     extern DICOM_EXPORT const tag ReferencedMeasuredDoseReferenceNumber;
-    /** ReferencedMeasuredDoseReferenceSequence, (3008,0080), SQ, 1,  */
+    /** ReferencedMeasuredDoseReferenceSequence, 0x30080080, SQ, 1 */
     extern DICOM_EXPORT const tag ReferencedMeasuredDoseReferenceSequence;
-    /** ReferencedNonImageCompositeSOPInstanceSequence, (0040,0220), SQ, 1,  */
+    /** ReferencedNonImageCompositeSOPInstanceSequence, 0x00400220, SQ, 1 */
     extern DICOM_EXPORT const tag ReferencedNonImageCompositeSOPInstanceSequence;
-    /** ReferencedObjectObservationClassTrial, (0040,A174), CS, 1, RET */
+    /** ReferencedObjectObservationClassTrial, 0x0040A174, CS, 1, RET */
     extern DICOM_EXPORT const tag ReferencedObjectObservationClassTrial;
-    /** ReferencedObservationClassTrial, (0040,A173), CS, 1, RET */
+    /** ReferencedObservationClassTrial, 0x0040A173, CS, 1, RET */
     extern DICOM_EXPORT const tag ReferencedObservationClassTrial;
-    /** ReferencedObservationUIDTrial, (0040,A172), UI, 1, RET */
+    /** ReferencedObservationUIDTrial, 0x0040A172, UI, 1, RET */
     extern DICOM_EXPORT const tag ReferencedObservationUIDTrial;
-    /** ReferencedOphthalmicAxialLengthMeasurementQCImageSequence, (0022,1330), SQ, 1,  */
+    /** ReferencedOphthalmicAxialLengthMeasurementQCImageSequence, 0x00221330, SQ, 1 */
     extern DICOM_EXPORT const tag ReferencedOphthalmicAxialLengthMeasurementQCImageSequence;
-    /** ReferencedOphthalmicAxialMeasurementsSequence, (0022,1100), SQ, 1,  */
+    /** ReferencedOphthalmicAxialMeasurementsSequence, 0x00221100, SQ, 1 */
     extern DICOM_EXPORT const tag ReferencedOphthalmicAxialMeasurementsSequence;
-    /** ReferencedOtherPlaneSequence, (0008,9410), SQ, 1,  */
+    /** ReferenceDoseDefinition, 0x300A0512, CS, 1 */
+    extern DICOM_EXPORT const tag ReferenceDoseDefinition;
+    /** ReferencedOtherPlaneSequence, 0x00089410, SQ, 1 */
     extern DICOM_EXPORT const tag ReferencedOtherPlaneSequence;
-    /** ReferencedOverlayPlaneGroups, (2040,0011), US, 1-99, RET */
+    /** ReferencedOverlayPlaneGroups, 0x20400011, US, 1, RET */
     extern DICOM_EXPORT const tag ReferencedOverlayPlaneGroups;
-    /** ReferencedOverlayPlaneSequence, (2040,0010), SQ, 1, RET */
+    /** ReferencedOverlayPlaneSequence, 0x20400010, SQ, 1, RET */
     extern DICOM_EXPORT const tag ReferencedOverlayPlaneSequence;
-    /** ReferencedOverlaySequence, (0008,1130), SQ, 1, RET */
+    /** ReferencedOverlaySequence, 0x00081130, SQ, 1, RET */
     extern DICOM_EXPORT const tag ReferencedOverlaySequence;
-    /** ReferencedPatientAliasSequence, (0038,0004), SQ, 1,  */
+    /** ReferencedPatientAliasSequence, 0x00380004, SQ, 1 */
     extern DICOM_EXPORT const tag ReferencedPatientAliasSequence;
-    /** ReferencedPatientSequence, (0008,1120), SQ, 1,  */
+    /** ReferencedPatientPhotoSequence, 0x00101100, SQ, 1 */
+    extern DICOM_EXPORT const tag ReferencedPatientPhotoSequence;
+    /** ReferencedPatientSequence, 0x00081120, SQ, 1 */
     extern DICOM_EXPORT const tag ReferencedPatientSequence;
-    /** ReferencedPatientSetupNumber, (300C,006A), IS, 1,  */
+    /** ReferencedPatientSetupNumber, 0x300C006A, IS, 1 */
     extern DICOM_EXPORT const tag ReferencedPatientSetupNumber;
-    /** ReferencedPerformedProcedureStepSequence, (0008,1111), SQ, 1,  */
+    /** ReferencedPerformedProcedureStepSequence, 0x00081111, SQ, 1 */
     extern DICOM_EXPORT const tag ReferencedPerformedProcedureStepSequence;
-    /** ReferencedPresentationLUTSequence, (2050,0500), SQ, 1,  */
+    /** ReferencedPerformedProtocolSequence, 0x0018990D, SQ, 1 */
+    extern DICOM_EXPORT const tag ReferencedPerformedProtocolSequence;
+    /** ReferencedPresentationLUTSequence, 0x20500500, SQ, 1 */
     extern DICOM_EXPORT const tag ReferencedPresentationLUTSequence;
-    /** ReferencedPresentationStateSequence, (0008,9237), SQ, 1,  */
+    /** ReferencedPresentationStateSequence, 0x00089237, SQ, 1 */
     extern DICOM_EXPORT const tag ReferencedPresentationStateSequence;
-    /** ReferencedPrintJobSequence, (2120,0070), SQ, 1, RET */
+    /** ReferencedPrintJobSequence, 0x21200070, SQ, 1, RET */
     extern DICOM_EXPORT const tag ReferencedPrintJobSequence;
-    /** ReferencedPrintJobSequencePullStoredPrint, (2100,0500), SQ, 1, RET */
+    /** ReferencedPrintJobSequencePullStoredPrint, 0x21000500, SQ, 1, RET */
     extern DICOM_EXPORT const tag ReferencedPrintJobSequencePullStoredPrint;
-    /** ReferencedProcedureStepSequence, (0040,0330), SQ, 1, RET */
+    /** ReferencedProcedureStepSequence, 0x00400330, SQ, 1, RET */
     extern DICOM_EXPORT const tag ReferencedProcedureStepSequence;
-    /** ReferencedRangeModulatorNumber, (300C,0104), IS, 1,  */
+    /** ReferencedPTOSequence, 0x40101076, SQ, 1, RET */
+    extern DICOM_EXPORT const tag ReferencedPTOSequence;
+    /** ReferencedRangeModulatorNumber, 0x300C0104, IS, 1 */
     extern DICOM_EXPORT const tag ReferencedRangeModulatorNumber;
-    /** ReferencedRangeShifterNumber, (300C,0100), IS, 1,  */
+    /** ReferencedRangeShifterNumber, 0x300C0100, IS, 1 */
     extern DICOM_EXPORT const tag ReferencedRangeShifterNumber;
-    /** ReferencedRawDataSequence, (0008,9121), SQ, 1,  */
+    /** ReferencedRawDataSequence, 0x00089121, SQ, 1 */
     extern DICOM_EXPORT const tag ReferencedRawDataSequence;
-    /** ReferencedRealWorldValueMappingInstanceSequence, (0008,114B), SQ, 1,  */
+    /** ReferencedRealWorldValueMappingInstanceSequence, 0x0008114B, SQ, 1 */
     extern DICOM_EXPORT const tag ReferencedRealWorldValueMappingInstanceSequence;
-    /** ReferencedReferenceImageNumber, (300C,0007), IS, 1,  */
+    /** ReferencedReferenceImageNumber, 0x300C0007, IS, 1 */
     extern DICOM_EXPORT const tag ReferencedReferenceImageNumber;
-    /** ReferencedReferenceImageSequence, (300C,0042), SQ, 1,  */
+    /** ReferencedReferenceImageSequence, 0x300C0042, SQ, 1 */
     extern DICOM_EXPORT const tag ReferencedReferenceImageSequence;
-    /** ReferencedRefractiveMeasurementsSequence, (0046,0145), SQ, 1,  */
+    /** ReferencedRefractiveMeasurementsSequence, 0x00460145, SQ, 1 */
     extern DICOM_EXPORT const tag ReferencedRefractiveMeasurementsSequence;
-    /** ReferencedRelatedGeneralSOPClassUIDInFile, (0004,151A), UI, 1-n,  */
+    /** ReferencedRelatedGeneralSOPClassUIDInFile, 0x0004151A, UI, 1 */
     extern DICOM_EXPORT const tag ReferencedRelatedGeneralSOPClassUIDInFile;
-    /** ReferencedRequestSequence, (0040,A370), SQ, 1,  */
+    /** ReferencedRequestSequence, 0x0040A370, SQ, 1 */
     extern DICOM_EXPORT const tag ReferencedRequestSequence;
-    /** ReferencedResultsSequence, (0008,1100), SQ, 1, RET */
+    /** ReferencedResultsSequence, 0x00081100, SQ, 1, RET */
     extern DICOM_EXPORT const tag ReferencedResultsSequence;
-    /** ReferencedROINumber, (3006,0084), IS, 1,  */
+    /** ReferencedROINumber, 0x30060084, IS, 1 */
     extern DICOM_EXPORT const tag ReferencedROINumber;
-    /** ReferencedRTPlanSequence, (300C,0002), SQ, 1,  */
+    /** ReferencedRTPlanSequence, 0x300C0002, SQ, 1 */
     extern DICOM_EXPORT const tag ReferencedRTPlanSequence;
-    /** ReferencedSamplePositions, (0040,A132), UL, 1-n,  */
+    /** ReferencedSamplePositions, 0x0040A132, UL, 1 */
     extern DICOM_EXPORT const tag ReferencedSamplePositions;
-    /** ReferencedSegmentNumber, (0062,000B), US, 1-n,  */
+    /** ReferencedSegmentNumber, 0x0062000B, US, 1 */
     extern DICOM_EXPORT const tag ReferencedSegmentNumber;
-    /** ReferencedSeriesSequence, (0008,1115), SQ, 1,  */
+    /** ReferencedSeriesSequence, 0x00081115, SQ, 1 */
     extern DICOM_EXPORT const tag ReferencedSeriesSequence;
-    /** ReferencedSetupImageSequence, (300A,0401), SQ, 1,  */
+    /** ReferencedSetupImageSequence, 0x300A0401, SQ, 1 */
     extern DICOM_EXPORT const tag ReferencedSetupImageSequence;
-    /** ReferencedSOPClassUID, (0008,1150), UI, 1,  */
+    /** ReferencedSOPClassUID, 0x00081150, UI, 1 */
     extern DICOM_EXPORT const tag ReferencedSOPClassUID;
-    /** ReferencedSOPClassUIDInFile, (0004,1510), UI, 1,  */
+    /** ReferencedSOPClassUIDInFile, 0x00041510, UI, 1 */
     extern DICOM_EXPORT const tag ReferencedSOPClassUIDInFile;
-    /** ReferencedSOPInstanceMACSequence, (0400,0403), SQ, 1,  */
+    /** ReferencedSOPInstanceMACSequence, 0x04000403, SQ, 1 */
     extern DICOM_EXPORT const tag ReferencedSOPInstanceMACSequence;
-    /** ReferencedSOPInstanceUID, (0008,1155), UI, 1,  */
+    /** ReferencedSOPInstanceUID, 0x00081155, UI, 1 */
     extern DICOM_EXPORT const tag ReferencedSOPInstanceUID;
-    /** ReferencedSOPInstanceUIDInFile, (0004,1511), UI, 1,  */
+    /** ReferencedSOPInstanceUIDInFile, 0x00041511, UI, 1 */
     extern DICOM_EXPORT const tag ReferencedSOPInstanceUIDInFile;
-    /** ReferencedSOPSequence, (0008,1199), SQ, 1,  */
+    /** ReferencedSOPSequence, 0x00081199, SQ, 1 */
     extern DICOM_EXPORT const tag ReferencedSOPSequence;
-    /** ReferencedSourceApplicatorNumber, (3008,0142), IS, 1,  */
+    /** ReferencedSourceApplicatorNumber, 0x30080142, IS, 1 */
     extern DICOM_EXPORT const tag ReferencedSourceApplicatorNumber;
-    /** ReferencedSourceNumber, (300C,000E), IS, 1,  */
+    /** ReferencedSourceNumber, 0x300C000E, IS, 1 */
     extern DICOM_EXPORT const tag ReferencedSourceNumber;
-    /** ReferencedSpatialRegistrationSequence, (0070,0404), SQ, 1,  */
+    /** ReferencedSpatialRegistrationSequence, 0x00700404, SQ, 1 */
     extern DICOM_EXPORT const tag ReferencedSpatialRegistrationSequence;
-    /** ReferencedStartControlPointIndex, (300C,00F4), IS, 1,  */
+    /** ReferencedStartControlPointIndex, 0x300C00F4, IS, 1 */
     extern DICOM_EXPORT const tag ReferencedStartControlPointIndex;
-    /** ReferencedStereometricInstanceSequence, (0008,1134), SQ, 1,  */
+    /** ReferencedStereometricInstanceSequence, 0x00081134, SQ, 1 */
     extern DICOM_EXPORT const tag ReferencedStereometricInstanceSequence;
-    /** ReferencedStopControlPointIndex, (300C,00F6), IS, 1,  */
+    /** ReferencedStopControlPointIndex, 0x300C00F6, IS, 1 */
     extern DICOM_EXPORT const tag ReferencedStopControlPointIndex;
-    /** ReferencedStorageMediaSequence, (2200,000D), SQ, 1,  */
+    /** ReferencedStorageMediaSequence, 0x2200000D, SQ, 1 */
     extern DICOM_EXPORT const tag ReferencedStorageMediaSequence;
-    /** ReferencedStoredPrintSequence, (2000,0510), SQ, 1, RET */
+    /** ReferencedStoredPrintSequence, 0x20000510, SQ, 1, RET */
     extern DICOM_EXPORT const tag ReferencedStoredPrintSequence;
-    /** ReferencedStructureSetSequence, (300C,0060), SQ, 1,  */
+    /** ReferencedStructuredContextSequence, 0x00701903, SQ, 1 */
+    extern DICOM_EXPORT const tag ReferencedStructuredContextSequence;
+    /** ReferencedStructureSetSequence, 0x300C0060, SQ, 1 */
     extern DICOM_EXPORT const tag ReferencedStructureSetSequence;
-    /** ReferencedStudySequence, (0008,1110), SQ, 1,  */
+    /** ReferencedStudySequence, 0x00081110, SQ, 1 */
     extern DICOM_EXPORT const tag ReferencedStudySequence;
-    /** ReferencedSurfaceNumber, (0066,002C), UL, 1,  */
+    /** ReferencedSurfaceDataSequence, 0x00800013, SQ, 1 */
+    extern DICOM_EXPORT const tag ReferencedSurfaceDataSequence;
+    /** ReferencedSurfaceMeshIdentificationSequence, 0x00221620, SQ, 1 */
+    extern DICOM_EXPORT const tag ReferencedSurfaceMeshIdentificationSequence;
+    /** ReferencedSurfaceNumber, 0x0066002C, UL, 1 */
     extern DICOM_EXPORT const tag ReferencedSurfaceNumber;
-    /** ReferencedSurfaceSequence, (0066,002B), SQ, 1,  */
+    /** ReferencedSurfaceSequence, 0x0066002B, SQ, 1 */
     extern DICOM_EXPORT const tag ReferencedSurfaceSequence;
-    /** ReferencedTimeOffsets, (0040,A138), DS, 1-n,  */
+    /** ReferencedTargetLuminanceCharacteristicsID, 0x0028700E, US, 1 */
+    extern DICOM_EXPORT const tag ReferencedTargetLuminanceCharacteristicsID;
+    /** ReferencedTDRInstanceSequence, 0x40101077, SQ, 1, RET */
+    extern DICOM_EXPORT const tag ReferencedTDRInstanceSequence;
+    /** ReferencedTextureSequence, 0x00800012, SQ, 1 */
+    extern DICOM_EXPORT const tag ReferencedTextureSequence;
+    /** ReferencedTimeOffsets, 0x0040A138, DS, 1 */
     extern DICOM_EXPORT const tag ReferencedTimeOffsets;
-    /** ReferencedToleranceTableNumber, (300C,00A0), IS, 1,  */
+    /** ReferencedToleranceTableNumber, 0x300C00A0, IS, 1 */
     extern DICOM_EXPORT const tag ReferencedToleranceTableNumber;
-    /** ReferencedTransferSyntaxUIDInFile, (0004,1512), UI, 1,  */
+    /** ReferencedTransferSyntaxUIDInFile, 0x00041512, UI, 1 */
     extern DICOM_EXPORT const tag ReferencedTransferSyntaxUIDInFile;
-    /** ReferencedTreatmentRecordSequence, (3008,0030), SQ, 1,  */
+    /** ReferencedTreatmentRecordSequence, 0x30080030, SQ, 1 */
     extern DICOM_EXPORT const tag ReferencedTreatmentRecordSequence;
-    /** ReferencedVerificationImageSequence, (300C,0040), SQ, 1,  */
+    /** ReferencedVerificationImageSequence, 0x300C0040, SQ, 1 */
     extern DICOM_EXPORT const tag ReferencedVerificationImageSequence;
-    /** ReferencedVisitSequence, (0008,1125), SQ, 1,  */
+    /** ReferencedVisitSequence, 0x00081125, SQ, 1 */
     extern DICOM_EXPORT const tag ReferencedVisitSequence;
-    /** ReferencedVOILUTBoxSequence, (2020,0140), SQ, 1, RET */
+    /** ReferencedVOILUTBoxSequence, 0x20200140, SQ, 1, RET */
     extern DICOM_EXPORT const tag ReferencedVOILUTBoxSequence;
-    /** ReferencedWaveformChannels, (0040,A0B0), US, 2-2n,  */
+    /** ReferencedWaveformChannels, 0x0040A0B0, US, 2 */
     extern DICOM_EXPORT const tag ReferencedWaveformChannels;
-    /** ReferencedWaveformSequence, (0008,113A), SQ, 1,  */
+    /** ReferencedWaveformSequence, 0x0008113A, SQ, 1 */
     extern DICOM_EXPORT const tag ReferencedWaveformSequence;
-    /** ReferencedWedgeNumber, (300C,00C0), IS, 1,  */
+    /** ReferencedWedgeNumber, 0x300C00C0, IS, 1 */
     extern DICOM_EXPORT const tag ReferencedWedgeNumber;
-    /** ReferenceImageNumber, (300A,00C8), IS, 1,  */
+    /** ReferenceGeometryCodeSequence, 0x00189903, SQ, 1 */
+    extern DICOM_EXPORT const tag ReferenceGeometryCodeSequence;
+    /** ReferenceImageNumber, 0x300A00C8, IS, 1 */
     extern DICOM_EXPORT const tag ReferenceImageNumber;
-    /** ReferencePixelPhysicalValueX, (0018,6028), FD, 1,  */
+    /** ReferenceLocationDescription, 0x00189901, UT, 1 */
+    extern DICOM_EXPORT const tag ReferenceLocationDescription;
+    /** ReferenceLocationLabel, 0x00189900, LO, 1 */
+    extern DICOM_EXPORT const tag ReferenceLocationLabel;
+    /** ReferencePixelPhysicalValueX, 0x00186028, FD, 1 */
     extern DICOM_EXPORT const tag ReferencePixelPhysicalValueX;
-    /** ReferencePixelPhysicalValueY, (0018,602A), FD, 1,  */
+    /** ReferencePixelPhysicalValueY, 0x0018602A, FD, 1 */
     extern DICOM_EXPORT const tag ReferencePixelPhysicalValueY;
-    /** ReferencePixelX0, (0018,6020), SL, 1,  */
+    /** ReferencePixelX0, 0x00186020, SL, 1 */
     extern DICOM_EXPORT const tag ReferencePixelX0;
-    /** ReferencePixelY0, (0018,6022), SL, 1,  */
+    /** ReferencePixelY0, 0x00186022, SL, 1 */
     extern DICOM_EXPORT const tag ReferencePixelY0;
-    /** ReferenceToRecordedSound, (4008,0103), LO, 1, RET */
+    /** ReferenceToRecordedSound, 0x40080103, LO, 1, RET */
     extern DICOM_EXPORT const tag ReferenceToRecordedSound;
-    /** ReferringPhysicianAddress, (0008,0092), ST, 1,  */
+    /** ReferringPhysicianAddress, 0x00080092, ST, 1 */
     extern DICOM_EXPORT const tag ReferringPhysicianAddress;
-    /** ReferringPhysicianIdentificationSequence, (0008,0096), SQ, 1,  */
+    /** ReferringPhysicianIdentificationSequence, 0x00080096, SQ, 1 */
     extern DICOM_EXPORT const tag ReferringPhysicianIdentificationSequence;
-    /** ReferringPhysicianName, (0008,0090), PN, 1,  */
+    /** ReferringPhysicianName, 0x00080090, PN, 1 */
     extern DICOM_EXPORT const tag ReferringPhysicianName;
-    /** ReferringPhysicianTelephoneNumbers, (0008,0094), SH, 1-n,  */
+    /** ReferringPhysicianTelephoneNumbers, 0x00080094, SH, 1 */
     extern DICOM_EXPORT const tag ReferringPhysicianTelephoneNumbers;
-    /** ReflectedAmbientLight, (2010,0160), US, 1,  */
+    /** ReflectedAmbientLight, 0x20100160, US, 1 */
     extern DICOM_EXPORT const tag ReflectedAmbientLight;
-    /** ReformattingInterval, (0072,0514), FD, 1,  */
+    /** ReformattingInterval, 0x00720514, FD, 1 */
     extern DICOM_EXPORT const tag ReformattingInterval;
-    /** ReformattingOperationInitialViewDirection, (0072,0516), CS, 1,  */
+    /** ReformattingOperationInitialViewDirection, 0x00720516, CS, 1 */
     extern DICOM_EXPORT const tag ReformattingOperationInitialViewDirection;
-    /** ReformattingOperationType, (0072,0510), CS, 1,  */
+    /** ReformattingOperationType, 0x00720510, CS, 1 */
     extern DICOM_EXPORT const tag ReformattingOperationType;
-    /** ReformattingThickness, (0072,0512), FD, 1,  */
+    /** ReformattingThickness, 0x00720512, FD, 1 */
     extern DICOM_EXPORT const tag ReformattingThickness;
-    /** RefractiveErrorBeforeRefractiveSurgeryCodeSequence, (0022,1103), SQ, 1,  */
+    /** RefractiveErrorBeforeRefractiveSurgeryCodeSequence, 0x00221103, SQ, 1 */
     extern DICOM_EXPORT const tag RefractiveErrorBeforeRefractiveSurgeryCodeSequence;
-    /** RefractiveIndexApplied, (0052,003A), CS, 1,  */
+    /** RefractiveIndexApplied, 0x0052003A, CS, 1 */
     extern DICOM_EXPORT const tag RefractiveIndexApplied;
-    /** RefractiveParametersUsedOnPatientSequence, (0024,0112), SQ, 1,  */
+    /** RefractiveParametersUsedOnPatientSequence, 0x00240112, SQ, 1 */
     extern DICOM_EXPORT const tag RefractiveParametersUsedOnPatientSequence;
-    /** RefractiveProcedureOccurred, (0022,1039), CS, 1,  */
+    /** RefractivePower, 0x00460251, FL, 1 */
+    extern DICOM_EXPORT const tag RefractivePower;
+    /** RefractiveProcedureOccurred, 0x00221039, CS, 1 */
     extern DICOM_EXPORT const tag RefractiveProcedureOccurred;
-    /** RefractiveStateSequence, (0022,001B), SQ, 1,  */
+    /** RefractiveStateSequence, 0x0022001B, SQ, 1 */
     extern DICOM_EXPORT const tag RefractiveStateSequence;
-    /** RefractiveSurgeryTypeCodeSequence, (0022,1040), SQ, 1,  */
+    /** RefractiveSurgeryTypeCodeSequence, 0x00221040, SQ, 1 */
     extern DICOM_EXPORT const tag RefractiveSurgeryTypeCodeSequence;
-    /** RegionDataType, (0018,6014), US, 1,  */
+    /** RegionDataType, 0x00186014, US, 1 */
     extern DICOM_EXPORT const tag RegionDataType;
-    /** RegionFlags, (0018,6016), UL, 1,  */
+    /** RegionFlags, 0x00186016, UL, 1 */
     extern DICOM_EXPORT const tag RegionFlags;
-    /** RegionLocationMaxX1, (0018,601C), UL, 1,  */
+    /** RegionLocationMaxX1, 0x0018601C, UL, 1 */
     extern DICOM_EXPORT const tag RegionLocationMaxX1;
-    /** RegionLocationMaxY1, (0018,601E), UL, 1,  */
+    /** RegionLocationMaxY1, 0x0018601E, UL, 1 */
     extern DICOM_EXPORT const tag RegionLocationMaxY1;
-    /** RegionLocationMinX0, (0018,6018), UL, 1,  */
+    /** RegionLocationMinX0, 0x00186018, UL, 1 */
     extern DICOM_EXPORT const tag RegionLocationMinX0;
-    /** RegionLocationMinY0, (0018,601A), UL, 1,  */
+    /** RegionLocationMinY0, 0x0018601A, UL, 1 */
     extern DICOM_EXPORT const tag RegionLocationMinY0;
-    /** RegionOfResidence, (0010,2152), LO, 1,  */
+    /** RegionOfResidence, 0x00102152, LO, 1 */
     extern DICOM_EXPORT const tag RegionOfResidence;
-    /** RegionPixelShiftSequence, (0028,9502), SQ, 1,  */
+    /** RegionPixelShiftSequence, 0x00289502, SQ, 1 */
     extern DICOM_EXPORT const tag RegionPixelShiftSequence;
-    /** RegionSpatialFormat, (0018,6012), US, 1,  */
+    /** RegionSpatialFormat, 0x00186012, US, 1 */
     extern DICOM_EXPORT const tag RegionSpatialFormat;
-    /** RegistrationSequence, (0070,0308), SQ, 1,  */
+    /** RegisteredLocalizerBottomRightHandCorner, 0x00221468, FL, 2 */
+    extern DICOM_EXPORT const tag RegisteredLocalizerBottomRightHandCorner;
+    /** RegisteredLocalizerTopLeftHandCorner, 0x00221467, FL, 2 */
+    extern DICOM_EXPORT const tag RegisteredLocalizerTopLeftHandCorner;
+    /** RegisteredLocalizerUnits, 0x00221466, CS, 1 */
+    extern DICOM_EXPORT const tag RegisteredLocalizerUnits;
+    /** RegistrationMethodCodeSequence, 0x00800003, SQ, 1 */
+    extern DICOM_EXPORT const tag RegistrationMethodCodeSequence;
+    /** RegistrationSequence, 0x00700308, SQ, 1 */
     extern DICOM_EXPORT const tag RegistrationSequence;
-    /** RegistrationTypeCodeSequence, (0070,030D), SQ, 1,  */
+    /** RegistrationToLocalizerSequence, 0x00221465, SQ, 1 */
+    extern DICOM_EXPORT const tag RegistrationToLocalizerSequence;
+    /** RegistrationTypeCodeSequence, 0x0070030D, SQ, 1 */
     extern DICOM_EXPORT const tag RegistrationTypeCodeSequence;
-    /** RelatedFrameOfReferenceUID, (3006,00C2), UI, 1,  */
+    /** RelatedAssertionSequence, 0x00440107, SQ, 1 */
+    extern DICOM_EXPORT const tag RelatedAssertionSequence;
+    /** RelatedFrameOfReferenceUID, 0x300600C2, UI, 1, RET */
     extern DICOM_EXPORT const tag RelatedFrameOfReferenceUID;
-    /** RelatedGeneralSOPClassUID, (0008,001A), UI, 1-n,  */
+    /** RelatedGeneralSOPClassUID, 0x0008001A, UI, 1 */
     extern DICOM_EXPORT const tag RelatedGeneralSOPClassUID;
-    /** RelatedProcedureStepSequence, (0074,1220), SQ, 1, RET */
+    /** RelatedProcedureStepSequence, 0x00741220, SQ, 1, RET */
     extern DICOM_EXPORT const tag RelatedProcedureStepSequence;
-    /** RelatedReferenceRTImageSequence, (0074,1040), SQ, 1,  */
+    /** RelatedReferenceRTImageSequence, 0x00741040, SQ, 1 */
     extern DICOM_EXPORT const tag RelatedReferenceRTImageSequence;
-    /** RelatedRTROIObservationsSequence, (3006,00A0), SQ, 1,  */
+    /** RelatedRTROIObservationsSequence, 0x300600A0, SQ, 1 */
     extern DICOM_EXPORT const tag RelatedRTROIObservationsSequence;
-    /** RelatedSeriesSequence, (0008,1250), SQ, 1,  */
+    /** RelatedSeriesSequence, 0x00081250, SQ, 1 */
     extern DICOM_EXPORT const tag RelatedSeriesSequence;
-    /** RelationshipSequenceTrial, (0040,A731), SQ, 1, RET */
+    /** RelationshipSequenceTrial, 0x0040A731, SQ, 1, RET */
     extern DICOM_EXPORT const tag RelationshipSequenceTrial;
-    /** RelationshipType, (0040,A010), CS, 1,  */
+    /** RelationshipType, 0x0040A010, CS, 1 */
     extern DICOM_EXPORT const tag RelationshipType;
-    /** RelationshipTypeCodeSequenceTrial, (0040,A732), SQ, 1, RET */
+    /** RelationshipTypeCodeSequenceTrial, 0x0040A732, SQ, 1, RET */
     extern DICOM_EXPORT const tag RelationshipTypeCodeSequenceTrial;
-    /** RelativeImagePositionCodeSequence, (0022,001D), SQ, 1,  */
+    /** RelativeElevation, 0x00460252, FL, 1 */
+    extern DICOM_EXPORT const tag RelativeElevation;
+    /** RelativeImagePositionCodeSequence, 0x0022001D, SQ, 1 */
     extern DICOM_EXPORT const tag RelativeImagePositionCodeSequence;
-    /** RelativeOpacity, (0070,0403), FL, 1,  */
+    /** RelativeOpacity, 0x00700403, FL, 1 */
     extern DICOM_EXPORT const tag RelativeOpacity;
-    /** RelativeTime, (0072,0038), US, 2,  */
+    /** RelativeTime, 0x00720038, US, 2 */
     extern DICOM_EXPORT const tag RelativeTime;
-    /** RelativeTimeUnits, (0072,003A), CS, 1,  */
+    /** RelativeTimeUnits, 0x0072003A, CS, 1 */
     extern DICOM_EXPORT const tag RelativeTimeUnits;
-    /** RelativeXRayExposure, (0018,1405), IS, 1,  */
+    /** RelativeXRayExposure, 0x00181405, IS, 1 */
     extern DICOM_EXPORT const tag RelativeXRayExposure;
-    /** RelevantInformationSequence, (0040,4022), SQ, 1,  */
+    /** RelevantInformationSequence, 0x00404022, SQ, 1, RET */
     extern DICOM_EXPORT const tag RelevantInformationSequence;
-    /** RepeatFractionCycleLength, (300A,007A), IS, 1,  */
+    /** RelevantOPTAttributesSequence, 0x00221472, SQ, 1 */
+    extern DICOM_EXPORT const tag RelevantOPTAttributesSequence;
+    /** RenderedImageReferenceSequence, 0x00701104, SQ, 1 */
+    extern DICOM_EXPORT const tag RenderedImageReferenceSequence;
+    /** RenderFieldOfView, 0x00701606, FD, 6 */
+    extern DICOM_EXPORT const tag RenderFieldOfView;
+    /** RenderingMethod, 0x0070120D, CS, 1 */
+    extern DICOM_EXPORT const tag RenderingMethod;
+    /** RenderProjection, 0x00701602, CS, 1 */
+    extern DICOM_EXPORT const tag RenderProjection;
+    /** RepairID, 0x00140105, ST, 1, RET */
+    extern DICOM_EXPORT const tag RepairID;
+    /** RepeatFractionCycleLength, 0x300A007A, IS, 1 */
     extern DICOM_EXPORT const tag RepeatFractionCycleLength;
-    /** RepeatInterval, (0028,0068), US, 1, RET */
+    /** RepeatInterval, 0x00280068, US, 1, RET */
     extern DICOM_EXPORT const tag RepeatInterval;
-    /** RepetitionTime, (0018,0080), DS, 1,  */
+    /** RepetitionTime, 0x00180080, DS, 1 */
     extern DICOM_EXPORT const tag RepetitionTime;
-    /** ReplacedImplantAssemblyTemplateSequence, (0076,0008), SQ, 1,  */
+    /** ReplacedImplantAssemblyTemplateSequence, 0x00760008, SQ, 1 */
     extern DICOM_EXPORT const tag ReplacedImplantAssemblyTemplateSequence;
-    /** ReplacedImplantTemplateGroupSequence, (0078,0026), SQ, 1,  */
+    /** ReplacedImplantTemplateGroupSequence, 0x00780026, SQ, 1 */
     extern DICOM_EXPORT const tag ReplacedImplantTemplateGroupSequence;
-    /** ReplacedImplantTemplateSequence, (0068,6222), SQ, 1,  */
+    /** ReplacedImplantTemplateSequence, 0x00686222, SQ, 1 */
     extern DICOM_EXPORT const tag ReplacedImplantTemplateSequence;
-    /** ReplacedProcedureStepSequence, (0074,1224), SQ, 1,  */
+    /** ReplacedProcedureStepSequence, 0x00741224, SQ, 1 */
     extern DICOM_EXPORT const tag ReplacedProcedureStepSequence;
-    /** ReportDetailSequenceTrial, (0040,A380), SQ, 1, RET */
+    /** ReportDetailSequenceTrial, 0x0040A380, SQ, 1, RET */
     extern DICOM_EXPORT const tag ReportDetailSequenceTrial;
-    /** ReportedValuesOrigin, (3002,000A), CS, 1,  */
+    /** ReportedValuesOrigin, 0x3002000A, CS, 1 */
     extern DICOM_EXPORT const tag ReportedValuesOrigin;
-    /** ReportingPriority, (0040,1009), SH, 1,  */
+    /** ReportingPriority, 0x00401009, SH, 1 */
     extern DICOM_EXPORT const tag ReportingPriority;
-    /** ReportNumber, (0020,00AA), IS, 1, RET */
+    /** ReportNumber, 0x002000AA, IS, 1, RET */
     extern DICOM_EXPORT const tag ReportNumber;
-    /** ReportProductionStatusTrial, (4008,00FF), CS, 1, RET */
+    /** ReportProductionStatusTrial, 0x400800FF, CS, 1, RET */
     extern DICOM_EXPORT const tag ReportProductionStatusTrial;
-    /** ReportStatusCommentTrial, (0040,A33A), ST, 1, RET */
+    /** ReportStatusCommentTrial, 0x0040A33A, ST, 1, RET */
     extern DICOM_EXPORT const tag ReportStatusCommentTrial;
-    /** ReportStatusIDTrial, (0040,A125), CS, 2, RET */
+    /** ReportStatusIDTrial, 0x0040A125, CS, 2, RET */
     extern DICOM_EXPORT const tag ReportStatusIDTrial;
-    /** RepositoryUniqueID, (0040,E030), UI, 1,  */
+    /** RepositoryUniqueID, 0x0040E030, UI, 1 */
     extern DICOM_EXPORT const tag RepositoryUniqueID;
-    /** RepresentativeFrameNumber, (0028,6010), US, 1,  */
+    /** RepresentativeFrameNumber, 0x00286010, US, 1 */
     extern DICOM_EXPORT const tag RepresentativeFrameNumber;
-    /** ReprojectionMethod, (0054,1004), CS, 1,  */
+    /** ReprojectionMethod, 0x00541004, CS, 1 */
     extern DICOM_EXPORT const tag ReprojectionMethod;
-    /** RequestAttributesSequence, (0040,0275), SQ, 1,  */
+    /** RequestAttributesSequence, 0x00400275, SQ, 1 */
     extern DICOM_EXPORT const tag RequestAttributesSequence;
-    /** RequestedContrastAgent, (0032,1070), LO, 1,  */
+    /** RequestedContrastAgent, 0x00321070, LO, 1 */
     extern DICOM_EXPORT const tag RequestedContrastAgent;
-    /** RequestedDecimateCropBehavior, (2020,0040), CS, 1,  */
+    /** RequestedDecimateCropBehavior, 0x20200040, CS, 1 */
     extern DICOM_EXPORT const tag RequestedDecimateCropBehavior;
-    /** RequestedImageSize, (2020,0030), DS, 1,  */
+    /** RequestedImageSize, 0x20200030, DS, 1 */
     extern DICOM_EXPORT const tag RequestedImageSize;
-    /** RequestedImageSizeFlag, (2020,00A0), CS, 1,  */
+    /** RequestedImageSizeFlag, 0x202000A0, CS, 1 */
     extern DICOM_EXPORT const tag RequestedImageSizeFlag;
-    /** RequestedMediaApplicationProfile, (2200,000C), LO, 1,  */
+    /** RequestedMediaApplicationProfile, 0x2200000C, LO, 1 */
     extern DICOM_EXPORT const tag RequestedMediaApplicationProfile;
-    /** RequestedProcedureCodeSequence, (0032,1064), SQ, 1,  */
+    /** RequestedProcedureCodeSequence, 0x00321064, SQ, 1 */
     extern DICOM_EXPORT const tag RequestedProcedureCodeSequence;
-    /** RequestedProcedureComments, (0040,1400), LT, 1,  */
+    /** RequestedProcedureComments, 0x00401400, LT, 1 */
     extern DICOM_EXPORT const tag RequestedProcedureComments;
-    /** RequestedProcedureDescription, (0032,1060), LO, 1,  */
+    /** RequestedProcedureDescription, 0x00321060, LO, 1 */
     extern DICOM_EXPORT const tag RequestedProcedureDescription;
-    /** RequestedProcedureDescriptionTrial, (0040,1060), LO, 1, RET */
+    /** RequestedProcedureDescriptionTrial, 0x00401060, LO, 1, RET */
     extern DICOM_EXPORT const tag RequestedProcedureDescriptionTrial;
-    /** RequestedProcedureID, (0040,1001), SH, 1,  */
+    /** RequestedProcedureID, 0x00401001, SH, 1 */
     extern DICOM_EXPORT const tag RequestedProcedureID;
-    /** RequestedProcedureLocation, (0040,1005), LO, 1,  */
+    /** RequestedProcedureLocation, 0x00401005, LO, 1 */
     extern DICOM_EXPORT const tag RequestedProcedureLocation;
-    /** RequestedProcedurePriority, (0040,1003), SH, 1,  */
+    /** RequestedProcedurePriority, 0x00401003, SH, 1 */
     extern DICOM_EXPORT const tag RequestedProcedurePriority;
-    /** RequestedResolutionID, (2020,0050), CS, 1,  */
+    /** RequestedResolutionID, 0x20200050, CS, 1 */
     extern DICOM_EXPORT const tag RequestedResolutionID;
-    /** RequestedSubsequentWorkitemCodeSequence, (0040,4031), SQ, 1,  */
+    /** RequestedSeriesDescription, 0x00189937, LO, 1 */
+    extern DICOM_EXPORT const tag RequestedSeriesDescription;
+    /** RequestedSubsequentWorkitemCodeSequence, 0x00404031, SQ, 1, RET */
     extern DICOM_EXPORT const tag RequestedSubsequentWorkitemCodeSequence;
-    /** RequestingAE, (0074,1236), AE, 1,  */
+    /** RequestingAE, 0x00741236, AE, 1 */
     extern DICOM_EXPORT const tag RequestingAE;
-    /** RequestingPhysician, (0032,1032), PN, 1,  */
+    /** RequestingPhysician, 0x00321032, PN, 1 */
     extern DICOM_EXPORT const tag RequestingPhysician;
-    /** RequestingPhysicianIdentificationSequence, (0032,1031), SQ, 1,  */
+    /** RequestingPhysicianIdentificationSequence, 0x00321031, SQ, 1 */
     extern DICOM_EXPORT const tag RequestingPhysicianIdentificationSequence;
-    /** RequestingService, (0032,1033), LO, 1,  */
+    /** RequestingService, 0x00321033, LO, 1 */
     extern DICOM_EXPORT const tag RequestingService;
-    /** RequestingServiceCodeSequence, (0032,1034), SQ, 1,  */
+    /** RequestingServiceCodeSequence, 0x00321034, SQ, 1 */
     extern DICOM_EXPORT const tag RequestingServiceCodeSequence;
-    /** RequestPriority, (2200,0020), CS, 1,  */
+    /** RequestPriority, 0x22000020, CS, 1 */
     extern DICOM_EXPORT const tag RequestPriority;
-    /** RescaleIntercept, (0028,1052), DS, 1,  */
+    /** RescaleIntercept, 0x00281052, DS, 1 */
     extern DICOM_EXPORT const tag RescaleIntercept;
-    /** RescaleSlope, (0028,1053), DS, 1,  */
+    /** RescaleSlope, 0x00281053, DS, 1 */
     extern DICOM_EXPORT const tag RescaleSlope;
-    /** RescaleType, (0028,1054), LO, 1,  */
+    /** RescaleType, 0x00281054, LO, 1 */
     extern DICOM_EXPORT const tag RescaleType;
-    /** ResidualSyringeCounts, (0054,0017), IS, 1,  */
+    /** ResidualSyringeCounts, 0x00540017, IS, 1 */
     extern DICOM_EXPORT const tag ResidualSyringeCounts;
-    /** ResonantNucleus, (0018,9100), CS, 1-2,  */
+    /** ResonantNucleus, 0x00189100, CS, 1 */
     extern DICOM_EXPORT const tag ResonantNucleus;
-    /** RespiratoryCyclePosition, (0018,9214), CS, 1,  */
+    /** ResourceDescription, 0x00380102, LO, 1 */
+    extern DICOM_EXPORT const tag ResourceDescription;
+    /** RespiratoryCyclePosition, 0x00189214, CS, 1 */
     extern DICOM_EXPORT const tag RespiratoryCyclePosition;
-    /** RespiratoryIntervalTime, (0020,9254), FD, 1,  */
+    /** RespiratoryIntervalTime, 0x00209254, FD, 1 */
     extern DICOM_EXPORT const tag RespiratoryIntervalTime;
-    /** RespiratoryMotionCompensationTechnique, (0018,9170), CS, 1,  */
+    /** RespiratoryMotionCompensationTechnique, 0x00189170, CS, 1 */
     extern DICOM_EXPORT const tag RespiratoryMotionCompensationTechnique;
-    /** RespiratoryMotionCompensationTechniqueDescription, (0018,9185), ST, 1,  */
+    /** RespiratoryMotionCompensationTechniqueDescription, 0x00189185, ST, 1 */
     extern DICOM_EXPORT const tag RespiratoryMotionCompensationTechniqueDescription;
-    /** RespiratorySignalSource, (0018,9171), CS, 1,  */
+    /** RespiratorySignalSource, 0x00189171, CS, 1 */
     extern DICOM_EXPORT const tag RespiratorySignalSource;
-    /** RespiratorySignalSourceID, (0018,9186), SH, 1,  */
+    /** RespiratorySignalSourceID, 0x00189186, SH, 1 */
     extern DICOM_EXPORT const tag RespiratorySignalSourceID;
-    /** RespiratorySynchronizationSequence, (0020,9253), SQ, 1,  */
+    /** RespiratorySynchronizationSequence, 0x00209253, SQ, 1 */
     extern DICOM_EXPORT const tag RespiratorySynchronizationSequence;
-    /** RespiratoryTriggerDelayThreshold, (0020,9256), FD, 1,  */
+    /** RespiratoryTriggerDelayThreshold, 0x00209256, FD, 1 */
     extern DICOM_EXPORT const tag RespiratoryTriggerDelayThreshold;
-    /** RespiratoryTriggerType, (0020,9250), CS, 1,  */
+    /** RespiratoryTriggerType, 0x00209250, CS, 1 */
     extern DICOM_EXPORT const tag RespiratoryTriggerType;
-    /** ResponsibleOrganization, (0010,2299), LO, 1,  */
+    /** ResponsibleGroupCodeSequence, 0x00080220, SQ, 1 */
+    extern DICOM_EXPORT const tag ResponsibleGroupCodeSequence;
+    /** ResponsibleOrganization, 0x00102299, LO, 1 */
     extern DICOM_EXPORT const tag ResponsibleOrganization;
-    /** ResponsiblePerson, (0010,2297), PN, 1,  */
+    /** ResponsiblePerson, 0x00102297, PN, 1 */
     extern DICOM_EXPORT const tag ResponsiblePerson;
-    /** ResponsiblePersonRole, (0010,2298), CS, 1,  */
+    /** ResponsiblePersonRole, 0x00102298, CS, 1 */
     extern DICOM_EXPORT const tag ResponsiblePersonRole;
-    /** ResultingGeneralPurposePerformedProcedureStepsSequence, (0040,4015), SQ, 1,  */
+    /** ResultingGeneralPurposePerformedProcedureStepsSequence, 0x00404015, SQ, 1, RET */
     extern DICOM_EXPORT const tag ResultingGeneralPurposePerformedProcedureStepsSequence;
-    /** ResultsComments, (4008,4000), ST, 1, RET */
+    /** ResultsComments, 0x40084000, ST, 1, RET */
     extern DICOM_EXPORT const tag ResultsComments;
-    /** ResultsDistributionListSequence, (4008,0118), SQ, 1, RET */
+    /** ResultsDistributionListSequence, 0x40080118, SQ, 1, RET */
     extern DICOM_EXPORT const tag ResultsDistributionListSequence;
-    /** ResultsID, (4008,0040), SH, 1, RET */
+    /** ResultsID, 0x40080040, SH, 1, RET */
     extern DICOM_EXPORT const tag ResultsID;
-    /** ResultsIDIssuer, (4008,0042), LO, 1, RET */
+    /** ResultsIDIssuer, 0x40080042, LO, 1, RET */
     extern DICOM_EXPORT const tag ResultsIDIssuer;
-    /** ResultsNormalsSequence, (0024,0064), SQ, 1,  */
+    /** ResultsNormalsSequence, 0x00240064, SQ, 1 */
     extern DICOM_EXPORT const tag ResultsNormalsSequence;
-    /** RetestSensitivityValue, (0024,0096), FL, 1,  */
+    /** RetestSensitivityValue, 0x00240096, FL, 1 */
     extern DICOM_EXPORT const tag RetestSensitivityValue;
-    /** RetestStimulusSeen, (0024,0095), CS, 1,  */
+    /** RetestStimulusSeen, 0x00240095, CS, 1 */
     extern DICOM_EXPORT const tag RetestStimulusSeen;
-    /** RetrieveAETitle, (0008,0054), AE, 1-n,  */
+    /** RetinalThicknessDefinitionCodeSequence, 0x00221445, SQ, 1 */
+    extern DICOM_EXPORT const tag RetinalThicknessDefinitionCodeSequence;
+    /** RetrieveAETitle, 0x00080054, AE, 1 */
     extern DICOM_EXPORT const tag RetrieveAETitle;
-    /** RetrieveLocationUID, (0040,E011), UI, 1,  */
+    /** RetrieveLocationUID, 0x0040E011, UI, 1 */
     extern DICOM_EXPORT const tag RetrieveLocationUID;
-    /** RetrieveURI, (0040,E010), UT, 1,  */
+    /** RetrieveURI, 0x0040E010, UR, 1 */
     extern DICOM_EXPORT const tag RetrieveURI;
-    /** ReviewDate, (300E,0004), DA, 1,  */
+    /** RetrieveURL, 0x00081190, UR, 1 */
+    extern DICOM_EXPORT const tag RetrieveURL;
+    /** ReviewDate, 0x300E0004, DA, 1 */
     extern DICOM_EXPORT const tag ReviewDate;
-    /** ReviewerName, (300E,0008), PN, 1,  */
+    /** ReviewerName, 0x300E0008, PN, 1 */
     extern DICOM_EXPORT const tag ReviewerName;
-    /** ReviewTime, (300E,0005), TM, 1,  */
+    /** ReviewTime, 0x300E0005, TM, 1 */
     extern DICOM_EXPORT const tag ReviewTime;
-    /** RevolutionTime, (0018,9305), FD, 1,  */
+    /** RevolutionTime, 0x00189305, FD, 1 */
     extern DICOM_EXPORT const tag RevolutionTime;
-    /** RFEchoTrainLength, (0018,9240), US, 1,  */
+    /** RFEchoTrainLength, 0x00189240, US, 1 */
     extern DICOM_EXPORT const tag RFEchoTrainLength;
-    /** RGBLUTTransferFunction, (0028,140F), CS, 1,  */
+    /** RGBATransferFunctionDescription, 0x00701A09, LO, 1 */
+    extern DICOM_EXPORT const tag RGBATransferFunctionDescription;
+    /** RGBLUTTransferFunction, 0x0028140F, CS, 1 */
     extern DICOM_EXPORT const tag RGBLUTTransferFunction;
-    /** RightImageSequence, (0022,0022), SQ, 1,  */
+    /** RightImageSequence, 0x00220022, SQ, 1 */
     extern DICOM_EXPORT const tag RightImageSequence;
-    /** RightLensSequence, (0046,0014), SQ, 1,  */
+    /** RightLensSequence, 0x00460014, SQ, 1 */
     extern DICOM_EXPORT const tag RightLensSequence;
-    /** ROIArea, (60XX,1301), IS, 1,  */
-    extern const range_tag ROIArea;
-    /** ROIContourSequence, (3006,0039), SQ, 1,  */
+    /** ROIArea, 0x60001301, IS, 1 */
+    extern DICOM_EXPORT const range_tag ROIArea;
+    /** ROIContourSequence, 0x30060039, SQ, 1 */
     extern DICOM_EXPORT const tag ROIContourSequence;
-    /** ROIDescription, (3006,0028), ST, 1,  */
+    /** ROIDescription, 0x30060028, ST, 1 */
     extern DICOM_EXPORT const tag ROIDescription;
-    /** ROIDisplayColor, (3006,002A), IS, 3,  */
+    /** ROIDisplayColor, 0x3006002A, IS, 3 */
     extern DICOM_EXPORT const tag ROIDisplayColor;
-    /** ROIElementalCompositionAtomicMassFraction, (3006,00B8), FL, 1,  */
+    /** ROIElementalCompositionAtomicMassFraction, 0x300600B8, FL, 1 */
     extern DICOM_EXPORT const tag ROIElementalCompositionAtomicMassFraction;
-    /** ROIElementalCompositionAtomicNumber, (3006,00B7), US, 1,  */
+    /** ROIElementalCompositionAtomicNumber, 0x300600B7, US, 1 */
     extern DICOM_EXPORT const tag ROIElementalCompositionAtomicNumber;
-    /** ROIElementalCompositionSequence, (3006,00B6), SQ, 1,  */
+    /** ROIElementalCompositionSequence, 0x300600B6, SQ, 1 */
     extern DICOM_EXPORT const tag ROIElementalCompositionSequence;
-    /** ROIGenerationAlgorithm, (3006,0036), CS, 1,  */
+    /** ROIGenerationAlgorithm, 0x30060036, CS, 1 */
     extern DICOM_EXPORT const tag ROIGenerationAlgorithm;
-    /** ROIGenerationDescription, (3006,0038), LO, 1,  */
+    /** ROIGenerationDescription, 0x30060038, LO, 1 */
     extern DICOM_EXPORT const tag ROIGenerationDescription;
-    /** ROIInterpreter, (3006,00A6), PN, 1,  */
+    /** ROIInterpreter, 0x300600A6, PN, 1 */
     extern DICOM_EXPORT const tag ROIInterpreter;
-    /** ROIMean, (60XX,1302), DS, 1,  */
-    extern const range_tag ROIMean;
-    /** ROIName, (3006,0026), LO, 1,  */
+    /** ROIMean, 0x60001302, DS, 1 */
+    extern DICOM_EXPORT const range_tag ROIMean;
+    /** ROIName, 0x30060026, LO, 1 */
     extern DICOM_EXPORT const tag ROIName;
-    /** ROINumber, (3006,0022), IS, 1,  */
+    /** ROINumber, 0x30060022, IS, 1 */
     extern DICOM_EXPORT const tag ROINumber;
-    /** ROIObservationDescription, (3006,0088), ST, 1,  */
+    /** ROIObservationDescription, 0x30060088, ST, 1 */
     extern DICOM_EXPORT const tag ROIObservationDescription;
-    /** ROIObservationLabel, (3006,0085), SH, 1,  */
+    /** ROIObservationLabel, 0x30060085, SH, 1 */
     extern DICOM_EXPORT const tag ROIObservationLabel;
-    /** ROIPhysicalPropertiesSequence, (3006,00B0), SQ, 1,  */
+    /** ROIPhysicalPropertiesSequence, 0x300600B0, SQ, 1 */
     extern DICOM_EXPORT const tag ROIPhysicalPropertiesSequence;
-    /** ROIPhysicalProperty, (3006,00B2), CS, 1,  */
+    /** ROIPhysicalProperty, 0x300600B2, CS, 1 */
     extern DICOM_EXPORT const tag ROIPhysicalProperty;
-    /** ROIPhysicalPropertyValue, (3006,00B4), DS, 1,  */
+    /** ROIPhysicalPropertyValue, 0x300600B4, DS, 1 */
     extern DICOM_EXPORT const tag ROIPhysicalPropertyValue;
-    /** ROIStandardDeviation, (60XX,1303), DS, 1,  */
-    extern const range_tag ROIStandardDeviation;
-    /** ROIVolume, (3006,002C), DS, 1,  */
+    /** ROIStandardDeviation, 0x60001303, DS, 1 */
+    extern DICOM_EXPORT const range_tag ROIStandardDeviation;
+    /** ROIVolume, 0x3006002C, DS, 1 */
     extern DICOM_EXPORT const tag ROIVolume;
-    /** RotationAngle, (0070,0230), FD, 1,  */
+    /** RotationAngle, 0x00700230, FD, 1 */
     extern DICOM_EXPORT const tag RotationAngle;
-    /** RotationDirection, (0018,1140), CS, 1,  */
+    /** RotationDirection, 0x00181140, CS, 1 */
     extern DICOM_EXPORT const tag RotationDirection;
-    /** RotationInformationSequence, (0054,0052), SQ, 1,  */
+    /** RotationInformationSequence, 0x00540052, SQ, 1 */
     extern DICOM_EXPORT const tag RotationInformationSequence;
-    /** RotationOffset, (0018,1146), DS, 1-n, RET */
+    /** RotationOffset, 0x00181146, DS, 1, RET */
     extern DICOM_EXPORT const tag RotationOffset;
-    /** RotationOfScannedFilm, (0018,2030), DS, 1,  */
+    /** RotationOfScannedFilm, 0x00182030, DS, 1 */
     extern DICOM_EXPORT const tag RotationOfScannedFilm;
-    /** RotationPoint, (0070,0273), FL, 2,  */
+    /** RotationPoint, 0x00700273, FL, 2 */
     extern DICOM_EXPORT const tag RotationPoint;
-    /** RotationVector, (0054,0050), US, 1-n,  */
+    /** RotationVector, 0x00540050, US, 1 */
     extern DICOM_EXPORT const tag RotationVector;
-    /** RouteID, (4010,1054), SH, 1,  */
+    /** RouteID, 0x40101054, SH, 1, RET */
     extern DICOM_EXPORT const tag RouteID;
-    /** RouteIDAssigningAuthority, (4010,1055), SH, 1,  */
+    /** RouteIDAssigningAuthority, 0x40101055, SH, 1, RET */
     extern DICOM_EXPORT const tag RouteIDAssigningAuthority;
-    /** RouteOfAdmissions, (0038,0016), LO, 1,  */
+    /** RouteOfAdmissions, 0x00380016, LO, 1 */
     extern DICOM_EXPORT const tag RouteOfAdmissions;
-    /** RouteSegmentEndLocationID, (4010,101F), SH, 1,  */
+    /** RouteSegmentEndLocationID, 0x4010101F, SH, 1, RET */
     extern DICOM_EXPORT const tag RouteSegmentEndLocationID;
-    /** RouteSegmentEndTime, (4010,1026), DT, 1,  */
+    /** RouteSegmentEndTime, 0x40101026, DT, 1, RET */
     extern DICOM_EXPORT const tag RouteSegmentEndTime;
-    /** RouteSegmentID, (4010,1007), SH, 1,  */
+    /** RouteSegmentID, 0x40101007, SH, 1, RET */
     extern DICOM_EXPORT const tag RouteSegmentID;
-    /** RouteSegmentLocationIDType, (4010,1020), CS, 1,  */
+    /** RouteSegmentLocationIDType, 0x40101020, CS, 1, RET */
     extern DICOM_EXPORT const tag RouteSegmentLocationIDType;
-    /** RouteSegmentSequence, (4010,100A), SQ, 1,  */
+    /** RouteSegmentSequence, 0x4010100A, SQ, 1, RET */
     extern DICOM_EXPORT const tag RouteSegmentSequence;
-    /** RouteSegmentStartLocationID, (4010,101E), SH, 1,  */
+    /** RouteSegmentStartLocationID, 0x4010101E, SH, 1, RET */
     extern DICOM_EXPORT const tag RouteSegmentStartLocationID;
-    /** RouteSegmentStartTime, (4010,1025), DT, 1,  */
+    /** RouteSegmentStartTime, 0x40101025, DT, 1, RET */
     extern DICOM_EXPORT const tag RouteSegmentStartTime;
-    /** RowOverlap, (0028,0093), US, 1, RET */
+    /** RowOverlap, 0x00280093, US, 1, RET */
     extern DICOM_EXPORT const tag RowOverlap;
-    /** RowPositionInTotalImagePixelMatrix, (0048,021E), SL, 1,  */
+    /** RowPositionInTotalImagePixelMatrix, 0x0048021F, SL, 1 */
     extern DICOM_EXPORT const tag RowPositionInTotalImagePixelMatrix;
-    /** Rows, (0028,0010), US, 1,  */
+    /** Rows, 0x00280010, US, 1 */
     extern DICOM_EXPORT const tag Rows;
-    /** RowsForNthOrderCoefficients, (0028,04X0), US, 1, RET */
-    extern const range_tag RowsForNthOrderCoefficients;
-    /** RRIntervalTimeNominal, (0020,9251), FD, 1,  */
+    /** RowsForNthOrderCoefficients, 0x00280400, US, 1, RET */
+    extern DICOM_EXPORT const range_tag RowsForNthOrderCoefficients;
+    /** RRIntervalTimeNominal, 0x00209251, FD, 1 */
     extern DICOM_EXPORT const tag RRIntervalTimeNominal;
-    /** RRIntervalVector, (0054,0060), US, 1-n,  */
+    /** RRIntervalVector, 0x00540060, US, 1 */
     extern DICOM_EXPORT const tag RRIntervalVector;
-    /** RTBeamLimitingDeviceType, (300A,00B8), CS, 1,  */
+    /** RTBeamLimitingDeviceType, 0x300A00B8, CS, 1 */
     extern DICOM_EXPORT const tag RTBeamLimitingDeviceType;
-    /** RTDoseROISequence, (3004,0010), SQ, 1,  */
+    /** RTDoseROISequence, 0x30040010, SQ, 1 */
     extern DICOM_EXPORT const tag RTDoseROISequence;
-    /** RTImageDescription, (3002,0004), ST, 1,  */
+    /** RTImageDescription, 0x30020004, ST, 1 */
     extern DICOM_EXPORT const tag RTImageDescription;
-    /** RTImageLabel, (3002,0002), SH, 1,  */
+    /** RTImageLabel, 0x30020002, SH, 1 */
     extern DICOM_EXPORT const tag RTImageLabel;
-    /** RTImageName, (3002,0003), LO, 1,  */
+    /** RTImageName, 0x30020003, LO, 1 */
     extern DICOM_EXPORT const tag RTImageName;
-    /** RTImageOrientation, (3002,0010), DS, 6,  */
+    /** RTImageOrientation, 0x30020010, DS, 6 */
     extern DICOM_EXPORT const tag RTImageOrientation;
-    /** RTImagePlane, (3002,000C), CS, 1,  */
+    /** RTImagePlane, 0x3002000C, CS, 1 */
     extern DICOM_EXPORT const tag RTImagePlane;
-    /** RTImagePosition, (3002,0012), DS, 2,  */
+    /** RTImagePosition, 0x30020012, DS, 2 */
     extern DICOM_EXPORT const tag RTImagePosition;
-    /** RTImageSID, (3002,0026), DS, 1,  */
+    /** RTImageSID, 0x30020026, DS, 1 */
     extern DICOM_EXPORT const tag RTImageSID;
-    /** RTPlanDate, (300A,0006), DA, 1,  */
+    /** RTPlanDate, 0x300A0006, DA, 1 */
     extern DICOM_EXPORT const tag RTPlanDate;
-    /** RTPlanDescription, (300A,0004), ST, 1,  */
+    /** RTPlanDescription, 0x300A0004, ST, 1 */
     extern DICOM_EXPORT const tag RTPlanDescription;
-    /** RTPlanGeometry, (300A,000C), CS, 1,  */
+    /** RTPlanGeometry, 0x300A000C, CS, 1 */
     extern DICOM_EXPORT const tag RTPlanGeometry;
-    /** RTPlanLabel, (300A,0002), SH, 1,  */
+    /** RTPlanLabel, 0x300A0002, SH, 1 */
     extern DICOM_EXPORT const tag RTPlanLabel;
-    /** RTPlanName, (300A,0003), LO, 1,  */
+    /** RTPlanName, 0x300A0003, LO, 1 */
     extern DICOM_EXPORT const tag RTPlanName;
-    /** RTPlanRelationship, (300A,0055), CS, 1,  */
+    /** RTPlanRelationship, 0x300A0055, CS, 1 */
     extern DICOM_EXPORT const tag RTPlanRelationship;
-    /** RTPlanTime, (300A,0007), TM, 1,  */
+    /** RTPlanTime, 0x300A0007, TM, 1 */
     extern DICOM_EXPORT const tag RTPlanTime;
-    /** RTReferencedSeriesSequence, (3006,0014), SQ, 1,  */
+    /** RTReferencedSeriesSequence, 0x30060014, SQ, 1 */
     extern DICOM_EXPORT const tag RTReferencedSeriesSequence;
-    /** RTReferencedStudySequence, (3006,0012), SQ, 1,  */
+    /** RTReferencedStudySequence, 0x30060012, SQ, 1 */
     extern DICOM_EXPORT const tag RTReferencedStudySequence;
-    /** RTRelatedROISequence, (3006,0030), SQ, 1,  */
+    /** RTRelatedROISequence, 0x30060030, SQ, 1 */
     extern DICOM_EXPORT const tag RTRelatedROISequence;
-    /** RTROIIdentificationCodeSequence, (3006,0086), SQ, 1,  */
+    /** RTROIIdentificationCodeSequence, 0x30060086, SQ, 1 */
     extern DICOM_EXPORT const tag RTROIIdentificationCodeSequence;
-    /** RTROIInterpretedType, (3006,00A4), CS, 1,  */
+    /** RTROIInterpretedType, 0x300600A4, CS, 1 */
     extern DICOM_EXPORT const tag RTROIInterpretedType;
-    /** RTROIObservationsSequence, (3006,0080), SQ, 1,  */
+    /** RTROIObservationsSequence, 0x30060080, SQ, 1 */
     extern DICOM_EXPORT const tag RTROIObservationsSequence;
-    /** RTROIRelationship, (3006,0033), CS, 1,  */
+    /** RTROIRelationship, 0x30060033, CS, 1 */
     extern DICOM_EXPORT const tag RTROIRelationship;
-    /** RunLengthTriplet, (1000,XXX1), US, 3, RET */
-    extern const range_tag RunLengthTriplet;
-    /** RWavePointer, (0028,6040), US, 1-n,  */
+    /** RunLengthTriplet, 0x10000001, US, 3, RET */
+    extern DICOM_EXPORT const range_tag RunLengthTriplet;
+    /** RWavePointer, 0x00286040, US, 1 */
     extern DICOM_EXPORT const tag RWavePointer;
-    /** RWaveTimeVector, (0018,6060), FL, 1-n,  */
+    /** RWaveTimeVector, 0x00186060, FL, 1 */
     extern DICOM_EXPORT const tag RWaveTimeVector;
-    /** SafePositionExitDate, (3008,0162), DA, 1,  */
+    /** SafePositionExitDate, 0x30080162, DA, 1 */
     extern DICOM_EXPORT const tag SafePositionExitDate;
-    /** SafePositionExitTime, (3008,0164), TM, 1,  */
+    /** SafePositionExitTime, 0x30080164, TM, 1 */
     extern DICOM_EXPORT const tag SafePositionExitTime;
-    /** SafePositionReturnDate, (3008,0166), DA, 1,  */
+    /** SafePositionReturnDate, 0x30080166, DA, 1 */
     extern DICOM_EXPORT const tag SafePositionReturnDate;
-    /** SafePositionReturnTime, (3008,0168), TM, 1,  */
+    /** SafePositionReturnTime, 0x30080168, TM, 1 */
     extern DICOM_EXPORT const tag SafePositionReturnTime;
-    /** SampleRate, (50XX,2008), UL, 1, RET */
-    extern const range_tag SampleRate;
-    /** SamplesPerPixel, (0028,0002), US, 1,  */
+    /** SampleRate, 0x50002008, UL, 1, RET */
+    extern DICOM_EXPORT const range_tag SampleRate;
+    /** SamplesPerPixel, 0x00280002, US, 1 */
     extern DICOM_EXPORT const tag SamplesPerPixel;
-    /** SamplesPerPixelUsed, (0028,0003), US, 1,  */
+    /** SamplesPerPixelUsed, 0x00280003, US, 1 */
     extern DICOM_EXPORT const tag SamplesPerPixelUsed;
-    /** SamplingFrequency, (003A,001A), DS, 1,  */
+    /** SamplingFrequency, 0x003A001A, DS, 1 */
     extern DICOM_EXPORT const tag SamplingFrequency;
-    /** SAR, (0018,1316), DS, 1,  */
+    /** SamplingStepSize, 0x00701607, FD, 1 */
+    extern DICOM_EXPORT const tag SamplingStepSize;
+    /** SAR, 0x00181316, DS, 1 */
     extern DICOM_EXPORT const tag SAR;
-    /** SaturationRecovery, (0018,9024), CS, 1,  */
+    /** SaturationRecovery, 0x00189024, CS, 1 */
     extern DICOM_EXPORT const tag SaturationRecovery;
-    /** ScanArc, (0018,1143), DS, 1,  */
+    /** ScanArc, 0x00181143, DS, 1 */
     extern DICOM_EXPORT const tag ScanArc;
-    /** ScanLength, (0018,1302), IS, 1,  */
+    /** ScanLength, 0x00181302, IS, 1 */
     extern DICOM_EXPORT const tag ScanLength;
-    /** ScanMode, (300A,0308), CS, 1,  */
+    /** ScanMode, 0x300A0308, CS, 1 */
     extern DICOM_EXPORT const tag ScanMode;
-    /** ScanningSequence, (0018,0020), CS, 1-n,  */
+    /** ScannerSettingsSequence, 0x0014409A, SQ, 1, RET */
+    extern DICOM_EXPORT const tag ScannerSettingsSequence;
+    /** ScanningSequence, 0x00180020, CS, 1 */
     extern DICOM_EXPORT const tag ScanningSequence;
-    /** ScanningSpotSize, (300A,0398), FL, 2,  */
+    /** ScanningSpotSize, 0x300A0398, FL, 2 */
     extern DICOM_EXPORT const tag ScanningSpotSize;
-    /** ScanOptions, (0018,0022), CS, 1-n,  */
+    /** ScanOptions, 0x00180022, CS, 1 */
     extern DICOM_EXPORT const tag ScanOptions;
-    /** ScanSpotMetersetsDelivered, (3008,0047), FL, 1-n,  */
+    /** ScanPatternTypeCodeSequence, 0x00221618, SQ, 1 */
+    extern DICOM_EXPORT const tag ScanPatternTypeCodeSequence;
+    /** ScanProcedure, 0x0014409B, ST, 1, RET */
+    extern DICOM_EXPORT const tag ScanProcedure;
+    /** ScanProgressionDirection, 0x00540501, CS, 1 */
+    extern DICOM_EXPORT const tag ScanProgressionDirection;
+    /** ScanSpotMetersetsDelivered, 0x30080047, FL, 1 */
     extern DICOM_EXPORT const tag ScanSpotMetersetsDelivered;
-    /** ScanSpotMetersetWeights, (300A,0396), FL, 1-n,  */
+    /** ScanSpotMetersetWeights, 0x300A0396, FL, 1 */
     extern DICOM_EXPORT const tag ScanSpotMetersetWeights;
-    /** ScanSpotPositionMap, (300A,0394), FL, 1-n,  */
+    /** ScanSpotPositionMap, 0x300A0394, FL, 1 */
     extern DICOM_EXPORT const tag ScanSpotPositionMap;
-    /** ScanSpotTuneID, (300A,0390), SH, 1,  */
+    /** ScanSpotPrescribedIndices, 0x300A0391, IS, 1 */
+    extern DICOM_EXPORT const tag ScanSpotPrescribedIndices;
+    /** ScanSpotReordered, 0x300A0393, CS, 1 */
+    extern DICOM_EXPORT const tag ScanSpotReordered;
+    /** ScanSpotReorderingAllowed, 0x300A0395, CS, 1 */
+    extern DICOM_EXPORT const tag ScanSpotReorderingAllowed;
+    /** ScanSpotTimeOffset, 0x300A038F, FL, 1 */
+    extern DICOM_EXPORT const tag ScanSpotTimeOffset;
+    /** ScanSpotTuneID, 0x300A0390, SH, 1 */
     extern DICOM_EXPORT const tag ScanSpotTuneID;
-    /** ScanType, (4010,1048), CS, 1,  */
+    /** ScanType, 0x40101048, CS, 1, RET */
     extern DICOM_EXPORT const tag ScanType;
-    /** ScanVelocity, (0018,1300), DS, 1,  */
+    /** ScanVelocity, 0x00181300, DS, 1 */
     extern DICOM_EXPORT const tag ScanVelocity;
-    /** ScatterCorrected, (0018,9760), CS, 1,  */
+    /** ScatterCorrected, 0x00189760, CS, 1 */
     extern DICOM_EXPORT const tag ScatterCorrected;
-    /** ScatterCorrectionMethod, (0054,1105), LO, 1,  */
+    /** ScatterCorrectionMethod, 0x00541105, LO, 1 */
     extern DICOM_EXPORT const tag ScatterCorrectionMethod;
-    /** ScatterFractionFactor, (0054,1323), DS, 1,  */
+    /** ScatterFractionFactor, 0x00541323, DS, 1 */
     extern DICOM_EXPORT const tag ScatterFractionFactor;
-    /** ScheduledAdmissionDate, (0038,001A), DA, 1, RET */
+    /** ScheduledAdmissionDate, 0x0038001A, DA, 1, RET */
     extern DICOM_EXPORT const tag ScheduledAdmissionDate;
-    /** ScheduledAdmissionTime, (0038,001B), TM, 1, RET */
+    /** ScheduledAdmissionTime, 0x0038001B, TM, 1, RET */
     extern DICOM_EXPORT const tag ScheduledAdmissionTime;
-    /** ScheduledDischargeDate, (0038,001C), DA, 1, RET */
+    /** ScheduledDischargeDate, 0x0038001C, DA, 1, RET */
     extern DICOM_EXPORT const tag ScheduledDischargeDate;
-    /** ScheduledDischargeTime, (0038,001D), TM, 1, RET */
+    /** ScheduledDischargeTime, 0x0038001D, TM, 1, RET */
     extern DICOM_EXPORT const tag ScheduledDischargeTime;
-    /** ScheduledHumanPerformersSequence, (0040,4034), SQ, 1,  */
+    /** ScheduledHumanPerformersSequence, 0x00404034, SQ, 1 */
     extern DICOM_EXPORT const tag ScheduledHumanPerformersSequence;
-    /** ScheduledPatientInstitutionResidence, (0038,001E), LO, 1, RET */
+    /** ScheduledPatientInstitutionResidence, 0x0038001E, LO, 1, RET */
     extern DICOM_EXPORT const tag ScheduledPatientInstitutionResidence;
-    /** ScheduledPerformingPhysicianIdentificationSequence, (0040,000B), SQ, 1,  */
+    /** ScheduledPerformingPhysicianIdentificationSequence, 0x0040000B, SQ, 1 */
     extern DICOM_EXPORT const tag ScheduledPerformingPhysicianIdentificationSequence;
-    /** ScheduledPerformingPhysicianName, (0040,0006), PN, 1,  */
+    /** ScheduledPerformingPhysicianName, 0x00400006, PN, 1 */
     extern DICOM_EXPORT const tag ScheduledPerformingPhysicianName;
-    /** ScheduledProcedureStepDescription, (0040,0007), LO, 1,  */
+    /** ScheduledProcedureStepDescription, 0x00400007, LO, 1 */
     extern DICOM_EXPORT const tag ScheduledProcedureStepDescription;
-    /** ScheduledProcedureStepEndDate, (0040,0004), DA, 1,  */
+    /** ScheduledProcedureStepEndDate, 0x00400004, DA, 1 */
     extern DICOM_EXPORT const tag ScheduledProcedureStepEndDate;
-    /** ScheduledProcedureStepEndTime, (0040,0005), TM, 1,  */
+    /** ScheduledProcedureStepEndTime, 0x00400005, TM, 1 */
     extern DICOM_EXPORT const tag ScheduledProcedureStepEndTime;
-    /** ScheduledProcedureStepID, (0040,0009), SH, 1,  */
+    /** ScheduledProcedureStepExpirationDateTime, 0x00404008, DT, 1 */
+    extern DICOM_EXPORT const tag ScheduledProcedureStepExpirationDateTime;
+    /** ScheduledProcedureStepID, 0x00400009, SH, 1 */
     extern DICOM_EXPORT const tag ScheduledProcedureStepID;
-    /** ScheduledProcedureStepLocation, (0040,0011), SH, 1,  */
+    /** ScheduledProcedureStepLocation, 0x00400011, SH, 1 */
     extern DICOM_EXPORT const tag ScheduledProcedureStepLocation;
-    /** ScheduledProcedureStepModificationDateTime, (0040,4010), DT, 1,  */
+    /** ScheduledProcedureStepModificationDateTime, 0x00404010, DT, 1 */
     extern DICOM_EXPORT const tag ScheduledProcedureStepModificationDateTime;
-    /** ScheduledProcedureStepPriority, (0074,1200), CS, 1,  */
+    /** ScheduledProcedureStepPriority, 0x00741200, CS, 1 */
     extern DICOM_EXPORT const tag ScheduledProcedureStepPriority;
-    /** ScheduledProcedureStepSequence, (0040,0100), SQ, 1,  */
+    /** ScheduledProcedureStepSequence, 0x00400100, SQ, 1 */
     extern DICOM_EXPORT const tag ScheduledProcedureStepSequence;
-    /** ScheduledProcedureStepStartDate, (0040,0002), DA, 1,  */
+    /** ScheduledProcedureStepStartDate, 0x00400002, DA, 1 */
     extern DICOM_EXPORT const tag ScheduledProcedureStepStartDate;
-    /** ScheduledProcedureStepStartDateTime, (0040,4005), DT, 1,  */
+    /** ScheduledProcedureStepStartDateTime, 0x00404005, DT, 1 */
     extern DICOM_EXPORT const tag ScheduledProcedureStepStartDateTime;
-    /** ScheduledProcedureStepStartTime, (0040,0003), TM, 1,  */
+    /** ScheduledProcedureStepStartTime, 0x00400003, TM, 1 */
     extern DICOM_EXPORT const tag ScheduledProcedureStepStartTime;
-    /** ScheduledProcedureStepStatus, (0040,0020), CS, 1,  */
+    /** ScheduledProcedureStepStatus, 0x00400020, CS, 1 */
     extern DICOM_EXPORT const tag ScheduledProcedureStepStatus;
-    /** ScheduledProcessingApplicationsCodeSequence, (0040,4004), SQ, 1,  */
+    /** ScheduledProcessingApplicationsCodeSequence, 0x00404004, SQ, 1, RET */
     extern DICOM_EXPORT const tag ScheduledProcessingApplicationsCodeSequence;
-    /** ScheduledProcessingParametersSequence, (0074,1210), SQ, 1,  */
+    /** ScheduledProcessingParametersSequence, 0x00741210, SQ, 1 */
     extern DICOM_EXPORT const tag ScheduledProcessingParametersSequence;
-    /** ScheduledProtocolCodeSequence, (0040,0008), SQ, 1,  */
+    /** ScheduledProtocolCodeSequence, 0x00400008, SQ, 1 */
     extern DICOM_EXPORT const tag ScheduledProtocolCodeSequence;
-    /** ScheduledSpecimenSequence, (0040,0500), SQ, 1,  */
+    /** ScheduledSpecimenSequence, 0x00400500, SQ, 1 */
     extern DICOM_EXPORT const tag ScheduledSpecimenSequence;
-    /** ScheduledStationAETitle, (0040,0001), AE, 1-n,  */
+    /** ScheduledStationAETitle, 0x00400001, AE, 1 */
     extern DICOM_EXPORT const tag ScheduledStationAETitle;
-    /** ScheduledStationClassCodeSequence, (0040,4026), SQ, 1,  */
+    /** ScheduledStationClassCodeSequence, 0x00404026, SQ, 1 */
     extern DICOM_EXPORT const tag ScheduledStationClassCodeSequence;
-    /** ScheduledStationGeographicLocationCodeSequence, (0040,4027), SQ, 1,  */
+    /** ScheduledStationGeographicLocationCodeSequence, 0x00404027, SQ, 1 */
     extern DICOM_EXPORT const tag ScheduledStationGeographicLocationCodeSequence;
-    /** ScheduledStationName, (0040,0010), SH, 1-n,  */
+    /** ScheduledStationName, 0x00400010, SH, 1 */
     extern DICOM_EXPORT const tag ScheduledStationName;
-    /** ScheduledStationNameCodeSequence, (0040,4025), SQ, 1,  */
+    /** ScheduledStationNameCodeSequence, 0x00404025, SQ, 1 */
     extern DICOM_EXPORT const tag ScheduledStationNameCodeSequence;
-    /** ScheduledStepAttributesSequence, (0040,0270), SQ, 1,  */
+    /** ScheduledStepAttributesSequence, 0x00400270, SQ, 1 */
     extern DICOM_EXPORT const tag ScheduledStepAttributesSequence;
-    /** ScheduledStudyLocation, (0032,1020), LO, 1, RET */
+    /** ScheduledStudyLocation, 0x00321020, LO, 1, RET */
     extern DICOM_EXPORT const tag ScheduledStudyLocation;
-    /** ScheduledStudyLocationAETitle, (0032,1021), AE, 1-n, RET */
+    /** ScheduledStudyLocationAETitle, 0x00321021, AE, 1, RET */
     extern DICOM_EXPORT const tag ScheduledStudyLocationAETitle;
-    /** ScheduledStudyStartDate, (0032,1000), DA, 1, RET */
+    /** ScheduledStudyStartDate, 0x00321000, DA, 1, RET */
     extern DICOM_EXPORT const tag ScheduledStudyStartDate;
-    /** ScheduledStudyStartTime, (0032,1001), TM, 1, RET */
+    /** ScheduledStudyStartTime, 0x00321001, TM, 1, RET */
     extern DICOM_EXPORT const tag ScheduledStudyStartTime;
-    /** ScheduledStudyStopDate, (0032,1010), DA, 1, RET */
+    /** ScheduledStudyStopDate, 0x00321010, DA, 1, RET */
     extern DICOM_EXPORT const tag ScheduledStudyStopDate;
-    /** ScheduledStudyStopTime, (0032,1011), TM, 1, RET */
+    /** ScheduledStudyStopTime, 0x00321011, TM, 1, RET */
     extern DICOM_EXPORT const tag ScheduledStudyStopTime;
-    /** ScheduledWorkitemCodeSequence, (0040,4018), SQ, 1,  */
+    /** ScheduledWorkitemCodeSequence, 0x00404018, SQ, 1 */
     extern DICOM_EXPORT const tag ScheduledWorkitemCodeSequence;
-    /** SCPStatus, (0074,1242), CS, 1,  */
+    /** SCPStatus, 0x00741242, CS, 1 */
     extern DICOM_EXPORT const tag SCPStatus;
-    /** ScreeningBaselineMeasured, (0024,0120), CS, 1,  */
+    /** ScreeningBaselineMeasured, 0x00240120, CS, 1 */
     extern DICOM_EXPORT const tag ScreeningBaselineMeasured;
-    /** ScreeningBaselineMeasuredSequence, (0024,0122), SQ, 1,  */
+    /** ScreeningBaselineMeasuredSequence, 0x00240122, SQ, 1 */
     extern DICOM_EXPORT const tag ScreeningBaselineMeasuredSequence;
-    /** ScreeningBaselineType, (0024,0124), CS, 1,  */
+    /** ScreeningBaselineType, 0x00240124, CS, 1 */
     extern DICOM_EXPORT const tag ScreeningBaselineType;
-    /** ScreeningBaselineValue, (0024,0126), FL, 1,  */
+    /** ScreeningBaselineValue, 0x00240126, FL, 1 */
     extern DICOM_EXPORT const tag ScreeningBaselineValue;
-    /** ScreeningTestModeCodeSequence, (0024,0016), SQ, 1,  */
+    /** ScreeningTestModeCodeSequence, 0x00240016, SQ, 1 */
     extern DICOM_EXPORT const tag ScreeningTestModeCodeSequence;
-    /** ScreenMinimumColorBitDepth, (0072,010C), US, 1,  */
+    /** ScreenMinimumColorBitDepth, 0x0072010C, US, 1 */
     extern DICOM_EXPORT const tag ScreenMinimumColorBitDepth;
-    /** ScreenMinimumGrayscaleBitDepth, (0072,010A), US, 1,  */
+    /** ScreenMinimumGrayscaleBitDepth, 0x0072010A, US, 1 */
     extern DICOM_EXPORT const tag ScreenMinimumGrayscaleBitDepth;
-    /** SeamLineIndex, (0052,0036), US, 1,  */
+    /** SeamLineIndex, 0x00520036, US, 1 */
     extern DICOM_EXPORT const tag SeamLineIndex;
-    /** SeamLineLocation, (0052,0033), FD, 1,  */
+    /** SeamLineLocation, 0x00520033, FD, 1 */
     extern DICOM_EXPORT const tag SeamLineLocation;
-    /** SecondaryCaptureDeviceID, (0018,1010), LO, 1,  */
+    /** SecondaryApprovalStatus, 0x00140101, CS, 1, RET */
+    extern DICOM_EXPORT const tag SecondaryApprovalStatus;
+    /** SecondaryCaptureDeviceID, 0x00181010, LO, 1 */
     extern DICOM_EXPORT const tag SecondaryCaptureDeviceID;
-    /** SecondaryCaptureDeviceManufacturer, (0018,1016), LO, 1,  */
+    /** SecondaryCaptureDeviceManufacturer, 0x00181016, LO, 1 */
     extern DICOM_EXPORT const tag SecondaryCaptureDeviceManufacturer;
-    /** SecondaryCaptureDeviceManufacturerModelName, (0018,1018), LO, 1,  */
+    /** SecondaryCaptureDeviceManufacturerModelName, 0x00181018, LO, 1 */
     extern DICOM_EXPORT const tag SecondaryCaptureDeviceManufacturerModelName;
-    /** SecondaryCaptureDeviceSoftwareVersions, (0018,1019), LO, 1-n,  */
+    /** SecondaryCaptureDeviceSoftwareVersions, 0x00181019, LO, 1 */
     extern DICOM_EXPORT const tag SecondaryCaptureDeviceSoftwareVersions;
-    /** SecondaryCountsAccumulated, (0054,1311), IS, 1-n,  */
+    /** SecondaryCountsAccumulated, 0x00541311, IS, 1 */
     extern DICOM_EXPORT const tag SecondaryCountsAccumulated;
-    /** SecondaryCountsType, (0054,1220), CS, 1-n,  */
+    /** SecondaryCountsType, 0x00541220, CS, 1 */
     extern DICOM_EXPORT const tag SecondaryCountsType;
-    /** SecondaryPositionerIncrement, (0018,9515), FL, 1,  */
+    /** SecondaryInspectionMethodSequence, 0x4010107D, SQ, 1, RET */
+    extern DICOM_EXPORT const tag SecondaryInspectionMethodSequence;
+    /** SecondaryPositionerIncrement, 0x00189515, FL, 1 */
     extern DICOM_EXPORT const tag SecondaryPositionerIncrement;
-    /** SecondaryPositionerScanArc, (0018,9509), FL, 1,  */
+    /** SecondaryPositionerIncrementSign, 0x00189519, SS, 1 */
+    extern DICOM_EXPORT const tag SecondaryPositionerIncrementSign;
+    /** SecondaryPositionerScanArc, 0x00189509, FL, 1 */
     extern DICOM_EXPORT const tag SecondaryPositionerScanArc;
-    /** SecondaryPositionerScanStartAngle, (0018,9511), FL, 1,  */
+    /** SecondaryPositionerScanStartAngle, 0x00189511, FL, 1 */
     extern DICOM_EXPORT const tag SecondaryPositionerScanStartAngle;
-    /** SegmentAlgorithmName, (0062,0009), LO, 1,  */
+    /** SecondaryReviewDate, 0x00140102, DA, 1, RET */
+    extern DICOM_EXPORT const tag SecondaryReviewDate;
+    /** SecondaryReviewerName, 0x00140104, PN, 1, RET */
+    extern DICOM_EXPORT const tag SecondaryReviewerName;
+    /** SecondaryReviewTime, 0x00140103, TM, 1, RET */
+    extern DICOM_EXPORT const tag SecondaryReviewTime;
+    /** SegmentAlgorithmName, 0x00620009, LO, 1 */
     extern DICOM_EXPORT const tag SegmentAlgorithmName;
-    /** SegmentAlgorithmType, (0062,0008), CS, 1,  */
+    /** SegmentAlgorithmType, 0x00620008, CS, 1 */
     extern DICOM_EXPORT const tag SegmentAlgorithmType;
-    /** SegmentationFractionalType, (0062,0010), CS, 1,  */
+    /** SegmentationAlgorithmIdentificationSequence, 0x00620007, SQ, 1 */
+    extern DICOM_EXPORT const tag SegmentationAlgorithmIdentificationSequence;
+    /** SegmentationFractionalType, 0x00620010, CS, 1 */
     extern DICOM_EXPORT const tag SegmentationFractionalType;
-    /** SegmentationType, (0062,0001), CS, 1,  */
+    /** SegmentationType, 0x00620001, CS, 1 */
     extern DICOM_EXPORT const tag SegmentationType;
-    /** SegmentDescription, (0062,0006), ST, 1,  */
+    /** SegmentDescription, 0x00620006, ST, 1 */
     extern DICOM_EXPORT const tag SegmentDescription;
-    /** SegmentedBluePaletteColorLookupTableData, (0028,1223), OW, 1,  */
+    /** SegmentedAlphaPaletteColorLookupTableData, 0x00281224, OW, 1 */
+    extern DICOM_EXPORT const tag SegmentedAlphaPaletteColorLookupTableData;
+    /** SegmentedBluePaletteColorLookupTableData, 0x00281223, OW, 1 */
     extern DICOM_EXPORT const tag SegmentedBluePaletteColorLookupTableData;
-    /** SegmentedGreenPaletteColorLookupTableData, (0028,1222), OW, 1,  */
+    /** SegmentedGreenPaletteColorLookupTableData, 0x00281222, OW, 1 */
     extern DICOM_EXPORT const tag SegmentedGreenPaletteColorLookupTableData;
-    /** SegmentedKSpaceTraversal, (0018,9033), CS, 1,  */
+    /** SegmentedKSpaceTraversal, 0x00189033, CS, 1 */
     extern DICOM_EXPORT const tag SegmentedKSpaceTraversal;
-    /** SegmentedPropertyCategoryCodeSequence, (0062,0003), SQ, 1,  */
+    /** SegmentedPropertyCategoryCodeSequence, 0x00620003, SQ, 1 */
     extern DICOM_EXPORT const tag SegmentedPropertyCategoryCodeSequence;
-    /** SegmentedPropertyTypeCodeSequence, (0062,000F), SQ, 1,  */
+    /** SegmentedPropertyTypeCodeSequence, 0x0062000F, SQ, 1 */
     extern DICOM_EXPORT const tag SegmentedPropertyTypeCodeSequence;
-    /** SegmentedRedPaletteColorLookupTableData, (0028,1221), OW, 1,  */
+    /** SegmentedPropertyTypeModifierCodeSequence, 0x00620011, SQ, 1 */
+    extern DICOM_EXPORT const tag SegmentedPropertyTypeModifierCodeSequence;
+    /** SegmentedRedPaletteColorLookupTableData, 0x00281221, OW, 1 */
     extern DICOM_EXPORT const tag SegmentedRedPaletteColorLookupTableData;
-    /** SegmentIdentificationSequence, (0062,000A), SQ, 1,  */
+    /** SegmentIdentificationSequence, 0x0062000A, SQ, 1 */
     extern DICOM_EXPORT const tag SegmentIdentificationSequence;
-    /** SegmentLabel, (0062,0005), LO, 1,  */
+    /** SegmentLabel, 0x00620005, LO, 1 */
     extern DICOM_EXPORT const tag SegmentLabel;
-    /** SegmentNumber, (0062,0004), US, 1,  */
+    /** SegmentNumber, 0x00620004, US, 1 */
     extern DICOM_EXPORT const tag SegmentNumber;
-    /** SegmentSequence, (0062,0002), SQ, 1,  */
+    /** SegmentSequence, 0x00620002, SQ, 1 */
     extern DICOM_EXPORT const tag SegmentSequence;
-    /** SegmentSurfaceGenerationAlgorithmIdentificationSequence, (0066,002D), SQ, 1,  */
+    /** SegmentSurfaceGenerationAlgorithmIdentificationSequence, 0x0066002D, SQ, 1 */
     extern DICOM_EXPORT const tag SegmentSurfaceGenerationAlgorithmIdentificationSequence;
-    /** SegmentSurfaceSourceInstanceSequence, (0066,002E), SQ, 1,  */
+    /** SegmentSurfaceSourceInstanceSequence, 0x0066002E, SQ, 1 */
     extern DICOM_EXPORT const tag SegmentSurfaceSourceInstanceSequence;
-    /** SelectedSegmentalOphthalmicAxialLengthSequence, (0022,1257), SQ, 1,  */
+    /** SelectedSegmentalOphthalmicAxialLengthSequence, 0x00221257, SQ, 1 */
     extern DICOM_EXPORT const tag SelectedSegmentalOphthalmicAxialLengthSequence;
-    /** SelectedTotalOphthalmicAxialLengthSequence, (0022,1260), SQ, 1,  */
+    /** SelectedTotalOphthalmicAxialLengthSequence, 0x00221260, SQ, 1 */
     extern DICOM_EXPORT const tag SelectedTotalOphthalmicAxialLengthSequence;
-    /** SelectorAttribute, (0072,0026), AT, 1,  */
+    /** SelectorAEValue, 0x0072005E, AE, 1 */
+    extern DICOM_EXPORT const tag SelectorAEValue;
+    /** SelectorASValue, 0x0072005F, AS, 1 */
+    extern DICOM_EXPORT const tag SelectorASValue;
+    /** SelectorAttribute, 0x00720026, AT, 1 */
     extern DICOM_EXPORT const tag SelectorAttribute;
-    /** SelectorAttributePrivateCreator, (0072,0056), LO, 1,  */
+    /** SelectorAttributeKeyword, 0x00820019, LO, 1 */
+    extern DICOM_EXPORT const tag SelectorAttributeKeyword;
+    /** SelectorAttributeName, 0x00820018, LO, 1 */
+    extern DICOM_EXPORT const tag SelectorAttributeName;
+    /** SelectorAttributePrivateCreator, 0x00720056, LO, 1 */
     extern DICOM_EXPORT const tag SelectorAttributePrivateCreator;
-    /** SelectorAttributeVR, (0072,0050), CS, 1,  */
+    /** SelectorAttributeVR, 0x00720050, CS, 1 */
     extern DICOM_EXPORT const tag SelectorAttributeVR;
-    /** SelectorATValue, (0072,0060), AT, 1-n,  */
+    /** SelectorATValue, 0x00720060, AT, 1 */
     extern DICOM_EXPORT const tag SelectorATValue;
-    /** SelectorCodeSequenceValue, (0072,0080), SQ, 1,  */
+    /** SelectorCodeSequenceValue, 0x00720080, SQ, 1 */
     extern DICOM_EXPORT const tag SelectorCodeSequenceValue;
-    /** SelectorCSValue, (0072,0062), CS, 1-n,  */
+    /** SelectorCSValue, 0x00720062, CS, 1 */
     extern DICOM_EXPORT const tag SelectorCSValue;
-    /** SelectorDSValue, (0072,0072), DS, 1-n,  */
+    /** SelectorDAValue, 0x00720061, DA, 1 */
+    extern DICOM_EXPORT const tag SelectorDAValue;
+    /** SelectorDSValue, 0x00720072, DS, 1 */
     extern DICOM_EXPORT const tag SelectorDSValue;
-    /** SelectorFDValue, (0072,0074), FD, 1-n,  */
+    /** SelectorDTValue, 0x00720063, DT, 1 */
+    extern DICOM_EXPORT const tag SelectorDTValue;
+    /** SelectorFDValue, 0x00720074, FD, 1 */
     extern DICOM_EXPORT const tag SelectorFDValue;
-    /** SelectorFLValue, (0072,0076), FL, 1-n,  */
+    /** SelectorFLValue, 0x00720076, FL, 1 */
     extern DICOM_EXPORT const tag SelectorFLValue;
-    /** SelectorISValue, (0072,0064), IS, 1-n,  */
+    /** SelectorISValue, 0x00720064, IS, 1 */
     extern DICOM_EXPORT const tag SelectorISValue;
-    /** SelectorLOValue, (0072,0066), LO, 1-n,  */
+    /** SelectorLOValue, 0x00720066, LO, 1 */
     extern DICOM_EXPORT const tag SelectorLOValue;
-    /** SelectorLTValue, (0072,0068), LT, 1,  */
+    /** SelectorLTValue, 0x00720068, LT, 1 */
     extern DICOM_EXPORT const tag SelectorLTValue;
-    /** SelectorPNValue, (0072,006A), PN, 1-n,  */
+    /** SelectorOBValue, 0x00720065, OB, 1 */
+    extern DICOM_EXPORT const tag SelectorOBValue;
+    /** SelectorODValue, 0x00720073, OD, 1 */
+    extern DICOM_EXPORT const tag SelectorODValue;
+    /** SelectorOFValue, 0x00720067, OF, 1 */
+    extern DICOM_EXPORT const tag SelectorOFValue;
+    /** SelectorOLValue, 0x00720075, OL, 1 */
+    extern DICOM_EXPORT const tag SelectorOLValue;
+    /** SelectorOWValue, 0x00720069, OW, 1 */
+    extern DICOM_EXPORT const tag SelectorOWValue;
+    /** SelectorPNValue, 0x0072006A, PN, 1 */
     extern DICOM_EXPORT const tag SelectorPNValue;
-    /** SelectorSequencePointer, (0072,0052), AT, 1-n,  */
+    /** SelectorSequencePointer, 0x00720052, AT, 1 */
     extern DICOM_EXPORT const tag SelectorSequencePointer;
-    /** SelectorSequencePointerItems, (0074,1057), IS, 1-n,  */
+    /** SelectorSequencePointerItems, 0x00741057, IS, 1 */
     extern DICOM_EXPORT const tag SelectorSequencePointerItems;
-    /** SelectorSequencePointerPrivateCreator, (0072,0054), LO, 1-n,  */
+    /** SelectorSequencePointerPrivateCreator, 0x00720054, LO, 1 */
     extern DICOM_EXPORT const tag SelectorSequencePointerPrivateCreator;
-    /** SelectorSHValue, (0072,006C), SH, 1-n,  */
+    /** SelectorSHValue, 0x0072006C, SH, 1 */
     extern DICOM_EXPORT const tag SelectorSHValue;
-    /** SelectorSLValue, (0072,007C), SL, 1-n,  */
+    /** SelectorSLValue, 0x0072007C, SL, 1 */
     extern DICOM_EXPORT const tag SelectorSLValue;
-    /** SelectorSSValue, (0072,007E), SS, 1-n,  */
+    /** SelectorSSValue, 0x0072007E, SS, 1 */
     extern DICOM_EXPORT const tag SelectorSSValue;
-    /** SelectorSTValue, (0072,006E), ST, 1,  */
+    /** SelectorSTValue, 0x0072006E, ST, 1 */
     extern DICOM_EXPORT const tag SelectorSTValue;
-    /** SelectorULValue, (0072,0078), UL, 1-n,  */
+    /** SelectorTMValue, 0x0072006B, TM, 1 */
+    extern DICOM_EXPORT const tag SelectorTMValue;
+    /** SelectorUCValue, 0x0072006F, UC, 1 */
+    extern DICOM_EXPORT const tag SelectorUCValue;
+    /** SelectorUIValue, 0x0072007F, UI, 1 */
+    extern DICOM_EXPORT const tag SelectorUIValue;
+    /** SelectorULValue, 0x00720078, UL, 1 */
     extern DICOM_EXPORT const tag SelectorULValue;
-    /** SelectorUSValue, (0072,007A), US, 1-n,  */
+    /** SelectorUNValue, 0x0072006D, UN, 1 */
+    extern DICOM_EXPORT const tag SelectorUNValue;
+    /** SelectorURValue, 0x00720071, UR, 1 */
+    extern DICOM_EXPORT const tag SelectorURValue;
+    /** SelectorUSValue, 0x0072007A, US, 1 */
     extern DICOM_EXPORT const tag SelectorUSValue;
-    /** SelectorUTValue, (0072,0070), UT, 1,  */
+    /** SelectorUTValue, 0x00720070, UT, 1 */
     extern DICOM_EXPORT const tag SelectorUTValue;
-    /** SelectorValueNumber, (0072,0028), US, 1,  */
+    /** SelectorValueNumber, 0x00720028, US, 1 */
     extern DICOM_EXPORT const tag SelectorValueNumber;
-    /** Sensitivity, (0018,6000), DS, 1,  */
+    /** SendingApplicationEntityTitle, 0x00020017, AE, 1 */
+    extern DICOM_EXPORT const tag SendingApplicationEntityTitle;
+    /** Sensitivity, 0x00186000, DS, 1 */
     extern DICOM_EXPORT const tag Sensitivity;
-    /** SensitivityCalibrated, (0018,9767), CS, 1,  */
+    /** SensitivityCalibrated, 0x00189767, CS, 1 */
     extern DICOM_EXPORT const tag SensitivityCalibrated;
-    /** SensitivityValue, (0024,0094), FL, 1,  */
+    /** SensitivityValue, 0x00240094, FL, 1 */
     extern DICOM_EXPORT const tag SensitivityValue;
-    /** SensorName, (0014,3022), DS, 1,  */
+    /** SensorName, 0x00143022, ST, 1, RET */
     extern DICOM_EXPORT const tag SensorName;
-    /** SensorTemperature, (0014,3028), DS, 1,  */
+    /** SensorTemperature, 0x00143028, DS, 1, RET */
     extern DICOM_EXPORT const tag SensorTemperature;
-    /** SequenceName, (0018,0024), SH, 1,  */
+    /** SequenceName, 0x00180024, SH, 1 */
     extern DICOM_EXPORT const tag SequenceName;
-    /** SequenceOfCompressedData, (0028,0403), LO, 1-n, RET */
+    /** SequenceOfCompressedData, 0x00280403, LO, 1, RET */
     extern DICOM_EXPORT const tag SequenceOfCompressedData;
-    /** SequenceOfUltrasoundRegions, (0018,6011), SQ, 1,  */
+    /** SequenceOfUltrasoundRegions, 0x00186011, SQ, 1 */
     extern DICOM_EXPORT const tag SequenceOfUltrasoundRegions;
-    /** SequenceVariant, (0018,0021), CS, 1-n,  */
+    /** SequenceVariant, 0x00180021, CS, 1 */
     extern DICOM_EXPORT const tag SequenceVariant;
-    /** SequencingIndicatorTrial, (0040,A060), LO, 1, RET */
+    /** SequencingIndicatorTrial, 0x0040A060, LO, 1, RET */
     extern DICOM_EXPORT const tag SequencingIndicatorTrial;
-    /** SeriesDate, (0008,0021), DA, 1,  */
+    /** SeriesDate, 0x00080021, DA, 1 */
     extern DICOM_EXPORT const tag SeriesDate;
-    /** SeriesDescription, (0008,103E), LO, 1,  */
+    /** SeriesDescription, 0x0008103E, LO, 1 */
     extern DICOM_EXPORT const tag SeriesDescription;
-    /** SeriesDescriptionCodeSequence, (0008,103F), SQ, 1,  */
+    /** SeriesDescriptionCodeSequence, 0x0008103F, SQ, 1 */
     extern DICOM_EXPORT const tag SeriesDescriptionCodeSequence;
-    /** SeriesInstanceUID, (0020,000E), UI, 1,  */
+    /** SeriesInstanceUID, 0x0020000E, UI, 1 */
     extern DICOM_EXPORT const tag SeriesInstanceUID;
-    /** SeriesInStudy, (0020,1000), IS, 1, RET */
+    /** SeriesInStudy, 0x00201000, IS, 1, RET */
     extern DICOM_EXPORT const tag SeriesInStudy;
-    /** SeriesNumber, (0020,0011), IS, 1,  */
+    /** SeriesNumber, 0x00200011, IS, 1 */
     extern DICOM_EXPORT const tag SeriesNumber;
-    /** SeriesTime, (0008,0031), TM, 1,  */
+    /** SeriesTime, 0x00080031, TM, 1 */
     extern DICOM_EXPORT const tag SeriesTime;
-    /** SeriesType, (0054,1000), CS, 2,  */
+    /** SeriesType, 0x00541000, CS, 2 */
     extern DICOM_EXPORT const tag SeriesType;
-    /** ServiceEpisodeDescription, (0038,0062), LO, 1,  */
+    /** ServiceEpisodeDescription, 0x00380062, LO, 1 */
     extern DICOM_EXPORT const tag ServiceEpisodeDescription;
-    /** ServiceEpisodeID, (0038,0060), LO, 1,  */
+    /** ServiceEpisodeID, 0x00380060, LO, 1 */
     extern DICOM_EXPORT const tag ServiceEpisodeID;
-    /** SetupDeviceDescription, (300A,01BA), ST, 1,  */
+    /** SettlingPhaseFrame, 0x00189624, CS, 1 */
+    extern DICOM_EXPORT const tag SettlingPhaseFrame;
+    /** SetupDeviceDescription, 0x300A01BA, ST, 1 */
     extern DICOM_EXPORT const tag SetupDeviceDescription;
-    /** SetupDeviceLabel, (300A,01B8), SH, 1,  */
+    /** SetupDeviceLabel, 0x300A01B8, SH, 1 */
     extern DICOM_EXPORT const tag SetupDeviceLabel;
-    /** SetupDeviceParameter, (300A,01BC), DS, 1,  */
+    /** SetupDeviceParameter, 0x300A01BC, DS, 1 */
     extern DICOM_EXPORT const tag SetupDeviceParameter;
-    /** SetupDeviceSequence, (300A,01B4), SQ, 1,  */
+    /** SetupDeviceSequence, 0x300A01B4, SQ, 1 */
     extern DICOM_EXPORT const tag SetupDeviceSequence;
-    /** SetupDeviceType, (300A,01B6), CS, 1,  */
+    /** SetupDeviceType, 0x300A01B6, CS, 1 */
     extern DICOM_EXPORT const tag SetupDeviceType;
-    /** SetupImageComment, (300A,0402), ST, 1,  */
+    /** SetupImageComment, 0x300A0402, ST, 1 */
     extern DICOM_EXPORT const tag SetupImageComment;
-    /** SetupReferenceDescription, (300A,01D0), ST, 1,  */
+    /** SetupReferenceDescription, 0x300A01D0, ST, 1 */
     extern DICOM_EXPORT const tag SetupReferenceDescription;
-    /** SetupTechnique, (300A,01B0), CS, 1,  */
+    /** SetupTechnique, 0x300A01B0, CS, 1 */
     extern DICOM_EXPORT const tag SetupTechnique;
-    /** SetupTechniqueDescription, (300A,01B2), ST, 1,  */
+    /** SetupTechniqueDescription, 0x300A01B2, ST, 1 */
     extern DICOM_EXPORT const tag SetupTechniqueDescription;
-    /** ShadowColorCIELabValue, (0070,0247), US, 3,  */
+    /** ShadingStyle, 0x00701701, CS, 1 */
+    extern DICOM_EXPORT const tag ShadingStyle;
+    /** ShadowColorCIELabValue, 0x00700247, US, 3 */
     extern DICOM_EXPORT const tag ShadowColorCIELabValue;
-    /** ShadowOffsetX, (0070,0245), FL, 1,  */
+    /** ShadowOffsetX, 0x00700245, FL, 1 */
     extern DICOM_EXPORT const tag ShadowOffsetX;
-    /** ShadowOffsetY, (0070,0246), FL, 1,  */
+    /** ShadowOffsetY, 0x00700246, FL, 1 */
     extern DICOM_EXPORT const tag ShadowOffsetY;
-    /** ShadowOpacity, (0070,0258), FL, 1,  */
+    /** ShadowOpacity, 0x00700258, FL, 1 */
     extern DICOM_EXPORT const tag ShadowOpacity;
-    /** ShadowStyle, (0070,0244), CS, 1,  */
+    /** ShadowStyle, 0x00700244, CS, 1 */
     extern DICOM_EXPORT const tag ShadowStyle;
-    /** ShapeType, (0070,0306), CS, 1,  */
+    /** ShapeType, 0x00700306, CS, 1 */
     extern DICOM_EXPORT const tag ShapeType;
-    /** SharedFunctionalGroupsSequence, (5200,9229), SQ, 1,  */
+    /** SharedFunctionalGroupsSequence, 0x52009229, SQ, 1 */
     extern DICOM_EXPORT const tag SharedFunctionalGroupsSequence;
-    /** ShieldingDeviceDescription, (300A,01A6), ST, 1,  */
+    /** ShieldingDeviceDescription, 0x300A01A6, ST, 1 */
     extern DICOM_EXPORT const tag ShieldingDeviceDescription;
-    /** ShieldingDeviceLabel, (300A,01A4), SH, 1,  */
+    /** ShieldingDeviceLabel, 0x300A01A4, SH, 1 */
     extern DICOM_EXPORT const tag ShieldingDeviceLabel;
-    /** ShieldingDevicePosition, (300A,01A8), SH, 1,  */
+    /** ShieldingDevicePosition, 0x300A01A8, SH, 1 */
     extern DICOM_EXPORT const tag ShieldingDevicePosition;
-    /** ShieldingDeviceSequence, (300A,01A0), SQ, 1,  */
+    /** ShieldingDeviceSequence, 0x300A01A0, SQ, 1 */
     extern DICOM_EXPORT const tag ShieldingDeviceSequence;
-    /** ShieldingDeviceType, (300A,01A2), CS, 1,  */
+    /** ShieldingDeviceType, 0x300A01A2, CS, 1 */
     extern DICOM_EXPORT const tag ShieldingDeviceType;
-    /** ShiftTableSize, (1000,XXX4), US, 1, RET */
-    extern const range_tag ShiftTableSize;
-    /** ShiftTableTriplet, (1000,XXX5), US, 3, RET */
-    extern const range_tag ShiftTableTriplet;
-    /** ShortTermFluctuation, (0024,0075), FL, 1,  */
+    /** ShiftTableSize, 0x10000004, US, 1, RET */
+    extern DICOM_EXPORT const range_tag ShiftTableSize;
+    /** ShiftTableTriplet, 0x10000005, US, 3, RET */
+    extern DICOM_EXPORT const range_tag ShiftTableTriplet;
+    /** Shininess, 0x00701706, FD, 1 */
+    extern DICOM_EXPORT const tag Shininess;
+    /** ShortTermFluctuation, 0x00240075, FL, 1 */
     extern DICOM_EXPORT const tag ShortTermFluctuation;
-    /** ShortTermFluctuationCalculated, (0024,0074), CS, 1,  */
+    /** ShortTermFluctuationCalculated, 0x00240074, CS, 1 */
     extern DICOM_EXPORT const tag ShortTermFluctuationCalculated;
-    /** ShortTermFluctuationProbability, (0024,0077), FL, 1,  */
+    /** ShortTermFluctuationProbability, 0x00240077, FL, 1 */
     extern DICOM_EXPORT const tag ShortTermFluctuationProbability;
-    /** ShortTermFluctuationProbabilityCalculated, (0024,0076), CS, 1,  */
+    /** ShortTermFluctuationProbabilityCalculated, 0x00240076, CS, 1 */
     extern DICOM_EXPORT const tag ShortTermFluctuationProbabilityCalculated;
-    /** ShowAcquisitionTechniquesFlag, (0072,0716), CS, 1,  */
+    /** ShotDurationTime, 0x00800004, FD, 1 */
+    extern DICOM_EXPORT const tag ShotDurationTime;
+    /** ShotOffsetTime, 0x00800005, FD, 1 */
+    extern DICOM_EXPORT const tag ShotOffsetTime;
+    /** ShowAcquisitionTechniquesFlag, 0x00720716, CS, 1 */
     extern DICOM_EXPORT const tag ShowAcquisitionTechniquesFlag;
-    /** ShowGraphicAnnotationFlag, (0072,0712), CS, 1,  */
+    /** ShowGraphicAnnotationFlag, 0x00720712, CS, 1 */
     extern DICOM_EXPORT const tag ShowGraphicAnnotationFlag;
-    /** ShowGrayscaleInverted, (0072,0706), CS, 1,  */
+    /** ShowGrayscaleInverted, 0x00720706, CS, 1 */
     extern DICOM_EXPORT const tag ShowGrayscaleInverted;
-    /** ShowImageTrueSizeFlag, (0072,0710), CS, 1,  */
+    /** ShowImageTrueSizeFlag, 0x00720710, CS, 1 */
     extern DICOM_EXPORT const tag ShowImageTrueSizeFlag;
-    /** ShowPatientDemographicsFlag, (0072,0714), CS, 1,  */
+    /** ShowPatientDemographicsFlag, 0x00720714, CS, 1 */
     extern DICOM_EXPORT const tag ShowPatientDemographicsFlag;
-    /** ShowTickLabel, (0070,0278), CS, 1,  */
+    /** ShowTickLabel, 0x00700278, CS, 1 */
     extern DICOM_EXPORT const tag ShowTickLabel;
-    /** ShutterLeftVerticalEdge, (0018,1602), IS, 1,  */
+    /** ShutterLeftVerticalEdge, 0x00181602, IS, 1 */
     extern DICOM_EXPORT const tag ShutterLeftVerticalEdge;
-    /** ShutterLowerHorizontalEdge, (0018,1608), IS, 1,  */
+    /** ShutterLowerHorizontalEdge, 0x00181608, IS, 1 */
     extern DICOM_EXPORT const tag ShutterLowerHorizontalEdge;
-    /** ShutterOverlayGroup, (0018,1623), US, 1,  */
+    /** ShutterOverlayGroup, 0x00181623, US, 1 */
     extern DICOM_EXPORT const tag ShutterOverlayGroup;
-    /** ShutterPresentationColorCIELabValue, (0018,1624), US, 3,  */
+    /** ShutterPresentationColorCIELabValue, 0x00181624, US, 3 */
     extern DICOM_EXPORT const tag ShutterPresentationColorCIELabValue;
-    /** ShutterPresentationValue, (0018,1622), US, 1,  */
+    /** ShutterPresentationValue, 0x00181622, US, 1 */
     extern DICOM_EXPORT const tag ShutterPresentationValue;
-    /** ShutterRightVerticalEdge, (0018,1604), IS, 1,  */
+    /** ShutterRightVerticalEdge, 0x00181604, IS, 1 */
     extern DICOM_EXPORT const tag ShutterRightVerticalEdge;
-    /** ShutterShape, (0018,1600), CS, 1-3,  */
+    /** ShutterShape, 0x00181600, CS, 1 */
     extern DICOM_EXPORT const tag ShutterShape;
-    /** ShutterUpperHorizontalEdge, (0018,1606), IS, 1,  */
+    /** ShutterUpperHorizontalEdge, 0x00181606, IS, 1 */
     extern DICOM_EXPORT const tag ShutterUpperHorizontalEdge;
-    /** SignalDomainColumns, (0028,9003), CS, 1,  */
+    /** SignalDomainColumns, 0x00289003, CS, 1 */
     extern DICOM_EXPORT const tag SignalDomainColumns;
-    /** SignalDomainRows, (0028,9235), CS, 1,  */
+    /** SignalDomainRows, 0x00289235, CS, 1 */
     extern DICOM_EXPORT const tag SignalDomainRows;
-    /** SignalToNoiseRatio, (0022,1155), FL, 1,  */
+    /** SignalToNoiseRatio, 0x00221155, FL, 1 */
     extern DICOM_EXPORT const tag SignalToNoiseRatio;
-    /** Signature, (0400,0120), OB, 1,  */
+    /** Signature, 0x04000120, OB, 1 */
     extern DICOM_EXPORT const tag Signature;
-    /** SimpleFrameList, (0008,1161), UL, 1-n,  */
+    /** SimpleFrameList, 0x00081161, UL, 1 */
     extern DICOM_EXPORT const tag SimpleFrameList;
-    /** SingleCollimationWidth, (0018,9306), FD, 1,  */
+    /** SimulatedKeratometricCylinderSequence, 0x00460218, SQ, 1 */
+    extern DICOM_EXPORT const tag SimulatedKeratometricCylinderSequence;
+    /** SingleCollimationWidth, 0x00189306, FD, 1 */
     extern DICOM_EXPORT const tag SingleCollimationWidth;
-    /** SkipBeats, (0018,1086), IS, 1,  */
+    /** SkipBeats, 0x00181086, IS, 1 */
     extern DICOM_EXPORT const tag SkipBeats;
-    /** SkipFrameRangeFlag, (0008,9460), CS, 1,  */
+    /** SkipFrameRangeFlag, 0x00089460, CS, 1 */
     extern DICOM_EXPORT const tag SkipFrameRangeFlag;
-    /** SlabOrientation, (0018,9105), FD, 3,  */
+    /** SlabOrientation, 0x00189105, FD, 3 */
     extern DICOM_EXPORT const tag SlabOrientation;
-    /** SlabThickness, (0018,9104), FD, 1,  */
+    /** SlabThickness, 0x00189104, FD, 1 */
     extern DICOM_EXPORT const tag SlabThickness;
-    /** SliceLocation, (0020,1041), DS, 1,  */
+    /** SliceLocation, 0x00201041, DS, 1 */
     extern DICOM_EXPORT const tag SliceLocation;
-    /** SliceLocationVector, (0018,2005), DS, 1-n,  */
+    /** SliceLocationVector, 0x00182005, DS, 1 */
     extern DICOM_EXPORT const tag SliceLocationVector;
-    /** SliceProgressionDirection, (0054,0500), CS, 1,  */
+    /** SliceProgressionDirection, 0x00540500, CS, 1 */
     extern DICOM_EXPORT const tag SliceProgressionDirection;
-    /** SliceSensitivityFactor, (0054,1320), DS, 1,  */
+    /** SliceSensitivityFactor, 0x00541320, DS, 1 */
     extern DICOM_EXPORT const tag SliceSensitivityFactor;
-    /** SliceThickness, (0018,0050), DS, 1,  */
+    /** SliceThickness, 0x00180050, DS, 1 */
     extern DICOM_EXPORT const tag SliceThickness;
-    /** SliceVector, (0054,0080), US, 1-n,  */
+    /** SliceVector, 0x00540080, US, 1 */
     extern DICOM_EXPORT const tag SliceVector;
-    /** SlideIdentifier, (0040,06FA), LO, 1, RET */
+    /** SlideIdentifier, 0x004006FA, LO, 1, RET */
     extern DICOM_EXPORT const tag SlideIdentifier;
-    /** SmallestImagePixelValue, (0028,0106), US or SS, 1,  */
+    /** SmallestImagePixelValue, 0x00280106, US or SS, 1 */
     extern DICOM_EXPORT const tag SmallestImagePixelValue;
-    /** SmallestImagePixelValueInPlane, (0028,0110), US or SS, 1, RET */
+    /** SmallestImagePixelValueInPlane, 0x00280110, US or SS, 1, RET */
     extern DICOM_EXPORT const tag SmallestImagePixelValueInPlane;
-    /** SmallestPixelValueInSeries, (0028,0108), US or SS, 1,  */
+    /** SmallestPixelValueInSeries, 0x00280108, US or SS, 1 */
     extern DICOM_EXPORT const tag SmallestPixelValueInSeries;
-    /** SmallestValidPixelValue, (0028,0104), US or SS, 1, RET */
+    /** SmallestValidPixelValue, 0x00280104, US or SS, 1, RET */
     extern DICOM_EXPORT const tag SmallestValidPixelValue;
-    /** SmokingStatus, (0010,21A0), CS, 1,  */
+    /** SmokingStatus, 0x001021A0, CS, 1 */
     extern DICOM_EXPORT const tag SmokingStatus;
-    /** SmoothingType, (2010,0080), CS, 1,  */
+    /** SmoothingType, 0x20100080, CS, 1 */
     extern DICOM_EXPORT const tag SmoothingType;
-    /** SnoutID, (300A,030F), SH, 1,  */
+    /** SnoutID, 0x300A030F, SH, 1 */
     extern DICOM_EXPORT const tag SnoutID;
-    /** SnoutPosition, (300A,030D), FL, 1,  */
+    /** SnoutPosition, 0x300A030D, FL, 1 */
     extern DICOM_EXPORT const tag SnoutPosition;
-    /** SnoutPositionTolerance, (300A,004B), FL, 1,  */
+    /** SnoutPositionTolerance, 0x300A004B, FL, 1 */
     extern DICOM_EXPORT const tag SnoutPositionTolerance;
-    /** SnoutSequence, (300A,030C), SQ, 1,  */
+    /** SnoutSequence, 0x300A030C, SQ, 1 */
     extern DICOM_EXPORT const tag SnoutSequence;
-    /** SoftcopyVOILUTSequence, (0028,3110), SQ, 1,  */
+    /** SNRThreshold, 0x40101073, FD, 1, RET */
+    extern DICOM_EXPORT const tag SNRThreshold;
+    /** SoftcopyVOILUTSequence, 0x00283110, SQ, 1 */
     extern DICOM_EXPORT const tag SoftcopyVOILUTSequence;
-    /** SoftTissueFocusThermalIndex, (0018,5028), DS, 1,  */
+    /** SoftTissueFocusThermalIndex, 0x00185028, DS, 1 */
     extern DICOM_EXPORT const tag SoftTissueFocusThermalIndex;
-    /** SoftTissueSurfaceThermalIndex, (0018,5029), DS, 1,  */
+    /** SoftTissueSurfaceThermalIndex, 0x00185029, DS, 1 */
     extern DICOM_EXPORT const tag SoftTissueSurfaceThermalIndex;
-    /** SoftTissueThermalIndex, (0018,5027), DS, 1,  */
+    /** SoftTissueThermalIndex, 0x00185027, DS, 1 */
     extern DICOM_EXPORT const tag SoftTissueThermalIndex;
-    /** SoftwareVersions, (0018,1020), LO, 1-n,  */
+    /** SoftwareVersions, 0x00181020, LO, 1 */
     extern DICOM_EXPORT const tag SoftwareVersions;
-    /** SOPAuthorizationComment, (0100,0424), LT, 1,  */
+    /** SOPAuthorizationComment, 0x01000424, LT, 1 */
     extern DICOM_EXPORT const tag SOPAuthorizationComment;
-    /** SOPAuthorizationDateTime, (0100,0420), DT, 1,  */
+    /** SOPAuthorizationDateTime, 0x01000420, DT, 1 */
     extern DICOM_EXPORT const tag SOPAuthorizationDateTime;
-    /** SOPClassesInStudy, (0008,0062), UI, 1-n,  */
+    /** SOPClassesInStudy, 0x00080062, UI, 1 */
     extern DICOM_EXPORT const tag SOPClassesInStudy;
-    /** SOPClassesSupported, (0008,115A), UI, 1-n,  */
+    /** SOPClassesSupported, 0x0008115A, UI, 1 */
     extern DICOM_EXPORT const tag SOPClassesSupported;
-    /** SOPClassUID, (0008,0016), UI, 1,  */
+    /** SOPClassUID, 0x00080016, UI, 1 */
     extern DICOM_EXPORT const tag SOPClassUID;
-    /** SOPInstanceStatus, (0100,0410), CS, 1,  */
+    /** SOPInstanceStatus, 0x01000410, CS, 1 */
     extern DICOM_EXPORT const tag SOPInstanceStatus;
-    /** SOPInstanceUID, (0008,0018), UI, 1,  */
+    /** SOPInstanceUID, 0x00080018, UI, 1 */
     extern DICOM_EXPORT const tag SOPInstanceUID;
-    /** SOPInstanceUIDOfConcatenationSource, (0020,0242), UI, 1,  */
+    /** SOPInstanceUIDOfConcatenationSource, 0x00200242, UI, 1 */
     extern DICOM_EXPORT const tag SOPInstanceUIDOfConcatenationSource;
-    /** SortByCategory, (0072,0602), CS, 1,  */
+    /** SortByCategory, 0x00720602, CS, 1 */
     extern DICOM_EXPORT const tag SortByCategory;
-    /** SortingDirection, (0072,0604), CS, 1,  */
+    /** SortingDirection, 0x00720604, CS, 1 */
     extern DICOM_EXPORT const tag SortingDirection;
-    /** SortingOperationsSequence, (0072,0600), SQ, 1,  */
+    /** SortingOperationsSequence, 0x00720600, SQ, 1 */
     extern DICOM_EXPORT const tag SortingOperationsSequence;
-    /** SoundPathLength, (0014,405A), DS, 1,  */
+    /** SoundPathLength, 0x0014405A, DS, 1, RET */
     extern DICOM_EXPORT const tag SoundPathLength;
-    /** SourceApplicationEntityTitle, (0002,0016), AE, 1,  */
+    /** SourceAcquisitionBeamNumber, 0x00189939, US, 1 */
+    extern DICOM_EXPORT const tag SourceAcquisitionBeamNumber;
+    /** SourceAcquisitionProtocolElementNumber, 0x00189938, US, 1 */
+    extern DICOM_EXPORT const tag SourceAcquisitionProtocolElementNumber;
+    /** SourceApplicationEntityTitle, 0x00020016, AE, 1 */
     extern DICOM_EXPORT const tag SourceApplicationEntityTitle;
-    /** SourceApplicatorID, (300A,0291), SH, 1,  */
+    /** SourceApplicatorID, 0x300A0291, SH, 1 */
     extern DICOM_EXPORT const tag SourceApplicatorID;
-    /** SourceApplicatorLength, (300A,0296), DS, 1,  */
+    /** SourceApplicatorLength, 0x300A0296, DS, 1 */
     extern DICOM_EXPORT const tag SourceApplicatorLength;
-    /** SourceApplicatorManufacturer, (300A,0298), LO, 1,  */
+    /** SourceApplicatorManufacturer, 0x300A0298, LO, 1 */
     extern DICOM_EXPORT const tag SourceApplicatorManufacturer;
-    /** SourceApplicatorName, (300A,0294), LO, 1,  */
+    /** SourceApplicatorName, 0x300A0294, LO, 1 */
     extern DICOM_EXPORT const tag SourceApplicatorName;
-    /** SourceApplicatorNumber, (300A,0290), IS, 1,  */
+    /** SourceApplicatorNumber, 0x300A0290, IS, 1 */
     extern DICOM_EXPORT const tag SourceApplicatorNumber;
-    /** SourceApplicatorStepSize, (300A,02A0), DS, 1,  */
+    /** SourceApplicatorStepSize, 0x300A02A0, DS, 1 */
     extern DICOM_EXPORT const tag SourceApplicatorStepSize;
-    /** SourceApplicatorType, (300A,0292), CS, 1,  */
+    /** SourceApplicatorTipLength, 0x300A0274, DS, 1 */
+    extern DICOM_EXPORT const tag SourceApplicatorTipLength;
+    /** SourceApplicatorType, 0x300A0292, CS, 1 */
     extern DICOM_EXPORT const tag SourceApplicatorType;
-    /** SourceApplicatorWallNominalThickness, (300A,029C), DS, 1,  */
+    /** SourceApplicatorWallNominalThickness, 0x300A029C, DS, 1 */
     extern DICOM_EXPORT const tag SourceApplicatorWallNominalThickness;
-    /** SourceApplicatorWallNominalTransmission, (300A,029E), DS, 1,  */
+    /** SourceApplicatorWallNominalTransmission, 0x300A029E, DS, 1 */
     extern DICOM_EXPORT const tag SourceApplicatorWallNominalTransmission;
-    /** SourceAxisDistance, (300A,00B4), DS, 1,  */
+    /** SourceAxisDistance, 0x300A00B4, DS, 1 */
     extern DICOM_EXPORT const tag SourceAxisDistance;
-    /** SourceEncapsulationNominalThickness, (300A,0222), DS, 1,  */
+    /** SourceDescription, 0x300A021C, LO, 1 */
+    extern DICOM_EXPORT const tag SourceDescription;
+    /** SourceEncapsulationNominalThickness, 0x300A0222, DS, 1 */
     extern DICOM_EXPORT const tag SourceEncapsulationNominalThickness;
-    /** SourceEncapsulationNominalTransmission, (300A,0224), DS, 1,  */
+    /** SourceEncapsulationNominalTransmission, 0x300A0224, DS, 1 */
     extern DICOM_EXPORT const tag SourceEncapsulationNominalTransmission;
-    /** SourceFrameOfReferenceUID, (0064,0003), UI, 1,  */
+    /** SourceFrameOfReferenceUID, 0x00640003, UI, 1 */
     extern DICOM_EXPORT const tag SourceFrameOfReferenceUID;
-    /** SourceHangingProtocolSequence, (0072,0012), SQ, 1,  */
+    /** SourceHangingProtocolSequence, 0x00720012, SQ, 1 */
     extern DICOM_EXPORT const tag SourceHangingProtocolSequence;
-    /** SourceImageEvidenceSequence, (0008,9154), SQ, 1,  */
+    /** SourceImageCornealProcessedDataSequence, 0x00460244, SQ, 1 */
+    extern DICOM_EXPORT const tag SourceImageCornealProcessedDataSequence;
+    /** SourceImageEvidenceSequence, 0x00089154, SQ, 1 */
     extern DICOM_EXPORT const tag SourceImageEvidenceSequence;
-    /** SourceImageIDs, (0020,31XX), CS, 1-n, RET */
-    extern const range_tag SourceImageIDs;
-    /** SourceImageSequence, (0008,2112), SQ, 1,  */
+    /** SourceImageIDs, 0x00203100, CS, 1, RET */
+    extern DICOM_EXPORT const range_tag SourceImageIDs;
+    /** SourceImageSequence, 0x00082112, SQ, 1 */
     extern DICOM_EXPORT const tag SourceImageSequence;
-    /** SourceInstanceSequence, (0042,0013), SQ, 1,  */
+    /** SourceInstanceSequence, 0x00420013, SQ, 1 */
     extern DICOM_EXPORT const tag SourceInstanceSequence;
-    /** SourceIsotopeHalfLife, (300A,0228), DS, 1,  */
+    /** SourceIrradiationEventSequence, 0x00083011, SQ, 1 */
+    extern DICOM_EXPORT const tag SourceIrradiationEventSequence;
+    /** SourceIsotopeHalfLife, 0x300A0228, DS, 1 */
     extern DICOM_EXPORT const tag SourceIsotopeHalfLife;
-    /** SourceIsotopeName, (300A,0226), LO, 1,  */
+    /** SourceIsotopeName, 0x300A0226, LO, 1 */
     extern DICOM_EXPORT const tag SourceIsotopeName;
-    /** SourceManufacturer, (300A,0216), LO, 1,  */
+    /** SourceManufacturer, 0x300A0216, LO, 1 */
     extern DICOM_EXPORT const tag SourceManufacturer;
-    /** SourceMovementType, (300A,0288), CS, 1,  */
+    /** SourceModelID, 0x300A021B, SH, 1 */
+    extern DICOM_EXPORT const tag SourceModelID;
+    /** SourceMovementType, 0x300A0288, CS, 1 */
     extern DICOM_EXPORT const tag SourceMovementType;
-    /** SourceNumber, (300A,0212), IS, 1,  */
+    /** SourceNumber, 0x300A0212, IS, 1 */
     extern DICOM_EXPORT const tag SourceNumber;
-    /** SourceOfAnteriorChamberDepthDataCodeSequence, (0022,1133), SQ, 1,  */
+    /** SourceOfAnteriorChamberDepthDataCodeSequence, 0x00221133, SQ, 1 */
     extern DICOM_EXPORT const tag SourceOfAnteriorChamberDepthDataCodeSequence;
-    /** SourceOfLensThicknessDataCodeSequence, (0022,1132), SQ, 1,  */
+    /** SourceOfLensThicknessDataCodeSequence, 0x00221132, SQ, 1 */
     extern DICOM_EXPORT const tag SourceOfLensThicknessDataCodeSequence;
-    /** SourceOfOphthalmicAxialLengthCodeSequence, (0022,1035), SQ, 1,  */
+    /** SourceOfOphthalmicAxialLengthCodeSequence, 0x00221035, SQ, 1 */
     extern DICOM_EXPORT const tag SourceOfOphthalmicAxialLengthCodeSequence;
-    /** SourceOfPreviousValues, (0400,0564), LO, 1,  */
+    /** SourceOfPreviousValues, 0x04000564, LO, 1 */
     extern DICOM_EXPORT const tag SourceOfPreviousValues;
-    /** SourceOfRefractiveErrorDataCodeSequence, (0022,1135), SQ, 1,  */
-    extern DICOM_EXPORT const tag SourceOfRefractiveErrorDataCodeSequence;
-    /** SourceOfRefractiveMeasurementsSequence, (0022,1134), SQ, 1,  */
+    /** SourceOfRefractiveMeasurementsCodeSequence, 0x00221135, SQ, 1 */
+    extern DICOM_EXPORT const tag SourceOfRefractiveMeasurementsCodeSequence;
+    /** SourceOfRefractiveMeasurementsSequence, 0x00221134, SQ, 1 */
     extern DICOM_EXPORT const tag SourceOfRefractiveMeasurementsSequence;
-    /** SourceOrientation, (4010,1060), FL, 3,  */
+    /** SourceOrientation, 0x40101060, FL, 3, RET */
     extern DICOM_EXPORT const tag SourceOrientation;
-    /** SourcePosition, (4010,1061), FL, 3,  */
+    /** SourcePatientGroupIdentificationSequence, 0x00100026, SQ, 1 */
+    extern DICOM_EXPORT const tag SourcePatientGroupIdentificationSequence;
+    /** SourcePosition, 0x40101061, FL, 3, RET */
     extern DICOM_EXPORT const tag SourcePosition;
-    /** SourceSequence, (300A,0210), SQ, 1,  */
+    /** SourceReconstructionProtocolElementNumber, 0x0018993A, US, 1 */
+    extern DICOM_EXPORT const tag SourceReconstructionProtocolElementNumber;
+    /** SourceSequence, 0x300A0210, SQ, 1 */
     extern DICOM_EXPORT const tag SourceSequence;
-    /** SourceSerialNumber, (3008,0105), LO, 1,  */
+    /** SourceSerialNumber, 0x30080105, LO, 1 */
     extern DICOM_EXPORT const tag SourceSerialNumber;
-    /** SourceStrength, (300A,022B), DS, 1,  */
+    /** SourceStrength, 0x300A022B, DS, 1 */
     extern DICOM_EXPORT const tag SourceStrength;
-    /** SourceStrengthReferenceDate, (300A,022C), DA, 1,  */
+    /** SourceStrengthReferenceDate, 0x300A022C, DA, 1 */
     extern DICOM_EXPORT const tag SourceStrengthReferenceDate;
-    /** SourceStrengthReferenceTime, (300A,022E), TM, 1,  */
+    /** SourceStrengthReferenceTime, 0x300A022E, TM, 1 */
     extern DICOM_EXPORT const tag SourceStrengthReferenceTime;
-    /** SourceStrengthUnits, (300A,0229), CS, 1,  */
+    /** SourceStrengthUnits, 0x300A0229, CS, 1 */
     extern DICOM_EXPORT const tag SourceStrengthUnits;
-    /** SourceToApplicatorMountingPositionDistance, (300A,0436), FL, 1,  */
+    /** SourceToApplicatorMountingPositionDistance, 0x300A0436, FL, 1 */
     extern DICOM_EXPORT const tag SourceToApplicatorMountingPositionDistance;
-    /** SourceToBeamLimitingDeviceDistance, (300A,00BA), DS, 1,  */
+    /** SourceToBeamLimitingDeviceDistance, 0x300A00BA, DS, 1 */
     extern DICOM_EXPORT const tag SourceToBeamLimitingDeviceDistance;
-    /** SourceToBlockTrayDistance, (300A,00F6), DS, 1,  */
+    /** SourceToBlockTrayDistance, 0x300A00F6, DS, 1 */
     extern DICOM_EXPORT const tag SourceToBlockTrayDistance;
-    /** SourceToCompensatorDistance, (300A,02E2), DS, 1-n,  */
+    /** SourceToCompensatorDistance, 0x300A02E2, DS, 1 */
     extern DICOM_EXPORT const tag SourceToCompensatorDistance;
-    /** SourceToCompensatorTrayDistance, (300A,00E6), DS, 1,  */
+    /** SourceToCompensatorTrayDistance, 0x300A00E6, DS, 1 */
     extern DICOM_EXPORT const tag SourceToCompensatorTrayDistance;
-    /** SourceToReferenceObjectDistance, (3002,0028), DS, 1,  */
+    /** SourceToExternalContourDistance, 0x300A0132, FL, 1 */
+    extern DICOM_EXPORT const tag SourceToExternalContourDistance;
+    /** SourceToGeneralAccessoryDistance, 0x300A0425, FL, 1 */
+    extern DICOM_EXPORT const tag SourceToGeneralAccessoryDistance;
+    /** SourceToReferenceObjectDistance, 0x30020028, DS, 1 */
     extern DICOM_EXPORT const tag SourceToReferenceObjectDistance;
-    /** SourceToSurfaceDistance, (300A,0130), DS, 1,  */
+    /** SourceToSurfaceDistance, 0x300A0130, DS, 1 */
     extern DICOM_EXPORT const tag SourceToSurfaceDistance;
-    /** SourceToWedgeTrayDistance, (300A,00DA), DS, 1,  */
+    /** SourceToWedgeTrayDistance, 0x300A00DA, DS, 1 */
     extern DICOM_EXPORT const tag SourceToWedgeTrayDistance;
-    /** SourceType, (300A,0214), CS, 1,  */
+    /** SourceType, 0x300A0214, CS, 1 */
     extern DICOM_EXPORT const tag SourceType;
-    /** SourceWaveformSequence, (003A,020A), SQ, 1,  */
+    /** SourceWaveformSequence, 0x003A020A, SQ, 1 */
     extern DICOM_EXPORT const tag SourceWaveformSequence;
-    /** SpacingBetweenSlices, (0018,0088), DS, 1,  */
+    /** SpacingBetweenSlices, 0x00180088, DS, 1 */
     extern DICOM_EXPORT const tag SpacingBetweenSlices;
-    /** SpatialLocationsPreserved, (0028,135A), CS, 1,  */
+    /** SpatialLocationsPreserved, 0x0028135A, CS, 1 */
     extern DICOM_EXPORT const tag SpatialLocationsPreserved;
-    /** SpatialPresaturation, (0018,9027), CS, 1,  */
+    /** SpatialPresaturation, 0x00189027, CS, 1 */
     extern DICOM_EXPORT const tag SpatialPresaturation;
-    /** SpatialResolution, (0018,1050), DS, 1,  */
+    /** SpatialResolution, 0x00181050, DS, 1 */
     extern DICOM_EXPORT const tag SpatialResolution;
-    /** SpecialNeeds, (0038,0050), LO, 1,  */
+    /** SpatialTransformOfDose, 0x30040005, CS, 1 */
+    extern DICOM_EXPORT const tag SpatialTransformOfDose;
+    /** SpecialNeeds, 0x00380050, LO, 1 */
     extern DICOM_EXPORT const tag SpecialNeeds;
-    /** SpecificAbsorptionRateDefinition, (0018,9179), CS, 1,  */
+    /** SpecificAbsorptionRateDefinition, 0x00189179, CS, 1 */
     extern DICOM_EXPORT const tag SpecificAbsorptionRateDefinition;
-    /** SpecificAbsorptionRateSequence, (0018,9239), SQ, 1,  */
+    /** SpecificAbsorptionRateSequence, 0x00189239, SQ, 1 */
     extern DICOM_EXPORT const tag SpecificAbsorptionRateSequence;
-    /** SpecificAbsorptionRateValue, (0018,9181), FD, 1,  */
+    /** SpecificAbsorptionRateValue, 0x00189181, FD, 1 */
     extern DICOM_EXPORT const tag SpecificAbsorptionRateValue;
-    /** SpecificCharacterSet, (0008,0005), CS, 1-n,  */
+    /** SpecificationSelectionGuidance, 0x00820033, UT, 1 */
+    extern DICOM_EXPORT const tag SpecificationSelectionGuidance;
+    /** SpecificCharacterSet, 0x00080005, CS, 1 */
     extern DICOM_EXPORT const tag SpecificCharacterSet;
-    /** SpecificCharacterSetOfFileSetDescriptorFile, (0004,1142), CS, 1,  */
+    /** SpecificCharacterSetOfFileSetDescriptorFile, 0x00041142, CS, 1 */
     extern DICOM_EXPORT const tag SpecificCharacterSetOfFileSetDescriptorFile;
-    /** SpecifiedChannelTotalTime, (3008,0132), DS, 1,  */
+    /** SpecifiedChannelTotalTime, 0x30080132, DS, 1 */
     extern DICOM_EXPORT const tag SpecifiedChannelTotalTime;
-    /** SpecifiedMeterset, (3008,0042), DS, 1,  */
+    /** SpecifiedMeterset, 0x30080042, DS, 1 */
     extern DICOM_EXPORT const tag SpecifiedMeterset;
-    /** SpecifiedNumberOfPulses, (3008,0136), IS, 1,  */
+    /** SpecifiedNumberOfPulses, 0x30080136, IS, 1 */
     extern DICOM_EXPORT const tag SpecifiedNumberOfPulses;
-    /** SpecifiedPrimaryMeterset, (3008,0032), DS, 1,  */
+    /** SpecifiedPrimaryMeterset, 0x30080032, DS, 1 */
     extern DICOM_EXPORT const tag SpecifiedPrimaryMeterset;
-    /** SpecifiedPulseRepetitionInterval, (3008,013A), DS, 1,  */
+    /** SpecifiedPulseRepetitionInterval, 0x3008013A, DS, 1 */
     extern DICOM_EXPORT const tag SpecifiedPulseRepetitionInterval;
-    /** SpecifiedSecondaryMeterset, (3008,0033), DS, 1,  */
+    /** SpecifiedSecondaryMeterset, 0x30080033, DS, 1 */
     extern DICOM_EXPORT const tag SpecifiedSecondaryMeterset;
-    /** SpecifiedTreatmentTime, (3008,003A), DS, 1,  */
+    /** SpecifiedTreatmentTime, 0x3008003A, DS, 1 */
     extern DICOM_EXPORT const tag SpecifiedTreatmentTime;
-    /** SpecimenAccessionNumber, (0040,050A), LO, 1, RET */
+    /** SpecimenAccessionNumber, 0x0040050A, LO, 1, RET */
     extern DICOM_EXPORT const tag SpecimenAccessionNumber;
-    /** SpecimenDescriptionSequence, (0040,0560), SQ, 1,  */
+    /** SpecimenDescriptionSequence, 0x00400560, SQ, 1 */
     extern DICOM_EXPORT const tag SpecimenDescriptionSequence;
-    /** SpecimenDescriptionSequenceTrial, (0040,0552), SQ, 1, RET */
+    /** SpecimenDescriptionSequenceTrial, 0x00400552, SQ, 1, RET */
     extern DICOM_EXPORT const tag SpecimenDescriptionSequenceTrial;
-    /** SpecimenDescriptionTrial, (0040,0553), ST, 1, RET */
+    /** SpecimenDescriptionTrial, 0x00400553, ST, 1, RET */
     extern DICOM_EXPORT const tag SpecimenDescriptionTrial;
-    /** SpecimenDetailedDescription, (0040,0602), UT, 1,  */
+    /** SpecimenDetailedDescription, 0x00400602, UT, 1 */
     extern DICOM_EXPORT const tag SpecimenDetailedDescription;
-    /** SpecimenIdentifier, (0040,0551), LO, 1,  */
+    /** SpecimenIdentifier, 0x00400551, LO, 1 */
     extern DICOM_EXPORT const tag SpecimenIdentifier;
-    /** SpecimenLabelInImage, (0048,0010), CS, 1,  */
+    /** SpecimenLabelInImage, 0x00480010, CS, 1 */
     extern DICOM_EXPORT const tag SpecimenLabelInImage;
-    /** SpecimenLocalizationContentItemSequence, (0040,0620), SQ, 1,  */
+    /** SpecimenLocalizationContentItemSequence, 0x00400620, SQ, 1 */
     extern DICOM_EXPORT const tag SpecimenLocalizationContentItemSequence;
-    /** SpecimenPreparationSequence, (0040,0610), SQ, 1,  */
+    /** SpecimenPreparationSequence, 0x00400610, SQ, 1 */
     extern DICOM_EXPORT const tag SpecimenPreparationSequence;
-    /** SpecimenPreparationStepContentItemSequence, (0040,0612), SQ, 1,  */
+    /** SpecimenPreparationStepContentItemSequence, 0x00400612, SQ, 1 */
     extern DICOM_EXPORT const tag SpecimenPreparationStepContentItemSequence;
-    /** SpecimenReferenceSequence, (0048,0110), SQ, 1,  */
+    /** SpecimenReferenceSequence, 0x00480110, SQ, 1 */
     extern DICOM_EXPORT const tag SpecimenReferenceSequence;
-    /** SpecimenSequence, (0040,0550), SQ, 1, RET */
+    /** SpecimenSequence, 0x00400550, SQ, 1, RET */
     extern DICOM_EXPORT const tag SpecimenSequence;
-    /** SpecimenShortDescription, (0040,0600), LO, 1,  */
+    /** SpecimenShortDescription, 0x00400600, LO, 1 */
     extern DICOM_EXPORT const tag SpecimenShortDescription;
-    /** SpecimenTypeCodeSequence, (0040,059A), SQ, 1,  */
+    /** SpecimenTypeCodeSequence, 0x0040059A, SQ, 1 */
     extern DICOM_EXPORT const tag SpecimenTypeCodeSequence;
-    /** SpecimenUID, (0040,0554), UI, 1,  */
+    /** SpecimenUID, 0x00400554, UI, 1 */
     extern DICOM_EXPORT const tag SpecimenUID;
-    /** SpectrallySelectedExcitation, (0018,9026), CS, 1,  */
+    /** SpectrallySelectedExcitation, 0x00189026, CS, 1 */
     extern DICOM_EXPORT const tag SpectrallySelectedExcitation;
-    /** SpectrallySelectedSuppression, (0018,9025), CS, 1,  */
+    /** SpectrallySelectedSuppression, 0x00189025, CS, 1 */
     extern DICOM_EXPORT const tag SpectrallySelectedSuppression;
-    /** SpectralWidth, (0018,9052), FD, 1-2,  */
+    /** SpectralWidth, 0x00189052, FD, 1 */
     extern DICOM_EXPORT const tag SpectralWidth;
-    /** SpectroscopyAcquisitionDataColumns, (0018,9127), UL, 1,  */
+    /** SpectroscopyAcquisitionDataColumns, 0x00189127, UL, 1 */
     extern DICOM_EXPORT const tag SpectroscopyAcquisitionDataColumns;
-    /** SpectroscopyAcquisitionOutOfPlanePhaseSteps, (0018,9159), UL, 1,  */
+    /** SpectroscopyAcquisitionOutOfPlanePhaseSteps, 0x00189159, UL, 1 */
     extern DICOM_EXPORT const tag SpectroscopyAcquisitionOutOfPlanePhaseSteps;
-    /** SpectroscopyAcquisitionPhaseColumns, (0018,9234), UL, 1,  */
+    /** SpectroscopyAcquisitionPhaseColumns, 0x00189234, UL, 1 */
     extern DICOM_EXPORT const tag SpectroscopyAcquisitionPhaseColumns;
-    /** SpectroscopyAcquisitionPhaseRows, (0018,9095), UL, 1,  */
+    /** SpectroscopyAcquisitionPhaseRows, 0x00189095, UL, 1 */
     extern DICOM_EXPORT const tag SpectroscopyAcquisitionPhaseRows;
-    /** SpectroscopyData, (5600,0020), OF, 1,  */
+    /** SpectroscopyData, 0x56000020, OF, 1 */
     extern DICOM_EXPORT const tag SpectroscopyData;
-    /** SpherePower, (0046,0146), FD, 1,  */
+    /** SpecularReflectionIntensity, 0x00701705, FD, 1 */
+    extern DICOM_EXPORT const tag SpecularReflectionIntensity;
+    /** SpherePower, 0x00460146, FD, 1 */
     extern DICOM_EXPORT const tag SpherePower;
-    /** SphericalLensPower, (0022,0007), FL, 1,  */
+    /** SphericalLensPower, 0x00220007, FL, 1 */
     extern DICOM_EXPORT const tag SphericalLensPower;
-    /** SpiralPitchFactor, (0018,9311), FD, 1,  */
+    /** SpiralPitchFactor, 0x00189311, FD, 1 */
     extern DICOM_EXPORT const tag SpiralPitchFactor;
-    /** Spoiling, (0018,9016), CS, 1,  */
+    /** Spoiling, 0x00189016, CS, 1 */
     extern DICOM_EXPORT const tag Spoiling;
-    /** StackID, (0020,9056), SH, 1,  */
+    /** StackID, 0x00209056, SH, 1 */
     extern DICOM_EXPORT const tag StackID;
-    /** StageCodeSequence, (0040,000A), SQ, 1,  */
+    /** StageCodeSequence, 0x0040000A, SQ, 1 */
     extern DICOM_EXPORT const tag StageCodeSequence;
-    /** StageName, (0008,2120), SH, 1,  */
+    /** StageName, 0x00082120, SH, 1 */
     extern DICOM_EXPORT const tag StageName;
-    /** StageNumber, (0008,2122), IS, 1,  */
+    /** StageNumber, 0x00082122, IS, 1 */
     extern DICOM_EXPORT const tag StageNumber;
-    /** StartAcquisitionDateTime, (0018,9516), DT, 1,  */
+    /** StartAcquisitionDateTime, 0x00189516, DT, 1 */
     extern DICOM_EXPORT const tag StartAcquisitionDateTime;
-    /** StartAngle, (0054,0200), DS, 1,  */
+    /** StartAngle, 0x00540200, DS, 1 */
     extern DICOM_EXPORT const tag StartAngle;
-    /** StartCardiacTriggerCountThreshold, (0018,9717), FD, 1,  */
+    /** StartCardiacTriggerCountThreshold, 0x00189717, FD, 1 */
     extern DICOM_EXPORT const tag StartCardiacTriggerCountThreshold;
-    /** StartCumulativeMetersetWeight, (300C,0008), DS, 1,  */
+    /** StartCumulativeMetersetWeight, 0x300C0008, DS, 1 */
     extern DICOM_EXPORT const tag StartCumulativeMetersetWeight;
-    /** StartDensityThreshold, (0018,9715), FD, 1,  */
+    /** StartCumulativeTimeWeight, 0x00741407, DS, 1 */
+    extern DICOM_EXPORT const tag StartCumulativeTimeWeight;
+    /** StartDensityThreshold, 0x00189715, FD, 1 */
     extern DICOM_EXPORT const tag StartDensityThreshold;
-    /** StartingRespiratoryAmplitude, (0020,9246), FL, 1,  */
+    /** StartingRespiratoryAmplitude, 0x00209246, FL, 1 */
     extern DICOM_EXPORT const tag StartingRespiratoryAmplitude;
-    /** StartingRespiratoryPhase, (0020,9247), CS, 1,  */
+    /** StartingRespiratoryPhase, 0x00209247, CS, 1 */
     extern DICOM_EXPORT const tag StartingRespiratoryPhase;
-    /** StartMeterset, (3008,0078), DS, 1,  */
+    /** StartMeterset, 0x30080078, DS, 1 */
     extern DICOM_EXPORT const tag StartMeterset;
-    /** StartRelativeDensityDifferenceThreshold, (0018,9716), FD, 1,  */
+    /** StartRelativeDensityDifferenceThreshold, 0x00189716, FD, 1 */
     extern DICOM_EXPORT const tag StartRelativeDensityDifferenceThreshold;
-    /** StartRespiratoryTriggerCountThreshold, (0018,9718), FD, 1,  */
+    /** StartRespiratoryTriggerCountThreshold, 0x00189718, FD, 1 */
     extern DICOM_EXPORT const tag StartRespiratoryTriggerCountThreshold;
-    /** StartTrim, (0008,2142), IS, 1,  */
+    /** StartTrim, 0x00082142, IS, 1 */
     extern DICOM_EXPORT const tag StartTrim;
-    /** StationName, (0008,1010), SH, 1,  */
+    /** StationAETitle, 0x00080055, AE, 1 */
+    extern DICOM_EXPORT const tag StationAETitle;
+    /** StationName, 0x00081010, SH, 1 */
     extern DICOM_EXPORT const tag StationName;
-    /** SteadyStatePulseSequence, (0018,9017), CS, 1,  */
+    /** SteadyStatePulseSequence, 0x00189017, CS, 1 */
     extern DICOM_EXPORT const tag SteadyStatePulseSequence;
-    /** SteepKeratometricAxisSequence, (0046,0074), SQ, 1,  */
+    /** SteepKeratometricAxisSequence, 0x00460074, SQ, 1 */
     extern DICOM_EXPORT const tag SteepKeratometricAxisSequence;
-    /** SteeringAngle, (0018,6036), FD, 1,  */
+    /** SteeringAngle, 0x00186036, FD, 1 */
     extern DICOM_EXPORT const tag SteeringAngle;
-    /** StereoBaselineAngle, (0022,0010), FL, 1,  */
+    /** StereoBaselineAngle, 0x00220010, FL, 1 */
     extern DICOM_EXPORT const tag StereoBaselineAngle;
-    /** StereoBaselineDisplacement, (0022,0011), FL, 1,  */
+    /** StereoBaselineDisplacement, 0x00220011, FL, 1 */
     extern DICOM_EXPORT const tag StereoBaselineDisplacement;
-    /** StereoHorizontalPixelOffset, (0022,0012), FL, 1,  */
+    /** StereoHorizontalPixelOffset, 0x00220012, FL, 1 */
     extern DICOM_EXPORT const tag StereoHorizontalPixelOffset;
-    /** StereoPairsSequence, (0022,0020), SQ, 1,  */
+    /** StereoPairsPresent, 0x00220028, CS, 1 */
+    extern DICOM_EXPORT const tag StereoPairsPresent;
+    /** StereoPairsSequence, 0x00220020, SQ, 1 */
     extern DICOM_EXPORT const tag StereoPairsSequence;
-    /** StereoRotation, (0022,0014), FL, 1,  */
+    /** StereoRotation, 0x00220014, FL, 1 */
     extern DICOM_EXPORT const tag StereoRotation;
-    /** StereoVerticalPixelOffset, (0022,0013), FL, 1,  */
+    /** StereoVerticalPixelOffset, 0x00220013, FL, 1 */
     extern DICOM_EXPORT const tag StereoVerticalPixelOffset;
-    /** StimuliRetestingQuantity, (0024,0042), US, 1,  */
+    /** StimuliRetestingQuantity, 0x00240042, US, 1 */
     extern DICOM_EXPORT const tag StimuliRetestingQuantity;
-    /** StimulusArea, (0024,0025), FL, 1,  */
+    /** StimulusArea, 0x00240025, FL, 1 */
     extern DICOM_EXPORT const tag StimulusArea;
-    /** StimulusColorCodeSequence, (0024,0021), SQ, 1,  */
+    /** StimulusColorCodeSequence, 0x00240021, SQ, 1 */
     extern DICOM_EXPORT const tag StimulusColorCodeSequence;
-    /** StimulusPresentationTime, (0024,0028), FL, 1,  */
+    /** StimulusPresentationTime, 0x00240028, FL, 1 */
     extern DICOM_EXPORT const tag StimulusPresentationTime;
-    /** StimulusResults, (0024,0093), CS, 1,  */
+    /** StimulusResults, 0x00240093, CS, 1 */
     extern DICOM_EXPORT const tag StimulusResults;
-    /** StopTrim, (0008,2143), IS, 1,  */
+    /** StopTrim, 0x00082143, IS, 1 */
     extern DICOM_EXPORT const tag StopTrim;
-    /** StorageMediaFileSetID, (0088,0130), SH, 1,  */
+    /** StorageMediaFileSetID, 0x00880130, SH, 1 */
     extern DICOM_EXPORT const tag StorageMediaFileSetID;
-    /** StorageMediaFileSetUID, (0088,0140), UI, 1,  */
+    /** StorageMediaFileSetUID, 0x00880140, UI, 1 */
     extern DICOM_EXPORT const tag StorageMediaFileSetUID;
-    /** StructuredDisplayBackgroundCIELabValue, (0072,0420), US, 3,  */
+    /** StorageProtocolElementSequence, 0x00189936, SQ, 1 */
+    extern DICOM_EXPORT const tag StorageProtocolElementSequence;
+    /** StorageProtocolElementSpecificationSequence, 0x00189935, SQ, 1 */
+    extern DICOM_EXPORT const tag StorageProtocolElementSpecificationSequence;
+    /** StorageURL, 0x00404073, UR, 1 */
+    extern DICOM_EXPORT const tag StorageURL;
+    /** StoredValueColorRangeSequence, 0x00281230, SQ, 1 */
+    extern DICOM_EXPORT const tag StoredValueColorRangeSequence;
+    /** STOWRSStorageSequence, 0x00404072, SQ, 1 */
+    extern DICOM_EXPORT const tag STOWRSStorageSequence;
+    /** StrainAdditionalInformation, 0x00100218, UT, 1 */
+    extern DICOM_EXPORT const tag StrainAdditionalInformation;
+    /** StrainCodeSequence, 0x00100219, SQ, 1 */
+    extern DICOM_EXPORT const tag StrainCodeSequence;
+    /** StrainDescription, 0x00100212, UC, 1 */
+    extern DICOM_EXPORT const tag StrainDescription;
+    /** StrainNomenclature, 0x00100213, LO, 1 */
+    extern DICOM_EXPORT const tag StrainNomenclature;
+    /** StrainSource, 0x00100217, LO, 1 */
+    extern DICOM_EXPORT const tag StrainSource;
+    /** StrainSourceRegistryCodeSequence, 0x00100215, SQ, 1 */
+    extern DICOM_EXPORT const tag StrainSourceRegistryCodeSequence;
+    /** StrainStockNumber, 0x00100214, LO, 1 */
+    extern DICOM_EXPORT const tag StrainStockNumber;
+    /** StrainStockSequence, 0x00100216, SQ, 1 */
+    extern DICOM_EXPORT const tag StrainStockSequence;
+    /** StructuredConstraintObservationSequence, 0x0082000C, SQ, 1 */
+    extern DICOM_EXPORT const tag StructuredConstraintObservationSequence;
+    /** StructuredDisplayBackgroundCIELabValue, 0x00720420, US, 3 */
     extern DICOM_EXPORT const tag StructuredDisplayBackgroundCIELabValue;
-    /** StructuredDisplayImageBoxSequence, (0072,0422), SQ, 1,  */
+    /** StructuredDisplayImageBoxSequence, 0x00720422, SQ, 1 */
     extern DICOM_EXPORT const tag StructuredDisplayImageBoxSequence;
-    /** StructuredDisplayTextBoxSequence, (0072,0424), SQ, 1,  */
+    /** StructuredDisplayTextBoxSequence, 0x00720424, SQ, 1 */
     extern DICOM_EXPORT const tag StructuredDisplayTextBoxSequence;
-    /** StructureSetDate, (3006,0008), DA, 1,  */
+    /** StructureSetDate, 0x30060008, DA, 1 */
     extern DICOM_EXPORT const tag StructureSetDate;
-    /** StructureSetDescription, (3006,0006), ST, 1,  */
+    /** StructureSetDescription, 0x30060006, ST, 1 */
     extern DICOM_EXPORT const tag StructureSetDescription;
-    /** StructureSetLabel, (3006,0002), SH, 1,  */
+    /** StructureSetLabel, 0x30060002, SH, 1 */
     extern DICOM_EXPORT const tag StructureSetLabel;
-    /** StructureSetName, (3006,0004), LO, 1,  */
+    /** StructureSetName, 0x30060004, LO, 1 */
     extern DICOM_EXPORT const tag StructureSetName;
-    /** StructureSetROISequence, (3006,0020), SQ, 1,  */
+    /** StructureSetROISequence, 0x30060020, SQ, 1 */
     extern DICOM_EXPORT const tag StructureSetROISequence;
-    /** StructureSetTime, (3006,0009), TM, 1,  */
+    /** StructureSetTime, 0x30060009, TM, 1 */
     extern DICOM_EXPORT const tag StructureSetTime;
-    /** StudiesContainingOtherReferencedInstancesSequence, (0008,1200), SQ, 1,  */
+    /** StudiesContainingOtherReferencedInstancesSequence, 0x00081200, SQ, 1 */
     extern DICOM_EXPORT const tag StudiesContainingOtherReferencedInstancesSequence;
-    /** StudyArrivalDate, (0032,1040), DA, 1, RET */
+    /** StudyArrivalDate, 0x00321040, DA, 1, RET */
     extern DICOM_EXPORT const tag StudyArrivalDate;
-    /** StudyArrivalTime, (0032,1041), TM, 1, RET */
+    /** StudyArrivalTime, 0x00321041, TM, 1, RET */
     extern DICOM_EXPORT const tag StudyArrivalTime;
-    /** StudyComments, (0032,4000), LT, 1, RET */
+    /** StudyComments, 0x00324000, LT, 1, RET */
     extern DICOM_EXPORT const tag StudyComments;
-    /** StudyCompletionDate, (0032,1050), DA, 1, RET */
+    /** StudyCompletionDate, 0x00321050, DA, 1, RET */
     extern DICOM_EXPORT const tag StudyCompletionDate;
-    /** StudyCompletionTime, (0032,1051), TM, 1, RET */
+    /** StudyCompletionTime, 0x00321051, TM, 1, RET */
     extern DICOM_EXPORT const tag StudyCompletionTime;
-    /** StudyComponentStatusID, (0032,1055), CS, 1, RET */
+    /** StudyComponentStatusID, 0x00321055, CS, 1, RET */
     extern DICOM_EXPORT const tag StudyComponentStatusID;
-    /** StudyDate, (0008,0020), DA, 1,  */
+    /** StudyDate, 0x00080020, DA, 1 */
     extern DICOM_EXPORT const tag StudyDate;
-    /** StudyDescription, (0008,1030), LO, 1,  */
+    /** StudyDescription, 0x00081030, LO, 1 */
     extern DICOM_EXPORT const tag StudyDescription;
-    /** StudyID, (0020,0010), SH, 1,  */
+    /** StudyID, 0x00200010, SH, 1 */
     extern DICOM_EXPORT const tag StudyID;
-    /** StudyIDIssuer, (0032,0012), LO, 1, RET */
+    /** StudyIDIssuer, 0x00320012, LO, 1, RET */
     extern DICOM_EXPORT const tag StudyIDIssuer;
-    /** StudyInstanceUID, (0020,000D), UI, 1,  */
+    /** StudyInstanceUID, 0x0020000D, UI, 1 */
     extern DICOM_EXPORT const tag StudyInstanceUID;
-    /** StudyPriorityID, (0032,000C), CS, 1, RET */
+    /** StudyPriorityID, 0x0032000C, CS, 1, RET */
     extern DICOM_EXPORT const tag StudyPriorityID;
-    /** StudyReadDate, (0032,0034), DA, 1, RET */
+    /** StudyReadDate, 0x00320034, DA, 1, RET */
     extern DICOM_EXPORT const tag StudyReadDate;
-    /** StudyReadTime, (0032,0035), TM, 1, RET */
+    /** StudyReadTime, 0x00320035, TM, 1, RET */
     extern DICOM_EXPORT const tag StudyReadTime;
-    /** StudyStatusID, (0032,000A), CS, 1, RET */
+    /** StudyStatusID, 0x0032000A, CS, 1, RET */
     extern DICOM_EXPORT const tag StudyStatusID;
-    /** StudyTime, (0008,0030), TM, 1,  */
+    /** StudyTime, 0x00080030, TM, 1 */
     extern DICOM_EXPORT const tag StudyTime;
-    /** StudyVerifiedDate, (0032,0032), DA, 1, RET */
+    /** StudyVerifiedDate, 0x00320032, DA, 1, RET */
     extern DICOM_EXPORT const tag StudyVerifiedDate;
-    /** StudyVerifiedTime, (0032,0033), TM, 1, RET */
+    /** StudyVerifiedTime, 0x00320033, TM, 1, RET */
     extern DICOM_EXPORT const tag StudyVerifiedTime;
-    /** SubjectiveRefractionLeftEyeSequence, (0046,0098), SQ, 1,  */
+    /** SubjectiveRefractionLeftEyeSequence, 0x00460098, SQ, 1 */
     extern DICOM_EXPORT const tag SubjectiveRefractionLeftEyeSequence;
-    /** SubjectiveRefractionRightEyeSequence, (0046,0097), SQ, 1,  */
+    /** SubjectiveRefractionRightEyeSequence, 0x00460097, SQ, 1 */
     extern DICOM_EXPORT const tag SubjectiveRefractionRightEyeSequence;
-    /** SubscriptionListStatus, (0074,1244), CS, 1,  */
+    /** SubjectRelativePositionInImage, 0x00100028, US, 3 */
+    extern DICOM_EXPORT const tag SubjectRelativePositionInImage;
+    /** SubscriptionListStatus, 0x00741244, CS, 1 */
     extern DICOM_EXPORT const tag SubscriptionListStatus;
-    /** SubstanceAdministrationApproval, (0044,0002), CS, 1,  */
+    /** SubstanceAdministrationApproval, 0x00440002, CS, 1 */
     extern DICOM_EXPORT const tag SubstanceAdministrationApproval;
-    /** SubstanceAdministrationDateTime, (0044,0010), DT, 1,  */
+    /** SubstanceAdministrationDateTime, 0x00440010, DT, 1 */
     extern DICOM_EXPORT const tag SubstanceAdministrationDateTime;
-    /** SubstanceAdministrationDeviceID, (0044,0012), LO, 1,  */
+    /** SubstanceAdministrationDeviceID, 0x00440012, LO, 1 */
     extern DICOM_EXPORT const tag SubstanceAdministrationDeviceID;
-    /** SubstanceAdministrationNotes, (0044,0011), LO, 1,  */
+    /** SubstanceAdministrationNotes, 0x00440011, LO, 1 */
     extern DICOM_EXPORT const tag SubstanceAdministrationNotes;
-    /** SubstanceAdministrationParameterSequence, (0044,0019), SQ, 1,  */
+    /** SubstanceAdministrationParameterSequence, 0x00440019, SQ, 1 */
     extern DICOM_EXPORT const tag SubstanceAdministrationParameterSequence;
-    /** SubtractionItemID, (0028,9416), US, 1,  */
+    /** SubtractionItemID, 0x00289416, US, 1 */
     extern DICOM_EXPORT const tag SubtractionItemID;
-    /** SupportedImageDisplayFormatsSequence, (2000,00A8), SQ, 1,  */
+    /** SupportedImageDisplayFormatsSequence, 0x200000A8, SQ, 1 */
     extern DICOM_EXPORT const tag SupportedImageDisplayFormatsSequence;
-    /** SurfaceComments, (0066,0004), LT, 1,  */
+    /** SurfaceAsymmetryIndex, 0x00460232, FL, 1 */
+    extern DICOM_EXPORT const tag SurfaceAsymmetryIndex;
+    /** SurfaceComments, 0x00660004, LT, 1 */
     extern DICOM_EXPORT const tag SurfaceComments;
-    /** SurfaceCount, (0066,002A), UL, 1,  */
+    /** SurfaceCount, 0x0066002A, UL, 1 */
     extern DICOM_EXPORT const tag SurfaceCount;
-    /** SurfaceEntryPoint, (300A,012E), DS, 3,  */
+    /** SurfaceEntryPoint, 0x300A012E, DS, 3 */
     extern DICOM_EXPORT const tag SurfaceEntryPoint;
-    /** SurfaceMeshPrimitivesSequence, (0066,0013), SQ, 1,  */
+    /** SurfaceMeshPrimitivesSequence, 0x00660013, SQ, 1 */
     extern DICOM_EXPORT const tag SurfaceMeshPrimitivesSequence;
-    /** SurfaceModelDescriptionSequence, (0068,6360), SQ, 1,  */
+    /** SurfaceMeshZPixelOffset, 0x00221658, UL, 1 */
+    extern DICOM_EXPORT const tag SurfaceMeshZPixelOffset;
+    /** SurfaceModelDescriptionSequence, 0x00686360, SQ, 1 */
     extern DICOM_EXPORT const tag SurfaceModelDescriptionSequence;
-    /** SurfaceModelLabel, (0068,6380), LO, 1,  */
+    /** SurfaceModelLabel, 0x00686380, LO, 1 */
     extern DICOM_EXPORT const tag SurfaceModelLabel;
-    /** SurfaceModelScalingFactor, (0068,6390), FD, 1,  */
+    /** SurfaceModelScalingFactor, 0x00686390, FD, 1 */
     extern DICOM_EXPORT const tag SurfaceModelScalingFactor;
-    /** SurfaceNumber, (0066,0003), UL, 1,  */
+    /** SurfaceNumber, 0x00660003, UL, 1 */
     extern DICOM_EXPORT const tag SurfaceNumber;
-    /** SurfacePointsNormalsSequence, (0066,0012), SQ, 1,  */
+    /** SurfacePointColorCIELabValueData, 0x00800007, US, 3 */
+    extern DICOM_EXPORT const tag SurfacePointColorCIELabValueData;
+    /** SurfacePointPresentationValueData, 0x00800006, US, 1 */
+    extern DICOM_EXPORT const tag SurfacePointPresentationValueData;
+    /** SurfacePointsNormalsSequence, 0x00660012, SQ, 1 */
     extern DICOM_EXPORT const tag SurfacePointsNormalsSequence;
-    /** SurfacePointsSequence, (0066,0011), SQ, 1,  */
+    /** SurfacePointsSequence, 0x00660011, SQ, 1 */
     extern DICOM_EXPORT const tag SurfacePointsSequence;
-    /** SurfaceProcessing, (0066,0009), CS, 1,  */
+    /** SurfaceProcessing, 0x00660009, CS, 1 */
     extern DICOM_EXPORT const tag SurfaceProcessing;
-    /** SurfaceProcessingAlgorithmIdentificationSequence, (0066,0035), SQ, 1,  */
+    /** SurfaceProcessingAlgorithmIdentificationSequence, 0x00660035, SQ, 1 */
     extern DICOM_EXPORT const tag SurfaceProcessingAlgorithmIdentificationSequence;
-    /** SurfaceProcessingDescription, (0066,000B), LO, 1,  */
+    /** SurfaceProcessingDescription, 0x0066000B, LO, 1 */
     extern DICOM_EXPORT const tag SurfaceProcessingDescription;
-    /** SurfaceProcessingRatio, (0066,000A), FL, 1,  */
+    /** SurfaceProcessingRatio, 0x0066000A, FL, 1 */
     extern DICOM_EXPORT const tag SurfaceProcessingRatio;
-    /** SurfaceSequence, (0066,0002), SQ, 1,  */
+    /** SurfaceRegularityIndex, 0x00460230, FL, 1 */
+    extern DICOM_EXPORT const tag SurfaceRegularityIndex;
+    /** SurfaceScanAcquisitionTypeCodeSequence, 0x00800001, SQ, 1 */
+    extern DICOM_EXPORT const tag SurfaceScanAcquisitionTypeCodeSequence;
+    /** SurfaceScanModeCodeSequence, 0x00800002, SQ, 1 */
+    extern DICOM_EXPORT const tag SurfaceScanModeCodeSequence;
+    /** SurfaceSequence, 0x00660002, SQ, 1 */
     extern DICOM_EXPORT const tag SurfaceSequence;
-    /** SurgicalTechnique, (0076,0030), LO, 1,  */
+    /** SurgicalTechnique, 0x00760030, LO, 1 */
     extern DICOM_EXPORT const tag SurgicalTechnique;
-    /** SUVType, (0054,1006), CS, 1,  */
+    /** SUVType, 0x00541006, CS, 1 */
     extern DICOM_EXPORT const tag SUVType;
-    /** SynchronizationChannel, (0018,106C), US, 2,  */
+    /** SwivelRange, 0x00701A06, FD, 1 */
+    extern DICOM_EXPORT const tag SwivelRange;
+    /** SynchronizationChannel, 0x0018106C, US, 2 */
     extern DICOM_EXPORT const tag SynchronizationChannel;
-    /** SynchronizationFrameOfReferenceUID, (0020,0200), UI, 1,  */
+    /** SynchronizationFrameOfReferenceUID, 0x00200200, UI, 1 */
     extern DICOM_EXPORT const tag SynchronizationFrameOfReferenceUID;
-    /** SynchronizationTrigger, (0018,106A), CS, 1,  */
+    /** SynchronizationTrigger, 0x0018106A, CS, 1 */
     extern DICOM_EXPORT const tag SynchronizationTrigger;
-    /** SynchronizedImageBoxList, (0072,0432), US, 2-n,  */
+    /** SynchronizedImageBoxList, 0x00720432, US, 2 */
     extern DICOM_EXPORT const tag SynchronizedImageBoxList;
-    /** SynchronizedScrollingSequence, (0072,0210), SQ, 1,  */
+    /** SynchronizedScrollingSequence, 0x00720210, SQ, 1 */
     extern DICOM_EXPORT const tag SynchronizedScrollingSequence;
-    /** SyringeCounts, (0018,1045), IS, 1,  */
+    /** SyringeCounts, 0x00181045, IS, 1 */
     extern DICOM_EXPORT const tag SyringeCounts;
-    /** T2Preparation, (0018,9021), CS, 1,  */
+    /** SystemStatus, 0x00287006, CS, 1 */
+    extern DICOM_EXPORT const tag SystemStatus;
+    /** SystemStatusComment, 0x00287007, LO, 1 */
+    extern DICOM_EXPORT const tag SystemStatusComment;
+    /** T2Preparation, 0x00189021, CS, 1 */
     extern DICOM_EXPORT const tag T2Preparation;
-    /** TableAngle, (0018,1138), DS, 1,  */
+    /** TableAngle, 0x00181138, DS, 1 */
     extern DICOM_EXPORT const tag TableAngle;
-    /** TableCradleTiltAngle, (0018,9471), FL, 1,  */
+    /** TableCradleTiltAngle, 0x00189471, FL, 1 */
     extern DICOM_EXPORT const tag TableCradleTiltAngle;
-    /** TableFeedPerRotation, (0018,9310), FD, 1,  */
+    /** TableFeedPerRotation, 0x00189310, FD, 1 */
     extern DICOM_EXPORT const tag TableFeedPerRotation;
-    /** TableFrameOfReferenceUID, (0020,9313), UI, 1,  */
+    /** TableFrameOfReferenceUID, 0x00209313, UI, 1 */
     extern DICOM_EXPORT const tag TableFrameOfReferenceUID;
-    /** TableHeadTiltAngle, (0018,9470), FL, 1,  */
+    /** TableHeadTiltAngle, 0x00189470, FL, 1 */
     extern DICOM_EXPORT const tag TableHeadTiltAngle;
-    /** TableHeight, (0018,1130), DS, 1,  */
+    /** TableHeight, 0x00181130, DS, 1 */
     extern DICOM_EXPORT const tag TableHeight;
-    /** TableHorizontalRotationAngle, (0018,9469), FL, 1,  */
+    /** TableHorizontalRotationAngle, 0x00189469, FL, 1 */
     extern DICOM_EXPORT const tag TableHorizontalRotationAngle;
-    /** TableLateralIncrement, (0018,1136), DS, 1-n,  */
+    /** TableLateralIncrement, 0x00181136, DS, 1 */
     extern DICOM_EXPORT const tag TableLateralIncrement;
-    /** TableLongitudinalIncrement, (0018,1137), DS, 1-n,  */
+    /** TableLongitudinalIncrement, 0x00181137, DS, 1 */
     extern DICOM_EXPORT const tag TableLongitudinalIncrement;
-    /** TableMotion, (0018,1134), CS, 1,  */
+    /** TableMotion, 0x00181134, CS, 1 */
     extern DICOM_EXPORT const tag TableMotion;
-    /** TableOfParameterValues, (0018,605A), FL, 1-n,  */
+    /** TableOfParameterValues, 0x0018605A, FL, 1 */
     extern DICOM_EXPORT const tag TableOfParameterValues;
-    /** TableOfPixelValues, (0018,6058), UL, 1-n,  */
+    /** TableOfPixelValues, 0x00186058, UL, 1 */
     extern DICOM_EXPORT const tag TableOfPixelValues;
-    /** TableOfXBreakPoints, (0018,6052), UL, 1-n,  */
+    /** TableOfXBreakPoints, 0x00186052, UL, 1 */
     extern DICOM_EXPORT const tag TableOfXBreakPoints;
-    /** TableOfYBreakPoints, (0018,6054), FD, 1-n,  */
+    /** TableOfYBreakPoints, 0x00186054, FD, 1 */
     extern DICOM_EXPORT const tag TableOfYBreakPoints;
-    /** TablePosition, (0018,9327), FD, 1,  */
+    /** TablePosition, 0x00189327, FD, 1 */
     extern DICOM_EXPORT const tag TablePosition;
-    /** TablePositionSequence, (0018,9406), SQ, 1,  */
+    /** TablePositionSequence, 0x00189406, SQ, 1 */
     extern DICOM_EXPORT const tag TablePositionSequence;
-    /** TableSpeed, (0018,9309), FD, 1,  */
+    /** TableSpeed, 0x00189309, FD, 1 */
     extern DICOM_EXPORT const tag TableSpeed;
-    /** TableTopEccentricAdjustedAngle, (0074,102B), FD, 1,  */
+    /** TableTopEccentricAdjustedAngle, 0x0074102B, FD, 1 */
     extern DICOM_EXPORT const tag TableTopEccentricAdjustedAngle;
-    /** TableTopEccentricAngle, (300A,0125), DS, 1,  */
+    /** TableTopEccentricAngle, 0x300A0125, DS, 1 */
     extern DICOM_EXPORT const tag TableTopEccentricAngle;
-    /** TableTopEccentricAngleTolerance, (300A,004E), DS, 1,  */
+    /** TableTopEccentricAngleTolerance, 0x300A004E, DS, 1 */
     extern DICOM_EXPORT const tag TableTopEccentricAngleTolerance;
-    /** TableTopEccentricAxisDistance, (300A,0124), DS, 1,  */
+    /** TableTopEccentricAxisDistance, 0x300A0124, DS, 1 */
     extern DICOM_EXPORT const tag TableTopEccentricAxisDistance;
-    /** TableTopEccentricRotationDirection, (300A,0126), CS, 1,  */
+    /** TableTopEccentricRotationDirection, 0x300A0126, CS, 1 */
     extern DICOM_EXPORT const tag TableTopEccentricRotationDirection;
-    /** TableTopLateralAdjustedPosition, (0074,1028), FD, 1,  */
+    /** TableTopLateralAdjustedPosition, 0x00741028, FD, 1 */
     extern DICOM_EXPORT const tag TableTopLateralAdjustedPosition;
-    /** TableTopLateralPosition, (300A,012A), DS, 1,  */
+    /** TableTopLateralPosition, 0x300A012A, DS, 1 */
     extern DICOM_EXPORT const tag TableTopLateralPosition;
-    /** TableTopLateralPositionTolerance, (300A,0053), DS, 1,  */
+    /** TableTopLateralPositionTolerance, 0x300A0053, DS, 1 */
     extern DICOM_EXPORT const tag TableTopLateralPositionTolerance;
-    /** TableTopLateralSetupDisplacement, (300A,01D6), DS, 1,  */
+    /** TableTopLateralSetupDisplacement, 0x300A01D6, DS, 1 */
     extern DICOM_EXPORT const tag TableTopLateralSetupDisplacement;
-    /** TableTopLongitudinalAdjustedPosition, (0074,1027), FD, 1,  */
+    /** TableTopLongitudinalAdjustedPosition, 0x00741027, FD, 1 */
     extern DICOM_EXPORT const tag TableTopLongitudinalAdjustedPosition;
-    /** TableTopLongitudinalPosition, (300A,0129), DS, 1,  */
+    /** TableTopLongitudinalPosition, 0x300A0129, DS, 1 */
     extern DICOM_EXPORT const tag TableTopLongitudinalPosition;
-    /** TableTopLongitudinalPositionTolerance, (300A,0052), DS, 1,  */
+    /** TableTopLongitudinalPositionTolerance, 0x300A0052, DS, 1 */
     extern DICOM_EXPORT const tag TableTopLongitudinalPositionTolerance;
-    /** TableTopLongitudinalSetupDisplacement, (300A,01D4), DS, 1,  */
+    /** TableTopLongitudinalSetupDisplacement, 0x300A01D4, DS, 1 */
     extern DICOM_EXPORT const tag TableTopLongitudinalSetupDisplacement;
-    /** TableTopPitchAdjustedAngle, (0074,102C), FD, 1,  */
+    /** TableTopPitchAdjustedAngle, 0x0074102C, FD, 1 */
     extern DICOM_EXPORT const tag TableTopPitchAdjustedAngle;
-    /** TableTopPitchAngle, (300A,0140), FL, 1,  */
+    /** TableTopPitchAngle, 0x300A0140, FL, 1 */
     extern DICOM_EXPORT const tag TableTopPitchAngle;
-    /** TableTopPitchAngleTolerance, (300A,004F), FL, 1,  */
+    /** TableTopPitchAngleTolerance, 0x300A004F, FL, 1 */
     extern DICOM_EXPORT const tag TableTopPitchAngleTolerance;
-    /** TableTopPitchRotationDirection, (300A,0142), CS, 1,  */
+    /** TableTopPitchRotationDirection, 0x300A0142, CS, 1 */
     extern DICOM_EXPORT const tag TableTopPitchRotationDirection;
-    /** TableTopRollAdjustedAngle, (0074,102D), FD, 1,  */
+    /** TableTopRollAdjustedAngle, 0x0074102D, FD, 1 */
     extern DICOM_EXPORT const tag TableTopRollAdjustedAngle;
-    /** TableTopRollAngle, (300A,0144), FL, 1,  */
+    /** TableTopRollAngle, 0x300A0144, FL, 1 */
     extern DICOM_EXPORT const tag TableTopRollAngle;
-    /** TableTopRollAngleTolerance, (300A,0050), FL, 1,  */
+    /** TableTopRollAngleTolerance, 0x300A0050, FL, 1 */
     extern DICOM_EXPORT const tag TableTopRollAngleTolerance;
-    /** TableTopRollRotationDirection, (300A,0146), CS, 1,  */
+    /** TableTopRollRotationDirection, 0x300A0146, CS, 1 */
     extern DICOM_EXPORT const tag TableTopRollRotationDirection;
-    /** TableTopVerticalAdjustedPosition, (0074,1026), FD, 1,  */
+    /** TableTopVerticalAdjustedPosition, 0x00741026, FD, 1 */
     extern DICOM_EXPORT const tag TableTopVerticalAdjustedPosition;
-    /** TableTopVerticalPosition, (300A,0128), DS, 1,  */
+    /** TableTopVerticalPosition, 0x300A0128, DS, 1 */
     extern DICOM_EXPORT const tag TableTopVerticalPosition;
-    /** TableTopVerticalPositionTolerance, (300A,0051), DS, 1,  */
+    /** TableTopVerticalPositionTolerance, 0x300A0051, DS, 1 */
     extern DICOM_EXPORT const tag TableTopVerticalPositionTolerance;
-    /** TableTopVerticalSetupDisplacement, (300A,01D2), DS, 1,  */
+    /** TableTopVerticalSetupDisplacement, 0x300A01D2, DS, 1 */
     extern DICOM_EXPORT const tag TableTopVerticalSetupDisplacement;
-    /** TableTraverse, (0018,1131), DS, 1,  */
+    /** TableTraverse, 0x00181131, DS, 1 */
     extern DICOM_EXPORT const tag TableTraverse;
-    /** TableType, (0018,113A), CS, 1,  */
+    /** TableType, 0x0018113A, CS, 1 */
     extern DICOM_EXPORT const tag TableType;
-    /** TableVerticalIncrement, (0018,1135), DS, 1-n,  */
+    /** TableVerticalIncrement, 0x00181135, DS, 1 */
     extern DICOM_EXPORT const tag TableVerticalIncrement;
-    /** TableXPositionToIsocenter, (0018,9466), FL, 1,  */
+    /** TableXPositionToIsocenter, 0x00189466, FL, 1 */
     extern DICOM_EXPORT const tag TableXPositionToIsocenter;
-    /** TableYPositionToIsocenter, (0018,9467), FL, 1,  */
+    /** TableYPositionToIsocenter, 0x00189467, FL, 1 */
     extern DICOM_EXPORT const tag TableYPositionToIsocenter;
-    /** TableZPositionToIsocenter, (0018,9468), FL, 1,  */
+    /** TableZPositionToIsocenter, 0x00189468, FL, 1 */
     extern DICOM_EXPORT const tag TableZPositionToIsocenter;
-    /** TagAngleFirstAxis, (0018,9019), FD, 1,  */
+    /** TagAngleFirstAxis, 0x00189019, FD, 1 */
     extern DICOM_EXPORT const tag TagAngleFirstAxis;
-    /** TagAngleSecondAxis, (0018,9219), SS, 1,  */
+    /** TagAngleSecondAxis, 0x00189219, SS, 1 */
     extern DICOM_EXPORT const tag TagAngleSecondAxis;
-    /** Tagging, (0018,9028), CS, 1,  */
+    /** Tagging, 0x00189028, CS, 1 */
     extern DICOM_EXPORT const tag Tagging;
-    /** TaggingDelay, (0018,9184), FD, 1,  */
+    /** TaggingDelay, 0x00189184, FD, 1 */
     extern DICOM_EXPORT const tag TaggingDelay;
-    /** TagSpacingFirstDimension, (0018,9030), FD, 1,  */
+    /** TagSpacingFirstDimension, 0x00189030, FD, 1 */
     extern DICOM_EXPORT const tag TagSpacingFirstDimension;
-    /** TagSpacingSecondDimension, (0018,9218), FD, 1,  */
+    /** TagSpacingSecondDimension, 0x00189218, FD, 1 */
     extern DICOM_EXPORT const tag TagSpacingSecondDimension;
-    /** TagThickness, (0018,9035), FD, 1,  */
+    /** TagThickness, 0x00189035, FD, 1 */
     extern DICOM_EXPORT const tag TagThickness;
-    /** TargetExposureIndex, (0018,1412), DS, 1,  */
+    /** TangentialPower, 0x00460250, FL, 1 */
+    extern DICOM_EXPORT const tag TangentialPower;
+    /** TargetExposureIndex, 0x00181412, DS, 1 */
     extern DICOM_EXPORT const tag TargetExposureIndex;
-    /** TargetMaximumDose, (300A,0027), DS, 1,  */
+    /** TargetFrameOfReferenceUID, 0x0018991E, UI, 1 */
+    extern DICOM_EXPORT const tag TargetFrameOfReferenceUID;
+    /** TargetLabel, 0x00182045, SH, 1 */
+    extern DICOM_EXPORT const tag TargetLabel;
+    /** TargetLuminanceCharacteristicsSequence, 0x00287008, SQ, 1 */
+    extern DICOM_EXPORT const tag TargetLuminanceCharacteristicsSequence;
+    /** TargetMaterialSequence, 0x40101072, SQ, 1, RET */
+    extern DICOM_EXPORT const tag TargetMaterialSequence;
+    /** TargetMaximumDose, 0x300A0027, DS, 1 */
     extern DICOM_EXPORT const tag TargetMaximumDose;
-    /** TargetMinimumDose, (300A,0025), DS, 1,  */
+    /** TargetMaximumLuminance, 0x0028701E, FL, 1 */
+    extern DICOM_EXPORT const tag TargetMaximumLuminance;
+    /** TargetMinimumDose, 0x300A0025, DS, 1 */
     extern DICOM_EXPORT const tag TargetMinimumDose;
-    /** TargetPrescriptionDose, (300A,0026), DS, 1,  */
+    /** TargetMinimumLuminance, 0x0028701D, FL, 1 */
+    extern DICOM_EXPORT const tag TargetMinimumLuminance;
+    /** TargetPositionReferenceIndicator, 0x0020103F, LO, 1 */
+    extern DICOM_EXPORT const tag TargetPositionReferenceIndicator;
+    /** TargetPrescriptionDose, 0x300A0026, DS, 1 */
     extern DICOM_EXPORT const tag TargetPrescriptionDose;
-    /** TargetRefraction, (0022,1037), FL, 1,  */
+    /** TargetRefraction, 0x00221037, FL, 1 */
     extern DICOM_EXPORT const tag TargetRefraction;
-    /** TargetUnderdoseVolumeFraction, (300A,0028), DS, 1,  */
+    /** TargetUID, 0x00182042, UI, 1 */
+    extern DICOM_EXPORT const tag TargetUID;
+    /** TargetUnderdoseVolumeFraction, 0x300A0028, DS, 1 */
     extern DICOM_EXPORT const tag TargetUnderdoseVolumeFraction;
-    /** TDRType, (4010,1027), CS, 1,  */
+    /** TDRType, 0x40101027, CS, 1, RET */
     extern DICOM_EXPORT const tag TDRType;
-    /** TelephoneNumberTrial, (0040,A354), LO, 1, RET */
+    /** TelephoneNumberTrial, 0x0040A354, LO, 1, RET */
     extern DICOM_EXPORT const tag TelephoneNumberTrial;
-    /** TemplateExtensionCreatorUID, (0040,DB0D), UI, 1, RET */
+    /** TemplateExtensionCreatorUID, 0x0040DB0D, UI, 1, RET */
     extern DICOM_EXPORT const tag TemplateExtensionCreatorUID;
-    /** TemplateExtensionFlag, (0040,DB0B), CS, 1, RET */
+    /** TemplateExtensionFlag, 0x0040DB0B, CS, 1, RET */
     extern DICOM_EXPORT const tag TemplateExtensionFlag;
-    /** TemplateExtensionOrganizationUID, (0040,DB0C), UI, 1, RET */
+    /** TemplateExtensionOrganizationUID, 0x0040DB0C, UI, 1, RET */
     extern DICOM_EXPORT const tag TemplateExtensionOrganizationUID;
-    /** TemplateIdentifier, (0040,DB00), CS, 1,  */
+    /** TemplateIdentifier, 0x0040DB00, CS, 1 */
     extern DICOM_EXPORT const tag TemplateIdentifier;
-    /** TemplateLocalVersion, (0040,DB07), DT, 1, RET */
+    /** TemplateLocalVersion, 0x0040DB07, DT, 1, RET */
     extern DICOM_EXPORT const tag TemplateLocalVersion;
-    /** TemplateName, (300A,0244), LO, 1,  */
+    /** TemplateName, 0x300A0244, LO, 1 */
     extern DICOM_EXPORT const tag TemplateName;
-    /** TemplateNumber, (300A,0240), IS, 1,  */
+    /** TemplateNumber, 0x300A0240, IS, 1 */
     extern DICOM_EXPORT const tag TemplateNumber;
-    /** TemplateType, (300A,0242), SH, 1,  */
+    /** TemplateType, 0x300A0242, SH, 1 */
     extern DICOM_EXPORT const tag TemplateType;
-    /** TemplateVersion, (0040,DB06), DT, 1, RET */
+    /** TemplateVersion, 0x0040DB06, DT, 1, RET */
     extern DICOM_EXPORT const tag TemplateVersion;
-    /** TemporalPositionIdentifier, (0020,0100), IS, 1,  */
+    /** TemporalPositionIdentifier, 0x00200100, IS, 1 */
     extern DICOM_EXPORT const tag TemporalPositionIdentifier;
-    /** TemporalPositionIndex, (0020,9128), UL, 1,  */
+    /** TemporalPositionIndex, 0x00209128, UL, 1 */
     extern DICOM_EXPORT const tag TemporalPositionIndex;
-    /** TemporalPositionSequence, (0020,9310), SQ, 1,  */
+    /** TemporalPositionSequence, 0x00209310, SQ, 1 */
     extern DICOM_EXPORT const tag TemporalPositionSequence;
-    /** TemporalPositionTimeOffset, (0020,930D), FD, 1,  */
+    /** TemporalPositionTimeOffset, 0x0020930D, FD, 1 */
     extern DICOM_EXPORT const tag TemporalPositionTimeOffset;
-    /** TemporalRangeType, (0040,A130), CS, 1,  */
+    /** TemporalRangeType, 0x0040A130, CS, 1 */
     extern DICOM_EXPORT const tag TemporalRangeType;
-    /** TemporalResolution, (0020,0110), DS, 1,  */
+    /** TemporalResolution, 0x00200110, DS, 1 */
     extern DICOM_EXPORT const tag TemporalResolution;
-    /** TerminationCardiacTriggerCountThreshold, (0018,9723), FD, 1,  */
+    /** TerminationCardiacTriggerCountThreshold, 0x00189723, FD, 1 */
     extern DICOM_EXPORT const tag TerminationCardiacTriggerCountThreshold;
-    /** TerminationCountsThreshold, (0018,9719), FD, 1,  */
+    /** TerminationCountsThreshold, 0x00189719, FD, 1 */
     extern DICOM_EXPORT const tag TerminationCountsThreshold;
-    /** TerminationDensityThreshold, (0018,9720), FD, 1,  */
+    /** TerminationDensityThreshold, 0x00189720, FD, 1 */
     extern DICOM_EXPORT const tag TerminationDensityThreshold;
-    /** TerminationRelativeDensityThreshold, (0018,9721), FD, 1,  */
+    /** TerminationRelativeDensityThreshold, 0x00189721, FD, 1 */
     extern DICOM_EXPORT const tag TerminationRelativeDensityThreshold;
-    /** TerminationRespiratoryTriggerCountThreshold, (0018,9724), FD, 1,  */
+    /** TerminationRespiratoryTriggerCountThreshold, 0x00189724, FD, 1 */
     extern DICOM_EXPORT const tag TerminationRespiratoryTriggerCountThreshold;
-    /** TerminationTimeThreshold, (0018,9722), FD, 1,  */
+    /** TerminationTimeThreshold, 0x00189722, FD, 1 */
     extern DICOM_EXPORT const tag TerminationTimeThreshold;
-    /** TestPointNormalsDataFlag, (0024,0057), CS, 1,  */
+    /** TestImageValidation, 0x0028702B, CS, 1 */
+    extern DICOM_EXPORT const tag TestImageValidation;
+    /** TestPatternCodeSequence, 0x0028702C, SQ, 1 */
+    extern DICOM_EXPORT const tag TestPatternCodeSequence;
+    /** TestPointNormalsDataFlag, 0x00240057, CS, 1 */
     extern DICOM_EXPORT const tag TestPointNormalsDataFlag;
-    /** TestPointNormalsSequence, (0024,0058), SQ, 1,  */
+    /** TestPointNormalsSequence, 0x00240058, SQ, 1 */
     extern DICOM_EXPORT const tag TestPointNormalsSequence;
-    /** TextColorCIELabValue, (0070,0241), US, 3,  */
+    /** TestResult, 0x00287029, CS, 1 */
+    extern DICOM_EXPORT const tag TestResult;
+    /** TestResultComment, 0x0028702A, LO, 1 */
+    extern DICOM_EXPORT const tag TestResultComment;
+    /** TextColorCIELabValue, 0x00700241, US, 3 */
     extern DICOM_EXPORT const tag TextColorCIELabValue;
-    /** TextComments, (4000,4000), LT, 1, RET */
+    /** TextComments, 0x40004000, LT, 1, RET */
     extern DICOM_EXPORT const tag TextComments;
-    /** TextObjectSequence, (0070,0008), SQ, 1,  */
+    /** TextObjectSequence, 0x00700008, SQ, 1 */
     extern DICOM_EXPORT const tag TextObjectSequence;
-    /** TextString, (2030,0020), LO, 1,  */
+    /** TextString, 0x20300020, LO, 1 */
     extern DICOM_EXPORT const tag TextString;
-    /** TextStyleSequence, (0070,0231), SQ, 1,  */
+    /** TextStyleSequence, 0x00700231, SQ, 1 */
     extern DICOM_EXPORT const tag TextStyleSequence;
-    /** TextValue, (0040,A160), UT, 1,  */
+    /** TextureLabel, 0x00800009, SH, 1 */
+    extern DICOM_EXPORT const tag TextureLabel;
+    /** TextValue, 0x0040A160, UT, 1 */
     extern DICOM_EXPORT const tag TextValue;
-    /** TherapyDescription, (0018,0039), CS, 1, RET */
+    /** TherapyDescription, 0x00180039, CS, 1, RET */
     extern DICOM_EXPORT const tag TherapyDescription;
-    /** TherapyType, (0018,0037), CS, 1, RET */
+    /** TherapyType, 0x00180037, CS, 1, RET */
     extern DICOM_EXPORT const tag TherapyType;
-    /** ThreatCategory, (4010,1012), CS, 1,  */
+    /** ThreatCategory, 0x40101012, CS, 1, RET */
     extern DICOM_EXPORT const tag ThreatCategory;
-    /** ThreatCategoryDescription, (4010,1013), LT, 1,  */
+    /** ThreatCategoryDescription, 0x40101013, LT, 1, RET */
     extern DICOM_EXPORT const tag ThreatCategoryDescription;
-    /** ThreatDetectionAlgorithmandVersion, (4010,1029), LO, 1-n,  */
+    /** ThreatDetectionAlgorithmandVersion, 0x40101029, LO, 1, RET */
     extern DICOM_EXPORT const tag ThreatDetectionAlgorithmandVersion;
-    /** ThreatROIBase, (4010,1004), FL, 3,  */
+    /** ThreatROIBase, 0x40101004, FL, 3, RET */
     extern DICOM_EXPORT const tag ThreatROIBase;
-    /** ThreatROIBitmap, (4010,1006), OB, 1,  */
+    /** ThreatROIBitmap, 0x40101006, OB, 1, RET */
     extern DICOM_EXPORT const tag ThreatROIBitmap;
-    /** ThreatROIExtents, (4010,1005), FL, 3,  */
+    /** ThreatROIExtents, 0x40101005, FL, 3, RET */
     extern DICOM_EXPORT const tag ThreatROIExtents;
-    /** ThreatROIVoxelSequence, (4010,1001), SQ, 1,  */
+    /** ThreatROIVoxelSequence, 0x40101001, SQ, 1, RET */
     extern DICOM_EXPORT const tag ThreatROIVoxelSequence;
-    /** ThreatSequence, (4010,1011), SQ, 1,  */
+    /** ThreatSequence, 0x40101011, SQ, 1, RET */
     extern DICOM_EXPORT const tag ThreatSequence;
-    /** ThreeDDegreeOfFreedomAxis, (0068,6490), FD, 3,  */
+    /** ThreeDDegreeOfFreedomAxis, 0x00686490, FD, 3 */
     extern DICOM_EXPORT const tag ThreeDDegreeOfFreedomAxis;
-    /** ThreeDImplantTemplateGroupMemberMatchingAxes, (0078,0060), FD, 9,  */
+    /** ThreeDImplantTemplateGroupMemberMatchingAxes, 0x00780060, FD, 9 */
     extern DICOM_EXPORT const tag ThreeDImplantTemplateGroupMemberMatchingAxes;
-    /** ThreeDImplantTemplateGroupMemberMatchingPoint, (0078,0050), FD, 3,  */
+    /** ThreeDImplantTemplateGroupMemberMatchingPoint, 0x00780050, FD, 3 */
     extern DICOM_EXPORT const tag ThreeDImplantTemplateGroupMemberMatchingPoint;
-    /** ThreeDLineCoordinates, (0068,65D0), FD, 6,  */
+    /** ThreeDLineCoordinates, 0x006865D0, FD, 6 */
     extern DICOM_EXPORT const tag ThreeDLineCoordinates;
-    /** ThreeDMatingAxes, (0068,64D0), FD, 9,  */
+    /** ThreeDMatingAxes, 0x006864D0, FD, 9 */
     extern DICOM_EXPORT const tag ThreeDMatingAxes;
-    /** ThreeDMatingPoint, (0068,64C0), FD, 3,  */
+    /** ThreeDMatingPoint, 0x006864C0, FD, 3 */
     extern DICOM_EXPORT const tag ThreeDMatingPoint;
-    /** ThreeDPlaneNormal, (0068,6620), FD, 3,  */
+    /** ThreeDPlaneNormal, 0x00686620, FD, 3 */
     extern DICOM_EXPORT const tag ThreeDPlaneNormal;
-    /** ThreeDPlaneOrigin, (0068,6610), FD, 3,  */
+    /** ThreeDPlaneOrigin, 0x00686610, FD, 3 */
     extern DICOM_EXPORT const tag ThreeDPlaneOrigin;
-    /** ThreeDPointCoordinates, (0068,6590), FD, 3,  */
+    /** ThreeDPointCoordinates, 0x00686590, FD, 3 */
     extern DICOM_EXPORT const tag ThreeDPointCoordinates;
-    /** ThreeDRenderingType, (0072,0520), CS, 1-n,  */
+    /** ThreeDRenderingType, 0x00720520, CS, 1 */
     extern DICOM_EXPORT const tag ThreeDRenderingType;
-    /** ThresholdDensity, (2040,0100), CS, 1, RET */
+    /** ThresholdDensity, 0x20400100, CS, 1, RET */
     extern DICOM_EXPORT const tag ThresholdDensity;
-    /** TickAlignment, (0070,0274), CS, 1,  */
+    /** ThresholdSequence, 0x00701B11, SQ, 1 */
+    extern DICOM_EXPORT const tag ThresholdSequence;
+    /** ThresholdType, 0x00701B13, CS, 1 */
+    extern DICOM_EXPORT const tag ThresholdType;
+    /** ThresholdValue, 0x00701B14, FD, 1 */
+    extern DICOM_EXPORT const tag ThresholdValue;
+    /** ThresholdValueSequence, 0x00701B12, SQ, 1 */
+    extern DICOM_EXPORT const tag ThresholdValueSequence;
+    /** TickAlignment, 0x00700274, CS, 1 */
     extern DICOM_EXPORT const tag TickAlignment;
-    /** TickLabel, (0070,0289), SH, 1,  */
+    /** TickLabel, 0x00700289, SH, 1 */
     extern DICOM_EXPORT const tag TickLabel;
-    /** TickLabelAlignment, (0070,0279), CS, 1,  */
+    /** TickLabelAlignment, 0x00700279, CS, 1 */
     extern DICOM_EXPORT const tag TickLabelAlignment;
-    /** TickPosition, (0070,0288), FL, 1,  */
+    /** TickPosition, 0x00700288, FL, 1 */
     extern DICOM_EXPORT const tag TickPosition;
-    /** TIDOffset, (0028,6120), SS, 1,  */
+    /** TIDOffset, 0x00286120, SS, 1 */
     extern DICOM_EXPORT const tag TIDOffset;
-    /** Time, (0040,A122), TM, 1,  */
+    /** Time, 0x0040A122, TM, 1 */
     extern DICOM_EXPORT const tag Time;
-    /** TimeBasedImageSetsSequence, (0072,0030), SQ, 1,  */
+    /** TimeBasedImageSetsSequence, 0x00720030, SQ, 1 */
     extern DICOM_EXPORT const tag TimeBasedImageSetsSequence;
-    /** TimeDistributionProtocol, (0018,1802), CS, 1,  */
+    /** TimeDistributionProtocol, 0x00181802, CS, 1 */
     extern DICOM_EXPORT const tag TimeDistributionProtocol;
-    /** TimeDomainFiltering, (0018,9065), CS, 1-2,  */
+    /** TimeDomainFiltering, 0x00189065, CS, 1 */
     extern DICOM_EXPORT const tag TimeDomainFiltering;
-    /** TimeOfDocumentCreationOrVerbalTransactionTrial, (0040,A112), TM, 1, RET */
+    /** TimeOfDocumentCreationOrVerbalTransactionTrial, 0x0040A112, TM, 1, RET */
     extern DICOM_EXPORT const tag TimeOfDocumentCreationOrVerbalTransactionTrial;
-    /** TimeOfFlightContrast, (0018,9015), CS, 1,  */
+    /** TimeOfFlightContrast, 0x00189015, CS, 1 */
     extern DICOM_EXPORT const tag TimeOfFlightContrast;
-    /** TimeOfFlightInformationUsed, (0018,9755), CS, 1,  */
+    /** TimeOfFlightInformationUsed, 0x00189755, CS, 1 */
     extern DICOM_EXPORT const tag TimeOfFlightInformationUsed;
-    /** TimeOfGainCalibration, (0014,3077), TM, 1,  */
+    /** TimeOfGainCalibration, 0x00143077, TM, 1, RET */
     extern DICOM_EXPORT const tag TimeOfGainCalibration;
-    /** TimeOfLastCalibration, (0018,1201), TM, 1-n,  */
+    /** TimeOfLastCalibration, 0x00181201, TM, 1 */
     extern DICOM_EXPORT const tag TimeOfLastCalibration;
-    /** TimeOfLastDetectorCalibration, (0018,700E), TM, 1,  */
+    /** TimeOfLastDetectorCalibration, 0x0018700E, TM, 1 */
     extern DICOM_EXPORT const tag TimeOfLastDetectorCalibration;
-    /** TimeOfSecondaryCapture, (0018,1014), TM, 1,  */
+    /** TimeOfSecondaryCapture, 0x00181014, TM, 1 */
     extern DICOM_EXPORT const tag TimeOfSecondaryCapture;
-    /** TimeRange, (0008,1163), FD, 2,  */
+    /** TimeRange, 0x00081163, FD, 2 */
     extern DICOM_EXPORT const tag TimeRange;
-    /** TimeSliceVector, (0054,0100), US, 1-n,  */
+    /** TimeSeriesBlending, 0x00701B07, CS, 1 */
+    extern DICOM_EXPORT const tag TimeSeriesBlending;
+    /** TimeSliceVector, 0x00540100, US, 1 */
     extern DICOM_EXPORT const tag TimeSliceVector;
-    /** TimeSlotInformationSequence, (0054,0072), SQ, 1,  */
+    /** TimeSlotInformationSequence, 0x00540072, SQ, 1 */
     extern DICOM_EXPORT const tag TimeSlotInformationSequence;
-    /** TimeSlotNumber, (0020,0017), IS, 1, RET */
+    /** TimeSlotNumber, 0x00200017, IS, 1, RET */
     extern DICOM_EXPORT const tag TimeSlotNumber;
-    /** TimeSlotTime, (0054,0073), DS, 1,  */
+    /** TimeSlotTime, 0x00540073, DS, 1 */
     extern DICOM_EXPORT const tag TimeSlotTime;
-    /** TimeSlotVector, (0054,0070), US, 1-n,  */
+    /** TimeSlotVector, 0x00540070, US, 1 */
     extern DICOM_EXPORT const tag TimeSlotVector;
-    /** TimeSource, (0018,1801), SH, 1,  */
+    /** TimeSource, 0x00181801, SH, 1 */
     extern DICOM_EXPORT const tag TimeSource;
-    /** TimezoneOffsetFromUTC, (0008,0201), SH, 1,  */
+    /** TimezoneOffsetFromUTC, 0x00080201, SH, 1 */
     extern DICOM_EXPORT const tag TimezoneOffsetFromUTC;
-    /** TIPType, (4010,1039), CS, 1,  */
+    /** TIPType, 0x40101039, CS, 1, RET */
     extern DICOM_EXPORT const tag TIPType;
-    /** TissueHeterogeneityCorrection, (3004,0014), CS, 1-3,  */
+    /** TissueHeterogeneityCorrection, 0x30040014, CS, 1 */
     extern DICOM_EXPORT const tag TissueHeterogeneityCorrection;
-    /** TMLinePositionX0, (0018,603D), SL, 1,  */
+    /** TMLinePositionX0, 0x0018603D, SL, 1 */
     extern DICOM_EXPORT const tag TMLinePositionX0;
-    /** TMLinePositionX0Retired, (0018,603C), UL, 1, RET */
+    /** TMLinePositionX0Retired, 0x0018603C, UL, 1, RET */
     extern DICOM_EXPORT const tag TMLinePositionX0Retired;
-    /** TMLinePositionX1, (0018,6041), SL, 1,  */
+    /** TMLinePositionX1, 0x00186041, SL, 1 */
     extern DICOM_EXPORT const tag TMLinePositionX1;
-    /** TMLinePositionX1Retired, (0018,6040), UL, 1, RET */
+    /** TMLinePositionX1Retired, 0x00186040, UL, 1, RET */
     extern DICOM_EXPORT const tag TMLinePositionX1Retired;
-    /** TMLinePositionY0, (0018,603F), SL, 1,  */
+    /** TMLinePositionY0, 0x0018603F, SL, 1 */
     extern DICOM_EXPORT const tag TMLinePositionY0;
-    /** TMLinePositionY0Retired, (0018,603E), UL, 1, RET */
+    /** TMLinePositionY0Retired, 0x0018603E, UL, 1, RET */
     extern DICOM_EXPORT const tag TMLinePositionY0Retired;
-    /** TMLinePositionY1, (0018,6043), SL, 1,  */
+    /** TMLinePositionY1, 0x00186043, SL, 1 */
     extern DICOM_EXPORT const tag TMLinePositionY1;
-    /** TMLinePositionY1Retired, (0018,6042), UL, 1, RET */
+    /** TMLinePositionY1Retired, 0x00186042, UL, 1, RET */
     extern DICOM_EXPORT const tag TMLinePositionY1Retired;
-    /** ToleranceTableLabel, (300A,0043), SH, 1,  */
+    /** ToleranceTableLabel, 0x300A0043, SH, 1 */
     extern DICOM_EXPORT const tag ToleranceTableLabel;
-    /** ToleranceTableNumber, (300A,0042), IS, 1,  */
+    /** ToleranceTableNumber, 0x300A0042, IS, 1 */
     extern DICOM_EXPORT const tag ToleranceTableNumber;
-    /** ToleranceTableSequence, (300A,0040), SQ, 1,  */
+    /** ToleranceTableSequence, 0x300A0040, SQ, 1 */
     extern DICOM_EXPORT const tag ToleranceTableSequence;
-    /** TomoAngle, (0018,1470), DS, 1,  */
+    /** TomoAngle, 0x00181470, DS, 1 */
     extern DICOM_EXPORT const tag TomoAngle;
-    /** TomoClass, (0018,1491), CS, 1,  */
+    /** TomoClass, 0x00181491, CS, 1 */
     extern DICOM_EXPORT const tag TomoClass;
-    /** TomoLayerHeight, (0018,1460), DS, 1,  */
+    /** TomoLayerHeight, 0x00181460, DS, 1 */
     extern DICOM_EXPORT const tag TomoLayerHeight;
-    /** TomoTime, (0018,1480), DS, 1,  */
+    /** TomoTime, 0x00181480, DS, 1 */
     extern DICOM_EXPORT const tag TomoTime;
-    /** TomoType, (0018,1490), CS, 1,  */
+    /** TomoType, 0x00181490, CS, 1 */
     extern DICOM_EXPORT const tag TomoType;
-    /** TopicAuthor, (0088,0910), LO, 1, RET */
+    /** TopicAuthor, 0x00880910, LO, 1, RET */
     extern DICOM_EXPORT const tag TopicAuthor;
-    /** TopicKeywords, (0088,0912), LO, 1-32, RET */
+    /** TopicKeywords, 0x00880912, LO, 1, RET */
     extern DICOM_EXPORT const tag TopicKeywords;
-    /** TopicSubject, (0088,0906), ST, 1, RET */
+    /** TopicSubject, 0x00880906, ST, 1, RET */
     extern DICOM_EXPORT const tag TopicSubject;
-    /** TopicTitle, (0088,0904), LO, 1, RET */
+    /** TopicTitle, 0x00880904, LO, 1, RET */
     extern DICOM_EXPORT const tag TopicTitle;
-    /** TopLeftHandCornerOfLocalizerArea, (0048,0201), US, 2,  */
+    /** TopLeftHandCornerOfLocalizerArea, 0x00480201, US, 2 */
     extern DICOM_EXPORT const tag TopLeftHandCornerOfLocalizerArea;
-    /** TotalBlockTrayFactor, (300A,00F2), DS, 1,  */
+    /** TotalAperture, 0x00145101, DS, 1, RET */
+    extern DICOM_EXPORT const tag TotalAperture;
+    /** TotalBlockTrayFactor, 0x300A00F2, DS, 1 */
     extern DICOM_EXPORT const tag TotalBlockTrayFactor;
-    /** TotalBlockTrayWaterEquivalentThickness, (300A,00F3), FL, 1,  */
+    /** TotalBlockTrayWaterEquivalentThickness, 0x300A00F3, FL, 1 */
     extern DICOM_EXPORT const tag TotalBlockTrayWaterEquivalentThickness;
-    /** TotalCollimationWidth, (0018,9307), FD, 1,  */
+    /** TotalCollimationWidth, 0x00189307, FD, 1 */
     extern DICOM_EXPORT const tag TotalCollimationWidth;
-    /** TotalCompensatorTrayFactor, (300A,00E2), DS, 1,  */
+    /** TotalCompensatorTrayFactor, 0x300A00E2, DS, 1 */
     extern DICOM_EXPORT const tag TotalCompensatorTrayFactor;
-    /** TotalCompensatorTrayWaterEquivalentThickness, (300A,02E3), FL, 1,  */
+    /** TotalCompensatorTrayWaterEquivalentThickness, 0x300A02E3, FL, 1 */
     extern DICOM_EXPORT const tag TotalCompensatorTrayWaterEquivalentThickness;
-    /** TotalGain, (0018,5040), DS, 1, RET */
+    /** TotalGain, 0x00185040, DS, 1, RET */
     extern DICOM_EXPORT const tag TotalGain;
-    /** TotalNumberOfExposures, (0040,0301), US, 1,  */
+    /** TotalNumberOfExposures, 0x00400301, US, 1, RET */
     extern DICOM_EXPORT const tag TotalNumberOfExposures;
-    /** TotalNumberOfPiecesOfMediaCreated, (2200,000B), US, 1,  */
+    /** TotalNumberOfPiecesOfMediaCreated, 0x2200000B, US, 1 */
     extern DICOM_EXPORT const tag TotalNumberOfPiecesOfMediaCreated;
-    /** TotalPixelMatrixColumns, (0048,0006), UL, 1,  */
+    /** TotalPixelMatrixColumns, 0x00480006, UL, 1 */
     extern DICOM_EXPORT const tag TotalPixelMatrixColumns;
-    /** TotalPixelMatrixOriginSequence, (0048,0008), SQ, 1,  */
+    /** TotalPixelMatrixFocalPlanes, 0x00480303, UL, 1 */
+    extern DICOM_EXPORT const tag TotalPixelMatrixFocalPlanes;
+    /** TotalPixelMatrixOriginSequence, 0x00480008, SQ, 1 */
     extern DICOM_EXPORT const tag TotalPixelMatrixOriginSequence;
-    /** TotalPixelMatrixRows, (0048,0007), UL, 1,  */
+    /** TotalPixelMatrixRows, 0x00480007, UL, 1 */
     extern DICOM_EXPORT const tag TotalPixelMatrixRows;
-    /** TotalProcessingTime, (4010,1069), FL, 1,  */
+    /** TotalProcessingTime, 0x40101069, FL, 1, RET */
     extern DICOM_EXPORT const tag TotalProcessingTime;
-    /** TotalReferenceAirKerma, (300A,0250), DS, 1,  */
+    /** TotalReferenceAirKerma, 0x300A0250, DS, 1 */
     extern DICOM_EXPORT const tag TotalReferenceAirKerma;
-    /** TotalTime, (50XX,200A), UL, 1, RET */
-    extern const range_tag TotalTime;
-    /** TotalTimeOfFluoroscopy, (0040,0300), US, 1,  */
+    /** TotalTime, 0x5000200A, UL, 1, RET */
+    extern DICOM_EXPORT const range_tag TotalTime;
+    /** TotalTimeOfFluoroscopy, 0x00400300, US, 1, RET */
     extern DICOM_EXPORT const tag TotalTimeOfFluoroscopy;
-    /** TotalWedgeTrayWaterEquivalentThickness, (300A,00D7), FL, 1,  */
+    /** TotalWedgeTrayWaterEquivalentThickness, 0x300A00D7, FL, 1 */
     extern DICOM_EXPORT const tag TotalWedgeTrayWaterEquivalentThickness;
-    /** TransactionUID, (0008,1195), UI, 1,  */
+    /** TrackingAlgorithmIdentificationSequence, 0x00660104, SQ, 1 */
+    extern DICOM_EXPORT const tag TrackingAlgorithmIdentificationSequence;
+    /** TrackingID, 0x00620020, UT, 1 */
+    extern DICOM_EXPORT const tag TrackingID;
+    /** TrackingUID, 0x00620021, UI, 1 */
+    extern DICOM_EXPORT const tag TrackingUID;
+    /** TrackPointIndexList, 0x00660129, OL, 1 */
+    extern DICOM_EXPORT const tag TrackPointIndexList;
+    /** TrackSequence, 0x00660102, SQ, 1 */
+    extern DICOM_EXPORT const tag TrackSequence;
+    /** TrackSetAnatomicalTypeCodeSequence, 0x00660108, SQ, 1 */
+    extern DICOM_EXPORT const tag TrackSetAnatomicalTypeCodeSequence;
+    /** TrackSetDescription, 0x00660107, UT, 1 */
+    extern DICOM_EXPORT const tag TrackSetDescription;
+    /** TrackSetLabel, 0x00660106, LO, 1 */
+    extern DICOM_EXPORT const tag TrackSetLabel;
+    /** TrackSetNumber, 0x00660105, UL, 1 */
+    extern DICOM_EXPORT const tag TrackSetNumber;
+    /** TrackSetSequence, 0x00660101, SQ, 1 */
+    extern DICOM_EXPORT const tag TrackSetSequence;
+    /** TrackSetStatisticsSequence, 0x00660124, SQ, 1 */
+    extern DICOM_EXPORT const tag TrackSetStatisticsSequence;
+    /** TrackStatisticsSequence, 0x00660130, SQ, 1 */
+    extern DICOM_EXPORT const tag TrackStatisticsSequence;
+    /** TransactionUID, 0x00081195, UI, 1 */
     extern DICOM_EXPORT const tag TransactionUID;
-    /** TransducerApplicationCodeSequence, (0018,980F), SQ, 1,  */
+    /** TransducerApplicationCodeSequence, 0x0018980F, SQ, 1 */
     extern DICOM_EXPORT const tag TransducerApplicationCodeSequence;
-    /** TransducerBeamSteeringCodeSequence, (0018,980E), SQ, 1,  */
+    /** TransducerBeamSteeringCodeSequence, 0x0018980E, SQ, 1 */
     extern DICOM_EXPORT const tag TransducerBeamSteeringCodeSequence;
-    /** TransducerData, (0018,5010), LO, 1-n,  */
+    /** TransducerData, 0x00185010, LO, 1 */
     extern DICOM_EXPORT const tag TransducerData;
-    /** TransducerFrequency, (0018,6030), UL, 1,  */
+    /** TransducerFrequency, 0x00186030, UL, 1 */
     extern DICOM_EXPORT const tag TransducerFrequency;
-    /** TransducerGeometryCodeSequence, (0018,980D), SQ, 1,  */
+    /** TransducerGeometryCodeSequence, 0x0018980D, SQ, 1 */
     extern DICOM_EXPORT const tag TransducerGeometryCodeSequence;
-    /** TransducerOrientation, (0008,2204), CS, 1, RET */
+    /** TransducerOrientation, 0x00082204, CS, 1, RET */
     extern DICOM_EXPORT const tag TransducerOrientation;
-    /** TransducerOrientationModifierSequence, (0008,2246), SQ, 1, RET */
+    /** TransducerOrientationModifierSequence, 0x00082246, SQ, 1, RET */
     extern DICOM_EXPORT const tag TransducerOrientationModifierSequence;
-    /** TransducerOrientationSequence, (0008,2244), SQ, 1, RET */
+    /** TransducerOrientationSequence, 0x00082244, SQ, 1, RET */
     extern DICOM_EXPORT const tag TransducerOrientationSequence;
-    /** TransducerPosition, (0008,2200), CS, 1, RET */
+    /** TransducerPosition, 0x00082200, CS, 1, RET */
     extern DICOM_EXPORT const tag TransducerPosition;
-    /** TransducerPositionModifierSequence, (0008,2242), SQ, 1, RET */
+    /** TransducerPositionModifierSequence, 0x00082242, SQ, 1, RET */
     extern DICOM_EXPORT const tag TransducerPositionModifierSequence;
-    /** TransducerPositionSequence, (0008,2240), SQ, 1, RET */
+    /** TransducerPositionSequence, 0x00082240, SQ, 1, RET */
     extern DICOM_EXPORT const tag TransducerPositionSequence;
-    /** TransducerScanPatternCodeSequence, (0018,9809), SQ, 1,  */
+    /** TransducerScanPatternCodeSequence, 0x00189809, SQ, 1 */
     extern DICOM_EXPORT const tag TransducerScanPatternCodeSequence;
-    /** TransducerType, (0018,6031), CS, 1,  */
+    /** TransducerType, 0x00186031, CS, 1 */
     extern DICOM_EXPORT const tag TransducerType;
-    /** TransferSyntaxUID, (0002,0010), UI, 1,  */
+    /** TransferSyntaxUID, 0x00020010, UI, 1 */
     extern DICOM_EXPORT const tag TransferSyntaxUID;
-    /** TransferTubeLength, (300A,02A4), DS, 1,  */
+    /** TransferTubeLength, 0x300A02A4, DS, 1 */
     extern DICOM_EXPORT const tag TransferTubeLength;
-    /** TransferTubeNumber, (300A,02A2), IS, 1,  */
+    /** TransferTubeNumber, 0x300A02A2, IS, 1 */
     extern DICOM_EXPORT const tag TransferTubeNumber;
-    /** TransformDescription, (0014,2222), ST, 1,  */
+    /** TransformationAlgorithmSequence, 0x00221513, SQ, 1 */
+    extern DICOM_EXPORT const tag TransformationAlgorithmSequence;
+    /** TransformationMethodCodeSequence, 0x00221512, SQ, 1 */
+    extern DICOM_EXPORT const tag TransformationMethodCodeSequence;
+    /** TransformDescription, 0x00142222, ST, 1, RET */
     extern DICOM_EXPORT const tag TransformDescription;
-    /** TransformedAxisUnits, (0014,2228), CS, 1,  */
+    /** TransformedAxisUnits, 0x00142228, CS, 1, RET */
     extern DICOM_EXPORT const tag TransformedAxisUnits;
-    /** TransformLabel, (0028,0400), LO, 1, RET */
+    /** TransformLabel, 0x00280400, LO, 1, RET */
     extern DICOM_EXPORT const tag TransformLabel;
-    /** TransformNumberOfAxes, (0014,2224), IS, 1,  */
+    /** TransformNumberOfAxes, 0x00142224, IS, 1, RET */
     extern DICOM_EXPORT const tag TransformNumberOfAxes;
-    /** TransformOrderOfAxes, (0014,2226), IS, 1-n,  */
+    /** TransformOrderOfAxes, 0x00142226, IS, 1, RET */
     extern DICOM_EXPORT const tag TransformOrderOfAxes;
-    /** TransformVersionNumber, (0028,0401), LO, 1, RET */
+    /** TransformVersionNumber, 0x00280401, LO, 1, RET */
     extern DICOM_EXPORT const tag TransformVersionNumber;
-    /** TransmitCoilManufacturerName, (0018,9050), LO, 1,  */
+    /** TranslationRateX, 0x0014409C, DS, 1, RET */
+    extern DICOM_EXPORT const tag TranslationRateX;
+    /** TranslationRateY, 0x0014409D, DS, 1, RET */
+    extern DICOM_EXPORT const tag TranslationRateY;
+    /** TransmitCoilManufacturerName, 0x00189050, LO, 1 */
     extern DICOM_EXPORT const tag TransmitCoilManufacturerName;
-    /** TransmitCoilName, (0018,1251), SH, 1,  */
+    /** TransmitCoilName, 0x00181251, SH, 1 */
     extern DICOM_EXPORT const tag TransmitCoilName;
-    /** TransmitCoilType, (0018,9051), CS, 1,  */
+    /** TransmitCoilType, 0x00189051, CS, 1 */
     extern DICOM_EXPORT const tag TransmitCoilType;
-    /** TransmitterFrequency, (0018,9098), FD, 1-2,  */
+    /** TransmitterFrequency, 0x00189098, FD, 1 */
     extern DICOM_EXPORT const tag TransmitterFrequency;
-    /** TransmitTransducerSequence, (0014,4010), SQ, 1,  */
+    /** TransmitTransducerSequence, 0x00144010, SQ, 1, RET */
     extern DICOM_EXPORT const tag TransmitTransducerSequence;
-    /** TransmitTransducerSettingsSequence, (0014,4050), SQ, 1,  */
+    /** TransmitTransducerSettingsSequence, 0x00144050, SQ, 1, RET */
     extern DICOM_EXPORT const tag TransmitTransducerSettingsSequence;
-    /** TransportClassification, (4010,1067), CS, 1,  */
+    /** TransportClassification, 0x40101067, CS, 1, RET */
     extern DICOM_EXPORT const tag TransportClassification;
-    /** TransverseDetectorSeparation, (0018,9726), FD, 1,  */
+    /** TransverseDetectorSeparation, 0x00189726, FD, 1 */
     extern DICOM_EXPORT const tag TransverseDetectorSeparation;
-    /** TransverseMash, (0054,1202), IS, 1,  */
+    /** TransverseMash, 0x00541202, IS, 1 */
     extern DICOM_EXPORT const tag TransverseMash;
-    /** TreatmentControlPointDate, (3008,0024), DA, 1,  */
+    /** TrayAccessoryCode, 0x300A0355, LO, 1 */
+    extern DICOM_EXPORT const tag TrayAccessoryCode;
+    /** TreatmentControlPointDate, 0x30080024, DA, 1 */
     extern DICOM_EXPORT const tag TreatmentControlPointDate;
-    /** TreatmentControlPointTime, (3008,0025), TM, 1,  */
+    /** TreatmentControlPointTime, 0x30080025, TM, 1 */
     extern DICOM_EXPORT const tag TreatmentControlPointTime;
-    /** TreatmentDate, (3008,0250), DA, 1,  */
+    /** TreatmentDate, 0x30080250, DA, 1 */
     extern DICOM_EXPORT const tag TreatmentDate;
-    /** TreatmentDeliveryType, (300A,00CE), CS, 1,  */
+    /** TreatmentDeliveryType, 0x300A00CE, CS, 1 */
     extern DICOM_EXPORT const tag TreatmentDeliveryType;
-    /** TreatmentMachineName, (300A,00B2), SH, 1,  */
+    /** TreatmentMachineName, 0x300A00B2, SH, 1 */
     extern DICOM_EXPORT const tag TreatmentMachineName;
-    /** TreatmentMachineSequence, (300A,0206), SQ, 1,  */
+    /** TreatmentMachineSequence, 0x300A0206, SQ, 1 */
     extern DICOM_EXPORT const tag TreatmentMachineSequence;
-    /** TreatmentProtocols, (300A,0009), LO, 1-n,  */
+    /** TreatmentProtocols, 0x300A0009, LO, 1 */
     extern DICOM_EXPORT const tag TreatmentProtocols;
-    /** TreatmentSessionApplicationSetupSequence, (3008,0110), SQ, 1,  */
+    /** TreatmentSessionApplicationSetupSequence, 0x30080110, SQ, 1 */
     extern DICOM_EXPORT const tag TreatmentSessionApplicationSetupSequence;
-    /** TreatmentSessionBeamSequence, (3008,0020), SQ, 1,  */
+    /** TreatmentSessionBeamSequence, 0x30080020, SQ, 1 */
     extern DICOM_EXPORT const tag TreatmentSessionBeamSequence;
-    /** TreatmentSessionIonBeamSequence, (3008,0021), SQ, 1,  */
+    /** TreatmentSessionIonBeamSequence, 0x30080021, SQ, 1 */
     extern DICOM_EXPORT const tag TreatmentSessionIonBeamSequence;
-    /** TreatmentSites, (300A,000B), LO, 1-n,  */
+    /** TreatmentSites, 0x300A000B, LO, 1 */
     extern DICOM_EXPORT const tag TreatmentSites;
-    /** TreatmentStatusComment, (3008,0202), ST, 1,  */
+    /** TreatmentStatusComment, 0x30080202, ST, 1 */
     extern DICOM_EXPORT const tag TreatmentStatusComment;
-    /** TreatmentSummaryCalculatedDoseReferenceSequence, (3008,0050), SQ, 1,  */
+    /** TreatmentSummaryCalculatedDoseReferenceSequence, 0x30080050, SQ, 1 */
     extern DICOM_EXPORT const tag TreatmentSummaryCalculatedDoseReferenceSequence;
-    /** TreatmentSummaryMeasuredDoseReferenceSequence, (3008,00E0), SQ, 1,  */
+    /** TreatmentSummaryMeasuredDoseReferenceSequence, 0x300800E0, SQ, 1 */
     extern DICOM_EXPORT const tag TreatmentSummaryMeasuredDoseReferenceSequence;
-    /** TreatmentTerminationCode, (3008,002B), SH, 1,  */
+    /** TreatmentTerminationCode, 0x3008002B, SH, 1 */
     extern DICOM_EXPORT const tag TreatmentTerminationCode;
-    /** TreatmentTerminationStatus, (3008,002A), CS, 1,  */
+    /** TreatmentTerminationStatus, 0x3008002A, CS, 1 */
     extern DICOM_EXPORT const tag TreatmentTerminationStatus;
-    /** TreatmentTime, (3008,0251), TM, 1,  */
+    /** TreatmentTime, 0x30080251, TM, 1 */
     extern DICOM_EXPORT const tag TreatmentTime;
-    /** TreatmentVerificationStatus, (3008,002C), CS, 1,  */
+    /** TreatmentVerificationStatus, 0x3008002C, CS, 1 */
     extern DICOM_EXPORT const tag TreatmentVerificationStatus;
-    /** TriangleFanSequence, (0066,0027), SQ, 1,  */
+    /** TriangleFanSequence, 0x00660027, SQ, 1 */
     extern DICOM_EXPORT const tag TriangleFanSequence;
-    /** TrianglePointIndexList, (0066,0023), OW, 1,  */
+    /** TrianglePointIndexList, 0x00660023, OW, 1, RET */
     extern DICOM_EXPORT const tag TrianglePointIndexList;
-    /** TriangleStripSequence, (0066,0026), SQ, 1,  */
+    /** TriangleStripSequence, 0x00660026, SQ, 1 */
     extern DICOM_EXPORT const tag TriangleStripSequence;
-    /** TriggerSamplePosition, (0018,106E), UL, 1,  */
+    /** TriggerSamplePosition, 0x0018106E, UL, 1 */
     extern DICOM_EXPORT const tag TriggerSamplePosition;
-    /** TriggerSourceOrType, (0018,1061), LO, 1,  */
+    /** TriggerSourceOrType, 0x00181061, LO, 1 */
     extern DICOM_EXPORT const tag TriggerSourceOrType;
-    /** TriggerTime, (0018,1060), DS, 1,  */
+    /** TriggerTime, 0x00181060, DS, 1 */
     extern DICOM_EXPORT const tag TriggerTime;
-    /** TriggerTimeOffset, (0018,1069), DS, 1,  */
+    /** TriggerTimeOffset, 0x00181069, DS, 1 */
     extern DICOM_EXPORT const tag TriggerTimeOffset;
-    /** TriggerVector, (0054,0210), IS, 1-n,  */
+    /** TriggerVector, 0x00540210, IS, 1 */
     extern DICOM_EXPORT const tag TriggerVector;
-    /** TriggerWindow, (0018,1094), IS, 1,  */
+    /** TriggerWindow, 0x00181094, IS, 1 */
     extern DICOM_EXPORT const tag TriggerWindow;
-    /** Trim, (2010,0140), CS, 1,  */
+    /** Trim, 0x20100140, CS, 1 */
     extern DICOM_EXPORT const tag Trim;
-    /** TubeAngle, (0018,9303), FD, 1,  */
+    /** TubeAngle, 0x00189303, FD, 1 */
     extern DICOM_EXPORT const tag TubeAngle;
-    /** TwoDDegreeOfFreedomAxis, (0068,64F0), FD, 3,  */
+    /** TwoDDegreeOfFreedomAxis, 0x006864F0, FD, 3 */
     extern DICOM_EXPORT const tag TwoDDegreeOfFreedomAxis;
-    /** TwoDDegreeOfFreedomSequence, (0068,6470), SQ, 1,  */
+    /** TwoDDegreeOfFreedomSequence, 0x00686470, SQ, 1 */
     extern DICOM_EXPORT const tag TwoDDegreeOfFreedomSequence;
-    /** TwoDImplantTemplateGroupMemberMatchingAxes, (0078,00A0), FD, 4,  */
+    /** TwoDimensionalToThreeDimensionalMapData, 0x00221531, OF, 1 */
+    extern DICOM_EXPORT const tag TwoDimensionalToThreeDimensionalMapData;
+    /** TwoDimensionalToThreeDimensionalMapSequence, 0x00221518, SQ, 1 */
+    extern DICOM_EXPORT const tag TwoDimensionalToThreeDimensionalMapSequence;
+    /** TwoDImplantTemplateGroupMemberMatchingAxes, 0x007800A0, FD, 4 */
     extern DICOM_EXPORT const tag TwoDImplantTemplateGroupMemberMatchingAxes;
-    /** TwoDImplantTemplateGroupMemberMatchingPoint, (0078,0090), FD, 2,  */
+    /** TwoDImplantTemplateGroupMemberMatchingPoint, 0x00780090, FD, 2 */
     extern DICOM_EXPORT const tag TwoDImplantTemplateGroupMemberMatchingPoint;
-    /** TwoDLineCoordinates, (0068,65B0), FD, 4,  */
+    /** TwoDLineCoordinates, 0x006865B0, FD, 4 */
     extern DICOM_EXPORT const tag TwoDLineCoordinates;
-    /** TwoDLineCoordinatesSequence, (0068,65A0), SQ, 1,  */
+    /** TwoDLineCoordinatesSequence, 0x006865A0, SQ, 1 */
     extern DICOM_EXPORT const tag TwoDLineCoordinatesSequence;
-    /** TwoDMatingAxes, (0068,6460), FD, 4,  */
+    /** TwoDMatingAxes, 0x00686460, FD, 4 */
     extern DICOM_EXPORT const tag TwoDMatingAxes;
-    /** TwoDMatingFeatureCoordinatesSequence, (0068,6430), SQ, 1,  */
+    /** TwoDMatingFeatureCoordinatesSequence, 0x00686430, SQ, 1 */
     extern DICOM_EXPORT const tag TwoDMatingFeatureCoordinatesSequence;
-    /** TwoDMatingPoint, (0068,6450), FD, 2,  */
+    /** TwoDMatingPoint, 0x00686450, FD, 2 */
     extern DICOM_EXPORT const tag TwoDMatingPoint;
-    /** TwoDPlaneCoordinatesSequence, (0068,65E0), SQ, 1,  */
+    /** TwoDPlaneCoordinatesSequence, 0x006865E0, SQ, 1 */
     extern DICOM_EXPORT const tag TwoDPlaneCoordinatesSequence;
-    /** TwoDPlaneIntersection, (0068,65F0), FD, 4,  */
+    /** TwoDPlaneIntersection, 0x006865F0, FD, 4 */
     extern DICOM_EXPORT const tag TwoDPlaneIntersection;
-    /** TwoDPointCoordinates, (0068,6560), FD, 2,  */
+    /** TwoDPointCoordinates, 0x00686560, FD, 2 */
     extern DICOM_EXPORT const tag TwoDPointCoordinates;
-    /** TwoDPointCoordinatesSequence, (0068,6550), SQ, 1,  */
+    /** TwoDPointCoordinatesSequence, 0x00686550, SQ, 1 */
     extern DICOM_EXPORT const tag TwoDPointCoordinatesSequence;
-    /** TypeOfData, (50XX,0020), CS, 1, RET */
-    extern const range_tag TypeOfData;
-    /** TypeOfDetectorMotion, (0054,0202), CS, 1,  */
+    /** TypeOfData, 0x50000020, CS, 1, RET */
+    extern DICOM_EXPORT const range_tag TypeOfData;
+    /** TypeOfDetectorMotion, 0x00540202, CS, 1 */
     extern DICOM_EXPORT const tag TypeOfDetectorMotion;
-    /** TypeOfFilters, (0018,1161), LO, 1-n,  */
+    /** TypeOfFilters, 0x00181161, LO, 1 */
     extern DICOM_EXPORT const tag TypeOfFilters;
-    /** TypeOfInstances, (0040,E020), CS, 1,  */
+    /** TypeOfInstances, 0x0040E020, CS, 1 */
     extern DICOM_EXPORT const tag TypeOfInstances;
-    /** TypeOfPatientID, (0010,0022), CS, 1,  */
+    /** TypeOfPatientID, 0x00100022, CS, 1 */
     extern DICOM_EXPORT const tag TypeOfPatientID;
-    /** TypeOfSynchronization, (0072,0434), CS, 1,  */
+    /** TypeOfSynchronization, 0x00720434, CS, 1 */
     extern DICOM_EXPORT const tag TypeOfSynchronization;
-    /** UID, (0040,A124), UI, 1,  */
+    /** UDISequence, 0x0018100A, SQ, 1 */
+    extern DICOM_EXPORT const tag UDISequence;
+    /** UID, 0x0040A124, UI, 1 */
     extern DICOM_EXPORT const tag UID;
-    /** UltrasoundAcquisitionGeometry, (0020,9307), CS, 1,  */
+    /** UltrasoundAcquisitionGeometry, 0x00209307, CS, 1 */
     extern DICOM_EXPORT const tag UltrasoundAcquisitionGeometry;
-    /** UltrasoundColorDataPresent, (0028,0014), US, 1,  */
+    /** UltrasoundColorDataPresent, 0x00280014, US, 1 */
     extern DICOM_EXPORT const tag UltrasoundColorDataPresent;
-    /** UltrasoundOphthalmicAxialLengthMeasurementsSequence, (0022,1220), SQ, 1,  */
+    /** UltrasoundOphthalmicAxialLengthMeasurementsSequence, 0x00221220, SQ, 1 */
     extern DICOM_EXPORT const tag UltrasoundOphthalmicAxialLengthMeasurementsSequence;
-    /** UltrasoundSelectedOphthalmicAxialLengthSequence, (0022,1230), SQ, 1,  */
+    /** UltrasoundSelectedOphthalmicAxialLengthSequence, 0x00221230, SQ, 1 */
     extern DICOM_EXPORT const tag UltrasoundSelectedOphthalmicAxialLengthSequence;
-    /** Underlined, (0070,0248), CS, 1,  */
+    /** UnassignedPerFrameConvertedAttributesSequence, 0x00209171, SQ, 1 */
+    extern DICOM_EXPORT const tag UnassignedPerFrameConvertedAttributesSequence;
+    /** UnassignedSharedConvertedAttributesSequence, 0x00209170, SQ, 1 */
+    extern DICOM_EXPORT const tag UnassignedSharedConvertedAttributesSequence;
+    /** Underlined, 0x00700248, CS, 1 */
     extern DICOM_EXPORT const tag Underlined;
-    /** UnformattedTextValue, (0070,0006), ST, 1,  */
+    /** UnformattedTextValue, 0x00700006, ST, 1 */
     extern DICOM_EXPORT const tag UnformattedTextValue;
-    /** UnifiedProcedureStepListStatus, (0074,1246), CS, 1,  */
+    /** UnifiedProcedureStepListStatus, 0x00741246, CS, 1 */
     extern DICOM_EXPORT const tag UnifiedProcedureStepListStatus;
-    /** UnifiedProcedureStepPerformedProcedureSequence, (0074,1216), SQ, 1,  */
+    /** UnifiedProcedureStepPerformedProcedureSequence, 0x00741216, SQ, 1 */
     extern DICOM_EXPORT const tag UnifiedProcedureStepPerformedProcedureSequence;
-    /** UniformResourceLocatorTrial, (0040,A992), ST, 1, RET */
+    /** UniformResourceLocatorTrial, 0x0040A992, ST, 1, RET */
     extern DICOM_EXPORT const tag UniformResourceLocatorTrial;
-    /** Units, (0054,1001), CS, 1,  */
+    /** UniqueDeviceIdentifier, 0x00181009, UT, 1 */
+    extern DICOM_EXPORT const tag UniqueDeviceIdentifier;
+    /** Units, 0x00541001, CS, 1 */
     extern DICOM_EXPORT const tag Units;
-    /** UniversalEntityID, (0040,0032), UT, 1,  */
+    /** UniversalEntityID, 0x00400032, UT, 1 */
     extern DICOM_EXPORT const tag UniversalEntityID;
-    /** UniversalEntityIDType, (0040,0033), CS, 1,  */
+    /** UniversalEntityIDType, 0x00400033, CS, 1 */
     extern DICOM_EXPORT const tag UniversalEntityIDType;
-    /** UnspecifiedLateralityLensSequence, (0046,0016), SQ, 1,  */
+    /** UnspecifiedLateralityLensSequence, 0x00460016, SQ, 1 */
     extern DICOM_EXPORT const tag UnspecifiedLateralityLensSequence;
-    /** UpperLowerPixelValues, (0018,1240), IS, 1-n, RET */
+    /** UpperLowerPixelValues, 0x00181240, IS, 1, RET */
     extern DICOM_EXPORT const tag UpperLowerPixelValues;
-    /** UrgencyOrPriorityAlertsTrial, (0040,A057), CS, 1-n, RET */
+    /** UrgencyOrPriorityAlertsTrial, 0x0040A057, CS, 1, RET */
     extern DICOM_EXPORT const tag UrgencyOrPriorityAlertsTrial;
-    /** UsedFiducialsSequence, (0070,0314), SQ, 1,  */
+    /** URNCodeValue, 0x00080120, UR, 1 */
+    extern DICOM_EXPORT const tag URNCodeValue;
+    /** UsedFiducialsSequence, 0x00700314, SQ, 1 */
     extern DICOM_EXPORT const tag UsedFiducialsSequence;
-    /** USImageDescriptionSequence, (0018,9806), SQ, 1,  */
+    /** UsedSegmentsSequence, 0x00620012, SQ, 1 */
+    extern DICOM_EXPORT const tag UsedSegmentsSequence;
+    /** UserSelectedGainY, 0x0014408B, DS, 1, RET */
+    extern DICOM_EXPORT const tag UserSelectedGainY;
+    /** UserSelectedOffsetX, 0x0014408D, DS, 1, RET */
+    extern DICOM_EXPORT const tag UserSelectedOffsetX;
+    /** UserSelectedOffsetY, 0x0014408E, DS, 1, RET */
+    extern DICOM_EXPORT const tag UserSelectedOffsetY;
+    /** UserSelectedPhase, 0x0014408C, DS, 1, RET */
+    extern DICOM_EXPORT const tag UserSelectedPhase;
+    /** USImageDescriptionSequence, 0x00189806, SQ, 1 */
     extern DICOM_EXPORT const tag USImageDescriptionSequence;
-    /** ValueType, (0040,A040), CS, 1,  */
+    /** UValueData, 0x00800010, OF, 1 */
+    extern DICOM_EXPORT const tag UValueData;
+    /** UVMappingSequence, 0x00800008, SQ, 1 */
+    extern DICOM_EXPORT const tag UVMappingSequence;
+    /** ValueType, 0x0040A040, CS, 1 */
     extern DICOM_EXPORT const tag ValueType;
-    /** VariableCoefficientsSDDN, (7FXX,0040), OW, 1, RET */
-    extern const range_tag VariableCoefficientsSDDN;
-    /** VariableCoefficientsSDHN, (7FXX,0030), OW, 1, RET */
-    extern const range_tag VariableCoefficientsSDHN;
-    /** VariableCoefficientsSDVN, (7FXX,0020), OW, 1, RET */
-    extern const range_tag VariableCoefficientsSDVN;
-    /** VariableFlipAngleFlag, (0018,1315), CS, 1,  */
+    /** VariableCoefficientsSDDN, 0x7F000040, OW, 1, RET */
+    extern DICOM_EXPORT const range_tag VariableCoefficientsSDDN;
+    /** VariableCoefficientsSDHN, 0x7F000030, OW, 1, RET */
+    extern DICOM_EXPORT const range_tag VariableCoefficientsSDHN;
+    /** VariableCoefficientsSDVN, 0x7F000020, OW, 1, RET */
+    extern DICOM_EXPORT const range_tag VariableCoefficientsSDVN;
+    /** VariableFlipAngleFlag, 0x00181315, CS, 1 */
     extern DICOM_EXPORT const tag VariableFlipAngleFlag;
-    /** VariableNextDataGroup, (7FXX,0011), US, 1, RET */
-    extern const range_tag VariableNextDataGroup;
-    /** VariablePixelData, (7FXX,0010), OW or OB, 1, RET */
-    extern const range_tag VariablePixelData;
-    /** VectorAccuracy, (0066,0020), FL, 1-n,  */
+    /** VariableNextDataGroup, 0x7F000011, US, 1, RET */
+    extern DICOM_EXPORT const range_tag VariableNextDataGroup;
+    /** VariablePixelData, 0x7F000010, OB or OW, 1, RET */
+    extern DICOM_EXPORT const range_tag VariablePixelData;
+    /** VectorAccuracy, 0x00660020, FL, 1 */
     extern DICOM_EXPORT const tag VectorAccuracy;
-    /** VectorCoordinateData, (0066,0021), OF, 1,  */
+    /** VectorCoordinateData, 0x00660021, OF, 1 */
     extern DICOM_EXPORT const tag VectorCoordinateData;
-    /** VectorDimensionality, (0066,001F), US, 1,  */
+    /** VectorDimensionality, 0x0066001F, US, 1 */
     extern DICOM_EXPORT const tag VectorDimensionality;
-    /** VectorGridData, (0064,0009), OF, 1,  */
+    /** VectorGridData, 0x00640009, OF, 1 */
     extern DICOM_EXPORT const tag VectorGridData;
-    /** VelocityEncodingAcquisitionSequence, (0018,9092), SQ, 1,  */
+    /** VelocityEncodingAcquisitionSequence, 0x00189092, SQ, 1 */
     extern DICOM_EXPORT const tag VelocityEncodingAcquisitionSequence;
-    /** VelocityEncodingDirection, (0018,9090), FD, 3,  */
+    /** VelocityEncodingDirection, 0x00189090, FD, 3 */
     extern DICOM_EXPORT const tag VelocityEncodingDirection;
-    /** VelocityEncodingMaximumValue, (0018,9217), FD, 1,  */
+    /** VelocityEncodingMaximumValue, 0x00189217, FD, 1 */
     extern DICOM_EXPORT const tag VelocityEncodingMaximumValue;
-    /** VelocityEncodingMinimumValue, (0018,9091), FD, 1,  */
+    /** VelocityEncodingMinimumValue, 0x00189091, FD, 1 */
     extern DICOM_EXPORT const tag VelocityEncodingMinimumValue;
-    /** VelocityOfSound, (0014,4064), DS, 1,  */
+    /** VelocityOfSound, 0x00144064, DS, 1, RET */
     extern DICOM_EXPORT const tag VelocityOfSound;
-    /** VerbalSourceIdentifierCodeSequenceTrial, (0040,A358), SQ, 1, RET */
+    /** VerbalSourceIdentifierCodeSequenceTrial, 0x0040A358, SQ, 1, RET */
     extern DICOM_EXPORT const tag VerbalSourceIdentifierCodeSequenceTrial;
-    /** VerbalSourceTrial, (0040,A352), PN, 1, RET */
+    /** VerbalSourceTrial, 0x0040A352, PN, 1, RET */
     extern DICOM_EXPORT const tag VerbalSourceTrial;
-    /** VerificationDateTime, (0040,A030), DT, 1,  */
+    /** VerificationDateTime, 0x0040A030, DT, 1 */
     extern DICOM_EXPORT const tag VerificationDateTime;
-    /** VerificationFlag, (0040,A493), CS, 1,  */
+    /** VerificationFlag, 0x0040A493, CS, 1 */
     extern DICOM_EXPORT const tag VerificationFlag;
-    /** VerificationImageTiming, (0074,1032), CS, 1,  */
+    /** VerificationImageTiming, 0x00741032, CS, 1 */
     extern DICOM_EXPORT const tag VerificationImageTiming;
-    /** VerifyingObserverIdentificationCodeSequence, (0040,A088), SQ, 1,  */
+    /** VerifyingObserverIdentificationCodeSequence, 0x0040A088, SQ, 1 */
     extern DICOM_EXPORT const tag VerifyingObserverIdentificationCodeSequence;
-    /** VerifyingObserverName, (0040,A075), PN, 1,  */
+    /** VerifyingObserverName, 0x0040A075, PN, 1 */
     extern DICOM_EXPORT const tag VerifyingObserverName;
-    /** VerifyingObserverSequence, (0040,A073), SQ, 1,  */
+    /** VerifyingObserverSequence, 0x0040A073, SQ, 1 */
     extern DICOM_EXPORT const tag VerifyingObserverSequence;
-    /** VerifyingOrganization, (0040,A027), LO, 1,  */
+    /** VerifyingOrganization, 0x0040A027, LO, 1 */
     extern DICOM_EXPORT const tag VerifyingOrganization;
-    /** VertexPointIndexList, (0066,0025), OW, 1,  */
+    /** VertexPointIndexList, 0x00660025, OW, 1, RET */
     extern DICOM_EXPORT const tag VertexPointIndexList;
-    /** VerticalAlignment, (0070,0243), CS, 1,  */
+    /** VerticalAlignment, 0x00700243, CS, 1 */
     extern DICOM_EXPORT const tag VerticalAlignment;
-    /** VerticalOffsetOfSensor, (0014,3026), DS, 1,  */
+    /** VerticalOffsetOfSensor, 0x00143026, DS, 1, RET */
     extern DICOM_EXPORT const tag VerticalOffsetOfSensor;
-    /** VerticalPrismBase, (0046,0036), CS, 1,  */
+    /** VerticalPrismBase, 0x00460036, CS, 1 */
     extern DICOM_EXPORT const tag VerticalPrismBase;
-    /** VerticalPrismPower, (0046,0034), FD, 1,  */
+    /** VerticalPrismPower, 0x00460034, FD, 1 */
     extern DICOM_EXPORT const tag VerticalPrismPower;
-    /** VerticesOfThePolygonalCollimator, (0018,1720), IS, 2-2n,  */
+    /** VerticesOfTheOutlineOfPupil, 0x00460208, IS, 2 */
+    extern DICOM_EXPORT const tag VerticesOfTheOutlineOfPupil;
+    /** VerticesOfThePolygonalCollimator, 0x00181720, IS, 2 */
     extern DICOM_EXPORT const tag VerticesOfThePolygonalCollimator;
-    /** VerticesOfThePolygonalExposureControlSensingRegion, (0018,9442), SS, 2-n,  */
+    /** VerticesOfThePolygonalExposureControlSensingRegion, 0x00189442, SS, 2 */
     extern DICOM_EXPORT const tag VerticesOfThePolygonalExposureControlSensingRegion;
-    /** VerticesOfThePolygonalShutter, (0018,1620), IS, 2-2n,  */
+    /** VerticesOfThePolygonalShutter, 0x00181620, IS, 2 */
     extern DICOM_EXPORT const tag VerticesOfThePolygonalShutter;
-    /** VerticesOfTheRegion, (0028,9503), SS, 2-2n,  */
+    /** VerticesOfTheRegion, 0x00289503, SS, 2 */
     extern DICOM_EXPORT const tag VerticesOfTheRegion;
-    /** VideoImageFormatAcquired, (0018,1022), SH, 1,  */
+    /** VideoImageFormatAcquired, 0x00181022, SH, 1 */
     extern DICOM_EXPORT const tag VideoImageFormatAcquired;
-    /** ViewCodeSequence, (0054,0220), SQ, 1,  */
+    /** ViewCodeSequence, 0x00540220, SQ, 1 */
     extern DICOM_EXPORT const tag ViewCodeSequence;
-    /** ViewingDistance, (0046,0106), FD, 1,  */
+    /** ViewingDistance, 0x00460106, FD, 1 */
     extern DICOM_EXPORT const tag ViewingDistance;
-    /** ViewingDistanceType, (0046,0125), CS, 1,  */
+    /** ViewingDistanceType, 0x00460125, CS, 1 */
     extern DICOM_EXPORT const tag ViewingDistanceType;
-    /** ViewModifierCodeSequence, (0054,0222), SQ, 1,  */
+    /** ViewModifierCodeSequence, 0x00540222, SQ, 1 */
     extern DICOM_EXPORT const tag ViewModifierCodeSequence;
-    /** ViewName, (0008,2127), SH, 1,  */
+    /** ViewName, 0x00082127, SH, 1 */
     extern DICOM_EXPORT const tag ViewName;
-    /** ViewNumber, (0008,2128), IS, 1,  */
+    /** ViewNumber, 0x00082128, IS, 1 */
     extern DICOM_EXPORT const tag ViewNumber;
-    /** ViewOrientationCodeSequence, (0068,62E0), SQ, 1,  */
+    /** ViewOrientationCodeSequence, 0x006862E0, SQ, 1 */
     extern DICOM_EXPORT const tag ViewOrientationCodeSequence;
-    /** ViewOrientationModifier, (0068,62F0), FD, 9,  */
-    extern DICOM_EXPORT const tag ViewOrientationModifier;
-    /** ViewPosition, (0018,5101), CS, 1,  */
+    /** ViewOrientationModifierCodeSequence, 0x006862F0, SQ, 1 */
+    extern DICOM_EXPORT const tag ViewOrientationModifierCodeSequence;
+    /** ViewpointLookAtPoint, 0x00701604, FD, 3 */
+    extern DICOM_EXPORT const tag ViewpointLookAtPoint;
+    /** ViewpointPosition, 0x00701603, FD, 3 */
+    extern DICOM_EXPORT const tag ViewpointPosition;
+    /** ViewpointUpDirection, 0x00701605, FD, 3 */
+    extern DICOM_EXPORT const tag ViewpointUpDirection;
+    /** ViewPosition, 0x00185101, CS, 1 */
     extern DICOM_EXPORT const tag ViewPosition;
-    /** VirtualSourceAxisDistances, (300A,030A), FL, 2,  */
+    /** VirtualSourceAxisDistances, 0x300A030A, FL, 2 */
     extern DICOM_EXPORT const tag VirtualSourceAxisDistances;
-    /** VisitComments, (0038,4000), LT, 1,  */
+    /** VisitComments, 0x00384000, LT, 1 */
     extern DICOM_EXPORT const tag VisitComments;
-    /** VisitStatusID, (0038,0008), CS, 1,  */
+    /** VisitStatusID, 0x00380008, CS, 1 */
     extern DICOM_EXPORT const tag VisitStatusID;
-    /** VisualAcuityBothEyesOpenSequence, (0046,0124), SQ, 1,  */
+    /** VisualAcuityBothEyesOpenSequence, 0x00460124, SQ, 1 */
     extern DICOM_EXPORT const tag VisualAcuityBothEyesOpenSequence;
-    /** VisualAcuityLeftEyeSequence, (0046,0123), SQ, 1,  */
+    /** VisualAcuityLeftEyeSequence, 0x00460123, SQ, 1 */
     extern DICOM_EXPORT const tag VisualAcuityLeftEyeSequence;
-    /** VisualAcuityMeasurementSequence, (0024,0110), SQ, 1,  */
+    /** VisualAcuityMeasurementSequence, 0x00240110, SQ, 1 */
     extern DICOM_EXPORT const tag VisualAcuityMeasurementSequence;
-    /** VisualAcuityModifiers, (0046,0135), SS, 2,  */
+    /** VisualAcuityModifiers, 0x00460135, SS, 2 */
     extern DICOM_EXPORT const tag VisualAcuityModifiers;
-    /** VisualAcuityRightEyeSequence, (0046,0122), SQ, 1,  */
+    /** VisualAcuityRightEyeSequence, 0x00460122, SQ, 1 */
     extern DICOM_EXPORT const tag VisualAcuityRightEyeSequence;
-    /** VisualAcuityTypeCodeSequence, (0046,0121), SQ, 1,  */
+    /** VisualAcuityTypeCodeSequence, 0x00460121, SQ, 1 */
     extern DICOM_EXPORT const tag VisualAcuityTypeCodeSequence;
-    /** VisualFieldCatchTrialSequence, (0024,0034), SQ, 1,  */
+    /** VisualEvaluationMethodCodeSequence, 0x0028702E, SQ, 1 */
+    extern DICOM_EXPORT const tag VisualEvaluationMethodCodeSequence;
+    /** VisualEvaluationResultSequence, 0x00287015, SQ, 1 */
+    extern DICOM_EXPORT const tag VisualEvaluationResultSequence;
+    /** VisualEvaluationTestSequence, 0x00287028, SQ, 1 */
+    extern DICOM_EXPORT const tag VisualEvaluationTestSequence;
+    /** VisualFieldCatchTrialSequence, 0x00240034, SQ, 1 */
     extern DICOM_EXPORT const tag VisualFieldCatchTrialSequence;
-    /** VisualFieldGlobalResultsIndexSequence, (0024,0320), SQ, 1,  */
+    /** VisualFieldGlobalResultsIndexSequence, 0x00240320, SQ, 1 */
     extern DICOM_EXPORT const tag VisualFieldGlobalResultsIndexSequence;
-    /** VisualFieldHorizontalExtent, (0024,0010), FL, 1,  */
+    /** VisualFieldHorizontalExtent, 0x00240010, FL, 1 */
     extern DICOM_EXPORT const tag VisualFieldHorizontalExtent;
-    /** VisualFieldMeanSensitivity, (0024,0070), FL, 1,  */
+    /** VisualFieldMeanSensitivity, 0x00240070, FL, 1 */
     extern DICOM_EXPORT const tag VisualFieldMeanSensitivity;
-    /** VisualFieldShape, (0024,0012), CS, 1,  */
+    /** VisualFieldShape, 0x00240012, CS, 1 */
     extern DICOM_EXPORT const tag VisualFieldShape;
-    /** VisualFieldTestDuration, (0024,0088), FL, 1,  */
+    /** VisualFieldTestDuration, 0x00240088, FL, 1 */
     extern DICOM_EXPORT const tag VisualFieldTestDuration;
-    /** VisualFieldTestNormalsFlag, (0024,0063), CS, 1,  */
+    /** VisualFieldTestNormalsFlag, 0x00240063, CS, 1 */
     extern DICOM_EXPORT const tag VisualFieldTestNormalsFlag;
-    /** VisualFieldTestPointNormalsSequence, (0024,0097), SQ, 1,  */
+    /** VisualFieldTestPointNormalsSequence, 0x00240097, SQ, 1 */
     extern DICOM_EXPORT const tag VisualFieldTestPointNormalsSequence;
-    /** VisualFieldTestPointSequence, (0024,0089), SQ, 1,  */
+    /** VisualFieldTestPointSequence, 0x00240089, SQ, 1 */
     extern DICOM_EXPORT const tag VisualFieldTestPointSequence;
-    /** VisualFieldTestPointXCoordinate, (0024,0090), FL, 1,  */
+    /** VisualFieldTestPointXCoordinate, 0x00240090, FL, 1 */
     extern DICOM_EXPORT const tag VisualFieldTestPointXCoordinate;
-    /** VisualFieldTestPointYCoordinate, (0024,0091), FL, 1,  */
+    /** VisualFieldTestPointYCoordinate, 0x00240091, FL, 1 */
     extern DICOM_EXPORT const tag VisualFieldTestPointYCoordinate;
-    /** VisualFieldTestReliabilityGlobalIndexSequence, (0024,0317), SQ, 1,  */
+    /** VisualFieldTestReliabilityGlobalIndexSequence, 0x00240317, SQ, 1 */
     extern DICOM_EXPORT const tag VisualFieldTestReliabilityGlobalIndexSequence;
-    /** VisualFieldVerticalExtent, (0024,0011), FL, 1,  */
+    /** VisualFieldVerticalExtent, 0x00240011, FL, 1 */
     extern DICOM_EXPORT const tag VisualFieldVerticalExtent;
-    /** VitalStainCodeSequenceTrial, (0040,09F8), SQ, 1, RET */
+    /** VitalStainCodeSequenceTrial, 0x004009F8, SQ, 1, RET */
     extern DICOM_EXPORT const tag VitalStainCodeSequenceTrial;
-    /** VitreousStatusCodeSequence, (0022,1025), SQ, 1,  */
+    /** VitreousStatusCodeSequence, 0x00221025, SQ, 1 */
     extern DICOM_EXPORT const tag VitreousStatusCodeSequence;
-    /** VitreousStatusDescription, (0022,1066), LO, 1,  */
+    /** VitreousStatusDescription, 0x00221066, LO, 1 */
     extern DICOM_EXPORT const tag VitreousStatusDescription;
-    /** VOILUTFunction, (0028,1056), CS, 1,  */
+    /** VOILUTFunction, 0x00281056, CS, 1 */
     extern DICOM_EXPORT const tag VOILUTFunction;
-    /** VOILUTSequence, (0028,3010), SQ, 1,  */
+    /** VOILUTSequence, 0x00283010, SQ, 1 */
     extern DICOM_EXPORT const tag VOILUTSequence;
-    /** VOIType, (0072,0702), CS, 1,  */
+    /** VOIType, 0x00720702, CS, 1 */
     extern DICOM_EXPORT const tag VOIType;
-    /** VolumeBasedCalculationTechnique, (0008,9207), CS, 1,  */
+    /** VolumeBasedCalculationTechnique, 0x00089207, CS, 1 */
     extern DICOM_EXPORT const tag VolumeBasedCalculationTechnique;
-    /** VolumeFrameOfReferenceUID, (0020,9312), UI, 1,  */
+    /** VolumeCroppingMethod, 0x00701302, CS, 1 */
+    extern DICOM_EXPORT const tag VolumeCroppingMethod;
+    /** VolumeCroppingSequence, 0x00701301, SQ, 1 */
+    extern DICOM_EXPORT const tag VolumeCroppingSequence;
+    /** VolumeFrameOfReferenceUID, 0x00209312, UI, 1 */
     extern DICOM_EXPORT const tag VolumeFrameOfReferenceUID;
-    /** VolumeLocalizationSequence, (0018,9126), SQ, 1,  */
+    /** VolumeLocalizationSequence, 0x00189126, SQ, 1 */
     extern DICOM_EXPORT const tag VolumeLocalizationSequence;
-    /** VolumeLocalizationTechnique, (0018,9054), CS, 1,  */
+    /** VolumeLocalizationTechnique, 0x00189054, CS, 1 */
     extern DICOM_EXPORT const tag VolumeLocalizationTechnique;
-    /** VolumeOfPTO, (4010,1023), FL, 1,  */
+    /** VolumeOfPTO, 0x40101023, FL, 1, RET */
     extern DICOM_EXPORT const tag VolumeOfPTO;
-    /** VolumeToTableMappingMatrix, (0020,930A), FD, 16,  */
+    /** VolumeStreamSequence, 0x00701A08, SQ, 1 */
+    extern DICOM_EXPORT const tag VolumeStreamSequence;
+    /** VolumeToTableMappingMatrix, 0x0020930A, FD, 16 */
     extern DICOM_EXPORT const tag VolumeToTableMappingMatrix;
-    /** VolumeToTransducerMappingMatrix, (0020,9309), FD, 16,  */
+    /** VolumeToTransducerMappingMatrix, 0x00209309, FD, 16 */
     extern DICOM_EXPORT const tag VolumeToTransducerMappingMatrix;
-    /** VolumetricProperties, (0008,9206), CS, 1,  */
+    /** VolumeToTransducerRelationship, 0x0020930B, CS, 1 */
+    extern DICOM_EXPORT const tag VolumeToTransducerRelationship;
+    /** VolumetricAnnotationSequence, 0x00701901, SQ, 1 */
+    extern DICOM_EXPORT const tag VolumetricAnnotationSequence;
+    /** VolumetricCurvePoints, 0x0070150D, OD, 1 */
+    extern DICOM_EXPORT const tag VolumetricCurvePoints;
+    /** VolumetricCurveUpDirections, 0x00701A07, OD, 1 */
+    extern DICOM_EXPORT const tag VolumetricCurveUpDirections;
+    /** VolumetricPresentationInputAnnotationSequence, 0x00701905, SQ, 1 */
+    extern DICOM_EXPORT const tag VolumetricPresentationInputAnnotationSequence;
+    /** VolumetricPresentationInputIndex, 0x00701804, US, 1 */
+    extern DICOM_EXPORT const tag VolumetricPresentationInputIndex;
+    /** VolumetricPresentationInputNumber, 0x00701207, US, 1 */
+    extern DICOM_EXPORT const tag VolumetricPresentationInputNumber;
+    /** VolumetricPresentationInputSetSequence, 0x0070120A, SQ, 1 */
+    extern DICOM_EXPORT const tag VolumetricPresentationInputSetSequence;
+    /** VolumetricPresentationInputSetUID, 0x00701209, UI, 1 */
+    extern DICOM_EXPORT const tag VolumetricPresentationInputSetUID;
+    /** VolumetricPresentationStateInputSequence, 0x00701201, SQ, 1 */
+    extern DICOM_EXPORT const tag VolumetricPresentationStateInputSequence;
+    /** VolumetricProperties, 0x00089206, CS, 1 */
     extern DICOM_EXPORT const tag VolumetricProperties;
-    /** WADORetrievalSequence, (0040,E023), SQ, 1,  */
+    /** VValueData, 0x00800011, OF, 1 */
+    extern DICOM_EXPORT const tag VValueData;
+    /** WADORetrievalSequence, 0x0040E023, SQ, 1 */
     extern DICOM_EXPORT const tag WADORetrievalSequence;
-    /** WaterReferencedPhaseCorrection, (0018,9199), CS, 1,  */
+    /** WADORSRetrievalSequence, 0x0040E025, SQ, 1 */
+    extern DICOM_EXPORT const tag WADORSRetrievalSequence;
+    /** WarningReason, 0x00081196, US, 1 */
+    extern DICOM_EXPORT const tag WarningReason;
+    /** WaterEquivalentDiameter, 0x00181271, FD, 1 */
+    extern DICOM_EXPORT const tag WaterEquivalentDiameter;
+    /** WaterEquivalentDiameterCalculationMethodCodeSequence, 0x00181272, SQ, 1 */
+    extern DICOM_EXPORT const tag WaterEquivalentDiameterCalculationMethodCodeSequence;
+    /** WaterReferenceAcquisition, 0x00189297, CS, 1 */
+    extern DICOM_EXPORT const tag WaterReferenceAcquisition;
+    /** WaterReferencedPhaseCorrection, 0x00189199, CS, 1 */
     extern DICOM_EXPORT const tag WaterReferencedPhaseCorrection;
-    /** WaveformAnnotationSequence, (0040,B020), SQ, 1,  */
+    /** WaveformAnnotationSequence, 0x0040B020, SQ, 1 */
     extern DICOM_EXPORT const tag WaveformAnnotationSequence;
-    /** WaveformBitsAllocated, (5400,1004), US, 1,  */
+    /** WaveformBitsAllocated, 0x54001004, US, 1 */
     extern DICOM_EXPORT const tag WaveformBitsAllocated;
-    /** WaveformBitsStored, (003A,021A), US, 1,  */
+    /** WaveformBitsStored, 0x003A021A, US, 1 */
     extern DICOM_EXPORT const tag WaveformBitsStored;
-    /** WaveformChannelNumber, (003A,0202), IS, 1,  */
+    /** WaveformChannelNumber, 0x003A0202, IS, 1 */
     extern DICOM_EXPORT const tag WaveformChannelNumber;
-    /** WaveformData, (5400,1010), OB or OW, 1,  */
+    /** WaveformData, 0x54001010, OB or OW, 1 */
     extern DICOM_EXPORT const tag WaveformData;
-    /** WaveformDataDisplayScale, (003A,0230), FL, 1,  */
+    /** WaveformDataDisplayScale, 0x003A0230, FL, 1 */
     extern DICOM_EXPORT const tag WaveformDataDisplayScale;
-    /** WaveformDisplayBackgroundCIELabValue, (003A,0231), US, 3,  */
+    /** WaveformDisplayBackgroundCIELabValue, 0x003A0231, US, 3 */
     extern DICOM_EXPORT const tag WaveformDisplayBackgroundCIELabValue;
-    /** WaveformOriginality, (003A,0004), CS, 1,  */
+    /** WaveformOriginality, 0x003A0004, CS, 1 */
     extern DICOM_EXPORT const tag WaveformOriginality;
-    /** WaveformPaddingValue, (5400,100A), OB or OW, 1,  */
+    /** WaveformPaddingValue, 0x5400100A, OB or OW, 1 */
     extern DICOM_EXPORT const tag WaveformPaddingValue;
-    /** WaveformPresentationGroupSequence, (003A,0240), SQ, 1,  */
+    /** WaveformPresentationGroupSequence, 0x003A0240, SQ, 1 */
     extern DICOM_EXPORT const tag WaveformPresentationGroupSequence;
-    /** WaveformSampleInterpretation, (5400,1006), CS, 1,  */
+    /** WaveformSampleInterpretation, 0x54001006, CS, 1 */
     extern DICOM_EXPORT const tag WaveformSampleInterpretation;
-    /** WaveformSequence, (5400,0100), SQ, 1,  */
+    /** WaveformSequence, 0x54000100, SQ, 1 */
     extern DICOM_EXPORT const tag WaveformSequence;
-    /** WedgeAngle, (300A,00D5), IS, 1,  */
+    /** WedgeAngle, 0x300A00D5, IS, 1 */
     extern DICOM_EXPORT const tag WedgeAngle;
-    /** WedgeFactor, (300A,00D6), DS, 1,  */
+    /** WedgeAngleFloat, 0x00145107, DS, 1, RET */
+    extern DICOM_EXPORT const tag WedgeAngleFloat;
+    /** WedgeChamferHeight, 0x0014511D, DS, 1, RET */
+    extern DICOM_EXPORT const tag WedgeChamferHeight;
+    /** WedgeCurve, 0x0014511E, CS, 1, RET */
+    extern DICOM_EXPORT const tag WedgeCurve;
+    /** WedgeDescription, 0x00145111, LO, 1, RET */
+    extern DICOM_EXPORT const tag WedgeDescription;
+    /** WedgeElement1Position, 0x00145109, CS, 1, RET */
+    extern DICOM_EXPORT const tag WedgeElement1Position;
+    /** WedgeFactor, 0x300A00D6, DS, 1 */
     extern DICOM_EXPORT const tag WedgeFactor;
-    /** WedgeID, (300A,00D4), SH, 1,  */
+    /** WedgeFrontGap, 0x00145117, DS, 1, RET */
+    extern DICOM_EXPORT const tag WedgeFrontGap;
+    /** WedgeFrontHeight, 0x00145119, DS, 1, RET */
+    extern DICOM_EXPORT const tag WedgeFrontHeight;
+    /** WedgeID, 0x300A00D4, SH, 1 */
     extern DICOM_EXPORT const tag WedgeID;
-    /** WedgeNumber, (300A,00D2), IS, 1,  */
+    /** WedgeInContactLength, 0x00145116, DS, 1, RET */
+    extern DICOM_EXPORT const tag WedgeInContactLength;
+    /** WedgeInContactWidth, 0x0014511C, DS, 1, RET */
+    extern DICOM_EXPORT const tag WedgeInContactWidth;
+    /** WedgeManufacturerName, 0x00145110, SH, 1, RET */
+    extern DICOM_EXPORT const tag WedgeManufacturerName;
+    /** WedgeMaterial, 0x0014510B, SH, 1, RET */
+    extern DICOM_EXPORT const tag WedgeMaterial;
+    /** WedgeMaterialVelocity, 0x0014510A, DS, 1, RET */
+    extern DICOM_EXPORT const tag WedgeMaterialVelocity;
+    /** WedgeModelNumber, 0x00145106, SH, 1, RET */
+    extern DICOM_EXPORT const tag WedgeModelNumber;
+    /** WedgeName, 0x0014510F, SH, 1, RET */
+    extern DICOM_EXPORT const tag WedgeName;
+    /** WedgeNumber, 0x300A00D2, IS, 1 */
     extern DICOM_EXPORT const tag WedgeNumber;
-    /** WedgeOrientation, (300A,00D8), DS, 1,  */
+    /** WedgeOffsetX, 0x00145113, DS, 1, RET */
+    extern DICOM_EXPORT const tag WedgeOffsetX;
+    /** WedgeOffsetY, 0x00145114, DS, 1, RET */
+    extern DICOM_EXPORT const tag WedgeOffsetY;
+    /** WedgeOffsetZ, 0x0014510C, DS, 1, RET */
+    extern DICOM_EXPORT const tag WedgeOffsetZ;
+    /** WedgeOrientation, 0x300A00D8, DS, 1 */
     extern DICOM_EXPORT const tag WedgeOrientation;
-    /** WedgePosition, (300A,0118), CS, 1,  */
+    /** WedgeOriginOffsetX, 0x0014510D, DS, 1, RET */
+    extern DICOM_EXPORT const tag WedgeOriginOffsetX;
+    /** WedgePosition, 0x300A0118, CS, 1 */
     extern DICOM_EXPORT const tag WedgePosition;
-    /** WedgePositionSequence, (300A,0116), SQ, 1,  */
+    /** WedgePositionSequence, 0x300A0116, SQ, 1 */
     extern DICOM_EXPORT const tag WedgePositionSequence;
-    /** WedgeSequence, (300A,00D1), SQ, 1,  */
+    /** WedgeRearHeight, 0x0014511A, DS, 1, RET */
+    extern DICOM_EXPORT const tag WedgeRearHeight;
+    /** WedgeRoofAngle, 0x00145108, DS, 1, RET */
+    extern DICOM_EXPORT const tag WedgeRoofAngle;
+    /** WedgeSequence, 0x300A00D1, SQ, 1 */
     extern DICOM_EXPORT const tag WedgeSequence;
-    /** WedgeThinEdgePosition, (300A,00DB), FL, 1,  */
+    /** WedgeThinEdgePosition, 0x300A00DB, FL, 1 */
     extern DICOM_EXPORT const tag WedgeThinEdgePosition;
-    /** WedgeType, (300A,00D3), CS, 1,  */
+    /** WedgeTimeDelay, 0x0014510E, DS, 1, RET */
+    extern DICOM_EXPORT const tag WedgeTimeDelay;
+    /** WedgeTotalHeight, 0x00145118, DS, 1, RET */
+    extern DICOM_EXPORT const tag WedgeTotalHeight;
+    /** WedgeTotalLength, 0x00145115, DS, 1, RET */
+    extern DICOM_EXPORT const tag WedgeTotalLength;
+    /** WedgeTotalWidth, 0x0014511B, DS, 1, RET */
+    extern DICOM_EXPORT const tag WedgeTotalWidth;
+    /** WedgeType, 0x300A00D3, CS, 1 */
     extern DICOM_EXPORT const tag WedgeType;
-    /** WholeBodyTechnique, (0018,1301), CS, 1-n,  */
+    /** WeightingLookupTableData, 0x00701808, OB, 1 */
+    extern DICOM_EXPORT const tag WeightingLookupTableData;
+    /** WeightingLookupTableDescriptor, 0x00701807, US, 3 */
+    extern DICOM_EXPORT const tag WeightingLookupTableDescriptor;
+    /** WeightingTransferFunctionSequence, 0x00701806, SQ, 1 */
+    extern DICOM_EXPORT const tag WeightingTransferFunctionSequence;
+    /** WhitePointFlag, 0x00287021, CS, 1 */
+    extern DICOM_EXPORT const tag WhitePointFlag;
+    /** WholeBodyTechnique, 0x00181301, CS, 1 */
     extern DICOM_EXPORT const tag WholeBodyTechnique;
-    /** WindowCenter, (0028,1050), DS, 1-n,  */
+    /** WholeSlideMicroscopyImageFrameTypeSequence, 0x00400710, SQ, 1 */
+    extern DICOM_EXPORT const tag WholeSlideMicroscopyImageFrameTypeSequence;
+    /** WideFieldOphthalmicPhotographyQualityRatingSequence, 0x00221525, SQ, 1 */
+    extern DICOM_EXPORT const tag WideFieldOphthalmicPhotographyQualityRatingSequence;
+    /** WideFieldOphthalmicPhotographyQualityThresholdSequence, 0x00221526, SQ, 1 */
+    extern DICOM_EXPORT const tag WideFieldOphthalmicPhotographyQualityThresholdSequence;
+    /** WideFieldOphthalmicPhotographyThresholdQualityRating, 0x00221527, FL, 1 */
+    extern DICOM_EXPORT const tag WideFieldOphthalmicPhotographyThresholdQualityRating;
+    /** WindowCenter, 0x00281050, DS, 1 */
     extern DICOM_EXPORT const tag WindowCenter;
-    /** WindowCenterWidthExplanation, (0028,1055), LO, 1-n,  */
+    /** WindowCenterWidthExplanation, 0x00281055, LO, 1 */
     extern DICOM_EXPORT const tag WindowCenterWidthExplanation;
-    /** WindowWidth, (0028,1051), DS, 1-n,  */
+    /** WindowWidth, 0x00281051, DS, 1 */
     extern DICOM_EXPORT const tag WindowWidth;
-    /** WorklistLabel, (0074,1202), LO, 1,  */
+    /** WorklistLabel, 0x00741202, LO, 1 */
     extern DICOM_EXPORT const tag WorklistLabel;
-    /** XAXRFFrameCharacteristicsSequence, (0018,9412), SQ, 1,  */
+    /** XAXRFFrameCharacteristicsSequence, 0x00189412, SQ, 1 */
     extern DICOM_EXPORT const tag XAXRFFrameCharacteristicsSequence;
-    /** XDSRetrievalSequence, (0040,E024), SQ, 1,  */
+    /** XCoordinatesCenterPixelViewAngle, 0x00221528, FL, 1 */
+    extern DICOM_EXPORT const tag XCoordinatesCenterPixelViewAngle;
+    /** XDSRetrievalSequence, 0x0040E024, SQ, 1 */
     extern DICOM_EXPORT const tag XDSRetrievalSequence;
-    /** XFocusCenter, (0018,1183), DS, 1-2,  */
+    /** XDSStorageSequence, 0x00404074, SQ, 1 */
+    extern DICOM_EXPORT const tag XDSStorageSequence;
+    /** XFocusCenter, 0x00181183, DS, 1 */
     extern DICOM_EXPORT const tag XFocusCenter;
-    /** XOffsetInSlideCoordinateSystem, (0040,072A), DS, 1,  */
+    /** XOffsetInSlideCoordinateSystem, 0x0040072A, DS, 1 */
     extern DICOM_EXPORT const tag XOffsetInSlideCoordinateSystem;
-    /** XRay3DAcquisitionSequence, (0018,9507), SQ, 1,  */
+    /** XRay3DAcquisitionSequence, 0x00189507, SQ, 1 */
     extern DICOM_EXPORT const tag XRay3DAcquisitionSequence;
-    /** XRay3DFrameTypeSequence, (0018,9504), SQ, 1,  */
+    /** XRay3DFrameTypeSequence, 0x00189504, SQ, 1 */
     extern DICOM_EXPORT const tag XRay3DFrameTypeSequence;
-    /** XRay3DReconstructionSequence, (0018,9530), SQ, 1,  */
+    /** XRay3DReconstructionSequence, 0x00189530, SQ, 1 */
     extern DICOM_EXPORT const tag XRay3DReconstructionSequence;
-    /** XRayGeometrySequence, (0018,9476), SQ, 1,  */
+    /** XRayAcquisitionDoseSequence, 0x00189542, SQ, 1 */
+    extern DICOM_EXPORT const tag XRayAcquisitionDoseSequence;
+    /** XRayFilterSequence, 0x00189556, SQ, 1 */
+    extern DICOM_EXPORT const tag XRayFilterSequence;
+    /** XRayGeometrySequence, 0x00189476, SQ, 1 */
     extern DICOM_EXPORT const tag XRayGeometrySequence;
-    /** XRayImageReceptorAngle, (3002,000E), DS, 1,  */
+    /** XRayGridSequence, 0x00189555, SQ, 1 */
+    extern DICOM_EXPORT const tag XRayGridSequence;
+    /** XRayImageReceptorAngle, 0x3002000E, DS, 1 */
     extern DICOM_EXPORT const tag XRayImageReceptorAngle;
-    /** XRayImageReceptorTranslation, (3002,000D), DS, 3,  */
+    /** XRayImageReceptorTranslation, 0x3002000D, DS, 3 */
     extern DICOM_EXPORT const tag XRayImageReceptorTranslation;
-    /** XRayOutput, (0040,0312), DS, 1,  */
+    /** XRayOutput, 0x00400312, DS, 1 */
     extern DICOM_EXPORT const tag XRayOutput;
-    /** XRayReceptorType, (0018,9420), CS, 1,  */
+    /** XRayReceptorType, 0x00189420, CS, 1 */
     extern DICOM_EXPORT const tag XRayReceptorType;
-    /** XRayTubeCurrent, (0018,1151), IS, 1,  */
+    /** XRaySourceIsocenterPrimaryAngle, 0x00189543, FD, 1 */
+    extern DICOM_EXPORT const tag XRaySourceIsocenterPrimaryAngle;
+    /** XRaySourceIsocenterSecondaryAngle, 0x00189544, FD, 1 */
+    extern DICOM_EXPORT const tag XRaySourceIsocenterSecondaryAngle;
+    /** XRayTubeCurrent, 0x00181151, IS, 1 */
     extern DICOM_EXPORT const tag XRayTubeCurrent;
-    /** XRayTubeCurrentInmA, (0018,9330), FD, 1,  */
+    /** XRayTubeCurrentInmA, 0x00189330, FD, 1 */
     extern DICOM_EXPORT const tag XRayTubeCurrentInmA;
-    /** XRayTubeCurrentInuA, (0018,8151), DS, 1,  */
+    /** XRayTubeCurrentInuA, 0x00188151, DS, 1 */
     extern DICOM_EXPORT const tag XRayTubeCurrentInuA;
-    /** YFocusCenter, (0018,1184), DS, 1-2,  */
+    /** YCoordinatesCenterPixelViewAngle, 0x00221529, FL, 1 */
+    extern DICOM_EXPORT const tag YCoordinatesCenterPixelViewAngle;
+    /** YFocusCenter, 0x00181184, DS, 1 */
     extern DICOM_EXPORT const tag YFocusCenter;
-    /** YOffsetInSlideCoordinateSystem, (0040,073A), DS, 1,  */
+    /** YOffsetInSlideCoordinateSystem, 0x0040073A, DS, 1 */
     extern DICOM_EXPORT const tag YOffsetInSlideCoordinateSystem;
-    /** ZEffective, (4010,1019), FL, 1,  */
+    /** ZEffective, 0x40101019, FL, 1, RET */
     extern DICOM_EXPORT const tag ZEffective;
-    /** ZOffsetInSlideCoordinateSystem, (0040,074A), DS, 1,  */
+    /** ZeroVelocityPixelValue, 0x00189810, US or SS, 1 */
+    extern DICOM_EXPORT const tag ZeroVelocityPixelValue;
+    /** ZOffsetInSlideCoordinateSystem, 0x0040074A, DS, 1 */
     extern DICOM_EXPORT const tag ZOffsetInSlideCoordinateSystem;
-    /** ZonalMap, (1010,XXXX), US, 1-n, RET */
-    extern const range_tag ZonalMap;
-    /** ZonalMapFormat, (0028,0722), US, 1, RET */
+    /** ZonalMap, 0x10100000, US, 1, RET */
+    extern DICOM_EXPORT const range_tag ZonalMap;
+    /** ZonalMapFormat, 0x00280722, US, 1, RET */
     extern DICOM_EXPORT const tag ZonalMapFormat;
-    /** ZonalMapLocation, (0028,0721), AT, 1-n, RET */
+    /** ZonalMapLocation, 0x00280721, AT, 1, RET */
     extern DICOM_EXPORT const tag ZonalMapLocation;
-    /** ZonalMapNumberFormat, (0028,0720), US, 1, RET */
+    /** ZonalMapNumberFormat, 0x00280720, US, 1, RET */
     extern DICOM_EXPORT const tag ZonalMapNumberFormat;
-    /** ZoomCenter, (0028,0032), DS, 2,  */
+    /** ZoomCenter, 0x00280032, DS, 2 */
     extern DICOM_EXPORT const tag ZoomCenter;
-    /** ZoomFactor, (0028,0031), DS, 2,  */
+    /** ZoomFactor, 0x00280031, DS, 2 */
     extern DICOM_EXPORT const tag ZoomFactor;
-} // namespace tags
 }
