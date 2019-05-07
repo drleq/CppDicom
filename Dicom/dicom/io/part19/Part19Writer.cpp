@@ -34,6 +34,8 @@
 #include "dicom/data/UT.h"
 #include "dicom/data/VRType.h"
 
+#include "dicom/detail/Base64.hpp"
+
 #include <iomanip>
 #include <fstream>
 
@@ -94,8 +96,16 @@ namespace {
     //--------------------------------------------------------------------------------------------------------
 
     template <typename T>
-    void write_value(std::ostream& /*dest*/, const dicom::data::buffer<T>& /*binary*/) {
-        // TODO: Base64 encoding of binary data.
+    void write_value(std::ostream& dest, const dicom::data::buffer<T>& binary) {
+        auto tmp_buffer = base64::encode_to_byte_vector(
+            reinterpret_cast<const uint8_t*>(binary.Get()),
+            binary.ByteLength()
+        );
+
+        dest.write(
+            reinterpret_cast<const char*>(tmp_buffer.data()),
+            tmp_buffer.size()
+        );
     }
 
     //--------------------------------------------------------------------------------------------------------

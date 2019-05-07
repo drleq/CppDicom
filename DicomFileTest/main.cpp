@@ -49,15 +49,18 @@ int main(int argc, const char* argv[]) {
             nullptr,
             [](const std::string_view*, tag_number) { return AttributeFilterResult::Load; }
         );
-        
-        [[maybe_unused]] auto frame_count = load_result->FrameCount();
-        // for (size_t j = 0; j < frame_count; ++j) {
-        //     load_result->GetPixelData(j);
-        // }
+
+        multiframe::FrameCache frame_cache;
+        frame_cache.Add(load_result);
+
+        auto indices = frame_cache.GetIndexList();
+        for (auto& index : indices) {
+            [[maybe_unused]] auto dummy = frame_cache.LoadPixelData(index, nullptr);
+        }
 
         part19::Part19Writer::Write(
             "test.xml",
-            load_result->Metadata()
+            frame_cache.GetFrame00(indices.front())
         );
     }
     auto end = high_resolution_clock::now();
