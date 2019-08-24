@@ -11,6 +11,7 @@ set (CMAKE_RUNTIME_OUTPUT_DIRECTORY ${CMAKE_BINARY_DIR}/output)
 # enable_testing()
 
 add_subdirectory(Dicom)
+add_subdirectory(DicomNet)
 add_subdirectory(DicomFileTest)
 add_subdirectory(DicomTest)
 

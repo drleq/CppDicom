@@ -42,7 +42,9 @@
         "utility": "cpp",
         "cstddef": "cpp",
         "strstream": "cpp",
-        "numeric": "cpp"
+        "numeric": "cpp",
+        "xutility": "cpp",
+        "*.ipp": "cpp"
     },
     "telemetry.enableTelemetry": false,
     "cmake.configureOnOpen": true,
