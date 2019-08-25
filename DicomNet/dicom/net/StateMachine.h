@@ -103,6 +103,16 @@ namespace dicom::net {
               // Next state is Sta13
     };
 
+    class DICOMNET_EXPORT IllegalStateChange :
+        public std::logic_error
+    {
+    public:
+        using std::logic_error::logic_error;
+    };
+
+    //--------------------------------------------------------------------------------------------------------
+
+    // PS 3.8, Table 9-10: DICOM Upper Layer Protocol State Transition Table
     class DICOMNET_EXPORT StateMachine
     {
     public:
@@ -117,6 +127,36 @@ namespace dicom::net {
 
     private:
         void HandleArtimExpired(const asio::error_code& error);
+        void ApplyAE1();
+        void ApplyAE2();
+        void ApplyAE3();
+        void ApplyAE4();
+        void ApplyAE5();
+        void ApplyAE6();
+        void ApplyAE7();
+        void ApplyAE8();
+        void ApplyDT1();
+        void ApplyDT2();
+        void ApplyAR1();
+        void ApplyAR2();
+        void ApplyAR3();
+        void ApplyAR4();
+        void ApplyAR5();
+        void ApplyAR6();
+        void ApplyAR7();
+        void ApplyAR8();
+        void ApplyAR9();
+        void ApplyAR10();
+        void ApplyAA1();
+        void ApplyAA2();
+        void ApplyAA3();
+        void ApplyAA4();
+        void ApplyAA5();
+        void ApplyAA6();
+        void ApplyAA7();
+        void ApplyAA8();
+
+        void ThrowInvalidState() const;
 
     private:
         std::unique_ptr<UpperLayer> m_upper_layer;

@@ -16,6 +16,8 @@
 #include "dicom_precompiled.h"
 
 // ASIO
+#include "asio/buffer.hpp"
 #include "asio/high_resolution_timer.hpp"
 #include "asio/io_context.hpp"
 #include "asio/ip/tcp.hpp"
+#include "asio/write.hpp"
