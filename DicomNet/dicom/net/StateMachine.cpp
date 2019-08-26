@@ -116,8 +116,12 @@ namespace dicom::net {
             { "2.3.4.5.6", "3.4.5.6.7" }, // TransferSyntaxes
             128 * 1024
         };
+        data_buffer data;
+        auto buffer = asio::dynamic_buffer(data);
+        encode_pdu(buffer, pdu);
+
         m_upper_layer->AsyncSendPDU(
-            pdu,
+            std::move(data),
             [this](auto& error) {
                 if (error) {
                     // Log error information.
@@ -127,6 +131,7 @@ namespace dicom::net {
         );
 
         m_state = MachineState::Sta5;
+        AsyncReadNextPDU();
     }
 
     //--------------------------------------------------------------------------------------------------------
@@ -147,6 +152,19 @@ namespace dicom::net {
 
     void StateMachine::ThrowInvalidState() const {
         throw IllegalStateChange("Unexpected state: " + std::to_string(static_cast<int>(m_state)));
+    }
+
+    //--------------------------------------------------------------------------------------------------------
+
+    void StateMachine::AsyncReadNextPDU() {
+        // m_upper_layer->AsyncReadPDU(
+        //     [this](auto& error, std::vector<uint8_t>&& pdu_buf){
+        //         PDUHeader header;
+        //         memcpy(&header, pdu_buf.data(), sizeof(PDUHeader));
+
+
+        //     }
+        // );
     }
 
 }

@@ -20,4 +20,5 @@
 #include "asio/high_resolution_timer.hpp"
 #include "asio/io_context.hpp"
 #include "asio/ip/tcp.hpp"
+#include "asio/read.hpp"
 #include "asio/write.hpp"

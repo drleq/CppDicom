@@ -12,7 +12,7 @@ namespace dicom::net {
         ArtimExpiredCallback&& artim_expired_callback
     ) : m_io_context(&io_context),
         m_state_machine(state_machine),
-        m_artim_expired_callback(artim_expired_callback),
+        m_artim_expired_callback(std::forward<ArtimExpiredCallback>(artim_expired_callback)),
         m_artim(io_context)
     {}
 
@@ -51,18 +51,16 @@ namespace dicom::net {
     //--------------------------------------------------------------------------------------------------------
 
     void UpperLayer::AsyncSendPDU(
-        const PDU& pdu,
+        data_buffer&& pdu_data,
         AsyncCallback&& callback
     ) {
         if (m_socket00 == nullptr) {
             throw std::logic_error("Socket not connected");
         }
 
-        std::vector<uint8_t> data;
-        auto buffer = asio::dynamic_buffer(data);
-        pdu.Write(buffer);
-
-        auto wrapped_callback = [callback=std::forward<AsyncCallback>(callback), data=std::move(data)](auto& error, size_t) {
+        // Construct the asio [buffer] first as we need to move [pdu_data] into the callback.
+        auto buffer = asio::buffer(pdu_data);
+        auto wrapped_callback = [callback=std::forward<AsyncCallback>(callback), data=std::move(pdu_data)](auto& error, size_t) {
             if (error.value() == asio::error::operation_aborted) {
                 // An aborted timer means we're being cancelled or destructed.  Do nothing.
                 return;
@@ -71,6 +69,48 @@ namespace dicom::net {
         };
 
         asio::async_write(*m_socket00, buffer, std::move(wrapped_callback));
+    }
+
+    //--------------------------------------------------------------------------------------------------------
+
+    void UpperLayer::AsyncReadPDU(AsyncReadCallback&& callback) {
+        data_buffer pdu_buf{ sizeof(PDUHeader), 0 };
+
+        // Start by reading the PDUHeader.  This will tell us how much additional data to read.
+        asio::async_read(
+            *m_socket00,
+            asio::buffer(pdu_buf),
+            [this, callback=std::forward<AsyncReadCallback>(callback), buf=std::move(pdu_buf)](auto& error, size_t) mutable {
+                if (error) {
+                    if (error.value() != asio::error::operation_aborted) {
+                        callback(error, std::vector<uint8_t>{});
+                    }
+                    return;
+                }
+                
+                // Extract the PDUHeader so we can read the Length field.
+                PDUHeader header;
+                memcpy(&header, buf.data(), sizeof(PDUHeader));
+
+                // Resize the buffer and continue reading the rest of the PDU.
+                buf.resize(buf.size() + header.Length);
+                asio::async_read(
+                    *m_socket00,
+                    asio::buffer(buf) + sizeof(PDUHeader),
+                    [callback=std::move(callback), buf=std::move(buf)](auto& error, size_t) mutable {
+                        if (error) {
+                            if (error.value() != asio::error::operation_aborted) {
+                                callback(error, std::vector<uint8_t>{});
+                            }
+                            return;
+                        }
+
+                        // Success.  Invoke the callback.
+                        callback(error, std::move(buf));
+                    }
+                );
+            }
+        );
     }
 
     //--------------------------------------------------------------------------------------------------------

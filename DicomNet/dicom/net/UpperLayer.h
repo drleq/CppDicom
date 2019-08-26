@@ -1,12 +1,13 @@
 #pragma once
 
-namespace dicom::net { struct PDU; }
+#include "dicom/net/ProtocolDataUnits.h"
 namespace dicom::net { class StateMachine; }
 
 namespace dicom::net {
 
     using AsyncCallback = std::function<void(const asio::error_code&)>;
     using ArtimExpiredCallback = AsyncCallback;
+    using AsyncReadCallback = std::function<void(const asio::error_code&, data_buffer&&)>;
 
     class DICOMNET_EXPORT UpperLayer
     {
@@ -29,14 +30,18 @@ namespace dicom::net {
         void Disconnect();
 
         void AsyncSendPDU(
-            const PDU& pdu,
+            data_buffer&& pdu_data,
             AsyncCallback&& callback
+        );
+        void AsyncReadPDU(
+            AsyncReadCallback&& callback
         );
 
     private:
         asio::io_context*const m_io_context;
         StateMachine*const m_state_machine;
         ArtimExpiredCallback m_artim_expired_callback;
+
         asio::steady_timer m_artim;
         std::unique_ptr<asio::ip::tcp::socket> m_socket00;
     };

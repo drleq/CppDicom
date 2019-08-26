@@ -2,6 +2,8 @@
 
 namespace dicom::net {
 
+    using data_buffer = std::vector<uint8_t>;
+    using input_buffer = asio::const_buffer;
     using output_buffer = asio::dynamic_vector_buffer<uint8_t, std::allocator<uint8_t>>;
 
     //--------------------------------------------------------------------------------------------------------
@@ -16,20 +18,17 @@ namespace dicom::net {
         AAbortRQ = 0x07
     };
 
+    struct PDUHeader {
+        PDUType Type;
+        uint8_t Reserved;
+        uint32_t Length;
+    };
+
     struct DICOMNET_EXPORT PDU {
-        virtual void Write(output_buffer& dest) const = 0;
-
-    protected:
-        void WriteImpl(output_buffer& dest, PDUType type) const;
-        virtual void WriteContent(output_buffer& dest) const = 0;
+        virtual ~PDU();
     };
 
-    template <PDUType Type>
-    struct PDUT : PDU {
-        void Write(output_buffer& dest) const override {
-            WriteImpl(dest, Type);
-        }        
-    };
+    using PDUPtr = std::unique_ptr<PDU>;
 
     //--------------------------------------------------------------------------------------------------------
 
@@ -51,60 +50,53 @@ namespace dicom::net {
         UserIdentitySubItemAC = 0x59
     };
 
-    struct DICOMNET_EXPORT PDUItem {
-    protected:
-        void WriteImpl(output_buffer& dest, PDUItemType type) const;
-        virtual void WriteContent(output_buffer& dest) const = 0;
-    };
-
-    template <PDUItemType ItemType>
-    struct PDUItemT : PDUItem {
-        void Write(output_buffer& dest) const {
-            WriteImpl(dest, ItemType);
-        }
+    struct PDUItemHeader {
+        PDUItemType Type;
+        uint8_t Reserved;
+        uint16_t Length;
     };
 
     //--------------------------------------------------------------------------------------------------------
 
-    struct DICOMNET_EXPORT ApplicationContextItem :
-        PDUItemT<PDUItemType::ApplicationContextItem>
+    struct DICOMNET_EXPORT ApplicationContextItem
     {
+        ApplicationContextItem() = default;
         ApplicationContextItem(std::string&& application_context_name);
         std::string ApplicationContextName;
-
-    protected:
-        void WriteContent(output_buffer& dest) const override;
     };
+
+    void encode_pdu_item(output_buffer& dest, const ApplicationContextItem& item);
+    bool decode_pdu_item(input_buffer& dest, ApplicationContextItem& item);
 
     //--------------------------------------------------------------------------------------------------------
 
-    struct DICOMNET_EXPORT AbstractSyntaxItem :
-        PDUItemT<PDUItemType::AbstractSyntaxItem>
+    struct DICOMNET_EXPORT AbstractSyntaxItem
     {
+        AbstractSyntaxItem() = default;
         AbstractSyntaxItem(std::string&& abstract_syntax);
         std::string AbstractSyntax;
-
-    protected:
-        void WriteContent(output_buffer& dest) const override;
     };
+
+    void encode_pdu_item(output_buffer& dest, const AbstractSyntaxItem& item);
+    bool decode_pdu_item(input_buffer& dest, AbstractSyntaxItem& item);
 
     //--------------------------------------------------------------------------------------------------------
 
-    struct DICOMNET_EXPORT TransferSyntaxItem :
-        PDUItemT<PDUItemType::TransferSyntaxItem>
+    struct DICOMNET_EXPORT TransferSyntaxItem
     {
+        TransferSyntaxItem() = default;
         TransferSyntaxItem(std::string&& transfer_syntax_name);
         std::string TransferSyntax;
-
-    protected:
-        void WriteContent(output_buffer& dest) const override;
     };
+
+    void encode_pdu_item(output_buffer& dest, const TransferSyntaxItem& item);
+    bool decode_pdu_item(input_buffer& dest, TransferSyntaxItem& item);
 
     //--------------------------------------------------------------------------------------------------------
 
-    struct DICOMNET_EXPORT PresentationContextItemRQ :
-        PDUItemT<PDUItemType::PresentationContextItemRQ>
+    struct DICOMNET_EXPORT PresentationContextItemRQ
     {
+        PresentationContextItemRQ() = default;
         PresentationContextItemRQ(
             uint8_t presentation_context_id,
             std::string&& abstract_syntax,
@@ -113,40 +105,40 @@ namespace dicom::net {
         uint8_t PresentationContextID;
         AbstractSyntaxItem AbstractSyntax;
         std::vector<TransferSyntaxItem> TransferSyntaxes;
-
-    protected:
-        void WriteContent(output_buffer& dest) const override;
     };
+
+    void encode_pdu_item(output_buffer& dest, const PresentationContextItemRQ& item);
+    bool decode_pdu_item(input_buffer& dest, PresentationContextItemRQ& item);
 
     //--------------------------------------------------------------------------------------------------------
 
-    struct DICOMNET_EXPORT MaximumLengthItem :
-        PDUItemT<PDUItemType::MaximumLengthItem>
+    struct DICOMNET_EXPORT MaximumLengthItem
     {
+        MaximumLengthItem() = default;
         MaximumLengthItem(uint32_t maximum_length);
         uint32_t MaximumLength;
-
-    protected:
-        void WriteContent(output_buffer& dest) const override;
     };
+
+    void encode_pdu_item(output_buffer& dest, const MaximumLengthItem& item);
+    bool decode_pdu_item(input_buffer& dest, MaximumLengthItem& item);
 
     //--------------------------------------------------------------------------------------------------------
 
-    struct DICOMNET_EXPORT UserInformationItem :
-        PDUItemT<PDUItemType::UserInformationItem>
+    struct DICOMNET_EXPORT UserInformationItem
     {
+        UserInformationItem() = default;
         UserInformationItem(uint32_t maximum_length);
         MaximumLengthItem MaximumLength;
-
-    protected:
-        void WriteContent(output_buffer& dest) const override;
     };
+
+    void encode_pdu_item(output_buffer& dest, const UserInformationItem& item);
+    bool decode_pdu_item(input_buffer& dest, UserInformationItem& item);
 
     //--------------------------------------------------------------------------------------------------------
 
-    struct DICOMNET_EXPORT AAssociateRQ :
-        PDUT<PDUType::AAssociateRQ>
+    struct DICOMNET_EXPORT AAssociateRQ : PDU
     {
+        AAssociateRQ() = default;
         AAssociateRQ(
             std::string called_ae_title,
             std::string calling_ae_title,
@@ -162,9 +154,13 @@ namespace dicom::net {
         ApplicationContextItem ApplicationContext;
         PresentationContextItemRQ PresentationContext;
         UserInformationItem UserInformation;
-
-    protected:
-        void WriteContent(output_buffer& dest) const override;
     };
+
+    void encode_pdu(output_buffer& dest, const AAssociateRQ& pdu);
+    bool decode_pdu_data(input_buffer& data, std::unique_ptr<AAssociateRQ>& pdu);
+
+    //--------------------------------------------------------------------------------------------------------
+
+    std::unique_ptr<PDU> decode_pdu(const data_buffer& data);
 
 }

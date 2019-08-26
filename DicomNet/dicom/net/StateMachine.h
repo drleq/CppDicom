@@ -155,8 +155,9 @@ namespace dicom::net {
         void ApplyAA6();
         void ApplyAA7();
         void ApplyAA8();
-
         void ThrowInvalidState() const;
+
+        void AsyncReadNextPDU();
 
     private:
         std::unique_ptr<UpperLayer> m_upper_layer;
