@@ -86,7 +86,7 @@ namespace dicom::net {
         }
 
         m_upper_layer->AsyncConnect(
-            asio::ip::tcp::endpoint(),
+            asio::ip::tcp::endpoint(asio::ip::make_address_v4("127.0.0.1"), 106),
             [this](auto& error) {
                 if (error) {
                     // Log error information.
@@ -108,14 +108,17 @@ namespace dicom::net {
 
         // Send A-ASSOCIATE-RQ-PDU
         AAssociateRQ pdu {
-            "TARGET_AE",
-            "MY_AE",
-            "Temp",
-            0,
-            "1.2.3.4.5", // AbstractSyntax
-            { "2.3.4.5.6", "3.4.5.6.7" }, // TransferSyntaxes
-            128 * 1024
+            "DVTK_QR_SCP",
+            "DVTK_QR_SCU",
+            "1.2.3.4.5",
+            1,
+            "1.2.840.10008.1.1", // AbstractSyntax
+            { "1.2.840.10008.1.2" }, // TransferSyntaxes
+            16 * 1024,
+            "1.2.3.4.5",
+            "FakeImp"
         };
+        
         DataSequence data;
         encode_pdu(data, pdu);
 
@@ -156,14 +159,17 @@ namespace dicom::net {
     //--------------------------------------------------------------------------------------------------------
 
     void StateMachine::AsyncReadNextPDU() {
-        // m_upper_layer->AsyncReadPDU(
-        //     [this](auto& error, std::vector<uint8_t>&& pdu_buf){
-        //         PDUHeader header;
-        //         memcpy(&header, pdu_buf.data(), sizeof(PDUHeader));
+        m_upper_layer->AsyncReadPDU(
+            [this](auto& error, data_buffer&& pdu_buf){
+                if (error) {
+                    // Networking error.
+                    ApplyAction(MachineAction::AA4);
+                    return;
+                }
 
-
-        //     }
-        // );
+                [[maybe_unused]] auto pdu = decode_pdu(std::forward<data_buffer>(pdu_buf));
+            }
+        );
     }
 
 }

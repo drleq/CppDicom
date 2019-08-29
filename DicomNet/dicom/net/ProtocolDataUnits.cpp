@@ -1,6 +1,23 @@
 #include "dicomnet_pch.h"
 #include "dicom/net/ProtocolDataUnits.h"
 
+#include "dicom/detail/intrinsic.h"
+
+namespace {
+    template <typename T>
+    T apply_endian(T value) {
+        if constexpr (sizeof(T) == 2) {
+            return static_cast<T>(
+                dicom::detail::byte_swap16(static_cast<uint16_t>(value))
+            );
+        } else if constexpr (sizeof(T) == 4) {
+            return static_cast<T>(
+                dicom::detail::byte_swap32(static_cast<uint32_t>(value))
+            );
+        }
+    }
+}
+
 namespace {
     using namespace dicom::net;
 
@@ -27,7 +44,7 @@ namespace {
         auto header_ptr = reinterpret_cast<PDUHeader*>(header_buffer.data());
         header_ptr->Type = type;
         header_ptr->Reserved = 0;
-        header_ptr->Length = static_cast<uint32_t>(content_end - content_start);
+        header_ptr->Length = apply_endian(static_cast<uint32_t>(content_end - content_start));
     }
 
     //--------------------------------------------------------------------------------------------------------
@@ -53,7 +70,7 @@ namespace {
         auto header_ptr = reinterpret_cast<PDUItemHeader*>(header_buffer.data());
         header_ptr->Type = type;
         header_ptr->Reserved = 0;
-        header_ptr->Length = static_cast<uint16_t>(content_end - content_start);
+        header_ptr->Length = apply_endian(static_cast<uint16_t>(content_end - content_start));
     }
 
     //--------------------------------------------------------------------------------------------------------
@@ -76,16 +93,17 @@ namespace {
             // Read the PDU item header
             auto header_ptr = reinterpret_cast<const PDUItemHeader*>(data.data());
             data += sizeof(PDUItemHeader);
+            auto item_length = apply_endian(header_ptr->Length);
             
             // Decode the PDU item data
-            auto item_buffer = asio::buffer(data, header_ptr->Length);
+            auto item_buffer = asio::buffer(data, item_length);
             bool result = handle_item(*header_ptr, item_buffer);
             if (!result) {
                 return false;
             }
 
             // Advance [data]
-            data += header_ptr->Length;
+            data += item_length;
         }
 
         return true;
@@ -290,6 +308,66 @@ namespace dicom::net {
 
     //--------------------------------------------------------------------------------------------------------
 
+    PresentationContextItemAC::PresentationContextItemAC(
+        uint8_t presentation_context_id,
+        ReasonType reason,
+        std::string&& transfer_syntax
+    ) : PresentationContextID(presentation_context_id),
+        Reason(reason),
+        TransferSyntax(std::forward<std::string>(transfer_syntax))
+    {}
+
+    //--------------------------------------------------------------------------------------------------------
+
+    void encode_pdu_item(output_buffer& dest, const PresentationContextItemAC& item) {
+        encode_pdu_item_impl(
+            dest,
+            PDUItemType::PresentationContextItemAC,
+            [&item](auto& d) {
+                {
+                    auto sub_buffer = d.prepare(4);
+                    d.commit(4);
+
+                    auto data_ptr = reinterpret_cast<uint8_t*>(sub_buffer.data());
+                    memset(data_ptr, 0, 4);
+                    data_ptr[0] = item.PresentationContextID;
+                    data_ptr[2] = static_cast<uint8_t>(item.Reason);
+                }
+
+                encode_pdu_item(d, item.TransferSyntax);
+            }
+        );
+    }
+
+    //--------------------------------------------------------------------------------------------------------
+
+    bool decode_pdu_item(input_buffer& data, PresentationContextItemAC& item) {
+        {
+            if (data.size() < 4) {
+                return false;
+            }
+
+            auto data_ptr = reinterpret_cast<const uint8_t*>(data.data());
+            item.PresentationContextID = data_ptr[0];
+            item.Reason = static_cast<PresentationContextItemAC::ReasonType>(data_ptr[2]);
+
+            data += 4;
+        }
+
+        return decode_pdu_items_impl(
+            data,
+            [&item](const PDUItemHeader& header, input_buffer& d) -> bool {
+                switch (header.Type) {
+                case PDUItemType::TransferSyntaxItem: return decode_pdu_item(d, item.TransferSyntax);
+                default:
+                    return false;
+                }
+            }
+        );
+    }
+
+    //--------------------------------------------------------------------------------------------------------
+
     MaximumLengthItem::MaximumLengthItem(uint32_t maximum_length)
       : MaximumLength(maximum_length)
     {}
@@ -303,7 +381,7 @@ namespace dicom::net {
             [&item](auto& d) {
                 auto sub_buffer = d.prepare(sizeof(uint32_t));
                 d.commit(sizeof(uint32_t));
-                *reinterpret_cast<uint32_t*>(sub_buffer.data()) = item.MaximumLength;
+                *reinterpret_cast<uint32_t*>(sub_buffer.data()) = apply_endian(item.MaximumLength);
             }
         );
     }
@@ -315,15 +393,80 @@ namespace dicom::net {
             return false;
         }
 
-        item.MaximumLength = *reinterpret_cast<const uint32_t*>(data.data());
+        item.MaximumLength = apply_endian(*reinterpret_cast<const uint32_t*>(data.data()));
         data += sizeof(uint32_t);
         return true;
     }
 
     //--------------------------------------------------------------------------------------------------------
 
-    UserInformationItem::UserInformationItem(uint32_t maximum_length)
-      : MaximumLength(maximum_length)
+    ImplementationClassUIDItem::ImplementationClassUIDItem(std::string uid)
+      : ImplementationClassUID(std::move(uid))
+    {}
+
+    //--------------------------------------------------------------------------------------------------------
+
+    void encode_pdu_item(output_buffer& dest, const ImplementationClassUIDItem& item) {
+        encode_pdu_item_impl(
+            dest,
+            PDUItemType::ImplementationClassUIDItem,
+            [&item](auto& d) {
+                auto sub_buffer = d.prepare(item.ImplementationClassUID.size());
+                d.commit(item.ImplementationClassUID.size());
+                memcpy(sub_buffer.data(), item.ImplementationClassUID.data(), item.ImplementationClassUID.size());
+            }
+        );
+    }
+
+    //--------------------------------------------------------------------------------------------------------
+
+    bool decode_pdu_item(input_buffer& data, ImplementationClassUIDItem& item) {
+        item.ImplementationClassUID = std::string{
+            reinterpret_cast<const char*>(data.data()),
+            data.size()
+        };
+        return true;
+    }
+
+    //--------------------------------------------------------------------------------------------------------
+
+    ImplementationVersionNameItem::ImplementationVersionNameItem(std::string name)
+      : ImplementationVersionName(std::move(name))
+    {}
+
+    //--------------------------------------------------------------------------------------------------------
+
+    void encode_pdu_item(output_buffer& dest, const ImplementationVersionNameItem& item) {
+        encode_pdu_item_impl(
+            dest,
+            PDUItemType::ImplementationVersionNameItem,
+            [&item](auto& d) {
+                auto sub_buffer = d.prepare(item.ImplementationVersionName.size());
+                d.commit(item.ImplementationVersionName.size());
+                memcpy(sub_buffer.data(), item.ImplementationVersionName.data(), item.ImplementationVersionName.size());
+            }
+        );
+    }
+
+    //--------------------------------------------------------------------------------------------------------
+
+    bool decode_pdu_item(input_buffer& data, ImplementationVersionNameItem& item) {
+        item.ImplementationVersionName = std::string{
+            reinterpret_cast<const char*>(data.data()),
+            data.size()
+        };
+        return true;
+    }
+
+    //--------------------------------------------------------------------------------------------------------
+
+    UserInformationItem::UserInformationItem(
+        uint32_t maximum_length,
+        std::string implementation_class_uid,
+        std::string implementation_version_name
+    ) : MaximumLength(maximum_length),
+        ImplementationClassUID(std::move(implementation_class_uid)),
+        ImplementationVersionName(std::move(implementation_version_name))
     {}
 
     //--------------------------------------------------------------------------------------------------------
@@ -334,6 +477,8 @@ namespace dicom::net {
             PDUItemType::UserInformationItem,
             [&item](auto& d) {
                 encode_pdu_item(d, item.MaximumLength);
+                encode_pdu_item(d, item.ImplementationClassUID);
+                encode_pdu_item(d, item.ImplementationVersionName);
             }
         );
     }
@@ -344,11 +489,14 @@ namespace dicom::net {
         return decode_pdu_items_impl(
             data,
             [&item](const PDUItemHeader& header, input_buffer& d) -> bool {
-                if (header.Type != PDUItemType::MaximumLengthItem) {
+                switch (header.Type) {
+                case PDUItemType::MaximumLengthItem: return decode_pdu_item(d, item.MaximumLength);
+                case PDUItemType::ImplementationClassUIDItem: return decode_pdu_item(d, item.ImplementationClassUID);
+                case PDUItemType::ImplementationVersionNameItem: return decode_pdu_item(d, item.ImplementationVersionName);
+                default:
+                    // Unexpected PDU item type.
                     return false;
                 }
-
-                return decode_pdu_item(d, item.MaximumLength);
             }
         );
     }
@@ -362,7 +510,9 @@ namespace dicom::net {
         uint8_t presentation_context_id,
         std::string abstract_syntax,
         std::vector<std::string> transfer_syntaxes,
-        uint32_t maximum_length
+        uint32_t maximum_length,
+        std::string implementation_class_uid,
+        std::string implementation_version_name
     ) : CalledAETitle(std::move(called_ae_title)),
         CallingAETitle(std::move(calling_ae_title)),
         ApplicationContext(std::move(application_context)),
@@ -371,7 +521,11 @@ namespace dicom::net {
             std::move(abstract_syntax),
             std::move(transfer_syntaxes)
         ),
-        UserInformation(maximum_length)
+        UserInformation(
+            maximum_length,
+            std::move(implementation_class_uid),
+            std::move(implementation_version_name)
+        )
     {}
 
     //--------------------------------------------------------------------------------------------------------
@@ -389,9 +543,10 @@ namespace dicom::net {
                     auto data_ptr = reinterpret_cast<uint8_t*>(sub_buffer.data());
                     memset(data_ptr, 0, 68);
 
-                    *reinterpret_cast<uint16_t*>(&data_ptr[0]) = 1; // ProtocolVersion
-                    memcpy(&data_ptr[5], pdu.CalledAETitle.data(), pdu.CalledAETitle.size());
-                    memcpy(&data_ptr[21], pdu.CallingAETitle.data(), pdu.CallingAETitle.size());
+                    *reinterpret_cast<uint16_t*>(&data_ptr[0]) = apply_endian<uint16_t>(1); // ProtocolVersion
+                    memset(&data_ptr[4], ' ', 32);
+                    memcpy(&data_ptr[4], pdu.CalledAETitle.data(), pdu.CalledAETitle.size());
+                    memcpy(&data_ptr[20], pdu.CallingAETitle.data(), pdu.CallingAETitle.size());
                 }
 
                 encode_pdu_item(d, pdu.ApplicationContext);
@@ -450,16 +605,22 @@ namespace dicom::net {
     AAssociateAC::AAssociateAC(
         std::string application_context,
         uint8_t presentation_context_id,
-        std::string abstract_syntax,
-        std::vector<std::string> transfer_syntaxes,
-        uint32_t maximum_length
+        PresentationContextItemAC::ReasonType reason,
+        std::string transfer_syntax,
+        uint32_t maximum_length,
+        std::string implementation_class_uid,
+        std::string implementation_version_name
     ) : ApplicationContext(std::move(application_context)),
         PresentationContext(
             presentation_context_id,
-            std::move(abstract_syntax),
-            std::move(transfer_syntaxes)
+            reason,
+            std::move(transfer_syntax)
         ),
-        UserInformation(maximum_length)
+        UserInformation(
+            maximum_length,
+            std::move(implementation_class_uid),
+            std::move(implementation_version_name)
+        )
     {}
 
     //--------------------------------------------------------------------------------------------------------
@@ -476,7 +637,7 @@ namespace dicom::net {
 
                     auto data_ptr = reinterpret_cast<uint8_t*>(sub_buffer.data());
                     memset(data_ptr, 0, 68);
-                    *reinterpret_cast<uint16_t*>(&data_ptr[0]) = 1; // ProtocolVersion
+                    *reinterpret_cast<uint16_t*>(&data_ptr[0]) = apply_endian<uint16_t>(1); // ProtocolVersion
                 }
 
                 encode_pdu_item(d, pdu.ApplicationContext);
@@ -500,7 +661,8 @@ namespace dicom::net {
             data += 68;
 
             auto data_ptr = reinterpret_cast<const uint8_t*>(sub_buffer.data());
-            if (*reinterpret_cast<const uint16_t*>(&data_ptr[0]) != 1) {
+            auto protocol_version = apply_endian(*reinterpret_cast<const uint16_t*>(&data_ptr[0]));
+            if (protocol_version != 1) {
                 // Validate the Protocol Version.
                 return false;
             }
@@ -511,7 +673,7 @@ namespace dicom::net {
             [&tmp](const PDUItemHeader& header, input_buffer& d) -> bool {
                 switch (header.Type) {
                 case PDUItemType::ApplicationContextItem: return decode_pdu_item(d, tmp->ApplicationContext);
-                case PDUItemType::PresentationContextItemRQ: return decode_pdu_item(d, tmp->PresentationContext);
+                case PDUItemType::PresentationContextItemAC: return decode_pdu_item(d, tmp->PresentationContext);
                 case PDUItemType::UserInformationItem: return decode_pdu_item(d, tmp->UserInformation);
                 default:
                     // Unexpected PDU item type.
@@ -600,7 +762,7 @@ namespace dicom::net {
                     d.commit(value_size);
 
                     auto data_ptr = reinterpret_cast<uint8_t*>(sub_buffer.data());
-                    *reinterpret_cast<uint32_t*>(&data_ptr[0]) = static_cast<uint32_t>(data_size);
+                    *reinterpret_cast<uint32_t*>(&data_ptr[0]) = apply_endian(static_cast<uint32_t>(data_size));
                     data_ptr[4] = value.PresentationContextID;
 
                     // Attach the PDV data directly (no copy)
@@ -647,7 +809,7 @@ namespace dicom::net {
 
             // Build a new ValueItem using the [shared_storage]
             PDataTF::ValueItem value;
-            uint32_t value_length = *reinterpret_cast<const uint32_t*>(data_ptr[0]);
+            uint32_t value_length = apply_endian(*reinterpret_cast<const uint32_t*>(data_ptr[0]));
             value.PresentationContextID = data_ptr[4];
 
             if (value_length + 5 > data_remaining) {
@@ -791,7 +953,8 @@ namespace dicom::net {
         }
 
         auto header_ptr = reinterpret_cast<const PDUHeader*>(data.data());
-        if (header_ptr->Length > data.size() - sizeof(PDUHeader)) {
+        auto pdu_length = apply_endian(header_ptr->Length);
+        if (pdu_length > data.size() - sizeof(PDUHeader)) {
             // Not enough data in the buffer.
             return nullptr;
         }

@@ -3,6 +3,9 @@
 
 #include "dicom/net/ProtocolDataUnits.h"
 #include "dicom/net/StateMachine.h"
+#include "dicom/detail/intrinsic.h"
+
+#include <fstream>
 
 namespace dicom::net {
 
@@ -63,14 +66,20 @@ namespace dicom::net {
         buffers.reserve(pdu_data.Sequence.size());
         for (auto& b : pdu_data.Sequence) {
             buffers.push_back(b->AsBuffer());
+
+            std::fstream fs{ "pdu.dat", std::ios_base::out | std::ios_base::binary };
+            fs.write(reinterpret_cast<const char*>(b->AsBuffer().data()), b->AsBuffer().size());
         }
 
-        auto wrapped_callback = [callback=std::forward<AsyncCallback>(callback), data=std::move(pdu_data)](auto& error, size_t) {
+        auto wrapped_callback = [callback=std::forward<AsyncCallback>(callback), data=std::move(pdu_data)](
+            auto& error, size_t bytes_transmitted
+        ) {
             if (error.value() == asio::error::operation_aborted) {
                 // An aborted timer means we're being cancelled or destructed.  Do nothing.
                 return;
             }
             callback(error);
+            (void)bytes_transmitted;
         };
 
         asio::async_write(*m_socket00, buffers, std::move(wrapped_callback));
@@ -79,36 +88,43 @@ namespace dicom::net {
     //--------------------------------------------------------------------------------------------------------
 
     void UpperLayer::AsyncReadPDU(AsyncReadCallback&& callback) {
-        data_buffer pdu_buf{ sizeof(PDUHeader), 0 };
+        data_buffer pdu_buf(sizeof(PDUHeader), 0);
 
         // Start by reading the PDUHeader.  This will tell us how much additional data to read.
+        auto readh_buf = asio::mutable_buffer(pdu_buf.data(), sizeof(PDUHeader));
         asio::async_read(
             *m_socket00,
-            asio::buffer(pdu_buf),
-            [this, callback=std::forward<AsyncReadCallback>(callback), buf=std::move(pdu_buf)](auto& error, size_t) mutable {
+            readh_buf,
+            [this, callback=std::forward<AsyncReadCallback>(callback), buf=std::move(pdu_buf)](auto& error, size_t bytes_read) mutable {
                 if (error) {
                     if (error.value() != asio::error::operation_aborted) {
                         callback(error, std::vector<uint8_t>{});
                     }
                     return;
                 }
+
+                (void)bytes_read;
                 
                 // Extract the PDUHeader so we can read the Length field.
                 PDUHeader header;
                 memcpy(&header, buf.data(), sizeof(PDUHeader));
+                header.Length = dicom::detail::byte_swap32(header.Length);
 
                 // Resize the buffer and continue reading the rest of the PDU.
                 buf.resize(buf.size() + header.Length);
+                auto read_buf = asio::mutable_buffer(buf.data() + sizeof(PDUHeader), header.Length);
                 asio::async_read(
                     *m_socket00,
-                    asio::buffer(buf) + sizeof(PDUHeader),
-                    [callback=std::move(callback), buf=std::move(buf)](auto& error, size_t) mutable {
+                    read_buf,
+                    [callback=std::move(callback), buf=std::move(buf)](auto& error, size_t bytes_received) mutable {
                         if (error) {
                             if (error.value() != asio::error::operation_aborted) {
                                 callback(error, std::vector<uint8_t>{});
                             }
                             return;
                         }
+
+                        (void)bytes_received;
 
                         // Success.  Invoke the callback.
                         callback(error, std::move(buf));

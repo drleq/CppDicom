@@ -14,6 +14,7 @@ add_subdirectory(Dicom)
 add_subdirectory(DicomNet)
 add_subdirectory(DicomFileTest)
 add_subdirectory(DicomTest)
+add_subdirectory(DicomNetTestbed)
 
 set(CPACK_PROJECT_NAME ${PROJECT_NAME})
 set(CPACK_PROJECT_VERSION ${PROJECT_VERSION})

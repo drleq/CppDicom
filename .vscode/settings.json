@@ -76,7 +76,8 @@
         "xstddef": "cpp",
         "xstring": "cpp",
         "xtr1common": "cpp",
-        "xtree": "cpp"
+        "xtree": "cpp",
+        "filesystem": "cpp"
     },
     "telemetry.enableTelemetry": false,
     "cmake.configureOnOpen": true,

@@ -30,11 +30,15 @@ namespace dicom::net {
         output_buffer OutputBuffer;
 
         asio::const_buffer AsBuffer() const override {
-            return asio::buffer(Storage);
+            return asio::const_buffer(Storage.data(), Storage.size());//asio::buffer(Storage);
         }
     };
     
     struct DataSequence {
+        DataSequence() {
+            Sequence.push_back(std::make_shared<OutputDataStorage>());
+        }
+
         std::vector<DataStoragePtr> Sequence;
 
         void Insert(DataStoragePtr storage) {
@@ -75,11 +79,13 @@ namespace dicom::net {
         AAbort = 0x07
     };
 
+    #pragma pack (push, 1)
     struct PDUHeader {
         PDUType Type;
         uint8_t Reserved;
         uint32_t Length;
     };
+    #pragma pack (pop)
 
     struct DICOMNET_EXPORT PDU {
         virtual ~PDU();
@@ -107,11 +113,13 @@ namespace dicom::net {
         UserIdentitySubItemAC = 0x59
     };
 
+    #pragma pack (push, 1)
     struct PDUItemHeader {
         PDUItemType Type;
         uint8_t Reserved;
         uint16_t Length;
     };
+    #pragma pack (pop)
 
     //--------------------------------------------------------------------------------------------------------
 
@@ -169,6 +177,32 @@ namespace dicom::net {
 
     //--------------------------------------------------------------------------------------------------------
 
+    struct DICOMNET_EXPORT PresentationContextItemAC
+    {
+        enum class ReasonType : uint8_t {
+            Acceptance = 0,
+            UserRejection = 1,
+            NoReason = 2,
+            AbstractSyntaxNotSupported = 3,
+            TransferSyntaxesNotSupported = 4
+        };
+
+        PresentationContextItemAC() = default;
+        PresentationContextItemAC(
+            uint8_t presentation_context_id,
+            ReasonType reason,
+            std::string&& transfer_syntax
+        );
+        uint8_t PresentationContextID;
+        ReasonType Reason;
+        TransferSyntaxItem TransferSyntax;
+    };
+
+    void encode_pdu_item(output_buffer& dest, const PresentationContextItemAC& item);
+    bool decode_pdu_item(input_buffer& data, PresentationContextItemAC& item);
+
+    //--------------------------------------------------------------------------------------------------------
+
     struct DICOMNET_EXPORT MaximumLengthItem
     {
         MaximumLengthItem() = default;
@@ -181,11 +215,41 @@ namespace dicom::net {
 
     //--------------------------------------------------------------------------------------------------------
 
+    struct DICOMNET_EXPORT ImplementationClassUIDItem
+    {
+        ImplementationClassUIDItem() = default;
+        ImplementationClassUIDItem(std::string uid);
+        std::string ImplementationClassUID;
+    };
+
+    void encode_pdu_item(output_buffer& dest, const ImplementationClassUIDItem& item);
+    bool decode_pdu_item(input_buffer& data, ImplementationClassUIDItem& item);
+
+    //--------------------------------------------------------------------------------------------------------
+
+    struct DICOMNET_EXPORT ImplementationVersionNameItem
+    {
+        ImplementationVersionNameItem() = default;
+        ImplementationVersionNameItem(std::string name);
+        std::string ImplementationVersionName;
+    };
+
+    void encode_pdu_item(output_buffer& dest, const ImplementationVersionNameItem& item);
+    bool decode_pdu_item(input_buffer& data, ImplementationVersionNameItem& item);
+
+    //--------------------------------------------------------------------------------------------------------
+
     struct DICOMNET_EXPORT UserInformationItem
     {
         UserInformationItem() = default;
-        UserInformationItem(uint32_t maximum_length);
+        UserInformationItem(
+            uint32_t maximum_length,
+            std::string implementation_class_uid,
+            std::string implementation_version_name
+        );
         MaximumLengthItem MaximumLength;
+        ImplementationClassUIDItem ImplementationClassUID;
+        ImplementationVersionNameItem ImplementationVersionName;
     };
 
     void encode_pdu_item(output_buffer& dest, const UserInformationItem& item);
@@ -203,7 +267,9 @@ namespace dicom::net {
             uint8_t presentation_context_id,
             std::string abstract_syntax,
             std::vector<std::string> transfer_syntaxes,
-            uint32_t maximum_length
+            uint32_t maximum_length,
+            std::string implementation_class_uid,
+            std::string implementation_version_name
         );
 
         std::string CalledAETitle;
@@ -224,13 +290,15 @@ namespace dicom::net {
         AAssociateAC(
             std::string application_context,
             uint8_t presentation_context_id,
-            std::string abstract_syntax,
-            std::vector<std::string> transfer_syntaxes,
-            uint32_t maximum_length
+            PresentationContextItemAC::ReasonType reason,
+            std::string transfer_syntax,
+            uint32_t maximum_length,
+            std::string implementation_class_uid,
+            std::string implementation_version_name
         );
 
         ApplicationContextItem ApplicationContext;
-        PresentationContextItemRQ PresentationContext;
+        PresentationContextItemAC PresentationContext;
         UserInformationItem UserInformation;
     };
 
