@@ -30,7 +30,7 @@ namespace dicom::net {
         void Disconnect();
 
         void AsyncSendPDU(
-            data_buffer&& pdu_data,
+            DataSequence&& pdu_data,
             AsyncCallback&& callback
         );
         void AsyncReadPDU(

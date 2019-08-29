@@ -6,22 +6,24 @@ namespace {
 
     template <typename WriteContent>
     void encode_pdu_impl(
-        output_buffer& dest,
+        DataSequence& dest,
         PDUType type,
         WriteContent write_content
     ) {
+        auto& buf = dest.OutputBuffer();
+
         // Reserve space for the header values
-        auto header_start = dest.size();
-        dest.prepare(sizeof(PDUHeader));
-        dest.commit(sizeof(PDUHeader));
+        auto header_start = buf.size();
+        buf.prepare(sizeof(PDUHeader));
+        buf.commit(sizeof(PDUHeader));
 
         // Write all additional content
-        auto content_start = dest.size();
+        auto content_start = dest.Size();
         write_content(dest);
-        auto content_end = dest.size();
+        auto content_end = dest.Size();
 
         // Re-open the header data and fill it in
-        auto header_buffer = dest.data(header_start, sizeof(PDUHeader));
+        auto header_buffer = buf.data(header_start, sizeof(PDUHeader));
         auto header_ptr = reinterpret_cast<PDUHeader*>(header_buffer.data());
         header_ptr->Type = type;
         header_ptr->Reserved = 0;
@@ -32,22 +34,22 @@ namespace {
 
     template <typename WriteContent>
     void encode_pdu_item_impl(
-        output_buffer& dest,
+        output_buffer& buf,
         PDUItemType type,
         WriteContent write_content
     ) {
         // Reserve space for the header values
-        auto header_start = dest.size();
-        dest.prepare(sizeof(PDUItemHeader));
-        dest.commit(sizeof(PDUItemHeader));
+        auto header_start = buf.size();
+        buf.prepare(sizeof(PDUItemHeader));
+        buf.commit(sizeof(PDUItemHeader));
 
         // Write all additional content
-        auto content_start = dest.size();
-        write_content(dest);
-        auto content_end = dest.size();
+        auto content_start = buf.size();
+        write_content(buf);
+        auto content_end = buf.size();
 
         // Re-open the header data and fill it in
-        auto header_buffer = dest.data(header_start, sizeof(PDUItemHeader));
+        auto header_buffer = buf.data(header_start, sizeof(PDUItemHeader));
         auto header_ptr = reinterpret_cast<PDUItemHeader*>(header_buffer.data());
         header_ptr->Type = type;
         header_ptr->Reserved = 0;
@@ -374,11 +376,12 @@ namespace dicom::net {
 
     //--------------------------------------------------------------------------------------------------------
 
-    void encode_pdu(output_buffer& dest, const AAssociateRQ& pdu) {
+    void encode_pdu(DataSequence& dest, const AAssociateRQ& pdu) {
         encode_pdu_impl(
             dest,
             PDUType::AAssociateRQ,
-            [&pdu](auto& d) {
+            [&pdu](DataSequence& ds) {
+                auto& d = ds.OutputBuffer();
                 {
                     auto sub_buffer = d.prepare(68);
                     d.commit(68);
@@ -444,7 +447,344 @@ namespace dicom::net {
 
     //--------------------------------------------------------------------------------------------------------
 
-    std::unique_ptr<PDU> decode_pdu(const data_buffer& data) {
+    AAssociateAC::AAssociateAC(
+        std::string application_context,
+        uint8_t presentation_context_id,
+        std::string abstract_syntax,
+        std::vector<std::string> transfer_syntaxes,
+        uint32_t maximum_length
+    ) : ApplicationContext(std::move(application_context)),
+        PresentationContext(
+            presentation_context_id,
+            std::move(abstract_syntax),
+            std::move(transfer_syntaxes)
+        ),
+        UserInformation(maximum_length)
+    {}
+
+    //--------------------------------------------------------------------------------------------------------
+
+    void encode_pdu(DataSequence& dest, const AAssociateAC& pdu) {
+        encode_pdu_impl(
+            dest,
+            PDUType::AAssociateAC,
+            [&pdu](DataSequence& ds) {
+                auto& d = ds.OutputBuffer();
+                {
+                    auto sub_buffer = d.prepare(68);
+                    d.commit(68);
+
+                    auto data_ptr = reinterpret_cast<uint8_t*>(sub_buffer.data());
+                    memset(data_ptr, 0, 68);
+                    *reinterpret_cast<uint16_t*>(&data_ptr[0]) = 1; // ProtocolVersion
+                }
+
+                encode_pdu_item(d, pdu.ApplicationContext);
+                encode_pdu_item(d, pdu.PresentationContext);
+                encode_pdu_item(d, pdu.UserInformation);
+            }
+        );
+    }
+
+    //--------------------------------------------------------------------------------------------------------
+
+    bool decode_pdu_data(input_buffer& data, std::unique_ptr<AAssociateAC>& pdu) {
+        auto tmp = std::make_unique<AAssociateAC>();
+
+        {
+            if (data.size() < 68) {
+                return false;
+            }
+
+            auto sub_buffer = asio::buffer(data, 68);
+            data += 68;
+
+            auto data_ptr = reinterpret_cast<const uint8_t*>(sub_buffer.data());
+            if (*reinterpret_cast<const uint16_t*>(&data_ptr[0]) != 1) {
+                // Validate the Protocol Version.
+                return false;
+            }
+        }
+
+        bool result = decode_pdu_items_impl(
+            data,
+            [&tmp](const PDUItemHeader& header, input_buffer& d) -> bool {
+                switch (header.Type) {
+                case PDUItemType::ApplicationContextItem: return decode_pdu_item(d, tmp->ApplicationContext);
+                case PDUItemType::PresentationContextItemRQ: return decode_pdu_item(d, tmp->PresentationContext);
+                case PDUItemType::UserInformationItem: return decode_pdu_item(d, tmp->UserInformation);
+                default:
+                    // Unexpected PDU item type.
+                    return false;
+                }
+            }
+        );
+        if (!result) {
+            return false;
+        }
+
+        pdu = std::move(tmp);
+        return true;
+    }
+
+    //--------------------------------------------------------------------------------------------------------
+
+    AAssociateRJ::AAssociateRJ(ResultType result, SourceType source, ReasonType reason)
+      : Result(result),
+        Source(source),
+        Reason(reason)
+    {}
+
+    //--------------------------------------------------------------------------------------------------------
+
+    void encode_pdu(DataSequence& dest, const AAssociateRJ& pdu) {
+        encode_pdu_impl(
+            dest,
+            PDUType::AAssociateRJ,
+            [&pdu](DataSequence& ds) {
+                auto& d = ds.OutputBuffer();
+                auto sub_buffer = d.prepare(4);
+                d.commit(4);
+
+                auto data_ptr = reinterpret_cast<uint8_t*>(sub_buffer.data());
+                data_ptr[0] = 0;
+                data_ptr[1] = static_cast<uint8_t>(pdu.Result);
+                data_ptr[2] = static_cast<uint8_t>(pdu.Source);
+                data_ptr[3] = static_cast<uint8_t>(pdu.Reason);
+            }
+        );
+    }
+
+    //--------------------------------------------------------------------------------------------------------
+
+    bool decode_pdu_data(input_buffer& data, std::unique_ptr<AAssociateRJ>& pdu) {
+        auto tmp = std::make_unique<AAssociateRJ>();
+
+        if (data.size() < 4) {
+            return false;
+        }
+
+        auto sub_buffer = asio::buffer(data, 4);
+        data += 4;
+
+        auto data_ptr = reinterpret_cast<const uint8_t*>(sub_buffer.data());
+        tmp->Result = static_cast<AAssociateRJ::ResultType>(data_ptr[1]);
+        tmp->Source = static_cast<AAssociateRJ::SourceType>(data_ptr[2]);
+        tmp->Reason = static_cast<AAssociateRJ::ReasonType>(data_ptr[3]);
+
+        pdu = std::move(tmp);
+        return true;
+    }
+
+    //--------------------------------------------------------------------------------------------------------
+
+    PDataTF::PDataTF(std::vector<ValueItem>&& values)
+      : Values(std::forward<std::vector<ValueItem>>(values))
+    {}
+
+    //--------------------------------------------------------------------------------------------------------
+
+    void encode_pdu(DataSequence& dest, const PDataTF& pdu) {
+        encode_pdu_impl(
+            dest,
+            PDUType::PDataTF,
+            [&pdu](DataSequence& ds) {
+                for (auto& value : pdu.Values) {
+                    // Re-obtain the output buffer for each item as it will be changing
+                    auto& d = ds.OutputBuffer();
+
+                    // Output the PDV header
+                    size_t data_size = value.EncodedData->AsBuffer().size();
+                    size_t value_size = data_size + 5;
+                    auto sub_buffer = d.prepare(value_size);
+                    d.commit(value_size);
+
+                    auto data_ptr = reinterpret_cast<uint8_t*>(sub_buffer.data());
+                    *reinterpret_cast<uint32_t*>(&data_ptr[0]) = static_cast<uint32_t>(data_size);
+                    data_ptr[4] = value.PresentationContextID;
+
+                    // Attach the PDV data directly (no copy)
+                    ds.Insert(value.EncodedData);
+                }
+            }
+        );
+    }
+
+    //--------------------------------------------------------------------------------------------------------
+
+    bool decode_pdu_data(data_buffer&& storage, std::unique_ptr<PDataTF>& pdu) {
+        using SharedDataBuffer = std::shared_ptr<data_buffer>;
+        class SharedValueDataStorage : public IDataStorage {
+        public:
+            SharedValueDataStorage(SharedDataBuffer storage, size_t offset, size_t length)
+              : Storage(storage),
+                Offset(offset),
+                Length(length)
+            {}
+
+            virtual ~SharedValueDataStorage() = default;
+
+            SharedDataBuffer Storage;
+            size_t Offset;
+            size_t Length;
+
+            asio::const_buffer AsBuffer() const override {
+                return asio::const_buffer(Storage->data() + Offset, Length);
+            }
+        };
+
+        auto shared_storage = std::make_shared<data_buffer>(std::forward<data_buffer>(storage));
+        auto tmp = std::make_unique<PDataTF>();
+
+        size_t data_remaining = shared_storage->size();
+        auto data_ptr = reinterpret_cast<uint8_t*>(shared_storage->data());
+
+        while (data_remaining > 0) {
+            if (data_remaining < 5) {
+                // Not enough data for the PDV header.
+                return false;
+            }
+
+            // Build a new ValueItem using the [shared_storage]
+            PDataTF::ValueItem value;
+            uint32_t value_length = *reinterpret_cast<const uint32_t*>(data_ptr[0]);
+            value.PresentationContextID = data_ptr[4];
+
+            if (value_length + 5 > data_remaining) {
+                // Not enough data for the PDV
+                return false;
+            }
+
+            value.EncodedData = std::make_shared<SharedValueDataStorage>(
+                shared_storage,
+                std::distance(shared_storage->data(), data_ptr + 5),
+                value_length
+            );
+
+            data_ptr += value_length + 5;
+            data_remaining -= value_length + 5;
+        }
+
+        pdu = std::move(tmp);
+        return true;
+    }
+
+    //--------------------------------------------------------------------------------------------------------
+
+    void encode_pdu(DataSequence& dest, const AReleaseRQ& pdu) {
+        encode_pdu_impl(
+            dest,
+            PDUType::AReleaseRQ,
+            [&pdu](DataSequence& ds) {
+                auto& d = ds.OutputBuffer();
+                auto sub_buffer = d.prepare(4);
+                d.commit(4);
+
+                auto data_ptr = reinterpret_cast<uint8_t*>(sub_buffer.data());
+                *reinterpret_cast<uint32_t*>(data_ptr) = 0; // Reserved
+            }
+        );
+    }
+
+    //--------------------------------------------------------------------------------------------------------
+
+    bool decode_pdu_data(input_buffer& data, std::unique_ptr<AReleaseRQ>& pdu) {
+        auto tmp = std::make_unique<AReleaseRQ>();
+
+        if (data.size() < 4) {
+            return false;
+        }
+
+        // Reserved value unchecked.
+        data += 4;
+
+        pdu = std::move(tmp);
+        return true;
+    }    
+
+    //--------------------------------------------------------------------------------------------------------
+
+    void encode_pdu(DataSequence& dest, const AReleaseRP& pdu) {
+        encode_pdu_impl(
+            dest,
+            PDUType::AReleaseRP,
+            [&pdu](DataSequence& ds) {
+                auto& d = ds.OutputBuffer();
+                auto sub_buffer = d.prepare(4);
+                d.commit(4);
+
+                auto data_ptr = reinterpret_cast<uint8_t*>(sub_buffer.data());
+                *reinterpret_cast<uint32_t*>(data_ptr) = 0; // Reserved
+            }
+        );
+    }
+
+    //--------------------------------------------------------------------------------------------------------
+
+    bool decode_pdu_data(input_buffer& data, std::unique_ptr<AReleaseRP>& pdu) {
+        auto tmp = std::make_unique<AReleaseRP>();
+
+        if (data.size() < 4) {
+            return false;
+        }
+
+        // Reserved value unchecked.
+        data += 4;
+
+        pdu = std::move(tmp);
+        return true;
+    }
+
+    //--------------------------------------------------------------------------------------------------------
+
+    AAbort::AAbort(SourceType source, ReasonType reason)
+      : Source(source),
+        Reason(reason)
+    {}
+
+    //--------------------------------------------------------------------------------------------------------
+
+    void encode_pdu(DataSequence& dest, const AAbort& pdu) {
+        encode_pdu_impl(
+            dest,
+            PDUType::AAbort,
+            [&pdu](DataSequence& ds) {
+                auto& d = ds.OutputBuffer();
+                auto sub_buffer = d.prepare(4);
+                d.commit(4);
+
+                auto data_ptr = reinterpret_cast<uint8_t*>(sub_buffer.data());
+                data_ptr[0] = 0;
+                data_ptr[1] = 0;
+                data_ptr[2] = static_cast<uint8_t>(pdu.Source);
+                data_ptr[3] = static_cast<uint8_t>(pdu.Reason);
+            }
+        );
+    }
+
+    //--------------------------------------------------------------------------------------------------------
+
+    bool decode_pdu_data(input_buffer& data, std::unique_ptr<AAbort>& pdu) {
+        auto tmp = std::make_unique<AAbort>();
+
+        if (data.size() < 4) {
+            return false;
+        }
+
+        auto sub_buffer = asio::buffer(data, 4);
+        data += 4;
+
+        auto data_ptr = reinterpret_cast<const uint8_t*>(sub_buffer.data());
+        tmp->Source = static_cast<AAbort::SourceType>(data_ptr[2]);
+        tmp->Reason = static_cast<AAbort::ReasonType>(data_ptr[3]);
+
+        pdu = std::move(tmp);
+        return true;
+    }
+
+    //--------------------------------------------------------------------------------------------------------
+
+    std::unique_ptr<PDU> decode_pdu(data_buffer&& data) {
         if (data.size() < sizeof(PDUHeader)) {
             // No PDUHeader available.
             return nullptr;
@@ -456,10 +796,24 @@ namespace dicom::net {
             return nullptr;
         }
 
-        auto pdu_data = asio::buffer(data) + sizeof(PDUHeader);
+        auto pdu_data = asio::buffer(const_cast<const data_buffer&>(data)) + sizeof(PDUHeader);
 
         switch (header_ptr->Type) {
         case PDUType::AAssociateRQ: return decode_pdu_data_impl<AAssociateRQ>(pdu_data);
+        case PDUType::AAssociateAC: return decode_pdu_data_impl<AAssociateAC>(pdu_data);
+        case PDUType::AAssociateRJ: return decode_pdu_data_impl<AAssociateRJ>(pdu_data);
+        case PDUType::AReleaseRQ:   return decode_pdu_data_impl<AReleaseRQ>(pdu_data);
+        case PDUType::AReleaseRP:   return decode_pdu_data_impl<AReleaseRP>(pdu_data);
+        case PDUType::AAbort:       return decode_pdu_data_impl<AAbort>(pdu_data);
+
+        case PDUType::PDataTF: {
+            // PDataTF is special in that we want to move the data ownership for efficiency.
+            std::unique_ptr<PDataTF> pdu;
+            if (!decode_pdu_data(std::forward<data_buffer>(data), pdu)) {
+                return false;
+            }
+            return pdu;
+        }
         default:
             // Unknown PDU type.
             return nullptr;

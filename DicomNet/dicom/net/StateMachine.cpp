@@ -116,9 +116,8 @@ namespace dicom::net {
             { "2.3.4.5.6", "3.4.5.6.7" }, // TransferSyntaxes
             128 * 1024
         };
-        data_buffer data;
-        auto buffer = asio::dynamic_buffer(data);
-        encode_pdu(buffer, pdu);
+        DataSequence data;
+        encode_pdu(data, pdu);
 
         m_upper_layer->AsyncSendPDU(
             std::move(data),

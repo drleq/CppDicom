@@ -51,15 +51,20 @@ namespace dicom::net {
     //--------------------------------------------------------------------------------------------------------
 
     void UpperLayer::AsyncSendPDU(
-        data_buffer&& pdu_data,
+        DataSequence&& pdu_data,
         AsyncCallback&& callback
     ) {
         if (m_socket00 == nullptr) {
             throw std::logic_error("Socket not connected");
         }
 
-        // Construct the asio [buffer] first as we need to move [pdu_data] into the callback.
-        auto buffer = asio::buffer(pdu_data);
+        // Construct the asio [buffer] sequence first as we need to move [pdu_data] into the callback.
+        std::vector<asio::const_buffer> buffers;
+        buffers.reserve(pdu_data.Sequence.size());
+        for (auto& b : pdu_data.Sequence) {
+            buffers.push_back(b->AsBuffer());
+        }
+
         auto wrapped_callback = [callback=std::forward<AsyncCallback>(callback), data=std::move(pdu_data)](auto& error, size_t) {
             if (error.value() == asio::error::operation_aborted) {
                 // An aborted timer means we're being cancelled or destructed.  Do nothing.
@@ -68,7 +73,7 @@ namespace dicom::net {
             callback(error);
         };
 
-        asio::async_write(*m_socket00, buffer, std::move(wrapped_callback));
+        asio::async_write(*m_socket00, buffers, std::move(wrapped_callback));
     }
 
     //--------------------------------------------------------------------------------------------------------
