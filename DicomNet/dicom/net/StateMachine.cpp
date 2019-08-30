@@ -8,7 +8,8 @@ namespace dicom::net {
 
     StateMachine::StateMachine(
         asio::io_context& io_context
-    ) {
+    ) : m_is_service_user(true)
+    {
         m_upper_layer = std::make_unique<UpperLayer>(
             io_context,
             this,
@@ -23,39 +24,9 @@ namespace dicom::net {
 
     //--------------------------------------------------------------------------------------------------------
 
-    void StateMachine::ApplyAction(MachineAction action) {
-        switch (action) {
-        case MachineAction::AE1: ApplyAE1(); break;
-        case MachineAction::AE2: ApplyAE2(); break;
-        // case MachineAction::AE3: ApplyAE3(); break;
-        // case MachineAction::AE4: ApplyAE4(); break;
-        // case MachineAction::AE5: ApplyAE5(); break;
-        // case MachineAction::AE6: ApplyAE6(); break;
-        // case MachineAction::AE7: ApplyAE7(); break;
-        // case MachineAction::AE8: ApplyAE8(); break;
-        // case MachineAction::DT1: ApplyDT1(); break;
-        // case MachineAction::DT2: ApplyDT2(); break;
-        // case MachineAction::AR1: ApplyAR1(); break;
-        // case MachineAction::AR2: ApplyAR2(); break;
-        // case MachineAction::AR3: ApplyAR3(); break;
-        // case MachineAction::AR4: ApplyAR4(); break;
-        // case MachineAction::AR5: ApplyAR5(); break;
-        // case MachineAction::AR6: ApplyAR6(); break;
-        // case MachineAction::AR7: ApplyAR7(); break;
-        // case MachineAction::AR8: ApplyAR8(); break;
-        // case MachineAction::AR9: ApplyAR9(); break;
-        // case MachineAction::AR10: ApplyAR10(); break;
-        // case MachineAction::AA1: ApplyAA1(); break;
-        // case MachineAction::AA2: ApplyAA2(); break;
-        // case MachineAction::AA3: ApplyAA3(); break;
-        case MachineAction::AA4: ApplyAA4(); break;
-        // case MachineAction::AA5: ApplyAA5(); break;
-        // case MachineAction::AA6: ApplyAA6(); break;
-        // case MachineAction::AA7: ApplyAA7(); break;
-        // case MachineAction::AA8: ApplyAA8(); break;
-        default:
-            throw std::invalid_argument("Invalid action");
-        }
+    void StateMachine::StartUser() {
+        m_is_service_user = true;
+        ApplyAE1();
     }
     
     //--------------------------------------------------------------------------------------------------------
@@ -64,7 +35,7 @@ namespace dicom::net {
         switch (m_state) {
         case MachineState::Sta2:
         case MachineState::Sta13:
-            ApplyAction(MachineAction::AA2);
+            ApplyAA2();
             break;
 
         default:
@@ -90,9 +61,9 @@ namespace dicom::net {
             [this](auto& error) {
                 if (error) {
                     // Log error information.
-                    ApplyAction(MachineAction::AA4);
+                    ApplyAA4();
                 } else {
-                    ApplyAction(MachineAction::AE2);
+                    ApplyAE2();
                 }
             }
         );
@@ -127,7 +98,7 @@ namespace dicom::net {
             [this](auto& error) {
                 if (error) {
                     // Log error information.
-                    ApplyAction(MachineAction::AA4);
+                    ApplyAA4();
                 }
             }
         );
@@ -138,17 +109,61 @@ namespace dicom::net {
 
     //--------------------------------------------------------------------------------------------------------
 
+    void StateMachine::ApplyAE3() {}
+    void StateMachine::ApplyAE4() {}
+    void StateMachine::ApplyAE5() {}
+    void StateMachine::ApplyAE6() {}
+    void StateMachine::ApplyAE7() {}
+    void StateMachine::ApplyAE8() {}
+    void StateMachine::ApplyDT1() {}
+    void StateMachine::ApplyDT2() {}
+    void StateMachine::ApplyAR1() {}
+    void StateMachine::ApplyAR2() {}
+    void StateMachine::ApplyAR3() {}
+    void StateMachine::ApplyAR4() {}
+    void StateMachine::ApplyAR5() {}
+    void StateMachine::ApplyAR6() {}
+    void StateMachine::ApplyAR7() {}
+    void StateMachine::ApplyAR8() {}
+    void StateMachine::ApplyAR9() {}
+    void StateMachine::ApplyAR10() {}
+
+    //--------------------------------------------------------------------------------------------------------
+
+    void StateMachine::ApplyAA1() {}
+    void StateMachine::ApplyAA2() {}
+    void StateMachine::ApplyAA3() {}
+
+    //--------------------------------------------------------------------------------------------------------
+
     void StateMachine::ApplyAA4() {
         if (m_state < MachineState::Sta3 || m_state > MachineState::Sta12) {
             ThrowInvalidState();
         }
 
         if (m_state != MachineState::Sta4) {
-            // Send A-P-ABORT message
+            // Send A-P-ABORT message.
+            // Note: This doesn't really make sense as the client is disconnected and we don't _really_ have
+            // a local SCU to send this to. 
+            AAbort pdu{
+                m_is_service_user ?
+                    AAbort::SourceType::ServiceUser :
+                    AAbort::SourceType::ServiceProvider,
+                AAbort::ReasonType::NotSpecified
+            };
+
+            // Send to handler
         }
 
         m_state = MachineState::Sta1;
     }
+
+    //--------------------------------------------------------------------------------------------------------
+
+    void StateMachine::ApplyAA5() {}
+    void StateMachine::ApplyAA6() {}
+    void StateMachine::ApplyAA7() {}
+    void StateMachine::ApplyAA8() {}
 
     //--------------------------------------------------------------------------------------------------------
 
@@ -163,13 +178,70 @@ namespace dicom::net {
             [this](auto& error, data_buffer&& pdu_buf){
                 if (error) {
                     // Networking error.
-                    ApplyAction(MachineAction::AA4);
+                    ApplyAA4();
                     return;
                 }
 
-                [[maybe_unused]] auto pdu = decode_pdu(std::forward<data_buffer>(pdu_buf));
+                auto pdu = decode_pdu(std::forward<data_buffer>(pdu_buf));
+                if (!pdu) {
+                    // Failed to decode PDU.
+                    HandleInvalidPDU();
+                    return;
+                }
+
+                switch (pdu->Type()) {
+                case PDUType::AAssociateAC: HandleAAssociateAC(std::move(pdu)); break;
+                }
             }
         );
+    }
+
+    //--------------------------------------------------------------------------------------------------------
+
+    void StateMachine::HandleInvalidPDU() {
+        if (m_state == MachineState::Sta1 || m_state == MachineState::Sta4) {
+            ThrowInvalidState();
+        }
+
+        switch (m_state) {
+        case MachineState::Sta2:
+            ApplyAA1();
+            break;
+
+        case MachineState::Sta13:
+            ApplyAA7();
+            break;
+
+        default:
+            ApplyAA8();
+            break;
+        }
+    }
+
+    //--------------------------------------------------------------------------------------------------------
+
+    void StateMachine::HandleAAssociateAC([[maybe_unused]] PDUPtr&& pdu) {
+        if (m_state == MachineState::Sta1 || m_state == MachineState::Sta4) {
+            ThrowInvalidState();
+        }
+
+        switch (m_state) {
+        case MachineState::Sta2:
+            ApplyAA1();
+            break;
+
+        case MachineState::Sta5:
+            ApplyAE3();
+            break;
+
+        case MachineState::Sta13:
+            ApplyAA6();
+            break;
+
+        default:
+            ApplyAA8();
+            break;
+        }
     }
 
 }

@@ -4,6 +4,10 @@
 #include "dicom/detail/intrinsic.h"
 
 namespace {
+    using namespace dicom::net;
+
+    //--------------------------------------------------------------------------------------------------------
+
     template <typename T>
     T apply_endian(T value) {
         if constexpr (sizeof(T) == 2) {
@@ -16,10 +20,27 @@ namespace {
             );
         }
     }
-}
 
-namespace {
-    using namespace dicom::net;
+    //--------------------------------------------------------------------------------------------------------
+
+    class OutputDataStorage : public IDataStorage
+    {
+    public:
+        OutputDataStorage()
+          : Storage(),
+            OutputBuffer(asio::dynamic_buffer(Storage))
+        {}
+        virtual ~OutputDataStorage() = default;
+
+        data_buffer Storage;
+        output_buffer OutputBuffer;
+
+        asio::const_buffer AsBuffer() const override {
+            return asio::const_buffer(Storage.data(), Storage.size());//asio::buffer(Storage);
+        }
+    };
+
+    //--------------------------------------------------------------------------------------------------------
 
     template <typename WriteContent>
     void encode_pdu_impl(
@@ -128,6 +149,43 @@ namespace {
 }
 
 namespace dicom::net {
+
+    DataSequence::DataSequence() {
+        Sequence.push_back(std::make_shared<OutputDataStorage>());
+    }
+
+    //--------------------------------------------------------------------------------------------------------
+
+    void DataSequence::Insert(DataStoragePtr storage) {
+        if (Sequence.back()->AsBuffer().size() == 0) {
+            // Remove the current buffer from the sequence if it's empty.
+            Sequence.pop_back();
+        }
+
+        // Insert a custom DataStorage at the current location.
+        Sequence.push_back(std::move(storage));
+
+        // Create a new output_buffer after the custom storage to maintain the sequence.
+        Sequence.push_back(std::make_shared<OutputDataStorage>());
+    }
+
+    //--------------------------------------------------------------------------------------------------------
+
+    output_buffer& DataSequence::OutputBuffer() const {
+        return dynamic_cast<OutputDataStorage&>(*Sequence.back()).OutputBuffer;
+    }
+
+    //--------------------------------------------------------------------------------------------------------
+
+    size_t DataSequence::Size() const {
+        size_t total = 0;
+        for (auto& ds : Sequence) {
+            total += ds->AsBuffer().size();
+        }
+        return total;
+    }
+
+    //--------------------------------------------------------------------------------------------------------
 
     PDU::~PDU() = default;
 

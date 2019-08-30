@@ -7,7 +7,7 @@ int main([[maybe_unused]] int argc, [[maybe_unused]] const char* argv[]) {
     asio::io_context context;
 
     dicom::net::StateMachine sm{ context };
-    sm.ApplyAction(dicom::net::MachineAction::AE1);
+    sm.StartUser();
 
     while (true) {
         context.run();

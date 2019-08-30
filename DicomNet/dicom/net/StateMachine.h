@@ -1,5 +1,6 @@
 #pragma once
 
+#include "dicom/net/ProtocolDataUnits.h"
 namespace dicom::net { class UpperLayer; }
 
 namespace dicom::net {
@@ -122,44 +123,48 @@ namespace dicom::net {
         virtual ~StateMachine();
 
         MachineState State() const { return m_state; }
-        void ApplyAction(MachineAction action);
+        void StartUser();
 
 
     private:
         void HandleArtimExpired(const asio::error_code& error);
         void ApplyAE1();
         void ApplyAE2();
-        // void ApplyAE3();
-        // void ApplyAE4();
-        // void ApplyAE5();
-        // void ApplyAE6();
-        // void ApplyAE7();
-        // void ApplyAE8();
-        // void ApplyDT1();
-        // void ApplyDT2();
-        // void ApplyAR1();
-        // void ApplyAR2();
-        // void ApplyAR3();
-        // void ApplyAR4();
-        // void ApplyAR5();
-        // void ApplyAR6();
-        // void ApplyAR7();
-        // void ApplyAR8();
-        // void ApplyAR9();
-        // void ApplyAR10();
-        // void ApplyAA1();
-        // void ApplyAA2();
-        // void ApplyAA3();
+        void ApplyAE3();
+        void ApplyAE4();
+        void ApplyAE5();
+        void ApplyAE6();
+        void ApplyAE7();
+        void ApplyAE8();
+        void ApplyDT1();
+        void ApplyDT2();
+        void ApplyAR1();
+        void ApplyAR2();
+        void ApplyAR3();
+        void ApplyAR4();
+        void ApplyAR5();
+        void ApplyAR6();
+        void ApplyAR7();
+        void ApplyAR8();
+        void ApplyAR9();
+        void ApplyAR10();
+        void ApplyAA1();
+        void ApplyAA2();
+        void ApplyAA3();
         void ApplyAA4();
         void ApplyAA5();
-        // void ApplyAA6();
-        // void ApplyAA7();
-        // void ApplyAA8();
+        void ApplyAA6();
+        void ApplyAA7();
+        void ApplyAA8();
         void ThrowInvalidState() const;
 
         void AsyncReadNextPDU();
 
+        void HandleInvalidPDU();
+        void HandleAAssociateAC(PDUPtr&& pdu);
+
     private:
+        bool m_is_service_user;
         std::unique_ptr<UpperLayer> m_upper_layer;
         MachineState m_state;
     };

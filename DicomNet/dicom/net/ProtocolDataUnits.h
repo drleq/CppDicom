@@ -17,54 +17,16 @@ namespace dicom::net {
     };
     using DataStoragePtr = std::shared_ptr<IDataStorage>;
 
-    class OutputDataStorage : public IDataStorage
-    {
-    public:
-        OutputDataStorage()
-          : Storage(),
-            OutputBuffer(asio::dynamic_buffer(Storage))
-        {}
-        virtual ~OutputDataStorage() = default;
-
-        data_buffer Storage;
-        output_buffer OutputBuffer;
-
-        asio::const_buffer AsBuffer() const override {
-            return asio::const_buffer(Storage.data(), Storage.size());//asio::buffer(Storage);
-        }
-    };
+    //--------------------------------------------------------------------------------------------------------
     
     struct DataSequence {
-        DataSequence() {
-            Sequence.push_back(std::make_shared<OutputDataStorage>());
-        }
+        DataSequence();
 
         std::vector<DataStoragePtr> Sequence;
 
-        void Insert(DataStoragePtr storage) {
-            if (Sequence.back()->AsBuffer().size() == 0) {
-                // Remove the current buffer from the sequence if it's empty.
-                Sequence.pop_back();
-            }
-
-            // Insert a custom DataStorage at the current location.
-            Sequence.push_back(std::move(storage));
-
-            // Create a new output_buffer after the custom storage to maintain the sequence.
-            Sequence.push_back(std::make_shared<OutputDataStorage>());
-        }
-
-        output_buffer& OutputBuffer() const {
-            return dynamic_cast<OutputDataStorage&>(*Sequence.back()).OutputBuffer;
-        }
-
-        size_t Size() const {
-            size_t total = 0;
-            for (auto& ds : Sequence) {
-                total += ds->AsBuffer().size();
-            }
-            return total;
-        }
+        void Insert(DataStoragePtr storage);
+        output_buffer& OutputBuffer() const;
+        size_t Size() const;
     };
 
     //--------------------------------------------------------------------------------------------------------
@@ -89,6 +51,8 @@ namespace dicom::net {
 
     struct DICOMNET_EXPORT PDU {
         virtual ~PDU();
+
+        virtual PDUType Type() const = 0;
     };
 
     using PDUPtr = std::unique_ptr<PDU>;
@@ -272,6 +236,8 @@ namespace dicom::net {
             std::string implementation_version_name
         );
 
+        PDUType Type() const override { return PDUType::AAssociateRQ; }
+
         std::string CalledAETitle;
         std::string CallingAETitle;
         ApplicationContextItem ApplicationContext;
@@ -296,6 +262,8 @@ namespace dicom::net {
             std::string implementation_class_uid,
             std::string implementation_version_name
         );
+
+        PDUType Type() const override { return PDUType::AAssociateAC; }
 
         ApplicationContextItem ApplicationContext;
         PresentationContextItemAC PresentationContext;
@@ -334,6 +302,8 @@ namespace dicom::net {
         AAssociateRJ() = default;
         AAssociateRJ(ResultType result, SourceType source, ReasonType reason);
 
+        PDUType Type() const override { return PDUType::AAssociateRJ; }
+
         ResultType Result;
         SourceType Source;
         ReasonType Reason;
@@ -354,6 +324,8 @@ namespace dicom::net {
         PDataTF() = default;
         PDataTF(std::vector<ValueItem>&& values);
 
+        PDUType Type() const override { return PDUType::PDataTF; }
+
         std::vector<ValueItem> Values;
     };
 
@@ -365,6 +337,8 @@ namespace dicom::net {
     struct DICOMNET_EXPORT AReleaseRQ : PDU
     {
         AReleaseRQ() = default;
+
+        PDUType Type() const override { return PDUType::AReleaseRQ; }
     };
 
     void encode_pdu(DataSequence& dest, const AReleaseRQ& pdu);
@@ -375,6 +349,8 @@ namespace dicom::net {
     struct DICOMNET_EXPORT AReleaseRP : PDU
     {
         AReleaseRP() = default;
+
+        PDUType Type() const override { return PDUType::AReleaseRP; }
     };
 
     void encode_pdu(DataSequence& dest, const AReleaseRP& pdu);
@@ -400,6 +376,8 @@ namespace dicom::net {
 
         AAbort() = default;
         AAbort(SourceType source, ReasonType reason);
+
+        PDUType Type() const override { return PDUType::AAbort; }
 
         SourceType Source;
         ReasonType Reason;
