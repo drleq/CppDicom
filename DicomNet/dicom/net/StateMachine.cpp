@@ -1,6 +1,7 @@
 #include "dicomnet_pch.h"
 #include "dicom/net/StateMachine.h"
 
+#include "dicom/io/TransferSyntax.h"
 #include "dicom/net/ProtocolDataUnits.h"
 #include "dicom/net/UpperLayer.h"
 
@@ -8,13 +9,10 @@ namespace dicom::net {
 
     StateMachine::StateMachine(
         asio::io_context& io_context
-    ) : m_is_service_user(true)
+    ) : m_is_service_user(true),
+        m_artim(io_context)
     {
-        m_upper_layer = std::make_unique<UpperLayer>(
-            io_context,
-            this,
-            [this](auto& error) { HandleArtimExpired(error); }
-        );
+        m_upper_layer = std::make_unique<UpperLayer>(io_context, this);
         m_state = MachineState::Sta1;
     }
 
@@ -52,6 +50,12 @@ namespace dicom::net {
     //--------------------------------------------------------------------------------------------------------
 
     void StateMachine::ApplyAE1() {
+        // [Idle] ->
+        // [Service User establishing connection to remote Service Provider]
+        //
+        // Issue TRANSPORT CONNECT request primitive to local transport service
+        // Next state is Sta4
+
         if (m_state != MachineState::Sta1) {
             ThrowInvalidState();
         }
@@ -73,6 +77,12 @@ namespace dicom::net {
     //--------------------------------------------------------------------------------------------------------
 
     void StateMachine::ApplyAE2() {
+        // [Service User initiating connection to remote Service Provider] ->
+        // [Service User sending Association Request PDU]
+        //
+        // Send A-ASSOCIATE-RQ-PDU
+        // Next state is Sta5
+
         if (m_state != MachineState::Sta4) {
             ThrowInvalidState();
         }
@@ -109,14 +119,171 @@ namespace dicom::net {
 
     //--------------------------------------------------------------------------------------------------------
 
-    void StateMachine::ApplyAE3() {}
-    void StateMachine::ApplyAE4() {}
-    void StateMachine::ApplyAE5() {}
-    void StateMachine::ApplyAE6() {}
-    void StateMachine::ApplyAE7() {}
-    void StateMachine::ApplyAE8() {}
-    void StateMachine::ApplyDT1() {}
-    void StateMachine::ApplyDT2() {}
+    void StateMachine::ApplyAE3(const AAssociateAC& pdu) {
+        // [Service User sending Association Request PDU] ->
+        // [Service User received Association Accepted PDU] ->
+        // [Service User ready for Data Transfer]
+        //
+        // Issue A-ASSOCIATE confirmation (accept) primitive
+        // Next state is Sta6
+
+        m_maximum_pdu_size = pdu.UserInformation.MaximumLength.MaximumLength;
+        m_chosen_transfer_syntax = dicom::io::get_transfer_syntax(pdu.PresentationContext.TransferSyntax.TransferSyntax);
+
+        m_state = MachineState::Sta6;
+        AsyncReadNextPDU();
+    }
+
+    //--------------------------------------------------------------------------------------------------------
+
+    void StateMachine::ApplyAE4(const AAssociateRJ& pdu) {
+        // [Service User sending Association Request PDU] ->
+        // [Service User received Association Rejected PDU; Connection is closed]
+        //
+        // Issue A-ASSOCIATE confirmation (reject) primitive and close transport connection
+        // Next state is Sta1
+
+        // Log why association was rejected.  Raise event.
+        (void)pdu;
+
+        m_upper_layer->Disconnect();
+
+        m_state = MachineState::Sta1;
+    }
+
+    //--------------------------------------------------------------------------------------------------------
+
+    void StateMachine::ApplyAE5() {
+        // [Service Provider receives connection from Service User] ->
+        // [Service Provider waiting for Association Request PDU; Start ARTIM timeout]
+        //
+        // Issue Transport connection response primitive; start ARTIM timer
+        // Next state is Sta2
+        
+        ResetArtim();
+
+        m_state = MachineState::Sta2;
+        AsyncReadNextPDU();
+    }
+
+    //--------------------------------------------------------------------------------------------------------
+
+    void StateMachine::ApplyAE6([[maybe_unused]] const AAssociateRQ& pdu) {
+        // [Service Provider receives for Association Request PDU] ->
+        // [Service Provider determines if Association Request is acceptable]
+        //
+        // Stop ARTIM timer and if A-ASSOCIATE-RQ acceptable by service-provider:
+        //    issue A-ASSOCIATE indication primitive
+        //    Next state is Sta3
+        // otherwise:
+        //    issue A-ASSOCIATE-RJ-PDU and start ARTIM timer
+        //    Next state is Sta13
+
+        m_artim.Cancel();
+
+        bool is_acceptable = true; // Check if [pdu] can be accepted
+        if (is_acceptable) {
+            m_state = MachineState::Sta3;
+
+        } else {
+            // TODO: Obtain and pack actual reason
+            AAssociateRJ rj_pdu{ 
+                AAssociateRJ::ResultType::RejectedPermanent,
+                AAssociateRJ::SourceType::ServiceUser,
+                AAssociateRJ::ReasonType::ACSE_ProtocolNotSupported
+            };
+            DataSequence data;
+            encode_pdu(data, rj_pdu);
+
+            m_upper_layer->AsyncSendPDU(
+                std::move(data),
+                [this](auto& error) { HandleNetworkError(error); }
+            );
+            ResetArtim();
+            m_state = MachineState::Sta13;
+        }
+    }
+
+    //--------------------------------------------------------------------------------------------------------
+
+    void StateMachine::ApplyAE7(const AAssociateAC& pdu) {
+        // [Service Provider determines if Association Request is acceptable] ->
+        // [Service Provider accepts Association Request] ->
+        // [Service Provider ready for Data Transfer]
+        //
+        // Send A-ASSOCIATE-AC PDU
+        // Next state is Sta6
+
+        DataSequence data;
+        encode_pdu(data, pdu);
+
+        m_upper_layer->AsyncSendPDU(
+            std::move(data),
+            [this](auto& error) { HandleNetworkError(error); }
+        );
+
+        m_state = MachineState::Sta6;
+        AsyncReadNextPDU();
+    }
+
+    //--------------------------------------------------------------------------------------------------------
+
+    void StateMachine::ApplyAE8(const AAssociateRJ& pdu) {
+        // [Service Provider determines if Association Request is acceptable] ->
+        // [Service Provider rejects Association Request]
+        //
+        // Send A-ASSOCIATE-RJ PDU and start ARTIM timer
+        // Next state is STA13
+
+        DataSequence data;
+        encode_pdu(data, pdu);
+
+        m_upper_layer->AsyncSendPDU(
+            std::move(data),
+            [this](auto& error) { HandleNetworkError(error); }
+        );
+        ResetArtim();
+
+        m_state = MachineState::Sta13;
+    }
+
+    //--------------------------------------------------------------------------------------------------------
+
+    void StateMachine::ApplyDT1(const PDataTF& pdu) {
+        // [Service Provider/User ready for Data Transfer] ->
+        // [Service Provider/User sends Data PDU]
+        //
+        // Send P-DATA-TF PDU
+        // Next state is Sta6
+
+        DataSequence data;
+        encode_pdu(data, pdu);
+
+        m_upper_layer->AsyncSendPDU(
+            std::move(data),
+            [this](auto& error) { HandleNetworkError(error); }
+        );
+        
+        m_state = MachineState::Sta6;
+    }
+
+    //--------------------------------------------------------------------------------------------------------
+
+    void StateMachine::ApplyDT2([[maybe_unused]] const PDataTF& pdu) {
+        // [Service Provider/User ready for Data Transfer] ->
+        // [Service Provider/User receives Data PDU]
+        //
+        // Send P-DATA indication primitive
+        // Next state is Sta6
+
+        // Send data to handler
+
+        m_state = MachineState::Sta6;
+        AsyncReadNextPDU();
+    }
+
+    //--------------------------------------------------------------------------------------------------------
+
     void StateMachine::ApplyAR1() {}
     void StateMachine::ApplyAR2() {}
     void StateMachine::ApplyAR3() {}
@@ -130,45 +297,159 @@ namespace dicom::net {
 
     //--------------------------------------------------------------------------------------------------------
 
-    void StateMachine::ApplyAA1() {}
-    void StateMachine::ApplyAA2() {}
-    void StateMachine::ApplyAA3() {}
+    void StateMachine::ApplyAA1(AAbort::ReasonType reason) {
+        // [Service User ready for Data Transfer] ->
+        // [Service User sends Abort PDU]
+        //
+        // Send A-ABORT PDU (service-user source) and start (or restart if already started) ARTIM timer
+        // Next state is Sta13
+
+        AAbort pdu{ AAbort::SourceType::ServiceUser, reason };
+        DataSequence data;
+        encode_pdu(data, pdu);
+
+        m_upper_layer->AsyncSendPDU(
+            std::move(data),
+            [this](auto& error) { HandleNetworkError(error); }
+        );
+        ResetArtim();
+
+        m_state = MachineState::Sta13;
+    }
 
     //--------------------------------------------------------------------------------------------------------
 
-    void StateMachine::ApplyAA4() {
-        if (m_state < MachineState::Sta3 || m_state > MachineState::Sta12) {
-            ThrowInvalidState();
-        }
+    void StateMachine::ApplyAA2() {
+        // [Service User initiating connection to remote Service Provider] ->
+        // [Service User sends Abort PDU]
+        //
+        // Stop ARTIM timer if running. Close transport connection
+        // Next state is Sta1
 
-        if (m_state != MachineState::Sta4) {
-            // Send A-P-ABORT message.
-            // Note: This doesn't really make sense as the client is disconnected and we don't _really_ have
-            // a local SCU to send this to. 
-            AAbort pdu{
-                m_is_service_user ?
-                    AAbort::SourceType::ServiceUser :
-                    AAbort::SourceType::ServiceProvider,
-                AAbort::ReasonType::NotSpecified
-            };
-
-            // Send to handler
-        }
+        // We haven't actually connected yet so there's no need to send an Abort PDU.
+        m_artim.Cancel();
+        m_upper_layer->Disconnect();
 
         m_state = MachineState::Sta1;
     }
 
     //--------------------------------------------------------------------------------------------------------
 
-    void StateMachine::ApplyAA5() {}
-    void StateMachine::ApplyAA6() {}
-    void StateMachine::ApplyAA7() {}
-    void StateMachine::ApplyAA8() {}
+    void StateMachine::ApplyAA3() {
+        // [Service Provider/User ready for Data Transfer] ->
+        // [Service Provider/User receives Abort PDU]
+        //
+        // If (service-user inititated abort):
+        //    issue A-ABORT indication and close transport connection
+        // otherwise (service-provider inititated abort):
+        //    issue A-P-ABORT indication and close transport connection
+        // Next state is Sta1
+
+        // Trigger handler.
+
+        m_state = MachineState::Sta1;
+    }
+
+    //--------------------------------------------------------------------------------------------------------
+
+    void StateMachine::ApplyAA4() {
+        // [Service Provider/User is disconnected (at transport level)]
+        //
+        // Issue A-P-ABORT indication primitive
+        // Next state is Sta1
+
+        if (m_state < MachineState::Sta3 || m_state > MachineState::Sta12) {
+            ThrowInvalidState();
+        }
+
+        // Trigger handler
+        AAbort pdu{
+            m_is_service_user ?
+                AAbort::SourceType::ServiceUser :
+                AAbort::SourceType::ServiceProvider,
+            AAbort::ReasonType::NotSpecified
+        };
+
+        m_state = MachineState::Sta1;
+    }
+
+    //--------------------------------------------------------------------------------------------------------
+
+    void StateMachine::ApplyAA5() {
+        // [Service Provider/User is disconnected (at transport level) but connection isn't fully established]
+        //
+        // Stop ARTIM timer
+        // Next state is Sta1
+
+        m_artim.Cancel();
+        m_state = MachineState::Sta1;
+    }
+
+    //--------------------------------------------------------------------------------------------------------
+
+    void StateMachine::ApplyAA6() {
+        // [Service Provider/User receives PDU after Association has ended]
+        //
+        // Ignore PDU
+        // Next state is Sta13
+
+        m_state = MachineState::Sta13;
+    }
+
+    //--------------------------------------------------------------------------------------------------------
+
+    void StateMachine::ApplyAA7(AAbort::ReasonType reason) {
+        // [Service Provider receives Association Request while waiting for transport to close]
+        //
+        // Send A-ABORT PDU
+        // Next state is Sta13
+
+        AAbort pdu{ AAbort::SourceType::ServiceUser, reason };
+        DataSequence data;
+        encode_pdu(data, pdu);
+
+        m_upper_layer->AsyncSendPDU(
+            std::move(data),
+            [this](auto& error) { HandleNetworkError(error); }
+        );
+
+        m_state = MachineState::Sta13;
+    }
+
+    //--------------------------------------------------------------------------------------------------------
+
+    void StateMachine::ApplyAA8(AAbort::ReasonType reason) {
+        // [Service Provider/User receives unexpected PDU for the current state]
+        //
+        // Send A-ABORT PDU (service-provider source-), issue an A-P-ABORT indication, and start ARTIM timer
+        // Next state is Sta13
+
+        AAbort pdu{ AAbort::SourceType::ServiceProvider, reason };
+        DataSequence data;
+        encode_pdu(data, pdu);
+
+        m_upper_layer->AsyncSendPDU(
+            std::move(data),
+            [this](auto& error) { HandleNetworkError(error); }
+        );
+        ResetArtim();
+
+        m_state = MachineState::Sta13;
+    }
 
     //--------------------------------------------------------------------------------------------------------
 
     void StateMachine::ThrowInvalidState() const {
         throw IllegalStateChange("Unexpected state: " + std::to_string(static_cast<int>(m_state)));
+    }
+
+    //--------------------------------------------------------------------------------------------------------
+
+    void StateMachine::ResetArtim() {
+        m_artim.Reset(
+            std::chrono::seconds(30),
+            [this](auto& error) { HandleArtimExpired(error); }
+        );
     }
 
     //--------------------------------------------------------------------------------------------------------
@@ -191,9 +472,36 @@ namespace dicom::net {
 
                 switch (pdu->Type()) {
                 case PDUType::AAssociateAC: HandleAAssociateAC(std::move(pdu)); break;
+                case PDUType::AAssociateRJ: HandleAAssociateRJ(std::move(pdu)); break;
+                case PDUType::AAbort: HandleAAbort(std::move(pdu)); break;
                 }
             }
         );
+    }
+
+    //--------------------------------------------------------------------------------------------------------
+
+    void StateMachine::HandleNetworkError(const asio::error_code& error) {
+        if (m_state == MachineState::Sta1) {
+            ThrowInvalidState();
+        }
+
+        // Log error
+        (void)error;
+
+        switch (m_state) {
+        case MachineState::Sta2:
+            ApplyAA5();
+            break;
+
+        case MachineState::Sta13:
+            ApplyAR5();
+            break;
+
+        default:
+            ApplyAA4();
+            break;
+        }
     }
 
     //--------------------------------------------------------------------------------------------------------
@@ -205,33 +513,33 @@ namespace dicom::net {
 
         switch (m_state) {
         case MachineState::Sta2:
-            ApplyAA1();
+            ApplyAA1(AAbort::ReasonType::UnrecognisedPDU);
             break;
 
         case MachineState::Sta13:
-            ApplyAA7();
+            ApplyAA7(AAbort::ReasonType::UnrecognisedPDU);
             break;
 
         default:
-            ApplyAA8();
+            ApplyAA8(AAbort::ReasonType::UnrecognisedPDU);
             break;
         }
     }
 
     //--------------------------------------------------------------------------------------------------------
 
-    void StateMachine::HandleAAssociateAC([[maybe_unused]] PDUPtr&& pdu) {
+    void StateMachine::HandleAAssociateAC(PDUPtr&& pdu) {
         if (m_state == MachineState::Sta1 || m_state == MachineState::Sta4) {
             ThrowInvalidState();
         }
 
         switch (m_state) {
         case MachineState::Sta2:
-            ApplyAA1();
+            ApplyAA1(AAbort::ReasonType::UnexpectedPDU);
             break;
 
         case MachineState::Sta5:
-            ApplyAE3();
+            ApplyAE3(dynamic_cast<AAssociateAC&>(*pdu));
             break;
 
         case MachineState::Sta13:
@@ -239,7 +547,52 @@ namespace dicom::net {
             break;
 
         default:
-            ApplyAA8();
+            ApplyAA8(AAbort::ReasonType::UnexpectedPDU);
+            break;
+        }
+    }
+
+    //--------------------------------------------------------------------------------------------------------
+
+    void StateMachine::HandleAAssociateRJ(PDUPtr&& pdu) {
+        if (m_state == MachineState::Sta1 || m_state == MachineState::Sta4) {
+            ThrowInvalidState();
+        }
+
+        switch (m_state) {
+        case MachineState::Sta2:
+            ApplyAA1(AAbort::ReasonType::UnexpectedPDU);
+            break;
+
+        case MachineState::Sta5:
+            ApplyAE4(dynamic_cast<AAssociateRJ&>(*pdu));
+            break;
+
+        case MachineState::Sta13:
+            ApplyAA6();
+            break;
+
+        default:
+            ApplyAA8(AAbort::ReasonType::UnexpectedPDU);
+            break;
+        }
+    }
+
+    //--------------------------------------------------------------------------------------------------------
+
+    void StateMachine::HandleAAbort([[maybe_unused]] PDUPtr&& pdu) {
+        if (m_state == MachineState::Sta1 || m_state == MachineState::Sta4) {
+            ThrowInvalidState();
+        }
+
+        switch (m_state) {
+        case MachineState::Sta2:
+        case MachineState::Sta13:
+            ApplyAA2();
+            break;
+
+        default:
+            ApplyAA3();
             break;
         }
     }

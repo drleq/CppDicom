@@ -11,12 +11,9 @@ namespace dicom::net {
 
     UpperLayer::UpperLayer(
         asio::io_context& io_context,
-        StateMachine* state_machine,
-        ArtimExpiredCallback&& artim_expired_callback
+        StateMachine* state_machine
     ) : m_io_context(&io_context),
-        m_state_machine(state_machine),
-        m_artim_expired_callback(std::forward<ArtimExpiredCallback>(artim_expired_callback)),
-        m_artim(io_context)
+        m_state_machine(state_machine)
     {}
 
     //--------------------------------------------------------------------------------------------------------
@@ -132,29 +129,6 @@ namespace dicom::net {
                 );
             }
         );
-    }
-
-    //--------------------------------------------------------------------------------------------------------
-
-    void UpperLayer::ResetArtimTimeout() {
-        m_artim.expires_from_now(std::chrono::seconds(30));
-        m_artim.async_wait(
-            [this](const asio::error_code& error) {
-                if (error.value() == asio::error::operation_aborted) {
-                    // An aborted timer means we're being cancelled or destructed.  Do nothing.
-                    return;
-                }
-
-                // Timeout triggered.
-                m_artim_expired_callback(error);
-            }
-        );
-    }
-
-    //--------------------------------------------------------------------------------------------------------
-
-    void UpperLayer::CancelArtimTimeout() {
-        m_artim.cancel();
     }
 
 }

@@ -1,6 +1,8 @@
 #pragma once
 
+#include "dicom/net/ArtimTimer.h"
 #include "dicom/net/ProtocolDataUnits.h"
+namespace dicom::io { struct TransferSyntax; }
 namespace dicom::net { class UpperLayer; }
 
 namespace dicom::net {
@@ -130,14 +132,14 @@ namespace dicom::net {
         void HandleArtimExpired(const asio::error_code& error);
         void ApplyAE1();
         void ApplyAE2();
-        void ApplyAE3();
-        void ApplyAE4();
+        void ApplyAE3(const AAssociateAC& pdu);
+        void ApplyAE4(const AAssociateRJ& pdu);
         void ApplyAE5();
-        void ApplyAE6();
-        void ApplyAE7();
-        void ApplyAE8();
-        void ApplyDT1();
-        void ApplyDT2();
+        void ApplyAE6(const AAssociateRQ& pdu);
+        void ApplyAE7(const AAssociateAC& pdu);
+        void ApplyAE8(const AAssociateRJ& pdu);
+        void ApplyDT1(const PDataTF& pdu);
+        void ApplyDT2(const PDataTF& pdu);
         void ApplyAR1();
         void ApplyAR2();
         void ApplyAR3();
@@ -148,25 +150,33 @@ namespace dicom::net {
         void ApplyAR8();
         void ApplyAR9();
         void ApplyAR10();
-        void ApplyAA1();
+        void ApplyAA1(AAbort::ReasonType reason);
         void ApplyAA2();
         void ApplyAA3();
         void ApplyAA4();
         void ApplyAA5();
         void ApplyAA6();
-        void ApplyAA7();
-        void ApplyAA8();
+        void ApplyAA7(AAbort::ReasonType reason);
+        void ApplyAA8(AAbort::ReasonType reason);
         void ThrowInvalidState() const;
 
+        void ResetArtim();
         void AsyncReadNextPDU();
 
+        void HandleNetworkError(const asio::error_code& error);
         void HandleInvalidPDU();
         void HandleAAssociateAC(PDUPtr&& pdu);
+        void HandleAAssociateRJ(PDUPtr&& pdu);
+        void HandleAAbort(PDUPtr&& pdu);
 
     private:
         bool m_is_service_user;
         std::unique_ptr<UpperLayer> m_upper_layer;
+        ArtimTimer m_artim;
         MachineState m_state;
+
+        size_t m_maximum_pdu_size = 0;
+        const dicom::io::TransferSyntax* m_chosen_transfer_syntax = nullptr;
     };
 
 }
