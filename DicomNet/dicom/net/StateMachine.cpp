@@ -8,24 +8,40 @@
 namespace dicom::net {
 
     StateMachine::StateMachine(
-        asio::io_context& io_context
-    ) : m_is_service_user(true),
+        asio::io_context& io_context,
+        bool is_service_user
+    ) : m_is_service_user(is_service_user),
+        m_transport(io_context),
         m_artim(io_context)
     {
-        m_upper_layer = std::make_unique<UpperLayer>(io_context, this);
         m_state = MachineState::Sta1;
     }
 
     //--------------------------------------------------------------------------------------------------------
 
-    StateMachine::~StateMachine() = default;
+    std::unique_ptr<StateMachine> StateMachine::CreateForProvider(
+        asio::io_context& io_context,
+        asio::ip::tcp::socket&& socket
+    ) {
+        std::unique_ptr<StateMachine> sm{ new StateMachine{ io_context, false } };
+        sm->ApplyAE5(std::forward<asio::ip::tcp::socket>(socket));
+        return sm;
+    }
 
     //--------------------------------------------------------------------------------------------------------
 
-    void StateMachine::StartUser() {
-        m_is_service_user = true;
-        ApplyAE1();
+    std::unique_ptr<StateMachine> StateMachine::CreateForUser(
+        asio::io_context& io_context,
+        const asio::ip::tcp::endpoint& provider_endpoint
+    ) {
+        std::unique_ptr<StateMachine> sm{ new StateMachine{ io_context, true } };
+        sm->ApplyAE1(provider_endpoint);
+        return sm;
     }
+
+    //--------------------------------------------------------------------------------------------------------
+
+    StateMachine::~StateMachine() = default;
     
     //--------------------------------------------------------------------------------------------------------
 
@@ -49,7 +65,7 @@ namespace dicom::net {
 
     //--------------------------------------------------------------------------------------------------------
 
-    void StateMachine::ApplyAE1() {
+    void StateMachine::ApplyAE1(const asio::ip::tcp::endpoint& provider_endpoint) {
         // [Idle] ->
         // [Service User establishing connection to remote Service Provider]
         //
@@ -60,8 +76,8 @@ namespace dicom::net {
             ThrowInvalidState();
         }
 
-        m_upper_layer->AsyncConnect(
-            asio::ip::tcp::endpoint(asio::ip::make_address_v4("127.0.0.1"), 106),
+        m_transport.AsyncConnect(
+            provider_endpoint,
             [this](auto& error) {
                 if (error) {
                     // Log error information.
@@ -103,7 +119,7 @@ namespace dicom::net {
         DataSequence data;
         encode_pdu(data, pdu);
 
-        m_upper_layer->AsyncSendPDU(
+        m_transport.AsyncSendPDU(
             std::move(data),
             [this](auto& error) {
                 if (error) {
@@ -146,20 +162,21 @@ namespace dicom::net {
         // Log why association was rejected.  Raise event.
         (void)pdu;
 
-        m_upper_layer->Disconnect();
+        m_transport.Disconnect();
 
         m_state = MachineState::Sta1;
     }
 
     //--------------------------------------------------------------------------------------------------------
 
-    void StateMachine::ApplyAE5() {
+    void StateMachine::ApplyAE5(asio::ip::tcp::socket&& socket) {
         // [Service Provider receives connection from Service User] ->
         // [Service Provider waiting for Association Request PDU; Start ARTIM timeout]
         //
         // Issue Transport connection response primitive; start ARTIM timer
         // Next state is Sta2
         
+        m_transport.AdoptConnection(std::forward<asio::ip::tcp::socket>(socket));
         ResetArtim();
 
         m_state = MachineState::Sta2;
@@ -195,7 +212,7 @@ namespace dicom::net {
             DataSequence data;
             encode_pdu(data, rj_pdu);
 
-            m_upper_layer->AsyncSendPDU(
+            m_transport.AsyncSendPDU(
                 std::move(data),
                 [this](auto& error) { HandleNetworkError(error); }
             );
@@ -217,7 +234,7 @@ namespace dicom::net {
         DataSequence data;
         encode_pdu(data, pdu);
 
-        m_upper_layer->AsyncSendPDU(
+        m_transport.AsyncSendPDU(
             std::move(data),
             [this](auto& error) { HandleNetworkError(error); }
         );
@@ -238,7 +255,7 @@ namespace dicom::net {
         DataSequence data;
         encode_pdu(data, pdu);
 
-        m_upper_layer->AsyncSendPDU(
+        m_transport.AsyncSendPDU(
             std::move(data),
             [this](auto& error) { HandleNetworkError(error); }
         );
@@ -259,7 +276,7 @@ namespace dicom::net {
         DataSequence data;
         encode_pdu(data, pdu);
 
-        m_upper_layer->AsyncSendPDU(
+        m_transport.AsyncSendPDU(
             std::move(data),
             [this](auto& error) { HandleNetworkError(error); }
         );
@@ -308,7 +325,7 @@ namespace dicom::net {
         DataSequence data;
         encode_pdu(data, pdu);
 
-        m_upper_layer->AsyncSendPDU(
+        m_transport.AsyncSendPDU(
             std::move(data),
             [this](auto& error) { HandleNetworkError(error); }
         );
@@ -328,7 +345,7 @@ namespace dicom::net {
 
         // We haven't actually connected yet so there's no need to send an Abort PDU.
         m_artim.Cancel();
-        m_upper_layer->Disconnect();
+        m_transport.Disconnect();
 
         m_state = MachineState::Sta1;
     }
@@ -408,7 +425,7 @@ namespace dicom::net {
         DataSequence data;
         encode_pdu(data, pdu);
 
-        m_upper_layer->AsyncSendPDU(
+        m_transport.AsyncSendPDU(
             std::move(data),
             [this](auto& error) { HandleNetworkError(error); }
         );
@@ -428,7 +445,7 @@ namespace dicom::net {
         DataSequence data;
         encode_pdu(data, pdu);
 
-        m_upper_layer->AsyncSendPDU(
+        m_transport.AsyncSendPDU(
             std::move(data),
             [this](auto& error) { HandleNetworkError(error); }
         );
@@ -455,7 +472,7 @@ namespace dicom::net {
     //--------------------------------------------------------------------------------------------------------
 
     void StateMachine::AsyncReadNextPDU() {
-        m_upper_layer->AsyncReadPDU(
+        m_transport.AsyncReadPDU(
             [this](auto& error, data_buffer&& pdu_buf){
                 if (error) {
                     // Networking error.

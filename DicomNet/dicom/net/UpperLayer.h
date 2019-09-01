@@ -11,13 +11,12 @@ namespace dicom::net {
     class DICOMNET_EXPORT UpperLayer
     {
     public:
-        UpperLayer(
-            asio::io_context& context,
-            StateMachine* state_machine
-        );
+        UpperLayer(asio::io_context& context);
         virtual ~UpperLayer();
 
-        void AdoptSocket(asio::ip::tcp::socket&& socket);
+        void AdoptConnection(
+            asio::ip::tcp::socket&& socket
+        );
         void AsyncConnect(
             const asio::ip::tcp::endpoint& endpoint,
             AsyncCallback&& callback
@@ -34,9 +33,7 @@ namespace dicom::net {
 
     private:
         asio::io_context*const m_io_context;
-        StateMachine*const m_state_machine;
-
-        std::unique_ptr<asio::ip::tcp::socket> m_socket00;
+        std::optional<asio::ip::tcp::socket> m_socket00;
     };
 
 }

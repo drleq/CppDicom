@@ -2,8 +2,8 @@
 
 #include "dicom/net/ArtimTimer.h"
 #include "dicom/net/ProtocolDataUnits.h"
+#include "dicom/net/UpperLayer.h"
 namespace dicom::io { struct TransferSyntax; }
-namespace dicom::net { class UpperLayer; }
 
 namespace dicom::net {
 
@@ -119,22 +119,33 @@ namespace dicom::net {
     class DICOMNET_EXPORT StateMachine
     {
     public:
-        StateMachine(
-            asio::io_context& io_context
-        );
+        StateMachine(StateMachine&&) = default;
+        StateMachine& operator = (StateMachine&&) = default;
+
         virtual ~StateMachine();
 
-        MachineState State() const { return m_state; }
-        void StartUser();
+        static std::unique_ptr<StateMachine> CreateForProvider(
+            asio::io_context& io_context,
+            asio::ip::tcp::socket&& socket
+        );
+        static std::unique_ptr<StateMachine> CreateForUser(
+            asio::io_context& io_context,
+            const asio::ip::tcp::endpoint& provider_endpoint
+        );
 
+    private:
+        StateMachine(
+            asio::io_context& io_context,
+            bool is_service_user
+        );
 
     private:
         void HandleArtimExpired(const asio::error_code& error);
-        void ApplyAE1();
+        void ApplyAE1(const asio::ip::tcp::endpoint& provider_endpoint);
         void ApplyAE2();
         void ApplyAE3(const AAssociateAC& pdu);
         void ApplyAE4(const AAssociateRJ& pdu);
-        void ApplyAE5();
+        void ApplyAE5(asio::ip::tcp::socket&& socket);
         void ApplyAE6(const AAssociateRQ& pdu);
         void ApplyAE7(const AAssociateAC& pdu);
         void ApplyAE8(const AAssociateRJ& pdu);
@@ -171,7 +182,8 @@ namespace dicom::net {
 
     private:
         bool m_is_service_user;
-        std::unique_ptr<UpperLayer> m_upper_layer;
+        UpperLayer m_transport;
+
         ArtimTimer m_artim;
         MachineState m_state;
 
