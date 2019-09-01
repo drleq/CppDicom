@@ -2,7 +2,7 @@
 
 #include "dicom/net/ArtimTimer.h"
 #include "dicom/net/ProtocolDataUnits.h"
-#include "dicom/net/UpperLayer.h"
+#include "dicom/net/Transport.h"
 namespace dicom::io { struct TransferSyntax; }
 
 namespace dicom::net {
@@ -182,7 +182,7 @@ namespace dicom::net {
 
     private:
         bool m_is_service_user;
-        UpperLayer m_transport;
+        Transport m_transport;
 
         ArtimTimer m_artim;
         MachineState m_state;

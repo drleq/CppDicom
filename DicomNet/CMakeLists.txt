@@ -47,7 +47,7 @@ add_library(DicomNet SHARED
     dicom/net/ArtimTimer.cpp
     dicom/net/ProtocolDataUnits.cpp
     dicom/net/StateMachine.cpp
-    dicom/net/UpperLayer.cpp
+    dicom/net/Transport.cpp
 )
 
 # Conan

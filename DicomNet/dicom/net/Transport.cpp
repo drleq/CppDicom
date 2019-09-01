@@ -1,5 +1,5 @@
 #include "dicomnet_pch.h"
-#include "dicom/net/UpperLayer.h"
+#include "dicom/net/Transport.h"
 
 #include "dicom/net/ProtocolDataUnits.h"
 #include "dicom/net/StateMachine.h"
@@ -7,24 +7,24 @@
 
 namespace dicom::net {
 
-    UpperLayer::UpperLayer(
+    Transport::Transport(
         asio::io_context& io_context
     ) : m_io_context(&io_context)
     {}
 
     //--------------------------------------------------------------------------------------------------------
 
-    UpperLayer::~UpperLayer() = default;
+    Transport::~Transport() = default;
 
     //--------------------------------------------------------------------------------------------------------
 
-    void UpperLayer::AdoptConnection(asio::ip::tcp::socket&& socket) {
+    void Transport::AdoptConnection(asio::ip::tcp::socket&& socket) {
         m_socket00 = std::forward<asio::ip::tcp::socket>(socket);
     }
 
     //--------------------------------------------------------------------------------------------------------
 
-    void UpperLayer::AsyncConnect(
+    void Transport::AsyncConnect(
         const asio::ip::tcp::endpoint& endpoint,
         AsyncCallback&& callback
     ) {
@@ -34,13 +34,13 @@ namespace dicom::net {
 
     //--------------------------------------------------------------------------------------------------------
 
-    void UpperLayer::Disconnect() {
+    void Transport::Disconnect() {
         m_socket00.reset();
     }
 
     //--------------------------------------------------------------------------------------------------------
 
-    void UpperLayer::AsyncSendPDU(
+    void Transport::AsyncSendPDU(
         DataSequence&& pdu_data,
         AsyncCallback&& callback
     ) {
@@ -67,7 +67,7 @@ namespace dicom::net {
 
     //--------------------------------------------------------------------------------------------------------
 
-    void UpperLayer::AsyncReadPDU(AsyncReadCallback&& callback) {
+    void Transport::AsyncReadPDU(AsyncReadCallback&& callback) {
         data_buffer pdu_buf(sizeof(PDUHeader), 0);
 
         // Start by reading the PDUHeader.  This will tell us how much additional data to read.

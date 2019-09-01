@@ -8,11 +8,11 @@ namespace dicom::net {
     using AsyncCallback = std::function<void(const asio::error_code&)>;
     using AsyncReadCallback = std::function<void(const asio::error_code&, data_buffer&&)>;
 
-    class DICOMNET_EXPORT UpperLayer
+    class DICOMNET_EXPORT Transport
     {
     public:
-        UpperLayer(asio::io_context& context);
-        virtual ~UpperLayer();
+        Transport(asio::io_context& context);
+        virtual ~Transport();
 
         void AdoptConnection(
             asio::ip::tcp::socket&& socket

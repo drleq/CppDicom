@@ -3,7 +3,6 @@
 
 #include "dicom/io/TransferSyntax.h"
 #include "dicom/net/ProtocolDataUnits.h"
-#include "dicom/net/UpperLayer.h"
 
 namespace dicom::net {
 
