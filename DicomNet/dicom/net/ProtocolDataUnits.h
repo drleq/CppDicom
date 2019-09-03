@@ -9,7 +9,7 @@ namespace dicom::net {
 
     //--------------------------------------------------------------------------------------------------------
 
-    class IDataStorage
+    class DICOMNET_EXPORT IDataStorage
     {
     public:
         virtual ~IDataStorage() = default;

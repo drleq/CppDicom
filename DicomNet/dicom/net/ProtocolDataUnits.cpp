@@ -36,7 +36,7 @@ namespace {
         output_buffer OutputBuffer;
 
         asio::const_buffer AsBuffer() const override {
-            return asio::const_buffer(Storage.data(), Storage.size());//asio::buffer(Storage);
+            return asio::const_buffer(Storage.data(), Storage.size());
         }
     };
 
@@ -144,7 +144,7 @@ namespace {
         }
 
         auto end = str.find_last_not_of(' ');
-        return std::string{ str, start, end-start };
+        return std::string{ str, start, end-start+1 };
     }
 }
 
@@ -628,13 +628,14 @@ namespace dicom::net {
             data += 68;
 
             auto data_ptr = reinterpret_cast<const uint8_t*>(sub_buffer.data());
-            if (*reinterpret_cast<const uint16_t*>(&data_ptr[0]) != 1) {
+            uint16_t protocol_version = apply_endian(*reinterpret_cast<const uint16_t*>(&data_ptr[0]));
+            if (protocol_version != 1) {
                 // Validate the Protocol Version.
                 return false;
             }
 
-            tmp->CalledAETitle = decode_unterminated_string(&data_ptr[5], 16);
-            tmp->CallingAETitle = decode_unterminated_string(&data_ptr[21], 16);
+            tmp->CalledAETitle = decode_unterminated_string(&data_ptr[4], 16);
+            tmp->CallingAETitle = decode_unterminated_string(&data_ptr[20], 16);
         }
 
         bool result = decode_pdu_items_impl(
@@ -856,8 +857,8 @@ namespace dicom::net {
         auto shared_storage = std::make_shared<data_buffer>(std::forward<data_buffer>(storage));
         auto tmp = std::make_unique<PDataTF>();
 
-        size_t data_remaining = shared_storage->size();
-        auto data_ptr = reinterpret_cast<uint8_t*>(shared_storage->data());
+        size_t data_remaining = shared_storage->size() - sizeof(PDUHeader);
+        auto data_ptr = reinterpret_cast<uint8_t*>(shared_storage->data()) + sizeof(PDUHeader);
 
         while (data_remaining > 0) {
             if (data_remaining < 5) {
@@ -867,7 +868,7 @@ namespace dicom::net {
 
             // Build a new ValueItem using the [shared_storage]
             PDataTF::ValueItem value;
-            uint32_t value_length = apply_endian(*reinterpret_cast<const uint32_t*>(data_ptr[0]));
+            uint32_t value_length = apply_endian(*reinterpret_cast<const uint32_t*>(&data_ptr[0])) - 1;
             value.PresentationContextID = data_ptr[4];
 
             if (value_length + 5 > data_remaining) {
@@ -880,6 +881,7 @@ namespace dicom::net {
                 std::distance(shared_storage->data(), data_ptr + 5),
                 value_length
             );
+            tmp->Values.push_back(std::move(value));
 
             data_ptr += value_length + 5;
             data_remaining -= value_length + 5;

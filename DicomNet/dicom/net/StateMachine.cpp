@@ -4,6 +4,8 @@
 #include "dicom/io/TransferSyntax.h"
 #include "dicom/net/ProtocolDataUnits.h"
 
+#include <fstream>
+
 namespace dicom::net {
 
     StateMachine::StateMachine(
@@ -201,22 +203,25 @@ namespace dicom::net {
         if (is_acceptable) {
             m_state = MachineState::Sta3;
 
+            AAssociateAC pdu_ac {
+                pdu.ApplicationContext.ApplicationContextName,
+                1,
+                PresentationContextItemAC::ReasonType::Acceptance,
+                "1.2.840.10008.1.2",
+                0,
+                "1.2.3.4.5",
+                "FakeImp"
+            };
+            ApplyAE7(pdu_ac);
+
         } else {
             // TODO: Obtain and pack actual reason
-            AAssociateRJ rj_pdu{ 
+            AAssociateRJ pdu_rj { 
                 AAssociateRJ::ResultType::RejectedPermanent,
                 AAssociateRJ::SourceType::ServiceUser,
                 AAssociateRJ::ReasonType::ACSE_ProtocolNotSupported
             };
-            DataSequence data;
-            encode_pdu(data, rj_pdu);
-
-            m_transport.AsyncSendPDU(
-                std::move(data),
-                [this](auto& error) { HandleNetworkError(error); }
-            );
-            ResetArtim();
-            m_state = MachineState::Sta13;
+            ApplyAE8(pdu_rj);
         }
     }
 
@@ -487,8 +492,10 @@ namespace dicom::net {
                 }
 
                 switch (pdu->Type()) {
+                case PDUType::AAssociateRQ: HandleAAssociateRQ(std::move(pdu)); break;
                 case PDUType::AAssociateAC: HandleAAssociateAC(std::move(pdu)); break;
                 case PDUType::AAssociateRJ: HandleAAssociateRJ(std::move(pdu)); break;
+                case PDUType::PDataTF: HandlePDataTF(std::move(pdu)); break;
                 case PDUType::AAbort: HandleAAbort(std::move(pdu)); break;
                 }
             }
@@ -544,6 +551,27 @@ namespace dicom::net {
 
     //--------------------------------------------------------------------------------------------------------
 
+    void StateMachine::HandleAAssociateRQ(PDUPtr&& pdu) {
+        if (m_state == MachineState::Sta1 || m_state == MachineState::Sta4) {
+            ThrowInvalidState();
+        }
+
+        switch (m_state) {
+        case MachineState::Sta2:
+            ApplyAE6(*reinterpret_cast<AAssociateRQ*>(pdu.get()));
+            break;
+
+        case MachineState::Sta13:
+            ApplyAA7(AAbort::ReasonType::UnexpectedPDU);
+            break;
+
+        default:
+            ApplyAA8(AAbort::ReasonType::UnexpectedPDU);
+        }
+    }
+
+    //--------------------------------------------------------------------------------------------------------
+
     void StateMachine::HandleAAssociateAC(PDUPtr&& pdu) {
         if (m_state == MachineState::Sta1 || m_state == MachineState::Sta4) {
             ThrowInvalidState();
@@ -592,6 +620,17 @@ namespace dicom::net {
             ApplyAA8(AAbort::ReasonType::UnexpectedPDU);
             break;
         }
+    }
+
+    //--------------------------------------------------------------------------------------------------------
+
+    void StateMachine::HandlePDataTF([[maybe_unused]] PDUPtr&& pdu) {
+        auto typed = dynamic_cast<PDataTF*>(pdu.get());
+        auto data = typed->Values.front().EncodedData->AsBuffer();
+        [[maybe_unused]] auto ptr = reinterpret_cast<const uint8_t*>(data.data());
+
+        std::fstream o{ "pdata.dat", std::ios_base::out | std::ios_base::binary };
+        o.write(reinterpret_cast<const char*>(data.data()), data.size());
     }
 
     //--------------------------------------------------------------------------------------------------------

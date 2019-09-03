@@ -11,6 +11,7 @@ namespace dicom::net {
         virtual ~Acceptor();
 
     private:
+        asio::io_context*const m_context;
         asio::ip::tcp::acceptor m_acceptor;
         
         void AcceptNext();

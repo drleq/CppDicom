@@ -176,8 +176,10 @@ namespace dicom::net {
 
         void HandleNetworkError(const asio::error_code& error);
         void HandleInvalidPDU();
+        void HandleAAssociateRQ(PDUPtr&& pdu);
         void HandleAAssociateAC(PDUPtr&& pdu);
         void HandleAAssociateRJ(PDUPtr&& pdu);
+        void HandlePDataTF(PDUPtr&& pdu);
         void HandleAAbort(PDUPtr&& pdu);
 
     private:
