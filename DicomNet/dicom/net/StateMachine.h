@@ -4,6 +4,7 @@
 #include "dicom/net/ProtocolDataUnits.h"
 #include "dicom/net/Transport.h"
 namespace dicom::io { struct TransferSyntax; }
+namespace dicom::net { class AcseHandlers; }
 
 namespace dicom::net {
 
@@ -126,17 +127,20 @@ namespace dicom::net {
 
         static std::unique_ptr<StateMachine> CreateForProvider(
             asio::io_context& io_context,
-            asio::ip::tcp::socket&& socket
+            asio::ip::tcp::socket&& socket,
+            std::shared_ptr<AcseHandlers> handlers
         );
         static std::unique_ptr<StateMachine> CreateForUser(
             asio::io_context& io_context,
-            const asio::ip::tcp::endpoint& provider_endpoint
+            const asio::ip::tcp::endpoint& provider_endpoint,
+            std::shared_ptr<AcseHandlers> handlers
         );
 
     private:
         StateMachine(
             asio::io_context& io_context,
-            bool is_service_user
+            bool is_service_user,
+            std::shared_ptr<AcseHandlers> handlers
         );
 
     private:
@@ -149,8 +153,8 @@ namespace dicom::net {
         void ApplyAE6(const AAssociateRQ& pdu);
         void ApplyAE7(const AAssociateAC& pdu);
         void ApplyAE8(const AAssociateRJ& pdu);
-        void ApplyDT1(const PDataTF& pdu);
-        void ApplyDT2(const PDataTF& pdu);
+        void ApplyDT1(PDataTF&& pdu);
+        void ApplyDT2(PDataTF&& pdu);
         void ApplyAR1();
         void ApplyAR2();
         void ApplyAR3();
@@ -174,7 +178,7 @@ namespace dicom::net {
         void ResetArtim();
         void AsyncReadNextPDU();
 
-        void HandleNetworkError(const asio::error_code& error);
+        bool ValidateNetworkResult(const asio::error_code& error);
         void HandleInvalidPDU();
         void HandleAAssociateRQ(PDUPtr&& pdu);
         void HandleAAssociateAC(PDUPtr&& pdu);
@@ -183,6 +187,8 @@ namespace dicom::net {
         void HandleAAbort(PDUPtr&& pdu);
 
     private:
+        std::shared_ptr<AcseHandlers> m_handlers;
+
         bool m_is_service_user;
         Transport m_transport;
 

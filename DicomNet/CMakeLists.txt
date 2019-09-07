@@ -43,6 +43,7 @@ set(CMAKE_CXX_EXTENSIONS OFF)
 add_library(DicomNet SHARED
     dicomnet_pch.cpp
     dicom/net/Acceptor.cpp
+    dicom/net/AcseHandlers.cpp
     dicom/net/ApplicationEntity.cpp
     dicom/net/ArtimTimer.cpp
     dicom/net/ProtocolDataUnits.cpp

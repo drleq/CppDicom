@@ -329,7 +329,7 @@ namespace dicom::net {
         std::vector<ValueItem> Values;
     };
 
-    void encode_pdu(DataSequence& dest, const PDataTF& pdu);
+    void encode_pdu(DataSequence& dest, PDataTF&& pdu);
     bool decode_pdu_data(data_buffer&& storage, std::unique_ptr<PDataTF>& pdu);
 
     //--------------------------------------------------------------------------------------------------------

@@ -805,7 +805,7 @@ namespace dicom::net {
 
     //--------------------------------------------------------------------------------------------------------
 
-    void encode_pdu(DataSequence& dest, const PDataTF& pdu) {
+    void encode_pdu(DataSequence& dest, PDataTF&& pdu) {
         encode_pdu_impl(
             dest,
             PDUType::PDataTF,
@@ -825,7 +825,7 @@ namespace dicom::net {
                     data_ptr[4] = value.PresentationContextID;
 
                     // Attach the PDV data directly (no copy)
-                    ds.Insert(value.EncodedData);
+                    ds.Insert(std::move(value.EncodedData));
                 }
             }
         );

@@ -2,16 +2,29 @@
 #include "dicom/net/StateMachine.h"
 
 #include "dicom/io/TransferSyntax.h"
+#include "dicom/net/AcseHandlers.h"
 #include "dicom/net/ProtocolDataUnits.h"
 
-#include <fstream>
+namespace {
+
+    #define __STRINGIFY1(a) #a
+    #define __STRINGIFY(a) __STRINGIFY1(a)
+    #define __LIBRARY_VERSION __STRINGIFY(DICOM_DLL_VERSION_MAJOR) "." __STRINGIFY(DICOM_DLL_VERSION_MINOR)
+
+    // TODO: These should match the Part10 values
+    const std::string_view ImplementationClassUID { "1.2.3.4.5.6" };
+    const std::string_view ImplementationVersionName { "DicomNet v" __LIBRARY_VERSION };
+
+}
 
 namespace dicom::net {
 
     StateMachine::StateMachine(
         asio::io_context& io_context,
-        bool is_service_user
-    ) : m_is_service_user(is_service_user),
+        bool is_service_user,
+        std::shared_ptr<AcseHandlers> handlers
+    ) : m_handlers(std::move(handlers)),
+        m_is_service_user(is_service_user),
         m_transport(io_context),
         m_artim(io_context)
     {
@@ -22,9 +35,12 @@ namespace dicom::net {
 
     std::unique_ptr<StateMachine> StateMachine::CreateForProvider(
         asio::io_context& io_context,
-        asio::ip::tcp::socket&& socket
+        asio::ip::tcp::socket&& socket,
+        std::shared_ptr<AcseHandlers> handlers
     ) {
-        std::unique_ptr<StateMachine> sm{ new StateMachine{ io_context, false } };
+        std::unique_ptr<StateMachine> sm{
+            new StateMachine{ io_context, false, std::move(handlers) }
+        };
         sm->ApplyAE5(std::forward<asio::ip::tcp::socket>(socket));
         return sm;
     }
@@ -33,9 +49,12 @@ namespace dicom::net {
 
     std::unique_ptr<StateMachine> StateMachine::CreateForUser(
         asio::io_context& io_context,
-        const asio::ip::tcp::endpoint& provider_endpoint
+        const asio::ip::tcp::endpoint& provider_endpoint,
+        std::shared_ptr<AcseHandlers> handlers
     ) {
-        std::unique_ptr<StateMachine> sm{ new StateMachine{ io_context, true } };
+        std::unique_ptr<StateMachine> sm{
+            new StateMachine{ io_context, true, std::move(handlers) }
+        };
         sm->ApplyAE1(provider_endpoint);
         return sm;
     }
@@ -47,6 +66,12 @@ namespace dicom::net {
     //--------------------------------------------------------------------------------------------------------
 
     void StateMachine::HandleArtimExpired(const asio::error_code& error) {
+        if (error) {
+            // Log error.
+            // User driven abort.
+            return;
+        }
+
         switch (m_state) {
         case MachineState::Sta2:
         case MachineState::Sta13:
@@ -54,10 +79,6 @@ namespace dicom::net {
             break;
 
         default:
-            if (error) {
-                // Handle errors here.
-            }
-
             // This shouldn't happen.
             std::string msg = "Unexpected ARTIM expiration: " + std::to_string(static_cast<int>(m_state)); 
             throw IllegalStateChange(msg);
@@ -80,10 +101,7 @@ namespace dicom::net {
         m_transport.AsyncConnect(
             provider_endpoint,
             [this](auto& error) {
-                if (error) {
-                    // Log error information.
-                    ApplyAA4();
-                } else {
+                if (ValidateNetworkResult(error)) {
                     ApplyAE2();
                 }
             }
@@ -113,8 +131,8 @@ namespace dicom::net {
             "1.2.840.10008.1.1", // AbstractSyntax
             { "1.2.840.10008.1.2" }, // TransferSyntaxes
             16 * 1024,
-            "1.2.3.4.5",
-            "FakeImp"
+            std::string{ ImplementationClassUID },
+            std::string{ ImplementationVersionName }
         };
         
         DataSequence data;
@@ -122,12 +140,7 @@ namespace dicom::net {
 
         m_transport.AsyncSendPDU(
             std::move(data),
-            [this](auto& error) {
-                if (error) {
-                    // Log error information.
-                    ApplyAA4();
-                }
-            }
+            [this](auto& error) { ValidateNetworkResult(error); }
         );
 
         m_state = MachineState::Sta5;
@@ -199,27 +212,55 @@ namespace dicom::net {
 
         m_artim.Cancel();
 
-        bool is_acceptable = true; // Check if [pdu] can be accepted
-        if (is_acceptable) {
+        // Check if [pdu] can be accepted
+        AcseHandlers::AcceptanceResult result { false };
+        try {
+            result = m_handlers->IsAssociationAcceptable(pdu);
+        } catch ([[maybe_unused]] const std::exception& ex) {
+            // Log exception details
+        } catch (...) {
+            // Log error
+        }
+
+        // Validate the selected TransferSyntax
+        auto check_it = std::find_if(
+            pdu.PresentationContext.TransferSyntaxes.begin(),
+            pdu.PresentationContext.TransferSyntaxes.end(),
+            [&](auto& ts) { return ts.TransferSyntax == result.AcceptedTransferSyntax; }
+        );
+        if (check_it == pdu.PresentationContext.TransferSyntaxes.end()) {
+            // Log that unsupported transfer syntax was selected
+            result = { false };
+            result.FailureReason = AAssociateRJ::ReasonType::User_ApplicationContextNotSupported;
+            result.FailureSource = AAssociateRJ::SourceType::ServiceUser;
+            result.FailureResult = AAssociateRJ::ResultType::RejectedPermanent;
+        }
+
+        // Validate the selected MaximumDataTFLength
+        if (result.MaximumDataTFLength < 0) {
+            // Log that an invalid DataTF length was selected
+            result.MaximumDataTFLength = 128 * 1024;
+        }
+
+        if (result.IsAccepted) {
             m_state = MachineState::Sta3;
 
             AAssociateAC pdu_ac {
                 pdu.ApplicationContext.ApplicationContextName,
                 1,
                 PresentationContextItemAC::ReasonType::Acceptance,
-                "1.2.840.10008.1.2",
-                0,
-                "1.2.3.4.5",
-                "FakeImp"
+                std::move(result.AcceptedTransferSyntax),
+                static_cast<uint32_t>(result.MaximumDataTFLength),
+                std::string{ ImplementationClassUID },
+                std::string{ ImplementationVersionName }
             };
             ApplyAE7(pdu_ac);
 
         } else {
-            // TODO: Obtain and pack actual reason
             AAssociateRJ pdu_rj { 
-                AAssociateRJ::ResultType::RejectedPermanent,
-                AAssociateRJ::SourceType::ServiceUser,
-                AAssociateRJ::ReasonType::ACSE_ProtocolNotSupported
+                result.FailureResult,
+                result.FailureSource,
+                result.FailureReason
             };
             ApplyAE8(pdu_rj);
         }
@@ -240,7 +281,7 @@ namespace dicom::net {
 
         m_transport.AsyncSendPDU(
             std::move(data),
-            [this](auto& error) { HandleNetworkError(error); }
+            [this](auto& error) { ValidateNetworkResult(error); }
         );
 
         m_state = MachineState::Sta6;
@@ -261,7 +302,7 @@ namespace dicom::net {
 
         m_transport.AsyncSendPDU(
             std::move(data),
-            [this](auto& error) { HandleNetworkError(error); }
+            [this](auto& error) { ValidateNetworkResult(error); }
         );
         ResetArtim();
 
@@ -270,7 +311,7 @@ namespace dicom::net {
 
     //--------------------------------------------------------------------------------------------------------
 
-    void StateMachine::ApplyDT1(const PDataTF& pdu) {
+    void StateMachine::ApplyDT1(PDataTF&& pdu) {
         // [Service Provider/User ready for Data Transfer] ->
         // [Service Provider/User sends Data PDU]
         //
@@ -278,11 +319,11 @@ namespace dicom::net {
         // Next state is Sta6
 
         DataSequence data;
-        encode_pdu(data, pdu);
+        encode_pdu(data, std::forward<PDataTF>(pdu));
 
         m_transport.AsyncSendPDU(
             std::move(data),
-            [this](auto& error) { HandleNetworkError(error); }
+            [this](auto& error) { ValidateNetworkResult(error); }
         );
         
         m_state = MachineState::Sta6;
@@ -290,14 +331,14 @@ namespace dicom::net {
 
     //--------------------------------------------------------------------------------------------------------
 
-    void StateMachine::ApplyDT2([[maybe_unused]] const PDataTF& pdu) {
+    void StateMachine::ApplyDT2(PDataTF&& pdu) {
         // [Service Provider/User ready for Data Transfer] ->
         // [Service Provider/User receives Data PDU]
         //
         // Send P-DATA indication primitive
         // Next state is Sta6
 
-        // Send data to handler
+        m_handlers->OnData(std::forward<PDataTF>(pdu));
 
         m_state = MachineState::Sta6;
         AsyncReadNextPDU();
@@ -331,7 +372,7 @@ namespace dicom::net {
 
         m_transport.AsyncSendPDU(
             std::move(data),
-            [this](auto& error) { HandleNetworkError(error); }
+            [this](auto& error) { ValidateNetworkResult(error); }
         );
         ResetArtim();
 
@@ -431,7 +472,7 @@ namespace dicom::net {
 
         m_transport.AsyncSendPDU(
             std::move(data),
-            [this](auto& error) { HandleNetworkError(error); }
+            [this](auto& error) { ValidateNetworkResult(error); }
         );
 
         m_state = MachineState::Sta13;
@@ -451,7 +492,7 @@ namespace dicom::net {
 
         m_transport.AsyncSendPDU(
             std::move(data),
-            [this](auto& error) { HandleNetworkError(error); }
+            [this](auto& error) { ValidateNetworkResult(error); }
         );
         ResetArtim();
 
@@ -478,9 +519,7 @@ namespace dicom::net {
     void StateMachine::AsyncReadNextPDU() {
         m_transport.AsyncReadPDU(
             [this](auto& error, data_buffer&& pdu_buf){
-                if (error) {
-                    // Networking error.
-                    ApplyAA4();
+                if (!ValidateNetworkResult(error)) {
                     return;
                 }
 
@@ -504,7 +543,11 @@ namespace dicom::net {
 
     //--------------------------------------------------------------------------------------------------------
 
-    void StateMachine::HandleNetworkError(const asio::error_code& error) {
+    bool StateMachine::ValidateNetworkResult(const asio::error_code& error) {
+        if (!error) {
+            return true;
+        }
+
         if (m_state == MachineState::Sta1) {
             ThrowInvalidState();
         }
@@ -525,6 +568,8 @@ namespace dicom::net {
             ApplyAA4();
             break;
         }
+
+        return false;
     }
 
     //--------------------------------------------------------------------------------------------------------
@@ -624,13 +669,32 @@ namespace dicom::net {
 
     //--------------------------------------------------------------------------------------------------------
 
-    void StateMachine::HandlePDataTF([[maybe_unused]] PDUPtr&& pdu) {
-        auto typed = dynamic_cast<PDataTF*>(pdu.get());
-        auto data = typed->Values.front().EncodedData->AsBuffer();
-        [[maybe_unused]] auto ptr = reinterpret_cast<const uint8_t*>(data.data());
+    void StateMachine::HandlePDataTF(PDUPtr&& pdu) {
+        if (m_state == MachineState::Sta1 || m_state == MachineState::Sta4) {
+            ThrowInvalidState();
+        }
 
-        std::fstream o{ "pdata.dat", std::ios_base::out | std::ios_base::binary };
-        o.write(reinterpret_cast<const char*>(data.data()), data.size());
+        switch (m_state) {
+        case MachineState::Sta2:
+            ApplyAA1(AAbort::ReasonType::UnexpectedPDU);
+            break;
+
+        case MachineState::Sta6:
+            ApplyDT2(std::move(*dynamic_cast<PDataTF*>(pdu.get())));
+            break;
+
+        case MachineState::Sta7:
+            ApplyAR6();
+            break;
+
+        case MachineState::Sta13:
+            ApplyAA6();
+            break;
+
+        default:
+            ApplyAA8(AAbort::ReasonType::UnexpectedPDU);
+            break;
+        }
     }
 
     //--------------------------------------------------------------------------------------------------------
