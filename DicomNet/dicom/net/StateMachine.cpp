@@ -22,8 +22,8 @@ namespace dicom::net {
     StateMachine::StateMachine(
         asio::io_context& io_context,
         bool is_service_user,
-        std::shared_ptr<AcseHandlers> handlers
-    ) : m_handlers(std::move(handlers)),
+        AcseHandlers*const handlers
+    ) : m_handlers(handlers),
         m_is_service_user(is_service_user),
         m_transport(io_context),
         m_artim(io_context)
@@ -33,30 +33,24 @@ namespace dicom::net {
 
     //--------------------------------------------------------------------------------------------------------
 
-    std::unique_ptr<StateMachine> StateMachine::CreateForProvider(
+    StateMachine::StateMachine(
         asio::io_context& io_context,
-        asio::ip::tcp::socket&& socket,
-        std::shared_ptr<AcseHandlers> handlers
-    ) {
-        std::unique_ptr<StateMachine> sm{
-            new StateMachine{ io_context, false, std::move(handlers) }
-        };
-        sm->ApplyAE5(std::forward<asio::ip::tcp::socket>(socket));
-        return sm;
+        AcseHandlers*const handlers,
+        asio::ip::tcp::socket&& provider_socket
+    ) : StateMachine(io_context, false, handlers)
+    {
+        ApplyAE5(std::forward<asio::ip::tcp::socket>(provider_socket));
     }
 
     //--------------------------------------------------------------------------------------------------------
 
-    std::unique_ptr<StateMachine> StateMachine::CreateForUser(
+    StateMachine::StateMachine(
         asio::io_context& io_context,
-        const asio::ip::tcp::endpoint& provider_endpoint,
-        std::shared_ptr<AcseHandlers> handlers
-    ) {
-        std::unique_ptr<StateMachine> sm{
-            new StateMachine{ io_context, true, std::move(handlers) }
-        };
-        sm->ApplyAE1(provider_endpoint);
-        return sm;
+        AcseHandlers*const handlers,
+        const asio::ip::tcp::endpoint& provider_endpoint
+    ) : StateMachine(io_context, true, handlers)
+    {
+        ApplyAE1(provider_endpoint);
     }
 
     //--------------------------------------------------------------------------------------------------------

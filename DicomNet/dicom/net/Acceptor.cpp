@@ -2,28 +2,11 @@
 #include "dicom/net/Acceptor.h"
 
 #include "dicom/net/AcseHandlers.h"
-#include "dicom/net/StateMachine.h"
+#include "dicom/net/Association.h"
 
 namespace {
     using namespace dicom::net;
-    std::vector<std::unique_ptr<StateMachine>> s_tmp;
-
-    class Dummy : public AcseHandlers {
-    public:
-        virtual ~Dummy() = default;
-
-        AcceptanceResult IsAssociationAcceptable(const AAssociateRQ& pdu) override {
-            return AcceptanceResult {
-                true,
-                pdu.PresentationContext.TransferSyntaxes.front().TransferSyntax,
-                128 * 1024
-            };
-        }
-
-        void OnData(PDataTF&& pdu) override {
-            (void)pdu;
-        }
-    };
+    std::vector<std::unique_ptr<Association>> s_tmp;
 }
 
 namespace dicom::net {
@@ -50,10 +33,7 @@ namespace dicom::net {
                 if (error) {
                     // Handle error.
                 } else {
-                    s_tmp.push_back(
-                        StateMachine::CreateForProvider(*m_context, std::move(conn), std::make_shared<Dummy>())
-                    );
-                    // Start Association handler
+                    s_tmp.push_back(std::make_unique<Association>(*m_context, std::move(conn)));
                 }
 
                 AcceptNext();

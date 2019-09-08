@@ -120,27 +120,27 @@ namespace dicom::net {
     class DICOMNET_EXPORT StateMachine
     {
     public:
+        StateMachine(
+            asio::io_context& io_context,
+            AcseHandlers*const handlers,
+            asio::ip::tcp::socket&& provider_socket
+        );
+        StateMachine(
+            asio::io_context& io_context,
+            AcseHandlers*const handlers,
+            const asio::ip::tcp::endpoint& provider_endpoint
+        );
+
         StateMachine(StateMachine&&) = default;
         StateMachine& operator = (StateMachine&&) = default;
 
         virtual ~StateMachine();
 
-        static std::unique_ptr<StateMachine> CreateForProvider(
-            asio::io_context& io_context,
-            asio::ip::tcp::socket&& socket,
-            std::shared_ptr<AcseHandlers> handlers
-        );
-        static std::unique_ptr<StateMachine> CreateForUser(
-            asio::io_context& io_context,
-            const asio::ip::tcp::endpoint& provider_endpoint,
-            std::shared_ptr<AcseHandlers> handlers
-        );
-
     private:
         StateMachine(
             asio::io_context& io_context,
             bool is_service_user,
-            std::shared_ptr<AcseHandlers> handlers
+            AcseHandlers*const handlers
         );
 
     private:
