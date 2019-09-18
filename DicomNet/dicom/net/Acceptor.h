@@ -1,5 +1,7 @@
 #pragma once
 
+#include <atomic>
+
 namespace dicom::net {
 
     class DICOMNET_EXPORT Acceptor {
@@ -13,6 +15,10 @@ namespace dicom::net {
     private:
         asio::io_context*const m_context;
         asio::ip::tcp::acceptor m_acceptor;
+
+        std::atomic<bool> m_cancel_flag;
+        struct Worker;
+        std::vector<std::unique_ptr<Worker>> m_workers;
         
         void AcceptNext();
     };

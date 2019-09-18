@@ -136,6 +136,9 @@ namespace dicom::net {
 
         virtual ~StateMachine();
 
+        bool IsClosed() const;
+        void Abort();
+
     private:
         StateMachine(
             asio::io_context& io_context,

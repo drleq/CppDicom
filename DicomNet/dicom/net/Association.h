@@ -1,6 +1,7 @@
 #pragma once
 
 #include "dicom/net/AcseHandlers.h"
+namespace dicom::data { class AttributeSet; }
 namespace dicom::net { class StateMachine; }
 
 namespace dicom::net {
@@ -19,6 +20,9 @@ namespace dicom::net {
         );
         virtual ~Association();
 
+        bool IsClosed() const;
+        void Abort() const;
+
     private: // AcseHandlers
         AcceptanceResult IsAssociationAcceptable(const AAssociateRQ& pdu) override;
         void OnData(PDataTF&& pdu) override;
@@ -27,8 +31,9 @@ namespace dicom::net {
         std::unique_ptr<StateMachine> m_state_machine;
 
         struct DimseCommandSet {
-            size_t Length;
+            std::streamsize Length;
             dicom::net::data_buffer Data;
+            std::unique_ptr<dicom::data::AttributeSet> Attributes;
         };
         std::optional<DimseCommandSet> m_current00;
     };

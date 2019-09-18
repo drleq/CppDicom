@@ -56,7 +56,33 @@ namespace dicom::net {
     //--------------------------------------------------------------------------------------------------------
 
     StateMachine::~StateMachine() = default;
-    
+
+    //--------------------------------------------------------------------------------------------------------
+
+    bool StateMachine::IsClosed() const { 
+        return m_state == MachineState::Sta13;
+    }
+
+    //--------------------------------------------------------------------------------------------------------
+
+    void StateMachine::Abort() {
+        switch (m_state) {
+        case MachineState::Sta1:
+        case MachineState::Sta2:
+        case MachineState::Sta13:
+            // We aren't connected.  Nothing to abort.
+            return;
+
+        case MachineState::Sta4:
+            ApplyAA2();
+            break;
+
+        default:
+            ApplyAA1(AAbort::ReasonType::NotSpecified);
+            break;
+        }
+    }
+
     //--------------------------------------------------------------------------------------------------------
 
     void StateMachine::HandleArtimExpired(const asio::error_code& error) {

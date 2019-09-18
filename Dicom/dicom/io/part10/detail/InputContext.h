@@ -11,7 +11,7 @@
 
 namespace dicom::io::part10::detail {
 
-    class InputContext
+    class DICOM_EXPORT InputContext
     {
     public:
         // Used for loading the whole dataset

@@ -12,7 +12,7 @@
 
 namespace dicom::io::part10::detail {
 
-    class OutputContext
+    class DICOM_EXPORT OutputContext
     {
     public:
         OutputContext(

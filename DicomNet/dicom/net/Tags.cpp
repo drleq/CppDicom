@@ -1,7 +1,9 @@
 #include "dicomnet_pch.h"
-#include "dicom/net/Tags.cpp"
+#include "dicom/net/Tags.h"
 
 namespace dicom::net::tags {
+    using namespace dicom::data;
+
     const tag ActionTypeID = { 0x00001008, {1, 1}, VRType::US, false };
     const tag AffectedSOPClassUID = { 0x00000002, {1, 1}, VRType::UI, false };
     const tag AffectedSOPInstanceUID = { 0x00001000, {1, 1}, VRType::UI, false };
