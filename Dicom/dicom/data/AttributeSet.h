@@ -42,6 +42,38 @@ namespace dicom::data {
         void CopyAll(const AttributeSet& other);
         void CopyRange(const_iterator first, const_iterator last);
 
+        template <typename First, typename... Rest>
+        void CopyExact(const AttributeSet& other, const First& first, const Rest&... rest) {
+            Add(first, other.Get(first)->Copy());
+
+            if constexpr (sizeof...(Rest) > 0) {
+                CopyExact(other, rest...);
+            }
+        }
+
+        template <typename TSource, typename TDest>
+        void CopyTo(const AttributeSet& other, const TSource& source, const TDest& dest) {
+            Add(dest, other.Get(source)->Copy());
+        }
+
+        //----------------------------------------------------------------------------------------------------
+
+        std::unique_ptr<VR> AddValue(const tag& tag, uint16_t value);
+
+        template <typename T, typename = std::enable_if_t<std::is_enum_v<T>>>
+        std::unique_ptr<VR> AddValue(const tag& tag, T value) {
+            return AddValue(tag, static_cast<std::underlying_type_t<T>>(value));
+        }
+
+        //----------------------------------------------------------------------------------------------------
+
+        template <typename T>
+        T GetValue(const tag& tag) const {
+            static_assert("Unknown value type");
+        }
+
+        template <> uint16_t GetValue<uint16_t>(const tag& tag) const;
+
         //----------------------------------------------------------------------------------------------------
 
         void AddUnowned(tag_number tag, VR* unowned_attribute);

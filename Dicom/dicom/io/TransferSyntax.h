@@ -24,25 +24,25 @@ namespace dicom::io {
     );
 
     namespace transfer_syntax {
-        extern const TransferSyntax ImplicitLittle;
-        extern const TransferSyntax ExplicitLittle;
-        extern const TransferSyntax ExplicitBig;
-        extern const TransferSyntax RLECompression;
-        extern const TransferSyntax JpegBaseline;
-        extern const TransferSyntax JpegExtended;
-        extern const TransferSyntax JpegLossless;
-        extern const TransferSyntax JpegLosslessFOP;
-        extern const TransferSyntax JpegLSLossless;
-        extern const TransferSyntax JpegLSNearLossless;
-        extern const TransferSyntax Jpeg2000Lossless;
-        extern const TransferSyntax Jpeg2000;
-        extern const TransferSyntax Mpeg2MainLevel;
-        extern const TransferSyntax Mpeg2HighLevel;
-        extern const TransferSyntax Mpeg4;
-        extern const TransferSyntax Mpeg4BDCompatible;
-        extern const TransferSyntax Deflate;
-        extern const TransferSyntax JpipReferenced;
-        extern const TransferSyntax JpipDeflateReferenced;
+        extern DICOM_EXPORT const TransferSyntax ImplicitLittle;
+        extern DICOM_EXPORT const TransferSyntax ExplicitLittle;
+        extern DICOM_EXPORT const TransferSyntax ExplicitBig;
+        extern DICOM_EXPORT const TransferSyntax RLECompression;
+        extern DICOM_EXPORT const TransferSyntax JpegBaseline;
+        extern DICOM_EXPORT const TransferSyntax JpegExtended;
+        extern DICOM_EXPORT const TransferSyntax JpegLossless;
+        extern DICOM_EXPORT const TransferSyntax JpegLosslessFOP;
+        extern DICOM_EXPORT const TransferSyntax JpegLSLossless;
+        extern DICOM_EXPORT const TransferSyntax JpegLSNearLossless;
+        extern DICOM_EXPORT const TransferSyntax Jpeg2000Lossless;
+        extern DICOM_EXPORT const TransferSyntax Jpeg2000;
+        extern DICOM_EXPORT const TransferSyntax Mpeg2MainLevel;
+        extern DICOM_EXPORT const TransferSyntax Mpeg2HighLevel;
+        extern DICOM_EXPORT const TransferSyntax Mpeg4;
+        extern DICOM_EXPORT const TransferSyntax Mpeg4BDCompatible;
+        extern DICOM_EXPORT const TransferSyntax Deflate;
+        extern DICOM_EXPORT const TransferSyntax JpipReferenced;
+        extern DICOM_EXPORT const TransferSyntax JpipDeflateReferenced;
     } // namespace transfer_syntax
 
 }

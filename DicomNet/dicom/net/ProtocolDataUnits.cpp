@@ -150,6 +150,24 @@ namespace {
 
 namespace dicom::net {
 
+    SharedValueDataStorage::SharedValueDataStorage(SharedDataBuffer storage, size_t offset, size_t length)
+      : Storage(storage),
+        Offset(offset),
+        Length(length)
+    {}
+
+    //--------------------------------------------------------------------------------------------------------
+
+    SharedValueDataStorage::~SharedValueDataStorage() = default;
+
+    //--------------------------------------------------------------------------------------------------------
+
+    asio::const_buffer SharedValueDataStorage::AsBuffer() const {
+        return asio::const_buffer(Storage->data() + Offset, Length);
+    }
+
+    //--------------------------------------------------------------------------------------------------------
+
     DataSequence::DataSequence() {
         Sequence.push_back(std::make_shared<OutputDataStorage>());
     }
@@ -834,26 +852,6 @@ namespace dicom::net {
     //--------------------------------------------------------------------------------------------------------
 
     bool decode_pdu_data(data_buffer&& storage, std::unique_ptr<PDataTF>& pdu) {
-        using SharedDataBuffer = std::shared_ptr<data_buffer>;
-        class SharedValueDataStorage : public IDataStorage {
-        public:
-            SharedValueDataStorage(SharedDataBuffer storage, size_t offset, size_t length)
-              : Storage(storage),
-                Offset(offset),
-                Length(length)
-            {}
-
-            virtual ~SharedValueDataStorage() = default;
-
-            SharedDataBuffer Storage;
-            size_t Offset;
-            size_t Length;
-
-            asio::const_buffer AsBuffer() const override {
-                return asio::const_buffer(Storage->data() + Offset, Length);
-            }
-        };
-
         auto shared_storage = std::make_shared<data_buffer>(std::forward<data_buffer>(storage));
         auto tmp = std::make_unique<PDataTF>();
 

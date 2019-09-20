@@ -18,6 +18,23 @@ namespace dicom::net {
     using DataStoragePtr = std::shared_ptr<IDataStorage>;
 
     //--------------------------------------------------------------------------------------------------------
+
+    using SharedDataBuffer = std::shared_ptr<data_buffer>;
+    class SharedValueDataStorage :
+        public IDataStorage
+    {
+    public:
+        SharedValueDataStorage(SharedDataBuffer storage, size_t offset, size_t length);
+        virtual ~SharedValueDataStorage();
+
+        SharedDataBuffer Storage;
+        size_t Offset;
+        size_t Length;
+
+        asio::const_buffer AsBuffer() const override;
+    };
+
+    //--------------------------------------------------------------------------------------------------------
     
     struct DataSequence {
         DataSequence();

@@ -139,6 +139,8 @@ add_library(Dicom SHARED
     dicom/io/part10/FileInputStream.cpp
     dicom/io/part10/FileOutputStream.cpp
     dicom/io/part10/InputStream.cpp
+    dicom/io/part10/MemoryInputStream.cpp
+    dicom/io/part10/MemoryOutputStream.cpp
     dicom/io/part10/OutputStream.cpp
     dicom/io/part10/Part10LoadResult.cpp
     dicom/io/part10/Part10Reader.cpp

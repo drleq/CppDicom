@@ -47,6 +47,7 @@ add_library(DicomNet SHARED
     dicom/net/ApplicationEntity.cpp
     dicom/net/Association.cpp
     dicom/net/ArtimTimer.cpp
+    dicom/net/DimseHandlers.cpp
     dicom/net/ProtocolDataUnits.cpp
     dicom/net/StateMachine.cpp
     dicom/net/Tags.cpp

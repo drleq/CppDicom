@@ -2,6 +2,7 @@
 #include "dicom/data/AttributeSet.h"
 
 #include "dicom/data/LO.h"
+#include "dicom/data/US.h"
 #include "dicom/private_tag.h"
 
 using namespace std;
@@ -89,6 +90,30 @@ namespace dicom::data {
 
         // Update the attribute map, returning the removed VR.
         return RemoveRaw(_tag);
+    }
+
+    //--------------------------------------------------------------------------------------------------------
+
+    unique_ptr<VR> AttributeSet::AddValue(const tag& tag, uint16_t value) {
+        switch (tag.Type) {
+        case VRType::US: return Add(tag, std::make_unique<US>(value));
+
+        default:
+            throw std::invalid_argument("Tag does not match value type");
+        }
+    }
+
+    //--------------------------------------------------------------------------------------------------------
+
+    template <>
+    uint16_t AttributeSet::GetValue<uint16_t>(const tag& tag) const {
+        auto vr = Get(tag);
+        switch (vr->Type()) {
+        case VRType::US: return static_cast<const data::US*>(vr)->First();
+        
+        default:
+            throw std::invalid_argument("Tag does not match value type");
+        }
     }
 
     //--------------------------------------------------------------------------------------------------------

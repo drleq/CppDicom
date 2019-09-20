@@ -5,54 +5,14 @@
 #include "dicom/net/Association.h"
 #include <thread>
 
-namespace {
-    using namespace dicom::net;
-
-    static void HandleAssociation(
-        std::atomic<bool>*const cancel_flag,
-        std::atomic<bool>*const has_completed,
-        asio::ip::tcp::socket&& conn
-    ) {
-        // Create a new asio context for this thread.
-        asio::io_context context;
-
-        try {
-            // Create an Association to handle the connection.
-            Association assoc{
-                context,
-                std::forward<asio::ip::tcp::socket>(conn)
-            };
-            
-            // Keep running until the association terminates.
-            bool cancelling = false;
-            while (!assoc.IsClosed()) {
-                if (*cancel_flag && !cancelling) {
-                    // We have been asked to cancel the association.  Issue an Abort but continue processing
-                    // events to allow the conversation to occur.
-                    assoc.Abort();
-                    cancelling = true;
-                }
-
-                context.run();
-            }
-        } catch (const std::exception&) {
-        } catch (...) {
-        }
-
-        *has_completed = true;
-    }
-
-}
-
 namespace dicom::net {
 
     struct Acceptor::Worker
     {
-        Worker(std::atomic<bool>& cancel_flag, asio::ip::tcp::socket&& conn)
-        {
+        Worker(const Acceptor* owner, asio::ip::tcp::socket&& conn) {
             Thread = std::thread{
                 HandleAssociation,
-                &cancel_flag,
+                owner,
                 &HasCompleted,
                 std::forward<asio::ip::tcp::socket>(conn)
             };
@@ -65,15 +25,54 @@ namespace dicom::net {
 
         std::thread Thread;
         std::atomic<bool> HasCompleted = false;
+
+    private:
+        static void HandleAssociation(
+            const Acceptor* owner,
+            std::atomic<bool>*const has_completed,
+            asio::ip::tcp::socket&& conn
+        ) {
+            // Create a new asio context for this thread.
+            asio::io_context context;
+
+            try {
+                // Create an Association to handle the connection.
+                Association assoc{
+                    context,
+                    std::forward<asio::ip::tcp::socket>(conn),
+                    owner->m_dimse_handlers
+                };
+                
+                // Keep running until the association terminates.
+                bool cancelling = false;
+                while (!assoc.IsClosed()) {
+                    if (owner->m_cancel_flag && !cancelling) {
+                        // We have been asked to cancel the association.  Issue an Abort but continue processing
+                        // events to allow the conversation to occur.
+                        assoc.Abort();
+                        cancelling = true;
+                    }
+
+                    context.run();
+                }
+            } catch (const std::exception&) {
+            } catch (...) {
+            }
+
+            *has_completed = true;
+        }
     };
 
     //--------------------------------------------------------------------------------------------------------
 
     Acceptor::Acceptor(
         asio::io_context& context,
-        asio::ip::tcp::endpoint endpoint
+        asio::ip::tcp::endpoint endpoint,
+        std::shared_ptr<DimseHandlers> dimse_handlers
     ) : m_context(&context),
-        m_acceptor(context, endpoint)
+        m_dimse_handlers(std::move(dimse_handlers)),
+        m_acceptor(context, endpoint),
+        m_cancel_flag(false)
     {
         m_acceptor.listen();
         AcceptNext();
@@ -81,7 +80,21 @@ namespace dicom::net {
 
     //--------------------------------------------------------------------------------------------------------
 
-    Acceptor::~Acceptor() = default;
+    Acceptor::~Acceptor() {
+        Shutdown();
+    }
+
+    //--------------------------------------------------------------------------------------------------------
+
+    void Acceptor::Shutdown() {
+        m_cancel_flag = true;
+
+        for (auto& worker : m_workers) {
+            if (worker->Thread.joinable()) {
+                worker->Thread.join();
+            }
+        }
+    }
 
     //--------------------------------------------------------------------------------------------------------
 
@@ -90,6 +103,11 @@ namespace dicom::net {
             m_workers.begin(),
             m_workers.end(),
             [](auto& worker) -> bool { return worker->HasCompleted; }
+        );
+        std::for_each(
+            completed_it,
+            m_workers.end(),
+            [](auto& worker) { worker->Thread.join(); }
         );
         m_workers.erase(completed_it, m_workers.end());
 
@@ -100,7 +118,7 @@ namespace dicom::net {
                     return;
                 }
                 
-                auto worker = std::make_unique<Worker>(m_cancel_flag, std::move(conn));
+                auto worker = std::make_unique<Worker>(this, std::move(conn));
                 m_workers.push_back(std::move(worker));
                 AcceptNext();
             }

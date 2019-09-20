@@ -2,6 +2,7 @@
 
 #include "dicom/net/AcseHandlers.h"
 namespace dicom::data { class AttributeSet; }
+namespace dicom::net { class DimseHandlers; }
 namespace dicom::net { class StateMachine; }
 
 namespace dicom::net {
@@ -12,7 +13,8 @@ namespace dicom::net {
     public:
         Association(
             asio::io_context& context,
-            asio::ip::tcp::socket&& provider_socket
+            asio::ip::tcp::socket&& provider_socket,
+            std::shared_ptr<DimseHandlers> dimse_handlers
         );
         Association(
             asio::io_context& context,
@@ -28,6 +30,7 @@ namespace dicom::net {
         void OnData(PDataTF&& pdu) override;
 
     private:
+        std::shared_ptr<DimseHandlers> m_dimse_handlers;
         std::unique_ptr<StateMachine> m_state_machine;
 
         struct DimseCommandSet {
@@ -36,6 +39,8 @@ namespace dicom::net {
             std::unique_ptr<dicom::data::AttributeSet> Attributes;
         };
         std::optional<DimseCommandSet> m_current00;
+
+        void HandleCEcho();
     };
 
 }
