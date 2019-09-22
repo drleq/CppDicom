@@ -320,6 +320,8 @@ namespace dicom::net {
             // Error.
             return;
         }
+
+        m_current00 = std::nullopt;
     }
 
     //--------------------------------------------------------------------------------------------------------
@@ -353,7 +355,7 @@ namespace dicom::net {
 
         for (auto& fragment : fragments) {
             PDataTF pdu;
-            pdu.Values.push_back(PDataTF::ValueItem{ 0, std::move(fragment) });
+            pdu.Values.push_back(PDataTF::ValueItem{ 1, std::move(fragment) });
             m_state_machine->SendPData(std::move(pdu));
         }
     }

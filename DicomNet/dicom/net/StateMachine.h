@@ -164,8 +164,8 @@ namespace dicom::net {
         void ApplyAR3();
         void ApplyAR4();
         void ApplyAR5();
-        void ApplyAR6();
-        void ApplyAR7();
+        void ApplyAR6(PDataTF&& pdu);
+        void ApplyAR7(PDataTF&& pdu);
         void ApplyAR8();
         void ApplyAR9();
         void ApplyAR10();
@@ -189,6 +189,8 @@ namespace dicom::net {
         void HandleAAssociateRJ(PDUPtr&& pdu);
         void HandlePDataTF(PDUPtr&& pdu);
         void HandleAAbort(PDUPtr&& pdu);
+        void HandleAReleaseRQ(PDUPtr&& pdu);
+        void HandleAReleaseRP(PDUPtr&& pdu);
 
     private:
         std::shared_ptr<AcseHandlers> m_handlers;

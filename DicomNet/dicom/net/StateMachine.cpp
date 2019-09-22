@@ -372,16 +372,123 @@ namespace dicom::net {
 
     //--------------------------------------------------------------------------------------------------------
 
-    void StateMachine::ApplyAR1() {}
-    void StateMachine::ApplyAR2() {}
-    void StateMachine::ApplyAR3() {}
-    void StateMachine::ApplyAR4() {}
-    void StateMachine::ApplyAR5() {}
-    void StateMachine::ApplyAR6() {}
-    void StateMachine::ApplyAR7() {}
-    void StateMachine::ApplyAR8() {}
-    void StateMachine::ApplyAR9() {}
-    void StateMachine::ApplyAR10() {}
+    void StateMachine::ApplyAR1() {
+        AReleaseRQ pdu;
+
+        DataSequence data;
+        encode_pdu(data, pdu);
+
+        m_transport.AsyncSendPDU(
+            std::move(data),
+            [this](auto& error) { ValidateNetworkResult(error); }
+        );
+
+        m_state = MachineState::Sta7;
+    }
+
+    //--------------------------------------------------------------------------------------------------------
+
+    void StateMachine::ApplyAR2() {
+        // Notify handler.
+
+        m_state = MachineState::Sta8;
+
+        ApplyAR4();
+    }
+
+    //--------------------------------------------------------------------------------------------------------
+
+    void StateMachine::ApplyAR3() {
+        // Notify handler.
+
+        m_transport.Disconnect();
+
+        m_state = MachineState::Sta1;
+    }
+
+    //--------------------------------------------------------------------------------------------------------
+
+    void StateMachine::ApplyAR4() {
+        AReleaseRP pdu;
+
+        DataSequence data;
+        encode_pdu(data, pdu);
+
+        m_transport.AsyncSendPDU(
+            std::move(data),
+            [this](auto& error) { ValidateNetworkResult(error); }
+        );
+        ResetArtim();
+
+        m_state = MachineState::Sta13;
+    }
+
+    //--------------------------------------------------------------------------------------------------------
+
+    void StateMachine::ApplyAR5() {
+        m_artim.Cancel();
+
+        m_state = MachineState::Sta1;
+    }
+
+    //--------------------------------------------------------------------------------------------------------
+
+    void StateMachine::ApplyAR6(PDataTF&& pdu) {
+        m_handlers->OnData(std::forward<PDataTF>(pdu));
+
+        m_state = MachineState::Sta7;
+        AsyncReadNextPDU();
+    }
+
+    //--------------------------------------------------------------------------------------------------------
+
+    void StateMachine::ApplyAR7(PDataTF&& pdu) {
+        DataSequence data;
+        encode_pdu(data, std::forward<PDataTF>(pdu));
+
+        m_transport.AsyncSendPDU(
+            std::move(data),
+            [this](auto& error) { ValidateNetworkResult(error); }
+        );
+        
+        m_state = MachineState::Sta8;
+    }
+
+    //--------------------------------------------------------------------------------------------------------
+
+    void StateMachine::ApplyAR8() {
+        // Notify handler (release collision)
+
+        if (m_is_service_user) {
+            m_state = MachineState::Sta9;
+        } else {
+            m_state = MachineState::Sta10;
+        }
+    }
+
+    //--------------------------------------------------------------------------------------------------------
+
+    void StateMachine::ApplyAR9() {
+        AReleaseRP pdu;
+
+        DataSequence data;
+        encode_pdu(data, pdu);
+
+        m_transport.AsyncSendPDU(
+            std::move(data),
+            [this](auto& error) { ValidateNetworkResult(error); }
+        );
+
+        m_state = MachineState::Sta11;
+    }
+
+    //--------------------------------------------------------------------------------------------------------
+
+    void StateMachine::ApplyAR10() {
+        // Notify handler (release confirmation)
+
+        m_state = MachineState::Sta12;
+    }
 
     //--------------------------------------------------------------------------------------------------------
 
@@ -562,6 +669,8 @@ namespace dicom::net {
                 case PDUType::AAssociateRJ: HandleAAssociateRJ(std::move(pdu)); break;
                 case PDUType::PDataTF: HandlePDataTF(std::move(pdu)); break;
                 case PDUType::AAbort: HandleAAbort(std::move(pdu)); break;
+                case PDUType::AReleaseRQ: HandleAReleaseRQ(std::move(pdu)); break;
+                case PDUType::AReleaseRP: HandleAReleaseRP(std::move(pdu)); break;
                 }
             }
         );
@@ -710,7 +819,7 @@ namespace dicom::net {
             break;
 
         case MachineState::Sta7:
-            ApplyAR6();
+            ApplyAR6(std::move(*dynamic_cast<PDataTF*>(pdu.get())));
             break;
 
         case MachineState::Sta13:
@@ -738,6 +847,67 @@ namespace dicom::net {
 
         default:
             ApplyAA3();
+            break;
+        }
+    }
+
+    //--------------------------------------------------------------------------------------------------------
+
+    void StateMachine::HandleAReleaseRQ([[maybe_unused]] PDUPtr&& pdu) {
+        if (m_state == MachineState::Sta1 || m_state == MachineState::Sta4) {
+            ThrowInvalidState();
+        }
+
+        switch (m_state) {
+        case MachineState::Sta2:
+            ApplyAA1(AAbort::ReasonType::UnexpectedPDU);
+            break;
+
+        case MachineState::Sta6:
+            ApplyAR2();
+            break;
+
+        case MachineState::Sta7:
+            ApplyAR8();
+            break;
+
+        case MachineState::Sta13:
+            ApplyAA6();
+            break;
+
+        default:
+            ApplyAA8(AAbort::ReasonType::UnexpectedPDU);
+            break;
+        }
+    }
+
+    //--------------------------------------------------------------------------------------------------------
+
+    void StateMachine::HandleAReleaseRP([[maybe_unused]] PDUPtr&& pdu) {
+        if (m_state == MachineState::Sta1 || m_state == MachineState::Sta4) {
+            ThrowInvalidState();
+        }
+
+        switch (m_state) {
+        case MachineState::Sta2:
+            ApplyAA1(AAbort::ReasonType::UnexpectedPDU);
+            break;
+
+        case MachineState::Sta7:
+        case MachineState::Sta11:
+            ApplyAR3();
+            break;
+
+        case MachineState::Sta10:
+            ApplyAR10();
+            break;
+
+        case MachineState::Sta13:
+            ApplyAA6();
+            break;
+
+        default:
+            ApplyAA8(AAbort::ReasonType::UnexpectedPDU);
             break;
         }
     }

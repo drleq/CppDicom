@@ -841,7 +841,7 @@ namespace dicom::net {
                     d.commit(ValueItemHeaderLength);
 
                     auto data_ptr = reinterpret_cast<uint8_t*>(sub_buffer.data());
-                    *reinterpret_cast<uint32_t*>(&data_ptr[0]) = apply_endian(static_cast<uint32_t>(data_size));
+                    *reinterpret_cast<uint32_t*>(&data_ptr[0]) = apply_endian(static_cast<uint32_t>(data_size + 1));
                     data_ptr[4] = value.PresentationContextID;
 
                     // Attach the PDV data directly (no copy)
