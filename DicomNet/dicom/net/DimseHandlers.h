@@ -1,5 +1,6 @@
 #pragma once
 
+#include "dicom/net/DataStorage.h"
 namespace dicom::data { class AttributeSet; }
 
 namespace dicom::net {
@@ -30,6 +31,8 @@ namespace dicom::net {
         CCancelRQ = 0x0FFF
     };
 
+    //--------------------------------------------------------------------------------------------------------
+
     enum class DimseResultCode : uint16_t {
         Success = 0x0000,
         SOPClassNotSupported = 0x0122,
@@ -44,6 +47,8 @@ namespace dicom::net {
         Pending = 0xFF00,
         PendingPartialMatch = 0xFF01
     };
+
+    //--------------------------------------------------------------------------------------------------------
 
     class DICOMNET_EXPORT DimseHandlers
     {

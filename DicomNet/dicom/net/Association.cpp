@@ -1,6 +1,7 @@
 #include "dicomnet_pch.h"
 #include "dicom/net/Association.h"
 
+#include "dicom/net/DataStorage.h"
 #include "dicom/net/DimseHandlers.h"
 #include "dicom/net/StateMachine.h"
 #include "dicom/net/Tags.h"
@@ -81,6 +82,110 @@ namespace {
         ctx.WriteImplicitTagLength(bytes_written);
         stream->Seek(0, std::ios::end);
     }
+
+    //--------------------------------------------------------------------------------------------------------
+
+    DataStoragePtr encode_command_set(const data::AttributeSet& command_set) {
+        auto stream = std::make_shared<io::part10::MemoryOutputStream>();
+        io::part10::detail::OutputContext ctx{
+            stream,
+            &io::transfer_syntax::ImplicitLittle,
+            data::StringEncodingType::ISO_IEC_646
+        };
+
+        ctx.WriteTagNumber(tags::CommandGroupLength);
+        ctx.WriteImplicitTagLength(4);
+        stream->WriteValue(0U);
+
+        auto start_pos = stream->Tell();
+        for (auto [tag, attrib] : command_set) {
+            write_data_element(ctx, tag, attrib);
+        }
+        auto end_pos = stream->Tell();
+        stream->Seek(8, std::ios_base::beg);
+        stream->WriteValue(static_cast<uint32_t>(end_pos - start_pos));
+
+        return std::make_shared<SharedValueDataStorage>(stream->Detach());
+    }
+
+    //--------------------------------------------------------------------------------------------------------
+
+    std::vector<DataStorageSequence> fragment_message_data(
+        size_t maximum_fragment_length,
+        bool is_command_set,
+        const DataStorageSequence& data
+    ) {
+        static const auto NonLastCommandFlag = std::make_shared<UniqueValueDataStorage>(data_buffer{ 0x01 });
+        static const auto LastCommandFlag = std::make_shared<UniqueValueDataStorage>(data_buffer{ 0x03 });
+        static const auto NonLastDatasetFlag = std::make_shared<UniqueValueDataStorage>(data_buffer{ 0x00 });
+        static const auto LastDatasetFlag = std::make_shared<UniqueValueDataStorage>(data_buffer{ 0x02 });
+        constexpr size_t MessageFlagSize = 1;
+        constexpr size_t ValueItemHeaderSize = 4 + 1;
+        constexpr size_t HeaderSize = ValueItemHeaderSize + MessageFlagSize;
+
+        DataStoragePtr non_last_fragment_flag;
+        DataStoragePtr last_fragment_flag;
+        if (is_command_set) {
+            non_last_fragment_flag = NonLastCommandFlag;
+            last_fragment_flag = LastCommandFlag;
+        } else {
+            non_last_fragment_flag = NonLastDatasetFlag;
+            last_fragment_flag = LastDatasetFlag;
+        }
+
+        // [data] contains a sequence of buffers representing all the data we want to send.  For
+        // transmission over the ACSE layer the data needs to be split into fragments and sent as
+        // individual messages.  Each fragment can consist of multiple buffers to make up the maximum
+        // allowed length, including a single byte buffer at the beginning that
+        std::vector<DataStorageSequence> fragments;
+        DataStorageSequence fragment { non_last_fragment_flag };
+        size_t fragment_remaining = maximum_fragment_length - HeaderSize;
+
+        for (auto& s : data) {
+            auto length = s->AsBuffer().size();
+
+            size_t pos = 0;
+            while (pos < length) {
+                size_t sub_length = std::min(fragment_remaining, length - pos);
+
+                auto sub_storage = std::make_shared<SubRangeDataStorage>(s, pos, sub_length);
+                fragment.push_back(std::move(sub_storage));
+
+                pos += sub_length;
+                fragment_remaining -= sub_length;
+
+                if (fragment_remaining == 0) {
+                    fragments.push_back(std::move(fragment));
+
+                    fragment_remaining = maximum_fragment_length - HeaderSize;
+                    fragment.push_back(non_last_fragment_flag);
+                }
+            }
+        }
+
+        if (fragment.size() > 1) {
+            fragment[0] = last_fragment_flag;
+            fragments.push_back(std::move(fragment));
+        }
+
+        return fragments;
+    }
+
+    //--------------------------------------------------------------------------------------------------------
+
+    std::vector<DataStorageSequence> encode_dimse_message(
+        size_t maximum_fragment_length,
+        const data::AttributeSet& command_set//,
+        /* ??? dataset */
+    ) {
+        // Encode the command set to a buffer.
+        auto encoded_command_set = encode_command_set(command_set);
+        auto command_set_sequence = fragment_message_data(maximum_fragment_length, true, { encoded_command_set });
+
+        // Encode the dataset to a buffer.
+
+        return command_set_sequence;
+    }
 }
 
 namespace dicom::net {
@@ -145,7 +250,8 @@ namespace dicom::net {
         // - Read of Command Group based on length
         // - If C-STORE start stream handler
         if (!m_current00) {
-            auto buf = pdu.Values.front().EncodedData->AsBuffer();
+            // Assume only one value fragment.
+            auto buf = pdu.Values.front().EncodedData.front()->AsBuffer();
 
             // Skip the control byte.
             buf += 1;
@@ -243,26 +349,13 @@ namespace dicom::net {
             response->AddValue(tags::Status, result);
         }
 
-        auto stream = std::make_shared<io::part10::MemoryOutputStream>();
-        io::part10::detail::OutputContext ctx{
-            stream,
-            &io::transfer_syntax::ImplicitLittle,
-            data::StringEncodingType::ISO_IEC_646
-        };
+        auto fragments = encode_dimse_message(16*1024, *response);
 
-        ctx.WriteTagNumber(tags::CommandGroupLength);
-        ctx.WriteImplicitTagLength(4);
-        stream->WriteValue(0U);
-
-        auto start_pos = stream->Tell();
-        for (auto [tag, attrib] : *response) {
-            write_data_element(ctx, tag, attrib);
+        for (auto& fragment : fragments) {
+            PDataTF pdu;
+            pdu.Values.push_back(PDataTF::ValueItem{ 0, std::move(fragment) });
+            m_state_machine->SendPData(std::move(pdu));
         }
-        auto end_pos = stream->Tell();
-        stream->Seek(8, std::ios_base::beg);
-        stream->WriteValue(static_cast<uint32_t>(end_pos - start_pos));
-
-        std::vector<uint8_t> buf = stream->Detach();
     }
 
 }

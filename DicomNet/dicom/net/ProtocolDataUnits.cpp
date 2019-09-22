@@ -150,38 +150,26 @@ namespace {
 
 namespace dicom::net {
 
-    SharedValueDataStorage::SharedValueDataStorage(SharedDataBuffer storage, size_t offset, size_t length)
-      : Storage(storage),
-        Offset(offset),
-        Length(length)
-    {}
-
-    //--------------------------------------------------------------------------------------------------------
-
-    SharedValueDataStorage::~SharedValueDataStorage() = default;
-
-    //--------------------------------------------------------------------------------------------------------
-
-    asio::const_buffer SharedValueDataStorage::AsBuffer() const {
-        return asio::const_buffer(Storage->data() + Offset, Length);
-    }
-
-    //--------------------------------------------------------------------------------------------------------
-
     DataSequence::DataSequence() {
         Sequence.push_back(std::make_shared<OutputDataStorage>());
     }
 
     //--------------------------------------------------------------------------------------------------------
 
-    void DataSequence::Insert(DataStoragePtr storage) {
+    void DataSequence::Insert(DataStorageSequence&& storage) {
         if (Sequence.back()->AsBuffer().size() == 0) {
             // Remove the current buffer from the sequence if it's empty.
             Sequence.pop_back();
         }
 
-        // Insert a custom DataStorage at the current location.
-        Sequence.push_back(std::move(storage));
+        // Insert the custom DataStorageSequence at the current location.
+        Sequence.reserve(storage.size());
+        for (auto& s : storage) {
+            if (s->AsBuffer().size() > 0) {
+                Sequence.push_back(std::move(s));
+            }
+        }
+        storage.clear();
 
         // Create a new output_buffer after the custom storage to maintain the sequence.
         Sequence.push_back(std::make_shared<OutputDataStorage>());
@@ -201,6 +189,16 @@ namespace dicom::net {
             total += ds->AsBuffer().size();
         }
         return total;
+    }
+
+    //--------------------------------------------------------------------------------------------------------
+
+    DataStorageSequence&& DataSequence::Detach() {
+        if (Sequence.back()->AsBuffer().size() == 0) {
+            Sequence.pop_back();
+        }
+
+        return std::move(Sequence);
     }
 
     //--------------------------------------------------------------------------------------------------------
@@ -832,11 +830,15 @@ namespace dicom::net {
                     // Re-obtain the output buffer for each item as it will be changing
                     auto& d = ds.OutputBuffer();
 
+                    size_t data_size = 0;
+                    for (auto& s : value.EncodedData) {
+                        data_size += s->AsBuffer().size();
+                    }
+
                     // Output the PDV header
-                    size_t data_size = value.EncodedData->AsBuffer().size();
-                    size_t value_size = data_size + 5;
-                    auto sub_buffer = d.prepare(value_size);
-                    d.commit(value_size);
+                    constexpr size_t ValueItemHeaderLength = sizeof(uint32_t) + 1;
+                    auto sub_buffer = d.prepare(ValueItemHeaderLength);
+                    d.commit(ValueItemHeaderLength);
 
                     auto data_ptr = reinterpret_cast<uint8_t*>(sub_buffer.data());
                     *reinterpret_cast<uint32_t*>(&data_ptr[0]) = apply_endian(static_cast<uint32_t>(data_size));
@@ -874,10 +876,12 @@ namespace dicom::net {
                 return false;
             }
 
-            value.EncodedData = std::make_shared<SharedValueDataStorage>(
-                shared_storage,
-                std::distance(shared_storage->data(), data_ptr + 5),
-                value_length
+            value.EncodedData.push_back(
+                std::make_shared<SharedValueDataStorage>(
+                    shared_storage,
+                    std::distance(shared_storage->data(), data_ptr + 5),
+                    value_length
+                )
             );
             tmp->Values.push_back(std::move(value));
 

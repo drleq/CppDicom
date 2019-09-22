@@ -85,6 +85,12 @@ namespace dicom::net {
 
     //--------------------------------------------------------------------------------------------------------
 
+    void StateMachine::SendPData(PDataTF&& pdu) {
+        ApplyDT1(std::forward<PDataTF>(pdu));
+    }
+
+    //--------------------------------------------------------------------------------------------------------
+
     void StateMachine::HandleArtimExpired(const asio::error_code& error) {
         if (error) {
             // Log error.

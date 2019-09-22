@@ -4,6 +4,7 @@
 #include "dicom/net/ProtocolDataUnits.h"
 #include "dicom/net/StateMachine.h"
 #include "dicom/detail/intrinsic.h"
+#include <fstream>
 
 namespace dicom::net {
 
@@ -45,13 +46,19 @@ namespace dicom::net {
         AsyncCallback&& callback
     ) {
         // Construct the asio [buffer] sequence first as we need to move [pdu_data] into the callback.
+        auto sequence = pdu_data.Detach();
         std::vector<asio::const_buffer> buffers;
-        buffers.reserve(pdu_data.Sequence.size());
-        for (auto& b : pdu_data.Sequence) {
+        for (auto& b : sequence) {
             buffers.push_back(b->AsBuffer());
         }
 
-        auto wrapped_callback = [callback=std::forward<AsyncCallback>(callback), data=std::move(pdu_data)](
+        std::fstream tmp{ "pdata.bin", std::ios_base::out | std::ios_base::binary };
+        for (auto& s : buffers) {
+            tmp.write(reinterpret_cast<const char*>(s.data()), s.size());
+        }
+
+
+        auto wrapped_callback = [callback=std::forward<AsyncCallback>(callback), data=std::move(sequence)](
             auto& error, size_t bytes_transmitted
         ) {
             if (error.value() == asio::error::operation_aborted) {

@@ -1,49 +1,19 @@
 #pragma once
 
+#include "dicom/net/DataStorage.h"
+
 namespace dicom::net {
 
-    using input_buffer = asio::const_buffer;
-
-    using data_buffer = std::vector<uint8_t>;
-    using output_buffer = asio::dynamic_vector_buffer<uint8_t, std::allocator<uint8_t>>;
-
-    //--------------------------------------------------------------------------------------------------------
-
-    class DICOMNET_EXPORT IDataStorage
-    {
-    public:
-        virtual ~IDataStorage() = default;
-        virtual asio::const_buffer AsBuffer() const = 0;
-    };
-    using DataStoragePtr = std::shared_ptr<IDataStorage>;
-
-    //--------------------------------------------------------------------------------------------------------
-
-    using SharedDataBuffer = std::shared_ptr<data_buffer>;
-    class SharedValueDataStorage :
-        public IDataStorage
-    {
-    public:
-        SharedValueDataStorage(SharedDataBuffer storage, size_t offset, size_t length);
-        virtual ~SharedValueDataStorage();
-
-        SharedDataBuffer Storage;
-        size_t Offset;
-        size_t Length;
-
-        asio::const_buffer AsBuffer() const override;
-    };
-
-    //--------------------------------------------------------------------------------------------------------
-    
     struct DataSequence {
         DataSequence();
 
-        std::vector<DataStoragePtr> Sequence;
-
-        void Insert(DataStoragePtr storage);
+        void Insert(DataStorageSequence&& storage);
         output_buffer& OutputBuffer() const;
-        size_t Size() const;
+        size_t Size() const;        
+        DataStorageSequence&& Detach();
+
+    private:
+        DataStorageSequence Sequence;
     };
 
     //--------------------------------------------------------------------------------------------------------
@@ -335,7 +305,7 @@ namespace dicom::net {
     {
         struct ValueItem {
             uint8_t PresentationContextID;
-            DataStoragePtr EncodedData;
+            DataStorageSequence EncodedData;
         };
 
         PDataTF() = default;

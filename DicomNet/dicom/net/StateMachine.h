@@ -138,6 +138,7 @@ namespace dicom::net {
 
         bool IsClosed() const;
         void Abort();
+        void SendPData(PDataTF&& pdu);
 
     private:
         StateMachine(
