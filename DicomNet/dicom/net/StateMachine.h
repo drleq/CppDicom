@@ -193,7 +193,7 @@ namespace dicom::net {
         void HandleAReleaseRP(PDUPtr&& pdu);
 
     private:
-        std::shared_ptr<AcseHandlers> m_handlers;
+        AcseHandlers*const m_handlers;
 
         bool m_is_service_user;
         Transport m_transport;

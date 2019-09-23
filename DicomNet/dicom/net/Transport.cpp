@@ -4,7 +4,6 @@
 #include "dicom/net/ProtocolDataUnits.h"
 #include "dicom/net/StateMachine.h"
 #include "dicom/detail/intrinsic.h"
-#include <fstream>
 
 namespace dicom::net {
 
@@ -51,12 +50,6 @@ namespace dicom::net {
         for (auto& b : sequence) {
             buffers.push_back(b->AsBuffer());
         }
-
-        std::fstream tmp{ "pdata.bin", std::ios_base::out | std::ios_base::binary };
-        for (auto& s : buffers) {
-            tmp.write(reinterpret_cast<const char*>(s.data()), s.size());
-        }
-
 
         auto wrapped_callback = [callback=std::forward<AsyncCallback>(callback), data=std::move(sequence)](
             auto& error, size_t bytes_transmitted

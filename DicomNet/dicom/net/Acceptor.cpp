@@ -18,6 +18,12 @@ namespace dicom::net {
             };
         }
 
+        ~Worker() {
+            if (Thread.joinable()) {
+                Thread.join();
+            }
+        }
+
         Worker(const Worker&) = delete;
         Worker& operator = (const Worker&) = delete;
         Worker(Worker&&) = delete;
@@ -88,12 +94,7 @@ namespace dicom::net {
 
     void Acceptor::Shutdown() {
         m_cancel_flag = true;
-
-        for (auto& worker : m_workers) {
-            if (worker->Thread.joinable()) {
-                worker->Thread.join();
-            }
-        }
+        m_workers.clear();
     }
 
     //--------------------------------------------------------------------------------------------------------
@@ -103,11 +104,6 @@ namespace dicom::net {
             m_workers.begin(),
             m_workers.end(),
             [](auto& worker) -> bool { return worker->HasCompleted; }
-        );
-        std::for_each(
-            completed_it,
-            m_workers.end(),
-            [](auto& worker) { worker->Thread.join(); }
         );
         m_workers.erase(completed_it, m_workers.end());
 
