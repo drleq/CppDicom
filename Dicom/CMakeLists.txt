@@ -86,6 +86,7 @@ add_library(Dicom SHARED
     dicom/data/OD.cpp
     dicom/data/OF.cpp
     dicom/data/OL.cpp
+    dicom/data/OV.cpp
     dicom/data/OW.cpp
     dicom/data/PatientNameGroup.cpp
     dicom/data/PN.cpp
@@ -95,6 +96,7 @@ add_library(Dicom SHARED
     dicom/data/SS.cpp
     dicom/data/ST.cpp
     dicom/data/StringEncodingType.cpp
+    dicom/data/SV.cpp
     dicom/data/time_offset.cpp
     dicom/data/time.cpp
     dicom/data/TM.cpp
@@ -106,6 +108,7 @@ add_library(Dicom SHARED
     dicom/data/uri.cpp
     dicom/data/US.cpp
     dicom/data/UT.cpp
+    dicom/data/UV.cpp
     dicom/data/value_empty.cpp
     dicom/data/value_invalid.cpp
     dicom/data/VR.cpp

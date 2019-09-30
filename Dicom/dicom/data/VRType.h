@@ -20,6 +20,7 @@ namespace dicom::data {
         OD = 0x444F,
         OF = 0x464F,
         OL = 0x4C4F,
+        OV = 0x564F,
         OW = 0x574F,
         PN = 0x4E50,
         SH = 0x4853,
@@ -27,6 +28,7 @@ namespace dicom::data {
         SQ = 0x5153,
         SS = 0x5353,
         ST = 0x5453,
+        SV = 0x5653,
         TM = 0x4D54,
         UC = 0x4355,
         UI = 0x4955,
@@ -35,6 +37,7 @@ namespace dicom::data {
         UR = 0x5255,
         US = 0x5355,
         UT = 0x5455,
+        UV = 0x5655,
 
         Deferred = 0xFFFF
     };

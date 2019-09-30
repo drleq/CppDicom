@@ -85,6 +85,28 @@ namespace dicom::net {
 
     //--------------------------------------------------------------------------------------------------------
 
+    void StateMachine::AbortFromInvalidPDU() {
+        switch (m_state) {
+        case MachineState::Sta1:
+        case MachineState::Sta4:
+            return;
+
+        case MachineState::Sta2:
+            ApplyAA1(AAbort::ReasonType::InvalidPDUParameter);
+            break;
+
+        case MachineState::Sta13:
+            ApplyAA7(AAbort::ReasonType::InvalidPDUParameter);
+            break;
+
+        default:
+            ApplyAA8(AAbort::ReasonType::InvalidPDUParameter);
+            break;
+        }
+    }
+
+    //--------------------------------------------------------------------------------------------------------
+
     void StateMachine::SendPData(PDataTF&& pdu) {
         ApplyDT1(std::forward<PDataTF>(pdu));
     }
@@ -683,10 +705,6 @@ namespace dicom::net {
             return true;
         }
 
-        if (m_state == MachineState::Sta1) {
-            ThrowInvalidState();
-        }
-
         // Log error
         (void)error;
 
@@ -697,6 +715,9 @@ namespace dicom::net {
 
         case MachineState::Sta13:
             ApplyAR5();
+            break;
+
+        case MachineState::Sta1:
             break;
 
         default:

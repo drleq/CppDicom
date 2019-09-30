@@ -17,6 +17,7 @@
 #include "dicom/data/OD.h"
 #include "dicom/data/OF.h"
 #include "dicom/data/OL.h"
+#include "dicom/data/OV.h"
 #include "dicom/data/OW.h"
 #include "dicom/data/PN.h"
 #include "dicom/data/SH.h"
@@ -24,6 +25,7 @@
 #include "dicom/data/SQ.h"
 #include "dicom/data/SS.h"
 #include "dicom/data/ST.h"
+#include "dicom/data/SV.h"
 #include "dicom/data/TM.h"
 #include "dicom/data/UC.h"
 #include "dicom/data/UI.h"
@@ -32,6 +34,7 @@
 #include "dicom/data/UR.h"
 #include "dicom/data/US.h"
 #include "dicom/data/UT.h"
+#include "dicom/data/UV.h"
 #include "dicom/io/Deferred.h"
 #include "dicom/io/part10/detail/OutputContext.h"
 #include "dicom/io/part10/detail/write_sq.h"
@@ -82,12 +85,15 @@ namespace dicom::io::part10::detail {
         case VRType::OD: ctx->WriteBinary(as<OD>(attribute)); break;
         case VRType::OF: ctx->WriteBinary(as<OF>(attribute)); break;
         case VRType::OL: ctx->WriteBinary(as<OL>(attribute)); break;
+        case VRType::OV: ctx->WriteBinary(as<OV>(attribute)); break;
         case VRType::OW: ctx->WriteBinary(as<OW>(attribute)); break;
         case VRType::SL: ctx->WriteBinary(as<SL>(attribute)); break;
         case VRType::SS: ctx->WriteBinary(as<SS>(attribute)); break;
+        case VRType::SV: ctx->WriteBinary(as<SV>(attribute)); break;
         case VRType::UL: ctx->WriteBinary(as<UL>(attribute)); break;
         case VRType::UN: ctx->WriteBinary(as<UN>(attribute)); break;
         case VRType::US: ctx->WriteBinary(as<US>(attribute)); break;
+        case VRType::UV: ctx->WriteBinary(as<UV>(attribute)); break;
 
         // Handle AT specifically
         case VRType::AT: {

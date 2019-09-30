@@ -17,6 +17,7 @@
 #include "dicom/data/OD.h"
 #include "dicom/data/OF.h"
 #include "dicom/data/OL.h"
+#include "dicom/data/OV.h"
 #include "dicom/data/OW.h"
 #include "dicom/data/PN.h"
 #include "dicom/data/SH.h"
@@ -24,6 +25,7 @@
 #include "dicom/data/SQ.h"
 #include "dicom/data/SS.h"
 #include "dicom/data/ST.h"
+#include "dicom/data/SV.h"
 #include "dicom/data/TM.h"
 #include "dicom/data/UC.h"
 #include "dicom/data/UI.h"
@@ -32,6 +34,7 @@
 #include "dicom/data/UR.h"
 #include "dicom/data/US.h"
 #include "dicom/data/UT.h"
+#include "dicom/data/UV.h"
 #include "dicom/io/part10/detail/InputContext.h"
 #include "dicom/io/part10/detail/read_sq.h"
 
@@ -73,12 +76,15 @@ namespace dicom::io::part10::detail {
         case VRType::OD: vr = ctx.ReadBinary<OD>(length); break;
         case VRType::OF: vr = ctx.ReadBinary<OF>(length); break;
         case VRType::OL: vr = ctx.ReadBinary<OL>(length); break;
+        case VRType::OV: vr = ctx.ReadBinary<OV>(length); break;
         case VRType::OW: vr = ctx.ReadBinary<OW>(length); break;
         case VRType::SL: vr = ctx.ReadBinary<SL>(length); break;
         case VRType::SS: vr = ctx.ReadBinary<SS>(length); break;
+        case VRType::SV: vr = ctx.ReadBinary<SV>(length); break;
         case VRType::UL: vr = ctx.ReadBinary<UL>(length); break;
         case VRType::UN: vr = ctx.ReadBinary<UN>(length); break;
         case VRType::US: vr = ctx.ReadBinary<US>(length); break;
+        case VRType::UV: vr = ctx.ReadBinary<UV>(length); break;
 
         // Handle AT specifically
         case VRType::AT: {

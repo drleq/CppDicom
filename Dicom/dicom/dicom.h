@@ -27,6 +27,7 @@
 #include "dicom/data/OD.h"
 #include "dicom/data/OF.h"
 #include "dicom/data/OL.h"
+#include "dicom/data/OV.h"
 #include "dicom/data/OW.h"
 #include "dicom/data/PN.h"
 #include "dicom/data/SH.h"
@@ -34,6 +35,7 @@
 #include "dicom/data/SQ.h"
 #include "dicom/data/SS.h"
 #include "dicom/data/ST.h"
+#include "dicom/data/SV.h"
 #include "dicom/data/TM.h"
 #include "dicom/data/UC.h"
 #include "dicom/data/UI.h"
@@ -42,6 +44,7 @@
 #include "dicom/data/US.h"
 #include "dicom/data/UR.h"
 #include "dicom/data/UT.h"
+#include "dicom/data/UV.h"
 
 #include "dicom/detail/element_defs.h"
 
@@ -83,6 +86,7 @@ namespace dicom {
     using data::OD;
     using data::OF;
     using data::OL;
+    using data::OV;
     using data::OW;
     using data::PN;
     using data::SH;
@@ -90,6 +94,7 @@ namespace dicom {
     using data::SQ;
     using data::SS;
     using data::ST;
+    using data::SV;
     using data::TM;
     using data::UC;
     using data::UI;
@@ -98,6 +103,7 @@ namespace dicom {
     using data::UR;
     using data::US;
     using data::UT;
+    using data::UV;
     using data::VRType;
 
 }

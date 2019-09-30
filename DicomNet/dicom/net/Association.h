@@ -1,5 +1,6 @@
 #pragma once
 
+#include "dicom/net/detail/CommandSetDecoder.h"
 #include "dicom/net/AcseHandlers.h"
 namespace dicom::data { class AttributeSet; }
 namespace dicom::net { class DimseHandlers; }
@@ -33,14 +34,9 @@ namespace dicom::net {
         std::shared_ptr<DimseHandlers> m_dimse_handlers;
         std::unique_ptr<StateMachine> m_state_machine;
 
-        struct DimseCommandSet {
-            std::streamsize Length;
-            dicom::net::data_buffer Data;
-            std::unique_ptr<dicom::data::AttributeSet> Attributes;
-        };
-        std::optional<DimseCommandSet> m_current00;
+        detail::CommandSetDecoder m_cs_decoder;
 
-        void HandleCEcho();
+        void HandleCEcho(const dicom::data::AttributeSet& command_set);
     };
 
 }

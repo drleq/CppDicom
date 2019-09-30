@@ -48,6 +48,13 @@ add_library(DicomNet SHARED
     dicom/net/Association.cpp
     dicom/net/ArtimTimer.cpp
     dicom/net/DataStorage.cpp
+    dicom/net/detail/CommandSetDecoder.cpp
+    dicom/net/detail/encode_command_set.cpp
+    dicom/net/detail/encode_dimse_message.cpp
+    dicom/net/detail/fragment_message_data.cpp
+    dicom/net/detail/get_data_dictionary.cpp
+    dicom/net/detail/read_data_element.cpp
+    dicom/net/detail/write_data_element.cpp
     dicom/net/DimseHandlers.cpp
     dicom/net/ProtocolDataUnits.cpp
     dicom/net/StateMachine.cpp
