@@ -34,6 +34,8 @@ namespace {
         dicom::net::tags::populate_data_dictionary(dict);
         return dict;
     }
+
+    constexpr uint16_t DataSetTypeValue = 0x0101;
 }
 
 namespace dicom::net {
@@ -131,16 +133,19 @@ namespace dicom::net {
         }
 
         if (m_cs_decoder.IsComplete()) {
-            auto& cs = m_cs_decoder.CommandSet();
-            auto command_field = cs.Get<data::US>(tags::CommandField);
+            auto& command_set = m_cs_decoder.CommandSet();
+            auto command_field = command_set.Get<data::US>(tags::CommandField);
             if (!command_field) {
                 m_state_machine->AbortFromInvalidPDU();
                 return;
             }
 
+            DimseHandlerContext context { command_set, *this };
+
             auto dimse_op = static_cast<DimseOp>(command_field->First());
             switch (dimse_op) {
-            case DimseOp::CEchoRQ: HandleCEcho(cs); break;
+            case DimseOp::CEchoRQ: HandleCEcho(context); break;
+            case DimseOp::CFindRQ: HandleCFind(context); break;
             default:
                 // Error.
                 return;
@@ -152,30 +157,95 @@ namespace dicom::net {
 
     //--------------------------------------------------------------------------------------------------------
 
-    void Association::HandleCEcho(const dicom::data::AttributeSet& command_set) {
+    void Association::HandleCEcho(const DimseHandlerContext& context) const {
         if (!m_dimse_handlers) {
             // SCU has received a DIMSE message
             return;
         }
 
-        constexpr uint16_t DataSetType = 0x0101;
-
         auto response = std::make_unique<data::AttributeSet>();
-        response->CopyExact(command_set, tags::AffectedSOPClassUID);
-        response->CopyTo(command_set, tags::MessageID, tags::MessageIDBeingRespondedTo);
-        response->AddValue(tags::CommandDataSetType, DataSetType);
-        response->AddValue(tags::CommandField, DimseOp::CEchoRSP);
+        AddResponseFields(*response, context, DimseOp::CEchoRSP);
 
-        if (command_set.GetValue<uint16_t>(tags::CommandDataSetType) != DataSetType) {
+        if (context.Request.GetValue<uint16_t>(tags::CommandDataSetType) != DataSetTypeValue) {
             // Something is wrong.  "Reject" the echo.
             response->AddValue(tags::Status, DimseResultCode::MistypedArgument);
 
         } else {
             // Handle the echo.
-            auto result = m_dimse_handlers->OnCEcho(command_set);
+            auto result = m_dimse_handlers->OnCEcho(context);
             response->AddValue(tags::Status, result);
         }
 
+        EncodeAndSendResponse(std::move(response));
+    }
+
+    //--------------------------------------------------------------------------------------------------------
+
+    void Association::HandleCFind(const DimseHandlerContext& context) const  {
+        if (!m_dimse_handlers) {
+            // SCU has received a DIMSE message
+            return;
+        }
+
+        auto response = std::make_unique<data::AttributeSet>();
+        AddResponseFields(*response, context, DimseOp::CFindRSP);
+
+        if (context.Request.GetValue<uint16_t>(tags::CommandDataSetType) != DataSetTypeValue) {
+            // Something is wrong.  "Reject" the find.
+            response->AddValue(tags::Status, DimseResultCode::MistypedArgument);
+
+        } else {
+            // Handle the find.
+            auto result = m_dimse_handlers->OnCFind(
+                context,
+                [&](auto&& match, bool all_optional_keys_supported) {
+                    HandleCFindMatch(
+                        context,
+                        std::forward<std::unique_ptr<data::AttributeSet>>(match),
+                        all_optional_keys_supported
+                    );
+                }
+            );
+            response->AddValue(tags::Status, result);
+        }
+
+        EncodeAndSendResponse(std::move(response));
+    }
+
+    //--------------------------------------------------------------------------------------------------------
+
+    void Association::HandleCFindMatch(
+        const DimseHandlerContext& context,
+        std::unique_ptr<data::AttributeSet>&& identifier,
+        bool all_optional_keys_supported
+    ) const {
+        AddResponseFields(*identifier, context, DimseOp::CFindRSP);
+
+        if (all_optional_keys_supported) {
+            identifier->AddValue(tags::Status, DimseResultCode::Pending);
+        } else {
+            identifier->AddValue(tags::Status, DimseResultCode::PendingPartialMatch);
+        }
+
+        EncodeAndSendResponse(std::forward<std::unique_ptr<data::AttributeSet>>(identifier));
+    }
+
+    //--------------------------------------------------------------------------------------------------------
+
+    void Association::AddResponseFields(
+        data::AttributeSet& command_set,
+        const DimseHandlerContext& context,
+        DimseOp operation
+    ) {
+        command_set.CopyExact(context.Request, tags::AffectedSOPClassUID);
+        command_set.CopyTo(context.Request, tags::MessageID, tags::MessageIDBeingRespondedTo);
+        command_set.AddValue(tags::CommandDataSetType, DataSetTypeValue);
+        command_set.AddValue(tags::CommandField, operation);
+    }
+
+    //--------------------------------------------------------------------------------------------------------
+
+    void Association::EncodeAndSendResponse(std::unique_ptr<data::AttributeSet>&& response) const {
         auto fragments = detail::encode_dimse_message(16*1024, *response);
 
         for (auto& fragment : fragments) {

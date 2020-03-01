@@ -2,8 +2,8 @@
 
 #include "dicom/net/detail/CommandSetDecoder.h"
 #include "dicom/net/AcseHandlers.h"
+#include "dicom/net/DimseHandlers.h"
 namespace dicom::data { class AttributeSet; }
-namespace dicom::net { class DimseHandlers; }
 namespace dicom::net { class StateMachine; }
 
 namespace dicom::net {
@@ -36,7 +36,21 @@ namespace dicom::net {
 
         detail::CommandSetDecoder m_cs_decoder;
 
-        void HandleCEcho(const dicom::data::AttributeSet& command_set);
+        void HandleCEcho(const DimseHandlerContext& context) const;
+        void HandleCFind(const DimseHandlerContext& context) const;
+
+        void HandleCFindMatch(
+            const DimseHandlerContext& context,
+            std::unique_ptr<data::AttributeSet>&& identifier,
+            bool all_optional_keys_supported
+        ) const;
+
+        static void AddResponseFields(
+            data::AttributeSet& command_set,
+            const DimseHandlerContext& context,
+            DimseOp operation
+        );
+        void EncodeAndSendResponse(std::unique_ptr<data::AttributeSet>&& response) const;
     };
 
 }

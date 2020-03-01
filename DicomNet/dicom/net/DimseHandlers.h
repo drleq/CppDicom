@@ -2,6 +2,7 @@
 
 #include "dicom/net/DataStorage.h"
 namespace dicom::data { class AttributeSet; }
+namespace dicom::net { class Association; }
 
 namespace dicom::net {
 
@@ -50,14 +51,29 @@ namespace dicom::net {
 
     //--------------------------------------------------------------------------------------------------------
 
+    struct DICOMNET_EXPORT DimseHandlerContext
+    {
+        const data::AttributeSet& Request;
+        const Association& Association;
+    };
+
+    //--------------------------------------------------------------------------------------------------------
+
     class DICOMNET_EXPORT DimseHandlers
     {
+    public:
+        using CFindCallback = std::function<void (std::unique_ptr<data::AttributeSet>&& identifier, bool all_optional_keys_supported)>;
+
     public:
         DimseHandlers();
         virtual ~DimseHandlers();
 
         virtual DimseResultCode OnCEcho(
-            const data::AttributeSet& command_set
+            const DimseHandlerContext& context
+        );
+        virtual DimseResultCode OnCFind(
+            const DimseHandlerContext& context,
+            const CFindCallback& match_callback
         );
     };
 
