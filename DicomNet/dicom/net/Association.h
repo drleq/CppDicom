@@ -38,6 +38,8 @@ namespace dicom::net {
 
         void HandleCEcho(const DimseHandlerContext& context) const;
         void HandleCFind(const DimseHandlerContext& context) const;
+        void HandleCMove(const DimseHandlerContext& context) const;
+        void HandleCStore(const DimseHandlerContext& context) const;
 
         void HandleCFindMatch(
             const DimseHandlerContext& context,

@@ -1,7 +1,7 @@
 #pragma once
 
+#include "dicom/data/AttributeSet.h"
 #include "dicom/net/DataStorage.h"
-namespace dicom::data { class AttributeSet; }
 namespace dicom::net { class Association; }
 
 namespace dicom::net {
@@ -53,7 +53,7 @@ namespace dicom::net {
 
     struct DICOMNET_EXPORT DimseHandlerContext
     {
-        const data::AttributeSet& Request;
+        const std::unique_ptr<const data::AttributeSet> Request;
         const Association& Association;
     };
 
@@ -63,6 +63,12 @@ namespace dicom::net {
     {
     public:
         using CFindCallback = std::function<void (std::unique_ptr<data::AttributeSet>&& identifier, bool all_optional_keys_supported)>;
+
+        struct CMoveInfo {
+            asio::ip::tcp::endpoint StoreSCP;
+            int32_t SubOperationCount = -1;
+        };
+        using CMoveCallback = std::function<void (std::unique_ptr<data::AttributeSet>&& dataset)>;
 
     public:
         DimseHandlers();
@@ -74,6 +80,19 @@ namespace dicom::net {
         virtual DimseResultCode OnCFind(
             const DimseHandlerContext& context,
             const CFindCallback& match_callback
+        );
+
+        virtual std::optional<CMoveInfo> OnBeginCMove(
+            const DimseHandlerContext& context
+        );
+        virtual DimseResultCode OnCMove(
+            const DimseHandlerContext& context,
+            const CMoveCallback&& callback
+        );
+
+        virtual DimseResultCode OnCStore(
+            const DimseHandlerContext& context,
+            std::unique_ptr<data::AttributeSet>&& dataset
         );
     };
 

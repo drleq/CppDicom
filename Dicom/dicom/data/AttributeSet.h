@@ -130,6 +130,8 @@ namespace dicom::data {
 
         [[nodiscard]] AttributeSet Copy() const;
 
+        void MoveGroupRange(AttributeSet&& other, tag_group start, tag_group end);
+
     private:
         bool m_owns_attributes;
         attribute_map m_attributes;

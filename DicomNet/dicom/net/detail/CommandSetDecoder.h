@@ -19,7 +19,7 @@ namespace dicom::net::detail {
         bool HasDecodeFailed() const { return m_decode_failed; }
         bool IsComplete() const { return m_cs != nullptr; }
 
-        const dicom::data::AttributeSet& CommandSet() const { return *m_cs; }
+        std::unique_ptr<dicom::data::AttributeSet> DetachCommandSet() { return std::move(m_cs); }
 
     private:
         dicom::net::data_buffer m_buffer;

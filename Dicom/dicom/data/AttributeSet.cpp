@@ -471,6 +471,24 @@ namespace dicom::data {
 
     //--------------------------------------------------------------------------------------------------------
 
+    void AttributeSet::MoveGroupRange(AttributeSet&& other, tag_group start, tag_group end) {
+        // Both AttributeSets must own their attributes
+        AssertOwned();
+        other.AssertOwned();
+        
+        // Move ownership to ourselves, using Add() to handle duplicates
+        auto start_it = other.m_attributes.lower_bound(make_tag_number(start, 0x0000));
+        auto end_it = other.m_attributes.upper_bound(make_tag_number(end, 0xFFFF));
+        for (auto it = start_it; it != end_it; ++it) {
+            Add(it->first, std::unique_ptr<VR>(it->second));
+        }
+
+        // Remove the attributes from [other]
+        other.m_attributes.erase(start_it, end_it);
+    }
+
+    //--------------------------------------------------------------------------------------------------------
+
     void AttributeSet::AssertOwned() const {
         if (!m_owns_attributes) {
             throw logic_error("AttributeSet only accepts unowned attributes");

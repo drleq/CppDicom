@@ -133,19 +133,21 @@ namespace dicom::net {
         }
 
         if (m_cs_decoder.IsComplete()) {
-            auto& command_set = m_cs_decoder.CommandSet();
-            auto command_field = command_set.Get<data::US>(tags::CommandField);
+            auto command_set = m_cs_decoder.DetachCommandSet();
+            auto command_field = command_set->Get<data::US>(tags::CommandField);
             if (!command_field) {
                 m_state_machine->AbortFromInvalidPDU();
                 return;
             }
 
-            DimseHandlerContext context { command_set, *this };
+            DimseHandlerContext context { std::move(command_set), *this };
 
             auto dimse_op = static_cast<DimseOp>(command_field->First());
             switch (dimse_op) {
             case DimseOp::CEchoRQ: HandleCEcho(context); break;
             case DimseOp::CFindRQ: HandleCFind(context); break;
+            case DimseOp::CMoveRQ: HandleCMove(context); break;
+            case DimseOp::CStoreRQ: HandleCStore(context); break;
             default:
                 // Error.
                 return;
@@ -166,7 +168,7 @@ namespace dicom::net {
         auto response = std::make_unique<data::AttributeSet>();
         AddResponseFields(*response, context, DimseOp::CEchoRSP);
 
-        if (context.Request.GetValue<uint16_t>(tags::CommandDataSetType) != DataSetTypeValue) {
+        if (context.Request->GetValue<uint16_t>(tags::CommandDataSetType) != DataSetTypeValue) {
             // Something is wrong.  "Reject" the echo.
             response->AddValue(tags::Status, DimseResultCode::MistypedArgument);
 
@@ -190,7 +192,7 @@ namespace dicom::net {
         auto response = std::make_unique<data::AttributeSet>();
         AddResponseFields(*response, context, DimseOp::CFindRSP);
 
-        if (context.Request.GetValue<uint16_t>(tags::CommandDataSetType) != DataSetTypeValue) {
+        if (context.Request->GetValue<uint16_t>(tags::CommandDataSetType) != DataSetTypeValue) {
             // Something is wrong.  "Reject" the find.
             response->AddValue(tags::Status, DimseResultCode::MistypedArgument);
 
@@ -232,13 +234,80 @@ namespace dicom::net {
 
     //--------------------------------------------------------------------------------------------------------
 
+    void Association::HandleCMove(const DimseHandlerContext& context) const {
+        if (!m_dimse_handlers) {
+            // SCU has received a DIMSE message
+            return;
+        }
+
+        auto response = std::make_unique<data::AttributeSet>();
+        AddResponseFields(*response, context, DimseOp::CMoveRSP);
+
+        auto info00 = m_dimse_handlers->OnBeginCMove(context);
+        if (!info00) {
+            // C-MOVE rejected by handler
+            response->AddValue(tags::Status, DimseResultCode::UnableToProcess); // TODO: Assign specific code
+            EncodeAndSendResponse(std::move(response));
+            return;
+        }
+
+        if (info00->SubOperationCount == 0) {
+            // C-MOVE accepted by handler, but there was nothing to do
+            response->AddValue(tags::Status, DimseResultCode::Success);
+            response->AddValue(tags::NumberOfRemainingSuboperations, 0);
+            response->AddValue(tags::NumberOfCompletedSuboperations, 0);
+            response->AddValue(tags::NumberOfWarningSuboperations, 0);
+            response->AddValue(tags::NumberOfFailedSuboperations, 0);
+            EncodeAndSendResponse(std::move(response));
+            return;
+        }
+
+        // Establish C-STORE SCU
+
+        //m_dimse_handlers->OnCMove(context, )
+    }
+
+    //--------------------------------------------------------------------------------------------------------
+
+    void Association::HandleCStore(const DimseHandlerContext& context) const {
+        if (!m_dimse_handlers) {
+            // SCU has received a DIMSE message
+            return;
+        }
+
+        auto response = std::make_unique<data::AttributeSet>();
+        AddResponseFields(*response, context, DimseOp::CStoreRSP);
+        response->CopyExact(*context.Request, tags::AffectedSOPInstanceUID);
+
+        if (context.Request->GetValue<uint16_t>(tags::CommandDataSetType) != DataSetTypeValue) {
+            // Something is wrong.  "Reject" the store.
+            response->AddValue(tags::Status, DimseResultCode::MistypedArgument);
+
+        } else {
+            // Handle the store.
+            auto dataset = std::make_unique<data::AttributeSet>();
+            dataset->MoveGroupRange(
+                std::move(const_cast<data::AttributeSet&>(*context.Request)),
+                0x0008,
+                0xFFFF
+            );
+        
+            auto result = m_dimse_handlers->OnCStore(context, std::move(dataset));
+            response->AddValue(tags::Status, result);
+        }
+
+        EncodeAndSendResponse(std::move(response));
+    }
+
+    //--------------------------------------------------------------------------------------------------------
+
     void Association::AddResponseFields(
         data::AttributeSet& command_set,
         const DimseHandlerContext& context,
         DimseOp operation
     ) {
-        command_set.CopyExact(context.Request, tags::AffectedSOPClassUID);
-        command_set.CopyTo(context.Request, tags::MessageID, tags::MessageIDBeingRespondedTo);
+        command_set.CopyExact(*context.Request, tags::AffectedSOPClassUID);
+        command_set.CopyTo(*context.Request, tags::MessageID, tags::MessageIDBeingRespondedTo);
         command_set.AddValue(tags::CommandDataSetType, DataSetTypeValue);
         command_set.AddValue(tags::CommandField, operation);
     }

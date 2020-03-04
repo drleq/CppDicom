@@ -27,4 +27,30 @@ namespace dicom::net {
         return DimseResultCode::SOPClassNotSupported;
     }
 
+    //--------------------------------------------------------------------------------------------------------
+
+    std::optional<DimseHandlers::CMoveInfo> DimseHandlers::OnBeginCMove(
+        [[maybe_unused]] const DimseHandlerContext& context
+    ) {
+        return std::nullopt;
+    }
+
+    //--------------------------------------------------------------------------------------------------------
+    
+    DimseResultCode DimseHandlers::OnCMove(
+        [[maybe_unused]] const DimseHandlerContext& context,
+        [[maybe_unused]] const CMoveCallback&& callback
+    ) {
+        return DimseResultCode::SOPClassNotSupported;
+    }
+
+    //--------------------------------------------------------------------------------------------------------
+
+    DimseResultCode DimseHandlers::OnCStore(
+        [[maybe_unused]] const DimseHandlerContext& context,
+        [[maybe_unused]] std::unique_ptr<data::AttributeSet>&& dataset
+    ) {
+        return DimseResultCode::SOPClassNotSupported;
+    }
+
 }
